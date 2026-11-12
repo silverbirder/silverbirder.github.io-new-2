@@ -36,6 +36,7 @@
 | R10 | ページ遷移の演出を工夫する。紹介されたVFX-JSの記事を参考にする |
 | R11 | 既存実装・OSSを活用し、自作の範囲と継続費用を抑える |
 | R12 | 成果物は操作動画・画面図・ボックスによる構成説明図・UML・Cucumberのシナリオと実行結果を中心に確認する |
+| R13 | new-2とcmsの両方を含むCodex Cloud環境で開発・検証する |
 
 1280pxの条件は画像に適用する。動画の解像度・容量・圧縮・配信条件は未決定。
 
@@ -175,3 +176,10 @@ flowchart LR
 - [Sveltiaのプレビュー](https://sveltiacms.app/en/docs/ui/content-editor)
 - [Sveltia Preview Workflow](https://sveltiacms.app/en/docs/workflows/preview)
 - [Google Photosの素材取得](https://developers.google.com/photos/picker/guides/media-items)
+
+## 11. Codex Cloud
+
+- 1つの非公開Cloud環境に、new-2とcmsをまとめて配置する。
+- 両リポジトリのAGENTS.mdを読み、要件資料を共通の基準にする。
+- 現在は資料のみ。アプリ実装後に依存関係・起動・テストの設定を追加する。
+- Codex Cloudは開発環境。公開ブログのGitHub Pages、CMSのホスト候補であるVercelとは役割が異なる。
