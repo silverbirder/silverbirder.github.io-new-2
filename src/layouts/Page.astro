@@ -1,0 +1,28 @@
+---
+import { pathFor } from '../lib/published.mjs';
+const { title = 'ジブンノート', summary = '', noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <meta name="description" content={summary} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="ジブンノート" href={pathFor('/rss.xml')} />
+    <link rel="me" href="https://github.com/silverbirder" />
+    <link rel="webmention" href="https://webmention.io/silverbirder.github.io/webmention" />
+    <style is:global>
+      img { max-width: 100%; height: auto; }
+      pre { overflow-x: auto; }
+    </style>
+  </head>
+  <body>
+    <header><a href={pathFor('/')}>ジブンノート</a></header>
+    <nav aria-label="メイン"><a href={pathFor('/blog/')}>記事一覧</a> · <a href={pathFor('/rss.xml')}>RSS</a></nav>
+    <main><slot /></main>
+  </body>
+</html>

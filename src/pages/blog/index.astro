@@ -1,0 +1,16 @@
+---
+import Page from '../../layouts/Page.astro';
+import { posts, postPath } from '../../lib/published.mjs';
+---
+<Page title="ブログ | ジブンノート">
+  <h1>ブログ</h1>
+  {posts.length === 0 ? <p>公開記事はまだありません。</p> : <ol>
+    {posts.map((post) => <li>
+      <article>
+        <h2><a href={postPath(post.slug)}>{post.title}</a></h2>
+        <time datetime={post.publishedAt}>{new Date(post.publishedAt).toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' })}</time>
+        <p>{post.summary}</p>
+      </article>
+    </li>)}
+  </ol>}
+</Page>

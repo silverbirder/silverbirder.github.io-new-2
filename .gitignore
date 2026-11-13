@@ -1,0 +1,12 @@
+node_modules/
+.astro/
+dist/
+content/
+.env
+.env.*
+!.env.example
+coverage/
+test-results/
+playwright-report/
+.npm-cache/
+.test-content-*/
