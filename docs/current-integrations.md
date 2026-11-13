@@ -2,6 +2,8 @@
 
 確認日: 2026-11-12
 
+補足更新日: 2026-11-13
+
 対象は [silverbirder.github.io の main](https://github.com/silverbirder/silverbirder.github.io/tree/54f14a4550505a09c1bef67e7449f2f90e295d55)、コミット `54f14a4550505a09c1bef67e7449f2f90e295d55`。調査時点のmainがこのコミットであることを確認した。
 
 以下はコード・設定の調査結果。本番のアカウント、Secretsの登録状態、実データの受信・配送は未確認。[要件資料](requirements.md)の維持・削除方針を基準にする。
@@ -22,7 +24,7 @@ Webmentionは、[既存の記事][webmention]でも「受信はwebmention.io、�
 
 ## 2. 維持するその他の機能と連携
 
-機能を維持する。Cloudinary・GitHub PR・Gistなどの実装方式を継続採用するかは、要件資料に従って比較する。
+機能を維持し、画像のCloudinary利用は継続する。GitHub PR・Gistなどの実装方式を継続採用するかは、要件資料に従って比較する。
 
 | 対象 | 現行実装・根拠 | 移行条件 |
 | --- | --- | --- |
@@ -31,7 +33,7 @@ Webmentionは、[既存の記事][webmention]でも「受信はwebmention.io、�
 | いいね・コメント | [いいねUI][likeui]・[コメントUI][commentui]から `NEXT_PUBLIC_LIKES_API_URL` のAPIを利用。[DBスキーマ][schema]に保存 | 記事slug、既存の反応データ、匿名ID、本人によるコメント削除、APIのCORSを引き継ぐ |
 | Slack通知 | [いいねAPI][likes]・[コメントAPI][comments]で `SLACK_WEBHOOK_URL` 設定時に送信。いいね・解除・コメント投稿・削除が対象 | 設定時の通知を維持。WebmentionのSlack通知とは別の機能 |
 | CMS認証 | [Better Auth設定][auth]でGitHub OAuth、[環境変数][adminenv]にGitHubクライアント設定・許可メールアドレス | 許可ユーザーだけが利用できる認証。非公開原稿と管理APIのアクセス制御を確認 |
-| 画像 | [画像loader][loader]と公開記事がCloudinary URLを利用。CMSは[アップローダー][cloudinary]を呼び、[環境変数][adminenv]で設定 | 既存の画像URL・表示・最適化を維持。新規素材の保存先は未決定 |
+| 画像 | [画像loader][loader]と公開記事がCloudinary URLを利用。CMSは[アップローダー][cloudinary]を呼び、[環境変数][adminenv]で設定 | 画像はCloudinaryを継続。既存の画像URL・表示・最適化を維持し、未公開画像の扱いを検討 |
 | 記事公開・下書き移送 | [編集処理][editor]、[記事PR作成][pr]、[GitHub処理][github]がGitHub PR・Gistを利用 | 公開前の確認、下書きの再開・端末間移送を維持。PR・Gistの継続採用は未決定 |
 | 要約生成・リンク補完 | [要約処理][summary]はMarkdown除去と先頭120文字の抽出。[リンク補完][linktitles]は外部ページのタイトルを取得 | 要約生成・リンクタイトル補完を維持。要約は外部AIの呼び出しではない |
 | 埋め込み・リンクカード | [本文表示][mdx]がSNS・動画などの表示部品を使用 | X・Bluesky・Instagram・YouTube・CodePenの既存埋め込み、リンクカードを維持 |
@@ -44,6 +46,8 @@ Webmentionは、[既存の記事][webmention]でも「受信はwebmention.io、�
 [ブラウザ保存][storage]の `likes`、`comments:anon-id`、`read-posts` と、CMSの `silverbirder-admin-post-drafts` を移行対象に含める。匿名IDが変わると、以前のいいねの解除・自分のコメント削除に影響する。Gistは手動の退避先で、復元後に対象Gistを削除する実装。
 
 現行のCloudinary画像変換は表示時の処理。アップロード前の横幅1280pxへの縮小・圧縮は新要件で、現行実装済みとは扱わない。
+
+リンクカードの画像は、現行ではCloudinaryとは別に `/link-card/*` のローカル素材として保存する経路がある。既存カードのJSON・画像も移行対象に含める。外部情報取得や記事情報の再読込に関するビルド負荷の候補と分離案は、[アーキテクチャ案](architecture.md)に記載した。時間の実測は未実施。
 
 ## 3. 置き換える・削除する対象
 
