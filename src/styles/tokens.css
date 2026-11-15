@@ -1,0 +1,71 @@
+:root {
+  /* Primitives: reusable values without a component name. */
+  --size-full: 100%;
+  --space-none: 0;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-fluid: 3vw;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --line-height-md: 1.625rem;
+  --measure-md: 40rem;
+  --underline-offset: 0.15em;
+  --opacity-70: 70%;
+  --opacity-100: 100%;
+  --layer-decoration: -1;
+
+  --palette-slate-900-hue: 212.727;
+  --palette-slate-900-saturation: 32.353%;
+  --palette-slate-900-lightness: 13.333%;
+  --palette-slate-900: hsl(
+    var(--palette-slate-900-hue) var(--palette-slate-900-saturation)
+    var(--palette-slate-900-lightness) / var(--opacity-100)
+  );
+  --palette-blue-700-hue: 207;
+  --palette-blue-700-saturation: 58.14%;
+  --palette-blue-700-lightness: 33.725%;
+  --palette-blue-700: hsl(
+    var(--palette-blue-700-hue) var(--palette-blue-700-saturation)
+    var(--palette-blue-700-lightness) / var(--opacity-100)
+  );
+  --palette-blue-50-hue: 205.714;
+  --palette-blue-50-saturation: 24.138%;
+  --palette-blue-50-lightness: 94.314%;
+  --palette-blue-50: hsl(
+    var(--palette-blue-50-hue) var(--palette-blue-50-saturation)
+    var(--palette-blue-50-lightness) / var(--opacity-100)
+  );
+  --palette-sage-200-hue: 100.851;
+  --palette-sage-200-saturation: 41.593%;
+  --palette-sage-200-lightness: 77.843%;
+  --palette-sage-200: hsl(
+    var(--palette-sage-200-hue) var(--palette-sage-200-saturation)
+    var(--palette-sage-200-lightness) / var(--opacity-100)
+  );
+
+  /* Semantics: choose values by their role, rather than their appearance. */
+  --color-text-primary: var(--palette-slate-900);
+  --color-text-link: var(--palette-blue-700);
+  --color-border-subtle: var(--palette-blue-50);
+  --opacity-selection: var(--opacity-70);
+  --color-background-selection: hsl(
+    var(--palette-sage-200-hue) var(--palette-sage-200-saturation)
+    var(--palette-sage-200-lightness) / var(--opacity-selection)
+  );
+  --font-size-body: var(--font-size-md);
+  --font-size-heading: var(--font-size-lg);
+  --font-size-title: var(--font-size-xl);
+  --font-weight-body: var(--font-weight-regular);
+  --font-weight-heading: var(--font-weight-bold);
+  --line-height-body: var(--line-height-md);
+  --line-height-title: calc(var(--line-height-body) + var(--line-height-body));
+  --content-width-reading: var(--measure-md);
+  --space-page-gutter: clamp(var(--space-4), var(--space-fluid), var(--space-8));
+  --space-list-indent: var(--space-6);
+  --space-quote-indent: var(--space-4);
+  --text-link-underline-offset: var(--underline-offset);
+}

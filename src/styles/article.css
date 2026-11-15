@@ -1,0 +1,110 @@
+.notebook {
+  /* Component: the notebook ruling follows the shared reading rhythm. */
+  --notebook-rule-spacing: var(--line-height-body);
+  /* Kaisei Opti and the SVG tile need these component-specific offsets. */
+  --notebook-rule-offset: -0.1875rem;
+  --notebook-rule-phase: 0.75rem;
+  width: calc(var(--size-full) - var(--space-page-gutter) - var(--space-page-gutter));
+  max-width: var(--content-width-reading);
+  margin: var(--notebook-rule-spacing) auto;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  line-height: var(--notebook-rule-spacing);
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+
+.notebook-header {
+  margin-block-end: var(--notebook-rule-spacing);
+}
+
+.notebook-header h1 {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-heading);
+  line-height: var(--line-height-title);
+}
+
+.notebook-body {
+  position: relative;
+  isolation: isolate;
+  display: flow-root;
+  padding-block: var(--notebook-rule-spacing);
+}
+
+/* The SVG supplies the shape; its visible color is managed here. */
+.notebook-body::before {
+  content: '';
+  position: absolute;
+  inset: var(--notebook-rule-spacing) var(--space-none);
+  z-index: var(--layer-decoration);
+  pointer-events: none;
+  background-color: var(--color-border-subtle);
+  mask-image: var(--notebook-rule-image);
+  mask-size: var(--content-width-reading) var(--notebook-rule-spacing);
+  mask-repeat: repeat-y;
+  mask-position: var(--space-none) calc(var(--notebook-rule-offset) + var(--notebook-rule-phase));
+}
+
+/* Use the browser's native selection, including keyboard and clipboard support. */
+.notebook-body ::selection {
+  color: inherit;
+  background: var(--color-background-selection);
+}
+
+.notebook-body > * {
+  margin-block: var(--space-none) var(--notebook-rule-spacing);
+}
+
+/* Complete image/embed rows in CSS; unsupported browsers retain natural flow. */
+@supports (height: calc-size(auto, size)) {
+  .notebook-body > :not(:is(h1, h2, h3, h4, h5, h6)) {
+    height: calc-size(auto, round(up, size, var(--notebook-rule-spacing)));
+  }
+}
+
+.notebook-body > :last-child,
+.notebook-body > :has(+ :is(h1, h2, h3, h4, h5, h6)) {
+  margin-block-end: var(--space-none);
+}
+
+.notebook-body :is(h1, h2, h3, h4, h5, h6) {
+  font-size: var(--font-size-heading);
+  font-weight: var(--font-weight-heading);
+  line-height: var(--notebook-rule-spacing);
+  padding-block-start: var(--notebook-rule-spacing);
+}
+
+.notebook-body a {
+  color: var(--color-text-link);
+  text-decoration: underline;
+  text-underline-offset: var(--text-link-underline-offset);
+}
+
+.notebook-body :is(img, video, iframe) {
+  display: block;
+  max-width: var(--size-full);
+}
+
+.notebook-body :is(img, video) {
+  height: auto;
+}
+
+.notebook-body :is(ul, ol) {
+  padding-inline-start: var(--space-list-indent);
+}
+
+.notebook-body ul { list-style-type: disc; }
+.notebook-body ol { list-style-type: decimal; }
+.notebook-body li > p { margin: var(--space-none); }
+.notebook-body blockquote { padding-inline-start: var(--space-quote-indent); }
+.notebook-body pre { overflow-x: auto; line-height: var(--notebook-rule-spacing); }
+.notebook-body hr { height: var(--notebook-rule-spacing); border: var(--space-none); }
+
+@media (forced-colors: active) {
+  .notebook-body::before { display: none; }
+  .notebook-body ::selection {
+    color: HighlightText;
+    background: Highlight;
+  }
+}
