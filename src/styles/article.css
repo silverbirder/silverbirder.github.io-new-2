@@ -1,22 +1,66 @@
 .notebook {
   --notebook-unit: 1.625rem;
   --notebook-width: 40rem;
-  --notebook-gutter: clamp(1rem, 3vw, 2rem);
+  --notebook-no-space: 0;
+  --notebook-full-width: 100%;
+  --notebook-gutter-min: 1rem;
+  --notebook-gutter-fluid: 3vw;
+  --notebook-gutter-max: 2rem;
+  --notebook-gutter-sides: 2;
+  --notebook-gutter: clamp(
+    var(--notebook-gutter-min), var(--notebook-gutter-fluid), var(--notebook-gutter-max)
+  );
   --notebook-body-size: 1rem;
   --notebook-heading-size: 1.25rem;
   --notebook-title-size: 1.5rem;
-  --notebook-text-color: hsl(212.727 32.353% 13.333%);
-  --notebook-link-color: hsl(207 58.14% 33.725%);
-  --notebook-rule-color: hsl(205.714 24.138% 94.314%);
-  --notebook-selection-color: hsl(100.851 41.593% 77.843% / 70%);
+  --notebook-body-weight: 400;
+  --notebook-heading-weight: 700;
+  --notebook-title-line-count: 2;
+  --notebook-rule-layer: -1;
+  --notebook-link-underline-offset: 0.15em;
+  --notebook-list-indent: 1.5rem;
+  --notebook-quote-indent: 1rem;
+  --notebook-text-hue: 212.727;
+  --notebook-text-saturation: 32.353%;
+  --notebook-text-lightness: 13.333%;
+  --notebook-text-alpha: 100%;
+  --notebook-text-color: hsl(
+    var(--notebook-text-hue) var(--notebook-text-saturation)
+    var(--notebook-text-lightness) / var(--notebook-text-alpha)
+  );
+  --notebook-link-hue: 207;
+  --notebook-link-saturation: 58.14%;
+  --notebook-link-lightness: 33.725%;
+  --notebook-link-alpha: 100%;
+  --notebook-link-color: hsl(
+    var(--notebook-link-hue) var(--notebook-link-saturation)
+    var(--notebook-link-lightness) / var(--notebook-link-alpha)
+  );
+  --notebook-rule-hue: 205.714;
+  --notebook-rule-saturation: 24.138%;
+  --notebook-rule-lightness: 94.314%;
+  --notebook-rule-alpha: 100%;
+  --notebook-rule-color: hsl(
+    var(--notebook-rule-hue) var(--notebook-rule-saturation)
+    var(--notebook-rule-lightness) / var(--notebook-rule-alpha)
+  );
+  --notebook-selection-hue: 100.851;
+  --notebook-selection-saturation: 41.593%;
+  --notebook-selection-lightness: 77.843%;
+  --notebook-selection-alpha: 70%;
+  --notebook-selection-color: hsl(
+    var(--notebook-selection-hue) var(--notebook-selection-saturation)
+    var(--notebook-selection-lightness) / var(--notebook-selection-alpha)
+  );
   /* Kaisei Opti 400/700: align the glyph bottoms with the lower rule. */
   --notebook-rule-offset: -0.1875rem;
   --notebook-rule-phase: 0.75rem;
-  width: calc(100% - 2 * var(--notebook-gutter));
+  width: calc(var(--notebook-full-width) - var(--notebook-gutter-sides) * var(--notebook-gutter));
   max-width: var(--notebook-width);
   margin: var(--notebook-unit) auto;
   color: var(--notebook-text-color);
   font-size: var(--notebook-body-size);
+  font-weight: var(--notebook-body-weight);
   line-height: var(--notebook-unit);
   letter-spacing: normal;
   overflow-wrap: anywhere;
@@ -28,8 +72,8 @@
 
 .notebook-header h1 {
   font-size: var(--notebook-title-size);
-  font-weight: 700;
-  line-height: calc(var(--notebook-unit) * 2);
+  font-weight: var(--notebook-heading-weight);
+  line-height: calc(var(--notebook-unit) * var(--notebook-title-line-count));
 }
 
 .notebook-body {
@@ -43,14 +87,14 @@
 .notebook-body::before {
   content: '';
   position: absolute;
-  inset: var(--notebook-unit) 0;
-  z-index: -1;
+  inset: var(--notebook-unit) var(--notebook-no-space);
+  z-index: var(--notebook-rule-layer);
   pointer-events: none;
   background-color: var(--notebook-rule-color);
   mask-image: var(--notebook-rule);
   mask-size: var(--notebook-width) var(--notebook-unit);
   mask-repeat: repeat-y;
-  mask-position: 0 calc(var(--notebook-rule-offset) + var(--notebook-rule-phase));
+  mask-position: var(--notebook-no-space) calc(var(--notebook-rule-offset) + var(--notebook-rule-phase));
 }
 
 /* Use the browser's native selection, including keyboard and clipboard support. */
@@ -60,11 +104,11 @@
 }
 
 .notebook-body > * {
-  margin-block: 0 var(--notebook-unit);
+  margin-block: var(--notebook-no-space) var(--notebook-unit);
 }
 
 /* Complete image/embed rows in CSS; unsupported browsers retain natural flow. */
-@supports (height: calc-size(auto, round(up, size, 1rem))) {
+@supports (height: calc-size(auto, size)) {
   .notebook-body > :not(:is(h1, h2, h3, h4, h5, h6)) {
     height: calc-size(auto, round(up, size, var(--notebook-unit)));
   }
@@ -72,12 +116,12 @@
 
 .notebook-body > :last-child,
 .notebook-body > :has(+ :is(h1, h2, h3, h4, h5, h6)) {
-  margin-block-end: 0;
+  margin-block-end: var(--notebook-no-space);
 }
 
 .notebook-body :is(h1, h2, h3, h4, h5, h6) {
   font-size: var(--notebook-heading-size);
-  font-weight: 700;
+  font-weight: var(--notebook-heading-weight);
   line-height: var(--notebook-unit);
   padding-block-start: var(--notebook-unit);
 }
@@ -85,12 +129,12 @@
 .notebook-body a {
   color: var(--notebook-link-color);
   text-decoration: underline;
-  text-underline-offset: 0.15em;
+  text-underline-offset: var(--notebook-link-underline-offset);
 }
 
 .notebook-body :is(img, video, iframe) {
   display: block;
-  max-width: 100%;
+  max-width: var(--notebook-full-width);
 }
 
 .notebook-body :is(img, video) {
@@ -98,15 +142,15 @@
 }
 
 .notebook-body :is(ul, ol) {
-  padding-inline-start: 1.5rem;
+  padding-inline-start: var(--notebook-list-indent);
 }
 
 .notebook-body ul { list-style-type: disc; }
 .notebook-body ol { list-style-type: decimal; }
-.notebook-body li > p { margin: 0; }
-.notebook-body blockquote { padding-inline-start: 1rem; }
+.notebook-body li > p { margin: var(--notebook-no-space); }
+.notebook-body blockquote { padding-inline-start: var(--notebook-quote-indent); }
 .notebook-body pre { overflow-x: auto; line-height: var(--notebook-unit); }
-.notebook-body hr { height: var(--notebook-unit); border: 0; }
+.notebook-body hr { height: var(--notebook-unit); border: var(--notebook-no-space); }
 
 @media (forced-colors: active) {
   .notebook-body::before { display: none; }
