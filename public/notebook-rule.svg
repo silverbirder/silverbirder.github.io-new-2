@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="26" viewBox="0 0 640 26">
   <defs>
     <pattern id="dots" x="13" width="26" height="26" patternUnits="userSpaceOnUse">
-      <circle cx="13" cy="13.25" r="1.25" fill="#edf1f4"/>
+      <circle cx="13" cy="13.25" r="1.25" fill="hsl(205.714 24.138% 94.314%)"/>
     </pattern>
   </defs>
-  <path d="M0 13.25H640" fill="none" stroke="#edf1f4" stroke-width="0.5"/>
+  <path d="M0 13.25H640" fill="none" stroke="hsl(205.714 24.138% 94.314%)" stroke-width="0.5"/>
   <!-- Omit the dot at zero; the first complete dot is centered at 26. -->
   <rect x="2" width="638" height="26" fill="url(#dots)"/>
 </svg>
