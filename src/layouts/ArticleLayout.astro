@@ -1,0 +1,12 @@
+---
+import type { MarkdownLayoutProps } from 'astro';
+import Layout from './Layout.astro';
+
+type Props = MarkdownLayoutProps<{ title: string; publishedAt: string }>;
+const { frontmatter } = Astro.props;
+---
+<Layout title={frontmatter.title} currentPage="blog">
+  <h1>{frontmatter.title}</h1>
+  <p><time datetime={frontmatter.publishedAt}>{frontmatter.publishedAt.slice(0, 10)}</time></p>
+  <slot />
+</Layout>
