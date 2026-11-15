@@ -1,14 +1,22 @@
 .notebook {
   --notebook-unit: 1.625rem;
   --notebook-width: 40rem;
+  --notebook-gutter: clamp(1rem, 3vw, 2rem);
+  --notebook-body-size: 1rem;
+  --notebook-heading-size: 1.25rem;
+  --notebook-title-size: 1.5rem;
+  --notebook-text-color: hsl(212.727 32.353% 13.333%);
+  --notebook-link-color: hsl(207 58.14% 33.725%);
+  --notebook-rule-color: hsl(205.714 24.138% 94.314%);
+  --notebook-selection-color: hsl(100.851 41.593% 77.843% / 70%);
   /* Kaisei Opti 400/700: align the glyph bottoms with the lower rule. */
   --notebook-rule-offset: -0.1875rem;
-  --notebook-heading-shift: 0.809rem;
-  width: calc(100% - 2 * clamp(1rem, 3vw, 2rem));
+  --notebook-rule-phase: 0.75rem;
+  width: calc(100% - 2 * var(--notebook-gutter));
   max-width: var(--notebook-width);
   margin: var(--notebook-unit) auto;
-  color: hsl(212.727 32.353% 13.333%);
-  font-size: 1rem;
+  color: var(--notebook-text-color);
+  font-size: var(--notebook-body-size);
   line-height: var(--notebook-unit);
   letter-spacing: normal;
   overflow-wrap: anywhere;
@@ -19,7 +27,7 @@
 }
 
 .notebook-header h1 {
-  font-size: 1.5rem;
+  font-size: var(--notebook-title-size);
   font-weight: 700;
   line-height: calc(var(--notebook-unit) * 2);
 }
@@ -29,55 +37,53 @@
   isolation: isolate;
   display: flow-root;
   padding-block: var(--notebook-unit);
-  background-image: var(--notebook-rule);
-  background-size: var(--notebook-width) var(--notebook-unit);
-  background-repeat: repeat-y;
-  background-origin: content-box;
-  background-clip: content-box;
-  background-position: 0 calc(var(--notebook-rule-offset) + 0.75rem);
 }
 
-/* Native selection/copy remains active; paint its background on the ruling. */
-.notebook-body.has-grid-selection ::selection {
-  color: inherit;
-  background: transparent;
-}
-
-.notebook-body > [data-selection-layer] {
+/* The SVG supplies the shape; its visible color is managed here. */
+.notebook-body::before {
+  content: '';
   position: absolute;
-  inset: 0;
+  inset: var(--notebook-unit) 0;
   z-index: -1;
-  margin: 0;
-  padding: 0;
   pointer-events: none;
+  background-color: var(--notebook-rule-color);
+  mask-image: var(--notebook-rule);
+  mask-size: var(--notebook-width) var(--notebook-unit);
+  mask-repeat: repeat-y;
+  mask-position: 0 calc(var(--notebook-rule-offset) + var(--notebook-rule-phase));
 }
 
-[data-selection-layer] > span {
-  position: absolute;
-  background: hsl(100.851 41.593% 77.843% / 70%);
+/* Use the browser's native selection, including keyboard and clipboard support. */
+.notebook-body ::selection {
+  color: inherit;
+  background: var(--notebook-selection-color);
 }
 
 .notebook-body > * {
   margin-block: 0 var(--notebook-unit);
-  padding-block-end: var(--rhythm-extra, 0px);
+}
+
+/* Complete image/embed rows in CSS; unsupported browsers retain natural flow. */
+@supports (height: calc-size(auto, round(up, size, 1rem))) {
+  .notebook-body > :not(:is(h1, h2, h3, h4, h5, h6)) {
+    height: calc-size(auto, round(up, size, var(--notebook-unit)));
+  }
 }
 
 .notebook-body > :last-child,
-.notebook-body > :has(+ [data-selection-layer]),
 .notebook-body > :has(+ :is(h1, h2, h3, h4, h5, h6)) {
   margin-block-end: 0;
 }
 
 .notebook-body :is(h1, h2, h3, h4, h5, h6) {
-  position: relative;
-  top: var(--notebook-heading-shift);
-  font-size: 1.25rem;
+  font-size: var(--notebook-heading-size);
   font-weight: 700;
-  line-height: calc(var(--notebook-unit) * 2);
+  line-height: var(--notebook-unit);
+  padding-block-start: var(--notebook-unit);
 }
 
 .notebook-body a {
-  color: hsl(207 58.14% 33.725%);
+  color: var(--notebook-link-color);
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
@@ -103,10 +109,9 @@
 .notebook-body hr { height: var(--notebook-unit); border: 0; }
 
 @media (forced-colors: active) {
-  .notebook-body { background-image: none; }
-  .notebook-body.has-grid-selection ::selection {
+  .notebook-body::before { display: none; }
+  .notebook-body ::selection {
     color: HighlightText;
     background: Highlight;
   }
-  [data-selection-layer] { display: none; }
 }
