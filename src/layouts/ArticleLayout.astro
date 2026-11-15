@@ -1,14 +1,15 @@
 ---
 import type { MarkdownLayoutProps } from 'astro';
 import Layout from './Layout.astro';
+import '../styles/tokens.css';
 import '../styles/article.css';
 
 type Props = MarkdownLayoutProps<{ title: string; publishedAt: string }>;
 const { frontmatter } = Astro.props;
-const rule = `${import.meta.env.BASE_URL}notebook-rule.svg`;
+const ruleImage = `${import.meta.env.BASE_URL}notebook-rule.svg`;
 ---
 <Layout title={frontmatter.title} currentPage="blog">
-  <article class="notebook" style={`--notebook-rule: url("${rule}")`}>
+  <article class="notebook" style={`--notebook-rule-image: url("${ruleImage}")`}>
     <header class="notebook-header">
       <h1>{frontmatter.title}</h1>
       <p><time datetime={frontmatter.publishedAt}>{frontmatter.publishedAt.slice(0, 10)}</time></p>
