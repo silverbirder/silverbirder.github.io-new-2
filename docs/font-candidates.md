@@ -2,7 +2,7 @@
 
 比較番号30のKaisei Optiをnew-2全体に仮適用する。通常400・太字700を読み込み、擬似太字は無効にする。正式採用は未決定。
 
-[仮適用した記事の画面例](images/kaisei-opti-article.png)
+[仮適用した記事の画面例](images/001-kaisei-opti-article.png)
 
 ## 比較した31書体
 
