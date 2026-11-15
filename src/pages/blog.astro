@@ -2,7 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import { frontmatter, url } from './blog/contents/20261101.md';
 ---
+
 <Layout title="ブログ" currentPage="blog">
   <h1>ブログ</h1>
-  <p><a href={url}>{frontmatter.title}</a></p>
+  <p>
+    <a href={url}>{frontmatter.title}</a>
+  </p>
 </Layout>
