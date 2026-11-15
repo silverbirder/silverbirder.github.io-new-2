@@ -1,0 +1,112 @@
+.notebook {
+  --notebook-unit: 1.625rem;
+  --notebook-width: 40rem;
+  /* Kaisei Opti 400/700: align the glyph bottoms with the lower rule. */
+  --notebook-rule-offset: -0.1875rem;
+  --notebook-heading-shift: 0.809rem;
+  width: calc(100% - 2 * clamp(1rem, 3vw, 2rem));
+  max-width: var(--notebook-width);
+  margin: var(--notebook-unit) auto;
+  color: #17212d;
+  font-size: 1rem;
+  line-height: var(--notebook-unit);
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+
+.notebook-header {
+  margin-block-end: var(--notebook-unit);
+}
+
+.notebook-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: calc(var(--notebook-unit) * 2);
+}
+
+.notebook-body {
+  position: relative;
+  isolation: isolate;
+  display: flow-root;
+  padding-block: var(--notebook-unit);
+  background-image: var(--notebook-rule);
+  background-size: var(--notebook-width) var(--notebook-unit);
+  background-repeat: repeat-y;
+  background-origin: content-box;
+  background-clip: content-box;
+  background-position: 0 calc(var(--notebook-rule-offset) + 0.75rem);
+}
+
+/* Native selection/copy remains active; paint its background on the ruling. */
+.notebook-body.has-grid-selection ::selection {
+  color: inherit;
+  background: transparent;
+}
+
+.notebook-body > [data-selection-layer] {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+[data-selection-layer] > span {
+  position: absolute;
+  background: rgb(190 222 175 / 70%);
+}
+
+.notebook-body > * {
+  margin-block: 0 var(--notebook-unit);
+  padding-block-end: var(--rhythm-extra, 0px);
+}
+
+.notebook-body > :last-child,
+.notebook-body > :has(+ [data-selection-layer]),
+.notebook-body > :has(+ :is(h1, h2, h3, h4, h5, h6)) {
+  margin-block-end: 0;
+}
+
+.notebook-body :is(h1, h2, h3, h4, h5, h6) {
+  position: relative;
+  top: var(--notebook-heading-shift);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: calc(var(--notebook-unit) * 2);
+}
+
+.notebook-body a {
+  color: #245b88;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.notebook-body :is(img, video, iframe) {
+  display: block;
+  max-width: 100%;
+}
+
+.notebook-body :is(img, video) {
+  height: auto;
+}
+
+.notebook-body :is(ul, ol) {
+  padding-inline-start: 1.5rem;
+}
+
+.notebook-body ul { list-style-type: disc; }
+.notebook-body ol { list-style-type: decimal; }
+.notebook-body li > p { margin: 0; }
+.notebook-body blockquote { padding-inline-start: 1rem; }
+.notebook-body pre { overflow-x: auto; line-height: var(--notebook-unit); }
+.notebook-body hr { height: var(--notebook-unit); border: 0; }
+
+@media (forced-colors: active) {
+  .notebook-body { background-image: none; }
+  .notebook-body.has-grid-selection ::selection {
+    color: HighlightText;
+    background: Highlight;
+  }
+  [data-selection-layer] { display: none; }
+}
