@@ -5,3 +5,4 @@ dist/
 .cache/
 .yomiyasu/
 yomiyasu-work/
+.lighthouseci/

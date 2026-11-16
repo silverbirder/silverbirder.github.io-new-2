@@ -27,7 +27,7 @@ jobs:
       - run: npm ci --ignore-scripts
         env:
           HUSKY: '0'
-      - run: npm run browser:install -- --with-deps
+      - run: npm run browser:install
       - run: npm run check
       - run: npm run build
         env:

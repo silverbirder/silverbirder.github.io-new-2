@@ -1,0 +1,31 @@
+{
+  "ci": {
+    "collect": {
+      "numberOfRuns": 3,
+      "url": [
+        "http://127.0.0.1:4350/",
+        "http://127.0.0.1:4350/blog/",
+        "http://127.0.0.1:4350/blog/contents/20261101/"
+      ],
+      "settings": {
+        "onlyCategories": ["performance", "accessibility"],
+        "chromeFlags": "--no-sandbox"
+      }
+    },
+    "assert": {
+      "assertions": {
+        "largest-contentful-paint": [
+          "error",
+          { "maxNumericValue": 2500, "aggregationMethod": "median" }
+        ],
+        "cumulative-layout-shift": [
+          "error",
+          { "maxNumericValue": 0.1, "aggregationMethod": "median" }
+        ],
+        "total-blocking-time": ["error", { "maxNumericValue": 200, "aggregationMethod": "median" }],
+        "categories:accessibility": ["error", { "minScore": 1, "aggregationMethod": "pessimistic" }]
+      }
+    },
+    "upload": { "target": "filesystem", "outputDir": ".cache/quality/lighthouse" }
+  }
+}
