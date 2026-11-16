@@ -29,6 +29,14 @@ jobs:
           HUSKY: '0'
       - run: npm run browser:install
       - run: npm run check
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: failure()
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 7
       - run: npm run build
         env:
           ASTRO_TELEMETRY_DISABLED: '1'
