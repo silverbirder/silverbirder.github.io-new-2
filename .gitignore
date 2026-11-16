@@ -2,3 +2,7 @@ node_modules/
 dist/
 .astro/
 .agents/skills/yomiyasu/
+.cache/
+.yomiyasu/
+yomiyasu-work/
+.lighthouseci/
