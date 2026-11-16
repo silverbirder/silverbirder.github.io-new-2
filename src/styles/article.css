@@ -1,4 +1,5 @@
 .notebook {
+  --notebook-rule-image: none;
   /* Component: the notebook ruling follows the shared reading rhythm. */
   --notebook-rule-spacing: var(--line-height-body);
   /* Kaisei Opti and the SVG tile need these component-specific offsets. */
@@ -94,15 +95,31 @@
   padding-inline-start: var(--space-list-indent);
 }
 
-.notebook-body ul { list-style-type: disc; }
-.notebook-body ol { list-style-type: decimal; }
-.notebook-body li > p { margin: var(--space-none); }
-.notebook-body blockquote { padding-inline-start: var(--space-quote-indent); }
-.notebook-body pre { overflow-x: auto; line-height: var(--notebook-rule-spacing); }
-.notebook-body hr { height: var(--notebook-rule-spacing); border: var(--space-none); }
+.notebook-body ul {
+  list-style-type: disc;
+}
+.notebook-body ol {
+  list-style-type: decimal;
+}
+.notebook-body li > p {
+  margin: var(--space-none);
+}
+.notebook-body blockquote {
+  padding-inline-start: var(--space-quote-indent);
+}
+.notebook-body pre {
+  overflow-x: auto;
+  line-height: var(--notebook-rule-spacing);
+}
+.notebook-body hr {
+  height: var(--notebook-rule-spacing);
+  border: var(--space-none);
+}
 
 @media (forced-colors: active) {
-  .notebook-body::before { display: none; }
+  .notebook-body::before {
+    display: none;
+  }
   .notebook-body ::selection {
     color: HighlightText;
     background: Highlight;
