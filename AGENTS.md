@@ -8,6 +8,7 @@
 - このブログサイトの作業で出力する日本語はチャットの返答・進捗報告・資料・PR説明も含め、出力前に[yomiyasu](https://github.com/nanaism/yomiyasu/blob/db78b9bc5e868549b517a037df7a4d1c93edac23/skills/yomiyasu/SKILL.md)で推敲する。
 - スキルが未導入なら、プロジェクト内の `.agents/skills/yomiyasu/` に導入する。スキル本体と検査記録はPRに含めない。
 - 変更・生成するファイルは依頼されたプロジェクト内に置く。
+- mainへ直接pushしない。変更は作業ブランチからmain向けのPRにし、ユーザーの確認・マージを待つ。PRの作成・更新を依頼された場合、作業ブランチへのpushは許可されているものとする。
 - 要件は[docs/requirements.md](docs/requirements.md)を基準とし、確定事項と候補・未決定事項を区別する。
 - 既存機能は原則維持する。ホームのタイムラインとZenn・はてなへの外部投稿連携は削除対象とする。
 - new-2とcmsの両リポジトリを含むCodex Cloud環境で開発・検証する。
