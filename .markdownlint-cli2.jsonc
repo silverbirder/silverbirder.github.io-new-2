@@ -1,0 +1,19 @@
+{
+  "globs": ["**/*.md", ".github/**/*.md"],
+  "ignores": [
+    "node_modules/**",
+    "dist/**",
+    ".astro/**",
+    ".agents/**",
+    ".cache/**",
+    ".yomiyasu/**",
+    "yomiyasu-work/**",
+  ],
+  "config": {
+    "MD013": false,
+    "MD024": { "siblings_only": true },
+    "MD033": false,
+    "MD034": false,
+    "MD041": false,
+  },
+}
