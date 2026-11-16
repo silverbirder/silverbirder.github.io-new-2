@@ -1,9 +1,10 @@
 ---
 import 'kiso.css';
-import '../../.astro/font-tokens.css';
+import '../styles/tokens.css';
 import postcss from 'postcss';
 import { Buffer } from 'node:buffer';
-import tokens from '../styles/font-tokens.json';
+import designTokens from '../styles/design-tokens.json';
+const tokens = designTokens.primitive;
 
 interface Props {
   title: string;
@@ -23,8 +24,8 @@ const bodySize = parseFloat(tokens['font-size-md'].value);
 const headingSize = parseFloat(tokens['font-size-lg'].value);
 const lineHeight = parseFloat(tokens['line-height-md'].value);
 const descent = parseFloat(tokens['font-descent-md'].value);
-const family = tokens['font-family-body'].value[0];
-const headingFamily = tokens['font-family-heading'].value[0];
+const family = tokens['font-family-kaisei-opti'].value[0];
+const headingFamily = tokens['font-family-kaisei-opti-heading'].value[0];
 
 // Font-face descriptors cannot resolve CSS custom properties. Generate them
 // at build time from the same tokens that define font sizes and ruling height.
@@ -89,7 +90,7 @@ if (characters) {
     ))}
     <style is:global>
       body {
-        font-family: var(--font-family-body);
+        font-family: var(--semantic-font-family-body);
         font-synthesis: none;
       }
     </style>

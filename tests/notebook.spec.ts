@@ -180,18 +180,21 @@ async function openArticle(page: Page, route: string, root: number) {
 }
 
 const sizes = [
-  { name: 'desktop', width: 1280, root: 16 },
-  { name: 'mobile', width: 375, root: 16 },
-  { name: 'narrow', width: 320, root: 16 },
-  { name: 'large text', width: 1280, root: 20 },
-  { name: 'double text', width: 1280, root: 32 },
+  { name: 'パソコン幅', width: 1280, root: 16 },
+  { name: 'スマートフォン幅', width: 375, root: 16 },
+  { name: '狭い画面幅', width: 320, root: 16 },
+  { name: '文字を1.25倍に拡大', width: 1280, root: 20 },
+  { name: '文字を2倍に拡大', width: 1280, root: 32 },
 ];
 
 for (const size of sizes) {
   test.describe(size.name, () => {
     test.use({ viewport: { width: size.width, height: 900 } });
-    for (const route of ['/samples/notebook/', '/blog/contents/20261101/']) {
-      test(`${route} text and native selection stay inside ruling`, async ({ page }, info) => {
+    for (const { name, route } of [
+      { name: '記事サンプル', route: '/samples/notebook/' },
+      { name: '実際の記事', route: '/blog/contents/20261101/' },
+    ]) {
+      test(`${name}の文字と選択背景が罫線内に収まる`, async ({ page }, info) => {
         await openArticle(page, route, size.root);
         const report = await auditText(page);
         await info.attach('ruling-measurements', {
@@ -208,7 +211,7 @@ for (const size of sizes) {
   });
 }
 
-test('detects glyph and selection overflow when heading size regresses', async ({ page }) => {
+test('見出しが大きすぎると文字と選択範囲のはみ出しを検出する', async ({ page }) => {
   await openArticle(page, '/samples/notebook/', 16);
   await page.addStyleTag({ content: '.notebook-body h2 { font-size: 3rem !important; }' });
   await page.evaluate(() => document.fonts.ready);

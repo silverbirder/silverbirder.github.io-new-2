@@ -1,14 +1,51 @@
 {
-  "source": ["src/styles/font-tokens.json"],
+  "source": ["src/styles/design-tokens.json"],
   "platforms": {
     "css": {
       "transformGroup": "css",
       "buildPath": ".astro/",
       "files": [
         {
-          "destination": "font-tokens.css",
+          "destination": "primitive-tokens.css",
           "format": "css/variables",
-          "options": { "showFileHeader": false }
+          "filter": {
+            "attributes": {
+              "category": "primitive"
+            }
+          },
+          "options": {
+            "showFileHeader": false,
+            "outputReferences": true,
+            "selector": ":root"
+          }
+        },
+        {
+          "destination": "semantic-tokens.css",
+          "format": "css/variables",
+          "filter": {
+            "attributes": {
+              "category": "semantic"
+            }
+          },
+          "options": {
+            "showFileHeader": false,
+            "outputReferences": true,
+            "selector": ":root"
+          }
+        },
+        {
+          "destination": "notebook-tokens.css",
+          "format": "css/variables",
+          "filter": {
+            "attributes": {
+              "category": "component"
+            }
+          },
+          "options": {
+            "showFileHeader": false,
+            "outputReferences": true,
+            "selector": ".notebook"
+          }
         }
       ]
     }
