@@ -22,7 +22,13 @@ jobs:
         with:
           node-version: 24
           cache: npm
+      - uses: jdx/mise-action@v3
+      - run: npm install --global npm@11.20.0
       - run: npm ci
+        env:
+          HUSKY: '0'
+      - run: npm run browser:install -- --with-deps
+      - run: npm run check
       - run: npm run build
         env:
           ASTRO_TELEMETRY_DISABLED: '1'
