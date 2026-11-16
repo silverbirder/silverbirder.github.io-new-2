@@ -30,8 +30,8 @@
     "serve:check": "http-server dist -a 127.0.0.1 -p 4350 -c-1",
     "browser:audits": "run-s audit:a11y audit:performance",
     "audit:a11y": "pa11y-ci --config .pa11yci.json",
-    "audit:performance": "lhci collect && lhci assert && lhci upload",
-    "browser:install": "PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" puppeteer browsers install chrome"
+    "audit:performance": "CHROME_PATH=\"$(PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" puppeteer browsers install chrome-headless-shell --format '{{path}}')\" lhci collect && lhci assert && lhci upload",
+    "browser:install": "PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" puppeteer browsers install chrome-headless-shell"
   },
   "dependencies": {
     "astro": "7.4.7",

@@ -7,7 +7,7 @@
     "wait": 1000,
     "concurrency": 1,
     "viewport": { "width": 1280, "height": 900 },
-    "chromeLaunchConfig": { "args": ["--no-sandbox"] }
+    "chromeLaunchConfig": { "headless": "shell", "args": ["--no-sandbox"] }
   },
   "urls": [
     "http://127.0.0.1:4350/",
