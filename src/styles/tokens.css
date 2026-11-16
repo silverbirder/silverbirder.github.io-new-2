@@ -33,12 +33,12 @@
       var(--palette-blue-700-hue) var(--palette-blue-700-saturation)
         var(--palette-blue-700-lightness) / var(--opacity-100)
     );
-    --palette-blue-50-hue: 205.714;
-    --palette-blue-50-saturation: 24.138%;
-    --palette-blue-50-lightness: 94.314%;
-    --palette-blue-50: hsl(
-      var(--palette-blue-50-hue) var(--palette-blue-50-saturation)
-        var(--palette-blue-50-lightness) / var(--opacity-100)
+    --palette-blue-200-hue: 205.714;
+    --palette-blue-200-saturation: 24.138%;
+    --palette-blue-200-lightness: 82%;
+    --palette-blue-200: hsl(
+      var(--palette-blue-200-hue) var(--palette-blue-200-saturation)
+        var(--palette-blue-200-lightness) / var(--opacity-100)
     );
     --palette-sage-200-hue: 100.851;
     --palette-sage-200-saturation: 41.593%;
@@ -51,7 +51,7 @@
     /* Semantics: choose values by their role, rather than their appearance. */
     --color-text-primary: var(--palette-slate-900);
     --color-text-link: var(--palette-blue-700);
-    --color-border-subtle: var(--palette-blue-50);
+    --color-border-subtle: var(--palette-blue-200);
     --opacity-selection: var(--opacity-70);
     --color-background-selection: hsl(
       var(--palette-sage-200-hue) var(--palette-sage-200-saturation)
