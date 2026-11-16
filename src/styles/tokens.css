@@ -2,18 +2,18 @@
   :root {
     /* Primitives: reusable values without a component name. */
     --size-full: 100%;
+    --size-css-pixel: 1px;
     --space-none: 0;
     --space-4: 1rem;
     --space-6: 1.5rem;
     --space-8: 2rem;
     --space-fluid: 3vw;
-    --font-size-md: 1rem;
-    --font-size-lg: 1.25rem;
     --font-size-xl: 1.5rem;
-    --font-weight-regular: 400;
-    --font-weight-bold: 700;
-    --line-height-md: 1.625rem;
     --measure-md: 40rem;
+    --measure-xs: 8rem;
+    --ratio-half: 0.5;
+    --font-metric-cap: 1cap;
+    --color-transparent: transparent;
     --underline-offset: 0.15em;
     --opacity-70: 70%;
     --opacity-100: 100%;
@@ -62,7 +62,13 @@
     --font-size-title: var(--font-size-xl);
     --font-weight-body: var(--font-weight-regular);
     --font-weight-heading: var(--font-weight-bold);
-    --line-height-body: var(--line-height-md);
+    --color-background-code: var(--color-transparent);
+    --space-text-baseline-gap: round(nearest, var(--space-0-5), var(--size-css-pixel));
+    --content-width-table-cell: var(--measure-xs);
+    --line-height-body: calc(
+      round(nearest, var(--line-height-md) - var(--space-0-5), var(--size-css-pixel)) +
+        var(--space-text-baseline-gap)
+    );
     --line-height-title: calc(var(--line-height-body) + var(--line-height-body));
     --content-width-reading: var(--measure-md);
     --space-page-gutter: clamp(var(--space-4), var(--space-fluid), var(--space-8));

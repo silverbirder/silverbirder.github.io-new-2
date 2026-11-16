@@ -1,0 +1,63 @@
+---
+import postcss from 'postcss';
+import { Buffer } from 'node:buffer';
+import tokens from '../styles/font-tokens.json';
+
+interface Props {
+  text: string;
+  boldText: string;
+}
+const { text, boldText } = Astro.props;
+const bodySize = parseFloat(tokens['font-size-md'].value);
+const headingSize = parseFloat(tokens['font-size-lg'].value);
+const lineHeight = parseFloat(tokens['line-height-md'].value);
+const descent = parseFloat(tokens['space-0-5'].value);
+const family = tokens['font-family-body'].value[0];
+const headingFamily = tokens['font-family-heading'].value[0];
+
+// Font-face descriptors cannot resolve CSS custom properties. Generate them
+// at build time from the same tokens that define font sizes and ruling height.
+const withMetrics = (source: string, name: string, size: number) => {
+  const css = postcss.parse(source);
+  css.walkAtRules('font-face', (face) => {
+    face.walkDecls('font-family', (decl) => {
+      decl.value = JSON.stringify(name);
+    });
+    face.append({ prop: 'ascent-override', value: `${((lineHeight - descent) / size) * 100}%` });
+    face.append({ prop: 'descent-override', value: `${(descent / size) * 100}%` });
+    face.append({ prop: 'line-gap-override', value: `${tokens['font-line-gap-percent'].value}%` });
+  });
+  return css.toString();
+};
+const googleCss = async (weight: number, characters: string) => {
+  const url = new URL('https://fonts.googleapis.com/css2');
+  url.searchParams.set('family', `${family}:wght@${weight}`);
+  url.searchParams.set('display', 'swap');
+  url.searchParams.set('text', characters);
+  const response = await fetch(url, {
+    headers: {
+      'User-Agent':
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36',
+    },
+    signal: AbortSignal.timeout(15000),
+  });
+  if (!response.ok) throw new Error(`Google Fonts CSS request failed: ${response.status}`);
+  return response.text();
+};
+let fontCss = '';
+if (text) {
+  const [regular, bold] = await Promise.all([
+    googleCss(tokens['font-weight-regular'].value, text),
+    googleCss(tokens['font-weight-bold'].value, boldText),
+  ]);
+  fontCss = [
+    withMetrics(regular, family, bodySize),
+    withMetrics(bold, family, bodySize),
+    withMetrics(bold, headingFamily, headingSize),
+  ].join('\n');
+}
+---
+
+{fontCss && (
+  <link rel="stylesheet" href={`data:text/css;base64,${Buffer.from(fontCss).toString('base64')}`} />
+)}

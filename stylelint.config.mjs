@@ -1,6 +1,6 @@
 export default {
   extends: ['stylelint-config-recommended'],
-  referenceFiles: ['src/styles/**/*.css'],
+  referenceFiles: ['src/styles/**/*.css', '.astro/font-tokens.css'],
   reportNeedlessDisables: true,
   reportInvalidScopeDisables: true,
   reportDescriptionlessDisables: true,

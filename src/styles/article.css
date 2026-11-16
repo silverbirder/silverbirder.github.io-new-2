@@ -3,8 +3,10 @@
   /* Component: the notebook ruling follows the shared reading rhythm. */
   --notebook-rule-spacing: var(--line-height-body);
   /* Kaisei Opti and the SVG tile need these component-specific offsets. */
-  --notebook-rule-offset: -0.1875rem;
-  --notebook-rule-phase: 0.75rem;
+  --notebook-rule-svg-offset-ratio: 0.0096153846;
+  --notebook-rule-phase: calc(
+    var(--notebook-rule-spacing) * (var(--ratio-half) - var(--notebook-rule-svg-offset-ratio))
+  );
   width: calc(var(--size-full) - var(--space-page-gutter) - var(--space-page-gutter));
   max-width: var(--content-width-reading);
   margin: var(--notebook-rule-spacing) auto;
@@ -37,14 +39,14 @@
 .notebook-body::before {
   content: '';
   position: absolute;
-  inset: var(--notebook-rule-spacing) var(--space-none);
+  inset: var(--space-none);
   z-index: var(--layer-decoration);
   pointer-events: none;
   background-color: var(--color-border-subtle);
   mask-image: var(--notebook-rule-image);
   mask-size: var(--content-width-reading) var(--notebook-rule-spacing);
   mask-repeat: repeat-y;
-  mask-position: var(--space-none) calc(var(--notebook-rule-offset) + var(--notebook-rule-phase));
+  mask-position: var(--space-none) var(--notebook-rule-phase);
 }
 
 /* Use the browser's native selection, including keyboard and clipboard support. */
@@ -53,14 +55,46 @@
   background: var(--color-background-selection);
 }
 
+/* Normalize nested browser defaults before snapping the outer block height. */
+.notebook-body :is(ul, ol, li, blockquote, figure, figcaption) {
+  margin-block: var(--space-none);
+}
+
 .notebook-body > * {
   margin-block: var(--space-none) var(--notebook-rule-spacing);
 }
 
+/* cap is the actual font metric: the first baseline is anchored, not guessed. */
+@supports (text-box: trim-both cap alphabetic) {
+  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, figcaption, pre, th, td) {
+    text-box: trim-both cap alphabetic;
+    padding-block-start: calc(
+      var(--notebook-rule-spacing) - var(--font-metric-cap) - var(--space-text-baseline-gap)
+    );
+    padding-block-end: var(--space-text-baseline-gap);
+  }
+
+  .notebook-body :is(h1, h2, h3, h4, h5, h6) {
+    padding-block-start: calc(
+      var(--notebook-rule-spacing) + var(--notebook-rule-spacing) - var(--font-metric-cap) -
+        var(--space-text-baseline-gap)
+    );
+  }
+
+  .notebook-body :is(ul, ol) :is(ul, ol, li, p) {
+    text-box: normal;
+    padding-block: var(--space-none);
+  }
+}
+
 /* Complete image/embed rows in CSS; unsupported browsers retain natural flow. */
 @supports (height: calc-size(auto, size)) {
-  .notebook-body > :not(:is(h1, h2, h3, h4, h5, h6)) {
+  .notebook-body > * {
     height: calc-size(auto, round(up, size, var(--notebook-rule-spacing)));
+  }
+
+  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, figcaption, pre, th, td) {
+    height: calc-size(auto, round(nearest, size, var(--notebook-rule-spacing)));
   }
 }
 
@@ -70,10 +104,10 @@
 }
 
 .notebook-body :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-family-heading);
   font-size: var(--font-size-heading);
   font-weight: var(--font-weight-heading);
   line-height: var(--notebook-rule-spacing);
-  padding-block-start: var(--notebook-rule-spacing);
 }
 
 .notebook-body a {
@@ -85,10 +119,29 @@
 .notebook-body :is(img, video, iframe) {
   display: block;
   max-width: var(--size-full);
+  min-height: var(--space-none);
+  object-fit: contain;
+  object-position: left top;
 }
 
 .notebook-body :is(img, video) {
   height: auto;
+}
+
+@supports (height: calc-size(auto, size)) {
+  .notebook-body :is(img, video, iframe) {
+    height: calc-size(auto, round(up, size, var(--notebook-rule-spacing)));
+  }
+}
+
+.notebook-body iframe {
+  border: var(--space-none);
+}
+
+.notebook-body code {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .notebook-body :is(ul, ol) {
@@ -105,11 +158,39 @@
   margin: var(--space-none);
 }
 .notebook-body blockquote {
+  display: flow-root;
   padding-inline-start: var(--space-quote-indent);
 }
 .notebook-body pre {
   overflow-x: auto;
+  font-family: inherit;
   line-height: var(--notebook-rule-spacing);
+}
+
+/* Shiki's inline dark theme must not hide the notebook ruling. */
+.notebook-body pre,
+.notebook-body pre span {
+  background-color: var(--color-background-code) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.notebook-body :is(th, td) {
+  min-width: var(--content-width-table-cell);
+  padding-inline: var(--space-text-baseline-gap);
+  vertical-align: top;
+  text-align: start;
+}
+
+.notebook-body table {
+  display: block;
+  max-width: var(--size-full);
+  overflow-x: auto;
+  border-collapse: collapse;
+  border-spacing: var(--space-none);
+}
+
+.notebook-body blockquote > :last-child {
+  margin-block-end: var(--space-none);
 }
 .notebook-body hr {
   height: var(--notebook-rule-spacing);

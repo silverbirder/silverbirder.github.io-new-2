@@ -1,5 +1,7 @@
 ---
 import 'kiso.css';
+import '../../.astro/font-tokens.css';
+import NotebookFonts from '../components/NotebookFonts.astro';
 
 interface Props {
   title: string;
@@ -13,9 +15,7 @@ const characters = fontText ? [...new Set(`トップブログ${title}${fontText}
 const boldCharacters = [...new Set(`${title}${fontBoldText ?? fontText ?? ''}`)].join('');
 const fontStylesheet = (weights: string, text = '') =>
   `https://fonts.googleapis.com/css2?family=Kaisei+Opti:wght@${weights}&display=swap${text ? `&text=${encodeURIComponent(text)}` : ''}`;
-const fontUrls = characters
-  ? [fontStylesheet('400', characters), fontStylesheet('700', boldCharacters)]
-  : [fontStylesheet('400;700')];
+const fontUrls = characters ? [] : [fontStylesheet('400;700')];
 ---
 
 <!doctype html>
@@ -24,6 +24,7 @@ const fontUrls = characters
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <NotebookFonts text={characters} boldText={boldCharacters} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     {fontText && <link rel="preconnect" href="https://res.cloudinary.com" />}
@@ -32,7 +33,7 @@ const fontUrls = characters
     ))}
     <style is:global>
       body {
-        font-family: 'Kaisei Opti', serif;
+        font-family: var(--font-family-body);
         font-synthesis: none;
       }
     </style>
