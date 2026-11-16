@@ -12,10 +12,8 @@ const mime = { '.html': 'text/html', '.css': 'text/css', '.svg': 'image/svg+xml'
 
 async function serve(request, response) {
   const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
-  const filename = path.resolve(
-    'dist',
-    `.${pathname.endsWith('/') ? `${pathname}index.html` : pathname}`,
-  );
+  const relativePath = pathname.endsWith('/') ? pathname + 'index.html' : pathname;
+  const filename = path.resolve('dist', '.' + relativePath);
   if (!filename.startsWith(`${path.resolve('dist')}${path.sep}`)) {
     response.writeHead(403).end();
     return;

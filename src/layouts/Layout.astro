@@ -5,11 +5,17 @@ interface Props {
   title: string;
   currentPage: 'home' | 'blog';
   fontText?: string;
+  fontBoldText?: string;
 }
-const { title, currentPage, fontText } = Astro.props;
+const { title, currentPage, fontText, fontBoldText } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const characters = fontText ? [...new Set(`トップブログ${title}${fontText}`)].join('') : '';
-const fontUrl = `https://fonts.googleapis.com/css2?family=Kaisei+Opti:wght@400;700&display=swap${characters ? `&text=${encodeURIComponent(characters)}` : ''}`;
+const boldCharacters = [...new Set(`${title}${fontBoldText ?? fontText ?? ''}`)].join('');
+const fontStylesheet = (weights: string, text = '') =>
+  `https://fonts.googleapis.com/css2?family=Kaisei+Opti:wght@${weights}&display=swap${text ? `&text=${encodeURIComponent(text)}` : ''}`;
+const fontUrls = characters
+  ? [fontStylesheet('400', characters), fontStylesheet('700', boldCharacters)]
+  : [fontStylesheet('400;700')];
 ---
 
 <!doctype html>
@@ -21,7 +27,9 @@ const fontUrl = `https://fonts.googleapis.com/css2?family=Kaisei+Opti:wght@400;7
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     {fontText && <link rel="preconnect" href="https://res.cloudinary.com" />}
-    <link href={fontUrl} rel="stylesheet" />
+    {fontUrls.map((href) => (
+      <link href={href} rel="stylesheet" />
+    ))}
     <style is:global>
       body {
         font-family: 'Kaisei Opti', serif;

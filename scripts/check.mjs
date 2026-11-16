@@ -3,6 +3,8 @@ import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
 await mkdir('.cache/tmp', { recursive: true });
+const npmCli = process.env.npm_execpath;
+if (!npmCli || !path.isAbsolute(npmCli)) throw new Error('Run this check with npm run check.');
 const env = {
   ...process.env,
   ASTRO_TELEMETRY_DISABLED: '1',
@@ -13,7 +15,7 @@ const env = {
 };
 function run(script) {
   return new Promise((resolve, reject) => {
-    const child = spawn('npm', ['run', script], { stdio: 'inherit', env });
+    const child = spawn(process.execPath, [npmCli, 'run', script], { stdio: 'inherit', env });
     child.once('error', reject);
     child.once('exit', (code) =>
       code === 0 ? resolve() : reject(new Error(`${script} failed (${code})`)),
