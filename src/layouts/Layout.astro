@@ -1,7 +1,9 @@
 ---
 import 'kiso.css';
 import '../../.astro/font-tokens.css';
-import NotebookFonts from '../components/NotebookFonts.astro';
+import postcss from 'postcss';
+import { Buffer } from 'node:buffer';
+import tokens from '../styles/font-tokens.json';
 
 interface Props {
   title: string;
@@ -11,11 +13,60 @@ interface Props {
 }
 const { title, currentPage, fontText, fontBoldText } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const characters = fontText ? [...new Set(`トップブログ${title}${fontText}`)].join('') : '';
-const boldCharacters = [...new Set(`${title}${fontBoldText ?? fontText ?? ''}`)].join('');
+// Keep space, cap-height and x-height glyphs in every Google Fonts subset.
+const characters = fontText ? [...new Set(` Hxトップブログ${title}${fontText}`)].join('') : '';
+const boldCharacters = [...new Set(` Hx${title}${fontBoldText ?? fontText ?? ''}`)].join('');
 const fontStylesheet = (weights: string, text = '') =>
   `https://fonts.googleapis.com/css2?family=Kaisei+Opti:wght@${weights}&display=swap${text ? `&text=${encodeURIComponent(text)}` : ''}`;
 const fontUrls = characters ? [] : [fontStylesheet('400;700')];
+const bodySize = parseFloat(tokens['font-size-md'].value);
+const headingSize = parseFloat(tokens['font-size-lg'].value);
+const lineHeight = parseFloat(tokens['line-height-md'].value);
+const descent = parseFloat(tokens['font-descent-md'].value);
+const family = tokens['font-family-body'].value[0];
+const headingFamily = tokens['font-family-heading'].value[0];
+
+// Font-face descriptors cannot resolve CSS custom properties. Generate them
+// at build time from the same tokens that define font sizes and ruling height.
+const withMetrics = (source: string, name: string, size: number) => {
+  const css = postcss.parse(source);
+  css.walkAtRules('font-face', (face) => {
+    face.walkDecls('font-family', (decl) => {
+      decl.value = JSON.stringify(name);
+    });
+    face.append({ prop: 'ascent-override', value: `${((lineHeight - descent) / size) * 100}%` });
+    face.append({ prop: 'descent-override', value: `${(descent / size) * 100}%` });
+    face.append({ prop: 'line-gap-override', value: `${tokens['font-line-gap-percent'].value}%` });
+  });
+  return css.toString();
+};
+const googleCss = async (weight: number, characters: string) => {
+  const url = new URL('https://fonts.googleapis.com/css2');
+  url.searchParams.set('family', `${family}:wght@${weight}`);
+  url.searchParams.set('display', 'swap');
+  url.searchParams.set('text', characters);
+  const response = await fetch(url, {
+    headers: {
+      'User-Agent':
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36',
+    },
+    signal: AbortSignal.timeout(15000),
+  });
+  if (!response.ok) throw new Error(`Google Fonts CSS request failed: ${response.status}`);
+  return response.text();
+};
+let fontCss = '';
+if (characters) {
+  const [regular, bold] = await Promise.all([
+    googleCss(tokens['font-weight-regular'].value, characters),
+    googleCss(tokens['font-weight-bold'].value, boldCharacters),
+  ]);
+  fontCss = [
+    withMetrics(regular, family, bodySize),
+    withMetrics(bold, family, bodySize),
+    withMetrics(bold, headingFamily, headingSize),
+  ].join('\n');
+}
 ---
 
 <!doctype html>
@@ -24,7 +75,12 @@ const fontUrls = characters ? [] : [fontStylesheet('400;700')];
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <NotebookFonts text={characters} boldText={boldCharacters} />
+    {fontCss && (
+      <link
+        rel="stylesheet"
+        href={`data:text/css;base64,${Buffer.from(fontCss).toString('base64')}`}
+      />
+    )}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     {fontText && <link rel="preconnect" href="https://res.cloudinary.com" />}

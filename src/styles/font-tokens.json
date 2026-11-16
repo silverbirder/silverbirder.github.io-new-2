@@ -19,10 +19,6 @@
     "type": "dimension",
     "value": "1.625rem"
   },
-  "space-0-5": {
-    "type": "dimension",
-    "value": "0.125rem"
-  },
   "font-weight-regular": {
     "type": "fontWeight",
     "value": 400
@@ -34,5 +30,9 @@
   "font-line-gap-percent": {
     "type": "number",
     "value": 0
+  },
+  "font-descent-md": {
+    "type": "dimension",
+    "value": "0.25rem"
   }
 }

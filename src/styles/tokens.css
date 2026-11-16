@@ -63,10 +63,10 @@
     --font-weight-body: var(--font-weight-regular);
     --font-weight-heading: var(--font-weight-bold);
     --color-background-code: var(--color-transparent);
-    --space-text-baseline-gap: round(nearest, var(--space-0-5), var(--size-css-pixel));
+    --space-text-baseline-gap: round(nearest, var(--font-descent-md), var(--size-css-pixel));
     --content-width-table-cell: var(--measure-xs);
     --line-height-body: calc(
-      round(nearest, var(--line-height-md) - var(--space-0-5), var(--size-css-pixel)) +
+      round(nearest, var(--line-height-md) - var(--font-descent-md), var(--size-css-pixel)) +
         var(--space-text-baseline-gap)
     );
     --line-height-title: calc(var(--line-height-body) + var(--line-height-body));

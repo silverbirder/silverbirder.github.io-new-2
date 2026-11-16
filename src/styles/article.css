@@ -175,6 +175,8 @@
 }
 
 .notebook-body :is(th, td) {
+  text-box: normal;
+  padding-block: var(--space-none);
   min-width: var(--content-width-table-cell);
   padding-inline: var(--space-text-baseline-gap);
   vertical-align: top;
