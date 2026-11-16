@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip/schema.json",
-  "entry": ["scripts/*.mjs", "src/layouts/ArticleLayout.astro"],
-  "project": ["src/**/*.{astro,ts,js}", "scripts/*.mjs", "*.{mjs,ts}"],
+  "entry": ["src/layouts/ArticleLayout.astro"],
+  "project": ["src/**/*.{astro,ts,js}", "*.{mjs,ts}"],
   "ignoreBinaries": ["actionlint", "jq"]
 }
