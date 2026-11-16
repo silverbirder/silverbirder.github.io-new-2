@@ -7,7 +7,6 @@
     ".astro/**",
     ".agents/**",
     ".cache/**",
-    ".lighthouseci/**",
     ".yomiyasu/**",
     "yomiyasu-work/**",
     ".husky/_/**",
