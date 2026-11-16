@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "require-name": "error",
+    "name-type": "error",
+    "name-format": "error",
+    "require-private": "error",
+    "private-type": "error",
+    "valid-values-private": ["error", [true]],
+    "require-type": "error",
+    "valid-values-type": ["error", ["module"]],
+    "require-engines": "error",
+    "engines-type": "error",
+    "require-scripts": "error",
+    "scripts-type": "error",
+    "no-duplicate-properties": "error",
+    "no-repeated-dependencies": "error",
+    "prefer-absolute-version-dependencies": "error",
+    "prefer-absolute-version-devDependencies": "error"
+  }
+}

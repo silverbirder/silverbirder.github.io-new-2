@@ -1,0 +1,49 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "runners": ["axe", "htmlcs"],
+    "levelCapWhenNeedsReview": "warning",
+    "timeout": 60000,
+    "wait": 1000,
+    "concurrency": 1,
+    "viewport": { "width": 1280, "height": 900 },
+    "chromeLaunchConfig": { "headless": "shell", "args": ["--no-sandbox"] }
+  },
+  "urls": [
+    "http://127.0.0.1:4350/",
+    "http://127.0.0.1:4350/blog/",
+    {
+      "url": "http://127.0.0.1:4350/blog/contents/20261101/",
+      "screenCapture": ".cache/quality/article-desktop.png"
+    },
+    { "url": "http://127.0.0.1:4350/", "viewport": { "width": 375, "height": 900 } },
+    { "url": "http://127.0.0.1:4350/blog/", "viewport": { "width": 375, "height": 900 } },
+    {
+      "url": "http://127.0.0.1:4350/blog/contents/20261101/",
+      "viewport": { "width": 375, "height": 900 },
+      "screenCapture": ".cache/quality/article-mobile.png"
+    },
+    {
+      "url": "http://127.0.0.1:4350/",
+      "viewport": { "width": 188, "height": 450, "deviceScaleFactor": 2 }
+    },
+    {
+      "url": "http://127.0.0.1:4350/blog/",
+      "viewport": { "width": 188, "height": 450, "deviceScaleFactor": 2 }
+    },
+    {
+      "url": "http://127.0.0.1:4350/blog/contents/20261101/",
+      "viewport": { "width": 188, "height": 450, "deviceScaleFactor": 2 },
+      "screenCapture": ".cache/quality/article-narrow.png"
+    },
+    {
+      "url": "http://127.0.0.1:4350/",
+      "actions": [
+        "click element nav a[href='/blog/']",
+        "wait for path to be /blog/",
+        "click element main a",
+        "wait for element .notebook-body to be visible"
+      ]
+    }
+  ]
+}

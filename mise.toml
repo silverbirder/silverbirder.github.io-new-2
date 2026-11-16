@@ -1,0 +1,4 @@
+[tools]
+actionlint = "1.7.12"
+jq = "1.8.2"
+

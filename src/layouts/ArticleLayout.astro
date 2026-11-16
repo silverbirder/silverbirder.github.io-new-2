@@ -5,15 +5,28 @@ import '../styles/tokens.css';
 import '../styles/article.css';
 
 type Props = MarkdownLayoutProps<{ title: string; publishedAt: string }>;
-const { frontmatter } = Astro.props;
+const { frontmatter, rawContent } = Astro.props;
 const ruleImage = `${import.meta.env.BASE_URL}notebook-rule.svg`;
+const fontBoldText = /\*\*|__|<(?:strong|b)\b/i.test(rawContent())
+  ? undefined
+  : Astro.props.headings.map(({ text }) => text).join('');
 ---
-<Layout title={frontmatter.title} currentPage="blog">
+
+<Layout
+  title={frontmatter.title}
+  currentPage="blog"
+  fontText={`${rawContent().replace(/<[^>]*>/g, '')}${frontmatter.publishedAt}`}
+  fontBoldText={fontBoldText}
+>
   <article class="notebook" style={`--notebook-rule-image: url("${ruleImage}")`}>
     <header class="notebook-header">
       <h1>{frontmatter.title}</h1>
-      <p><time datetime={frontmatter.publishedAt}>{frontmatter.publishedAt.slice(0, 10)}</time></p>
+      <p>
+        <time datetime={frontmatter.publishedAt}>{frontmatter.publishedAt.slice(0, 10)}</time>
+      </p>
     </header>
-    <div class="notebook-body"><slot /></div>
+    <div class="notebook-body">
+      <slot />
+    </div>
   </article>
 </Layout>

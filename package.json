@@ -5,10 +5,93 @@
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
     "build": "astro build",
-    "preview": "astro preview --host 0.0.0.0"
+    "preview": "astro preview --host 0.0.0.0",
+    "lint:js": "oxlint . --deny-warnings",
+    "lint:astro": "eslint \"src/**/*.astro\"",
+    "format:check": "oxfmt --check .",
+    "format": "oxfmt --write .",
+    "prepare": "husky",
+    "check": "mkdir -p .cache/tmp .cache/quality && ASTRO_TELEMETRY_DISABLED=1 ASTRO_BASE=/ npm_config_cache=\"$PWD/.cache/npm\" PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" TMPDIR=\"$PWD/.cache/tmp\" run-s check:static test",
+    "check:static": "run-p format:check lint:js lint:astro lint:css lint:md lint:config typecheck lint:unused lint:duplicates audit",
+    "lint:css": "stylelint \"src/**/*.{css,astro}\"",
+    "lint:md": "markdownlint-cli2",
+    "lint:config": "npm run lint:package && npm run lint:registry && actionlint && sh -n .husky/pre-commit",
+    "lint:package": "npmPkgJsonLint . --ignorePath .gitignore --maxWarnings 0 && npm ci --dry-run --ignore-scripts --no-audit --no-fund",
+    "lint:registry": "npm config list --json --location=project | jq -e '.registry == \"https://npm.flatt.tech/\" and .[\"min-release-age\"] == 7 and .[\"engine-strict\"] == true and .[\"save-exact\"] == true'",
+    "typecheck": "astro check",
+    "test": "run-s build check:assets check:browser",
+    "lint:unused": "knip",
+    "lint:duplicates": "jscpd",
+    "audit": "npm audit",
+    "lint:html": "html-validate \"dist/**/*.html\"",
+    "check:assets": "size-limit --ignore-missing && npm run lint:unused-css",
+    "lint:unused-css": "mkdir -p .cache/quality && purgecss --css 'src/styles/*.css' --content 'dist/**/*.html' --safelist h1 h2 h3 h4 h5 h6 p a ul ol li blockquote pre code hr table thead tbody tr th td figure figcaption img video iframe --rejected > .cache/quality/purgecss.json && jq -e 'length > 0 and all(.[]; (.rejected | length) == 0)' .cache/quality/purgecss.json",
+    "check:browser": "start-server-and-test serve:check http://127.0.0.1:4350 browser:audits",
+    "serve:check": "http-server dist -a 127.0.0.1 -p 4350 -c-1",
+    "browser:audits": "run-s audit:a11y audit:performance",
+    "audit:a11y": "pa11y-ci --config .pa11yci.json",
+    "audit:performance": "CHROME_PATH=\"$(PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" puppeteer browsers install chrome-headless-shell --format '{{path}}')\" lhci collect && lhci assert && lhci upload",
+    "browser:install": "PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" puppeteer browsers install chrome-headless-shell"
   },
   "dependencies": {
-    "astro": "^6.0.0",
+    "astro": "7.4.7",
     "kiso.css": "1.2.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@astrojs/compiler-rs": "0.5.2",
+    "@lhci/cli": "0.16.0",
+    "@size-limit/file": "14.3.0",
+    "@typescript-eslint/parser": "8.72.1",
+    "eslint": "10.14.0",
+    "eslint-plugin-astro": "3.2.1",
+    "eslint-plugin-jsx-a11y-x": "0.2.0",
+    "eslint-plugin-sonarjs": "4.2.2",
+    "html-validate": "11.19.0",
+    "http-server": "14.1.1",
+    "husky": "9.1.7",
+    "jscpd": "5.4.3",
+    "knip": "6.44.2",
+    "markdownlint-cli2": "0.24.0",
+    "npm-package-json-lint": "11.0.1",
+    "npm-run-all2": "9.0.4",
+    "oxfmt": "0.77.0",
+    "oxlint": "1.92.0",
+    "pa11y-ci": "5.0.0",
+    "postcss-html": "2.0.0",
+    "puppeteer": "25.16.0",
+    "purgecss": "9.1.0",
+    "size-limit": "14.3.0",
+    "start-server-and-test": "3.0.13",
+    "stylelint": "18.0.0",
+    "stylelint-config-recommended": "19.0.0",
+    "typescript": "6.0.3"
+  },
+  "overrides": {
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^11.0.1"
+    },
+    "eslint": {
+      "minimatch": "^11.0.1"
+    },
+    "eslint-plugin-jsx-a11y-x": {
+      "minimatch": "^11.0.1"
+    },
+    "eslint-plugin-sonarjs": {
+      "minimatch": "^11.0.1"
+    },
+    "get-uri": {
+      "basic-ftp": "^6.2.4"
+    },
+    "markdownlint": {
+      "re2js": "^2.8.7"
+    },
+    "micromark-extension-math": {
+      "katex": "^0.18.2"
+    }
+  },
+  "engines": {
+    "node": ">=24",
+    "npm": ">=11.15.0"
   }
 }
