@@ -72,6 +72,9 @@ async function auditText(page: Page) {
     return {
       origin,
       step,
+      headerBottom:
+        document.querySelector('.notebook-header')!.getBoundingClientRect().bottom + scrollY,
+      firstElementTop: body.firstElementChild!.getBoundingClientRect().top + scrollY,
       checked,
       totalViolations: violations.length,
       violations: violations.slice(0, 30),
@@ -291,7 +294,7 @@ async function auditRulingMarks(page: Page, info: TestInfo) {
       },
       bodyClip: {
         x,
-        y: Math.floor(bodyBox.top - step / 4),
+        y: Math.floor(bodyBox.top + step - step / 4),
         width,
         height: Math.ceil(step / 2),
       },
@@ -306,12 +309,13 @@ async function auditRulingMarks(page: Page, info: TestInfo) {
   const heading = auditAlternatingMarks(png, area);
   const bodyImage = await page.screenshot({
     clip: area.bodyClip,
+    style: '.notebook-body > * { visibility: hidden; }',
     path: info.outputPath('body-ruling.png'),
   });
   await info.attach('body-ruling', { body: bodyImage, contentType: 'image/png' });
   const bodyPng = PNG.sync.read(bodyImage);
   const line = horizontalRuleRows(bodyPng, 0, bodyPng.height - 1);
-  expect(line.length, '最上段の横罫線が描画される').toBeGreaterThan(0);
+  expect(line.length, '本文の二本目の横罫線が描画される').toBeGreaterThan(0);
   expect(paintedColumns(bodyPng, 0, line[0] - 1), '本文罫線の上にドットがない').toHaveLength(0);
   expect(
     paintedColumns(bodyPng, line.at(-1)! + 1, bodyPng.height - 1),
@@ -449,6 +453,10 @@ for (const size of sizes) {
           contentType: 'application/json',
         });
         expect(report.checked).toBeGreaterThan(0);
+        expect(
+          Math.abs(report.firstElementTop - report.headerBottom),
+          '本文はヘッダー直後の一行目から始まる',
+        ).toBeLessThan(0.05);
         expect(report.violations).toEqual([]);
         await auditNativeSelection(page, '.notebook-body > p', info, report);
         await auditNativeSelection(page, '.notebook-body h2', info, report);
