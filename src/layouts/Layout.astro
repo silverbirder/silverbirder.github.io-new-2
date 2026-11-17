@@ -1,21 +1,18 @@
 ---
 import 'kiso.css';
+import '../styles/tokens.css';
 
 interface Props {
   title: string;
   currentPage: 'home' | 'blog';
-  fontText?: string;
-  fontBoldText?: string;
+  article?: boolean;
 }
-const { title, currentPage, fontText, fontBoldText } = Astro.props;
+const { title, currentPage, article = false } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const characters = fontText ? [...new Set(`トップブログ${title}${fontText}`)].join('') : '';
-const boldCharacters = [...new Set(`${title}${fontBoldText ?? fontText ?? ''}`)].join('');
-const fontStylesheet = (weights: string, text = '') =>
-  `https://fonts.googleapis.com/css2?family=Kaisei+Opti:wght@${weights}&display=swap${text ? `&text=${encodeURIComponent(text)}` : ''}`;
-const fontUrls = characters
-  ? [fontStylesheet('400', characters), fontStylesheet('700', boldCharacters)]
-  : [fontStylesheet('400;700')];
+const pagePath = Astro.url.pathname.slice(base.length).replace(/^\/|\/$/g, '');
+const fontStylesheet = article
+  ? `${base.replace(/\/$/, '')}/fonts/${pagePath}.css`
+  : 'https://fonts.googleapis.com/css2?family=Kaisei+Opti:wght@400;700&display=swap';
 ---
 
 <!doctype html>
@@ -24,15 +21,13 @@ const fontUrls = characters
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href={fontStylesheet} />
+    {!article && <link rel="preconnect" href="https://fonts.googleapis.com" />}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    {fontText && <link rel="preconnect" href="https://res.cloudinary.com" />}
-    {fontUrls.map((href) => (
-      <link href={href} rel="stylesheet" />
-    ))}
+    {article && <link rel="preconnect" href="https://res.cloudinary.com" />}
     <style is:global>
       body {
-        font-family: 'Kaisei Opti', serif;
+        font-family: var(--semantic-font-family-body);
         font-synthesis: none;
       }
     </style>

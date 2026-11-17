@@ -1,11 +1,12 @@
 export default {
   extends: ['stylelint-config-recommended'],
-  referenceFiles: ['src/styles/**/*.css'],
+  referenceFiles: ['src/styles/**/*.css', '.astro/design-tokens.css'],
   reportNeedlessDisables: true,
   reportInvalidScopeDisables: true,
   reportDescriptionlessDisables: true,
   rules: {
     'no-unknown-custom-properties': true,
+    'declaration-no-important': true,
     'color-no-hex': true,
     'color-function-notation': 'modern',
     'function-disallowed-list': ['rgb', 'rgba', 'hsla', 'hwb', 'lab', 'lch', 'oklab', 'oklch'],
