@@ -217,74 +217,144 @@ function horizontalRuleRows(png: PNG, top: number, bottom: number) {
   return rows;
 }
 
+function ruleColor(png: PNG, rows: number[]) {
+  const colors = rows.map((y) => {
+    const offset = (y * png.width + Math.floor(png.width / 2)) * 4;
+    return [...png.data.subarray(offset, offset + 3)];
+  });
+  return colors.reduce((darkest, color) =>
+    color.reduce((sum, value) => sum + value, 0) < darkest.reduce((sum, value) => sum + value, 0)
+      ? color
+      : darkest,
+  );
+}
+
+function auditAlternatingMarks(
+  png: PNG,
+  area: { dpr: number; step: number; leftOffset: number; width: number },
+) {
+  const line = horizontalRuleRows(png, 0, Math.ceil(area.dpr * 2));
+  expect(line.length, '目印の上に横線が描画される').toBeGreaterThan(0);
+  const marks = paintedColumns(png, line.at(-1)! + 1, png.height - 1);
+  expect(marks, '目印は左から罫線一行分ごとに並ぶ').toHaveLength(
+    Math.floor((area.width - area.leftOffset) / area.step),
+  );
+  const scale = (area.step / 26) * area.dpr;
+  // Anti-aliasing can extend each edge by one device pixel, adding two to the painted size.
+  const paintTolerance = 2;
+  for (const [index, mark] of marks.entries()) {
+    const dot = index % 2 === 0;
+    const center = (mark.left + mark.right + 1) / 2;
+    const expectedCenter = (area.leftOffset + area.step * (index + 1)) * area.dpr;
+    expect(
+      Math.abs(center - expectedCenter),
+      '最初の目印と以降の間隔は罫線一行分',
+    ).toBeLessThanOrEqual(1);
+    expect(
+      Math.abs(mark.right - mark.left + 1 - (dot ? 1.5 : 1) * scale),
+      '点と棒の幅は文字拡大に追従する',
+    ).toBeLessThanOrEqual(paintTolerance);
+    expect(
+      Math.abs(mark.bottom - mark.top + 1 - (dot ? 1.5 : 4) * scale),
+      '小さい点と細長い棒が交互に並ぶ',
+    ).toBeLessThanOrEqual(paintTolerance);
+  }
+  return { line, marks };
+}
+
 async function auditRulingMarks(page: Page, info: TestInfo) {
   const area = await page.evaluate(() => {
     const heading = document.querySelector('.notebook-heading')!;
     const headingBox = heading.getBoundingClientRect();
     const body = document.querySelector('.notebook-body')!;
     const bodyBox = body.getBoundingClientRect();
-    const radius = Number.parseFloat(getComputedStyle(body).lineHeight) / 4;
-    const y = Math.floor(headingBox.bottom);
+    const bottom = document.querySelector('.notebook-bottom')!;
+    const step = Number.parseFloat(getComputedStyle(body).lineHeight);
+    const tickHeight = Number.parseFloat(getComputedStyle(heading, '::after').height);
+    const lineWidth = Number.parseFloat(getComputedStyle(heading).borderBottomWidth);
+    const x = Math.floor(bodyBox.left);
+    const y = Math.floor(headingBox.bottom - lineWidth);
+    const width = Math.floor(bodyBox.width);
     return {
       dpr: devicePixelRatio,
-      bodyY: bodyBox.top - y,
-      tickHeight: Number.parseFloat(getComputedStyle(heading, '::after').height),
-      radius,
-      clip: {
-        x: Math.floor(bodyBox.left),
+      step,
+      width,
+      leftOffset: bodyBox.left - x,
+      bodyColor: getComputedStyle(body, '::before').backgroundColor,
+      frameColor: getComputedStyle(heading).borderBottomColor,
+      bottomColor: getComputedStyle(bottom).borderTopColor,
+      headingClip: {
+        x,
         y,
-        width: Math.floor(bodyBox.width),
-        height: Math.ceil(bodyBox.top - y + radius),
+        width,
+        height: Math.ceil(headingBox.bottom - y + tickHeight + 1),
+      },
+      bodyClip: {
+        x,
+        y: Math.floor(bodyBox.top - step / 4),
+        width,
+        height: Math.ceil(step / 2),
       },
     };
   });
   const screenshot = await page.screenshot({
-    clip: area.clip,
+    clip: area.headingClip,
     path: info.outputPath('ruling-marks.png'),
   });
   await info.attach('ruling-marks', { body: screenshot, contentType: 'image/png' });
   const png = PNG.sync.read(screenshot);
-  const y = Math.round(area.bodyY * area.dpr);
-  const radius = Math.floor(area.radius * area.dpr);
-  const line = horizontalRuleRows(png, y - radius, y + radius);
+  const heading = auditAlternatingMarks(png, area);
+  const bodyImage = await page.screenshot({
+    clip: area.bodyClip,
+    path: info.outputPath('body-ruling.png'),
+  });
+  await info.attach('body-ruling', { body: bodyImage, contentType: 'image/png' });
+  const bodyPng = PNG.sync.read(bodyImage);
+  const line = horizontalRuleRows(bodyPng, 0, bodyPng.height - 1);
   expect(line.length, '最上段の横罫線が描画される').toBeGreaterThan(0);
-  const above = paintedColumns(png, y - radius, line[0] - 1);
-  const below = paintedColumns(png, line.at(-1)! + 1, y + radius);
-  const ticks = paintedColumns(png, area.dpr, Math.floor(area.tickHeight * area.dpr) - 1);
-  expect(above.length, '罫線の上側にもドットの丸みが描画される').toBeGreaterThan(3);
-  expect(below).toHaveLength(above.length);
-  expect(ticks).toHaveLength(above.length);
-  for (const [index, dot] of above.entries()) {
-    const lower = below[index];
-    const tick = ticks[index];
-    const center = (dot.left + dot.right) / 2;
-    expect(Math.abs(center - (lower.left + lower.right) / 2)).toBeLessThanOrEqual(1);
-    expect(Math.abs(center - (tick.left + tick.right) / 2)).toBeLessThanOrEqual(1);
-    expect(Math.abs(line[0] - dot.top - (lower.bottom - line.at(-1)!))).toBeLessThanOrEqual(1);
-  }
-  const bottomImage = await page.locator('.notebook-bottom').screenshot({
+  expect(paintedColumns(bodyPng, 0, line[0] - 1), '本文罫線の上にドットがない').toHaveLength(0);
+  expect(
+    paintedColumns(bodyPng, line.at(-1)! + 1, bodyPng.height - 1),
+    '本文罫線の下にドットがない',
+  ).toHaveLength(0);
+  expect(area.bodyColor, '本文罫線と上下の線は別の色').not.toBe(area.frameColor);
+  expect(area.bottomColor, '上下の線は同じ色').toBe(area.frameColor);
+  expect(ruleColor(bodyPng, line), '描画された本文罫線と上下の線も別の色').not.toEqual(
+    ruleColor(png, heading.line),
+  );
+  const bottomTarget = page.locator('.notebook-bottom');
+  await bottomTarget.scrollIntoViewIfNeeded();
+  const bottomArea = await bottomTarget.evaluate((element) => {
+    const box = element.getBoundingClientRect();
+    const x = Math.floor(box.left);
+    const y = Math.floor(box.top);
+    const width = Math.floor(box.width);
+    return {
+      width,
+      leftOffset: box.left - x,
+      clip: { x, y, width, height: Math.ceil(box.bottom - y + 1) },
+      edgeClip: { x, y: box.top - 4, width, height: 4 },
+    };
+  });
+  const bottomImage = await page.screenshot({
+    clip: bottomArea.clip,
     path: info.outputPath('bottom-marks.png'),
   });
   await info.attach('bottom-marks', { body: bottomImage, contentType: 'image/png' });
   const bottomPng = PNG.sync.read(bottomImage);
-  const bottomTicks = paintedColumns(bottomPng, area.dpr, bottomPng.height - 1);
-  expect(bottomTicks, '記事下端にも同じ間隔の棒が描画される').toHaveLength(ticks.length);
-  for (const [index, tick] of ticks.entries()) {
-    const bottomTick = bottomTicks[index];
+  const bottom = auditAlternatingMarks(bottomPng, { ...area, ...bottomArea });
+  expect(ruleColor(bottomPng, bottom.line), '描画された上下の線は同じ色').toEqual(
+    ruleColor(png, heading.line),
+  );
+  for (const [index, mark] of heading.marks.entries()) {
+    const lower = bottom.marks[index];
+    expect(Math.abs(mark.left + mark.right - lower.left - lower.right)).toBeLessThanOrEqual(2);
     expect(
-      Math.abs(tick.left + tick.right - bottomTick.left - bottomTick.right),
+      Math.abs(mark.bottom - mark.top - lower.bottom + lower.top),
+      '上下の点と棒は同じ高さ',
     ).toBeLessThanOrEqual(2);
   }
-  const edgeArea = await page.locator('.notebook-bottom').evaluate((element) => {
-    const box = element.getBoundingClientRect();
-    return {
-      x: Math.floor(box.left),
-      y: box.top - 4,
-      width: Math.floor(box.width),
-      height: 4,
-    };
-  });
-  const edge = PNG.sync.read(await page.screenshot({ clip: edgeArea }));
+  const edge = PNG.sync.read(await page.screenshot({ clip: bottomArea.edgeClip }));
   expect(paintedColumns(edge, 0, edge.height - 1), '下端の線の上に半円が残らない').toHaveLength(0);
 }
 
@@ -363,9 +433,7 @@ for (const size of sizes) {
       await openArticle(page, '/blog/contents/20261101/', size.root);
       await auditMetadata(page, info);
     });
-    test('上下の目印と罫線ドットが揃い、最上段のドットが上下に丸く描画される', async ({
-      page,
-    }, info) => {
+    test('本文罫線に丸がなく、別色の上下線に点と細い棒が交互に並ぶ', async ({ page }, info) => {
       await openArticle(page, '/samples/notebook/', size.root);
       await auditRulingMarks(page, info);
     });

@@ -124,6 +124,13 @@
       "value": "hsl( {primitive.palette-blue-200-hue} {primitive.palette-blue-200-saturation} {primitive.palette-blue-200-lightness} / {primitive.opacity-100} )",
       "type": "string"
     },
+    "palette-cyan-200-hue": { "value": 196, "type": "number" },
+    "palette-cyan-200-saturation": { "value": "50%", "type": "string" },
+    "palette-cyan-200-lightness": { "value": "78%", "type": "string" },
+    "palette-cyan-200": {
+      "value": "hsl( {primitive.palette-cyan-200-hue} {primitive.palette-cyan-200-saturation} {primitive.palette-cyan-200-lightness} / {primitive.opacity-100} )",
+      "type": "string"
+    },
     "palette-sage-200-hue": {
       "value": 100.851,
       "type": "number"
@@ -178,7 +185,7 @@
     }
   },
   "semantic": {
-    "color-border-paper": { "value": "{semantic.color-border-subtle}", "type": "string" },
+    "color-border-paper": { "value": "{primitive.palette-cyan-200}", "type": "string" },
     "border-width-hairline": { "value": "{primitive.size-css-pixel}", "type": "string" },
     "space-control-block": { "value": "{primitive.space-2}", "type": "string" },
     "space-control-inline": { "value": "{primitive.space-4}", "type": "string" },
@@ -276,25 +283,25 @@
   "component": {
     "notebook-meta-separator-gap": { "value": "{primitive.space-1}", "type": "string" },
     "notebook-meta-dot-size": {
-      "value": "calc({component.notebook-rule-spacing} * {component.notebook-rule-svg-dot-radius-ratio} * {primitive.ratio-double})",
+      "value": "calc({component.notebook-rule-spacing} * {component.notebook-meta-dot-radius-ratio} * {primitive.ratio-double})",
       "type": "string"
     },
     "notebook-meta-width": { "value": "{primitive.measure-sm}", "type": "string" },
     "notebook-meta-row-height": { "value": "{primitive.space-8}", "type": "string" },
     "notebook-meta-space-before": { "value": "{primitive.space-8}", "type": "string" },
     "notebook-meta-value-inset": { "value": "{primitive.space-8}", "type": "string" },
-    "notebook-tick-svg-height-ratio": { "value": 0.2307692308, "type": "number" },
-    "notebook-tick-height-long": {
+    "notebook-tick-svg-height-ratio": { "value": 0.1538461538, "type": "number" },
+    "notebook-tick-height": {
       "value": "calc({component.notebook-rule-spacing} * {component.notebook-tick-svg-height-ratio})",
       "type": "string"
     },
-    "notebook-tick-interval-count": { "value": 8, "type": "number" },
+    "notebook-tick-repeat-count": { "value": "{primitive.ratio-double}", "type": "string" },
     "notebook-tick-inset": {
       "value": "calc({component.notebook-rule-spacing} * {primitive.ratio-half})",
       "type": "string"
     },
-    "notebook-tick-interval-long": {
-      "value": "calc({component.notebook-rule-spacing} * {component.notebook-tick-interval-count})",
+    "notebook-tick-repeat-width": {
+      "value": "calc({component.notebook-rule-spacing} * {component.notebook-tick-repeat-count})",
       "type": "string"
     },
     "notebook-tick-image": {
@@ -310,13 +317,13 @@
       "type": "string"
     },
     "notebook-rule-svg-width-ratio": { "value": 24.6153846154, "type": "number" },
-    "notebook-rule-svg-dot-radius-ratio": { "value": 0.0480769231, "type": "number" },
+    "notebook-meta-dot-radius-ratio": { "value": 0.0480769231, "type": "number" },
     "notebook-rule-tile-width": {
       "value": "calc({component.notebook-rule-spacing} * {component.notebook-rule-svg-width-ratio})",
       "type": "string"
     },
     "notebook-rule-edge-outset": {
-      "value": "round(up, {component.notebook-rule-spacing} * {component.notebook-rule-svg-dot-radius-ratio}, {primitive.size-css-pixel})",
+      "value": "{semantic.border-width-hairline}",
       "type": "string"
     },
     "notebook-rule-edge-inset": {
