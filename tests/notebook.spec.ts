@@ -213,7 +213,7 @@ for (const size of sizes) {
 
 test('見出しが大きすぎると文字と選択範囲のはみ出しを検出する', async ({ page }) => {
   await openArticle(page, '/samples/notebook/', 16);
-  await page.addStyleTag({ content: '.notebook-body h2 { font-size: 3rem !important; }' });
+  await page.addStyleTag({ content: '.notebook .notebook-body h2 { font-size: 3rem; }' });
   await page.evaluate(() => document.fonts.ready);
   const report = await auditText(page);
   expect(report.violations.some(({ kind }) => kind === 'glyph ink')).toBe(true);

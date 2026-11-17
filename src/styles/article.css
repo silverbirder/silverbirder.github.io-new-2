@@ -162,13 +162,8 @@
   overflow-x: auto;
   font-family: inherit;
   line-height: var(--component-notebook-rule-spacing);
-}
-
-/* Shiki's inline dark theme must not hide the notebook ruling. */
-.notebook-body pre,
-.notebook-body pre span {
-  background-color: var(--semantic-color-background-code) !important;
-  color: var(--semantic-color-text-primary) !important;
+  background-color: var(--semantic-color-background-code);
+  color: var(--semantic-color-text-primary);
 }
 
 .notebook-body :is(th, td) {

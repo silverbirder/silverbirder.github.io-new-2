@@ -6,45 +6,11 @@
       "buildPath": ".astro/",
       "files": [
         {
-          "destination": "primitive-tokens.css",
+          "destination": "design-tokens.css",
           "format": "css/variables",
-          "filter": {
-            "attributes": {
-              "category": "primitive"
-            }
-          },
           "options": {
             "showFileHeader": false,
-            "outputReferences": true,
-            "selector": ":root"
-          }
-        },
-        {
-          "destination": "semantic-tokens.css",
-          "format": "css/variables",
-          "filter": {
-            "attributes": {
-              "category": "semantic"
-            }
-          },
-          "options": {
-            "showFileHeader": false,
-            "outputReferences": true,
-            "selector": ":root"
-          }
-        },
-        {
-          "destination": "notebook-tokens.css",
-          "format": "css/variables",
-          "filter": {
-            "attributes": {
-              "category": "component"
-            }
-          },
-          "options": {
-            "showFileHeader": false,
-            "outputReferences": true,
-            "selector": ".notebook"
+            "outputReferences": true
           }
         }
       ]
