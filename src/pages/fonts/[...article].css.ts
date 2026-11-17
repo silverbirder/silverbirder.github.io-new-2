@@ -17,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = () => {
   return Object.entries(articles).map(([path, article]) => {
     const { title, publishedAt } = article.frontmatter;
     const content = article.rawContent();
-    const fontText = `${content.replace(/<[^>]*>/g, '')}${publishedAt}`;
+    const fontText = `${content.replace(/<[^<>]*>/g, '')}${publishedAt}`;
     const fontBoldText = /\*\*|__|<(?:strong|b)\b/i.test(content)
       ? fontText
       : article
@@ -35,10 +35,10 @@ export const getStaticPaths: GetStaticPaths = () => {
   });
 };
 
-const bodySize = parseFloat(tokens['font-size-md'].value);
-const headingSize = parseFloat(tokens['font-size-lg'].value);
-const lineHeight = parseFloat(tokens['line-height-md'].value);
-const descent = parseFloat(tokens['font-descent-md'].value);
+const bodySize = Number.parseFloat(tokens['font-size-md'].value);
+const headingSize = Number.parseFloat(tokens['font-size-lg'].value);
+const lineHeight = Number.parseFloat(tokens['line-height-md'].value);
+const descent = Number.parseFloat(tokens['font-descent-md'].value);
 const family = tokens['font-family-kaisei-opti'].value[0];
 const headingFamily = tokens['font-family-kaisei-opti-heading'].value[0];
 

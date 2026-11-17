@@ -1,5 +1,6 @@
 .notebook {
   --notebook-rule-image: var(--component-notebook-rule-image);
+
   width: calc(
     var(--primitive-size-full) - var(--semantic-space-page-gutter) -
       var(--semantic-space-page-gutter)
@@ -64,11 +65,11 @@
 @supports (text-box: trim-both cap alphabetic) {
   .notebook-body :is(p, h1, h2, h3, h4, h5, h6, figcaption, pre, th, td) {
     text-box: trim-both cap alphabetic;
-    padding-block-start: calc(
-      var(--component-notebook-rule-spacing) - var(--primitive-font-metric-cap) -
-        var(--semantic-space-text-baseline-gap)
-    );
-    padding-block-end: var(--semantic-space-text-baseline-gap);
+    padding-block: calc(
+        var(--component-notebook-rule-spacing) - var(--primitive-font-metric-cap) -
+          var(--semantic-space-text-baseline-gap)
+      )
+      var(--semantic-space-text-baseline-gap);
   }
 
   .notebook-body :is(h1, h2, h3, h4, h5, h6) {
@@ -148,16 +149,20 @@
 .notebook-body ul {
   list-style-type: disc;
 }
+
 .notebook-body ol {
   list-style-type: decimal;
 }
+
 .notebook-body li > p {
   margin: var(--primitive-space-none);
 }
+
 .notebook-body blockquote {
   display: flow-root;
   padding-inline-start: var(--semantic-space-quote-indent);
 }
+
 .notebook-body pre {
   overflow-x: auto;
   font-family: inherit;
@@ -186,6 +191,7 @@
 .notebook-body blockquote > :last-child {
   margin-block-end: var(--primitive-space-none);
 }
+
 .notebook-body hr {
   height: var(--component-notebook-rule-spacing);
   border: var(--primitive-space-none);
@@ -195,6 +201,7 @@
   .notebook-body::before {
     display: none;
   }
+
   .notebook-body ::selection {
     color: HighlightText;
     background: Highlight;
