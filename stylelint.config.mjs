@@ -1,5 +1,5 @@
 export default {
-  extends: ['stylelint-config-standard'],
+  extends: ['stylelint-config-recommended'],
   referenceFiles: ['src/styles/**/*.css', '.astro/design-tokens.css'],
   reportNeedlessDisables: true,
   reportInvalidScopeDisables: true,
