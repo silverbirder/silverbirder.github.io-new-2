@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="208" height="6" viewBox="0 0 208 6">
+  <defs>
+    <pattern id="ticks" width="26" height="6" patternUnits="userSpaceOnUse">
+      <path d="M13 1V2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </pattern>
+  </defs>
+  <rect width="208" height="6" fill="url(#ticks)"/>
+  <path d="M195 1V5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+</svg>

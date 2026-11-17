@@ -1,5 +1,13 @@
 {
   "primitive": {
+    "space-1": { "value": "0.25rem", "type": "dimension" },
+    "ratio-double": { "value": 2, "type": "number" },
+    "radius-full": { "value": "50%", "type": "string" },
+    "scale-negative": { "value": -1, "type": "number" },
+    "space-2": { "value": "0.5rem", "type": "dimension" },
+    "measure-sm": { "value": "12rem", "type": "dimension" },
+    "font-size-sm": { "value": "0.875rem", "type": "dimension" },
+    "font-size-xs": { "value": "0.75rem", "type": "dimension" },
     "size-full": {
       "value": "100%",
       "type": "string"
@@ -140,6 +148,10 @@
       "type": "dimension",
       "value": "1.625rem"
     },
+    "line-height-lg": {
+      "type": "dimension",
+      "value": "2.5rem"
+    },
     "font-weight-regular": {
       "type": "fontWeight",
       "value": 400
@@ -166,6 +178,12 @@
     }
   },
   "semantic": {
+    "color-border-paper": { "value": "{semantic.color-border-subtle}", "type": "string" },
+    "border-width-hairline": { "value": "{primitive.size-css-pixel}", "type": "string" },
+    "space-control-block": { "value": "{primitive.space-2}", "type": "string" },
+    "space-control-inline": { "value": "{primitive.space-4}", "type": "string" },
+    "font-size-label": { "value": "{primitive.font-size-sm}", "type": "string" },
+    "font-size-caption": { "value": "{primitive.font-size-xs}", "type": "string" },
     "color-text-primary": {
       "value": "{primitive.palette-slate-900}",
       "type": "string"
@@ -223,7 +241,7 @@
       "type": "string"
     },
     "line-height-title": {
-      "value": "calc({semantic.line-height-body} + {semantic.line-height-body})",
+      "value": "{primitive.line-height-lg}",
       "type": "string"
     },
     "content-width-reading": {
@@ -256,12 +274,53 @@
     }
   },
   "component": {
+    "notebook-meta-separator-gap": { "value": "{primitive.space-1}", "type": "string" },
+    "notebook-meta-dot-size": {
+      "value": "calc({component.notebook-rule-spacing} * {component.notebook-rule-svg-dot-radius-ratio} * {primitive.ratio-double})",
+      "type": "string"
+    },
+    "notebook-meta-width": { "value": "{primitive.measure-sm}", "type": "string" },
+    "notebook-meta-row-height": { "value": "{primitive.space-8}", "type": "string" },
+    "notebook-meta-space-before": { "value": "{primitive.space-8}", "type": "string" },
+    "notebook-meta-value-inset": { "value": "{primitive.space-8}", "type": "string" },
+    "notebook-tick-svg-height-ratio": { "value": 0.2307692308, "type": "number" },
+    "notebook-tick-height-long": {
+      "value": "calc({component.notebook-rule-spacing} * {component.notebook-tick-svg-height-ratio})",
+      "type": "string"
+    },
+    "notebook-tick-interval-count": { "value": 8, "type": "number" },
+    "notebook-tick-inset": {
+      "value": "calc({component.notebook-rule-spacing} * {primitive.ratio-half})",
+      "type": "string"
+    },
+    "notebook-tick-interval-long": {
+      "value": "calc({component.notebook-rule-spacing} * {component.notebook-tick-interval-count})",
+      "type": "string"
+    },
+    "notebook-tick-image": {
+      "value": "none",
+      "type": "string"
+    },
     "notebook-rule-image": {
       "value": "none",
       "type": "string"
     },
     "notebook-rule-spacing": {
       "value": "{semantic.line-height-body}",
+      "type": "string"
+    },
+    "notebook-rule-svg-width-ratio": { "value": 24.6153846154, "type": "number" },
+    "notebook-rule-svg-dot-radius-ratio": { "value": 0.0480769231, "type": "number" },
+    "notebook-rule-tile-width": {
+      "value": "calc({component.notebook-rule-spacing} * {component.notebook-rule-svg-width-ratio})",
+      "type": "string"
+    },
+    "notebook-rule-edge-outset": {
+      "value": "round(up, {component.notebook-rule-spacing} * {component.notebook-rule-svg-dot-radius-ratio}, {primitive.size-css-pixel})",
+      "type": "string"
+    },
+    "notebook-rule-edge-inset": {
+      "value": "calc({component.notebook-rule-edge-outset} * {primitive.scale-negative})",
       "type": "string"
     },
     "notebook-rule-svg-offset-ratio": {

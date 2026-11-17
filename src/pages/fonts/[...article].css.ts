@@ -28,7 +28,7 @@ export const getStaticPaths: GetStaticPaths = () => {
     return {
       params: { article: path.slice('/src/pages/'.length, -'.md'.length) },
       props: {
-        characters: [...new Set(` Hxトップブログ${title}${fontText}`)].join(''),
+        characters: [...new Set(` HxNODATE0123456789トップブログ${title}${fontText}`)].join(''),
         boldCharacters: [...new Set(` Hx${title}${fontBoldText}`)].join(''),
       },
     };
