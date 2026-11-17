@@ -17,14 +17,15 @@ async function auditText(page: Page) {
     const svg = new DOMParser().parseFromString(source, 'image/svg+xml');
     const path = svg.querySelector('path')!;
     const svgHeight = svg.querySelector('svg')!.viewBox.baseVal.height;
-    const step = parseFloat(decoration.maskSize.split(' ')[1]);
+    const step = Number.parseFloat(decoration.maskSize.split(' ')[1]);
     const origin =
       body.getBoundingClientRect().top +
       scrollY +
-      parseFloat(decoration.top) +
-      parseFloat(decoration.maskPosition.split(' ')[1]) +
+      Number.parseFloat(decoration.top) +
+      Number.parseFloat(decoration.maskPosition.split(' ')[1]) +
       (path.getPointAtLength(0).y / svgHeight) * step;
-    const halfStroke = ((parseFloat(path.getAttribute('stroke-width')!) / svgHeight) * step) / 2;
+    const halfStroke =
+      ((Number.parseFloat(path.getAttribute('stroke-width')!) / svgHeight) * step) / 2;
     const ctx = document.createElement('canvas').getContext('2d')!;
     const segmenter = new Intl.Segmenter('ja', { granularity: 'grapheme' });
     const violations: {
@@ -118,7 +119,7 @@ async function auditNativeSelection(
     range.setEnd(node, Math.min(node.textContent!.length, 2));
     const rect = range.getBoundingClientRect();
     const body = document.querySelector('.notebook-body')!.getBoundingClientRect();
-    const unit = parseFloat(getComputedStyle(element).lineHeight);
+    const unit = Number.parseFloat(getComputedStyle(element).lineHeight);
     const ctx = document.createElement('canvas').getContext('2d')!;
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, 1, 1);
@@ -203,9 +204,10 @@ for (const size of sizes) {
         });
         expect(report.checked).toBeGreaterThan(0);
         expect(report.violations).toEqual([]);
-        for (const selector of ['.notebook-body > p', '.notebook-body h2', 'pre code', 'th']) {
-          await auditNativeSelection(page, selector, info, report);
-        }
+        await auditNativeSelection(page, '.notebook-body > p', info, report);
+        await auditNativeSelection(page, '.notebook-body h2', info, report);
+        await auditNativeSelection(page, 'pre code', info, report);
+        await auditNativeSelection(page, 'th', info, report);
       });
     }
   });

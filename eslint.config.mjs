@@ -1,4 +1,5 @@
 import astro from 'eslint-plugin-astro';
+import sonarjs from 'eslint-plugin-sonarjs';
 import tsParser from '@typescript-eslint/parser';
 
 export default [
@@ -13,6 +14,7 @@ export default [
       '.husky/_/**',
     ],
   },
+  { ...sonarjs.configs.recommended, files: ['**/*.astro'] },
   ...astro.configs.recommended,
   ...astro.configs['jsx-a11y-recommended'],
   { files: ['**/*.astro'], languageOptions: { parserOptions: { parser: tsParser } } },

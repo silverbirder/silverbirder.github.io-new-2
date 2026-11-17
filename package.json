@@ -71,7 +71,7 @@
     "start-server-and-test": "3.0.13",
     "style-dictionary": "3.9.2",
     "stylelint": "18.0.0",
-    "stylelint-config-recommended": "19.0.0",
+    "stylelint-config-standard": "41.0.0",
     "typescript": "6.0.3"
   },
   "overrides": {
