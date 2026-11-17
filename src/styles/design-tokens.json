@@ -60,6 +60,13 @@
       "value": "transparent",
       "type": "string"
     },
+    "palette-neutral-0-hue": { "value": 0, "type": "number" },
+    "palette-neutral-0-saturation": { "value": "0%", "type": "string" },
+    "palette-neutral-0-lightness": { "value": "100%", "type": "string" },
+    "palette-neutral-0": {
+      "value": "hsl( {primitive.palette-neutral-0-hue} {primitive.palette-neutral-0-saturation} {primitive.palette-neutral-0-lightness} / {primitive.opacity-100} )",
+      "type": "string"
+    },
     "underline-offset": {
       "value": "0.15em",
       "type": "dimension"
@@ -185,6 +192,7 @@
     }
   },
   "semantic": {
+    "color-background-page": { "value": "{primitive.palette-neutral-0}", "type": "string" },
     "color-border-paper": { "value": "{primitive.palette-cyan-200}", "type": "string" },
     "border-width-hairline": { "value": "{primitive.size-css-pixel}", "type": "string" },
     "space-control-block": { "value": "{primitive.space-2}", "type": "string" },

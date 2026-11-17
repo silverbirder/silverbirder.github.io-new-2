@@ -19,6 +19,7 @@ const fontStylesheet = article
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
+    <meta name="color-scheme" content="only light" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <link rel="stylesheet" href={fontStylesheet} />
@@ -26,6 +27,11 @@ const fontStylesheet = article
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     {article && <link rel="preconnect" href="https://res.cloudinary.com" />}
     <style is:global>
+      :root {
+        color-scheme: only light;
+        background-color: var(--semantic-color-background-page);
+      }
+
       body {
         font-family: var(--semantic-font-family-body);
         font-synthesis: none;
