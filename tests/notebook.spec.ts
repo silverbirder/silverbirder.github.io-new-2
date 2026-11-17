@@ -180,6 +180,174 @@ async function openArticle(page: Page, route: string, root: number) {
   }, root);
 }
 
+function hasInk(png: PNG, x: number, y: number) {
+  const offset = (y * png.width + x) * 4;
+  return [0, 1, 2].some((channel) => png.data[offset + channel] < 247);
+}
+
+function paintedColumns(png: PNG, top: number, bottom: number) {
+  const columns: { left: number; right: number; top: number; bottom: number }[] = [];
+  let current: (typeof columns)[number] | undefined;
+  for (let x = 0; x < png.width; x++) {
+    const rows = [];
+    for (let y = top; y <= bottom; y++) {
+      if (hasInk(png, x, y)) rows.push(y);
+    }
+    if (rows.length) {
+      current ??= { left: x, right: x, top: bottom, bottom: top };
+      current.right = x;
+      current.top = Math.min(current.top, rows[0]);
+      current.bottom = Math.max(current.bottom, rows.at(-1)!);
+    } else if (current) {
+      columns.push(current);
+      current = undefined;
+    }
+  }
+  if (current) columns.push(current);
+  return columns;
+}
+
+function horizontalRuleRows(png: PNG, top: number, bottom: number) {
+  const rows = [];
+  for (let y = top; y <= bottom; y++) {
+    let painted = 0;
+    for (let x = 0; x < png.width; x++) painted += Number(hasInk(png, x, y));
+    if (painted > png.width * 0.9) rows.push(y);
+  }
+  return rows;
+}
+
+async function auditRulingMarks(page: Page, info: TestInfo) {
+  const area = await page.evaluate(() => {
+    const heading = document.querySelector('.notebook-heading')!;
+    const headingBox = heading.getBoundingClientRect();
+    const body = document.querySelector('.notebook-body')!;
+    const bodyBox = body.getBoundingClientRect();
+    const radius = Number.parseFloat(getComputedStyle(body).lineHeight) / 4;
+    const y = Math.floor(headingBox.bottom);
+    return {
+      dpr: devicePixelRatio,
+      bodyY: bodyBox.top - y,
+      tickHeight: Number.parseFloat(getComputedStyle(heading, '::after').height),
+      radius,
+      clip: {
+        x: Math.floor(bodyBox.left),
+        y,
+        width: Math.floor(bodyBox.width),
+        height: Math.ceil(bodyBox.top - y + radius),
+      },
+    };
+  });
+  const screenshot = await page.screenshot({
+    clip: area.clip,
+    path: info.outputPath('ruling-marks.png'),
+  });
+  await info.attach('ruling-marks', { body: screenshot, contentType: 'image/png' });
+  const png = PNG.sync.read(screenshot);
+  const y = Math.round(area.bodyY * area.dpr);
+  const radius = Math.floor(area.radius * area.dpr);
+  const line = horizontalRuleRows(png, y - radius, y + radius);
+  expect(line.length, '最上段の横罫線が描画される').toBeGreaterThan(0);
+  const above = paintedColumns(png, y - radius, line[0] - 1);
+  const below = paintedColumns(png, line.at(-1)! + 1, y + radius);
+  const ticks = paintedColumns(png, area.dpr, Math.floor(area.tickHeight * area.dpr) - 1);
+  expect(above.length, '罫線の上側にもドットの丸みが描画される').toBeGreaterThan(3);
+  expect(below).toHaveLength(above.length);
+  expect(ticks).toHaveLength(above.length);
+  for (const [index, dot] of above.entries()) {
+    const lower = below[index];
+    const tick = ticks[index];
+    const center = (dot.left + dot.right) / 2;
+    expect(Math.abs(center - (lower.left + lower.right) / 2)).toBeLessThanOrEqual(1);
+    expect(Math.abs(center - (tick.left + tick.right) / 2)).toBeLessThanOrEqual(1);
+    expect(Math.abs(line[0] - dot.top - (lower.bottom - line.at(-1)!))).toBeLessThanOrEqual(1);
+  }
+  const bottomImage = await page.locator('.notebook-bottom').screenshot({
+    path: info.outputPath('bottom-marks.png'),
+  });
+  await info.attach('bottom-marks', { body: bottomImage, contentType: 'image/png' });
+  const bottomPng = PNG.sync.read(bottomImage);
+  const bottomTicks = paintedColumns(bottomPng, area.dpr, bottomPng.height - 1);
+  expect(bottomTicks, '記事下端にも同じ間隔の棒が描画される').toHaveLength(ticks.length);
+  for (const [index, tick] of ticks.entries()) {
+    const bottomTick = bottomTicks[index];
+    expect(
+      Math.abs(tick.left + tick.right - bottomTick.left - bottomTick.right),
+    ).toBeLessThanOrEqual(2);
+  }
+  const edgeArea = await page.locator('.notebook-bottom').evaluate((element) => {
+    const box = element.getBoundingClientRect();
+    return {
+      x: Math.floor(box.left),
+      y: box.top - 4,
+      width: Math.floor(box.width),
+      height: 4,
+    };
+  });
+  const edge = PNG.sync.read(await page.screenshot({ clip: edgeArea }));
+  expect(paintedColumns(edge, 0, edge.height - 1), '下端の線の上に半円が残らない').toHaveLength(0);
+}
+
+async function auditMetadata(page: Page, info: TestInfo) {
+  const rows = await page.locator('.notebook-entry').evaluateAll((entries) => {
+    const heading = document.querySelector('.notebook-heading')!;
+    const bodyFamily = getComputedStyle(document.querySelector('.notebook-body')!).fontFamily;
+    return entries.map((entry, index) => {
+      const style = getComputedStyle(entry);
+      return {
+        line:
+          index === 0
+            ? entry.getBoundingClientRect().bottom - Number.parseFloat(style.borderBottomWidth)
+            : heading.getBoundingClientRect().top,
+        color: index === 0 ? style.borderBottomColor : getComputedStyle(heading).borderTopColor,
+        labelColor: getComputedStyle(entry.querySelector('.notebook-entry-label')!).color,
+        bodyFamily,
+        families: [...entry.querySelectorAll('.notebook-entry-text')].map(
+          (text) => getComputedStyle(text).fontFamily,
+        ),
+        textEdges: [...entry.querySelectorAll('.notebook-entry-text')].map(
+          (text) => text.getBoundingClientRect().bottom,
+        ),
+        dots: [...entry.querySelectorAll('.notebook-meta-dot')].map((dot) => ({
+          bottom: dot.getBoundingClientRect().bottom,
+          width: dot.getBoundingClientRect().width,
+          height: dot.getBoundingClientRect().height,
+          color: getComputedStyle(dot).backgroundColor,
+          rounding: getComputedStyle(dot).borderRadius,
+          hidden: dot.getAttribute('aria-hidden'),
+        })),
+      };
+    });
+  });
+  expect(rows).toHaveLength(2);
+  for (const [index, row] of rows.entries()) {
+    expect(row.labelColor, 'NO・DATEの色は罫線と同じ').toBe(row.color);
+    expect(new Set(row.families), '番号・日付は本文と同じフォント').toEqual(
+      new Set([row.bodyFamily]),
+    );
+    expect(row.textEdges).toHaveLength(index === 0 ? 2 : 4);
+    for (const bottom of row.textEdges) expect(Math.abs(bottom - row.line)).toBeLessThan(0.05);
+    expect(row.dots).toHaveLength(index + 1);
+    for (const dot of row.dots) {
+      expect(Math.abs(dot.bottom - row.line)).toBeLessThan(0.05);
+      expect(dot.width).toBeGreaterThan(0);
+      expect(dot.width).toBeCloseTo(dot.height, 2);
+      expect(dot.rounding).toBe('50%');
+      expect(dot.color).toBe(row.color);
+      expect(dot.hidden).toBe('true');
+    }
+  }
+  await expect(page.locator('time .visually-hidden')).toHaveText('2026年11月1日');
+  await expect(page.locator('time .notebook-meta-parts')).toHaveAttribute('aria-hidden', 'true');
+  await page
+    .locator('.notebook-header')
+    .screenshot({ path: info.outputPath('metadata-heading.png') });
+  const image = await page.locator('.notebook-meta').screenshot({
+    path: info.outputPath('metadata.png'),
+  });
+  await info.attach('metadata', { body: image, contentType: 'image/png' });
+}
+
 const sizes = [
   { name: 'パソコン幅', width: 1280, root: 16 },
   { name: 'スマートフォン幅', width: 375, root: 16 },
@@ -191,6 +359,16 @@ const sizes = [
 for (const size of sizes) {
   test.describe(size.name, () => {
     test.use({ viewport: { width: size.width, height: 900 } });
+    test('番号と日付の文字と正円のドットが下線に接して揃う', async ({ page }, info) => {
+      await openArticle(page, '/blog/contents/20261101/', size.root);
+      await auditMetadata(page, info);
+    });
+    test('上下の目印と罫線ドットが揃い、最上段のドットが上下に丸く描画される', async ({
+      page,
+    }, info) => {
+      await openArticle(page, '/samples/notebook/', size.root);
+      await auditRulingMarks(page, info);
+    });
     for (const { name, route } of [
       { name: '記事サンプル', route: '/samples/notebook/' },
       { name: '実際の記事', route: '/blog/contents/20261101/' },
