@@ -225,6 +225,14 @@
   border: var(--primitive-space-none);
 }
 
+.notebook-body img[data-notebook-rows] {
+  /* Each image supplies its own row count as inline author data. */
+  --notebook-image-rows: initial;
+
+  height: calc(var(--component-notebook-rule-spacing) * var(--notebook-image-rows));
+  width: auto;
+}
+
 .notebook-body code {
   font-family: inherit;
   font-size: inherit;

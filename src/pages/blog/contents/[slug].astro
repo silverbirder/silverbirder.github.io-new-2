@@ -1,0 +1,17 @@
+---
+/* eslint-disable astro/no-set-html-directive -- Trusted author CMS snapshots are rendered at build time, like raw HTML in Markdown. */
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+import { cmsPostHTML, getCMSPosts, type CMSPost } from '../../../lib/cms';
+
+export async function getStaticPaths() {
+  const posts = await getCMSPosts();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+type Props = { post: CMSPost };
+const { post } = Astro.props;
+---
+
+<ArticleLayout frontmatter={post}>
+  <Fragment set:html={cmsPostHTML(post)} />
+</ArticleLayout>

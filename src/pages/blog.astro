@@ -1,11 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { frontmatter, url } from './blog/contents/20261101.md';
+import { cmsPostURL, getCMSPosts } from '../lib/cms';
+
+const posts = [
+  { title: frontmatter.title, publishedAt: frontmatter.publishedAt, url },
+  ...(await getCMSPosts()).map((post) => ({
+    title: post.title,
+    publishedAt: post.publishedAt,
+    url: cmsPostURL(post.slug),
+  })),
+].sort((left, right) => right.publishedAt.localeCompare(left.publishedAt));
 ---
 
 <Layout title="ブログ" currentPage="blog">
   <h1>ブログ</h1>
-  <p>
-    <a href={url}>{frontmatter.title}</a>
-  </p>
+  {posts.map((post) => (
+    <p>
+      <a href={post.url}>{post.title}</a>
+    </p>
+  ))}
 </Layout>

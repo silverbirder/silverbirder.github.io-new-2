@@ -1,5 +1,6 @@
 import type { APIRoute, GetStaticPaths, MarkdownInstance } from 'astro';
 import postcss from 'postcss';
+import { getCMSPosts } from '../../lib/cms';
 import designTokens from '../../styles/design-tokens.json';
 
 const tokens = designTokens.primitive;
@@ -9,12 +10,23 @@ interface FontProps {
   boldCharacters: string;
 }
 
-export const getStaticPaths: GetStaticPaths = () => {
+function fontPath(article: string, title: string, fontText: string, fontBoldText: string) {
+  // Retain metric glyphs even when an article contains only Japanese headings.
+  return {
+    params: { article },
+    props: {
+      characters: [...new Set(` HxNODATE0123456789トップブログ${title}${fontText}`)].join(''),
+      boldCharacters: [...new Set(` Hx${title}${fontBoldText}`)].join(''),
+    },
+  };
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
   const articles = import.meta.glob<MarkdownInstance<{ title: string; publishedAt: string }>>(
     '/src/pages/**/*.md',
     { eager: true },
   );
-  return Object.entries(articles).map(([path, article]) => {
+  const markdownPaths = Object.entries(articles).map(([path, article]) => {
     const { title, publishedAt } = article.frontmatter;
     const content = article.rawContent();
     const fontText = `${content.replace(/<[^<>]*>/g, '')}${publishedAt}`;
@@ -24,15 +36,16 @@ export const getStaticPaths: GetStaticPaths = () => {
           .getHeadings()
           .map(({ text }) => text)
           .join('');
-    // Retain metric glyphs even when an article contains only Japanese headings.
-    return {
-      params: { article: path.slice('/src/pages/'.length, -'.md'.length) },
-      props: {
-        characters: [...new Set(` HxNODATE0123456789トップブログ${title}${fontText}`)].join(''),
-        boldCharacters: [...new Set(` Hx${title}${fontBoldText}`)].join(''),
-      },
-    };
+    return fontPath(path.slice('/src/pages/'.length, -'.md'.length), title, fontText, fontBoldText);
   });
+  const posts = await getCMSPosts();
+  return [
+    ...markdownPaths,
+    ...posts.map((post) => {
+      const text = `${post.html.replace(/<[^<>]*>/gu, '')}${post.publishedAt}`;
+      return fontPath(`blog/contents/${post.slug}`, post.title, text, text);
+    }),
+  ];
 };
 
 const bodySize = Number.parseFloat(tokens['font-size-md'].value);
