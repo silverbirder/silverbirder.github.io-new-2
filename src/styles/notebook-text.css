@@ -1,0 +1,61 @@
+/* Normalize nested browser defaults before snapping the outer block height. */
+.notebook-body :is(ul, ol, li, blockquote, figure, figcaption) {
+  margin-block: var(--primitive-space-none);
+}
+
+.notebook-body > * {
+  margin-block: var(--primitive-space-none) var(--component-notebook-rule-spacing);
+}
+
+/* cap is the actual font metric: the first baseline is anchored, not guessed. */
+@supports (text-box: trim-both cap alphabetic) {
+  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, figcaption, pre, th, td) {
+    text-box: trim-both cap alphabetic;
+    padding-block: calc(
+        var(--component-notebook-rule-spacing) - var(--primitive-font-metric-cap) -
+          var(--semantic-space-text-baseline-gap)
+      )
+      var(--semantic-space-text-baseline-gap);
+  }
+
+  .notebook-body :is(h1, h2, h3, h4, h5, h6) {
+    padding-block-start: calc(
+      var(--component-notebook-rule-spacing) + var(--component-notebook-rule-spacing) -
+        var(--primitive-font-metric-cap) - var(--semantic-space-text-baseline-gap)
+    );
+  }
+
+  .notebook-body :is(ul, ol) :is(ul, ol, li, p) {
+    text-box: normal;
+    padding-block: var(--primitive-space-none);
+  }
+}
+
+/* Complete image/embed rows in CSS; unsupported browsers retain natural flow. */
+@supports (height: calc-size(auto, size)) {
+  .notebook-body > * {
+    height: calc-size(auto, round(up, size, var(--component-notebook-rule-spacing)));
+  }
+
+  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, figcaption, pre, th, td) {
+    height: calc-size(auto, round(nearest, size, var(--component-notebook-rule-spacing)));
+  }
+}
+
+.notebook-body > :last-child,
+.notebook-body > :has(+ :is(h1, h2, h3, h4, h5, h6)) {
+  margin-block-end: var(--primitive-space-none);
+}
+
+.notebook-body :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--semantic-font-family-heading);
+  font-size: var(--semantic-font-size-heading);
+  font-weight: var(--semantic-font-weight-heading);
+  line-height: var(--component-notebook-rule-spacing);
+}
+
+.notebook-body a {
+  color: var(--semantic-color-text-link);
+  text-decoration: underline;
+  text-underline-offset: var(--semantic-text-link-underline-offset);
+}
