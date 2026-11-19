@@ -4,16 +4,18 @@ import '../styles/tokens.css';
 import '../styles/article.css';
 
 type Props = {
+  noindex?: boolean;
+  sharedFont?: boolean;
   frontmatter: { title: string; publishedAt: string; number?: number; publicationId?: string };
 };
-const { frontmatter } = Astro.props;
+const { frontmatter, noindex, sharedFont } = Astro.props;
 const ruleImage = `${import.meta.env.BASE_URL}notebook-rule.svg`;
 const tickImage = `${import.meta.env.BASE_URL}notebook-ticks.svg`;
 const [year, month, day] = frontmatter.publishedAt.slice(0, 10).split('-');
 const dateLabel = `${year}年${Number(month)}月${Number(day)}日`;
 ---
 
-<Layout title={frontmatter.title} currentPage="blog" article>
+<Layout title={frontmatter.title} currentPage="blog" article {noindex} {sharedFont}>
   <article
     class="notebook"
     data-publication-id={frontmatter.publicationId}
