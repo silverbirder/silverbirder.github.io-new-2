@@ -154,9 +154,9 @@ This_is_a_deliberately_long_unbroken_line_for_checking_horizontal_scrolling_insi
 
 ### 小さな画像
 
-<img src="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_768/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg" alt="小さく表示した布団のパッケージ" width="120" height="90" loading="lazy" decoding="async" />
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_768/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg" alt="小さく表示した布団のパッケージ" data-notebook-rows="4" style="--notebook-image-rows: 4" loading="lazy" decoding="async" /></p>
 
-小さな画像を無理に本文幅まで引き伸ばさないかを確認します。
+画像の高さを罫線4行分に指定した例です。
 
 ## 区切り線
 
