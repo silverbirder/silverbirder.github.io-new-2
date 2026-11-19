@@ -1,22 +1,9 @@
-import { copyFile, mkdir, readdir, unlink, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir } from 'node:fs/promises';
+import { copyArticles, download, readTree } from './cms-github.mjs';
 
 const directory = new URL('../.cache/cms-published/', import.meta.url);
-const repository = 'https://api.github.com/repos/silverbirder/silverbirder.github.io-cms';
-const githubReadPath =
-  /^\/(?:git\/(?:ref\/heads\/published|trees\/[a-f0-9]{40}\?recursive=1|blobs\/[a-f0-9]{40})|contents\/articles\.json\?ref=original-articles)$/u;
+const archive = new URL('../.cache/cms-archive/', import.meta.url);
 const articlePath = /^published\/([A-Za-z0-9][A-Za-z0-9._-]*\.md)$/u;
-
-async function download(path, token, accept = 'application/vnd.github+json') {
-  if (!githubReadPath.test(path)) throw new Error('Invalid CMS publication path');
-  const response = await fetch(repository + path, {
-    headers: { Accept: accept, Authorization: `Bearer ${token}` },
-    redirect: 'error',
-    signal: AbortSignal.timeout(15_000),
-  });
-  if (!response.ok)
-    throw new Error(`GitHub returned ${response.status} while reading published articles`);
-  return response;
-}
 
 await mkdir(directory, { recursive: true });
 
@@ -26,16 +13,9 @@ if (!token) {
     throw new Error('CMS_PUBLISHED_READ_TOKEN is required');
   const fixture = new URL('../tests/fixtures/20261101.md', import.meta.url);
   await copyFile(fixture, new URL('20261101.md', directory));
+  await copyArticles([], archive);
 } else {
-  const ref = await download('/git/ref/heads/published', token);
-  const { object } = await ref.json();
-  const treeResponse = await download(
-    `/git/trees/${encodeURIComponent(object.sha)}?recursive=1`,
-    token,
-  );
-  const { tree, truncated } = await treeResponse.json();
-  if (truncated) throw new Error('The CMS published article tree is incomplete');
-
+  const tree = await readTree('published', token);
   const entries = tree.flatMap(({ path, type, sha }) => {
     const name = articlePath.exec(path)?.[1];
     return type === 'blob' && name ? [{ name, sha }] : [];
@@ -51,33 +31,28 @@ if (!token) {
 
   if (!articles.has('20261101.md'))
     throw new Error('The existing article 20261101.md is missing from CMS');
-  const batchSize = 10;
-  for (let offset = 0; offset < entries.length; offset += batchSize) {
-    // Keep concurrent GitHub requests below the secondary rate limit.
-    // eslint-disable-next-line no-await-in-loop
-    await Promise.all(
-      entries.slice(offset, offset + batchSize).map(async ({ name, sha }) => {
-        const response = await download(
-          `/git/blobs/${encodeURIComponent(sha)}`,
-          token,
-          'application/vnd.github.raw+json',
-        );
-        await writeFile(new URL(name, directory), await response.text());
-      }),
-    );
-  }
+  await copyArticles(entries, directory, token);
 
-  const stale = (await readdir(directory)).filter(
-    (name) => name.endsWith('.md') && !articles.has(name),
+  const [catalog, originalTree] = await Promise.all([
+    download(
+      '/contents/articles.json?ref=original-articles',
+      token,
+      'application/vnd.github.raw+json',
+    ),
+    readTree('original-articles', token),
+  ]);
+  const original = new Map(
+    originalTree.filter(({ type }) => type === 'blob').map(({ path, sha }) => [path, sha]),
   );
-  await Promise.all(stale.map((name) => unlink(new URL(name, directory))));
-}
-
-if (token) {
-  const catalog = await download(
-    '/contents/articles.json?ref=original-articles',
-    token,
-    'application/vnd.github.raw+json',
-  );
-  await writeFile(new URL('../cms-original-articles.json', directory), await catalog.text());
+  const originals = (await catalog.json())
+    .filter((article) => article.public)
+    .map(({ slug }) => {
+      if (!/^[A-Za-z0-9][A-Za-z0-9._-]*$/u.test(slug))
+        throw new Error('Invalid original article slug');
+      const name = `${slug}.md`;
+      const sha = original.get(`imported/${name}`);
+      if (!sha) throw new Error(`Missing original article ${name}`);
+      return { name, sha };
+    });
+  await copyArticles(originals, archive, token);
 }

@@ -8,8 +8,8 @@ import designTokens from '../../styles/design-tokens.json';
 const tokens = designTokens.primitive;
 
 interface FontProps {
-  characters: string;
-  boldCharacters: string;
+  characters?: string;
+  boldCharacters?: string;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -19,6 +19,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   );
   const published = await getCollection('published');
   return [
+    { params: { article: 'archive' }, props: {} },
     ...Object.entries(articles).map(([path, article]) => ({
       params: { article: path.slice('/src/pages/'.length, -'.md'.length) },
       props: fontProps(
@@ -69,11 +70,11 @@ const withMetrics = (source: string, name: string, size: number) => {
   });
   return css.toString();
 };
-const googleCss = async (weight: number, characters: string) => {
+const googleCss = async (weight: number, characters?: string) => {
   const url = new URL('https://fonts.googleapis.com/css2');
   url.searchParams.set('family', `${family}:wght@${weight}`);
   url.searchParams.set('display', 'swap');
-  url.searchParams.set('text', characters);
+  if (characters) url.searchParams.set('text', characters);
   const response = await fetch(url, {
     headers: {
       'User-Agent':
