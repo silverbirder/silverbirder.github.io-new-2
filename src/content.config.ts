@@ -30,5 +30,4 @@ function articles(base: string) {
 
 export const collections = {
   published: articles('./.cache/cms-published'),
-  archive: articles('./.cache/cms-archive'),
 };
