@@ -6,8 +6,9 @@ interface Props {
   title: string;
   currentPage: 'home' | 'blog';
   article?: boolean;
+  noindex?: boolean;
 }
-const { title, currentPage, article = false } = Astro.props;
+const { title, currentPage, article = false, noindex } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const pagePath = Astro.url.pathname.slice(base.length).replace(/^\/|\/$/g, '');
 const fontStylesheet = article
@@ -22,6 +23,7 @@ const fontStylesheet = article
     <meta name="color-scheme" content="only light" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="stylesheet" href={fontStylesheet} />
     {!article && <link rel="preconnect" href="https://fonts.googleapis.com" />}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

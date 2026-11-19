@@ -44,7 +44,7 @@ jobs:
           ARTICLE: ${{ inputs.article }}
           PUBLICATION: ${{ inputs.publication }}
         run: |
-          [[ "$ARTICLE" =~ ^[a-z0-9][a-z0-9-]*$ && "$PUBLICATION" =~ ^[a-f0-9]{64}$ ]]
+          [[ "$ARTICLE" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ && "$PUBLICATION" =~ ^[a-f0-9]{64}$ ]]
           needle=$(printf 'data-publication-id="%s"' "$PUBLICATION")
           matches=$(grep --fixed-strings --files-with-matches "$needle" dist/blog/contents/*/index.html)
           slug=$(basename "$(dirname "$matches")")

@@ -32,7 +32,7 @@ const articles = new Map(
 );
 for (const { id, data } of published) {
   const slug = articleSlug(id);
-  if (articles.has(slug)) continue;
+  if (articles.has(slug) && !data.publicationId) continue;
   articles.set(slug, {
     url: `${import.meta.env.BASE_URL}blog/contents/${slug}/`,
     title: data.title,
