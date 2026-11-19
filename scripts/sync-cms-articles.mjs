@@ -3,7 +3,7 @@ import { copyFile, mkdir, readdir, unlink, writeFile } from 'node:fs/promises';
 const directory = new URL('../.cache/cms-published/', import.meta.url);
 const repository = 'https://api.github.com/repos/silverbirder/silverbirder.github.io-cms';
 const githubReadPath =
-  /^\/git\/(?:ref\/heads\/published|trees\/[a-f0-9]{40}\?recursive=1|blobs\/[a-f0-9]{40})$/u;
+  /^\/(?:git\/(?:ref\/heads\/published|trees\/[a-f0-9]{40}\?recursive=1|blobs\/[a-f0-9]{40})|contents\/articles\.json\?ref=original-articles)$/u;
 const articlePath = /^published\/([A-Za-z0-9][A-Za-z0-9._-]*\.md)$/u;
 
 async function download(path, token, accept = 'application/vnd.github+json') {
@@ -71,4 +71,13 @@ if (!token) {
     (name) => name.endsWith('.md') && !articles.has(name),
   );
   await Promise.all(stale.map((name) => unlink(new URL(name, directory))));
+}
+
+if (token) {
+  const catalog = await download(
+    '/contents/articles.json?ref=original-articles',
+    token,
+    'application/vnd.github.raw+json',
+  );
+  await writeFile(new URL('../cms-original-articles.json', directory), await catalog.text());
 }
