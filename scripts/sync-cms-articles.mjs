@@ -2,9 +2,12 @@ import { mkdir, readdir, unlink, writeFile } from 'node:fs/promises';
 
 const directory = new URL('../.cache/cms-published/', import.meta.url);
 const repository = 'https://api.github.com/repos/silverbirder/silverbirder.github.io-cms';
+const githubReadPath =
+  /^\/git\/(?:ref\/heads\/published|trees\/[a-f0-9]{40}\?recursive=1|blobs\/[a-f0-9]{40})$/u;
 const articlePath = /^published\/([a-z0-9][a-z0-9-]*\.md)$/u;
 
 async function download(path, token, accept = 'application/vnd.github+json') {
+  if (!githubReadPath.test(path)) throw new Error('Invalid CMS publication path');
   const response = await fetch(repository + path, {
     headers: { Accept: accept, Authorization: `Bearer ${token}` },
     redirect: 'error',
@@ -21,7 +24,10 @@ const token = process.env.CMS_PUBLISHED_READ_TOKEN;
 if (token) {
   const ref = await download('/git/ref/heads/published', token);
   const { object } = await ref.json();
-  const treeResponse = await download(`/git/trees/${object.sha}?recursive=1`, token);
+  const treeResponse = await download(
+    `/git/trees/${encodeURIComponent(object.sha)}?recursive=1`,
+    token,
+  );
   const { tree, truncated } = await treeResponse.json();
   if (truncated) throw new Error('The CMS published article tree is incomplete');
 
@@ -37,7 +43,7 @@ if (token) {
     await Promise.all(
       entries.slice(offset, offset + batchSize).map(async ({ name, sha }) => {
         const response = await download(
-          `/git/blobs/${sha}`,
+          `/git/blobs/${encodeURIComponent(sha)}`,
           token,
           'application/vnd.github.raw+json',
         );
