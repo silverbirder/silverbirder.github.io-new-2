@@ -9,27 +9,30 @@ export const getStaticPaths = (async () => {
   const articles = await getBlogArticles();
   const existing = import.meta.glob('./*.md');
   const slugs = new Set(Object.keys(existing).map((path) => path.slice(2, -3)));
-  return articles.flatMap(({ article, original, sharedFont }) => {
+  return articles.flatMap(({ article, noindex, sharedFont }) => {
     const slug = articleSlug(article.id);
     if (slugs.has(slug)) throw new Error(`Multiple articles use the URL ${slug}`);
     slugs.add(slug);
     const legacy = article.data.draftId ? `cms-${article.data.draftId}` : undefined;
     const canonical = {
       params: { slug },
-      props: { article, original, sharedFont, redirect: false },
+      props: { article, noindex, sharedFont, redirect: false },
     };
     if (!legacy || legacy === slug) return [canonical];
     if (slugs.has(legacy)) throw new Error(`Multiple articles use the URL ${legacy}`);
     slugs.add(legacy);
     return [
       canonical,
-      { params: { slug: legacy }, props: { article, original, sharedFont, redirect: true } },
+      {
+        params: { slug: legacy },
+        props: { article, noindex, sharedFont, redirect: true },
+      },
     ];
   });
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { article, original, sharedFont, redirect } = Astro.props;
+const { article, noindex, sharedFont, redirect } = Astro.props;
 if (redirect) {
   return Astro.redirect(
     `${import.meta.env.BASE_URL}blog/contents/${articleSlug(article.id)}/`,
@@ -39,6 +42,6 @@ if (redirect) {
 const { Content } = await render(article);
 ---
 
-<ArticleLayout frontmatter={article.data} noindex={original} sharedFont={sharedFont}>
+<ArticleLayout frontmatter={article.data} {noindex} sharedFont={sharedFont}>
   <Content />
 </ArticleLayout>

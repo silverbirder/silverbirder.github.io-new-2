@@ -10,14 +10,14 @@ export async function getBlogArticles() {
   return [
     ...published.map((article) => ({
       article,
-      original: originals.has(article.id),
+      noindex: article.data.index === false || originals.get(article.id)?.data.index === false,
       sharedFont: false,
     })),
     ...archive
       .filter((article) => !current.has(article.id))
       .map((article) => ({
         article,
-        original: true,
+        noindex: article.data.index === false,
         sharedFont: true,
       })),
   ];
