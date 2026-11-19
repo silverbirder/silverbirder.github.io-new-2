@@ -5,6 +5,10 @@ import { z } from 'astro/zod';
 const published = defineCollection({
   loader: glob({ base: './.cache/cms-published', pattern: '*.md' }),
   schema: z.object({
+    draftId: z
+      .string()
+      .regex(/^[a-z0-9][a-z0-9-]*$/u)
+      .optional(),
     publicationId: z
       .string()
       .regex(/^[a-f0-9]{64}$/u)

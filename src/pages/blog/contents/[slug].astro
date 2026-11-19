@@ -12,9 +12,10 @@ export const getStaticPaths = (async () => {
     const slug = articleSlug(article.data.publishedAt);
     if (slugs.has(slug)) throw new Error(`Multiple articles use the date URL ${slug}`);
     slugs.add(slug);
+    const previousId = article.data.draftId ?? article.id;
     return [
       { params: { slug }, props: { article } },
-      { params: { slug: `cms-${article.id}` }, props: { article } },
+      { params: { slug: `cms-${previousId}` }, props: { article } },
     ];
   });
 }) satisfies GetStaticPaths;
