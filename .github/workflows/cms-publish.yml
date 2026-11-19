@@ -1,0 +1,70 @@
+name: Publish CMS articles
+
+on:
+  workflow_dispatch:
+    inputs:
+      article:
+        required: true
+        type: string
+      publication:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cms-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm install --global npm@11.20.0 --ignore-scripts
+      - run: npm ci --ignore-scripts
+        env:
+          HUSKY: '0'
+      - run: |
+          test -n "$CMS_PUBLISHED_READ_TOKEN"
+          npm run build
+        env:
+          ASTRO_TELEMETRY_DISABLED: '1'
+          CMS_PUBLISHED_READ_TOKEN: ${{ secrets.CMS_PUBLISHED_READ_TOKEN }}
+      - name: Verify the requested article was built
+        env:
+          ARTICLE: ${{ inputs.article }}
+          PUBLICATION: ${{ inputs.publication }}
+        run: |
+          [[ "$ARTICLE" =~ ^[a-z0-9][a-z0-9-]*$ && "$PUBLICATION" =~ ^[a-f0-9]{64}$ ]]
+          needle=$(printf 'data-publication-id="%s"' "$PUBLICATION")
+          grep --fixed-strings --quiet "$needle" "dist/blog/contents/cms-$ARTICLE/index.html"
+      - name: Start the Vercel production build
+        run: |
+          test -n "$VERCEL_DEPLOY_HOOK"
+          curl --fail --silent --show-error --max-time 20 --output /dev/null --request POST "$VERCEL_DEPLOY_HOOK"
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+      - name: Confirm the published revision
+        env:
+          ARTICLE: ${{ inputs.article }}
+          PUBLICATION: ${{ inputs.publication }}
+        run: |
+          [[ "$ARTICLE" =~ ^[a-z0-9][a-z0-9-]*$ && "$PUBLICATION" =~ ^[a-f0-9]{64}$ ]]
+          url="https://silverbirder-github-io-new-2.vercel.app/blog/contents/cms-$ARTICLE/"
+          needle=$(printf 'data-publication-id="%s"' "$PUBLICATION")
+          for attempt in {1..36}; do
+            if html=$(curl --fail --silent --max-time 10 "$url?publication=$PUBLICATION-$attempt") &&
+              [[ "$html" == *"$needle"* ]]; then
+              exit 0
+            fi
+            sleep 5
+          done
+          exit 1
