@@ -1,4 +1,4 @@
-https://github.com/user-attachments/assets/2968507f-bdd4-4555-ba57-8691c1003e32
+https://github.com/user-attachments/assets/6699a14c-4302-4533-9ef5-6d488d6ce160
 
 # 機能: 公開記事をまとめて取得する
 
