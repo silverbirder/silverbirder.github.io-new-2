@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm run tokens:build && astro dev --host 0.0.0.0",
-    "build": "npm run tokens:build && astro build",
+    "build": "node scripts/sync-cms-articles.mjs && npm run tokens:build && astro build",
     "tokens:build": "style-dictionary build --config style-dictionary.config.json",
     "preview": "astro preview --host 0.0.0.0",
     "lint:js": "oxlint . --deny-warnings",

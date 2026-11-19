@@ -1,5 +1,7 @@
 import type { APIRoute, GetStaticPaths, MarkdownInstance } from 'astro';
+import { getCollection, render } from 'astro:content';
 import postcss from 'postcss';
+import { fontProps } from '../../lib/article-font-characters';
 import designTokens from '../../styles/design-tokens.json';
 
 const tokens = designTokens.primitive;
@@ -9,30 +11,40 @@ interface FontProps {
   boldCharacters: string;
 }
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const articles = import.meta.glob<MarkdownInstance<{ title: string; publishedAt: string }>>(
     '/src/pages/**/*.md',
     { eager: true },
   );
-  return Object.entries(articles).map(([path, article]) => {
-    const { title, publishedAt } = article.frontmatter;
-    const content = article.rawContent();
-    const fontText = `${content.replace(/<[^<>]*>/g, '')}${publishedAt}`;
-    const fontBoldText = /\*\*|__|<(?:strong|b)\b/i.test(content)
-      ? fontText
-      : article
+  const published = await getCollection('published');
+  return [
+    ...Object.entries(articles).map(([path, article]) => ({
+      params: { article: path.slice('/src/pages/'.length, -'.md'.length) },
+      props: fontProps(
+        article.rawContent(),
+        article.frontmatter.title,
+        article.frontmatter.publishedAt,
+        article
           .getHeadings()
           .map(({ text }) => text)
-          .join('');
-    // Retain metric glyphs even when an article contains only Japanese headings.
-    return {
-      params: { article: path.slice('/src/pages/'.length, -'.md'.length) },
-      props: {
-        characters: [...new Set(` HxNODATE0123456789トップブログ${title}${fontText}`)].join(''),
-        boldCharacters: [...new Set(` Hx${title}${fontBoldText}`)].join(''),
-      },
-    };
-  });
+          .join(''),
+      ),
+    })),
+    ...(await Promise.all(
+      published.map(async (article) => {
+        const { headings } = await render(article);
+        return {
+          params: { article: `blog/contents/cms-${article.id}` },
+          props: fontProps(
+            article.body ?? '',
+            article.data.title,
+            article.data.publishedAt,
+            headings.map(({ text }) => text).join(''),
+          ),
+        };
+      }),
+    )),
+  ];
 };
 
 const bodySize = Number.parseFloat(tokens['font-size-md'].value);
