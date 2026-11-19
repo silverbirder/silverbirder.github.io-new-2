@@ -1,47 +1,15 @@
 ---
-import { readFile } from 'node:fs/promises';
-import { getCollection } from 'astro:content';
 import { articleSlug } from '../lib/article-slug';
+import { getBlogArticles } from '../lib/blog-articles';
 import Layout from '../layouts/Layout.astro';
 
-const published = await getCollection('published');
-interface OriginalArticle {
-  slug: string;
-  title: string;
-  publishedAt: string | null;
-  public: boolean;
-}
-const catalog = await readFile('.cache/cms-original-articles.json', 'utf8').catch(
-  (error: NodeJS.ErrnoException) => {
-    if (error.code === 'ENOENT') return '[]';
-    throw error;
-  },
-);
-const original: OriginalArticle[] = JSON.parse(catalog);
-const articles = new Map(
-  original
-    .filter((article) => article.public)
-    .map(({ slug, title, publishedAt }) => [
-      slug,
-      {
-        url: `https://silverbirder.github.io/blog/contents/${encodeURIComponent(slug)}/`,
-        title,
-        publishedAt,
-      },
-    ]),
-);
-for (const { id, data } of published) {
-  const slug = articleSlug(id);
-  if (articles.has(slug) && !data.publicationId) continue;
-  articles.set(slug, {
-    url: `${import.meta.env.BASE_URL}blog/contents/${slug}/`,
-    title: data.title,
-    publishedAt: data.publishedAt,
-  });
-}
-const sorted = [...articles.values()].sort((a, b) =>
-  (b.publishedAt ?? '').localeCompare(a.publishedAt ?? ''),
-);
+const sorted = (await getBlogArticles())
+  .map(({ article }) => ({
+    url: `${import.meta.env.BASE_URL}blog/contents/${articleSlug(article.id)}/`,
+    title: article.data.title,
+    publishedAt: article.data.publishedAt,
+  }))
+  .toSorted((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 ---
 
 <Layout title="ブログ" currentPage="blog">
