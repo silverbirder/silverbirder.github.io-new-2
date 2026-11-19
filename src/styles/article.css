@@ -221,6 +221,18 @@
   }
 }
 
+/* CMS stores the chosen number of rows with the image in Markdown. */
+.notebook-body img[data-notebook-rows] {
+  --notebook-image-rows: initial;
+  width: auto;
+  height: calc(var(--notebook-image-rows) * var(--component-notebook-rule-spacing));
+}
+
+.notebook-body p:where(:has(> img[data-notebook-rows]):not(:has(> :not(img)))) {
+  text-box: normal;
+  padding-block: var(--primitive-space-none);
+}
+
 .notebook-body iframe {
   border: var(--primitive-space-none);
 }
