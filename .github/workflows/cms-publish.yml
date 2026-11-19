@@ -28,14 +28,14 @@ jobs:
           SLUG: ${{ inputs.article }}
           PUBLICATION: ${{ inputs.publication }}
         run: |
-          [[ "$SLUG" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ && "$PUBLICATION" =~ ^[a-f0-9]{64}$ ]]
+          [[ "$SLUG" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ && "$PUBLICATION" =~ ^([a-f0-9]{64}|deleted)$ ]]
       - name: Start the Vercel production build
         run: |
           test -n "$VERCEL_DEPLOY_HOOK"
           curl --fail --silent --show-error --max-time 20 --output /dev/null --request POST "$VERCEL_DEPLOY_HOOK"
         env:
           VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
-      - name: Confirm the published revision
+      - name: Confirm the blog update
         env:
           SLUG: ${{ inputs.article }}
           PUBLICATION: ${{ inputs.publication }}
@@ -44,7 +44,10 @@ jobs:
           url="https://silverbirder-github-io-new-2.vercel.app/blog/contents/$SLUG/"
           needle=$(printf 'data-publication-id="%s"' "$PUBLICATION")
           for attempt in {1..36}; do
-            if html=$(curl --fail --silent --max-time 10 "$url?publication=$PUBLICATION-$attempt") &&
+            if [[ "$PUBLICATION" == deleted ]]; then
+              status=$(curl --silent --max-time 10 --output /dev/null --write-out '%{http_code}' "$url?publication=deleted-$attempt") || status=
+              [[ "$status" == 404 ]] && exit 0
+            elif html=$(curl --fail --silent --max-time 10 "$url?publication=$PUBLICATION-$attempt") &&
               [[ "$html" == *"$needle"* ]]; then
               exit 0
             fi
