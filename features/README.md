@@ -1,3 +1,5 @@
+https://github.com/user-attachments/assets/2968507f-bdd4-4555-ba57-8691c1003e32
+
 # 機能: 公開記事をまとめて取得する
 
 ## シナリオ: 公開記事が1,000件あるブログをビルドする
