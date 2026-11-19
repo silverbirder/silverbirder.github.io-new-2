@@ -26,7 +26,16 @@ const fontStylesheet = article
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     {noindex && <meta name="robots" content="noindex" />}
-    <link rel="stylesheet" href={fontStylesheet} />
+    {sharedFont ? (
+      <>
+        <link rel="stylesheet" href={fontStylesheet} media="print" onload="this.media='all'" />
+        <noscript>
+          <link rel="stylesheet" href={fontStylesheet} />
+        </noscript>
+      </>
+    ) : (
+      <link rel="stylesheet" href={fontStylesheet} />
+    )}
     {!article && <link rel="preconnect" href="https://fonts.googleapis.com" />}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     {article && <link rel="preconnect" href="https://res.cloudinary.com" />}
