@@ -9,22 +9,23 @@ export const getStaticPaths = (async () => {
   const existing = import.meta.glob('./*.md');
   const slugs = new Set(Object.keys(existing).map((path) => path.slice(2, -3)));
   return articles.flatMap((article) => {
-    const slug = articleSlug(article.data.publishedAt);
-    if (slugs.has(slug)) throw new Error(`Multiple articles use the date URL ${slug}`);
+    const slug = articleSlug(article.id);
+    if (slugs.has(slug)) throw new Error(`Multiple articles use the URL ${slug}`);
     slugs.add(slug);
-    const previousId = article.data.draftId ?? article.id;
-    return [
-      { params: { slug }, props: { article } },
-      { params: { slug: `cms-${previousId}` }, props: { article } },
-    ];
+    const legacy = article.data.draftId ? `cms-${article.data.draftId}` : undefined;
+    const canonical = { params: { slug }, props: { article, redirect: false } };
+    if (!legacy || legacy === slug) return [canonical];
+    if (slugs.has(legacy)) throw new Error(`Multiple articles use the URL ${legacy}`);
+    slugs.add(legacy);
+    return [canonical, { params: { slug: legacy }, props: { article, redirect: true } }];
   });
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { article } = Astro.props;
-if (Astro.params.slug?.startsWith('cms-')) {
+const { article, redirect } = Astro.props;
+if (redirect) {
   return Astro.redirect(
-    `${import.meta.env.BASE_URL}blog/contents/${articleSlug(article.data.publishedAt)}/`,
+    `${import.meta.env.BASE_URL}blog/contents/${articleSlug(article.id)}/`,
     301,
   );
 }

@@ -7,8 +7,8 @@ import { frontmatter, url } from './blog/contents/20261101.md';
 const published = await getCollection('published');
 const articles = [
   { url, title: frontmatter.title, publishedAt: frontmatter.publishedAt },
-  ...published.map(({ data }) => ({
-    url: `${import.meta.env.BASE_URL}blog/contents/${articleSlug(data.publishedAt)}/`,
+  ...published.map(({ id, data }) => ({
+    url: `${import.meta.env.BASE_URL}blog/contents/${articleSlug(id)}/`,
     ...data,
   })),
 ].toSorted((a, b) => b.publishedAt.localeCompare(a.publishedAt));

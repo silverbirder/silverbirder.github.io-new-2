@@ -3,7 +3,11 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const published = defineCollection({
-  loader: glob({ base: './.cache/cms-published', pattern: '*.md' }),
+  loader: glob({
+    base: './.cache/cms-published',
+    pattern: '*.md',
+    generateId: ({ entry }) => entry.slice(0, -'.md'.length),
+  }),
   schema: z.object({
     draftId: z
       .string()

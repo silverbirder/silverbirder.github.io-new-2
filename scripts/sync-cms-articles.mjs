@@ -4,7 +4,7 @@ const directory = new URL('../.cache/cms-published/', import.meta.url);
 const repository = 'https://api.github.com/repos/silverbirder/silverbirder.github.io-cms';
 const githubReadPath =
   /^\/git\/(?:ref\/heads\/published|trees\/[a-f0-9]{40}\?recursive=1|blobs\/[a-f0-9]{40})$/u;
-const articlePath = /^published\/([a-z0-9][a-z0-9-]*\.md)$/u;
+const articlePath = /^published\/([A-Za-z0-9][A-Za-z0-9._-]*\.md)$/u;
 
 async function download(path, token, accept = 'application/vnd.github+json') {
   if (!githubReadPath.test(path)) throw new Error('Invalid CMS publication path');

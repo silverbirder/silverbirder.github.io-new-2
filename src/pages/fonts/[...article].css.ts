@@ -35,7 +35,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       published.map(async (article) => {
         const { headings } = await render(article);
         return {
-          params: { article: `blog/contents/${articleSlug(article.data.publishedAt)}` },
+          params: { article: `blog/contents/${articleSlug(article.id)}` },
           props: fontProps(
             article.body ?? '',
             article.data.title,
