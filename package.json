@@ -34,7 +34,7 @@
     "audit:a11y": "pa11y-ci --config .pa11yci.json",
     "audit:performance": "CHROME_PATH=\"$(PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" puppeteer browsers install chrome-headless-shell --format '{{path}}')\" lhci collect && lhci assert && lhci upload",
     "browser:install": "PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" puppeteer browsers install chrome-headless-shell",
-    "test:cms": "cucumber-js --language ja --import tests/cms-archive.steps.mjs features/cms-archive.feature.md"
+    "test:cms": "cucumber-js --language ja --import \"tests/*.steps.mjs\" \"features/*.md\""
   },
   "dependencies": {
     "astro": "7.4.7",
