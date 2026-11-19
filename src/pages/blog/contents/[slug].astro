@@ -1,18 +1,32 @@
 ---
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { articleSlug } from '../../../lib/article-slug';
 import ArticleLayout from '../../../layouts/ArticleLayout.astro';
 
 export const getStaticPaths = (async () => {
   const articles = await getCollection('published');
-  return articles.map((article) => ({
-    params: { slug: `cms-${article.id}` },
-    props: { article },
-  }));
+  const existing = import.meta.glob('./*.md');
+  const slugs = new Set(Object.keys(existing).map((path) => path.slice(2, -3)));
+  return articles.flatMap((article) => {
+    const slug = articleSlug(article.data.publishedAt);
+    if (slugs.has(slug)) throw new Error(`Multiple articles use the date URL ${slug}`);
+    slugs.add(slug);
+    return [
+      { params: { slug }, props: { article } },
+      { params: { slug: `cms-${article.id}` }, props: { article } },
+    ];
+  });
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { article } = Astro.props;
+if (Astro.params.slug?.startsWith('cms-')) {
+  return Astro.redirect(
+    `${import.meta.env.BASE_URL}blog/contents/${articleSlug(article.data.publishedAt)}/`,
+    301,
+  );
+}
 const { Content } = await render(article);
 ---
 

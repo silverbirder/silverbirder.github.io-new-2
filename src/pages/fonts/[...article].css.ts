@@ -2,6 +2,7 @@ import type { APIRoute, GetStaticPaths, MarkdownInstance } from 'astro';
 import { getCollection, render } from 'astro:content';
 import postcss from 'postcss';
 import { fontProps } from '../../lib/article-font-characters';
+import { articleSlug } from '../../lib/article-slug';
 import designTokens from '../../styles/design-tokens.json';
 
 const tokens = designTokens.primitive;
@@ -34,7 +35,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       published.map(async (article) => {
         const { headings } = await render(article);
         return {
-          params: { article: `blog/contents/cms-${article.id}` },
+          params: { article: `blog/contents/${articleSlug(article.data.publishedAt)}` },
           props: fontProps(
             article.body ?? '',
             article.data.title,

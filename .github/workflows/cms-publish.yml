@@ -38,14 +38,18 @@ jobs:
         env:
           ASTRO_TELEMETRY_DISABLED: '1'
           CMS_PUBLISHED_READ_TOKEN: ${{ secrets.CMS_PUBLISHED_READ_TOKEN }}
-      - name: Verify the requested article was built
+      - name: Find the published date URL
+        id: article
         env:
           ARTICLE: ${{ inputs.article }}
           PUBLICATION: ${{ inputs.publication }}
         run: |
           [[ "$ARTICLE" =~ ^[a-z0-9][a-z0-9-]*$ && "$PUBLICATION" =~ ^[a-f0-9]{64}$ ]]
           needle=$(printf 'data-publication-id="%s"' "$PUBLICATION")
-          grep --fixed-strings --quiet "$needle" "dist/blog/contents/cms-$ARTICLE/index.html"
+          matches=$(grep --fixed-strings --files-with-matches "$needle" dist/blog/contents/*/index.html)
+          slug=$(basename "$(dirname "$matches")")
+          [[ "$slug" =~ ^[0-9]{8}$ ]]
+          printf 'slug=%s\n' "$slug" >> "$GITHUB_OUTPUT"
       - name: Start the Vercel production build
         run: |
           test -n "$VERCEL_DEPLOY_HOOK"
@@ -54,11 +58,11 @@ jobs:
           VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
       - name: Confirm the published revision
         env:
-          ARTICLE: ${{ inputs.article }}
+          SLUG: ${{ steps.article.outputs.slug }}
           PUBLICATION: ${{ inputs.publication }}
         run: |
-          [[ "$ARTICLE" =~ ^[a-z0-9][a-z0-9-]*$ && "$PUBLICATION" =~ ^[a-f0-9]{64}$ ]]
-          url="https://silverbirder-github-io-new-2.vercel.app/blog/contents/cms-$ARTICLE/"
+          [[ "$SLUG" =~ ^[0-9]{8}$ ]]
+          url="https://silverbirder-github-io-new-2.vercel.app/blog/contents/$SLUG/"
           needle=$(printf 'data-publication-id="%s"' "$PUBLICATION")
           for attempt in {1..36}; do
             if html=$(curl --fail --silent --max-time 10 "$url?publication=$PUBLICATION-$attempt") &&
