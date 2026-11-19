@@ -23,33 +23,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm install --global npm@11.20.0 --ignore-scripts
-      - run: npm ci --ignore-scripts
+      - name: Validate publication inputs
         env:
-          HUSKY: '0'
-      - run: |
-          test -n "$CMS_PUBLISHED_READ_TOKEN"
-          npm run build
-        env:
-          ASTRO_TELEMETRY_DISABLED: '1'
-          CMS_PUBLISHED_READ_TOKEN: ${{ secrets.CMS_PUBLISHED_READ_TOKEN }}
-      - name: Find the published article URL
-        id: article
-        env:
-          ARTICLE: ${{ inputs.article }}
+          SLUG: ${{ inputs.article }}
           PUBLICATION: ${{ inputs.publication }}
         run: |
-          [[ "$ARTICLE" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ && "$PUBLICATION" =~ ^[a-f0-9]{64}$ ]]
-          needle=$(printf 'data-publication-id="%s"' "$PUBLICATION")
-          matches=$(grep --fixed-strings --files-with-matches "$needle" dist/blog/contents/*/index.html)
-          slug=$(basename "$(dirname "$matches")")
-          [[ "$slug" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]
-          printf 'slug=%s\n' "$slug" >> "$GITHUB_OUTPUT"
+          [[ "$SLUG" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ && "$PUBLICATION" =~ ^[a-f0-9]{64}$ ]]
       - name: Start the Vercel production build
         run: |
           test -n "$VERCEL_DEPLOY_HOOK"
@@ -58,7 +37,7 @@ jobs:
           VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
       - name: Confirm the published revision
         env:
-          SLUG: ${{ steps.article.outputs.slug }}
+          SLUG: ${{ inputs.article }}
           PUBLICATION: ${{ inputs.publication }}
         run: |
           [[ "$SLUG" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]

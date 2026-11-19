@@ -20,7 +20,7 @@
     "lint:package": "npmPkgJsonLint . --ignorePath .gitignore --maxWarnings 0 && npm ci --dry-run --ignore-scripts --no-audit --no-fund",
     "lint:registry": "npm config list --json --location=project | jq -e '.registry == \"https://npm.flatt.tech/\" and .[\"min-release-age\"] == 7 and .[\"engine-strict\"] == true and .[\"save-exact\"] == true'",
     "typecheck": "astro check --minimumFailingSeverity warning && tsc --noEmit --ignoreConfig --strict --target ES2022 --module NodeNext --skipLibCheck tests/notebook.spec.ts",
-    "test": "run-s build check:assets check:browser",
+    "test": "run-s test:cms build check:assets check:browser",
     "lint:unused": "knip",
     "lint:duplicates": "jscpd",
     "audit": "npm audit",
@@ -33,7 +33,8 @@
     "test:notebook": "CHROME_PATH=\"$(PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" puppeteer browsers install chrome-headless-shell --format '{{path}}')\" playwright test tests/notebook.spec.ts --workers=1 --reporter=list --output=.cache/quality/notebook-tests",
     "audit:a11y": "pa11y-ci --config .pa11yci.json",
     "audit:performance": "CHROME_PATH=\"$(PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" puppeteer browsers install chrome-headless-shell --format '{{path}}')\" lhci collect && lhci assert && lhci upload",
-    "browser:install": "PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" puppeteer browsers install chrome-headless-shell"
+    "browser:install": "PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" puppeteer browsers install chrome-headless-shell",
+    "test:cms": "cucumber-js --language ja --import tests/cms-archive.steps.mjs features/cms-archive.feature.md"
   },
   "dependencies": {
     "astro": "7.4.7",
@@ -42,6 +43,7 @@
   "devDependencies": {
     "@astrojs/check": "0.9.12",
     "@astrojs/compiler-rs": "0.5.2",
+    "@cucumber/cucumber": "13.3.0",
     "@lhci/cli": "0.16.0",
     "@playwright/test": "1.65.0",
     "@size-limit/file": "14.3.0",
