@@ -29,6 +29,8 @@ jobs:
           HUSKY: '0'
       - run: npm run browser:install
       - run: npm run check
+        env:
+          CMS_PUBLISHED_READ_TOKEN: ${{ github.event_name != 'pull_request' && secrets.CMS_PUBLISHED_READ_TOKEN || '' }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: failure()
         with:
@@ -40,6 +42,7 @@ jobs:
       - run: npm run build
         env:
           ASTRO_TELEMETRY_DISABLED: '1'
+          CMS_PUBLISHED_READ_TOKEN: ${{ github.event_name != 'pull_request' && secrets.CMS_PUBLISHED_READ_TOKEN || '' }}
           ASTRO_BASE: /${{ github.event.repository.name }}/
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
