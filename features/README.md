@@ -1,4 +1,4 @@
-https://github.com/user-attachments/assets/2968507f-bdd4-4555-ba57-8691c1003e32
+https://github.com/user-attachments/assets/6699a14c-4302-4533-9ef5-6d488d6ce160
 
 # 機能: 公開記事をまとめて取得する
 
@@ -7,3 +7,7 @@ https://github.com/user-attachments/assets/2968507f-bdd4-4555-ba57-8691c1003e32
 - 前提 公開用アーカイブに1,000件の記事がある
 - もし ビルド用の記事を取得する
 - ならば GitHub APIの呼び出し1回で全記事を取得できる
+
+- 前提 元の幅1280ピクセル、高さ960ピクセルの画像を罫線6行に指定する
+- もし 記事の配信画像を生成する
+- ならば 幅208ピクセルと2倍密度向けの幅416ピクセルを選べる
