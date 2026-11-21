@@ -180,15 +180,15 @@
     },
     "font-descent-md": {
       "type": "dimension",
-      "value": "0.25rem"
+      "value": "0.3125rem"
     },
-    "font-family-kaisei-opti": {
+    "font-family-rounded-x-mplus": {
       "type": "fontFamily",
-      "value": ["Kaisei Opti", "serif"]
+      "value": ["\"Rounded-X M+ 1c\"", "sans-serif"]
     },
-    "font-family-kaisei-opti-heading": {
+    "font-family-rounded-x-mplus-heading": {
       "type": "fontFamily",
-      "value": ["Kaisei Opti Heading", "serif"]
+      "value": ["\"Rounded-X M+ 1c Heading\"", "sans-serif"]
     }
   },
   "semantic": {
@@ -281,11 +281,11 @@
     },
     "font-family-body": {
       "type": "fontFamily",
-      "value": "{primitive.font-family-kaisei-opti}"
+      "value": "{primitive.font-family-rounded-x-mplus}"
     },
     "font-family-heading": {
       "type": "fontFamily",
-      "value": "{primitive.font-family-kaisei-opti-heading}"
+      "value": "{primitive.font-family-rounded-x-mplus-heading}"
     }
   },
   "component": {
