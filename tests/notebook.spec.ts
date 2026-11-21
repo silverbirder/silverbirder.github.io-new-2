@@ -485,3 +485,12 @@ test('記事の概要がある場合だけ説明メタタグに出す', async ({
   await page.goto('/samples/notebook/');
   await expect(page.locator('meta[name="description"]')).toHaveCount(0);
 });
+
+test('CMSの記事タグがノートの下に表示される', async ({ page }) => {
+  await page.goto('/blog/contents/20261101/');
+  const tags = page.getByRole('list', { name: 'タグ' });
+  await expect(tags.getByRole('listitem')).toHaveText(['こども', '日記']);
+  await expect(page.locator('.notebook-body').getByRole('list', { name: 'タグ' })).toHaveCount(0);
+  await page.goto('/samples/notebook/');
+  await expect(tags).toHaveCount(0);
+});
