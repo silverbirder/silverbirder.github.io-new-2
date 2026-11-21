@@ -475,3 +475,13 @@ test('見出しが大きすぎると文字と選択範囲のはみ出しを検�
   expect(report.violations.some(({ kind }) => kind === 'glyph ink')).toBe(true);
   expect(report.violations.some(({ kind }) => kind === 'selection box')).toBe(true);
 });
+
+test('記事の概要がある場合だけ説明メタタグに出す', async ({ page }) => {
+  await page.goto('/blog/contents/20261101/');
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    'content',
+    '本文・罫線の表示と「ノート」の文字を確認します。',
+  );
+  await page.goto('/samples/notebook/');
+  await expect(page.locator('meta[name="description"]')).toHaveCount(0);
+});

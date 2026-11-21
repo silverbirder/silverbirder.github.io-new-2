@@ -14,6 +14,7 @@ const schema = z.object({
   number: z.number().optional(),
   index: z.boolean().optional(),
   title: z.string().trim().min(1),
+  summary: z.string().trim().nullish(),
   publishedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}(?:T.+)?$/u),
 });
 
