@@ -13,11 +13,7 @@ interface Props {
 const { title, description, currentPage, article = false, noindex, sharedFont } = Astro.props;
 const summary = description?.trim();
 const base = import.meta.env.BASE_URL;
-const pagePath = Astro.url.pathname.slice(base.length).replace(/^\/|\/$/g, '');
-const articleFont = sharedFont ? 'archive' : pagePath;
-const fontStylesheet = article
-  ? `${base.replace(/\/$/, '')}/fonts/${articleFont}.css`
-  : 'https://fonts.googleapis.com/css2?family=Kaisei+Opti:wght@400;700&display=swap';
+const fontStylesheet = `${base}fonts/site.css`;
 ---
 
 <!doctype html>
@@ -39,8 +35,6 @@ const fontStylesheet = article
     ) : (
       <link rel="stylesheet" href={fontStylesheet} />
     )}
-    {!article && <link rel="preconnect" href="https://fonts.googleapis.com" />}
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     {article && <link rel="preconnect" href="https://res.cloudinary.com" />}
     <style is:global>
       :root {
