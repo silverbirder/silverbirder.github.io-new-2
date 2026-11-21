@@ -180,7 +180,7 @@
     },
     "font-descent-md": {
       "type": "dimension",
-      "value": "0.25rem"
+      "value": "0.3125rem"
     },
     "font-family-rounded-x-mplus": {
       "type": "fontFamily",
