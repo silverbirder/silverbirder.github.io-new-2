@@ -56,10 +56,6 @@
       "value": "1cap",
       "type": "dimension"
     },
-    "color-transparent": {
-      "value": "transparent",
-      "type": "string"
-    },
     "palette-neutral-0-hue": { "value": 0, "type": "number" },
     "palette-neutral-0-saturation": { "value": "0%", "type": "string" },
     "palette-neutral-0-lightness": { "value": "100%", "type": "string" },
@@ -71,6 +67,7 @@
       "value": "0.15em",
       "type": "dimension"
     },
+    "opacity-35": { "value": "35%", "type": "string" },
     "opacity-70": {
       "value": "70%",
       "type": "string"
@@ -138,16 +135,21 @@
       "value": "hsl( {primitive.palette-cyan-200-hue} {primitive.palette-cyan-200-saturation} {primitive.palette-cyan-200-lightness} / {primitive.opacity-100} )",
       "type": "string"
     },
-    "palette-sage-200-hue": {
+    "palette-sage-hue": {
       "value": 100.851,
       "type": "number"
     },
-    "palette-sage-200-saturation": {
+    "palette-sage-saturation": {
       "value": "41.593%",
       "type": "string"
     },
     "palette-sage-200-lightness": {
       "value": "77.843%",
+      "type": "string"
+    },
+    "palette-sage-600-lightness": { "value": "36%", "type": "string" },
+    "palette-sage-600": {
+      "value": "hsl( {primitive.palette-sage-hue} {primitive.palette-sage-saturation} {primitive.palette-sage-600-lightness} / {primitive.opacity-100} )",
       "type": "string"
     },
     "font-size-md": {
@@ -182,6 +184,7 @@
       "type": "dimension",
       "value": "0.3125rem"
     },
+    "font-family-notebook-code": { "value": "\"Notebook Code\"", "type": "string" },
     "font-family-rounded-x-mplus": {
       "type": "fontFamily",
       "value": ["\"Rounded-X M+ 1c\"", "sans-serif"]
@@ -203,7 +206,12 @@
       "value": "{primitive.palette-slate-900}",
       "type": "string"
     },
+    "color-accent": { "value": "{primitive.palette-sage-600}", "type": "string" },
     "color-text-link": {
+      "value": "{primitive.palette-blue-700}",
+      "type": "string"
+    },
+    "color-list-marker": {
       "value": "{primitive.palette-blue-700}",
       "type": "string"
     },
@@ -216,7 +224,7 @@
       "type": "string"
     },
     "color-background-selection": {
-      "value": "hsl( {primitive.palette-sage-200-hue} {primitive.palette-sage-200-saturation} {primitive.palette-sage-200-lightness} / {semantic.opacity-selection} )",
+      "value": "hsl( {primitive.palette-sage-hue} {primitive.palette-sage-saturation} {primitive.palette-sage-200-lightness} / {semantic.opacity-selection} )",
       "type": "string"
     },
     "font-size-body": {
@@ -239,8 +247,8 @@
       "value": "{primitive.font-weight-bold}",
       "type": "string"
     },
-    "color-background-code": {
-      "value": "{primitive.color-transparent}",
+    "color-background-muted": {
+      "value": "hsl( {primitive.palette-blue-200-hue} {primitive.palette-blue-200-saturation} {primitive.palette-blue-200-lightness} / {primitive.opacity-35} )",
       "type": "string"
     },
     "space-text-baseline-gap": {
@@ -282,6 +290,10 @@
     "font-family-body": {
       "type": "fontFamily",
       "value": "{primitive.font-family-rounded-x-mplus}"
+    },
+    "font-family-code": {
+      "value": "{primitive.font-family-notebook-code}, {semantic.font-family-body}",
+      "type": "string"
     },
     "font-family-heading": {
       "type": "fontFamily",

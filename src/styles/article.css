@@ -173,7 +173,8 @@ time .notebook-meta-parts {
 }
 
 /* Normalize nested browser defaults before snapping the outer block height. */
-.notebook-body :is(ul, ol, li, blockquote, figure, figcaption) {
+.notebook-body :where(ul, ol, blockquote),
+.notebook-body :is(li, figure, figcaption) {
   margin-block: var(--primitive-space-none);
 }
 
@@ -228,6 +229,12 @@ time .notebook-meta-parts {
   line-height: var(--component-notebook-rule-spacing);
 }
 
+.notebook-body em {
+  font-style: italic;
+  font-weight: inherit;
+  font-synthesis: style;
+}
+
 .notebook-body a {
   color: var(--semantic-color-text-link);
   text-decoration: underline;
@@ -269,7 +276,6 @@ time .notebook-meta-parts {
 }
 
 .notebook-body code {
-  font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
@@ -280,6 +286,11 @@ time .notebook-meta-parts {
 
 .notebook-body ul {
   list-style-type: disc;
+}
+
+.notebook-body ul > li::marker {
+  color: var(--semantic-color-list-marker);
+  font-size: var(--primitive-font-size-xs);
 }
 
 .notebook-body ol {
@@ -293,13 +304,26 @@ time .notebook-meta-parts {
 .notebook-body blockquote {
   display: flow-root;
   padding-inline-start: var(--semantic-space-quote-indent);
+  background-color: var(--semantic-color-background-muted);
+  border-inline-start: var(--semantic-border-width-hairline) solid
+    var(--semantic-color-border-paper);
+}
+
+.notebook-body :is(pre, code) {
+  font-family: var(--semantic-font-family-code);
+}
+
+.notebook-body code:not(pre > code) {
+  padding-inline: var(--primitive-space-1);
+  background-color: var(--semantic-color-background-muted);
+  box-decoration-break: clone;
 }
 
 .notebook-body pre {
   overflow-x: auto;
-  font-family: inherit;
+  padding-inline: var(--semantic-space-control-inline);
   line-height: var(--component-notebook-rule-spacing);
-  background-color: var(--semantic-color-background-code);
+  background-color: var(--semantic-color-background-muted);
   color: var(--semantic-color-text-primary);
 }
 
@@ -308,8 +332,18 @@ time .notebook-meta-parts {
   padding-block: var(--primitive-space-none);
   min-width: var(--semantic-content-width-table-cell);
   padding-inline: var(--semantic-space-text-baseline-gap);
+  border-inline-end: var(--semantic-border-width-hairline) solid var(--semantic-color-border-subtle);
   vertical-align: top;
   text-align: start;
+}
+
+.notebook-body tr > :first-child {
+  border-inline-start: var(--semantic-border-width-hairline) solid
+    var(--semantic-color-border-subtle);
+}
+
+.notebook-body thead {
+  background-color: var(--semantic-color-background-muted);
 }
 
 .notebook-body table {
@@ -325,8 +359,23 @@ time .notebook-meta-parts {
 }
 
 .notebook-body hr {
+  position: relative;
+  box-sizing: border-box;
   height: var(--component-notebook-rule-spacing);
   border: var(--primitive-space-none);
+  background-color: var(--semantic-color-background-page);
+}
+
+.notebook-body hr::after {
+  content: '';
+  position: absolute;
+  inset: var(--primitive-space-none);
+  pointer-events: none;
+  background-color: var(--semantic-color-accent);
+  mask-image: url('./notebook-divider.svg');
+  mask-position: left center;
+  mask-repeat: repeat-x;
+  mask-size: auto var(--primitive-space-2);
 }
 
 @media (forced-colors: active) {

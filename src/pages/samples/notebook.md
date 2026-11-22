@@ -1,6 +1,7 @@
 ---
 layout: '../../layouts/ArticleLayout.astro'
 title: '記事の表示サンプル'
+number: 1
 publishedAt: '2026-11-16T00:00:00+09:00'
 index: false
 ---
