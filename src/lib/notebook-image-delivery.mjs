@@ -8,7 +8,8 @@ const gutter = `clamp(${primitive['space-4'].value}, ${primitive['space-fluid'].
 const availableWidth = `calc(100vw - ${gutter} - ${gutter})`;
 const pixelsPerRem = 16;
 const maxDensity = primitive['ratio-double'].value;
-const deliverySteps = [0.5, 0.75, 1, 1.5, maxDensity];
+const deliverySteps = [0.5, 0.75, 1, 1.125, 1.5, maxDensity];
+const firstImageGroups = new WeakMap();
 const cloudinaryAsset =
   /^\/(?<cloud>[A-Za-z0-9_-]+)\/image\/upload\/(?:(?:f_auto|q_auto|c_limit|w_\d+)[,/])*(?<asset>v\d+\/.+)$/u;
 
@@ -19,15 +20,16 @@ function positiveInteger(value) {
 
 function dimensions(properties, url) {
   const aspect = url.searchParams.get('ar')?.split(':') ?? [];
-  const width = positiveInteger(properties.width) ?? positiveInteger(aspect[0]);
-  const height = positiveInteger(properties.height) ?? positiveInteger(aspect[1]);
-  return { width, height };
+  return {
+    width: positiveInteger(properties.width) ?? positiveInteger(aspect[0]),
+    height: positiveInteger(properties.height) ?? positiveInteger(aspect[1]),
+  };
 }
 
 function delivery(properties, url, parts) {
+  const { width, height } = properties;
   const rows = positiveInteger(properties['data-notebook-rows']);
-  const { width, height } = dimensions(properties, url);
-  if (!width || !height || (!rows && properties.srcset)) return;
+  if (!rows && properties.srcSet) return;
 
   const imageWidth = rows ? (rows * lineHeight * width) / height : width / pixelsPerRem;
   const maxWidth = Math.min(imageWidth, Number.parseFloat(readingWidth));
@@ -38,36 +40,61 @@ function delivery(properties, url, parts) {
     `${url.origin}/${parts.cloud}/image/upload/c_limit,w_${pixels}/q_auto/f_auto/${parts.asset}${url.search}`;
   const widths = [...new Set(deliverySteps.map(candidate))];
   properties.src = address(candidate(1));
-  properties.srcset = widths.map((pixels) => `${address(pixels)} ${pixels}w`).join(', ');
+  properties.srcSet = widths.map((pixels) => `${address(pixels)} ${pixels}w`).join(', ');
   properties.sizes = properties.loading === 'lazy' ? `auto, ${sourceSize}` : sourceSize;
 }
 
-function updateImage(properties) {
-  if (typeof properties.src !== 'string') return;
-  const url = URL.parse(properties.src);
-  if (url?.origin !== 'https://res.cloudinary.com') return;
-  const parts = cloudinaryAsset.exec(url.pathname)?.groups;
-  if (parts) delivery(properties, url, parts);
+function assignPriority(properties, data, group) {
+  if (!firstImageGroups.has(data)) firstImageGroups.set(data, group);
+  const first = firstImageGroups.get(data) === group;
+  properties.loading ??= first ? 'eager' : 'lazy';
+  if (first && properties.loading !== 'lazy') properties.fetchPriority ??= 'high';
 }
+function imageProperties(original, data, group) {
+  const url = typeof original.src === 'string' && URL.parse(original.src);
+  if (!url || url.origin !== 'https://res.cloudinary.com') return;
+  const parts = cloudinaryAsset.exec(url.pathname)?.groups;
+  if (!parts) return;
+  const dimensionsInPixels = dimensions(original, url);
+  if (!(dimensionsInPixels.width && dimensionsInPixels.height)) return;
+  const properties = { ...original, ...dimensionsInPixels };
+  assignPriority(properties, data, group);
+  delivery(properties, url, parts);
+  return properties;
+}
+const hastPropertyNames = { srcset: 'srcSet', fetchpriority: 'fetchPriority' };
 
-function walk(node) {
+function walk(node, data, group) {
   if (node.tagName === 'img') {
-    const original = Object.fromEntries(node.attrs.map(({ name, value }) => [name, value]));
-    const properties = { ...original };
-    updateImage(properties);
-    if (properties.src !== original.src) {
-      node.attrs = Object.entries(properties).map(([name, value]) => ({ name, value }));
-      return true;
-    }
+    const original = Object.fromEntries(
+      node.attrs.map(({ name, value }) => [hastPropertyNames[name] ?? name, value]),
+    );
+    const properties = imageProperties(original, data, group);
+    if (!properties) return false;
+    node.attrs = Object.entries(properties).map(([name, value]) => ({
+      name: name.toLowerCase(),
+      value: String(value),
+    }));
+    return true;
   }
-  return (node.childNodes ?? []).map(walk).some(Boolean);
+  return (node.childNodes ?? []).map((child) => walk(child, data, group)).some(Boolean);
 }
 
 export default {
   name: 'notebook-image-delivery',
-  html(node, context) {
+  element: {
+    filter: ['img'],
+    visit(node, context) {
+      const group = context.parent(node) ?? node;
+      const properties = imageProperties(node.properties, context.data, group);
+      for (const [key, value] of Object.entries(properties ?? {})) {
+        if (value !== node.properties[key]) context.setProperty(node, key, value);
+      }
+    },
+  },
+  raw(node, context) {
     if (!node.value.includes('res.cloudinary.com')) return;
     const fragment = parseFragment(node.value);
-    if (walk(fragment)) context.setField(node, 'value', serialize(fragment));
+    if (walk(fragment, context.data, node)) context.setField(node, 'value', serialize(fragment));
   },
 };

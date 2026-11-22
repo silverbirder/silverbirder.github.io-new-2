@@ -296,7 +296,6 @@
     },
     "notebook-meta-width": { "value": "{primitive.measure-sm}", "type": "string" },
     "notebook-meta-row-height": { "value": "{primitive.space-8}", "type": "string" },
-    "notebook-meta-space-before": { "value": "{primitive.space-8}", "type": "string" },
     "notebook-meta-value-inset": { "value": "{primitive.space-8}", "type": "string" },
     "notebook-tick-svg-height-ratio": { "value": 0.1538461538, "type": "number" },
     "notebook-tick-height": {

@@ -6,7 +6,7 @@ export default defineConfig({
   output: 'static',
   markdown: {
     syntaxHighlight: false,
-    processor: satteri({ mdastPlugins: [notebookImageDelivery] }),
+    processor: satteri({ hastPlugins: [notebookImageDelivery] }),
   },
   trailingSlash: 'always',
   base: process.env.ASTRO_BASE || '/',
