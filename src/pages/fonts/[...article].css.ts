@@ -13,26 +13,31 @@ const descent = Number.parseFloat(tokens['font-descent-md'].value);
 const family = tokens['font-family-rounded-x-mplus'].value[0];
 const headingFamily = tokens['font-family-rounded-x-mplus-heading'].value[0];
 
-function fontFace(
-  name: string,
-  size: number,
-  weight: number,
-  file: keyof typeof ranges,
-  subset: keyof typeof ranges.regular,
-) {
+function fontFace(name: string, size: number, weight: number, src: string, range: string) {
   const rule = postcss.atRule({ name: 'font-face' });
   const descriptors = {
     'font-family': name,
     'font-weight': String(weight),
     'font-display': 'swap',
-    src: `url("./rounded-x-mplus-1c-${file}-${subset}.woff2") format("woff2")`,
-    'unicode-range': ranges[file][subset],
+    src,
+    'unicode-range': range,
     'ascent-override': `${((lineHeight - descent) / size) * 100}%`,
     'descent-override': `${(descent / size) * 100}%`,
     'line-gap-override': `${tokens['font-line-gap-percent'].value}%`,
   };
   for (const [prop, value] of Object.entries(descriptors)) rule.append({ prop, value });
   return rule;
+}
+
+function roundedFontFace(
+  name: string,
+  size: number,
+  weight: number,
+  file: keyof typeof ranges,
+  subset: keyof typeof ranges.regular,
+) {
+  const src = `url("./rounded-x-mplus-1c-${file}-${subset}.woff2") format("woff2")`;
+  return fontFace(name, size, weight, src, ranges[file][subset]);
 }
 
 export const GET: APIRoute = () => {
@@ -42,10 +47,17 @@ export const GET: APIRoute = () => {
     .root()
     .append(
       ...(['core', 'extended'] as const).flatMap((subset) => [
-        fontFace(family, bodySize, regular, 'regular', subset),
-        fontFace(family, bodySize, bold, 'bold', subset),
-        fontFace(headingFamily, headingSize, bold, 'bold', subset),
+        roundedFontFace(family, bodySize, regular, 'regular', subset),
+        roundedFontFace(family, bodySize, bold, 'bold', subset),
+        roundedFontFace(headingFamily, headingSize, bold, 'bold', subset),
       ]),
+      fontFace(
+        tokens['font-family-notebook-code'].value,
+        bodySize,
+        regular,
+        'local("Menlo-Regular"), local("Consolas"), local("DejaVu Sans Mono"), local("Courier New")',
+        'U+0000-007F',
+      ),
     );
   return new Response(css.toString(), { headers: { 'Content-Type': 'text/css; charset=utf-8' } });
 };

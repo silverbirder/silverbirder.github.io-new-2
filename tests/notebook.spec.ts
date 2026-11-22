@@ -111,6 +111,7 @@ async function auditNativeSelection(
   if (!(await target.count())) return;
   await target.scrollIntoViewIfNeeded();
   const area = await target.evaluate((element) => {
+    element.closest('pre')?.scrollTo({ left: 0 });
     const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
     let node: Node | null;
     do {
@@ -124,8 +125,14 @@ async function auditNativeSelection(
     const body = document.querySelector('.notebook-body')!.getBoundingClientRect();
     const unit = Number.parseFloat(getComputedStyle(element).lineHeight);
     const ctx = document.createElement('canvas').getContext('2d')!;
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, 1, 1);
+    const backgrounds: string[] = [];
+    for (let parent: Element | null = element; parent; parent = parent.parentElement) {
+      backgrounds.unshift(getComputedStyle(parent).backgroundColor);
+    }
+    for (const background of ['white', ...backgrounds]) {
+      ctx.fillStyle = background;
+      ctx.fillRect(0, 0, 1, 1);
+    }
     ctx.fillStyle = getComputedStyle(element, '::selection').backgroundColor;
     ctx.fillRect(0, 0, 1, 1);
     return {
@@ -169,6 +176,8 @@ async function auditNativeSelection(
 async function openArticle(page: Page, route: string, root: number) {
   await page.goto(route);
   await expect(page.locator('.notebook-body')).toBeVisible();
+  const deferredFont = page.locator('link[href$="/fonts/site.css"][media="print"]');
+  await expect(deferredFont).toHaveCount(0);
   await page.evaluate(async (size) => {
     document.documentElement.style.fontSize = `${size}px`;
     const body = document.querySelector('.notebook-body')!;
