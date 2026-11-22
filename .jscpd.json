@@ -2,7 +2,7 @@
   "threshold": 0,
   "minLines": 8,
   "minTokens": 60,
-  "path": ["src", "docs", "eslint.config.mjs", "stylelint.config.mjs", "astro.config.mjs"],
+  "path": ["src", "eslint.config.mjs", "stylelint.config.mjs", "astro.config.mjs"],
   "ignore": ["**/node_modules/**"],
   "reporters": ["console"],
   "format": ["javascript", "typescript", "css", "markup", "markdown"],
