@@ -41,7 +41,7 @@ const fontStylesheet = `${base}fonts/site.css`;
           rel="stylesheet"
           href={fontStylesheet}
           media="print"
-          onload="if(document.readyState==='complete'){this.media='all'}else{window.addEventListener('load',()=>this.media='all',{once:true})}"
+          onload="const showStyles=()=>this.setAttribute('media','all');if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"
         />
         <noscript>
           <link rel="stylesheet" href={fontStylesheet} />
