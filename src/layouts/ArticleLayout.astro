@@ -13,6 +13,7 @@ type Props = {
     publicationId?: string;
     summary?: string | null;
     tags?: string[] | null;
+    keywords?: string[] | null;
   };
 };
 const { frontmatter, noindex, sharedFont } = Astro.props;
@@ -20,12 +21,18 @@ const ruleImage = `${import.meta.env.BASE_URL}notebook-rule.svg`;
 const tickImage = `${import.meta.env.BASE_URL}notebook-ticks.svg`;
 const [year, month, day] = frontmatter.publishedAt.slice(0, 10).split('-');
 const tags = [...new Set(frontmatter.tags?.map((tag) => tag.trim()).filter(Boolean))];
+const keywords = [
+  ...new Set(
+    [...tags, ...(frontmatter.keywords ?? []).map((keyword) => keyword.trim())].filter(Boolean),
+  ),
+].join(',');
 const dateLabel = `${year}年${Number(month)}月${Number(day)}日`;
 ---
 
 <Layout
   title={frontmatter.title}
   description={frontmatter.summary}
+  {keywords}
   currentPage="blog"
   article
   {noindex}
