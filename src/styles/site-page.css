@@ -1,0 +1,15 @@
+.site-page {
+  --page-width: 52rem;
+  --page-top-space: clamp(2.5rem, 7vw, 5rem);
+  --page-bottom-space: 4rem;
+
+  max-inline-size: var(--page-width);
+  margin-inline: auto;
+  padding: var(--page-top-space) var(--semantic-space-page-gutter) var(--page-bottom-space);
+  color: var(--semantic-color-text-primary);
+}
+
+.site-page a {
+  color: var(--semantic-color-text-link);
+  text-underline-offset: var(--semantic-text-link-underline-offset);
+}

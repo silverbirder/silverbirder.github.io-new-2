@@ -1,12 +1,66 @@
 ---
+import HomeWindow from '../layouts/HomeWindow.astro';
 import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
-<Layout title="トップ" currentPage="home">
-  <h1>トップページ</h1>
-  <p>ここはトップページです。内容は仮のテキストです。</p>
-  <p>日々の出来事や考えたことを、ブログに書いていきます。</p>
-  <p>
-    <a href={`${import.meta.env.BASE_URL}blog/`}>ブログへ</a>
-  </p>
+<Layout title="ジブンノート" currentPage="home">
+  <section class="home">
+    <HomeWindow />
+    <div class="home-intro">
+      <h1>ジブンノート</h1>
+      <nav aria-label="サイト内のページ">
+        <a href={`${base}me/`}>自己紹介</a>
+        <a href={`${base}blog/`}>ブログ</a>
+      </nav>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .home {
+    --home-vertical-space: clamp(3.5rem, 9vh, 5.5rem);
+    --home-gap: clamp(1.5rem, 4vw, 2.5rem);
+    --home-nav-link-padding: 0.35em;
+
+    display: grid;
+    justify-items: center;
+    gap: var(--home-gap);
+    padding: var(--home-vertical-space) var(--semantic-space-page-gutter);
+    color: var(--semantic-color-text-primary);
+    text-align: center;
+  }
+
+  .home-intro h1 {
+    --title-size: clamp(2.5rem, 6vw, 3.5rem);
+    --title-line-height: 1.18;
+    --title-tracking: -0.04em;
+
+    inline-size: max-content;
+    margin: var(--primitive-space-none) auto;
+    font-family: var(--semantic-font-family-heading);
+    font-size: var(--title-size);
+    line-height: var(--title-line-height);
+    letter-spacing: var(--title-tracking);
+  }
+
+  .home-intro nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--primitive-space-6);
+    margin-block-start: var(--primitive-space-6);
+  }
+
+  .home-intro nav a {
+    padding-block: var(--home-nav-link-padding);
+    border-block-end: var(--semantic-border-width-hairline) solid var(--semantic-color-accent);
+    color: var(--semantic-color-text-link);
+    text-decoration: none;
+  }
+
+  .home-intro nav a:hover {
+    color: var(--semantic-color-accent);
+  }
+</style>

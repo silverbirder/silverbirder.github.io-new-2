@@ -1,0 +1,128 @@
+---
+import { homeWindowOutline } from '../lib/home-window-outline';
+
+const cloudinary = 'https://res.cloudinary.com/silverbirder/image/upload/';
+const photo = 'v1778412179/silver-birder.github.io/blog/x7je0vkto34mbvaof8k2.jpg';
+const photoUrl = (width: number) => `${cloudinary}f_auto,q_auto,c_limit,w_${width}/${photo}`;
+---
+
+<figure class="home-window">
+  <div class="home-window-frame">
+    <svg
+      class="home-window-outline"
+      viewBox="0 0 100 125"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path
+        class="home-window-line"
+        d={homeWindowOutline}
+        pathLength="1"
+        stroke-dasharray="1.02 1.02"
+        stroke-dashoffset="1.02"
+      />
+    </svg>
+    <img
+      class="home-window-photo"
+      src={photoUrl(768)}
+      srcset={`${photoUrl(480)} 480w, ${photoUrl(768)} 768w, ${photoUrl(1024)} 1024w`}
+      sizes="min(60vw, 22rem)"
+      width="1200"
+      height="901"
+      alt="琵琶湖が綺麗だ"
+      fetchpriority="high"
+    />
+    <img
+      class="home-window-avatar"
+      src={`${import.meta.env.BASE_URL}silverbirder-avatar.png`}
+      width="500"
+      height="500"
+      alt=""
+    />
+  </div>
+</figure>
+
+<style>
+  .home-window {
+    --window-width: min(60vw, 22rem);
+    --window-curve-width: 50%;
+    --window-photo-curve-depth: 40%;
+    --window-frame-ratio: 4 / 5;
+    --window-photo-position: 38%;
+
+    position: relative;
+    container-type: inline-size;
+    inline-size: var(--window-width);
+    margin: var(--primitive-space-none);
+  }
+
+  .home-window-frame {
+    position: relative;
+    box-sizing: border-box;
+    aspect-ratio: var(--window-frame-ratio);
+    padding: calc(var(--semantic-space-control-block) + var(--semantic-border-width-hairline));
+  }
+
+  .home-window-outline {
+    --window-view-box-width: 100px;
+    --window-container-width: 100cqw;
+    --window-stroke-width-fallback: 0.38px;
+
+    position: absolute;
+    inset: var(--primitive-space-none);
+    inline-size: var(--primitive-size-full);
+    block-size: var(--primitive-size-full);
+    overflow: visible;
+    fill: none;
+    stroke: var(--semantic-color-text-link);
+    stroke-width: var(--window-stroke-width-fallback);
+    stroke-width: calc(
+      var(--semantic-border-width-hairline) *
+        (var(--window-view-box-width) / var(--window-container-width))
+    );
+    stroke-linecap: round;
+    pointer-events: none;
+  }
+
+  .home-window-photo {
+    border-start-start-radius: var(--window-curve-width) var(--window-photo-curve-depth);
+    border-start-end-radius: var(--window-curve-width) var(--window-photo-curve-depth);
+    display: block;
+    inline-size: var(--primitive-size-full);
+    block-size: var(--primitive-size-full);
+    object-fit: cover;
+    object-position: var(--window-photo-position) center;
+  }
+
+  .home-window-avatar {
+    --window-avatar-width: 13%;
+    --window-avatar-offset: -50% 9%;
+
+    position: absolute;
+    inset-inline-start: var(--primitive-radius-full);
+    inset-block-end: var(--primitive-size-full);
+    inline-size: var(--window-avatar-width);
+    block-size: auto;
+    translate: var(--window-avatar-offset);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .home-window-line {
+      --window-draw-duration: 5.5s;
+
+      animation: window-outline-draw var(--window-draw-duration) linear forwards;
+    }
+
+    @keyframes window-outline-draw {
+      to {
+        stroke-dashoffset: var(--primitive-space-none);
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-window-line {
+      stroke-dasharray: none;
+    }
+  }
+</style>
