@@ -1,12 +1,13 @@
 ---
 import 'kiso.css';
 import '../styles/tokens.css';
+import SiteHeader from './SiteHeader.astro';
 
 interface Props {
   title: string;
   description?: string | null;
   keywords?: string;
-  currentPage: 'home' | 'blog';
+  currentPage: 'home' | 'blog' | 'me';
   article?: boolean;
   noindex?: boolean;
   sharedFont?: boolean;
@@ -55,6 +56,7 @@ const fontStylesheet = `${base}fonts/site.css`;
       :root {
         color-scheme: only light;
         background-color: var(--semantic-color-background-page);
+        background-image: url('../styles/wall-grain.svg');
       }
 
       body {
@@ -64,17 +66,7 @@ const fontStylesheet = `${base}fonts/site.css`;
     </style>
   </head>
   <body>
-    {!article && (
-      <nav aria-label="メインナビゲーション">
-        <a href={base} aria-current={currentPage === 'home' ? 'page' : undefined}>
-          トップ
-        </a>
-        |
-        <a href={`${base}blog/`} aria-current={currentPage === 'blog' ? 'page' : undefined}>
-          ブログ
-        </a>
-      </nav>
-    )}
+    {currentPage !== 'home' && <SiteHeader />}
     <main>
       <slot />
     </main>

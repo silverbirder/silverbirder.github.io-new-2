@@ -1,0 +1,75 @@
+---
+const base = import.meta.env.BASE_URL;
+const me = `${base}me/`;
+const blog = `${base}blog/`;
+const path = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-logo" href={base}>
+      <img src={`${base}jibun-note-logo.png`} width="1129" height="181" alt="ジブンノート トップ" />
+    </a>
+    <nav aria-label="メインナビゲーション">
+      <a href={me} aria-current={path === me ? 'page' : undefined}>
+        自己紹介
+      </a>
+      <a href={blog} aria-current={path === blog ? 'page' : undefined}>
+        ブログ
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-block-end: var(--semantic-border-width-hairline) solid
+      var(--semantic-color-border-subtle);
+  }
+
+  .site-header-inner {
+    --header-width: 60rem;
+    --header-height: 3.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--semantic-space-control-inline);
+    max-inline-size: var(--header-width);
+    min-block-size: var(--header-height);
+    margin-inline: auto;
+    padding-inline: var(--semantic-space-page-gutter);
+  }
+
+  .site-logo {
+    --logo-width: 9rem;
+
+    flex: auto;
+    max-inline-size: var(--logo-width);
+    min-inline-size: var(--primitive-space-none);
+  }
+
+  .site-logo img {
+    display: block;
+    inline-size: var(--primitive-size-full);
+    block-size: auto;
+  }
+
+  nav {
+    display: flex;
+    flex: none;
+    gap: var(--semantic-space-page-gutter);
+    font-size: var(--semantic-font-size-label);
+  }
+
+  nav a {
+    padding-block: var(--semantic-space-control-block);
+    color: var(--semantic-color-text-link);
+    text-decoration: none;
+    text-underline-offset: var(--semantic-text-link-underline-offset);
+  }
+
+  nav a:hover,
+  nav a[aria-current='page'] {
+    text-decoration: underline;
+  }
+</style>

@@ -2,6 +2,7 @@
 import { articleSlug } from '../lib/article-slug';
 import { getBlogArticles } from '../lib/blog-articles';
 import Layout from '../layouts/Layout.astro';
+import '../styles/site-page.css';
 
 const sorted = (await getBlogArticles())
   .map(({ article }) => ({
@@ -10,13 +11,83 @@ const sorted = (await getBlogArticles())
     publishedAt: article.data.publishedAt,
   }))
   .toSorted((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+const years = Map.groupBy(sorted, ({ publishedAt }) => publishedAt.slice(0, 4));
 ---
 
 <Layout title="ブログ" currentPage="blog">
-  <h1>ブログ</h1>
-  {sorted.map((article) => (
-    <p>
-      <a href={article.url}>{article.title}</a>
-    </p>
-  ))}
+  <div class="site-page">
+    {[...years].map(([year, articles]) => (
+      <section class="archive-year" aria-labelledby={`archive-${year}`}>
+        <h2 id={`archive-${year}`}>{year}年</h2>
+        <ul>
+          {articles.map(({ url, title, publishedAt }) => (
+            <li>
+              <a href={url}>
+                <time datetime={publishedAt}>{publishedAt.slice(5, 10).replace('-', ' / ')}</time>
+                <span>{title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
 </Layout>
+
+<style>
+  .archive-year {
+    --archive-year-width: 6rem;
+    --archive-date-width: 3.75rem;
+    --archive-row-spacing: 0.75rem;
+    --archive-year-spacing: 2.5rem;
+
+    display: grid;
+    grid-template-columns: var(--archive-year-width) minmax(var(--primitive-space-none), 1fr);
+    gap: var(--semantic-space-control-inline);
+    margin-block-end: var(--archive-year-spacing);
+  }
+
+  .archive-year h2 {
+    margin: var(--primitive-space-none);
+    padding-block-start: var(--archive-row-spacing);
+    color: var(--semantic-color-accent);
+    font-size: var(--semantic-font-size-heading);
+  }
+
+  .archive-year ul {
+    margin: var(--primitive-space-none);
+    padding: var(--primitive-space-none);
+    border-block-start: var(--semantic-border-width-hairline) solid
+      var(--semantic-color-border-subtle);
+    list-style: none;
+  }
+
+  .archive-year a {
+    display: grid;
+    grid-template-columns: var(--archive-date-width) minmax(var(--primitive-space-none), 1fr);
+    gap: var(--archive-row-spacing);
+    padding-block: var(--archive-row-spacing);
+    border-block-end: var(--semantic-border-width-hairline) solid
+      var(--semantic-color-border-subtle);
+    line-height: var(--semantic-line-height-body);
+    text-decoration: none;
+  }
+
+  .archive-year a:hover span,
+  .archive-year a:focus-visible span {
+    text-decoration: underline;
+  }
+
+  .archive-year time {
+    font-size: var(--semantic-font-size-label);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  @media (width <= 38rem) {
+    .archive-year {
+      grid-template-columns: minmax(var(--primitive-space-none), 1fr);
+      gap: var(--semantic-space-control-block);
+    }
+  }
+</style>
