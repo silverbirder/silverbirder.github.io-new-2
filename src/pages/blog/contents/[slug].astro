@@ -3,7 +3,10 @@ import { render } from 'astro:content';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { articleSlug } from '../../../lib/article-slug';
 import { getBlogArticles } from '../../../lib/blog-articles';
+import { loadLinkCards } from '../../../lib/blog-link-card-source';
 import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const linkCardSnapshot = loadLinkCards();
 
 export const getStaticPaths = (async () => {
   const articles = await getBlogArticles();
@@ -46,8 +49,14 @@ if (redirect) {
   );
 }
 const { Content } = await render(article);
+const linkCards = linkCardSnapshot.articles.get(article.id);
 ---
 
-<ArticleLayout frontmatter={{ ...article.data, number }} {noindex} sharedFont={sharedFont}>
+<ArticleLayout
+  frontmatter={{ ...article.data, number }}
+  {noindex}
+  sharedFont={sharedFont}
+  {linkCards}
+>
   <Content />
 </ArticleLayout>
