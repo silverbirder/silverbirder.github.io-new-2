@@ -24,6 +24,7 @@ const {
 const summary = description?.trim();
 const base = import.meta.env.BASE_URL;
 const fontName = currentPage === 'home' ? 'home' : 'site';
+const deferFont = sharedFont || (currentPage === 'blog' && !article);
 const fontStylesheet = `${base}fonts/${fontName}.css`;
 ---
 
@@ -37,7 +38,7 @@ const fontStylesheet = `${base}fonts/${fontName}.css`;
     {summary && <meta name="description" content={summary} />}
     {keywords && <meta name="keywords" content={keywords} />}
     {noindex && <meta name="robots" content="noindex" />}
-    {sharedFont ? (
+    {deferFont ? (
       <>
         <link
           rel="stylesheet"
