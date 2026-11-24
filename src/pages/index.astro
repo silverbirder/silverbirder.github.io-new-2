@@ -3,13 +3,60 @@ import HomeWindow from '../layouts/HomeWindow.astro';
 import Layout from '../layouts/Layout.astro';
 
 const base = import.meta.env.BASE_URL;
+const title = 'ジブンノート';
+const phaseStep = 0.52;
+const titleLetters = [...title].map((letter, index) => ({
+  letter,
+  waterId: `home-title-water-${index}`,
+  seamId: `home-title-seam-${index}`,
+  blueId: `home-title-blue-${index}`,
+  phase: `${(-index * phaseStep).toFixed(2)}s`,
+}));
+const titleWave = `
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+`;
 ---
 
-<Layout title="ジブンノート" currentPage="home">
+<Layout {title} currentPage="home">
   <section class="home">
     <HomeWindow />
     <div class="home-intro">
-      <h1>ジブンノート</h1>
+      <svg class="home-title-wave" aria-hidden="true" focusable="false">
+        <defs>
+          {titleLetters.map(({ waterId, seamId, blueId, phase }) => (
+            <>
+              <path
+                id={waterId}
+                class="home-title-water"
+                d={titleWave}
+                style={`--water-phase: ${phase}`}
+              />
+              <clipPath id={seamId} clipPathUnits="objectBoundingBox">
+                <use href={`#${waterId}`} />
+              </clipPath>
+              <clipPath id={blueId} clipPathUnits="objectBoundingBox">
+                <use href={`#${waterId}`} y=".015" />
+              </clipPath>
+            </>
+          ))}
+        </defs>
+      </svg>
+      <h1 aria-label={title}>
+        {titleLetters.map(({ letter, seamId, blueId }) => (
+          <span
+            class="home-title-letter"
+            aria-hidden="true"
+            data-letter={letter}
+            style={`--letter-seam: url(#${seamId}); --letter-blue: url(#${blueId})`}
+          >
+            {letter}
+          </span>
+        ))}
+      </h1>
       <nav aria-label="サイト内のページ">
         <a href={`${base}me/`}>自己紹介</a>
         <a href={`${base}blog/`}>ブログ</a>
@@ -37,12 +84,75 @@ const base = import.meta.env.BASE_URL;
     --title-line-height: 1.18;
     --title-tracking: -0.04em;
 
+    display: flex;
     inline-size: max-content;
     margin: var(--primitive-space-none) auto;
     font-family: var(--semantic-font-family-heading);
     font-size: var(--title-size);
     line-height: var(--title-line-height);
     letter-spacing: var(--title-tracking);
+  }
+
+  .home-title-wave {
+    position: absolute;
+    inline-size: var(--primitive-space-none);
+    block-size: var(--primitive-space-none);
+  }
+
+  .home-title-letter {
+    --letter-seam: url('#home-title-seam-0');
+    --letter-blue: url('#home-title-blue-0');
+
+    position: relative;
+  }
+
+  @supports (clip-path: url('#home-title-seam-0')) {
+    @media screen and (forced-colors: none) {
+      .home-title-letter::before,
+      .home-title-letter::after {
+        content: attr(data-letter);
+        position: absolute;
+        inset: var(--primitive-space-none);
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .home-title-letter::before {
+        color: var(--semantic-color-background-page);
+        clip-path: var(--letter-seam);
+      }
+
+      .home-title-letter::after {
+        color: var(--semantic-color-text-link);
+        clip-path: var(--letter-blue);
+      }
+    }
+  }
+
+  @media screen and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+    .home-title-water {
+      --water-duration: 5.4s;
+      --water-phase: 0s;
+      --water-shift: 6%;
+      --water-tilt: 3deg;
+
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: home-title-slosh var(--water-duration) ease-in-out var(--water-phase) infinite;
+    }
+  }
+
+  @keyframes home-title-slosh {
+    0%,
+    100% {
+      transform: translateX(calc(var(--water-shift) * var(--primitive-scale-negative)))
+        skewY(var(--water-tilt));
+    }
+
+    50% {
+      transform: translateX(var(--water-shift))
+        skewY(calc(var(--water-tilt) * var(--primitive-scale-negative)));
+    }
   }
 
   .home-intro nav {
