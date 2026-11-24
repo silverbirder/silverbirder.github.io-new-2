@@ -1,0 +1,14 @@
+/* The same Rounded-X M+ 1c, subset to the title and navigation on the top page. */
+@font-face {
+  font-family: 'Rounded-X M+ 1c';
+  font-weight: normal;
+  font-display: swap;
+  src: url('./rounded-x-mplus-1c-regular-home.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Rounded-X M+ 1c Heading';
+  font-weight: bold;
+  font-display: swap;
+  src: url('./rounded-x-mplus-1c-bold-home.woff2') format('woff2');
+}
