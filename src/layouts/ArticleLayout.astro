@@ -1,11 +1,15 @@
 ---
 import Layout from './Layout.astro';
+import LinkCard from './LinkCard.astro';
+import { insertLinkCards } from '../lib/insert-link-cards';
+import type { BlogLinkCard } from '../lib/blog-link-card-source';
 import '../styles/tokens.css';
 import '../styles/article.css';
 
 type Props = {
   noindex?: boolean;
   sharedFont?: boolean;
+  linkCards?: BlogLinkCard[];
   frontmatter: {
     title: string;
     publishedAt: string;
@@ -16,7 +20,10 @@ type Props = {
     keywords?: string[] | null;
   };
 };
-const { frontmatter, noindex, sharedFont } = Astro.props;
+const { frontmatter, noindex, sharedFont, linkCards } = Astro.props;
+const blocks = linkCards?.length
+  ? insertLinkCards(await Astro.slots.render('default'), linkCards)
+  : undefined;
 const ruleImage = `${import.meta.env.BASE_URL}notebook-rule.svg`;
 const tickImage = `${import.meta.env.BASE_URL}notebook-ticks.svg`;
 const [year, month, day] = frontmatter.publishedAt.slice(0, 10).split('-');
@@ -75,7 +82,18 @@ const dateLabel = `${year}年${Number(month)}月${Number(day)}日`;
       </div>
     </header>
     <div class="notebook-body">
-      <slot />
+      {blocks ? (
+        blocks.map((block) =>
+          typeof block === 'string' ? (
+            // eslint-disable-next-line astro/no-set-html-directive -- Only the already-rendered Astro slot is reused here.
+            <Fragment set:html={block} />
+          ) : (
+            <LinkCard card={block} />
+          ),
+        )
+      ) : (
+        <slot />
+      )}
     </div>
     <div class="notebook-bottom" aria-hidden="true"></div>
     {tags.length > 0 && (
