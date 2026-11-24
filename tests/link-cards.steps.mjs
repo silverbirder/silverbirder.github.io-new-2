@@ -6,9 +6,8 @@ import { After, Given, Then, When } from '@cucumber/cucumber';
 import { loadLinkCards } from '../src/lib/blog-link-card-source.ts';
 import { insertLinkCards } from '../src/lib/insert-link-cards.ts';
 
-const url = 'https://example.com/photo#day=1\\&view=2';
-const bareLink =
-  '<a href="https://example.com/photo#day=1%5C&amp;view=2">https://example.com/photo#day=1\\&amp;view=2</a>';
+const url = String.raw`https://example.com/photo#day=1\&view=2`;
+const bareLink = String.raw`<a href="https://example.com/photo#day=1%5C&amp;view=2">https://example.com/photo#day=1\&amp;view=2</a>`;
 const unchanged =
   '<ul><li><p>' +
   bareLink +
