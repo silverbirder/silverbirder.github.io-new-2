@@ -135,23 +135,21 @@ This_is_a_deliberately_long_unbroken_line_for_checking_horizontal_scrolling_insi
 
 ### 横長の画像
 
-<figure>
+<p>
   <a href="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_1280/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg">
-    <img src="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_768/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg" alt="開封前の布団のパッケージ" width="416" height="312" loading="lazy" decoding="async" />
+    <img src="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_768/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg" alt="開封前の布団のパッケージ。横長の写真。高さ312pxを目安に縮小した例です。" width="416" height="312" loading="lazy" decoding="async" />
   </a>
-  <figcaption>横長の写真。高さ312pxを目安に縮小した例です。</figcaption>
-</figure>
+</p>
 
 画像の次の段落です。画像とキャプションの高さが半端になっても、本文が罫線に戻るかを確認します。
 
 ### 縦長の画像
 
-<figure>
+<p>
   <a href="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_1280/v1793534298/silver-birder.github.io/blog/potg6bbdpvg7uz9d3mvi.jpg">
-    <img src="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_768/v1793534298/silver-birder.github.io/blog/potg6bbdpvg7uz9d3mvi.jpg" alt="星と月の模様がある布団" width="234" height="312" loading="lazy" decoding="async" />
+    <img src="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_768/v1793534298/silver-birder.github.io/blog/potg6bbdpvg7uz9d3mvi.jpg" alt="星と月の模様がある布団。縦長の写真も同じ高さに抑えた例です。長いキャプションが二行以上に折り返されたときの行間と、本文へ戻る位置も確認します。" width="234" height="312" loading="lazy" decoding="async" />
   </a>
-  <figcaption>縦長の写真も同じ高さに抑えた例です。長いキャプションが二行以上に折り返されたときの行間と、本文へ戻る位置も確認します。</figcaption>
-</figure>
+</p>
 
 ### 小さな画像
 

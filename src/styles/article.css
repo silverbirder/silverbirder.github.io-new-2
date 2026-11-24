@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Yomogi';
+  src: url('../assets/fonts/yomogi-regular.woff2') format('woff2');
+  font-display: swap;
+}
+
 .notebook {
   --notebook-rule-image: var(--component-notebook-rule-image);
   --notebook-tick-image: var(--component-notebook-tick-image);
@@ -215,6 +221,10 @@ time .notebook-meta-parts {
   .notebook-body :is(p, h1, h2, h3, h4, h5, h6, figcaption, pre, th, td) {
     height: calc-size(auto, round(nearest, size, var(--component-notebook-rule-spacing)));
   }
+
+  .notebook-body p:where(:has(img)) {
+    height: calc-size(auto, round(up, size, var(--component-notebook-rule-spacing)));
+  }
 }
 
 .notebook-body > :last-child,
@@ -249,12 +259,65 @@ time .notebook-meta-parts {
   object-position: left top;
 }
 
+.notebook-photo-frame {
+  --photo-frame-inset: var(--primitive-space-2);
+  --photo-frame-bottom: calc(
+    clamp(var(--primitive-space-2), var(--primitive-space-fluid), var(--primitive-space-4)) *
+      var(--photo-frame-bottom-ratio)
+  );
+  --photo-frame-bottom-ratio: 3.2;
+  --photo-shadow-opacity: 18%;
+  --photo-shadow-offset: 2px;
+  --photo-shadow-blur: 6px;
+  --photo-caption-line-height: 1.45;
+  --photo-caption-family: 'Yomogi', var(--semantic-font-family-body);
+  --photo-shadow: hsl(
+    var(--primitive-palette-slate-900-hue) var(--primitive-palette-slate-900-saturation)
+      var(--primitive-palette-slate-900-lightness) / var(--photo-shadow-opacity)
+  );
+
+  display: block;
+  box-sizing: border-box;
+  inline-size: fit-content;
+  max-inline-size: min(
+    calc(
+      var(--component-notebook-photo-width) + var(--photo-frame-inset) *
+        var(--primitive-ratio-double)
+    ),
+    calc(var(--primitive-size-full) - var(--primitive-space-2))
+  );
+  padding: var(--photo-frame-inset) var(--photo-frame-inset) var(--photo-frame-bottom);
+  background: var(--primitive-palette-neutral-0);
+  box-shadow: var(--primitive-space-none) var(--photo-shadow-offset) var(--photo-shadow-blur)
+    var(--photo-shadow);
+}
+
+.notebook-photo-frame:has(> .notebook-photo-caption) {
+  padding-block-end: var(--primitive-space-none);
+}
+
+.notebook-photo-frame > .notebook-photo-caption {
+  display: block;
+  align-content: center;
+  contain: inline-size;
+  box-sizing: border-box;
+  block-size: auto;
+  min-block-size: var(--photo-frame-bottom);
+  padding-block: var(--primitive-space-1);
+  text-box: normal;
+  font-family: var(--photo-caption-family);
+  font-size: var(--primitive-font-size-sm);
+  line-height: var(--photo-caption-line-height);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
 .notebook-body :is(img, video) {
   height: auto;
 }
 
 @supports (height: calc-size(auto, size)) {
-  .notebook-body :is(img, video, iframe) {
+  .notebook-body :is(video, iframe) {
     height: calc-size(auto, round(up, size, var(--component-notebook-rule-spacing)));
   }
 }
@@ -262,11 +325,26 @@ time .notebook-meta-parts {
 /* CMS stores the chosen number of rows with the image in Markdown. */
 .notebook-body img[data-notebook-rows] {
   --notebook-image-rows: initial;
+  --notebook-image-height: calc(
+    var(--notebook-image-rows) * var(--component-notebook-rule-spacing)
+  );
+
   width: auto;
-  height: calc(var(--notebook-image-rows) * var(--component-notebook-rule-spacing));
+  max-height: var(--notebook-image-height);
 }
 
-.notebook-body p:where(:has(> img[data-notebook-rows]):not(:has(> :not(img)))) {
+@supports (width: calc(1px * attr(width type(<number>)))) {
+  .notebook-body img[data-notebook-rows][width][height] {
+    width: calc(
+      var(--notebook-image-height) * attr(width type(<number>)) / attr(height type(<number>))
+    );
+  }
+}
+
+.notebook-body
+  p:where(
+    :has(> .notebook-photo-frame:only-child, > a:only-child > .notebook-photo-frame:only-child)
+  ) {
   text-box: normal;
   padding-block: var(--primitive-space-none);
 }
