@@ -1,0 +1,459 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一足遅れて Kubernetes を学び始める - 05. workloads その1 -</title><meta name="description" content="前回 一足遅れて Kubernetes を学び始める - 04. kubectl -では、kubenetesのCLIツールkubectlを学習しました。今回は、目玉機能であるworkloadsについて学習します。"><meta name="keywords" content="クラウドインフラ,Kubernetes,workloads"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">8</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-03"><span class="visually-hidden">2019年5月3日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 05. workloads その1 -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
+<ol>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_01/">一足遅れて Kubernetes を学び始める - 01. 環境選択編 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_02/">一足遅れて Kubernetes を学び始める - 02. Docker For Mac -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_03/">一足遅れて Kubernetes を学び始める - 03. Raspberry Pi -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_04/">一足遅れて Kubernetes を学び始める - 04. kubectl -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_05/">一足遅れて Kubernetes を学び始める - 05. workloads その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_06/">一足遅れて Kubernetes を学び始める - 06. workloads その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_07/">一足遅れて Kubernetes を学び始める - 07. workloads その 3 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_08/">一足遅れて Kubernetes を学び始める - 08. discovery&amp;LB その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_09/">一足遅れて Kubernetes を学び始める - 09. discovery&amp;LB その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_10/">一足遅れて Kubernetes を学び始める - 10. config&amp;storage その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_11/">一足遅れて Kubernetes を学び始める - 11. config&amp;storage その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_12/">一足遅れて Kubernetes を学び始める - 12. リソース制限 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_13/">一足遅れて Kubernetes を学び始める - 13. ヘルスチェックとコンテナライフサイクル -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_14/">一足遅れて Kubernetes を学び始める - 14. スケジューリング -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_15/">一足遅れて Kubernetes を学び始める - 15. セキュリティ -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_16/">一足遅れて Kubernetes を学び始める - 16. コンポーネント -</a></li>
+</ol>
+<h2 id="前回">前回</h2>
+<p><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_04/">一足遅れて Kubernetes を学び始める - 04. kubectl -</a>では、kubenetes の CLI ツール kubectl を学習しました。
+今回は、目玉機能である workloads について学習します。</p>
+<h2 id="workloads">workloads</h2>
+<p>Kubernetes には、下記のようにリソースの種類が存在します。
+今回は、Workloads を学習します。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left">リソースの分類</th>
+<th style="text-align: left">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left">Workloads リソース</td>
+<td style="text-align: left">コンテナの実行に関するリソース</td>
+</tr>
+<tr>
+<td style="text-align: left">Discovery＆LB リソース</td>
+<td style="text-align: left">コンテナを外部公開するようなエンドポイントを提供するリソース</td>
+</tr>
+<tr>
+<td style="text-align: left">Config＆Storage リソース</td>
+<td style="text-align: left">設定・機密情報・永続化ボリュームなどに関するリソース</td>
+</tr>
+<tr>
+<td style="text-align: left">Cluster リソース</td>
+<td style="text-align: left">セキュリティやクォータなどに関するリソース</td>
+</tr>
+<tr>
+<td style="text-align: left">Metadata リソース</td>
+<td style="text-align: left">リソースを操作する系統のリソース</td>
+</tr>
+</tbody>
+</table>
+<p>※ <a href="https://thinkit.co.jp/article/13610">Kubernetes の Workloads リソース（その 1）</a></p>
+<p>Workloads には、下記 8 つの種類があります。</p>
+<ul>
+<li>Pod</li>
+<li>ReplicationController</li>
+<li>ReplicaSet</li>
+<li>Deployment</li>
+<li>DaemonSet</li>
+<li>StatefulSet</li>
+<li>Job</li>
+<li>CronJob</li>
+</ul>
+<p>Pod,ReplicationController,ReplicaSet,Deployment までを見ていきます。</p>
+<h2 id="pod">Pod</h2>
+<p>コンテナを 1 つ以上含めた最小単位のリソース。
+Pod 毎に IP アドレスが振られる。ボリュームは共有。
+基本的に、Pod にコンテナを詰め込めるのではなく、「分離できるなら、分離する」方針がマイクロサービスとして良いそうです。
+さっそく、動かしてみます。</p>
+<p>※ <code>alias k=kubectl</code></p>
+<pre><code class="language-yaml">## sample-2pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-2pod
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:1.12
+    - name: redis-container
+      image: redis:3.2
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f . --prune --all
+pod/sample-2pod created
+pi@raspi001:~/tmp $ k get pod sample-2pod
+NAME          READY   STATUS    RESTARTS   AGE
+sample-2pod   2/2     Running   0          101s
+</code></pre>
+<p>期待通り複数のコンテナが動いていますね。(READY 2/2)
+exec で中に入る場合、どうなるのでしょうか。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k exec -it sample-2pod /bin/sh
+Defaulting container name to nginx-container.
+Use 'kubectl describe pod/sample-2pod -n default' to see all of the containers in this pod.
+#
+</code></pre>
+<p>なるほど、デフォルトのコンテナ（spec.containers の先頭)に入るみたいです。
+redis-container に入る場合は、</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k exec -it sample-2pod -c redis-container /bin/sh
+## redis-cli
+127.0.0.1:6379&gt; exit
+#
+</code></pre>
+<p><code>-c</code>でコンテナを指定するだけみたいです。
+他にも説明したいことがありますが、長くなりそうなので切り上げます。</p>
+<h2 id="replicaset-replicationcontroller">ReplicaSet, ReplicationController</h2>
+<p>レプリカという名前だけあって、Pod を複製するリソース。
+過去の経緯から ReplicationController から ReplicaSet へ名前変更があったため、ReplicaSet を使うことが推奨</p>
+<p>さっそく、動かしてみます。</p>
+<pre><code class="language-yaml">## sample-rs.yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: sample-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.12
+        - name: redis-container
+          image: redis:3.2
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f . --prune --all
+replicaset.apps/sample-rs created
+pod/sample-2pod unchanged
+pi@raspi001:~/tmp $ k get pods
+NAME              READY   STATUS              RESTARTS   AGE
+sample-2pod       2/2     Running             0          20m
+sample-rs-ghkcc   2/2     Running             0          103s
+sample-rs-nsc5b   0/2     ContainerCreating   0          103s
+sample-rs-wk7vl   0/2     ContainerCreating   0          103s
+</code></pre>
+<p>確かに、replica3 つ(sample-rs)で、それぞれコンテナが２つ(READY 2/2)作れていますね。
+書いて気になるのは、 pod の apiVersion は、<code>v1</code>に対して、replicaSet の apiVersion は、 <code>apps/v1</code>というのが気になりましたので、調べてみたところ、<a href="https://qiita.com/soymsk/items/69aeaa7945fe1f875822">Kubernetes の apiVersion に何を書けばいいか</a>という記事を見つけました。
+Core となる機能は、<code>v1</code>で良いみたいです。</p>
+<p>Kubernetes の目玉機能であるオーケストレーションの機能であるセルフヒーリングを試してみます。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k get pods
+NAME              READY   STATUS    RESTARTS   AGE
+sample-2pod       2/2     Running   0          29m
+sample-rs-ghkcc   2/2     Running   0          11m
+sample-rs-nsc5b   2/2     Running   0          11m
+sample-rs-wk7vl   2/2     Running   0          11m
+pi@raspi001:~/tmp $ k delete pod sample-rs-wk7vl
+pod "sample-rs-wk7vl" deleted
+pi@raspi001:~/tmp $ k get pods
+NAME              READY   STATUS              RESTARTS   AGE
+sample-2pod       2/2     Running             0          30m
+sample-rs-ghkcc   2/2     Running             0          11m
+sample-rs-gq2hs   0/2     ContainerCreating   0          13s
+sample-rs-nsc5b   2/2     Running             0          11m
+</code></pre>
+<p>おー、ContainerCreating されています。良いですね〜。
+ちなみに、気になったのは node 自体が故障してダウンした場合は、どうなるのでしょうか。試してみます。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k get pods -o=wide
+NAME              READY   STATUS    RESTARTS   AGE    IP            NODE       NOMINATED NODE   READINESS GATES
+sample-2pod       2/2     Running   0          32m    10.244.1.25   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-ghkcc   2/2     Running   0          13m    10.244.1.26   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-gq2hs   2/2     Running   0          114s   10.244.1.27   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-nsc5b   2/2     Running   0          13m    10.244.2.15   raspi003   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<p>raspi003 の電源を落としてみます。</p>
+<p>worker(raspi003)に移動</p>
+<pre><code class="language-shell">~ $ slogin pi@raspi003.local
+pi@raspi003.local's password:
+pi@raspi003:~ $ sudo shutdown now
+sudo: unable to resolve host raspi003
+Connection to raspi003.local closed by remote host.
+Connection to raspi003.local closed.
+~ $
+</code></pre>
+<p>master(raspi001)に移動</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k get nodes
+NAME       STATUS     ROLES    AGE     VERSION
+raspi001   Ready      master   5d16h   v1.14.1
+raspi002   Ready      worker   5d16h   v1.14.1
+raspi003   NotReady   worker   4d21h   v1.14.1
+pi@raspi001:~/tmp $ k get pods -o=wide
+NAME              READY   STATUS    RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES
+sample-2pod       2/2     Running   0          35m     10.244.1.25   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-ghkcc   2/2     Running   0          17m     10.244.1.26   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-gq2hs   2/2     Running   0          5m38s   10.244.1.27   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-nsc5b   2/2     Running   0          17m     10.244.2.15   raspi003   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<p>ん？ raspi003 で動いている？ 数十秒後…</p>
+<pre><code class="language-shell">pi@raspi001:~/kubernetes-perfect-guide/samples/chapter05/tmp $ k get pods -o=wide
+NAME              READY   STATUS        RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+sample-2pod       2/2     Running       0          40m   10.244.1.25   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-ghkcc   2/2     Running       0          22m   10.244.1.26   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-gq2hs   2/2     Running       0          10m   10.244.1.27   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-nsc5b   2/2     Terminating   0          22m   10.244.2.15   raspi003   &lt;none&gt;           &lt;none&gt;
+sample-rs-p2jsc   2/2     Running       0          53s   10.244.1.28   raspi002   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<p>おー、期待通り raspi003 にある pod が消えて、raspi002 に作り直されました。sample-rs-nsc5b は node が落ちちゃっているので、消すこともできず残り続けます。</p>
+<h2 id="少し待ち時間が長いような">少し待ち時間が長いような</h2>
+<p><a href="http://dr-asa.hatenablog.com/entry/2018/04/02/174006">Kubernetes はクラスタで障害があったとき、どういう動きをするのか</a>という記事によれば、kube-controller-manager が検知して、kube-scheduler が正しい数に揃えているみたいです。 <strong>数十秒待たされた</strong> のは、検知の間隔のせいでしょうか。</p>
+<p><a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/">kube-controller-manager</a>のオプションで、<code>--attach-detach-reconcile-sync-period duration Default: 1m0s</code>とあります。 <strong>1 分間隔</strong> なのですかね。</p>
+<h2 id="pod-を特定の-node-で動かさないようにしたい">Pod を特定の Node で動かさないようにしたい</h2>
+<p>みたいな要望を叶えれるのでしょうか。</p>
+<p><a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/">Assigning Pods to Nodes</a>によると、nodeSelector フィールドでアサインされる node を指定できるそうです。（除外ではなく、指定）
+ただし、<a href="https://stackoverflow.com/questions/48640806/editing-nodeselector-doesnt-rearrange-pods-in-replicaset">Editing nodeSelector doesn’t rearrange pods in ReplicaSet</a>によると、それは replicaSet ではなく、deployment で行うべきとのことです。replicaSet で動くかどうか、念の為試してみます。</p>
+<p>まず、先程落とした raspi003 を電源を入れ直して起動させます。
+その後、master(raspi001)に移動。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k label nodes raspi002 type=AWS
+node/raspi002 labeled
+pi@raspi001:~/tmp $ k label nodes raspi003 type=GCP
+node/raspi003 labeled
+pi@raspi001:~/tmp $ k get nodes -L type
+NAME       STATUS   ROLES    AGE     VERSION   TYPE
+raspi001   Ready    master   5d17h   v1.14.1
+raspi002   Ready    worker   5d17h   v1.14.1   AWS
+raspi003   Ready    worker   4d21h   v1.14.1   GCP
+pi@raspi001:~/tmp $ k get pods -o=wide
+NAME              READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+sample-2pod       2/2     Running   0          75m   10.244.1.25   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-ghkcc   2/2     Running   0          56m   10.244.1.26   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-gq2hs   2/2     Running   0          44m   10.244.1.27   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-p2jsc   2/2     Running   0          35m   10.244.1.28   raspi002   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<p>node にラベルを貼って、nodeSelector しやすいようにしました。
+sample-rs は、全て raspi002 で動いているので、下記を試してみます。</p>
+<ol>
+<li>sample-rs は raspi002 でのみ動くよう設定</li>
+<li>raspi002 をシャットダウン</li>
+</ol>
+<p>その結果、「sample-rs は raspi002 が動いていないので、セルフヒーリングしない」ことを期待します。</p>
+<pre><code class="language-yaml">## sample-rs.yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: sample-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.12
+        - name: redis-container
+          image: redis:3.2
+      nodeSelector:
+        type: AWS
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f . --prune --all
+replicaset.apps/sample-rs configured
+pod/sample-2pod unchanged
+</code></pre>
+<p>nodeSelector を追加しました。
+今回は単純な指定なのでこれで良いですが、より柔軟に指定したい場合は nodeAffinity を使うそうです。</p>
+<p>worker(raspi002)に移動</p>
+<pre><code class="language-shell">~ $ slogin pi@raspi002.local
+pi@raspi002.local's password:
+pi@raspi002:~ $ sudo shutdown now
+sudo: unable to resolve host raspi002
+Connection to raspi002.local closed by remote host.
+Connection to raspi002.local closed.
+~ $
+</code></pre>
+<p>数十秒待つ…
+結果は…!</p>
+<p>master(raspi001)に移動</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k get nodes -L type
+NAME       STATUS     ROLES    AGE     VERSION   TYPE
+raspi001   Ready      master   5d17h   v1.14.1
+raspi002   NotReady   worker   5d17h   v1.14.1   AWS
+raspi003   Ready      worker   4d22h   v1.14.1   GCP
+pi@raspi001:~/tmp $ k get pods -o=wide
+NAME              READY   STATUS        RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+sample-2pod       2/2     Terminating   0          89m   10.244.1.25   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-4srpp   0/2     Pending       0          36s   &lt;none&gt;        &lt;none&gt;     &lt;none&gt;           &lt;none&gt;
+sample-rs-6mgcr   0/2     Pending       0          37s   &lt;none&gt;        &lt;none&gt;     &lt;none&gt;           &lt;none&gt;
+sample-rs-ghkcc   2/2     Terminating   0          71m   10.244.1.26   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-gq2hs   2/2     Terminating   0          59m   10.244.1.27   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-rs-lc225   0/2     Pending       0          36s   &lt;none&gt;        &lt;none&gt;     &lt;none&gt;           &lt;none&gt;
+sample-rs-p2jsc   2/2     Terminating   0          49m   10.244.1.28   raspi002   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<p>期待通りでした。つまり、sample-rs は raspi002 以外で作り直せないので、Pending,Terminating 状態です。
+また、単純な pod である sample-2pod は replicaSet ではないので、セルフヒーリングされずに Terminating になっています。
+面白いですね。これ。</p>
+<h2 id="deployment">Deployment</h2>
+<p>複数の ReplicaSet を管理。
+ReplicaSet にない「ローリングアップデート、ロールバック」機能が存在。
+Pod や ReplicaSet ではなく、Deployment が最も推奨されるリソース種類。</p>
+<p>ReplicaSet では、指定したコンテナイメージを更新した場合(アップデート)、どうなるのでしょうか。すべて更新されるのか、一部だけなのでしょうか。試してみます。</p>
+<p>sample-2pod-replica.yaml の nginx イメージを 1.12 から 1.13 に更新しました。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k get all
+NAME                  READY   STATUS    RESTARTS   AGE
+pod/sample-rs-4srpp   2/2     Running   0          7h14m
+pod/sample-rs-6mgcr   2/2     Running   0          7h14m
+pod/sample-rs-lc225   2/2     Running   0          7h14m
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   6d
+
+NAME                        DESIRED   CURRENT   READY   AGE
+replicaset.apps/sample-rs   3         3         3       8h
+pi@raspi001:~/tmp $ k apply -f . --prune --all
+replicaset.apps/sample-rs configured
+pod/sample-2pod created
+pi@raspi001:~/tmp $ k describe replicaset sample-rs
+Name:         sample-rs
+...
+  Containers:
+   nginx-container:
+    Image:        nginx:1.13
+...
+</code></pre>
+<p>replicaset のマニュフェストは更新されました。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k describe pod sample-rs-4srpp
+Name:               sample-rs-4srpp
+...
+  nginx-container:
+    Container ID:   docker://9160f550ee9d9bbcd1a5c990ca95389b2b39aff6688bcd933c99fe93b1968b99
+    Image:          nginx:1.12
+...
+</code></pre>
+<p>pod は変化なしのようです。
+では、Deployment を使ってみます。</p>
+<pre><code class="language-yaml">## sample-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.12
+          ports:
+            - containerPort: 80
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f . --prune --all --record
+replicaset.apps/sample-rs configured
+pod/sample-2pod configured
+deployment.apps/sample-deployment created
+</code></pre>
+<p><code>--record</code>をつけることで、履歴を保持することができます。ロールバックに使います。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k get all
+NAME                                    READY   STATUS    RESTARTS   AGE
+pod/sample-2pod                         2/2     Running   0          12m
+pod/sample-deployment-6cd85bd5f-4whgn   1/1     Running   0          119s
+pod/sample-deployment-6cd85bd5f-js2sw   1/1     Running   0          119s
+pod/sample-deployment-6cd85bd5f-mjt77   1/1     Running   0          119s
+pod/sample-rs-4srpp                     2/2     Running   0          7h28m
+pod/sample-rs-6mgcr                     2/2     Running   0          7h28m
+pod/sample-rs-lc225                     2/2     Running   0          7h28m
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   6d1h
+
+NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/sample-deployment   3/3     3            3           2m
+
+NAME                                          DESIRED   CURRENT   READY   AGE
+replicaset.apps/sample-deployment-6cd85bd5f   3         3         3       2m
+replicaset.apps/sample-rs                     3         3         3       8h
+</code></pre>
+<p>sample-deployment が、deployment,replicaset,pod を作成しました。</p>
+<p>では、sample-deployment の nginx コンテナを 1.12 から 1.13 に更新してみます。</p>
+<pre><code class="language-yaml">## sample-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.13
+          ports:
+            - containerPort: 80
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f . --prune --all --record
+replicaset.apps/sample-rs unchanged
+pod/sample-2pod unchanged
+deployment.apps/sample-deployment configured
+pi@raspi001:~/tmp $ k get pod
+NAME                                 READY   STATUS              RESTARTS   AGE
+sample-2pod                          2/2     Running             0          15m
+sample-deployment-6cd85bd5f-js2sw    1/1     Running             0          4m53s
+sample-deployment-6cd85bd5f-mjt77    1/1     Running             0          4m53s
+sample-deployment-7dfb996c6b-gh2cg   0/1     ContainerCreating   0          21s
+sample-deployment-7dfb996c6b-m4wrd   1/1     Running             0          38s
+sample-rs-4srpp                      2/2     Running             0          7h31m
+sample-rs-6mgcr                      2/2     Running             0          7h31m
+sample-rs-lc225                      2/2     Running             0          7h31m
+</code></pre>
+<p>おー、deployment の pod が作り変わっていっています。これが <strong>ローリングアップデート</strong> です。
+ローリングアップデートは、spec.template 以下が更新されると変化したとみなすそうです。
+また、ロールバックは、rollout コマンドで実施できますし、revision 指定で戻すこともできます。
+しかし、基本的にはマニュフェストを戻して apply すべきです。</p>
+<p>アップデート戦略というものがあり、デフォルトは RollingUpdate です。過不足分の Pod 考慮した更新戦略になります。
+アップデート中に許容される不足分と超過分を設定できます。(maxUnavailable, maxSurge)
+他の戦略として、Recreate 戦略があります。こちらは、全て同時に作り直しになります。ですので、一時的にアクセス不可になってしまいます。</p>
+<p>１つ不安に感じたものとして、「フロントエンドのバージョンを１から２にアップデートしたら、バージョン 1 のコンテナにアクセスしたユーザがバージョン 2 のコンテナに遷移したら大丈夫なのかな」と思いました。しかし、これはローリングアップデートに限った話ではないので、それは考えないこととしました。ちゃんと設計すれば良い話ですね。</p>
+<p>ちなみに、マニュフェストを書かずに deployment ができます。<code>k run sample-deployment-cli --image nginx:1.12 --replicas 3 --port 80</code>です。お試しなら、便利ですね。</p>
+<h2 id="お片付け">お片付け</h2>
+<p>試しに、prune で削除しています。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ ls
+sample-2pod-replica.yaml  sample-2pod.yaml  sample-deployment.yaml
+pi@raspi001:~/tmp $ mv sample-2pod-replica.yaml sample-2pod-replica.yaml.org
+pi@raspi001:~/tmp $ mv sample-deployment.yaml sample-deployment.yaml.org
+pi@raspi001:~/tmp $ k apply -f . --all --prune
+pod/sample-2pod configured
+deployment.apps/sample-deployment pruned
+replicaset.apps/sample-rs pruned
+pi@raspi001:~/tmp $ k get all
+NAME              READY   STATUS    RESTARTS   AGE
+pod/sample-2pod   2/2     Running   0          30m
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   6d1h
+</code></pre>
+<p>んー、こうすると消せるのですが、どうしても１ファイル残してしまいます…。
+すべて org にすると、<code>k apply -f .</code>が失敗しますし…。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete pod sample-2pod
+pod "sample-2pod" deleted
+</code></pre>
+<p>結局、こうしました…。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k label node raspi002 type-
+pi@raspi001:~/tmp $ k label node raspi003 type-
+</code></pre>
+<h2 id="おわりに">おわりに</h2>
+<p>思った以上に、ReplicaSet にハマってしまいました。
+次は、残りの workloads を試します。
+次回は<a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_06/">こちら</a>です。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>クラウドインフラ</li></ul></footer></article></main></body></html>

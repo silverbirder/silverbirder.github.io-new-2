@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>InnerSourceとAI</title><meta name="description" content="デブサミ2019 の GitHub 社所属の登壇者の方が紹介されていた、InnerSource の考え方を最近を思い出しました。 https://event.shoeisha.jp/devsumi/20190214/session/1995"><meta name="keywords" content="仕事,InnerSource"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">410</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2026-07-16T20:27:00+09:00"><span class="visually-hidden">2026年7月16日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2026</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">07</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">16</span></span></time></p></div><div class="notebook-heading"><h1>InnerSourceとAI</h1></div></header><div class="notebook-body"><p>デブサミ2019 の GitHub 社所属の登壇者の方が紹介されていた、InnerSource の考え方を最近を思い出しました。</p>
+<p><a href="https://event.shoeisha.jp/devsumi/20190214/session/1995">https://event.shoeisha.jp/devsumi/20190214/session/1995</a></p>
+<h2 id="innersource-とは">InnerSource とは</h2>
+<p>Open Source Software（以降、OSS）の開発・運用プロセス文化を、<br>
+社内(Inner) にもその文化を醸成させよう、というニュアンスだったと思います。</p>
+<p>OSSは、オープンで誰でも閲覧可能で、誰でも問題起票（issue）、議論（Discussion）に参加できます。<br>
+情報源は、リポジトリを Single Source Of Truth（以降、SSOT）とし、誰でも貢献（コントリビュート）することができます。<br>
+PR作成されれば、コードオーナーがアサインされレビューし取り込むことができます。<br>
+ちなみに GitHub では、<code>CODE_OF_CONDUCT.md</code> や <code>SUPPORT.md</code>、<code>CONTRIBUTING.md</code> といった決まったファイル名を使うと、<br>
+<code>helpful resources</code> や <code>contribute タブ</code> などでリンクされます。</p>
+<p>オペレーションをGitOpsで駆動するようにすれば、<br>
+問い合わせIssue起票→担当者アサイン→回答（ナレッジ蓄積）などを自動化できます。<br>
+これは1例であり、SlackやZendesk などからGitOps起点にすることで、<br>
+プロダクトについての情報が1手にリポジトリへ集約されます。</p>
+<p>情報がオープンに誰でもアクセスして検索可能（個人情報の取り扱い管理は別途）、<br>
+GitOps駆動によるオペレーション自動化、<br>
+ナレッジが集約された情報源となります。</p>
+<h2 id="ai時代">AI時代</h2>
+<p>AI により、誰でも簡単にOSSへコントリビュートできる時代になりました。<br>
+AI slop 問題があるぐらい、以前に比べてコントリビュートする上での敷居が低くなった証拠です。<br>
+OSS はそれらの問題を対処する大変さがありますが、innerSource なら社内の人となるため、<br>
+比較的 AI slop な問題はそう大きな問題にはならないかもしれません。</p>
+<p>今の時代 誰でもPRを提出できるようになったため、<br>
+たとえば 営業職（Aさん）のチームメンバーから改善して欲しいことについてプロンプトをGitHub issue に書いて、<br>
+起票するだけで Claude などが駆動してPRを作成できます。<br>
+作成したPRは、プレビューデプロイ環境に展開され、Aさんが期待する結果を確認できたら、<br>
+コードオーナーへレビューアサインする仕組みにします。<br>
+そのままマージすることは、Claudeの精度やハーネス整備などの加減によりますが、<br>
+多くはそのままにはいけないかもしれません。<br>
+ただ、形と期待したいことをプロンプトと目に見える形を用意できれば、<br>
+コードオーナーが 温度感や優先度（Issueラベル運用など）を軸に形に仕上げる、<br>
+みたいなこともできそうです。</p>
+<p>またCS担当者からのお問い合わせが発生した際に、<br>
+プロダクト仕様はリポジトリの中のため（コードが仕様）、<br>
+Zendesk チケット作成 → 自動 GitHub issue 起票 (個人情報をマスクするならもう一段手前に何か必要） → Claude 調査 → レスポンス（or 内容確認のエンジニア側担当者をつける）といった流れも簡単そうです。</p>
+<p>さらに、Datadog 等のアラートを起因して、<br>
+GitHub issue 起票させ、Runbook ベースにトリアージを Claude に行わせて、<br>
+即リバートPRを作成させるか、マニュアル手順を実行する運用担当者をアサインさせ対応させるなども、<br>
+できるかもしれません。</p>
+<p>GitHub には Teams でチーム作成して、そのチームに属するメンバーをランダムアサインすることも可能のため、<br>
+運用担当者をランダムに割り振ることが可能ですし、ユーザー自身が Busy 状態にしておけばアサインから外れることになります。<br>
+他にも様々な OSS 運用する上での便利な機能があるかもしれません。</p>
+<h2 id="終わりに">終わりに</h2>
+<p>AI slop は知らない人から大量に送りつけられると困るのですが、<br>
+社内の知らない人からであれば、もし困ったとしても改善できる余地が OSS よりも広いと思います。<br>
+InnerSource、いかがでしょうか。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>仕事</li></ul></footer></article></main></body></html>

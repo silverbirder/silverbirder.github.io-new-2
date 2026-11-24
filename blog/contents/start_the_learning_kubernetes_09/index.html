@@ -1,0 +1,362 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一足遅れて Kubernetes を学び始める - 09. discovery&amp;LB その2 -</title><meta name="description" content="前回 一足遅れて Kubernetes を学び始める - 08. discovery&amp;LB その1 -でServiceについての概要を学びました。今回は下記を一気に学びます。"><meta name="keywords" content="クラウドインフラ,Kubernetes,Load Balancer"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">13</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-15"><span class="visually-hidden">2019年5月15日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">15</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 09. discovery&amp;LB その2 -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
+<ol>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_01/">一足遅れて Kubernetes を学び始める - 01. 環境選択編 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_02/">一足遅れて Kubernetes を学び始める - 02. Docker For Mac -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_03/">一足遅れて Kubernetes を学び始める - 03. Raspberry Pi -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_04/">一足遅れて Kubernetes を学び始める - 04. kubectl -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_05/">一足遅れて Kubernetes を学び始める - 05. workloads その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_06/">一足遅れて Kubernetes を学び始める - 06. workloads その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_07/">一足遅れて Kubernetes を学び始める - 07. workloads その 3 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_08/">一足遅れて Kubernetes を学び始める - 08. discovery&amp;LB その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_09/">一足遅れて Kubernetes を学び始める - 09. discovery&amp;LB その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_10/">一足遅れて Kubernetes を学び始める - 10. config&amp;storage その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_11/">一足遅れて Kubernetes を学び始める - 11. config&amp;storage その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_12/">一足遅れて Kubernetes を学び始める - 12. リソース制限 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_13/">一足遅れて Kubernetes を学び始める - 13. ヘルスチェックとコンテナライフサイクル -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_14/">一足遅れて Kubernetes を学び始める - 14. スケジューリング -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_15/">一足遅れて Kubernetes を学び始める - 15. セキュリティ -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_16/">一足遅れて Kubernetes を学び始める - 16. コンポーネント -</a></li>
+</ol>
+<h2 id="前回">前回</h2>
+<p><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_08/">一足遅れて Kubernetes を学び始める - 08. discovery&amp;LB その 1 -</a>で Service についての概要を学びました。今回は下記を一気に学びます。</p>
+<ul>
+<li>ExternalIP</li>
+<li>NodePort</li>
+<li>LocadBalancer</li>
+<li>Headless</li>
+<li>ExternalName</li>
+<li>None-Selector</li>
+<li>Ingress</li>
+</ul>
+<p>※ ClusterIP を飛ばしたのは、前回使った内容で十分だと思ったため。</p>
+<h2 id="externalip">ExternalIP</h2>
+<p>こちらは、外向けの IP アドレスを割り振ります。</p>
+<pre><code class="language-yaml">## sample-externalip.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-externalip
+spec:
+  type: ClusterIP
+  externalIPs:
+    - 192.168.3.33
+  ports:
+    - name: "http-port"
+      protocol: "TCP"
+      port: 8080
+      targetPort: 80
+  selector:
+    app: sample-app
+</code></pre>
+<p>私の Node 情報では、下記の状態です。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left">host</th>
+<th style="text-align: left">ip</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left">raspi001(master)</td>
+<td style="text-align: left">192.168.3.32</td>
+</tr>
+<tr>
+<td style="text-align: left">raspi002(worker)</td>
+<td style="text-align: left">192.168.3.33</td>
+</tr>
+<tr>
+<td style="text-align: left">raspi003(worker)</td>
+<td style="text-align: left">192.168.3.34</td>
+</tr>
+<tr>
+<td style="text-align: left">nfspi(NFS)</td>
+<td style="text-align: left">192.168.3.35</td>
+</tr>
+</tbody>
+</table>
+<p>ここで、spec. externalIPs に、公開したい IP アドレスを上記 Node の IP アドレスより設定します。
+今回は、１つだけ(raspi002:193.168.3.33)にしました。</p>
+<pre><code class="language-yaml">## sample-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.12
+          ports:
+            - containerPort: 80
+        - name: redis-container
+          image: redis:3.2
+</code></pre>
+<p>前回同様のファイルを用意します。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-deployment.yaml -f sample-externalip.yaml
+pi@raspi001:~/tmp $ k get pod -o=wide
+NAME                                      READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+sample-deployment-9dc487867-7n2sz         2/2     Running   0          16m   10.244.1.73   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-deployment-9dc487867-nnnqm         2/2     Running   0          16m   10.244.1.74   raspi002   &lt;none&gt;           &lt;none&gt;
+sample-deployment-9dc487867-qfdhw         2/2     Running   0          16m   10.244.2.68   raspi003   &lt;none&gt;           &lt;none&gt;
+pi@raspi001:~/tmp $ k get service
+NAME                TYPE        CLUSTER-IP       EXTERNAL-IP    PORT(S)    AGE
+sample-externalip   ClusterIP   10.104.170.220   192.168.3.33   8080/TCP   15m
+</code></pre>
+<p>externalIP が設定されました。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ for PODNAME in `k get pods -l app=sample-app -o jsonpath='{.items[*].metadata.name}'`; do k exec -it ${PODNAME} -- cp /etc/hostname /usr/share/nginx/html/index.html; done
+</code></pre>
+<p>どこの pod かどうかわかりやすいくするため、index.html を書き換えます。
+では、ブラウザからアクセスしてみます。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_593/q_auto/f_auto/v1639816612/silver-birder.github.io/blog/sample_deployment_1.png?ar=593%3A441" alt="sample_deployment_1" width="593" height="441" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_297/q_auto/f_auto/v1639816612/silver-birder.github.io/blog/sample_deployment_1.png?ar=593%3A441 297w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_445/q_auto/f_auto/v1639816612/silver-birder.github.io/blog/sample_deployment_1.png?ar=593%3A441 445w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_593/q_auto/f_auto/v1639816612/silver-birder.github.io/blog/sample_deployment_1.png?ar=593%3A441 593w" sizes="min(37.0625rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_594/q_auto/f_auto/v1639816612/silver-birder.github.io/blog/sample_deployment_2.png?ar=594%3A442" alt="sample_deployment_2" width="594" height="442" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_297/q_auto/f_auto/v1639816612/silver-birder.github.io/blog/sample_deployment_2.png?ar=594%3A442 297w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_446/q_auto/f_auto/v1639816612/silver-birder.github.io/blog/sample_deployment_2.png?ar=594%3A442 446w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_594/q_auto/f_auto/v1639816612/silver-birder.github.io/blog/sample_deployment_2.png?ar=594%3A442 594w" sizes="auto, min(37.125rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>raspi002 を公開したので、その Node に存在する Pod がランダムに出力されている、つまりロードバランサが動作していることがわかります。</p>
+<h2 id="nodeport">NodePort</h2>
+<p>ExternalIP のような特定 Node を公開するのと違って、NodePort は、 <strong>全て</strong> の Node を公開します。</p>
+<p>試してみます。</p>
+<pre><code class="language-yaml">## sample-nodeport.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-nodeport
+spec:
+  type: NodePort
+  ports:
+    - name: "http-port"
+      protocol: "TCP"
+      port: 8080
+      targetPort: 80
+      nodePort: 30080
+  selector:
+    app: sample-app
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-externalip.yaml #しなくても良い
+pi@raspi001:~/tmp $ k apply -f sample-nodeport.yaml
+pi@raspi001:~/tmp $ k get service
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+sample-nodeport   NodePort    10.96.173.243   &lt;none&gt;        8080:30080/TCP   66s
+</code></pre>
+<p>内向けには、10.96.173.243:8080 でアクセスでき、外向けには、各 Node の IP アドレス:30080 にアクセスします。
+どちらも正常にアクセスできています。もちろん、アクセス先の Pod は、ロードバランシングされます。ロードバランシングさせるのが嫌な場合にも対応できます。アクセスされた Node の先は、その Node 内にある Pod のみにアクセスさせる「spec.externalTrafficPolicy：Local」に設定すれば大丈夫です。
+注意点として、nodePort は、30000~32767 の範囲と決まっています。</p>
+<h2 id="loadbalancer">LoadBalancer</h2>
+<p>ExternalIP や NodePort の場合、ロードバランシングするのはクラスタ内の Node になります。そのため、アクセスが集中することで、Node 単一障害が発生しやすいそうです。そこで、LoadBalancer を使うことで、 <strong>クラスタ外</strong> にロードバランサを作成します。</p>
+<p>ただ、クラスタ外にロードバランサを作成する際は、プラットフォームによって対応しているか確認が必要です。私のような raspberryPi 環境では、もちろんそういった機能がないため、準備する必要があります。</p>
+<p>master(raspi001)に移動</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f https://raw.githubusercontent.com/google/metallb/v0.7.3/manifests/metallb.yaml
+</code></pre>
+<p>metallb と呼ばれるロードバランサを適用します。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://metallb.universe.tf" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>MetalLB :: MetalLB, bare metal load-balancer for Kubernetes</strong><span class="link-card-description" data-astro-cid-p7ia6262>MetalLB is a load-balancer implementation for bare metal Kubernetes clusters, using standard routing protocols. Note Despite the beta status of the project / API, MetalLB is known to be stable and reliable. The project maturity page explains what that implies. Why? Kubernetes does not offer an imple</span><span class="link-card-domain" data-astro-cid-p7ia6262>metallb.universe.tf</span></span></a></div>
+<blockquote>
+<p>MetalLB is a load-balancer implementation for bare metal Kubernetes clusters, using standard routing protocols.</p>
+</blockquote>
+<pre><code class="language-yaml">## l2-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 192.168.3.100-192.168.3.200
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f l2-config.yaml
+</code></pre>
+<p>これで、raspberryPi 環境でも loadBalancer が使えます。さっそくつかってみましょう。</p>
+<pre><code class="language-yaml">## sample-lb.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-lb
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.3.100
+  ports:
+    - name: "http-port"
+      protocol: "TCP"
+      port: 8080
+      targetPort: 80
+      nodePort: 30082
+  selector:
+    app: sample-app
+  loadBalancerSourceRanges:
+    - 192.168.3.0/8
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-deployment.yaml
+pi@raspi001:~/tmp $ k apply -f sample-lb.yaml
+pi@raspi001:~/tmp $ k get services
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)          AGE
+kubernetes   ClusterIP      10.96.0.1       &lt;none&gt;          443/TCP          16d
+sample-lb    LoadBalancer   10.106.253.65   192.168.3.100   8080:30082/TCP   8m4s
+</code></pre>
+<p>お、192.168.3.100:8080 にアクセス可能みたいです。</p>
+<p>iMac に移動</p>
+<pre><code class="language-shell">~ $ curl -s http://192.168.3.100:8080
+&lt;!DOCTYPE html&gt;
+...
+</code></pre>
+<p>OK</p>
+<h2 id="headless">Headless</h2>
+<p>今までのロードバランスと違い、公開する IP アドレスは提供されません。
+DNS ラウンドロビンによる転送先の Pod の IP アドレスを取得できます。
+つまり、Headless のサービスへ問い合わせすると、spec.selector で登録した Pod の IP アドレスが手に入ります。
+Pod の IP アドレスがほしいときには便利です。（Envoy とか?）</p>
+<pre><code class="language-yaml">## sample-statefulset-headless.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sample-statefulset-headless
+spec:
+  serviceName: sample-headless
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.12
+</code></pre>
+<pre><code class="language-yaml">## sample-headless.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-headless
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: "http-port"
+      protocol: "TCP"
+      port: 80
+      targetPort: 80
+  selector:
+    app: sample-app
+</code></pre>
+<p>spec.type が ClusterIP であり、spec.clusterIP が None、そして、metadata.name が statefulset の spec.serviceName と同じことで、Headless Service と呼ぶそうです。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-statefulset-headless.yaml
+pi@raspi001:~/tmp $ k run --image=centos:7 --restart=Never --rm -i testpod  -- dig sample-headless.default.svc.cluster.local
+...
+;; ANSWER SECTION:
+sample-headless.default.svc.cluster.local. 5 IN A 10.244.1.75
+sample-headless.default.svc.cluster.local. 5 IN A 10.244.2.72
+sample-headless.default.svc.cluster.local. 5 IN A 10.244.2.73
+sample-headless.default.svc.cluster.local. 5 IN A 10.244.1.78
+sample-headless.default.svc.cluster.local. 5 IN A 10.244.1.76
+sample-headless.default.svc.cluster.local. 5 IN A 10.244.2.70
+</code></pre>
+<p>たしかに、headless のサービスに問い合わせると、IP アドレスが返ってきました。</p>
+<h2 id="externalname">ExternalName</h2>
+<p>外部のドメイン宛の CNAME を返すサービスです。
+例えば、Pod から外部の<a href="http://example.com/">example.com</a>へアクセスする場合、下記のように設定します。</p>
+<pre><code class="language-yaml">## sample-externalname.yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: sample-externalname
+  namespace: default
+spec:
+  type: ExternalName
+  externalName: example.com
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-externalname.yaml
+pi@raspi001:~/tmp $ k run --image=centos:7 --restart=Never --rm -i testpod  -- dig sample-externalname.default.svc.cluster.local
+...
+;; ANSWER SECTION:
+sample-externalname.default.svc.cluster.local. 5 IN CNAME example.com.
+example.com.  5 IN A 93.184.216.34
+</code></pre>
+<p>確かに、<code>sample-externalname.default.svc.cluster.local</code>と問い合わせすることで、外部の<a href="http://example.com/">example.com</a>への CNAME を取得できます。また、外部のサイトを切り替えたいときは、問い合わせ先は <strong>変わらず</strong> に、sample-externalname.yaml の spec.externalName を変更するだけで済みます。これは切り替えが楽ですね。</p>
+<h2 id="none-selector">None-Selector</h2>
+<p>外部のサービスに対してロードバランシングします。</p>
+<pre><code class="language-yaml">## sample-none-selector.yaml
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sample-none-selector
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: sample-none-selector
+subsets:
+  - addresses:
+      - ip: 172.217.31.164
+      - ip: 172.217.31.165
+    ports:
+      - protocol: TCP
+        port: 80
+</code></pre>
+<p>172.217.31.164 と 172.217.31.165 は、どちらも<a href="https://www.google.com/">www.google.com</a>を指します。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-none-selector.yaml
+pi@raspi001:~/tmp $ k get service
+NAME                   TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)          AGE
+sample-none-selector   ClusterIP      10.102.225.99   &lt;none&gt;          8080/TCP         88s
+pi@raspi001:~/tmp $ k describe svc sample-none-selector
+Name:              sample-none-selector
+...
+Type:              ClusterIP
+IP:                10.102.225.99
+Port:              &lt;unset&gt;  8080/TCP
+TargetPort:        80/TCP
+Endpoints:         172.217.31.164:80,172.217.31.165:80
+...
+</code></pre>
+<p>ClusterIP なので、内部で公開されていますね。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ curl 10.102.225.99:8080
+&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
+&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;H1&gt;301 Moved&lt;/H1&gt;
+The document has moved
+&lt;A HREF="http://www.google.com:8080/"&gt;here&lt;/A&gt;.
+&lt;/BODY&gt;&lt;/HTML&gt;
+...
+</code></pre>
+<p>少し結果が不自然だったのですが、確かに google.com へアクセスしました。
+外部サービスへのロードバランシングも容易に実現できます。</p>
+<p>※ <a href="http://172.217.31.164">172.217.31.164</a>へアクセスすると、リダイレクトがかかります。<code>Status Code:  301</code></p>
+<h2 id="ingress">Ingress</h2>
+<p>今までのロードバランサは、l4 レイヤーのロードバランサです。(IP アドレスとポート番号による負荷分散)
+Ingress では、l7 レイヤーのロードバランサを提供します。(URL や HTTP ヘッダーで負荷分散が可能)</p>
+<p>Ingress を置く場所は、クラスタ内、外の２つあります。
+クラスタ外の場合は、使うプラットフォームによります。
+クラスタ内の場合は、Nginx Ingress を使うことができます。</p>
+<p>raspberryPi 環境では、Ingress-Nginx-Controller を使うことで、Ingress を使えるそうです。
+<a href="https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal">NGINX Ingress Controller - Installation Guide</a>
+を参考にして進めたのですが、arm64 環境では動きませんでした。</p>
+<p>そこで、下記の yaml を発見し、試してみると動作します。ぜひ、お試しあれ。
+<a href="https://gist.github.com/hectcastro/097ba8e9759689b6b29dd164cd116eeb">hectcastro/mandatory.yaml</a></p>
+<p>※ namespace を削除できない場合は、<a href="https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.1/troubleshoot/ns_terminating.html">こちら</a>を参考下さい。</p>
+<h2 id="お片付け">お片付け</h2>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-externalip.yaml -f sample-deployment.yaml -f sample-nodeport.yaml -f sample-lb.yaml -f sample-statefulset-headless.yaml -f sample-headless.yaml -f sample-none-selector.yaml -f sample-externalname.yaml
+</code></pre>
+<h2 id="最後に">最後に</h2>
+<p>Service について学びました。
+様々な用途に応じて、エンドポイントを公開する手段を学びました。
+手を動かして確認してみると、理解が深まりました。
+本番で k8s を使った経験はありませんが、今後必要に迫られた際に、こちらの記事を思い返そうと思います。</p>
+<p>次回は<a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_10/">こちら</a>です。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>クラウドインフラ</li></ul></footer></article></main></body></html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Google Map タイムラインデータをなんとかしたい</title><meta name="description" content="以下の記事で書いた通り、Google Map のタイムラインデータが7年分消失しました。 https://silverbirder.github.io/blog/contents/20251123/ こういう経験をすると、データを所有したい"><meta name="keywords" content="開発ツール,Google Map,タイムラインデータ"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">272</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2026-02-28"><span class="visually-hidden">2026年2月28日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2026</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">02</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">28</span></span></time></p></div><div class="notebook-heading"><h1>Google Map タイムラインデータをなんとかしたい</h1></div></header><div class="notebook-body"><p>以下の記事で書いた通り、Google Map のタイムラインデータが7年分消失しました。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://silverbirder.github.io/blog/contents/20251123/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Google Map の7年分のタイムラインデータが消えた</strong><span class="link-card-description" data-astro-cid-p7ia6262>Google Map の約7年分のタイムラインデータが消えてしまいました。 悲しすぎる。 原因は、スマホ（Google Pixel）のストレージ整理中に、 Google Map のストレージを誤って削除してしまったこと。 バックアップ自体は</span><span class="link-card-domain" data-astro-cid-p7ia6262>silverbirder.github.io</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/3a3cca17feff5d2b41bc06da6e6812d0cf3062920cfcf3a9bc583108b1d55705.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>こういう経験をすると、データを所有したいと思うようになりました。
+データって大事です。</p>
+<h2 id="データのエクスポート">データのエクスポート</h2>
+<p>Google には Takeout というサービスがあります。</p>
+<ul>
+<li><a href="https://takeout.google.com">Google データ エクスポート - takeout.google.com</a></li>
+</ul>
+<p>このサービスは、 Google アカウントに保存されている様々なデータ（Chromeの検索履歴やPhotoの写真など）をエクスポートすることができます。<br>
+Google Map もサービス対象ですが、タイムラインデータは含まれていません。<br>
+私は Google Pixel を持っているので、端末の設定アプリからタイムラインデータを JSON 形式でエクスポートすることができます。<br>
+エクスポートした JSON ファイルを Google Map にインポートすることはできません。</p>
+<p>また、タイムラインデータだけでなく口コミデータも一部エクスポートできませんでした。<br>
+私は640件以上の口コミをしているのですが、エクスポートできたのは全部ではなかったと思います。（200件ぐらい？）</p>
+<h3 id="脱線話">脱線話</h3>
+<p>Google Takeout を使って、行動履歴を可視化する ActivityViz というWebアプリを開発しました。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://actviz.vercel.app" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>ActivityViz</strong><span class="link-card-description" data-astro-cid-p7ia6262>Googleマイアクティビティを可視化します。</span><span class="link-card-domain" data-astro-cid-p7ia6262>actviz.vercel.app</span></span></a></div>
+<p>Google Takeout でダウンロードしたマイアクティビティをzipごとブラウザにアップロードするだけで、以下のようなグラフを見ることができます。</p>
+<ul>
+<li>検索キーワードのワードクラウド</li>
+<li>月別のアクティビティヒートマップ</li>
+<li>時間帯ごとの行動パターン</li>
+<li>位置情報ベースのマップ表示</li>
+</ul>
+<p>データはブラウザ上で全て完結して処理するため、外部通信は一切しません。<br>
+月別の行動振り返りに便利ですので、ぜひご利用ください。<br>
+実装した話について、以下の記事で紹介していますので、よければご覧ください。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://silverbirder.github.io/blog/contents/google-my-activity-visualization/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>DuckDB WASMとOPFSでGoogleマイアクティビティをブラウザ完結で可視化してみた</strong><span class="link-card-description" data-astro-cid-p7ia6262>DuckDB WASMとOrigin Private File System (OPFS) を組み合わせ、Google マイアクティビティの履歴をブラウザ内に閉じたまま扱えるようにしたときの設計と学びを整理しました。</span><span class="link-card-domain" data-astro-cid-p7ia6262>silverbirder.github.io</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/736d9ae3d912b499deaf10033cdb22c3d911a0a533682450a73233050e9268f2.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<h2 id="データの管理">データの管理</h2>
+<p>Google Map は便利なサービスです。<br>
+目的地までの移動ルートの確認や、場所の検索、ストリートビューで景観の確認もできます。<br>
+私の生活において、Google Map は欠かせない存在です。</p>
+<p>とはいえ、私の投稿した口コミデータや行動履歴について、可能なら自身が保持したいです。<br>
+データのエクスポート機能は、多くのプロダクトでは有料とされることが多いです。<br>
+<strong>それだけデータには価値があります。</strong></p>
+<p>Google Map だと口コミデータとタイムラインデータはどちらも手に入れる方法は少なからずあります。<br>
+ただし、どちらもそれらのデータを今後も継続して手に入るとは限りません。<br>
+Google Map にどっぷり依存しているなら、それは許容しないといけません。</p>
+<p>Google Map から脱するなら、それと同等のプロダクトを見つけるか自作しないといけません。<br>
+プロダクトはセルフホスト可能なもの（ex. Dawarich, OwnTracks) でないと、プロダクト側に主導権が渡ってしまいます。<br>
+自作は高難易度でしょう…。</p>
+<h2 id="折衷案">折衷案</h2>
+<p>Google Map の体験は継続したい。<br>
+けれど、データは所有したい。</p>
+<p>なら、定期的にデータをダウンロードするしかなさそうです。<br>
+自分用の小さなスクリプトを用意して、口コミデータやタイムラインデータを手に入れる方法を作ります。<br>
+Web 上ならブラウザオートメーションツール、モバイル 上ならアプリオートメーションツールです。<br>
+先ほど書いた、Google Takeout や Google Pixel の設定アプリ経由のデータ取得は正道です。<br>
+しかしそれらがいつまで提供されるのか不明ですので、自身の制御できる範囲で仕組み化するとよさそうです。</p>
+<h2 id="終わりに">終わりに</h2>
+<p>Dawarich と OwnTracks を使って、Google Map のタイムラインデータを置き換えようかなと思っていたのです。<br>
+それでうまくいった場合、タイムラインデータは自身の制御下になります。<br>
+ただ Google Pixel の純正アプリ（Google Map）に比べたら、バッテリー消耗や精度は厳しそうだなと思っています…。<br>
+タイムラインデータの可視化に関してはより良いものが作れるかもしれませんが。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>開発ツール</li></ul></footer></article></main></body></html>

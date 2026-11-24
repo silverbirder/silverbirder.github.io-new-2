@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>モダンな(?)フロントエンド技術セット</title><meta name="description" content="機能リクエスト投票サービス「fequest」の開発構成と技術スタックについての記録"><meta name="keywords" content="フロントエンド,Storybook,Vitest"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">162</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-11-10"><span class="visually-hidden">2025年11月10日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span></span></time></p></div><div class="notebook-heading"><h1>モダンな(?)フロントエンド技術セット</h1></div></header><div class="notebook-body"><p>機能リクエスト投票サービス <strong>fequest</strong> （<em>feature request</em> の造語）を開発しています。<br>
+ユーザー向けと管理者向けの 2 つの Web アプリを構築中です。
+開発中のコードは、以下のGitHubリポジトリで公開しています。</p>
+<ul>
+<li><a href="https://github.com/silverbirder/fequest">https://github.com/silverbirder/fequest</a></li>
+</ul>
+<h2 id="開発方針">開発方針</h2>
+<p>これまでは慣れたツールセットでスピード重視の開発を行っていましたが、今回は久しぶりに「試してみたい技術」を積極的に取り入れています。</p>
+<p>以前はツール導入に全力を注ぎすぎて、肝心のアプリが完成しないこともありました。<br>
+ですが今は、AI のサポートによってセットアップが驚くほど簡単になったので、コーヒー片手に気楽に新しい技術を試しています。</p>
+<h2 id="フォルダ構成">フォルダ構成</h2>
+<ul>
+<li>apps
+<ul>
+<li>user: ユーザー向け画面</li>
+<li>admin: 管理者向け画面</li>
+</ul>
+</li>
+<li>packages
+<ul>
+<li>db: Drizzle で DB 管理</li>
+<li>eslint-config: ESLint 設定</li>
+<li>schema: Valibot スキーマ定義</li>
+<li>storybook: Storybook 設定</li>
+<li>typescript-config: TypeScript 設定</li>
+<li>ui: 共通 UI コンポーネント</li>
+<li>user-feature-xxx: ユーザー向けフィーチャー</li>
+<li>admin-feature-xxx: 管理者向けフィーチャー</li>
+<li>vitest-config: Vitest 設定</li>
+</ul>
+</li>
+</ul>
+<p>モノリポ構成を採用し、モノレポツールには <strong>turborepo</strong> を利用しています。<br>
+さらに、UI コンポーネントやフィーチャーコードを自動生成するために <code>turborepo</code> のコード生成機能 <strong>turbo gen</strong> を使用しました。</p>
+<ul>
+<li><a href="https://turborepo.com/docs/guides/generating-code">Generating code | Turborepo</a></li>
+</ul>
+<h2 id="アプリケーションフレームワーク">アプリケーションフレームワーク</h2>
+<p>アプリケーションフレームワークは <strong>Next.js 16</strong> を採用しています。<br>
+巨人の肩には、もう少し乗っておきたいところです。</p>
+<ul>
+<li><a href="https://nextjs.org/blog/next-16">Next.js 16 | Next.js</a></li>
+</ul>
+<p>キャッシュコンポーネントはまだ使用していませんが、今後試してみたいと考えています。<br>
+「キャッシュ」という言葉には、どうしても少し抵抗があるんですよね……。</p>
+<p>Next.js の設定には、以下の 2 点を追加しています。</p>
+<ol>
+<li><strong>typedRoutes</strong>
+<ul>
+<li><code>Link</code> の URL を型安全に扱える。</li>
+<li>動的ルーティングでは <code>pathpida</code> が必要になるかもしれません。</li>
+</ul>
+</li>
+<li><strong>reactCompiler</strong>
+<ul>
+<li><code>useMemo</code> や <code>useCallback</code> を省略できる。</li>
+<li>安定版として使えるようになっているようです(?)。</li>
+</ul>
+</li>
+</ol>
+<p>また、<code>PageProps</code> インターフェースが自動生成され、<code>params</code> や <code>searchParams</code> に型安全にアクセスできるようになっています。</p>
+<h2 id="api-通信">API 通信</h2>
+<p>API 通信には、慣れ親しんだ <strong>tRPC</strong> を採用しました。<br>
+本来は <code>packages/trpc</code> として切り出す予定でしたが、DB や認証との依存関係が複雑だったため、現在は <code>apps</code> 内に配置しています。</p>
+<ul>
+<li><a href="https://trpc.io/docs/">tRPC | tRPC</a></li>
+</ul>
+<h2 id="lint--typescript-設定">Lint / TypeScript 設定</h2>
+<p><code>eslint-config</code> と <code>typescript-config</code> は、<code>turborepo</code> の <code>create-turbo</code> テンプレート由来で、そのまま利用しています。</p>
+<ul>
+<li><a href="https://turborepo.com/docs/guides/frameworks/nextjs">Next.js | Turborepo</a></li>
+</ul>
+<h2 id="schema">Schema</h2>
+<p>バリデーションスキーマには <strong>Valibot</strong> を採用しました。<br>
+普段は <strong>Zod</strong> を使っていますが、Valibot は後発のスキーマバリデーションライブラリなので、試しに導入してみました。<br>
+軽量だと言われていますが、実際のところは未確認です。</p>
+<h2 id="storybook">Storybook</h2>
+<p><strong>Storybook v10</strong> を使用し、フレームワークには <code>@storybook/nextjs-vite</code> を採用しています。<br>
+現時点では CSF 3 形式を継続使用中です。</p>
+<p>v8.5 で Story にタグを付けてフィルタリングできる機能が追加され、v10 ではさらに「除外」もサポートされました。<br>
+これまでタグ機能をあまり意識していなかったので、今回知る良いきっかけになりました。</p>
+<ul>
+<li><a href="https://storybook.js.org/blog/storybook-10/">Storybook 10</a></li>
+</ul>
+<h2 id="vitest-と-vrt">Vitest と VRT</h2>
+<p><strong>Vitest v4</strong> を導入し、Storybook と連携したスナップショットテストを実行しています。<br>
+<code>Story</code> の <code>play</code> 関数にテストを書くのは少し抵抗があるため、現在は描画確認レベルのシンプルなテストにとどめています。</p>
+<ul>
+<li><a href="https://vitest.dev/blog/vitest-4">Vitest 4.0 is out! | Vitest</a></li>
+</ul>
+<p>さらに、<code>@storycap-testrun/browser</code> を導入し、Storybook のテストランナー実行時に各 <code>Story</code> の <strong>VRT (Visual Regression Test)</strong> を自動実行するようにしました。<br>
+当初は Vitest や Storybook の公式機能で対応を試みましたが、うまく動作しなかったため、以下のアドオンを使わさせて貰いました。</p>
+<ul>
+<li><a href="https://storybook.js.org/addons/@storycap-testrun/browser">@storycap-testrun/browser | Storybook integrations</a></li>
+</ul>
+<p><code>vitest-config</code> では <strong>Browser Mode ** の設定を行い、<code>jsdom</code> ではなく ** Playwright</strong> を利用した実 DOM テストを可能にしています。</p>
+<ul>
+<li><a href="https://vitest.dev/guide/browser/">Browser Mode | Guide | Vitest</a></li>
+</ul>
+<p>これにより、<code>await expect.element(el).toMatchScreenshot();</code> のような要素単位の VRT も実行できます。<br>
+現状では Story 単位の VRT で十分ですが、テストケースによっては使い分けも検討しています。</p>
+<h2 id="ui-構成">UI 構成</h2>
+<p><code>ui</code> パッケージでは <strong>Tailwind CSS ** をデザイントークンとして使用し、</strong> shadcn/ui** をベースに共通 UI コンポーネントを構築しています。</p>
+<p>レイアウトコンポーネントは <strong>Chakra UI</strong> の思想を参考に自作しました。<br>
+以下のようなレイアウト系コンポーネントを用意しています。</p>
+<ul>
+<li><code>Box</code></li>
+<li><code>Center</code></li>
+<li><code>Container</code></li>
+<li><code>VStack</code></li>
+<li><code>HStack</code></li>
+<li><code>Flex</code></li>
+<li><code>Grid</code></li>
+</ul>
+<p>また、テキスト用の <code>Text</code> コンポーネントや、見出し用の <code>Heading</code> コンポーネントも定義しています。</p>
+<p>CSS を書くのは好きなのですが、Tailwind を採用している以上、トークンベースで統一した方が保守性が高いため、スタイルはすべて Tailwind で管理しています。</p>
+<p>このように、</p>
+<h2 id="デザイントークン--共通コンポーネントレイアウト--ドメインレベルのコンポーネント">デザイントークン → 共通コンポーネント／レイアウト → ドメインレベルのコンポーネント</h2>
+<p>という階層構造で UI を組み立てています。</p>
+<p>デザイントークンをベースに、共通コンポーネントやレイアウトを使用しているため、基本的に <code>tailwind</code> の <code>className</code> はこのレイヤーまでで完結します。</p>
+<p>ドメインレベルのコンポーネントでは、共通コンポーネントやレイアウトの <code>variant</code> を利用してスタイルを調整するため、直接 <code>className</code> を指定することは原則ありません。</p>
+<p>全体としては、 <strong>Design Token-Based UI Architecture</strong> の考え方を意識し、 <strong>Option tokens → Decision tokens → Component tokens</strong> の三層構成でデザインを整理しています。</p>
+<ul>
+<li><a href="https://martinfowler.com/articles/design-token-based-ui-architecture.html">Design Token-Based UI Architecture</a></li>
+</ul>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>フロントエンド</li></ul></footer></article></main></body></html>

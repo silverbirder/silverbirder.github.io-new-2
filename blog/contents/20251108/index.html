@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Technology Radar Vol. 33 所感</title><meta name="description" content="Thoughtworks の **Technology Radar Vol. 33** が公開されました。  - [Technology Radar | Guide to technology landscape | Thoughtworks](https://www.thoughtworks.com/radar)今回は、流し読みして気になったトピックについての感想をまとめます。"><meta name="keywords" content="仕事"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">160</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-11-08"><span class="visually-hidden">2025年11月8日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">08</span></span></time></p></div><div class="notebook-heading"><h1>Technology Radar Vol. 33 所感</h1></div></header><div class="notebook-body"><p>Thoughtworks の <strong>Technology Radar Vol. 33</strong> が公開されました。</p>
+<ul>
+<li><a href="https://www.thoughtworks.com/radar">Technology Radar | Guide to technology landscape | Thoughtworks</a></li>
+</ul>
+<p>今回は、流し読みして気になったトピックについての感想をまとめます。</p>
+<h3 id="ai-関連の話題が多い">AI 関連の話題が多い</h3>
+<p>今回の Radar では、AI に関するテーマが多く取り上げられていました。
+「仕様駆動開発」や「AI によるブラウザ操作（playwright-mcp）」、「AGENT.md による AI コーディングエージェントへの指示フォーマット」などがありました。</p>
+<h3 id="spec-driven-development">spec-driven development</h3>
+<ul>
+<li><a href="https://www.thoughtworks.com/radar/techniques/spec-driven-development">spec-driven development | Technology Radar | Thoughtworks</a></li>
+</ul>
+<p>レガシーシステムのモダナイゼーションにおいて、仕様駆動開発は相性が良いのかもしれません。<br>
+既存システムの仕様を再整理し、その仕様をもとに再構築を行うというアプローチです。<br>
+リバースエンジニアリングのあとに、フォワードエンジニアリング（はじめて知りました）を行う流れですね。</p>
+<p>仕様駆動開発は、UI・UX の設計では難しいのかな？という所感です。<br>
+一方で、バックエンド寄りのシステマチックな領域では、比較的取り入れやすいのかもしれません。</p>
+<p>以前、VS Code で GitHub Copilot の新機能として「Plan モード」が発表されていました。</p>
+<ul>
+<li><a href="https://www.publickey1.jp/blog/25/vs_codecopilotplan.html">VS Code、Copilot が仕様作成を支援する「Plan モード」が追加 － Publickey</a></li>
+</ul>
+<p><a href="https://github.com/github/spec-kit">spec-kit</a> を試してみたことがあるのですが、使いこなせませんでした。<br>
+今度こそ、もう少し丁寧に触ってみようかなと思います。</p>
+<h3 id="complacency-with-ai-generated-code">Complacency with AI-generated code</h3>
+<ul>
+<li><a href="https://www.thoughtworks.com/radar/techniques/complacency-with-ai-generated-code">Complacency with AI-generated code | Technology Radar | Thoughtworks</a></li>
+</ul>
+<p>「AI にコードを書かせて満足してしまう」という指摘。
+これは非常によくわかります。
+AI コーディングエージェントを使っていると、たくさんのコードが生まれていきます。
+追加・削除・変更といったコードチャーンが多いと、レビューする側が大変になりますね。
+しかも重複コードが増えたり、リファクタリングが必要になったりと、苦労した経験があります。</p>
+<h3 id="ai-accelerated-shadow-it">AI-accelerated shadow IT</h3>
+<ul>
+<li><a href="https://www.thoughtworks.com/radar/techniques/ai-accelerated-shadow-it">AI-accelerated shadow IT | Technology Radar | Thoughtworks</a></li>
+</ul>
+<p>「シャドー IT」という言葉を今回初めて知りました。
+企業が正式に許可していない IT ツールやアプリを、従業員が独自に利用することを指すようです。</p>
+<p>ノーコードやバイブコーディングが普及したことで、エンジニアでなくてもアプリを作れる時代になりました。
+その結果、簡単な社内アプリが次々に生まれ、統制が効かないシステムが増えるリスクも高まっているようです。</p>
+<h3 id="tcr-test--commit--revert">TCR (Test &amp;&amp; Commit || Revert)</h3>
+<ul>
+<li><a href="https://www.thoughtworks.com/radar/techniques/tcr-test-commit-revert">TCR (Test &amp;&amp; Commit || Revert) | Technology Radar | Thoughtworks</a></li>
+<li><a href="https://medium.com/@kentbeck_7670/test-commit-revert-870bbd756864">test &amp;&amp; commit || revert | Medium (Kent Beck)</a></li>
+</ul>
+<p>テスト駆動開発の文脈で、テストが成功するたびにコミットし、失敗した場合はリバートするというアイデアです。<br>
+常にテストが成功している状態を維持しながら、小さく確実にコミットを積み重ねる開発スタイルのようです。</p>
+<p>現代のモダンな開発現場であれば、CI/CD が整備されており、テストが失敗すればマージされない仕組みが一般的です。
+TCR のアプローチは、途中経過のコミットもきれいに保てる点が魅力的だと思いました。
+私自身も、基本的にこのスタイルに近い形で開発しています。</p>
+<h3 id="orpc">oRPC</h3>
+<ul>
+<li><a href="https://www.thoughtworks.com/radar/tools/orpc">oRPC | Technology Radar | Thoughtworks</a></li>
+</ul>
+<p>普段 tRPC をよく使っていますが、oRPC はその後発のようです。
+より洗練された記法を採用しており、 <strong>OpenAPI との統合を公式サポート</strong> している点が特徴的です。</p>
+<p>現時点では tRPC で十分と感じていますが、<br>
+将来的に OpenAPI との連携が必要になった際には、検討してみたいと思いました。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>仕事</li></ul></footer></article></main></body></html>

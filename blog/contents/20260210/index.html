@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CSSを、Vitestでテストしてみる</title><meta name="description" content="以下の記事で書いた CSSをテストする方法について、試してみました。 https://zenn.dev/silverbirder/articles/df6752b230f04c ソースコードは、以下に置いています。 https://gith"><meta name="keywords" content="フロントエンド,テスト"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">254</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2026-02-10"><span class="visually-hidden">2026年2月10日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2026</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">02</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span></span></time></p></div><div class="notebook-heading"><h1>CSSを、Vitestでテストしてみる</h1></div></header><div class="notebook-body"><p>以下の記事で書いた CSSをテストする方法について、試してみました。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://zenn.dev/silverbirder/articles/df6752b230f04c" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>CSS Layout Testing というテスト手法の提案</strong><span class="link-card-domain" data-astro-cid-p7ia6262>zenn.dev</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/d8cdcf3fce4c104cf9f251a6b6da97aaff80eee82ab9ff14d916e0f87abdb5a0.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>ソースコードは、以下に置いています。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/silverbirder/css-testing" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/css-testing</strong><span class="link-card-description" data-astro-cid-p7ia6262>Contribute to silverbirder/css-testing development by creating an account on GitHub.</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/5b696d95ab2eb80e3fe49b04d3397aed06e391e4d90293e7e3b6a59b7fac5ef2.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>検証ページは、以下のURLです。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://learn-layout.vercel.app" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>CSS AI - AI駆動CSSスタイリングプラットフォーム</strong><span class="link-card-domain" data-astro-cid-p7ia6262>learn-layout.vercel.app</span></span></a></div>
+<h2 id="何をテストするか">何をテストするか</h2>
+<p>CSSを書いていて、以下のミスをしたことはありませんか？</p>
+<ul>
+<li><code>flex-shrink</code> の指定を忘れて、要素が押しつぶされてしまった</li>
+<li><code>z-index</code> の指定を間違えて、要素が意図せず前面（または背面）に表示されてしまった</li>
+<li><code>object-fit</code> の指定を間違えて、画像の一部が欠損してしまった</li>
+</ul>
+<p>ミスした場合、誤りを修正してリリースすると思います。<br>
+そのミスが再発しないように、テストコードを書きたくありませんか？</p>
+<p>CSSの場合、見た目に関するテストというと、Visual Regression Testing（以下、VRT）が挙げられます。<br>
+対象のUIの画像を保存しておき、変更後のUIの画像と比較して差分を出し、意図するものか確認する。<br>
+これでも問題の検知はできるのですが、もう少し詳細な検証が欲しくなる場合があります。<br>
+<strong>特定のデータを入れた場合や特定のビューポートを設定した場合</strong> など、さまざまな条件においてのテストが書きたいかと思います。</p>
+<h2 id="どうテストしたか">どうテストしたか</h2>
+<p>Vitest Browser Mode を使います。<br>
+それを使うことで、 <strong>テスト実行環境がPlaywrightなどブラウザ上で動かすこと</strong> ができます。<br>
+JSDOMのような仮想的なDOMではなく、Playwrightのような本物に近いブラウザ環境でテストを動かすことが重要です。</p>
+<p>Playwright上でコンポーネントを表示すれば、テスト上で要素のスタイル情報を正確に取得できます。<br>
+さらに、Web APIも使ってテストコードを書くことができます。</p>
+<ul>
+<li><code>getBoundingClientRect</code> で要素の寸法を取得できる
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/API/Element/getBoundingClientRect">Element: getBoundingClientRect() メソッド - Web API | MDN - developer.mozilla.org</a></li>
+</ul>
+</li>
+<li><code>elementFromPoint</code> で前面に出ている要素を検出できる
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/API/Document/elementFromPoint">Document: elementFromPoint() メソッド - Web API | MDN - developer.mozilla.org</a></li>
+</ul>
+</li>
+</ul>
+<p>加えて、Playwrightを動かす際にビューポートを指定することができます。<br>
+<strong>モバイル端末のようなビューポートが狭い状態の中で発生するデザイン崩れ</strong> も、テストコードを書くことができます。</p>
+<h2 id="具体的なテストコード">具体的なテストコード</h2>
+<p>では、具体的なテストコードを2つ紹介します。</p>
+<h3 id="グローバルヘッダーと画像">グローバルヘッダーと画像</h3>
+<p>1つ目は、“fixedなグローバルヘッダーの上に画像が前面に出てしまった不具合” を守るためのテストコードです。</p>
+<p>以下のテストは、<a href="https://learn-layout.vercel.app">https://learn-layout.vercel.app</a>  にあるグローバルヘッダーがデモ画像より上に来ていることをテストしています。</p>
+<pre><code class="language-tsx">import { expect, test } from "vitest";
+import { page } from "vitest/browser";
+import { render } from "vitest-browser-react";
+
+import { CssAiPage } from "./CssAiPage";
+
+test("global header stays above demo image when they overlap", async () =&gt; {
+  // Arrange
+  await page.viewport(1200, 800);
+  await render(&lt;CssAiPage /&gt;);
+
+  const header = document.querySelector&lt;HTMLElement&gt;(".fixed-header");
+  const demoImage = document.querySelector&lt;HTMLElement&gt;(".demo-image");
+
+  if (!header || !demoImage) {
+    throw new Error("header or demo image not found");
+  }
+
+  // Act
+  document.documentElement.style.scrollBehavior = "auto";
+  const imgAbsTop = demoImage.getBoundingClientRect().top;
+  window.scrollTo({ top: imgAbsTop });
+  await new Promise(requestAnimationFrame);
+
+  // Assert
+  const imgRect = demoImage.getBoundingClientRect();
+  const pointX = Math.round(imgRect.left);
+  const pointY = Math.round(imgRect.top);
+  const hit = document.elementFromPoint(pointX, pointY);
+  expect(hit?.closest(".fixed-header")).toBe(header);
+});
+</code></pre>
+<p>上記のコードは、“デモ画像までスクロールして、デモ画像の表示位置のX,Y座標の <code>elementFromPoint</code> が グローバルヘッダーである” ことをテストしています。<br>
+デモ画像に <code>z-index: 99999</code> を指定するとデモ画像がグローバルヘッダーより上になるため、エラーとなります。</p>
+<h3 id="ビューポートによる位置関係">ビューポートによる位置関係</h3>
+<p>2つ目は、“モバイルとデスクトップで表示する位置関係が変わる” ことを守るテストコードです。<br>
+以下のテストは、<a href="https://learn-layout.vercel.app">https://learn-layout.vercel.app</a>  にあるデモセクションの左右にあるコンテンツ（デモ動画とデモ手順）がモバイルとデスクトップで以下の状態であることをテストします。</p>
+<ul>
+<li>モバイルの場合
+<ul>
+<li>デモ動画が上、デモ手順が下</li>
+</ul>
+</li>
+<li>デスクトップの場合
+<ul>
+<li>デモ動画が左、デモ手順が右</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-tsx">import { page } from "vitest/browser";
+import { expect, test } from "vitest";
+import { render } from "vitest-browser-react";
+
+import { CssAiDemo } from "./CssAiDemo";
+
+const setViewport = async (width: number, height = 800) =&gt; {
+  await page.viewport(width, height);
+};
+
+const getRects = () =&gt; {
+  const video = document.querySelector&lt;HTMLElement&gt;(".sidebar-video");
+  const steps = document.querySelector&lt;HTMLElement&gt;(".sidebar-steps");
+
+  if (!video || !steps) {
+    throw new Error("sidebar blocks not found");
+  }
+
+  return {
+    video: video.getBoundingClientRect(),
+    steps: steps.getBoundingClientRect(),
+  };
+};
+
+test("positions demo blocks for desktop viewport", async () =&gt; {
+  // Arrange
+  await setViewport(1200);
+
+  // Act
+  await render(&lt;CssAiDemo /&gt;);
+
+  // Assert
+  const { video, steps } = getRects();
+  expect(video.left).toBeLessThan(steps.left);
+  expect(video.top).toBe(steps.top);
+});
+
+test("positions demo blocks for mobile viewport", async () =&gt; {
+  // Arrange
+  await setViewport(375);
+
+  // Act
+  await render(&lt;CssAiDemo /&gt;);
+
+  // Assert
+  const { video, steps } = getRects();
+  expect(video.top).toBeLessThan(steps.top);
+});
+</code></pre>
+<p>どちらのテストも、ビューポートを最初に設定し、コンポーネントを描画します。<br>
+そして、大事なのが 各要素を <code>getBoundingClientRect</code> を使って <strong>要素のビューポートからの相対位置を取得します。</strong><br>
+位置関係の情報を使って、どちらが左側にあるか、どちらが下側にあるか ということを検証します。</p>
+<h2 id="終わりに">終わりに</h2>
+<p>今回は簡単な2つのテストケースを紹介しました。<br>
+プロダクションコードでは、reflowの懸念があるので <code>getBoundingClientRect</code> などは 比較的使うことを躊躇います。<br>
+しかし、テストコードでは そのような躊躇いは不要です。<br>
+<code>getBoundingClientRect</code> だけでなく、<code>innerHeight</code> や <code>scrollY</code> といったものもテストコードで使えます。<br>
+テストのバリエーションは広がるのではないでしょうか？</p>
+<p>昨今、さまざまなビューポートでの動作確認に加え、与えられるデータのバリエーションやボリュームも多様になってきました。<br>
+CSSのリンターやVRTに加えて、テストコードも加えると品質向上の一助になるかと思います。<br>
+ご参考にしてください。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>フロントエンド</li><li>テスト</li></ul></footer></article></main></body></html>

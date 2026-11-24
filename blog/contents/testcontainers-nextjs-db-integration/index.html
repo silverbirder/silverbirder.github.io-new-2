@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Testcontainersを用いたNext.jsとDBの結合テスト</title><meta name="description" content="Testcontainers というものを知りました。Testcontainersは、コンテナを利用してテスト環境を構築し、簡単に統合テストを行うことができるツールです。この便利なツールを用いて、Next.jsとデータベース(DB)を組み合わせた結合テストを実施しました。使い捨て可能なエンドツーエンド(E2E)テストの実装が可能で、とても良い結果を得ることができました。"><meta name="keywords" content="テスト"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">118</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2024-03-25"><span class="visually-hidden">2024年3月25日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2024</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">25</span></span></time></p></div><div class="notebook-heading"><h1>Testcontainersを用いたNext.jsとDBの結合テスト</h1></div></header><div class="notebook-body"><p><a href="https://testcontainers.com/">Testcontainers</a> というものを知りました。
+Testcontainersは、コンテナを利用してテスト環境を構築し、簡単に統合テストを行うことができるツールです。
+この便利なツールを用いて、Next.jsとデータベース(DB)を組み合わせた結合テストを実施しました。
+使い捨て可能なエンドツーエンド(E2E)テストの実装ができそうで、とても良さそうに思いました。
+試した内容について、簡単に紹介します。</p>
+<p>以下のGitHubリポジトリで、今回紹介するコードを確認できます。</p>
+<ul>
+<li><a href="https://github.com/silverbirder/testcontainers-nextjs">https://github.com/silverbirder/testcontainers-nextjs</a></li>
+</ul>
+<h2 id="実装手順">実装手順</h2>
+<p>私が試したことを以下に簡単にまとめました。</p>
+<ul>
+<li>テストのセットアップ
+<ul>
+<li>テストフレームワークとしてVitestを設定</li>
+<li>MySQLコンテナをデータベースとして作成し、必要なマイグレーションとシーディングを実施</li>
+</ul>
+</li>
+<li>アプリケーションのセットアップ
+<ul>
+<li>Dockerfileを使用してNext.jsアプリケーションを起動</li>
+<li>アプリケーションがMySQLデータベースに適切に接続できるように設定</li>
+</ul>
+</li>
+<li>テストの実施
+<ul>
+<li>ブラウザ自動化ツールであるPlaywrightを使用し、Next.jsアプリケーションへのアクセス及びテストの実行</li>
+</ul>
+</li>
+</ul>
+<p>この設計は特別な環境を用意する必要がなく、GitHub Actions でも動くことを確認しました。</p>
+<h2 id="実装例を見よう">実装例を見よう</h2>
+<p>ここでは、前述した実験手順に基づいて実際に記述したコードの紹介を行います。
+具体的な実装に関しては、<a href="https://github.com/silverbirder/testcontainers-nextjs">GitHub上に公開しています</a>。</p>
+<h3 id="テストのセットアップ">テストのセットアップ</h3>
+<p>まずはテストのセットアップを行います。
+これには、テストフレームワークのVitestのセットアップから始めます。Vitestの詳細なセットアップ方法については、<a href="https://vitest.dev/guide/">Vitestの公式ガイド</a>を参照してください。</p>
+<p>以下のサンプルコードは、テストの基本的な構造を示しています。</p>
+<pre><code class="language-ts">// sample.test.ts
+import { afterAll, beforeAll, describe, vi } from "vitest";
+
+describe("App and Database Containers Integration Test", () =&gt; {
+  vi.setConfig({ testTimeout: 600_000, hookTimeout: 600_000 });
+  beforeAll(async () =&gt; {});
+  afterAll(async () =&gt; {});
+});
+</code></pre>
+<p>Testcontainersを使用する際、テストの実行時間が長くなる可能性があるため、<code>testTimeout</code>と<code>hookTimeout</code>の値を拡大しています。
+テストの実行には、以下のコマンドを使用します。</p>
+<p>このコードに対して、以下のコマンドを実行します。</p>
+<pre><code class="language-bash">DEBUG=testcontainers* vitest
+</code></pre>
+<p>このコマンドでは、<code>DEBUG=testcontainers*</code>を指定しており、これはTestcontainersによる詳細なログ出力を有効にするためです。
+ログの設定に関する詳細は、<a href="https://node.testcontainers.org/configuration/">Testcontainersの設定ページ</a>を参照してください。</p>
+<p>次に、テストに必要なデータベースの準備を行います。
+以下のサンプルコードでは、MySQLコンテナの起動と、マイグレーションおよびダミーデータのシーディングを実行しています。</p>
+<pre><code class="language-ts">// sample.test.ts
+import { afterAll, beforeAll, describe } from "vitest";
+import { MySqlContainer, StartedMySqlContainer } from "@testcontainers/mysql";
+import { createPool } from "mysql2";
+import { drizzle } from "drizzle-orm/mysql2";
+import { migrate } from "drizzle-orm/mysql2/migrator";
+import { faker } from "@faker-js/faker";
+import * as schema from "../server/db/schema";
+
+describe("App and Database Containers Integration Test", () =&gt; {
+  // ...
+  let mysqlContainer: StartedMySqlContainer;
+  beforeAll(async () =&gt; {
+    mysqlContainer = await new MySqlContainer()
+      .withDatabase("t3-app-nextjs-testcontainers")
+      .start();
+    const databaseUrl = `mysql://${mysqlContainer.getUsername()}:${mysqlContainer.getUserPassword()}@${mysqlContainer.getHost()}:${mysqlContainer.getFirstMappedPort()}/${mysqlContainer.getDatabase()}`;
+    const db = drizzle(
+      createPool({
+        uri: databaseUrl,
+      }),
+      {
+        schema,
+        mode: "default",
+      },
+    );
+    await migrate(db, { migrationsFolder: "src/server/db/out" });
+    const data: (typeof schema.posts.$inferInsert)[] = [];
+    for (let i = 0; i &lt; 20; i++) {
+      data.push({
+        name: faker.internet.userName(),
+      });
+    }
+    await db.insert(schema.posts).values(data);
+  });
+  afterAll(async () =&gt; {
+    await mysqlContainer.stop();
+  });
+});
+</code></pre>
+<p>テスト完了後は、<code>afterAll</code>フックを使用してMySQLコンテナを停止します。これにより、テスト環境をクリーンな状態に保つことができます。</p>
+<p>Testcontainersでは、サポートされているコンテナ（例えばMySQL）と汎用的なコンテナ（Generic）の両方を使用することができ、
+どちらを使っても良いと思います。
+サポートされているコンテナの詳細については、<a href="https://testcontainers.com/modules/">Testcontainersのモジュール一覧ページ</a>を参照してください。</p>
+<h3 id="アプリケーションのセットアップ">アプリケーションのセットアップ</h3>
+<p>アプリケーションのセットアップは、Next.jsのフレームワークを用いて効率的に進めます。
+まず、<code>npm create t3-app@latest</code> コマンドを使用し、Next.jsでデータベースを含めたアプリケーションの基盤を簡単に作成します。
+このプロジェクトでは、ORMとして<code>drizzle</code>を使用しています。
+Next.jsのDocker化に関しては、<a href="https://create.t3.gg/en/deployment/docker">T3スタックの公式ガイド</a>に従い、Dockerfileを作成します。</p>
+<p>以下は、テストコード<code>sample.test.ts</code>の続きで、アプリケーションとデータベースのコンテナを統合する部分です。</p>
+<pre><code class="language-ts">// sample.test.ts
+import { afterAll, beforeAll, describe } from "vitest";
+import { MySqlContainer, StartedMySqlContainer } from "@testcontainers/mysql";
+import { GenericContainer, StartedTestContainer } from "testcontainers";
+
+describe("App and Database Containers Integration Test", () =&gt; {
+  // ...
+  let mysqlContainer: StartedMySqlContainer;
+  let appContainer: StartedTestContainer;
+  beforeAll(async () =&gt; {
+    mysqlContainer = await new MySqlContainer()
+      .withDatabase("t3-app-nextjs-testcontainers")
+      .start();
+    // ...
+    const innerDatabaseUrl = `mysql://${mysqlContainer.getUsername()}:${mysqlContainer.getUserPassword()}@${mysqlContainer.getIpAddress(mysqlContainer.getNetworkNames()[0] ?? "")}:3306/${mysqlContainer.getDatabase()}`;
+    const appImage = await GenericContainer.fromDockerfile("./")
+      .withBuildArgs({ NEXT_PUBLIC_CLIENTVAR: "clientvar" })
+      .withCache(true)
+      .build("app", { deleteOnExit: false });
+    appContainer = await appImage
+      .withEnvironment({ DATABASE_URL: innerDatabaseUrl, PORT: "3000" })
+      .withExposedPorts(3000)
+      .start();
+  });
+  afterAll(async () =&gt; {
+    await appContainer.stop();
+    await mysqlContainer.stop();
+  });
+});
+</code></pre>
+<p>このコードでは、<code>GenericContainer.fromDockerfile</code> を使用して、
+現在のディレクトリにあるDockerfileからアプリケーションのDockerイメージをビルドしています。
+ビルド時の引数は<code>withBuildArgs</code>を通じて渡され、コンテナの環境変数は<code>withEnvironment</code>で設定されます。
+これは、Docker CLIを使用するときと似ていますね。Docker Compose も使えます。</p>
+<p>また、データベースへの接続情報として<code>innerDatabaseUrl</code>には、ホスト側ではなくコンテナ側のポート（この場合は3306）を使用する必要があります。
+これは、コンテナ間通信を意識した設定です。</p>
+<p>これにより、データベースとアプリケーションのコンテナが準備完了となり、統合テストの実行に移ることができます。</p>
+<h3 id="テストの実施">テストの実施</h3>
+<p>テストの最終段階では、Playwrightを用いてブラウザを介したアプリケーションのテストを行います。
+Playwrightのセットアップと基本的な使い方については、<a href="https://playwright.dev/docs/intro">Playwrightの公式ドキュメント</a>を参照してください。</p>
+<p>以下のコードスニペットは、<code>sample.test.ts</code> ファイルにPlaywrightを組み込んだテストの例を示しています。</p>
+<pre><code class="language-ts">// sample.test.ts
+import { afterAll, beforeAll, describe, it } from "vitest";
+import { MySqlContainer, StartedMySqlContainer } from "@testcontainers/mysql";
+import { GenericContainer, StartedTestContainer } from "testcontainers";
+import { type Browser, type Page, chromium } from "@playwright/test";
+
+describe("App and Database Containers Integration Test", () =&gt; {
+  // ...
+  let mysqlContainer: StartedMySqlContainer;
+  let appContainer: StartedTestContainer;
+  let browser: Browser;
+  let page: Page;
+  beforeAll(async () =&gt; {
+    mysqlContainer = await new MySqlContainer()
+      .withDatabase("t3-app-nextjs-testcontainers")
+      .start();
+    // ...
+    appContainer = await appImage
+      .withEnvironment({ DATABASE_URL: innerDatabaseUrl, PORT: "3000" })
+      .withExposedPorts(3000)
+      .start();
+    browser = await chromium.launch();
+    page = await browser.newPage();
+  });
+  afterAll(async () =&gt; {
+    await appContainer.stop();
+    await mysqlContainer.stop();
+    await browser.close();
+  });
+  it("should interact with the app through the browser", async () =&gt; {
+    const url = `http://${appContainer.getHost()}:${appContainer.getFirstMappedPort()}`;
+    await page.goto(url);
+    await page.screenshot({ path: "screenshots/screenshot-1.png" });
+    await page.getByPlaceholder("Title").fill("Hello World");
+    await page.screenshot({ path: "screenshots/screenshot-2.png" });
+    await page.getByRole("button", { name: "Submit" }).click();
+    await page.screenshot({ path: "screenshots/screenshot-3.png" });
+    await page.locator("button").isEnabled();
+    await page.waitForSelector("text=Your most recent post: Hello World");
+    await page.screenshot({ path: "screenshots/screenshot-4.png" });
+  });
+});
+</code></pre>
+<p>このコードでは、まずChromiumブラウザを起動し、新しいページを開きます。
+その後、テスト対象のアプリケーションにアクセスし、フォームへの入力やボタンのクリックなど、ユーザー操作をシミュレートしています。
+スクリーンショットを見るとわかるのですが、DBへのPOSTやGETも機能しているので、実際に稼働しているアプリケーションに近いものになっています。</p>
+<p>このテストは、GitHub Actionsを使用して自動化することも可能です。
+以下のコードは、GitHub Actionsの設定例です。</p>
+<pre><code class="language-yml">name: Node.js CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'npm'
+    - run: npm ci
+    - run: npx playwright install --with-deps
+    - run: npm test
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: screenshots
+        path: ./screenshots/
+        retention-days: 30
+</code></pre>
+<p>このようにして、Next.jsとデータベースが統合された使い捨ての結合テスト環境をGitHub Actionsを通じて実現することができます。</p>
+<h2 id="テストのメリットとデメリット">テストのメリットとデメリット</h2>
+<p>Testcontainersを使用したテストアプローチには、いくつかのメリットとデメリットがあると思います。</p>
+<h3 id="メリット">メリット</h3>
+<ol>
+<li><strong>環境の即時構築</strong></li>
+</ol>
+<p>Dockerイメージを使用してテスト環境をゼロから構築し、データのシーディングまで一気に行うことが可能です。
+これにより、実際の環境を模倣したテストが手軽に実施できます。</p>
+<ol>
+<li><strong>軽量かつ迅速</strong></li>
+</ol>
+<p>Dockerコンテナを起動するだけで済むため、環境構築にかかる時間と労力を削減できます。
+これにより、開発サイクルを速めることが可能になります。</p>
+<ol>
+<li><strong>使い捨てが可能</strong></li>
+</ol>
+<p>テスト後に環境を簡単に破棄できるため、毎回クリーンな状態からテストを開始することができます。
+これは、テストの再現性と信頼性を保証します。</p>
+<ol>
+<li><strong>GitHub Actionsでの実行</strong></li>
+</ol>
+<p>GitHub Actionsを活用することで、テストプロセスを自動化し、CI/CDパイプラインに組み込むことが可能です。
+これにより、小規模プロジェクトでも効率的に開発を進めることができます。</p>
+<h3 id="デメリット">デメリット</h3>
+<ol>
+<li><strong>セットアップ時間の増加</strong></li>
+</ol>
+<p>コンテナの規模が大きくなると、セットアップに要する時間が長くなることがあります。これは、テストプロセスの迅速化を求める場合には考慮すべき点です。</p>
+<ol>
+<li><strong>マシンリソースの消費</strong></li>
+</ol>
+<p>複数のコンテナを同時に稼働させると、マシンリソースを大量に消費する可能性があります。これは、特にリソースに限りのある環境でのテスト実施において注意が必要です。</p>
+<p>テストの使い捨て可能な性質とこれらのトレードオフがあるのかと思います。
+アプリケーションの規模が大きくなるにつれ、コンテナセットアップの複雑さが増す可能性があります。
+しかし、Dockerイメージの事前準備やDocker Composeの活用により、これらの課題をある程度軽減することが可能です。</p>
+<h2 id="結論">結論</h2>
+<p>Testcontainersを活用したことで、Node.js環境でも、Vitestなどのテストライブラリと併用して使えることが明らかになりました。
+これまで、エンドツーエンド(E2E)テストを行う際には、テスト環境の準備やメンテナンスに伴うコストと労力が課題となっていました。
+しかし、Testcontainersを用いることで、使い捨て可能な結合テスト環境を簡単に構築できるようになり、新たな選択肢の一つになるかと思います。</p>
+<p>まだ検証段階で、実際に実務で考えると課題もあると思います。
+しかし、個人的にはこの設計に魅力を感じています！</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>テスト</li></ul></footer></article></main></body></html>

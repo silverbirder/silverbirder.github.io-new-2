@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>マイクロコピー、マイクロインタラクション、そしてリンク</title><meta name="description" content="こんにちは、@silverbirderです。最近、湖県に移住してWebフロントエンドのお仕事をしています。お仕事をしていると、ユーザー体験を良くするためには、大きな改善をせずとも小さな改善だけでも十分な効果があると思い始めました。本記事では、その小さな改善となる、3つのことについて書きたいと思います。"><meta name="keywords" content="フロントエンド,ブラウザ"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">143</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-08-27"><span class="visually-hidden">2025年8月27日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">08</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">27</span></span></time></p></div><div class="notebook-heading"><h1>マイクロコピー、マイクロインタラクション、そしてリンク</h1></div></header><div class="notebook-body"><p>こんにちは、<a href="https://x.com/silverbirder">@silverbirder</a> です。最近、湖県に移住してWebフロントエンドのお仕事をしています。
+お仕事をしていると、ユーザー体験を良くするためには、大きな改善をせずとも小さな改善だけでも十分な効果があると思い始めました。
+本記事では、その小さな改善となる、3つのことについて書きたいと思います。</p>
+<h2 id="3つのこと">3つのこと</h2>
+<p>その小さな改善は、Webの世界に必ず存在する、以下の3つの要素を丁寧に扱うことです。</p>
+<ul>
+<li>マイクロコピー
+<ul>
+<li>小さな文章</li>
+</ul>
+</li>
+<li>マイクロインタラクション
+<ul>
+<li>小さな操作</li>
+</ul>
+</li>
+<li>リンク
+<ul>
+<li>導線・動線</li>
+</ul>
+</li>
+</ul>
+<p>あるライブラリやフレームワークの話ではありません。Webの基本的な要素です。
+それぞれについて、私の考えていることをまとめます。</p>
+<h2 id="マイクロコピー">マイクロコピー</h2>
+<p>Web には、必ずと言っていいほどテキストが表示されています。
+例えば、以下のテキストがあります。</p>
+<ul>
+<li>ボタンのラベル</li>
+<li>入力フォームのプレースホルダー</li>
+<li>リンク</li>
+<li>エラーメッセージ</li>
+<li>説明文</li>
+</ul>
+<p>考え出すと、いくらでも列挙できるかと思います。それぐらい、Web にはテキストがほぼ必ず存在します。
+このような、小さな文章（コピー）をマイクロコピーと呼びます。</p>
+<p>このマイクロコピーは疎かにしてはいけません。
+JavaScriptでプログラムを書くのと同じぐらい、文章を書くことも大事です。
+なぜ大事かというと、1つの文章次第でユーザー体験が大きく変わるからです。文章の書き方一つで、購買率などの指標にも大きく影響します。
+いくつか、例を書いていました。多くの場合、Bの方が良いかと思います。</p>
+<ul>
+<li>購入ボタンのラベル名
+<ul>
+<li>A: 購入</li>
+<li>B: 注文を確定する</li>
+</ul>
+</li>
+<li>返品手続きの案内
+<ul>
+<li>A: 返品理由を入力してください</li>
+<li>B: 返品理由を教えていただければ、今後の改善に活かします</li>
+</ul>
+</li>
+<li>画像のアップロード
+<ul>
+<li>A: ファイルを選択</li>
+<li>B: 画像は 5MB 以内。jpg / png に対応</li>
+</ul>
+</li>
+</ul>
+<p>上記について、 <strong>何かの機能を作るのではなく、文章を変えているだけ</strong> なんです。
+文章を書くという小さなコストで、ユーザー体験が大きく変わる、非常に費用対効果の高い施策ですよね。</p>
+<p>ただ、文章を書くにもコストがかかります。
+文章を書くテクニック（コピーライティング）は書籍で様々紹介されているかと思いますが、私は恥ずかしながら知りません。
+知らない私でも、いつも以下について意識するように心掛けています。</p>
+<ul>
+<li>文章を書くことに躊躇わない
+<ul>
+<li>短くてストレートに伝わる文章を書ければよいですが、最初からできないです。</li>
+<li>伝えたい文章をストレートに書いてみて、そこから削るようにしています。</li>
+<li>デザイン上のスペースが限られている場合や、文章ばかりで窮屈に感じるときは、工夫しましょう。</li>
+</ul>
+</li>
+<li>ユーザー視点と言うが、具体を意識する
+<ul>
+<li>どういう動線で当該ページに辿り着いたのか、実際に操作したり画面画像を並べてみる。</li>
+<li>アクセス経路やデータは、できる限り本物にする。</li>
+<li>できる限り、シンプルな具体に落とし込む。</li>
+</ul>
+</li>
+<li>メタファーに頼りすぎない
+<ul>
+<li>アイコンだけで完結せず、アイコンは補助的に文章をメインに考える。</li>
+<li>アイコンだけであっても、ツールチップなどで補足する。</li>
+</ul>
+</li>
+<li>文章の読み手だけでなく、誰が書いているのか意識する
+<ul>
+<li>システムが機械的なトーンで書いているのか、人が寄り添って書いているのか。</li>
+<li>その結果、トーンや言い回しが揃う。</li>
+</ul>
+</li>
+</ul>
+<p>他には、専門用語を使わない、1文を簡潔に書く、ポジティブな表現で書くなどもありますが、粗末なことです。
+まずは、 <strong>文章を書くことに躊躇わない</strong> ことが大事と考えています。</p>
+<p>文章を書かずにアイコンやアニメーション、インタラクションの振る舞いだけでメッセージを伝えようとする
+スタイリッシュなUIを見かける機会が増えました。コンセプトやサービス形態によってはそれが良い場面も多いかと思います。
+しかし、Web というドキュメントを読んでもらうプラットフォームでは、文章で伝えることが最も確実です。</p>
+<h2 id="プログラムを書くより文章を書こう">プログラムを書くより、文章を書こう</h2>
+<h2 id="マイクロインタラクション">マイクロインタラクション</h2>
+<ul>
+<li>チェックボックスをクリックしたら、チェックマークが入ります。</li>
+<li>トグルボタンをクリックしたら、ON/OFFが切り替わります。</li>
+</ul>
+<p>そういう、何か操作したら（トリガーを発火したら）何かフィードバックを得る、これがインタラクションと呼ばれます。
+インタラクションは、ユーザーとシステムのやり取り、相互作用のことです。
+そのインタラクションの最小単位を、マイクロインタラクションと呼びます。</p>
+<p>Webフロントエンドのお仕事をしていると、マイクロインタラクションを作る機会が多いです。
+一例だと、『何かをクリックしたら、（APIが呼ばれてデータが保存されて）メッセージが表示される』などです。</p>
+<p>マイクロインタラクションを作る際、 <strong>フィードバックを疎かにしてはいけません</strong> 。
+例えば、以下のようにフィードバックを疎かにすると、ユーザーは不安になります。</p>
+<ul>
+<li>いいねボタンをクリックしても、最初の1秒間 何も反応しない
+<ul>
+<li>即座にいいねの数をカウントアップしてほしい</li>
+</ul>
+</li>
+<li>フォームの保存ボタンをクリックしても、保存できないときがある
+<ul>
+<li>保存できなかった原因を表示してほしい</li>
+</ul>
+</li>
+<li>ローディングスピナーが3秒以上ずっと、読み込み中のまま
+<ul>
+<li>進捗状況を表示してほしい</li>
+</ul>
+</li>
+<li>リストの並び替え時、どこが並び替わったか分からない
+<ul>
+<li>並び替えたアイテムの位置を示してほしい</li>
+</ul>
+</li>
+</ul>
+<p>マイクロインタラクションの悪い例の一つは『iPhoneをマナーモードにしても、アラームが鳴ること』です。
+音を鳴らさないマナーモードにしたのに、アラームでは音が鳴るのです。</p>
+<p>そもそも、マイクロインタラクションとは、どのような構成をしているのでしょうか。
+それは、以下の構成で表現されます。</p>
+<ul>
+<li>トリガー
+<ul>
+<li>動きを始めるきっかけ。</li>
+<li>例: クリック。</li>
+</ul>
+</li>
+<li>条件
+<ul>
+<li>実行するための前提。</li>
+<li>例: ログイン中。</li>
+</ul>
+</li>
+<li>フィードバック
+<ul>
+<li>操作への返答。</li>
+<li>例: 送信中…表示。</li>
+</ul>
+</li>
+<li>ループ
+<ul>
+<li>繰り返し続くか。</li>
+<li>例: アラーム時間まで繰り返す。</li>
+</ul>
+</li>
+</ul>
+<p>iPhoneの例でいうと、2番の条件にアラームは除外されるのです。それがユーザーにとって不透明なのです。</p>
+<p>私は、 <strong>些細なことでも良いので、フィードバックを必ず返す</strong> ことを意識しています。</p>
+<ul>
+<li>ボタンをクリックした瞬間にラベルが「送信中…」へ変わる</li>
+<li>二重送信を防ぐためボタンが一瞬無効化される</li>
+<li>フォーム送信後、エラーがある箇所へ自動スクロール</li>
+<li>入力完了したら✓アイコンが表示される</li>
+<li>コピー完了時に「コピーしました」と小さくトースト表示する</li>
+<li>入力中の文字数カウントが増える</li>
+<li>ホバーした行の背景色が変わる</li>
+<li>リストが空なら「まだデータがありません」と表示</li>
+<li>長文入力で自動的に高さが広がる</li>
+</ul>
+<p>この細部のマイクロインタラクションを丁寧に作り込むことで、他と差別化できるポイントになると思います。
+マイクロインタラクションを丁寧にすることで <strong>『神は細部に宿る』</strong> のです。</p>
+<h2 id="リンク">リンク</h2>
+<p>Web は、ハイパーテキストを介して様々なページが繋がっています。
+リンクは、Web の基本的な要素です。</p>
+<p>Webフロントエンドのお仕事では、導線をどのように設計するか考える機会が多いです。
+どのように回遊してもらうか、どのように離脱を防ぐか、意図せず行き止まりにならないか などを考えます。</p>
+<p><strong>リンクは、ページとページをつなぐ架け橋です</strong> 。
+もしリンクが以下のような場合、ユーザーは道に迷うかもしれません。</p>
+<ul>
+<li>目的地へ直線的に行けるリンクがなく、経由地を何度も通らされる</li>
+<li>リンクが一切なく、行き場を失って離脱してしまう
+<ul>
+<li>逆に、リンク数が多すぎてどれを選んだらよいか分からない</li>
+</ul>
+</li>
+<li>リンク先の内容とリンクテキストが一致しない</li>
+<li>退会などの重要ページへのリンクが、隠されている</li>
+<li>前に進むリンクはあるけど、戻るリンクはない</li>
+</ul>
+<p>道の迷わないためにも、以下のことを心がけたいですね。</p>
+<ul>
+<li>リンクは、標準的なスタイルにする
+<ul>
+<li>アンダーライン、色</li>
+<li>テキストは、コンテンツ内容を含める</li>
+<li>異なるドメインの場合は、新しいタブで開く。</li>
+</ul>
+</li>
+<li>ナビゲーションを充実させる
+<ul>
+<li>グローバルヘッダー・フッターの主要ページへのリンク</li>
+<li>サイドバーに補足・関連情報へのリンク</li>
+<li>ページの階層構造を示す パンくず</li>
+<li>コンテンツの関連リンク・おすすめリンク</li>
+<li>エラー画面での問い合わせやFAQリンク、トップページリンク</li>
+<li>データが空のときのアクションリンク</li>
+</ul>
+</li>
+</ul>
+<h2 id="終わりに">終わりに</h2>
+<p>短くまとめると、マイクロコピー、マイクロインタラクション、リンクの3点は、小さいけれど重要です。
+文章、操作、リンクを少し変えるだけで、ユーザー体験は確実に良くなります。</p>
+<p>ここまで読んでいただき、ありがとうございました。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>フロントエンド</li><li>ブラウザ</li></ul></footer></article></main></body></html>

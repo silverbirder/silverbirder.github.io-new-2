@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Docker Image に 構造化テスト container-structure-test を試してみた</title><meta name="description" content="Dockerイメージ内の構造や設定が期待通りかどうかを検証する `container-structure-test` を知りました。container-structure-test GitHub リポジトリ。せっかくなので、試してみました。"><meta name="keywords" content="テスト,クラウドインフラ"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">119</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2024-03-29"><span class="visually-hidden">2024年3月29日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2024</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">29</span></span></time></p></div><div class="notebook-heading"><h1>Docker Image に 構造化テスト container-structure-test を試してみた</h1></div></header><div class="notebook-body"><p>Dockerイメージ内の構造や設定が期待通りかどうかを検証する <code>container-structure-test</code> を知りました。</p>
+<p><a href="https://github.com/GoogleContainerTools/container-structure-test">container-structure-test GitHub リポジトリ</a></p>
+<p>せっかくなので、試してみました。</p>
+<h2 id="環境構築">環境構築</h2>
+<p>まず、<code>container-structure-test</code> をインストールします。MacOSの場合、Homebrewを使用すると簡単にインストールできます。</p>
+<pre><code class="language-sh">brew install container-structure-test
+</code></pre>
+<p>次に、テスト対象のDockerイメージをビルドするために、以下の内容のDockerfileを準備し、イメージをビルドします。</p>
+<pre><code class="language-Dockerfile">## ./Dockerfile
+## @see: https://github.com/silverbirder/testcontainers-nextjs/blob/main/Dockerfile
+
+## ...
+
+##### RUNNER
+
+FROM --platform=linux/amd64 node:18.17-alpine3.18 AS runner
+WORKDIR /app
+
+ENV NODE_ENV production
+
+## ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./package.json
+
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+EXPOSE 3000
+ENV PORT 3000
+
+CMD ["node", "server.js"]
+</code></pre>
+<p>ビルドコマンドは以下の通りです。</p>
+<pre><code class="language-sh">docker build . -t app:latest
+</code></pre>
+<p>このコマンドは、タグ名を <code>app:latest</code> としてDockerイメージをビルドします。</p>
+<h2 id="container-structure-test-を使ったテスト">container-structure-test を使ったテスト</h2>
+<p><code>container-structure-test</code> は、ビルドしたDockerイメージに対して様々なテストを実行することができます。
+以下のコマンドを実行することでテストを開始できます。</p>
+<pre><code class="language-sh">container-structure-test test \
+  --image app:latest \
+  --platform linux/amd64 \
+  --config config.yml
+</code></pre>
+<p><code>config.yml</code> には、実行したいテストの設定を記述します。以下はその例です。</p>
+<pre><code class="language-yml">## config.yml
+schemaVersion: "2.0.0"
+commandTests:
+  - name: "cat server.js"
+    command: "cat"
+    args: ["server.js"]
+    expectedOutput: [".*startServer.*"]
+fileContentTests:
+  - name: "package.json"
+    expectedContents: ["testcontainers-nextjs"]
+    path: "/app/package.json"
+fileExistenceTests:
+  - name: "package.json"
+    path: "/app/package.json"
+    shouldExist: true
+    permissions: '-rw-r--r--'
+    uid: 1001
+    gid: 1001
+metadataTest:
+  envVars:
+    - key: PORT
+      value: 3000
+    - key: NODE_ENV
+      value: production
+  exposedPorts: ["3000"]
+  cmd: ["node", "server.js"]
+  workdir: "/app"
+  user: "nextjs"
+## licenseTests:
+## - debian: true
+##   files: ["/foo/bar", "/baz/bat"]
+</code></pre>
+<p><code>container-structure-test</code> で実行できるテストには、以下のような種類があります。</p>
+<ul>
+<li><strong>commandTests</strong>
+<ul>
+<li>イメージからコマンドを実行し、期待する出力が得られるかを検証します。</li>
+</ul>
+</li>
+<li><strong>fileContentTests</strong>
+<ul>
+<li>特定のファイルが期待する内容を含んでいるかをテストします。</li>
+</ul>
+</li>
+<li><strong>fileExistenceTests</strong>
+<ul>
+<li>ファイルの存在有無、権限、所有者を検証します。</li>
+</ul>
+</li>
+<li><strong>metadataTest</strong>
+<ul>
+<li>環境変数やポートの露出、実行ユーザーなどのメタデータを検証します。</li>
+</ul>
+</li>
+<li><strong>licenseTests</strong>
+<ul>
+<li>著作権ファイルのリストをチェックして、Googleで許可されているライセンスのみが使用されていることをテストします。</li>
+</ul>
+</li>
+</ul>
+<p>詳しくは、<a href="https://github.com/GoogleContainerTools/container-structure-test">container-structure-test GitHub リポジトリ</a> をご確認ください。</p>
+<p><strong>commandTests</strong> は、Dockerコンテナを作成して、CMDを実行してテストするようです。
+エラーやワーニング、セキュリティなどのログが発生しないことを確認するのはよさそうです。</p>
+<p><strong>fileContentTests</strong> は、何に使えそうか思いつかなかったです。</p>
+<p><strong>fileExistenceTests</strong> は、permissionsやuid,gidを確認できるので、許可してはいけないものをチェックするのによさそうです。</p>
+<p><strong>metadataTest</strong> は、アプリに必要な環境変数を正規表現でテストするのは良さそうです。</p>
+<p><strong>licenseTests</strong> は、何に使えそうか思いつかなかったです。</p>
+<h2 id="まとめ">まとめ</h2>
+<p><code>container-structure-test</code>  は、Dockerイメージが期待する仕様を満たしているかを自動で検証するためのツールです。
+この記事で紹介した基本的な使い方とテストの例を参考に、安全で信頼性の高いコンテナ環境の構築に役立ててください。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>テスト</li><li>クラウドインフラ</li></ul></footer></article></main></body></html>

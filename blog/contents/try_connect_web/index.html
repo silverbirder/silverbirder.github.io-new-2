@@ -1,0 +1,222 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>connect-webやってみた</title><meta name="description" content="connect-web の記事が、はてブでトレンドになっていました。気になったので、試してみました。サンプルコードは、次のリポジトリに置いています。"><meta name="keywords" content="バックエンド,フロントエンド,クローリング"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">87</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-08-20"><span class="visually-hidden">2022年8月20日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">08</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">20</span></span></time></p></div><div class="notebook-heading"><h1>connect-webやってみた</h1></div></header><div class="notebook-body"><p><a href="https://future-architect.github.io/articles/20220819a/">connect-web の記事</a>が、はてブでトレンドになっていました。気になったので、試してみました。</p>
+<p>サンプルコードは、次のリポジトリに置いています。</p>
+<ul>
+<li><a href="https://github.com/silverbirder/playground/tree/main/node/connect-web-example/frontend">https://github.com/silverbirder/playground/tree/main/node/connect-web-example/frontend</a></li>
+</ul>
+<h2 id="前置き-grpc-と-connect-web-の雑な理解">前置き: gRPC と connect-web の雑な理解</h2>
+<p>RPC (Remote Procedure Call) を実現するためのプロトコルとして、gRPC があります。
+このプロトコルは、ブラウザ側からは使えない(?)ため、gRPC-Web というブラウザ向けの gRPC というものを使うことになります。
+その場合、ブラウザとサーバーとの間に、プロキシを建てる必要があるようです。(たぶん)</p>
+<p>そこで、Connect という gRPC 互換の HTTP API を構築するためのライブラリ群が開発されました。
+これのおかげで、プロキシを建てる必要がなく、ブラウザ側から gRPC を使うことが可能になります。</p>
+<ul>
+<li><a href="https://connect.build/docs/introduction">https://connect.build/docs/introduction</a></li>
+</ul>
+<p>上記ページに、バックエンドは connect-go、フロントエンドは connect-web という項目があります。
+connect-web は、ブラウザから RPC を動かすための小さなライブラリです。タイプセーフなライブラリなため、
+型補完が効きます。
+connect-go は、go で Connect のサービスを作ることができます。</p>
+<p>そのため、フロントエンドの開発は、connect-web を使うことになります。
+以降は、フロントエンドの作業を、紹介します。ちなみに、React を使います。</p>
+<h2 id="やってみた">やってみた</h2>
+<p>フロントエンド側は、主に、次の 2 つの作業になります。</p>
+<ol>
+<li>Protocol Buffer スキーマから TypeScript ファイルを生成</li>
+<li>生成された TypeScript ファイルから gRPC クライアントを実装</li>
+</ol>
+<h2 id="1-protocol-buffer-スキーマから-typescript-ファイルを生成">1. Protocol Buffer スキーマから TypeScript ファイルを生成</h2>
+<p>gRPC で通信するためのスキーマ、ProtocolBuffer スキーマが必要です。
+これは、すでにあるものを使います。</p>
+<ul>
+<li><a href="https://buf.build/bufbuild/eliza">https://buf.build/bufbuild/eliza</a></li>
+</ul>
+<p>具体的には、次のようなスキーマです。</p>
+<pre><code class="language-protobuf">syntax = "proto3";
+
+service ElizaService {
+  rpc Say(SayRequest) returns (SayResponse) {}
+}
+
+message SayRequest {
+  string sentence = 1;
+}
+
+message SayResponse {
+  string sentence = 1;
+}
+</code></pre>
+<p>TypeScript コードを生成するために、<code>buf</code> という CLI を使います。
+buf で利用する、次の定義ファイルを書きます。</p>
+<pre><code class="language-yaml">## buf.gen.yaml
+
+## buf.gen.yaml defines a local generation template.
+## For details, see https://docs.buf.build/configuration/v1/buf-gen-yaml
+version: v1
+plugins:
+  - name: es
+    path: node_modules/.bin/protoc-gen-es
+    out: gen
+    # With target=ts, we generate TypeScript files.
+    # Use target=js+dts to generate JavaScript and TypeScript declaration files
+    # like remote generation does.
+    opt: target=ts
+  - name: connect-web
+    path: node_modules/.bin/protoc-gen-connect-web
+    out: gen
+    # With target=ts, we generate TypeScript files.
+    opt: target=ts
+</code></pre>
+<p>これは、後述する <code>buf generate</code> するときにどういう出力をするかの設定情報です。
+codegen の yaml ファイルみたいなものかなと思います。
+これを動かすために、次の module をインストールしましょう。</p>
+<pre><code class="language-bash">## plugin
+yarn add --dev @bufbuild/protoc-gen-connect-web @bufbuild/protoc-gen-es
+## runtime
+yarn add @bufbuild/connect-web @bufbuild/protobuf
+</code></pre>
+<ul>
+<li>plugin
+<ul>
+<li>protoc-gen-es
+<ul>
+<li>リクエストやレスポンスメッセージのような基本型を生成</li>
+</ul>
+</li>
+<li>protoc-gen-connect-web
+<ul>
+<li>Protocol Buffer スキーマからサービスを生成</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>runtime
+<ul>
+<li>bufbuild/connect-web
+<ul>
+<li>Connect および gRPC-web プロトコルのクライアントを提供</li>
+</ul>
+</li>
+<li>bufbuild/protobuf
+<ul>
+<li>基本型に対するシリアライズなどを提供</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>次に、<code>buf</code>をインストールしましょう。
+私は、brew でインストールしました。</p>
+<pre><code class="language-bash">brew install bufbuild/buf/buf
+## ref: https://github.com/bufbuild/buf#installation
+</code></pre>
+<p>では、ProtocolBuffer スキーマから TypeScript ファイルを生成しましょう。</p>
+<pre><code class="language-bash">buf generate --template buf.gen.yaml buf.build/bufbuild/eliza
+</code></pre>
+<p>成功すると、次の 2 つの TypeScript ファイルが生成されます。</p>
+<ul>
+<li>gen/buf/connect/demo/eliza/v1/eliza_connectweb.ts</li>
+<li>gen/buf/connect/demo/eliza/v1/eliza_pb.ts</li>
+</ul>
+<p><code>eliza_connectweb.ts</code>は、次のコードが含まれています。</p>
+<pre><code class="language-typescript">// eliza_connectweb.ts
+import { SayRequest, SayResponse } from "./eliza_pb.js";
+import { MethodKind } from "@bufbuild/protobuf";
+
+export const ElizaService = {
+  typeName: "ElizaService",
+  methods: {
+    say: {
+      name: "Say",
+      I: SayRequest,
+      O: SayResponse,
+      kind: MethodKind.Unary,
+    },
+  },
+} as const;
+</code></pre>
+<p><code>eliza_pb.ts</code>は、次のコードが含まれています。</p>
+<pre><code class="language-typescript">export class SayRequest extends Message&lt;SayRequest&gt; {
+  /**
+   * @generated from field: string sentence = 1;
+   */
+  sentence = "";
+
+  constructor(data?: PartialMessage&lt;SayRequest&gt;) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "buf.connect.demo.eliza.v1.SayRequest";
+  # ... 省略 ...
+}
+
+/**
+ * SayResponse describes the sentence responded by the ELIZA program.
+ *
+ * @generated from message buf.connect.demo.eliza.v1.SayResponse
+ */
+export class SayResponse extends Message&lt;SayResponse&gt; {
+  /**
+   * @generated from field: string sentence = 1;
+   */
+  sentence = "";
+
+  constructor(data?: PartialMessage&lt;SayResponse&gt;) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "buf.connect.demo.eliza.v1.SayResponse";
+  # ... 省略 ...
+}
+</code></pre>
+<p>これで、準備はできました。</p>
+<h2 id="2-生成された-typescript-ファイルから-grpc-クライアントを実装">2. 生成された TypeScript ファイルから gRPC クライアントを実装</h2>
+<p>では、gRPC のクライアントを実装しましょう。
+gRPC のクライント生成は、<code>createPromiseClient</code> でできます。
+生成時の引数に、サービスとトランスポート(?)というものを渡す必要があります。
+コードを見たほうがわかりやすいと思うので、次のコードを見てください。</p>
+<pre><code class="language-typescript">// client.ts
+import { useMemo } from "react";
+import { ServiceType } from "@bufbuild/protobuf";
+import {
+  createConnectTransport,
+  createPromiseClient,
+  PromiseClient,
+  Transport,
+} from "@bufbuild/connect-web";
+
+const transport = createConnectTransport({
+  baseUrl: "https://demo.connect.build", # バックエンド側のURL
+});
+
+export function useClient&lt;T extends ServiceType&gt;(service: T): PromiseClient&lt;T&gt; {
+  return useMemo(() =&gt; createPromiseClient(service, transport), [service]);
+}
+</code></pre>
+<p>このクライアントを、使ってみましょう。</p>
+<pre><code class="language-typescript">// App.tsx
+
+import { createConnectTransport, Interceptor } from "@bufbuild/connect-web";
+import { ElizaService } from "../gen/buf/connect/demo/eliza/v1/eliza_connectweb";
+import { useClient } from "./client";
+
+function App() {
+  const client = useClient(ElizaService);
+  client
+    .say({
+      sentence: "hello",
+    })
+    .then(({ sentence }) =&gt; {
+      console.log(sentence);
+    });
+  // ...
+}
+</code></pre>
+<p>このように、ProtocolBuffers の ElizaService が、型補完として使えるようになります。
+良い感じです！</p>
+<h2 id="終わりに">終わりに</h2>
+<p>意外とあっさり動いて、びっくりしました。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>バックエンド</li><li>フロントエンド</li><li>クローリング</li></ul></footer></article></main></body></html>

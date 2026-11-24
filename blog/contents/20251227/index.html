@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Web配色とoklch設計</title><meta name="description" content="はじめに Webの配色設計では、ベースカラー・メインカラー・アクセントカラーの3つを軸に考えることが多くあります。 サービスのコンセプトや性質に応じて、どのような色を採用するかを検討していきます。 本記事では、色の基本的な構成要素を整理した"><meta name="keywords" content="フロントエンド"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">209</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-12-27"><span class="visually-hidden">2025年12月27日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">12</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">27</span></span></time></p></div><div class="notebook-heading"><h1>Web配色とoklch設計</h1></div></header><div class="notebook-body"><h2 id="はじめに">はじめに</h2>
+<p>Webの配色設計では、ベースカラー・メインカラー・アクセントカラーの3つを軸に考えることが多くあります。
+サービスのコンセプトや性質に応じて、どのような色を採用するかを検討していきます。</p>
+<p>本記事では、色の基本的な構成要素を整理したうえで、CSS の oklch を用いた配色設計と、その運用例について紹介します。</p>
+<h2 id="色の三属性">色の三属性</h2>
+<p>色は主に、色相・明度・彩度の3要素で構成されています。</p>
+<p>色相は赤や青といった色味の違いを表し、明度は色の明るさを示します。
+彩度は色の鮮やかさを表し、数値が高いほど視認性が高くなります。</p>
+<p>これらの要素をどのように組み合わせるかによって、画面全体の印象が決まります。</p>
+<h2 id="同系色による配色">同系色による配色</h2>
+<p>色相を同じ、もしくは近い値に揃えた配色は、同系色配色と呼ばれます。
+この配色では、全体に統一感が生まれ、落ち着いた印象を与えやすくなります。</p>
+<p>色同士が過度に主張し合わないため、視覚的なノイズが抑えられ、配色設計に慣れていない場合でも扱いやすい点が特徴です。</p>
+<h2 id="色調トーンという考え方">色調（トーン）という考え方</h2>
+<p>色相ではなく、明度や彩度を揃える設計もあります。
+この考え方は「色調（トーン）」と呼ばれ、以下の資料で詳しく解説されています。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://zokeifile.musabi.ac.jp/%E8%89%B2%E8%AA%BF/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>武蔵野美術大学 造形ファイル｜武蔵野美術大学による、美術とデザインの「素材・道具・技法」に関する情報提供サイト</strong><span class="link-card-description" data-astro-cid-p7ia6262>造形ファイルは、武蔵野美術大学がインターネット上で公開している、美術とデザインに用いられる素材や道具についての用語や技法の情報を提供する知識モジュール群です。</span><span class="link-card-domain" data-astro-cid-p7ia6262>zokeifile.musabi.ac.jp</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/724bdf5c98da1cfff237b9bb00ce19912d04e46072b14ced756d3c93952b8128.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>例えば、彩度を最も高く揃えたビビッドトーンの配色があります。
+ビビッドトーンは鮮やかさが強く、活気のある印象を与えます。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://tee-room.info/color/tone-v.html" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>PCCS-tone/ビビッド・トーン - IROUSE/DATABASE・Color harmony</strong><span class="link-card-description" data-astro-cid-p7ia6262>カラーコーディネート、ファッションイメージのサイト。イラストによる色彩/パーソナルカラー/ファッションイメージの解説をいたします。pccsトーンマップの各トーンサークル/vトーンにおける24色のトーン番号・PCCS記号・マンセル値・JIS色名・和洋色名・任意のRGB値やCMYK値などをご紹介するページです。</span><span class="link-card-domain" data-astro-cid-p7ia6262>tee-room.info</span></span></a></div>
+<p>一方で、彩度を抑え、明度を高くしたペールトーンという配色もあります。
+ペールトーンは淡い色合いとなり、柔らかく穏やかな印象を持ちます。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://tee-room.info/color/tone-p.html" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>PCCS-tone/ペール・トーン - IROUSE/DATABASE・Color harmony</strong><span class="link-card-description" data-astro-cid-p7ia6262>カラーコーディネート、ファッションイメージのサイト。イラストによる色彩/パーソナルカラー/ファッションイメージの解説をいたします。pccsトーンマップの各トーンサークル/pトーンにおける24色のトーン番号・PCCS記号・マンセル値・JIS色名・和洋色名・任意のRGB値やCMYK値などをご紹介するページです。</span><span class="link-card-domain" data-astro-cid-p7ia6262>tee-room.info</span></span></a></div>
+<p>これらの配色体系については、「PCCS 日本色研配色体系」で調べると、体系的に学ぶことができます。</p>
+<h2 id="oklch-による配色定義">OKLCH による配色定義</h2>
+<p>CSS では、明度・彩度・色相を明示的に指定できる oklch カラーモデルを利用できます。
+このモデルを用いることで、配色の意図を数値として保持したまま設計できます。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://developer.mozilla.org/ja/docs/Web/CSS/Reference/Values/color_value/oklch" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>CSS oklch() 関数 - CSS | MDN</strong><span class="link-card-description" data-astro-cid-p7ia6262>oklch() 関数記法は、指定された色を Oklch 色空間で表現します。oklch() は oklab() の円筒形式であり、同じ L 軸を使用しますが、極座標系の C （彩度）と H （色相）を使用します。</span><span class="link-card-domain" data-astro-cid-p7ia6262>developer.mozilla.org</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/cd9c29f984266adc4e163c03fff748da3b3177b4c8f2cf68a2e7518649856353.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>以下は、色相を1つに限定した同系色配色の例です。
+まず、色相・明度・彩度を変数として定義します。</p>
+<pre><code class="language-css">:root {
+  /* 色相は1つだけ */
+  --hue-base: 238deg;
+
+  /* 明度はいくつか用意する */
+  --lightness-95: 0.95;
+  --lightness-92: 0.92;
+  --lightness-90: 0.9;
+
+  /* 彩度もいくつか用意する */
+  --chroma-20: 0.017;
+  --chroma-10: 0.01;
+  --chroma-0: 0.006;
+}
+</code></pre>
+<p>これらの変数を組み合わせて色を定義します。
+以下は、背景色に適用した例です。</p>
+<pre><code class="language-css">:root {
+  --background: oklch(var(--lightness-95) var(--chroma-0) var(--hue-base));
+}
+</code></pre>
+<h2 id="色相の変更によるテーマ切り替え">色相の変更によるテーマ切り替え</h2>
+<p>上記の同系色配色を、個人開発の Web サービスに取り入れています。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://fequest.vercel.app" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Fequest</strong><span class="link-card-description" data-astro-cid-p7ia6262>ほしいとつくるを共有するプラットフォーム</span><span class="link-card-domain" data-astro-cid-p7ia6262>fequest.vercel.app</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/4e83b2ff8ee56d3bd9b0fa99fb1bf92d2ecb2ba5090515ab3aa57a9fa36e72e9.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>Fequest（Feature Request の略）は、機能リクエストを送信できるサービスです。
+このサイトでは、ログイン後の設定ページから色相を変更できるようにしています。</p>
+<p>色相を切り替えることで、選択した色味に応じてページ全体の配色が変化します。
+同系色配色を採用しているため、どの色相を選んでも落ち着いた印象を保てます。</p>
+<h2 id="色のコントラストと可読性">色のコントラストと可読性</h2>
+<p>配色設計では、見た目だけでなく可読性の確保も重要です。
+Storybook の a11y アドオンを有効にすると、各 Story に対して色コントラストの検証を行えます。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://storybook.js.org/docs/writing-tests/accessibility-testing" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Storybook: Frontend workshop for UI development</strong><span class="link-card-description" data-astro-cid-p7ia6262>Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It&#39;s open source and free.</span><span class="link-card-domain" data-astro-cid-p7ia6262>storybook.js.org</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/d58dbac443221d5a90aa0c03d75d4f7a4e8fe723ecb4539acf7aadd05f4b7782.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>このチェックを前提として開発を進めることで、最低限の色コントラストを継続的に維持できます。</p>
+<h2 id="おわりに">おわりに</h2>
+<p>oklch を用いた配色設計は、色の意図を数値として管理しやすく、テーマ展開やアクセシビリティ対応とも相性の良い方法です。
+色を感覚だけで扱うのではなく、構造として整理できる点が、この手法の特徴だと考えています。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>フロントエンド</li></ul></footer></article></main></body></html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>HTML解体新書を読みました</title><meta name="description" content="昔、HTML要素についてざっと学んだことがありましたが、記憶が曖昧になっています。改めてHTML要素を網羅的に理解し直したいと思い、HTML解体新書-仕様から紐解く本格入門という書籍を読んでみました。また、HTML 要素リファレンス - HTML: ハイパーテキストマークアップ言語 | MDNも参考にしました。この記事では、その中で特に印象に残った要素について紹介し、個人的な気づきについてお伝えします。"><meta name="keywords" content="書籍レビュー,フロントエンド"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">129</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2024-11-02"><span class="visually-hidden">2024年11月2日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2024</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">02</span></span></time></p></div><div class="notebook-heading"><h1>HTML解体新書を読みました</h1></div></header><div class="notebook-body"><p>昔、HTML要素についてざっと学んだことがありましたが、記憶が曖昧になっています。
+改めてHTML要素を網羅的に理解し直したいと思い、<a href="https://www.amazon.co.jp/dp/4862465277">HTML解体新書-仕様から紐解く本格入門</a> という書籍を読んでみました。
+また、<a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element">HTML 要素リファレンス - HTML: ハイパーテキストマークアップ言語 | MDN</a>も参考にしました。</p>
+<p>この記事では、その中で特に印象に残った要素について紹介し、個人的な気づきについてお伝えします。</p>
+<h2 id="main">main</h2>
+<p><strong>main</strong> は、ページ内で最も重要なコンテンツをまとめる要素で、ページごとに1つだけ使用います。</p>
+<p>main内には、ナビゲーションなど、他のページでも共通して表示されるコンテンツは含めない方が良いとされています。<br>
+これまでは、main要素内に他のページでも繰り返される要素を含めていましたが、これを機に構成を見直したいと思います。</p>
+<h2 id="headerfooter">header・footer</h2>
+<p><strong>header</strong> と <strong>footer</strong> は、コンテンツを読む前後に配置される要素です。</p>
+<p>書籍を読む前は、headerはグローバルナビゲーション、footerはサイト全体のフッターに使うものだと思っていました。
+しかし、articleやsection要素内でも、記事のタイトルや執筆日をheader、コメントやリアクションをfooterとして使う考えに気づき、柔軟な使い方ができると感じました。</p>
+<h2 id="aside">aside</h2>
+<p><strong>aside</strong> は、メインコンテンツと直接的な関係はないものの、補足的な情報を提供する要素です。
+サイドバーや注意書き、補足説明に適しており、たとえば記事内の関連リンクなどに使用できます。</p>
+<p>ブログ記事のarticle要素では、記事を読み終わった後のコメントやリアクションはメイン内容に直接関わるためfooterに配置し、
+一方、関連記事や関連タグのリストは補足的な要素としてasideに配置するのが良さそうだと感じました。</p>
+<h2 id="article">article</h2>
+<p><strong>article</strong> は、ブログ記事のように自己完結するコンテンツを表す要素です。
+自己完結しているため、article要素内の内容は、その部分だけ切り取っても意味が通じることが求められます。
+また、article内にはh1〜h6の見出しを付けることが推奨されます。</p>
+<p>articleという名称からも、ブログ記事や雑誌の記事、フォーラムの投稿など、事実や内容を独立して伝える文章に使うことが想定されています。
+「記事」とは「事実を書くこと、またはその文章」を指すため、この要素が自己完結的な情報に適していると理解しました。</p>
+<h2 id="time">time</h2>
+<p><strong>time</strong> は、日時を表現するための要素で、datetime属性にマシンリーダブルな形式の日付を入れ、人間が読みやすい日付を表示すると良いとされています。</p>
+<p>これまで日付の表示を何度も実装してきましたが、time要素を使用すべきだったと感じました。より正確でセマンティックな実装ができる点が魅力です。</p>
+<h2 id="address">address</h2>
+<p><strong>address</strong> は、住所だけでなく連絡先を示すための要素です。</p>
+<p>住所の他にも、SNSリンクやメールアドレスなど、連絡手段をaddress要素に含めると良さそうです。幅広く使える要素だと感じました。</p>
+<h2 id="section">section</h2>
+<p><strong>section</strong> は汎用的なセクション区切りの要素で、見出しを伴うことが推奨されています。</p>
+<p>navやasideなど、より適切な要素がある場合はそちらを優先し、それらがない場合にsectionを使用します。
+セクションを区切りたいときに活用できる便利な要素です。</p>
+<h2 id="fieldset">fieldset</h2>
+<p><strong>fieldset</strong> は、form内でチェックボックスやラジオボタンのグループをまとめる際に使用する要素です。
+グループ名はlegend要素で付けることができます。</p>
+<p>これまでに何度もチェックボックスやラジオボタンの実装を行ってきましたが、fieldsetを活用していなかったと反省しました。
+より意味のあるマークアップができると感じました。</p>
+<h2 id="anchora要素">anchor（a要素）</h2>
+<p>リンクに関する関係性は、 <strong>rel属性</strong> で定義できます。外部リンクにはrel=“external”を付けた方が良いでしょう。</p>
+<p>また、 <strong>ping属性</strong> を使うと、リンク先に遷移する前に指定したURLへPOSTリクエストが送信され、トラッキングに利用できます。
+これまで独自実装で対応していましたが、ping属性を使えば簡単に実現できるため、とても便利だと感じました。</p>
+<h2 id="small">small</h2>
+<p><strong>small</strong> は、補足的な情報を小さく表示するための要素です。
+例えば「180円（税込）」の「税込」のような付加情報を視覚的に小さくしたいときに便利です。</p>
+<h2 id="emstrongmark">em・strong・mark</h2>
+<p><strong>em</strong> は強調を示し、<strong>strong</strong> はさらに緊急性や重要性を持つ強調に使用します。
+<strong>mark</strong> は、参照や関連性がある場合に注目させたい部分に使うのが適しています。</p>
+<p>これまでは「目立たせたい」という意味で何となくemやstrongを使っていましたが、用途に応じて使い分けることが大切だと改めて感じました…。</p>
+<h2 id="form">form</h2>
+<p><strong>novalidate属性</strong> を使用すると、入力チェック（バリデーション）を無効化できます。
+下書き保存や一時的なデータ入力を許可するフォームなどで活用すると便利です。</p>
+<h2 id="input">input</h2>
+<p><strong>autocomplete属性</strong> は、ユーザーが入力する際に候補を提示するために便利です。</p>
+<h2 id="datalist">datalist</h2>
+<p><strong>datalist</strong> を使用すると、input（テキスト）フィールドに候補を表示できます。
+ただし、すべてのブラウザでサポートされているわけではない点に注意が必要です。</p>
+<h2 id="captionfigcaption">caption・figcaption</h2>
+<p><strong>caption</strong> はtableに説明を付けるための要素で、
+<strong>figcaption</strong> はfigureに説明を付けるために使用します。</p>
+<p>どちらも、画像やテーブルの補足説明を明確にできるため、より分かりやすいコンテンツ作成に役立つと感じました。</p>
+<h2 id="hgroup">hgroup</h2>
+<p><strong>hgroup</strong> は、タイトルとサブタイトルをグループ化する際に使用します。
+これにより、関連する見出しをひとまとまりにして、より整理された構造を提供できます。</p>
+<h2 id="終わりに">終わりに</h2>
+<p>HTMLを書く際、「どちらが正しいのだろう？」と悩むことが多々ありましたが、
+今回の気づきを通して、いくつかの疑問に答えが見つかったように思います。
+今後は、よりセマンティックに合った要素を意識して使っていきたいです。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element">MDN Web Docs - HTML要素</a></li>
+<li><a href="https://www.amazon.co.jp/dp/4862465277">HTML解体新書-仕様から紐解く本格入門</a></li>
+</ul>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>書籍レビュー</li><li>フロントエンド</li></ul></footer></article></main></body></html>

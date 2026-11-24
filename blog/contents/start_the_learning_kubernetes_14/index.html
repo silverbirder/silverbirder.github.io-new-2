@@ -1,0 +1,341 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一足遅れて Kubernetes を学び始める - 14. スケジューリング -</title><meta name="description" content="前回 一足遅れて Kubernetes を学び始める - 13. ヘルスチェックとコンテナライフサイクル -では、requestsやlimitといったヘルスチェックの仕方を学びました。今回は、Affinityなどによるスケジューリングについて学習します。"><meta name="keywords" content="クラウドインフラ,Kubernetes,スケジューリング"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">22</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-06-05"><span class="visually-hidden">2019年6月5日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">06</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 14. スケジューリング -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
+<ol>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_01/">一足遅れて Kubernetes を学び始める - 01. 環境選択編 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_02/">一足遅れて Kubernetes を学び始める - 02. Docker For Mac -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_03/">一足遅れて Kubernetes を学び始める - 03. Raspberry Pi -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_04/">一足遅れて Kubernetes を学び始める - 04. kubectl -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_05/">一足遅れて Kubernetes を学び始める - 05. workloads その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_06/">一足遅れて Kubernetes を学び始める - 06. workloads その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_07/">一足遅れて Kubernetes を学び始める - 07. workloads その 3 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_08/">一足遅れて Kubernetes を学び始める - 08. discovery&amp;LB その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_09/">一足遅れて Kubernetes を学び始める - 09. discovery&amp;LB その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_10/">一足遅れて Kubernetes を学び始める - 10. config&amp;storage その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_11/">一足遅れて Kubernetes を学び始める - 11. config&amp;storage その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_12/">一足遅れて Kubernetes を学び始める - 12. リソース制限 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_13/">一足遅れて Kubernetes を学び始める - 13. ヘルスチェックとコンテナライフサイクル -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_14/">一足遅れて Kubernetes を学び始める - 14. スケジューリング -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_15/">一足遅れて Kubernetes を学び始める - 15. セキュリティ -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_16/">一足遅れて Kubernetes を学び始める - 16. コンポーネント -</a></li>
+</ol>
+<h2 id="前回">前回</h2>
+<p><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_13/">一足遅れて Kubernetes を学び始める - 13. ヘルスチェックとコンテナライフサイクル -</a>では、requests や limit といったヘルスチェックの仕方を学びました。今回は、Affinity などによるスケジューリングについて学習します。</p>
+<h2 id="スケジューリング">スケジューリング</h2>
+<p>これから学ぶスケジューリングでは、大きく分けて２つに分類します。</p>
+<ul>
+<li>Pod のスケジューリング時に特定の Node を選択する方法
+<ul>
+<li>Affinity</li>
+<li>Anti-Affinity</li>
+</ul>
+</li>
+<li>Node に対して汚れをつけて、それを許容できる Pod のみスケジューリングを許可する方法
+<ul>
+<li>汚れ = Taints</li>
+<li>許容 = Tolerations</li>
+</ul>
+</li>
+</ul>
+<h2 id="node-のラベル確認">Node のラベル確認</h2>
+<p>デフォルトで設定されている Node のラベルを見てみます。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k get nodes -o json | jq ".items[] | .metadata.labels"
+{
+  "beta.kubernetes.io/arch": "arm",
+  "beta.kubernetes.io/os": "linux",
+  "kubernetes.io/arch": "arm",
+  "kubernetes.io/hostname": "raspi001",
+  "kubernetes.io/os": "linux",
+  "node-role.kubernetes.io/master": ""
+}
+{
+  "beta.kubernetes.io/arch": "arm",
+  "beta.kubernetes.io/os": "linux",
+  "kubernetes.io/arch": "arm",
+  "kubernetes.io/hostname": "raspi002",
+  "kubernetes.io/os": "linux",
+  "node-role.kubernetes.io/worker": "worker"
+}
+{
+  "beta.kubernetes.io/arch": "arm",
+  "beta.kubernetes.io/os": "linux",
+  "kubernetes.io/arch": "arm",
+  "kubernetes.io/hostname": "raspi003",
+  "kubernetes.io/os": "linux",
+  "node-role.kubernetes.io/worker": "worker"
+}
+</code></pre>
+<p>arch や os はデフォルトで設定されているみたいです。
+次以降の学習のため、ラベルをはります。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k label node raspi002 cputype=low disksize=200
+pi@raspi001:~/tmp $ k label node raspi003 cputype=low disksize=300
+</code></pre>
+<h2 id="nodeselector">NodeSelector</h2>
+<p>最も簡単な NodeAffinity の設定です。
+指定するラベルに属する Node に Pod を割り当てるようスケジューリングします。簡易なので、equality-base のみしか指定できません。</p>
+<p>では、disksize が 300 の Node(raspi003)に Pod を配置しましょう。</p>
+<pre><code class="language-yaml">## sample-nodeselector.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-nodeselector
+  labels:
+    app: sample-app
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:1.12
+  nodeSelector:
+    disksize: "300"
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-nodeselector.yaml
+pi@raspi001:~/tmp $ k get pods sample-nodeselector -o wide
+NAME                  READY   STATUS    RESTARTS   AGE   IP             NODE       NOMINATED NODE   READINESS GATES
+sample-nodeselector   1/1     Running   0          21s   10.244.2.130   raspi003   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<p>期待通りですね。OK です。
+nodeSelector はイコールでしか表現できないので、柔軟性に欠けます。</p>
+<h2 id="affinity">Affinity</h2>
+<p>Affinity は、NodeSelector よりも柔軟に設定できます。つまり、set-based の指定方法です。
+詳しくは<a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#set-based-requirement">こちら</a>を参照下さい。今回は In オペレータを使います。</p>
+<pre><code class="language-yaml">## sample-node-affinity.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-node-affinity
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                  - hdd
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - raspi002
+  containers:
+    - name: nginx-container
+      image: nginx:1.12
+</code></pre>
+<p>NodeAffinity では、required と preferred の 2 つ設定できます。</p>
+<ul>
+<li>required
+<ul>
+<li>必須スケジューリングポリシー</li>
+</ul>
+</li>
+<li>preferred
+<ul>
+<li>優先的に考慮されるスケジューリングポリシー</li>
+</ul>
+</li>
+</ul>
+<p>必須条件が「cputype=low である Node(raspi002,raspi003)」で、優先条件が「hostname=raspi002 である Node」です。
+適用してみましょう。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-node-affinity.yaml
+pi@raspi001:~/tmp $ k get pods sample-node-affinity -o wide
+NAME                   READY   STATUS              RESTARTS   AGE   IP       NODE       NOMINATED NODE   READINESS GATES
+sample-node-affinity   0/1     ContainerCreating   0          5s    &lt;none&gt;   raspi002   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<p>確かに raspi002 に配置されました。では、raspi002 をスケジューリングできなくするとどうなるのでしょうか。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-node-affinity.yaml
+pi@raspi001:~/tmp $ k cordon raspi002
+pi@raspi001:~/tmp $ k apply -f sample-node-affinity.yaml
+pi@raspi001:~/tmp $ k get pods sample-node-affinity -o wide
+NAME                   READY   STATUS              RESTARTS   AGE   IP       NODE       NOMINATED NODE   READINESS GATES
+sample-node-affinity   0/1     ContainerCreating   0          11s   &lt;none&gt;   raspi003   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<p>今度は、raspi002 を cordon したので、raspi003 に移りました。優先なので、満たされなくても良いのですね。必須条件が満たされなかったら、Pending になります。</p>
+<p>元に戻します。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-node-affinity.yaml
+pi@raspi001:~/tmp $ k uncordon raspi002
+</code></pre>
+<h2 id="and-と-or">AND と OR</h2>
+<p>nodeSelectorTerms や matchExpressions は配列なので複数指定できます。</p>
+<pre><code class="language-yaml">## sample.yaml
+nodeSelectorTerms:
+  - matchExpressions:
+      - A
+      - B
+  - matchExpressions:
+      - C
+      - D
+</code></pre>
+<p>上記の場合は、 (A and B) OR (C and D)という条件になります。</p>
+<h2 id="anti-affinity">Anti-Affinity</h2>
+<p>Anti-Affinity は、Affinity の逆です。つまり、特定 Node 以外の Node に割り当てるよう
+スケジューリングします。特別な指定はなく、単に Affinity の否定形式にするだけです。言葉だけですね。</p>
+<h2 id="inter-pod-affinity">Inter-Pod Affinity</h2>
+<p>特定の Pod が実行されているドメイン上へ Pod をスケジューリングするポリシーです。
+Pod 間を近づけることができるので、レイテンシを下げることができます。</p>
+<p>まず、特定の Pod は、先程の NodeSelector で使ったものとします。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-node-affinity.yaml
+pi@raspi001:~/tmp $ k get pods sample-nodeselector -o wide
+NAME                  READY   STATUS    RESTARTS   AGE   IP             NODE       NOMINATED NODE   READINESS GATES
+sample-nodeselector   1/1     Running   0          36m   10.244.2.130   raspi003   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<pre><code class="language-yaml">## sample-pod-affinity-host.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-pod-affinity-host
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - sample-app
+          topologyKey: kubernetes.io/hostname
+  containers:
+    - name: nginx-container
+      image: nginx:1.12
+</code></pre>
+<p>これだと、sample-app がある Node で kubernetes.io/hostname(=raspi003)と同じ Node に Pod を割り振ります。つまり、raspi003 にできるはずです。</p>
+<pre><code class="language-text">pi@raspi001:~/tmp $ k apply -f sample-pod-affinity-host.yaml
+pi@raspi001:~/tmp $  k get pods sample-pod-affinity-host -o wide
+NAME                       READY   STATUS              RESTARTS   AGE   IP       NODE       NOMINATED NODE   READINESS GATES
+sample-pod-affinity-host   0/1     ContainerCreating   0          11s   &lt;none&gt;   raspi003   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<p>期待通り raspi003 にできています。
+また、required だけでなく、preferred も設定できます。</p>
+<pre><code class="language-yaml">## sample-pod-affinity-arch.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-pod-affinity-arch
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - sample-app
+          topologyKey: kubernetes.io/arch
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - sample-app
+            topologyKey: kubernetes.io/hostname
+  containers:
+    - name: nginx-container
+      image: nginx:1.12
+</code></pre>
+<p>必須条件としては、下記のとおりです。</p>
+<ul>
+<li>「label が app=sample-app である Pod が動いている Node(raspi003)で、kubernetes.io/arch が同じ Node(arm)」</li>
+</ul>
+<p>これは raspi002(arm),raspi003(arm)どちらにも当てはまります。
+そして、優先条件として、下記のとおりです。</p>
+<ul>
+<li>「label が app=sample-app である Pod が動いている Node(raspi003)で、kubernetes.io/hostname が同じ Node(raspi003)」</li>
+</ul>
+<p>これにより、raspi003 が選ばれるはずです。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-pod-affinity-arch.yaml
+pi@raspi001:~/tmp $ k get pods sample-pod-affinity-arch -o wide
+NAME                       READY   STATUS              RESTARTS   AGE   IP       NODE       NOMINATED NODE   READINESS GATES
+sample-pod-affinity-arch   0/1     ContainerCreating   0          13s   &lt;none&gt;   raspi003   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<p>期待通り raspi003 で動いていますね。</p>
+<h2 id="inter-pod-anti-affinity">Inter-Pod Anti-Affinity</h2>
+<p>Inter-Pod Affinity の否定形です。以上。</p>
+<p>今まで紹介した Affinity、AntiAffinity,Inter-Pod Affinity, Inter-Pod AntiAffinity は、組み合わせることができます。</p>
+<h2 id="taints">Taints</h2>
+<p>Node に対して汚れをつけていきます。汚れた Node に対して、許容する Pod のみがスケジューリングできるようになります。</p>
+<p>汚れの種類(Effect)は、３つあります。</p>
+<ul>
+<li>PreferNoSchedule
+<ul>
+<li>可能な限りスケジューリングしない</li>
+</ul>
+</li>
+<li>NoSchedule
+<ul>
+<li>スケジューリングしない（既にスケジューリングされている Pod はそのまま）</li>
+</ul>
+</li>
+<li>NoExecute
+<ul>
+<li>実行を許可しない（既にスケジューリングされている Pod は停止される）</li>
+</ul>
+</li>
+</ul>
+<p>それでは、まず Node を汚しましょう。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k taint node raspi003 env=prd:NoSchedule
+pi@raspi001:~/tmp $ k describe node raspi003 | grep Taints
+Taints:             env=prd:NoSchedule
+</code></pre>
+<p>これで raspi003 に Pod をスケジューリングできなくなりました。</p>
+<h2 id="tolerations">Tolerations</h2>
+<p>さきほど汚した Node に対して、許容(Tolerations)できる Pod を作成しましょう。</p>
+<p>key と value(env=prd)と Effect(NoSchedule)が設定された Pod のみ許容されます。作ってみます。</p>
+<pre><code class="language-yaml">## sample-tolerations.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-tolerations
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:1.12
+  tolerations:
+    - key: "env"
+      operator: "Equal"
+      value: "prd"
+      effect: "NoSchedule"
+  nodeSelector:
+    disksize: "300"
+</code></pre>
+<p>※ nodeSelector で汚れた Node である raspi003 を指定するようにしています。</p>
+<p>operator には、2 種類あります。</p>
+<ul>
+<li>Equal
+<ul>
+<li>key と value が等しい</li>
+</ul>
+</li>
+<li>Exists
+<ul>
+<li>key が存在する</li>
+</ul>
+</li>
+</ul>
+<p>では、適用してみます。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-tolerations.yaml
+pi@raspi001:~/tmp $ k get pod sample-tolerations -o=wide
+NAME                 READY   STATUS    RESTARTS   AGE   IP             NODE       NOMINATED NODE   READINESS GATES
+sample-tolerations   1/1     Running   0          27s   10.244.2.140   raspi003   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<p>汚れた Node に許容される Pod が適用されましたね。
+許容を一部変えてみる(env=stg)と、もちろん Pending になりました。</p>
+<p>もとに戻しておきます。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k taint node raspi003 env-
+</code></pre>
+<h2 id="お片付け">お片付け</h2>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-nodeselector.yaml -f sample-node-affinity.yaml -f sample-pod-affinity-host.yaml -f sample-pod-affinity-arch.yaml -f sample-tolerations.yaml
+pi@raspi001:~/tmp $ k label node raspi002 cputype- disksize-
+pi@raspi001:~/tmp $ k label node raspi003 cputype- disksize-
+</code></pre>
+<h2 id="最後に">最後に</h2>
+<p>Pod をどの Node にスケジューリングするのか学習しました。
+汚れ(taint)と許容(tolerations)という考えは面白いなと思いました。
+ただ、あまり使いすぎると複雑に陥りやすそうなので、注意が必要ですね。
+次回は、<a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_15/">こちら</a>です。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>クラウドインフラ</li></ul></footer></article></main></body></html>

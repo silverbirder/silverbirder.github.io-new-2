@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Tauri でつくる自分用 VLog アプリ開発記</title><meta name="description" content="Tauri で Mac 向けの VLog 録画アプリを作り、技術選定から録画方式、PiP 実装までの試行錯誤を整理しました。ソースコードや配布ファイルも紹介します。"><meta name="keywords" content="成果物"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">145</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-10-04"><span class="visually-hidden">2025年10月4日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">04</span></span></time></p></div><div class="notebook-heading"><h1>Tauri でつくる自分用 VLog アプリ開発記</h1></div></header><div class="notebook-body"><p>最近、Mac 向けに画面と自分の姿を同時に記録する VLog アプリを Tauri で作りました。
+開発の背景やつまずき、乗り越えた工夫を振り返ります。
+ソースコードと署名なしの <code>.dmg</code> は GitHub に置いています。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/silverbirder/vlog" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/vlog: スクリーン・カメラを同時に記録できる macOS 向けデスクトップアプリ</strong><span class="link-card-description" data-astro-cid-p7ia6262>スクリーン・カメラを同時に記録できる macOS 向けデスクトップアプリ. Contribute to silverbirder/vlog development by creating an account on GitHub.</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span></a></div>
+<p>アプリの雰囲気が伝わるように、スクリーンショットを 2 枚載せておきます。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1759582696/silver-birder.github.io/blog/vlog-intro-1.png?ar=1826%3A1668" alt="VLog アプリのホーム画面" width="1826" height="1668" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1759582696/silver-birder.github.io/blog/vlog-intro-1.png?ar=1826%3A1668 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1759582696/silver-birder.github.io/blog/vlog-intro-1.png?ar=1826%3A1668 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1759582696/silver-birder.github.io/blog/vlog-intro-1.png?ar=1826%3A1668 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1759582696/silver-birder.github.io/blog/vlog-intro-1.png?ar=1826%3A1668 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1759582696/silver-birder.github.io/blog/vlog-intro-1.png?ar=1826%3A1668 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1759582696/silver-birder.github.io/blog/vlog-intro-1.png?ar=1826%3A1668 1280w" sizes="min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>起動直後のホーム画面です。保存先や自動停止時間などをここで設定できます。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1759582703/silver-birder.github.io/blog/vlog-intro-2.png?ar=3052%3A2062" alt="録画中の VLog アプリと PiP 表示" width="3052" height="2062" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1759582703/silver-birder.github.io/blog/vlog-intro-2.png?ar=3052%3A2062 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1759582703/silver-birder.github.io/blog/vlog-intro-2.png?ar=3052%3A2062 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1759582703/silver-birder.github.io/blog/vlog-intro-2.png?ar=3052%3A2062 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1759582703/silver-birder.github.io/blog/vlog-intro-2.png?ar=3052%3A2062 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1759582703/silver-birder.github.io/blog/vlog-intro-2.png?ar=3052%3A2062 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1759582703/silver-birder.github.io/blog/vlog-intro-2.png?ar=3052%3A2062 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>録画中はこのように ピクチャ・イン・ピクチャ (PiP) でカメラ映像を前面に固定しながら、画面全体をキャプチャします。</p>
+<h2 id="背景">背景</h2>
+<p>YouTube や TikTok を見て、日常を短い動画で残す VLog 文化があることを知りました。
+私は自分で書いたブログ記事を読み返したり、自分が歩いた記録が残る Google マップのタイムラインや撮りためた Google フォトのアルバムを眺めたりして、 <strong>過去を振り返る時間が好きです</strong> 。
+「動画でも記録しておけたら面白そうだな」と思ったのが、今回の起点でした。</p>
+<p>日々の大半は自宅で過ごし、パソコン作業の時間が長いです。
+それなら <strong>Mac の画面と自分の姿を同時に録画できるデスクトップアプリを自作しよう</strong> と決めました。</p>
+<h2 id="技術選定の迷いと-tauri-採用">技術選定の迷いと Tauri 採用</h2>
+<p>当初は経験のある Electron を使うつもりでした。
+しかし、公式の React テンプレートが無かったり、Electron Fiddle がうまく動かなかったり、<code>npm install electron</code> が通らなかったりと、序盤からストレスが溜まり始めました。
+過去にも同じような壁に当たった記憶があったので、Electron で進む気持ちは一気にしぼみました。</p>
+<p>そこで思い出したのが、以前にメジャーアップデートのニュースで見かけた Tauri です。
+モバイル対応は検討していませんでしたが、デスクトップアプリを作れるし、React テンプレートも整備されています。
+クイックスタートをなぞるだけで数分後には開発環境が整い、<code>.dmg</code> ビルドまで一気に到達できました。
+「これなら作り切れそうだ」と実感し、Tauri 採用を決めました。</p>
+<h2 id="動画保存まわりの試行錯誤">動画保存まわりの試行錯誤</h2>
+<p>録画には Web API の <code>MediaDevices.getDisplayMedia()</code> と <code>MediaDevices.getUserMedia()</code> を使いました。
+<code>getDisplayMedia</code> が画面キャプチャ、<code>getUserMedia</code> がカメラ映像の取得を担当します。</p>
+<p>最初は、取得した映像チャンクをフロントエンドで蓄積し、録画停止時にまとめて Rust 側へ送る構成を採用しました。
+保存するのはスクリーン録画 (mp4)、カメラ映像 (mp4)、マイク音声 (m4a) の 3 ファイルです。
+AI Agent に下書きしてもらったコードがそのまま動いたので、早速録画してみました。
+ところが、完成した動画は冒頭の数分だけが動き、その後は静止画になっていました。
+チャンク処理をフロントエンドで抱えきれず、途中で詰まってしまったようです。</p>
+<p>次に、Rust 側で直接キャプチャする方法を調査しました。
+ただしネイティブ API に踏み込む必要があり、理解コストが高そうだったので見送りました。</p>
+<p>そこで <strong>フロントエンドでチャンクを保持せず、取得したデータを即座に Rust 側へ送り、ファイルに追記する</strong> 方式へ切り替えました。
+結果として、録画が途中で止まる問題は解消され、停止ボタンを押すだけで保存が完了するようになりました。</p>
+<h2 id="欲しかった機能を揃える">欲しかった機能を揃える</h2>
+<p>使い続けるうちに、次のような要望が浮かびました。</p>
+<ul>
+<li>一定時間で自動停止したい
+<ul>
+<li>ずっと録画し続けるのではなく、15 分や 30 分で区切りたい</li>
+</ul>
+</li>
+<li>停止に気づける通知が欲しい
+<ul>
+<li>集中していると録画状態を忘れるので、自動停止時に気づきたい</li>
+</ul>
+</li>
+<li>カメラやマイクを切り替えたい
+<ul>
+<li>外付けデバイスを接続したときに選択したい</li>
+</ul>
+</li>
+<li>停止後にすぐ再開したい
+<ul>
+<li>録画停止と開始を繰り返す操作を簡単にしたい</li>
+</ul>
+</li>
+</ul>
+<p>これらを一つずつ実装し、特に使っていなかったマイク録音は機能ごと削除しました。
+余計な設定が消えて、アプリ全体の使い心地が軽くなった感覚があります。</p>
+<h2 id="pip-をどう実現したか">PiP をどう実現したか</h2>
+<p>スクリーンとカメラを別々に保存していると、見返すときに視線が忙しく感じました。
+そこで PiP のような、スクリーン上にカメラの映像を重ねて録画する方法を探りました。</p>
+<p>まずはフロントエンドでスクリーンとカメラの映像を合成し、単一の動画として保存する方式を試しました。
+ところが処理が重く、FPS が落ちてカクつきが目立ったため断念しました。
+次に、録画後に ffmpeg で合成する案も検討しましたが、15 分の動画でも処理時間が長く、運用したい気持ちになれませんでした。</p>
+<p>最終的にたどり着いたのは、 <strong>録画中にカメラ映像を常に前面表示し、そのままスクリーン録画に写し込む</strong> というシンプルな方法です。
+リアルタイム合成も後処理も不要で、狙い通りの PiP 動画が撮れるようになりました。
+唯一の課題は、VS Code などをフルスクリーン表示すると PiP ウィンドウを最前面に固定できないことです。
+今はフルスクリーンを控えることで運用しています。</p>
+<h2 id="おわりに">おわりに</h2>
+<p>React の “Learn Once, Write Anywhere” というスローガンがありますが、Tauri でも同じ感覚でデスクトップアプリを作れたのが嬉しいポイントでした。
+今回は Rust 側の実装を最小限に抑え、フロントエンドの改善に注力したことで、迷子にならずにリリースまでたどり着けました。</p>
+<p>Tauri はデスクトップやモバイル、Web までを React の知識でカバーできる仕組みがすでに整っています。
+ひと昔前なら Electron と React Native、さらに React Native for Web を組み合わせていた場面が、一つの選択肢にまとまるイメージです。
+今後も Tauri を使って、日常を記録するためのツールを少しずつ育てていきたいと思います。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>成果物</li></ul></footer></article></main></body></html>

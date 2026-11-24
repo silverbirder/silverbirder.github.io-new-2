@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Zalando tailor で Micro Frontends with ( LitElement  &amp; etcetera)</title><meta name="description" content="Zalando社が開発したTailorを使って、サンプルWebアプリをMicro Frontendsで構築してみました。Tailorはサーバーサイドで統合するアーキテクチャです。クライアントサイドは、Web Componentsで作られているLit Elementを使って統合しました。どういった内容か、ここに投稿しようと思います。"><meta name="keywords" content="フロントエンド,成果物,tailor,Micro Frontends"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">51</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2020-10-04"><span class="visually-hidden">2020年10月4日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2020</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">04</span></span></time></p></div><div class="notebook-heading"><h1>Zalando tailor で Micro Frontends with ( LitElement  &amp; etcetera)</h1></div></header><div class="notebook-body"><p>Zalando 社が開発した Tailor を使って、サンプル Web アプリを Micro Frontends で構築してみました。Tailor はサーバーサイドで統合するアーキテクチャです。クライアントサイドは、Web Components で作られている Lit Element を使って統合しました。どういった内容か、ここに投稿しようと思います。</p>
+<p>作ったリポジトリは、下記に残しています。
+<a href="https://github.com/silverbirder/micro-frontends-sample-code-4">https://github.com/silverbirder/micro-frontends-sample-code-4</a></p>
+<h2 id="全体構成">全体構成</h2>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614430036/silver-birder.github.io/blog/tailor_and_application_configuration.png?ar=1200%3A670" alt="アプリケーション構成" width="1200" height="670" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1614430036/silver-birder.github.io/blog/tailor_and_application_configuration.png?ar=1200%3A670 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1614430036/silver-birder.github.io/blog/tailor_and_application_configuration.png?ar=1200%3A670 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614430036/silver-birder.github.io/blog/tailor_and_application_configuration.png?ar=1200%3A670 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1614430036/silver-birder.github.io/blog/tailor_and_application_configuration.png?ar=1200%3A670 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1614430036/silver-birder.github.io/blog/tailor_and_application_configuration.png?ar=1200%3A670 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1200/q_auto/f_auto/v1614430036/silver-birder.github.io/blog/tailor_and_application_configuration.png?ar=1200%3A670 1200w" sizes="min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>ざっくり説明すると、HTML から Tailor に対してフラグメント(コンポーネント)を取得・返却するようにします。各フラグメントは、LitElement で WebComponents を定義させた Javascript を指します。フラグメントを読み込むだけで、カスタムエレメントを使えるようになります。</p>
+<h2 id="tailor">Tailor</h2>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_500/q_auto/f_auto/v1693364018/silver-birder.github.io/blog/68747470733a2f2f7261776769746875622e636f6d2f7a616c616e646f2f7461696c6f722f6d61737465722f6c6f676f2f7461696c6f722d6c6f676f2e737667.svg?ar=500%3A200" alt="image" width="500" height="200" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_250/q_auto/f_auto/v1693364018/silver-birder.github.io/blog/68747470733a2f2f7261776769746875622e636f6d2f7a616c616e646f2f7461696c6f722f6d61737465722f6c6f676f2f7461696c6f722d6c6f676f2e737667.svg?ar=500%3A200 250w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_375/q_auto/f_auto/v1693364018/silver-birder.github.io/blog/68747470733a2f2f7261776769746875622e636f6d2f7a616c616e646f2f7461696c6f722f6d61737465722f6c6f676f2f7461696c6f722d6c6f676f2e737667.svg?ar=500%3A200 375w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_500/q_auto/f_auto/v1693364018/silver-birder.github.io/blog/68747470733a2f2f7261776769746875622e636f6d2f7a616c616e646f2f7461696c6f722f6d61737465722f6c6f676f2f7461696c6f722d6c6f676f2e737667.svg?ar=500%3A200 500w" sizes="auto, min(31.25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/zalando/tailor" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - zalando/tailor: A streaming layout service for front-end microservices</strong><span class="link-card-description" data-astro-cid-p7ia6262>A streaming layout service for front-end microservices - zalando/tailor</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/cf5c15e745cdabf198d770cc89ff7f6b343c61fa73f9bdfe89c7baa115effb2f.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<blockquote>
+<p>A streaming layout service for front-end microservices</p>
+</blockquote>
+<p>tailor は、ストリーミングレイアウトサービスというだけあって、fragment の load をストリーミングするそうです。(こちらのライブラリは、Facebook の<a href="https://www.facebook.com/notes/facebook-engineering/bigpipe-pipelining-web-pages-for-high-performance/389414033919/">BigPipe</a> に影響されたそう)</p>
+<p>まず、tailor.js の HTML テンプレートは次のとおりです。</p>
+<p>templates/index.html</p>
+<pre><code class="language-html">&lt;body&gt;
+  &lt;div id="outlet"&gt;&lt;/div&gt;
+  &lt;fragment src="http://localhost:7000" defer&gt;&lt;/fragment&gt;
+  &lt;fragment src="http://localhost:8000" defer&gt;&lt;/fragment&gt;
+  &lt;fragment src="http://localhost:9000" defer&gt;&lt;/fragment&gt;
+&lt;/body&gt;
+</code></pre>
+<p>これらの fragment の取得は、tailor.js を経由します。</p>
+<p>tailor.js</p>
+<pre><code class="language-javascript">const http = require("http");
+const Tailor = require("node-tailor");
+const tailor = new Tailor({
+  templatesPath: __dirname + "/templates",
+});
+
+http
+  .createServer((req, res) =&gt; {
+    req.headers["x-request-uri"] = req.url;
+    req.url = "/index";
+    tailor.requestHandler(req, res);
+  })
+  .listen(8080);
+</code></pre>
+<p>x-request-uri は、後ろのフラグメントに URL を引き継ぐためのようです。
+そして、フラグメントサーバーは、次のとおりです。</p>
+<p>fragments.js</p>
+<pre><code class="language-javascript">const http = require("http");
+const url = require("url");
+const fs = require("fs");
+
+const server = http.createServer((req, res) =&gt; {
+  const pathname = url.parse(req.url).pathname;
+  const jsHeader = { "Content-Type": "application/javascript" };
+  switch (pathname) {
+    case "/public/bundle.js":
+      res.writeHead(200, jsHeader);
+      return fs.createReadStream("./public/bundle.js").pipe(res);
+    default:
+      res.writeHead(200, {
+        "Content-Type": "text/html",
+        Link: '&lt;http://localhost:8000/public/bundle.js&gt;; rel="fragment-script"',
+      });
+      return res.end("");
+  }
+});
+
+server.listen(8000);
+</code></pre>
+<p>fragments.js は、Response Header に Link ヘッダを追加するようにします。Tailor は、このヘッダの Javascript を読み込むことになります。
+さらに、fragments.js は、Link ヘッダで指定されたリクエストを <code>return fs.createReadStream('./public/bundle.js').pipe(res)</code> でストリームのパイプを返すそうです。</p>
+<h2 id="lerna">Lerna</h2>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_425/q_auto/f_auto/v1614430061/silver-birder.github.io/blog/Lerna.png?ar=425%3A384" alt="lerna" width="425" height="384" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_213/q_auto/f_auto/v1614430061/silver-birder.github.io/blog/Lerna.png?ar=425%3A384 213w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_319/q_auto/f_auto/v1614430061/silver-birder.github.io/blog/Lerna.png?ar=425%3A384 319w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_425/q_auto/f_auto/v1614430061/silver-birder.github.io/blog/Lerna.png?ar=425%3A384 425w" sizes="auto, min(26.5625rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>それぞれのフラグメントを Lerna で管理するようにします。
+私は、下記のような packages 分けをしました。</p>
+<ul>
+<li>common
+<ul>
+<li>共通する変数・ライブラリ</li>
+</ul>
+</li>
+<li>fragment
+<ul>
+<li>LitElement のカスタムエレメント定義</li>
+</ul>
+</li>
+<li>function
+<ul>
+<li>フラグメントと連携する関数 (ヒストリーやイベントなど)</li>
+</ul>
+</li>
+</ul>
+<p>具体的に言うと、次のようなものを用意しました。</p>
+<table>
+<thead>
+<tr>
+<th>directoy name</th>
+<th>package name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>packages/common-module</td>
+<td>@type/common-module</td>
+</tr>
+<tr>
+<td>packages/common-variable</td>
+<td>@type/common-variable</td>
+</tr>
+<tr>
+<td>packages/fragment-auth-components</td>
+<td>@auth/fragment-auth-components</td>
+</tr>
+<tr>
+<td>packages/fragment-product-item</td>
+<td>@product/fragment-product-item</td>
+</tr>
+<tr>
+<td>packages/fragment-search-box</td>
+<td>@search/fragment-search-box</td>
+</tr>
+<tr>
+<td>packages/function-event-hub</td>
+<td>@controller/function-event-hub</td>
+</tr>
+<tr>
+<td>packages/function-history-navigation</td>
+<td>@controller/function-history-navigation</td>
+</tr>
+<tr>
+<td>packages/function-renderer-proxy</td>
+<td>@controller/function-renderer-proxy</td>
+</tr>
+<tr>
+<td>packages/function-search-api</td>
+<td>@search/function-search-api</td>
+</tr>
+<tr>
+<td>packages/function-service-worker</td>
+<td>@type/function-service-worker</td>
+</tr>
+</tbody>
+</table>
+<p>どの名前も、その時の気分で雑に設定したので、気にしないでください。（笑）
+伝えたいのは、@XXX が 1 チームで管理する領域みたいなことをしたかっただけです。</p>
+<p>package を使いたい場合は、次のような依存を設定します。</p>
+<p>package.json</p>
+<pre><code class="language-json">{
+  "dependencies": {
+    "@controller/function-event-hub": "^0.0.0",
+    "@type/common-variable": "^0.0.0"
+  }
+}
+</code></pre>
+<h2 id="litelement">LitElement</h2>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_567/q_auto/f_auto/v1614430086/silver-birder.github.io/blog/LitElement.jpg?ar=567%3A196" alt="LitElement" width="567" height="196" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_284/q_auto/f_auto/v1614430086/silver-birder.github.io/blog/LitElement.jpg?ar=567%3A196 284w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_426/q_auto/f_auto/v1614430086/silver-birder.github.io/blog/LitElement.jpg?ar=567%3A196 426w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_567/q_auto/f_auto/v1614430086/silver-birder.github.io/blog/LitElement.jpg?ar=567%3A196 567w" sizes="auto, min(35.4375rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://lit-element.polymer-project.org/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Lit</strong><span class="link-card-description" data-astro-cid-p7ia6262>Simple. Fast. Web Components.</span><span class="link-card-domain" data-astro-cid-p7ia6262>lit-element.polymer-project.org</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/73b8e71b1f7675ac56ef1fda64c11e0934d6e59d3f9bd2b57e3ac0d01c64b06e.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<blockquote>
+<p>LitElement
+A simple base class for creating fast, lightweight web components</p>
+</blockquote>
+<p>純粋な WebComponents だけを使えばよかったのですが、次のような理由で LitElement を使いました。</p>
+<ul>
+<li>Typescript が書ける</li>
+<li>レンダリングパフォーマンスの良い lit-html が使える</li>
+<li>プロパティ変化によるレンダリング更新ができる</li>
+</ul>
+<p>まあ、特にこだわりはないです。
+書き方は、次のとおりです。</p>
+<pre><code class="language-typescript">import { LitElement, html, customElement, css, property } from "lit-element";
+
+@customElement("product-item")
+export class ProductItem extends LitElement {
+  static styles = css`
+    :host {
+      display: block;
+      border: solid 1px gray;
+      padding: 16px;
+      max-width: 800px;
+    }
+  `;
+  @property({ type: String })
+  name = ``;
+
+  render() {
+    return html`&lt;div&gt;${this.name}&lt;/div&gt;`;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "product-item": ProductItem;
+  }
+}
+</code></pre>
+<p>LitElement + Typescript では、open-testing を使ってテストすることができます。
+<a href="https://github.com/PolymerLabs/lit-element-starter-ts/blob/master/src/test/my-element_test.ts">https://github.com/PolymerLabs/lit-element-starter-ts/blob/master/src/test/my-element_test.ts</a></p>
+<p>また、jest でもテストができるようです。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://www.ninkovic.dev/blog/2020/testing-web-components-with-jest-and-lit-element" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Testing Web component with Jest and Lit element</strong><span class="link-card-description" data-astro-cid-p7ia6262>We all know that testing is critical for any software product and JS landscape offers a lot of tools to perform this task. One of the most popular ones is Jest which is famous for its simplicity.</span><span class="link-card-domain" data-astro-cid-p7ia6262>www.ninkovic.dev</span></span></a></div>
+<h2 id="dynamicrendering">DynamicRendering</h2>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_425/q_auto/f_auto/v1614430107/silver-birder.github.io/blog/rendertron.png?ar=425%3A93" alt="rendertron" width="425" height="93" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_213/q_auto/f_auto/v1614430107/silver-birder.github.io/blog/rendertron.png?ar=425%3A93 213w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_319/q_auto/f_auto/v1614430107/silver-birder.github.io/blog/rendertron.png?ar=425%3A93 319w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_425/q_auto/f_auto/v1614430107/silver-birder.github.io/blog/rendertron.png?ar=425%3A93 425w" sizes="auto, min(26.5625rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>このサンプルでは、カスタムエレメントを使って、ブラウザ側でレンダリングする 所謂 SPA の動きで構築しています。
+『SEO ガー！』と SSR しなきゃと思う訳ですが、正直 SSR を考えたくないです。(ハイドレーションなんて無駄なロードをブラウザにさせたくない）
+次の記事のように、ボットのアクセスのみに、ダイナミックレンダリングした結果（SPA のレンダリング結果 HTML）を返すようにしたいです。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://developers.google.com/search/docs/guides/dynamic-rendering?hl=ja" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>回避策としてのダイナミック レンダリング | Google 検索セントラル | Documentation | Google for Developers</strong><span class="link-card-description" data-astro-cid-p7ia6262>ダイナミック レンダリングは、JavaScript を利用しているコンテンツに問題が発生しているウェブサイトのための回避策です。</span><span class="link-card-domain" data-astro-cid-p7ia6262>developers.google.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/ff70309dcd300294437175a27f6b06016e1fb3a050c9b12b619ce0a790bb01b3.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>技術的には、次のようなものを使えば良いです。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/GoogleChrome/rendertron" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - GoogleChrome/rendertron: A Headless Chrome rendering solution</strong><span class="link-card-description" data-astro-cid-p7ia6262>A Headless Chrome rendering solution. Contribute to GoogleChrome/rendertron development by creating an account on GitHub.</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/183c85e1d3b02c7c5d4410aa1cc192d22f262585ece9344de3be7aeb68597524.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>function-renderer-proxy/src/renderer.ts</p>
+<pre><code class="language-typescript">...
+const page = await this.browser.newPage(); // browser: Puppeteer.Browser
+...
+const result = await page.content() as string;  // Puppeteerのレンダリング結果コンテンツ(HTML)
+</code></pre>
+<p>要は、Puppeteer で実際にレンダリングさせた結果を Bot に返却しているだけです。</p>
+<h2 id="eventhub">EventHub</h2>
+<p>フラグメント同士は、CustomEvent を通して連携します。</p>
+<p><a href="https://developer.mozilla.org/ja/docs/Web/Guide/Events/Creating_and_triggering_events">https://developer.mozilla.org/ja/docs/Web/Guide/Events/Creating_and_triggering_events</a></p>
+<p>全て、この CustomEvent と AddEventListener を管理する EventHub(packages 名)を経由するようにします。(理想)</p>
+<h2 id="history">History</h2>
+<p>ページ全体のヒストリーは、HistoryNavigation(packages 名)で管理したいと考えています。(理想)</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://developer.mozilla.org/en-US/docs/Web/API/History_API" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>History API - Web APIs | MDN</strong><span class="link-card-description" data-astro-cid-p7ia6262>The History API provides access to the browser&#39;s session history (not to be confused with WebExtensions history) through the history global object. It exposes useful methods and properties that let you navigate back and forth through the user&#39;s history, and manipulate the contents of the history sta</span><span class="link-card-domain" data-astro-cid-p7ia6262>developer.mozilla.org</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/cd9c29f984266adc4e163c03fff748da3b3177b4c8f2cf68a2e7518649856353.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>また、ルーティングを制御する Web Components 向けライブラリ vaadin/router も便利そうだったので導入してみました。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://vaadin.com/router" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>How to use React Router in Hilla applications | Vaadin</strong><span class="link-card-description" data-astro-cid-p7ia6262>Learn how to integrate and utilize React Router with Hilla for seamless routing.</span><span class="link-card-domain" data-astro-cid-p7ia6262>vaadin.com</span></span></a></div>
+<h2 id="sharemodule">ShareModule</h2>
+<p>LitElement のようなどこでも使っているライブラリは、共通化してバンドルサイズを縮めたいです。
+Webpack のようなバンドルツールには、External や DLLPlugin、ModuleFederation などの共通化機能があります。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://webpack.js.org/concepts/module-federation/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Module Federation | webpack</strong><span class="link-card-description" data-astro-cid-p7ia6262>Let separately built applications share modules at runtime and behave as a single application.</span><span class="link-card-domain" data-astro-cid-p7ia6262>webpack.js.org</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/ca264ba008f9d8859ececf7a52663751852d6374eabcbf26662e98b3e6d24771.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>今回は、external を使っています。</p>
+<p>common-module/common.js</p>
+<pre><code class="language-javascript">exports["rxjs"] = require("rxjs");
+exports["lit-element"] = require("lit-element");
+exports["graphql-tag"] = require("graphql-tag");
+exports["graphql"] = require("graphql");
+exports["apollo-client"] = require("apollo-client");
+exports["apollo-cache-inmemory"] = require("apollo-cache-inmemory");
+exports["apollo-link-http"] = require("apollo-link-http");
+</code></pre>
+<p>common-module/webpack.config.js</p>
+<pre><code class="language-javascript">module.exports = {
+  entry: "./common.js",
+  output: {
+    path: __dirname + "/public",
+    publicPath: "http://localhost:6006/public/",
+    filename: "bundle.js",
+    libraryTarget: "amd",
+  },
+};
+</code></pre>
+<p>共通化したライブラリは、次の Tailor の index.html で読み込みます。</p>
+<p>templates/index.html</p>
+<pre><code class="language-html">&lt;script&gt;
+  (function (d) {
+    require(d);
+    var arr = [
+      "lit-element",
+      "rxjs",
+      "graphql-tag",
+      "apollo-client",
+      "apollo-cache-inmemory",
+      "apollo-link-http",
+      "graphql",
+    ];
+    while ((i = arr.pop()))
+      (function (dep) {
+        define(dep, d, function (b) {
+          return b[dep];
+        });
+      })(i);
+  })(["http://localhost:6006/public/bundle.js"]);
+&lt;/script&gt;
+</code></pre>
+<p>そうすると、例えば searchBox の webpack では、次のようなことが使えます。</p>
+<p>fragment-search-box/webpack.config.js</p>
+<pre><code class="language-javascript">externals: {
+    'lit-element': 'lit-element',
+    'graphql-tag': 'graphql-tag',
+    'apollo-client': 'apollo-client',
+    'apollo-cache-inmemory': 'apollo-cache-inmemory',
+    'apollo-link-http': 'apollo-link-http',
+    'graphql': 'graphql'
+}
+</code></pre>
+<h2 id="その他">その他</h2>
+<p>その時の気分で導入したものを紹介します。(or 導入しようと考えたもの)</p>
+<h2 id="graphql">GraphQL</h2>
+<p>API は、雑に GraphQL を採用しました。特に理由はありません。</p>
+<h2 id="skeltonui">SkeltonUI</h2>
+<p>Skelton UI も使ってみたいなと思っていました。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://material-ui.com/components/skeleton/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>React Skeleton component - Material UI</strong><span class="link-card-description" data-astro-cid-p7ia6262>Display a placeholder preview of your content before the data gets loaded to reduce load-time frustration.</span><span class="link-card-domain" data-astro-cid-p7ia6262>material-ui.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/23cf4526cf7801acddd56900734ea2d14ed69d9e39c40b283caeb823d2be9bf2.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>React を使わなくても、CSS の@keyframes を使えば良いでしょう。が、まあ使っていません。(笑)</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://developer.mozilla.org/ja/docs/Web/CSS/@keyframes" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>CSS @keyframes アットルール - CSS | MDN</strong><span class="link-card-description" data-astro-cid-p7ia6262>@keyframes は CSS のアットルールで、アニメーションの流れに沿ったキーフレーム（または中間地点）のスタイルを定義することによって、一連の CSS アニメーションの中間ステップを制御します。これにより、アニメーションの中間ステップをトランジションよりも詳細に制御できます。</span><span class="link-card-domain" data-astro-cid-p7ia6262>developer.mozilla.org</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/cd9c29f984266adc4e163c03fff748da3b3177b4c8f2cf68a2e7518649856353.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<h2 id="rxjs">Rxjs</h2>
+<p>typescript の処理をリアクティブな雰囲気でコーディングしたかったので導入してみました。</p>
+<p>(リアクティブに詳しい人には、怒られそうな理由ですね…笑)</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://rxjs.dev/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>RxJS</strong><span class="link-card-domain" data-astro-cid-p7ia6262>rxjs.dev</span></span></a></div>
+<h2 id="所感">所感</h2>
+<p>これまで、Podium、Ara-Framework, そして Tailor といった Micro Frontends に関わるサーバーサイド統合ライブラリを使ってみました。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://silverbirder.github.io/blog/contents/microfrontends" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Micro Frontends を学んだすべて</strong><span class="link-card-description" data-astro-cid-p7ia6262>Micro FrontendsというWebフロントエンドアーキテクチャがあります。このアーキテクチャを知るために、書籍を読み、簡単なサンプルWebアプリを開発しました。そこから学んだことをすべて議事録として残したいと思います。</span><span class="link-card-domain" data-astro-cid-p7ia6262>silverbirder.github.io</span></span></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://silverbirder.github.io/blog/contents/ara-framework" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Ara-Framework で Micro Frontends with SSR</strong><span class="link-card-description" data-astro-cid-p7ia6262>みなさん、こんにちは。silverbirder です。、Micro Frontends があります。今、Ara-Frameworkというフレームワークを使った Micro Frontends のアプローチ方法を学んでいます。</span><span class="link-card-domain" data-astro-cid-p7ia6262>silverbirder.github.io</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/ce2cc8ac4c804a6b17bba2fdff30e3bde13d75462322522199de543db21a599f.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>これらは、どれも考え方が良いなと思っています。
+Podium のフラグメントのインターフェース設計、Ara-Framework の Render とデータ取得の明確な分離、そして Tailor のストリーム統合です。
+しかし、これらは良いライブラリではありますが、プロダクションとしてはあんまり採用したくない(依存したくない)と思っています。</p>
+<p>むしろ、もっと昔から使われていた Edge Side Include や Server Side Include などを使ったサーバーサイド統合の方が魅力的です。
+例えば、Edge Worker とか良さそうです。(HTTP2 や HTTP3 も気になります)</p>
+<p>まあ、まだ納得いく Micro Frontends の設計が発見できていないので、これからも検証し続けようと思います。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>フロントエンド</li><li>成果物</li></ul></footer></article></main></body></html>

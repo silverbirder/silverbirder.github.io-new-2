@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AIエージェント、マルチよりシングルの方が効率良いのでは</title><meta name="description" content="私は、AI エージェントのマルチタスクをしたことがない人です。 そのため、この記事はただの偏見です。 定量的なデータも示さないため、ふわふわとしたポエムです。 マルチタスク 複数のタスクを並列で進めるとします。 Web開発者であれば、AI"><meta name="keywords" content="AI,雑談,仕事,AIエージェント,シングルエージェント"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">291</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2026-03-19"><span class="visually-hidden">2026年3月19日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2026</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">19</span></span></time></p></div><div class="notebook-heading"><h1>AIエージェント、マルチよりシングルの方が効率良いのでは</h1></div></header><div class="notebook-body"><p>私は、AI エージェントのマルチタスクをしたことがない人です。<br>
+そのため、この記事はただの偏見です。<br>
+定量的なデータも示さないため、ふわふわとしたポエムです。</p>
+<h2 id="マルチタスク">マルチタスク</h2>
+<p>複数のタスクを並列で進めるとします。<br>
+Web開発者であれば、AI エージェントを使ったタスクとして様々なものがあります。</p>
+<ul>
+<li>新機能実装</li>
+<li>不具合の調査</li>
+<li>ちょっとした改善</li>
+<li>ライブラリメンテナンス</li>
+<li>リファクタリング</li>
+</ul>
+<p>何も考えないようなタスクであれば、マルチタスクとして動かすのは良い手と思います。<br>
+しかし、それ以外のタスクというのは人間の確認が入ります。<br>
+（何も考えないタスクも、軽く人間の確認はあるかと思いますが）</p>
+<ul>
+<li>『これこれ間違っているので、こう修正して』</li>
+<li>『不具合が解消されていないです、こう直して』</li>
+<li>『テストが意味を成していないです、こう修正して』</li>
+</ul>
+<p>それぞれのタスクには、それぞれのコンテキストが存在します。<br>
+そのコンテキストを踏まえた上で、タスクの成果物に人間が確認しなければいけません。<br>
+それをスイッチしながら並列的に作業するのって、かなり大変そうな印象です…。</p>
+<p>人間のキャパシティ的に記憶できる量が限られているので並列数に上限はあるだろうし、<br>
+<strong>記憶を蘇らせる作業</strong> というのは、相当な負荷がかかりそうです。<br>
+その高負荷の中、タスクの確認作業をしないといけないのですが、確認の質も低下しそうです。</p>
+<p>タスクを5個6個と同時に並列で進めれるため、初期進捗を出す量とスピードは圧倒的かなと思いますが、<br>
+タスク完了するまでの坂登りは質もスピードも低下しないか？と疑問に感じます。</p>
+<h2 id="シングルタスク">シングルタスク</h2>
+<p>シングルタスクに慣れている人は多いかと思います。<br>
+1つ1つタスクをこなしていくため、コンテキストスイッチせずに集中して <strong>深く潜る</strong> ことができます。<br>
+タスクの確認も記憶が鮮明にあるので、100%の力で確認できます。</p>
+<p>1つのタスクを終えると達成感があり、次のタスクへと向かいます。<br>
+タスクをこなすことで経験が積まれるため、次のタスクへの効率が良くなります。</p>
+<p>しかしマルチタスクに比べるとシングルタスクの場合、初動のタスク進捗度は低いと思います。<br>
+シングルタスクで1つ2つとこなしている間に、マルチタスクは4つ5つと進めているからです。<br>
+けれど、先ほども説明した通りマルチタスクの坂登りに時間がかかる一方で、シングルタスクは効率よく進んでいきます。<br>
+まあ、人間ですのでシングルタスクでも何度も続けていると疲労は蓄積されますが…。</p>
+<p>結果として、以下の印象があります。</p>
+<ul>
+<li>全タスクが完了するタイミングは、シングルもマルチもそう変わらない</li>
+<li>品質で言うとシングルの方が上</li>
+<li>疲労度はマルチの方が上</li>
+</ul>
+<h2 id="終わりに">終わりに</h2>
+<p>以上、ただの偏見でした。<br>
+マルチエージェント、使ってみた方が良いのでしょうか？</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>AI</li><li>雑談</li><li>仕事</li></ul></footer></article></main></body></html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ブラウザのレイアウトとペイントを知る</title><meta name="description" content="ブラウザのレンダリングエンジンにおけるレイアウトやペイントについて気になったので、調べました。その内容をまとめます。レンダリングエンジンは、Chrome の Blink を題材とします。"><meta name="keywords" content="ブラウザ,フロントエンド"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">83</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-07-03"><span class="visually-hidden">2022年7月3日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">07</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span></span></time></p></div><div class="notebook-heading"><h1>ブラウザのレイアウトとペイントを知る</h1></div></header><div class="notebook-body"><p>ブラウザのレンダリングエンジンにおけるレイアウトやペイントについて気になったので、調べました。
+その内容をまとめます。レンダリングエンジンは、Chrome の Blink を題材とします。</p>
+<h2 id="レンダリングエンジンの処理工程">レンダリングエンジンの処理工程</h2>
+<p>レンダリングエンジンの処理工程は、次の記事が参考になります。</p>
+<ul>
+<li><a href="https://web.dev/rendering-performance/">https://web.dev/rendering-performance/</a></li>
+<li><a href="https://blog.leap-in.com/lets-learn-how-to-browser-works/">https://blog.leap-in.com/lets-learn-how-to-browser-works/</a></li>
+<li><a href="https://silver-birder.github.io/blog/contents/learning_browser_engine/">https://silver-birder.github.io/blog/contents/learning_browser_engine/</a></li>
+<li><a href="https://developer.chrome.com/blog/inside-browser-part3/">https://developer.chrome.com/blog/inside-browser-part3/</a></li>
+</ul>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656816689/silver-birder.github.io/blog/browser_rendering_process.jpg?ar=1093%3A167" alt="レンダリングエンジンの工程" width="1093" height="167" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1656816689/silver-birder.github.io/blog/browser_rendering_process.jpg?ar=1093%3A167 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1656816689/silver-birder.github.io/blog/browser_rendering_process.jpg?ar=1093%3A167 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656816689/silver-birder.github.io/blog/browser_rendering_process.jpg?ar=1093%3A167 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1656816689/silver-birder.github.io/blog/browser_rendering_process.jpg?ar=1093%3A167 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1656816689/silver-birder.github.io/blog/browser_rendering_process.jpg?ar=1093%3A167 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1093/q_auto/f_auto/v1656816689/silver-birder.github.io/blog/browser_rendering_process.jpg?ar=1093%3A167 1093w" sizes="min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<ul>
+<li>(図には書いていないけど)Parse
+<ul>
+<li>HTML と CSS をパース</li>
+<li>DOM Tree と Style Rules を生成</li>
+</ul>
+</li>
+<li>JavaScript
+<ul>
+<li>視覚的な操作を処理</li>
+</ul>
+</li>
+<li>Style
+<ul>
+<li>HTML 要素が、どの CSS ルールが割り当たるかを決定</li>
+<li>DOM Tree と Style Rules を紐付けた Render Tree を生成</li>
+</ul>
+</li>
+<li>Layout
+<ul>
+<li>HTML 要素の位置と大きさを決定</li>
+<li>Layout Tree を生成</li>
+<li>Reflow とも呼ぶ</li>
+</ul>
+</li>
+<li>Paint
+<ul>
+<li>ブラウザに表示するピクセルを塗る</li>
+<li>レイヤーを分ける</li>
+<li>Draw とも呼ぶ</li>
+</ul>
+</li>
+<li>Composite
+<ul>
+<li>正しい順序で、レイヤーを重ねていく</li>
+<li>メインスレッドからコンポジットスレッド・ラスタースレッドに切り替わる
+<ul>
+<li>コンポジットスレッドから、ページを各タイルに分割して、ラスタースレッドに送る</li>
+<li>ラスタースレッドは、ラスタライズして GPU に格納する</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>この工程が、実際に動いているところを見てみましょう。</p>
+<h2 id="devtools-でレンダリング工程を見てみる">DevTools でレンダリング工程を見てみる</h2>
+<p>次のシンプルな HTML を Chrome で開いてみましょう。</p>
+<pre><code class="language-html">&lt;div&gt;Hello&lt;/div&gt;
+</code></pre>
+<p>開いたページで DevTools を開き、Performance タブをクリックします。
+左上にある reload ボタンを押して、計測してみましょう。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_performance.png?ar=1546%3A1212" alt="devtools_performance" width="1546" height="1212" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_performance.png?ar=1546%3A1212 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_performance.png?ar=1546%3A1212 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_performance.png?ar=1546%3A1212 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_performance.png?ar=1546%3A1212 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_performance.png?ar=1546%3A1212 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_performance.png?ar=1546%3A1212 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>計測の結果、 Main を見てみましょう。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_performance_1.png?ar=2907%3A1024" alt="devtools_performance_1" width="2907" height="1024" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_performance_1.png?ar=2907%3A1024 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_performance_1.png?ar=2907%3A1024 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_performance_1.png?ar=2907%3A1024 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_performance_1.png?ar=2907%3A1024 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_performance_1.png?ar=2907%3A1024 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_performance_1.png?ar=2907%3A1024 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>さきほど説明したレンダリングエンジンの工程(色も一致)が、見えると思います。</p>
+<ul>
+<li>青色 <code>Parse HTML</code></li>
+<li>紫色 <code>Recalculate Style</code></li>
+<li>紫色 <code>Layout</code></li>
+<li>(黄色は JavaScript 関係)</li>
+<li>(緑色は Paint/Composite 関係)</li>
+</ul>
+<p>視覚的に見やすい一方で、全体を網羅してみるのは難しいです。
+そこで、 <code>Event Log</code> を開きます。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656823105/silver-birder.github.io/blog/devtools_performance_2.png?ar=3104%3A1974" alt="devtools_performance_2" width="3104" height="1974" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1656823105/silver-birder.github.io/blog/devtools_performance_2.png?ar=3104%3A1974 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1656823105/silver-birder.github.io/blog/devtools_performance_2.png?ar=3104%3A1974 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656823105/silver-birder.github.io/blog/devtools_performance_2.png?ar=3104%3A1974 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1656823105/silver-birder.github.io/blog/devtools_performance_2.png?ar=3104%3A1974 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1656823105/silver-birder.github.io/blog/devtools_performance_2.png?ar=3104%3A1974 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1656823105/silver-birder.github.io/blog/devtools_performance_2.png?ar=3104%3A1974 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>レンダリングエンジンのイベントログが、色とともに表示されています。
+ここには、さきほど見れなかった黄色や緑色のものもあります。</p>
+<h3 id="tips-performance-タブに慣れよう">Tips: Performance タブに慣れよう</h3>
+<p>Performance タブには、様々な情報があります。</p>
+<p>いきなりプロダクションリリースされているものに対して、Performance 計測すると、何を見たらよいかわからなくなります。</p>
+<p>まずは、最小セットの HTML で見ていくと、情報量が絞られて、読みやすくなります。</p>
+<p>また、計測の各場所には、工程の色が使われています。色も合わせて見ると、読みやすくなります。</p>
+<h2 id="ブラウザとリフレッシュレートと-60fps">ブラウザとリフレッシュレートと 60fps</h2>
+<p>ブラウザでアニメーションなど動きを出すときに、60fps を目標とすると良いです。</p>
+<p><a href="http://jankfree.org/">http://jankfree.org/</a> というサイトから引用します。</p>
+<blockquote>
+<p>Modern browsers try to refresh the content on screen in sync with a device’s refresh rate. For most devices today, the screen will refresh 60 times a second, or 60Hz. If there is some motion on screen (such as scrolling, transitions, or animations) a browser should create 60 frames per second to match the refresh rate.</p>
+</blockquote>
+<p>ブラウザは、リフレッシュレートと同期してコンテンツを更新します。
+最近のデバイスは、1 秒間に 60 回更新できるようです。そのため、ブラウザは 60fps で動作すべきと書いています。</p>
+<p>DevTools から、fps を確認できます。
+Rendering タブにある <code>Frame Rendering Stats</code>にチェックを入れます。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656854862/silver-birder.github.io/blog/devtools_fps_1.png?ar=1664%3A1974" alt="devtools_fps_1" width="1664" height="1974" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1656854862/silver-birder.github.io/blog/devtools_fps_1.png?ar=1664%3A1974 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1656854862/silver-birder.github.io/blog/devtools_fps_1.png?ar=1664%3A1974 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656854862/silver-birder.github.io/blog/devtools_fps_1.png?ar=1664%3A1974 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1656854862/silver-birder.github.io/blog/devtools_fps_1.png?ar=1664%3A1974 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1656854862/silver-birder.github.io/blog/devtools_fps_1.png?ar=1664%3A1974 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1656854862/silver-birder.github.io/blog/devtools_fps_1.png?ar=1664%3A1974 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>そうすると、画面に次の画像が表示されます。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_384/q_auto/f_auto/v1656854862/silver-birder.github.io/blog/devtools_fps_2.png?ar=384%3A358" alt="devtools_fps_2" width="384" height="358" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_192/q_auto/f_auto/v1656854862/silver-birder.github.io/blog/devtools_fps_2.png?ar=384%3A358 192w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_288/q_auto/f_auto/v1656854862/silver-birder.github.io/blog/devtools_fps_2.png?ar=384%3A358 288w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_384/q_auto/f_auto/v1656854862/silver-birder.github.io/blog/devtools_fps_2.png?ar=384%3A358 384w" sizes="auto, min(24rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>今、ブラウザは 18.6 fps のようです。</p>
+<hr>
+<p>fps が少ないと、どうなるんでしょうか。ジャンクと呼ばれる現象が発生します。</p>
+<blockquote>
+<p>Jank is any stuttering, juddering or just plain halting that users see when a site or app isn’t keeping up with the refresh rate. Jank is the result of frames taking too long for a browser to make, and it negatively impacts your users and how they experience your site or app.</p>
+</blockquote>
+<p>リフレッシュレートに、画面が追いついていないと、ジャンクと呼ばれる滑らかではない動作になってしまいます。これは、ユーザーへの悪い体験をさせてしまいます。</p>
+<p><a href="https://googlechrome.github.io/devtools-samples/jank/">https://googlechrome.github.io/devtools-samples/jank/</a> が、まさにそのジャンクの体験ができます。</p>
+<h2 id="レイアウトスラッシング">レイアウトスラッシング</h2>
+<p>JavaScript や CSS を書いていると、DOM を追加してレイアウトが実行されたり、color を変えて、ペイントを実行されたりします。
+レンダリングエンジンは、シングルスレッドで動いているため、レイアウトの実行やペイントの実行をしていると、他の工程が動作されません。</p>
+<p>次のサイトにある JavaScript の関数を使うと、そのときのレイアウト情報を計算する必要があり、レイアウトが強制的に再計算されます。これがレイアウトスラッシングと呼ばれます。
+レイアウトスラッシングは、FPS の低下につながります。</p>
+<ul>
+<li><a href="https://gist.github.com/paulirish/5d52fb081b3570c81e3a">https://gist.github.com/paulirish/5d52fb081b3570c81e3a</a>
+<ul>
+<li>例えば、clientWidth</li>
+</ul>
+</li>
+</ul>
+<p>例を示しましょう。ボタン要素にスタイル変更し、clientWidth を参照したコードです。</p>
+<pre><code class="language-html">&lt;button&gt;click&lt;/button&gt;
+&lt;script&gt;
+  const b = document.querySelector("button");
+  b.addEventListener("click", () =&gt; {
+    b.setAttribute("style", `width: 100px;`);
+    b.clientWidth;
+  });
+&lt;/script&gt;
+</code></pre>
+<p>clientWidth を実行すると、そのときのレイアウト情報が必要になるため、強制的にレイアウトが実行されます。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656941215/silver-birder.github.io/blog/layout_forced.png?ar=3104%3A1974" alt="layout_forced" width="3104" height="1974" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1656941215/silver-birder.github.io/blog/layout_forced.png?ar=3104%3A1974 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1656941215/silver-birder.github.io/blog/layout_forced.png?ar=3104%3A1974 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656941215/silver-birder.github.io/blog/layout_forced.png?ar=3104%3A1974 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1656941215/silver-birder.github.io/blog/layout_forced.png?ar=3104%3A1974 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1656941215/silver-birder.github.io/blog/layout_forced.png?ar=3104%3A1974 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1656941215/silver-birder.github.io/blog/layout_forced.png?ar=3104%3A1974 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>強制レイアウトが発生しているのが、みてとれます。</p>
+<p><code>b.clientWidth</code> をコメントアウトすれば、Layout Forced は発生しません。
+もっと、明らかに警告となるサンプルを用意しました。</p>
+<pre><code class="language-html">&lt;button id="btn"&gt;click&lt;/button&gt;
+&lt;div id="root"&gt;&lt;/div&gt;
+&lt;template id="template"&gt;
+  &lt;div style="position: relative"&gt;hello&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  const root = document.getElementById("root");
+  const template = document.getElementById("template");
+  [...Array(100)].forEach(() =&gt;
+    root.appendChild(template.content.cloneNode(true))
+  );
+
+  document.getElementById("btn").addEventListener("click", () =&gt; {
+    setInterval(() =&gt; {
+      document.querySelectorAll("div").forEach((el) =&gt; {
+        el.style.left =
+          (Math.sin(el.offsetTop + Date.now() / 1000) + 1) * 500 + "px";
+      });
+    }, 100);
+  });
+&lt;/script&gt;
+</code></pre>
+<p>DevTools の Performance タブから見ると、<code>forced reflow is likely a bottleneck</code> と警告が出ているのが分かります。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_warn_forced_reflow.png?ar=2910%3A844" alt="devtools_warn_forced_reflow" width="2910" height="844" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_warn_forced_reflow.png?ar=2910%3A844 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_warn_forced_reflow.png?ar=2910%3A844 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_warn_forced_reflow.png?ar=2910%3A844 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_warn_forced_reflow.png?ar=2910%3A844 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_warn_forced_reflow.png?ar=2910%3A844 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1656941719/silver-birder.github.io/blog/devtools_warn_forced_reflow.png?ar=2910%3A844 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>対策としては、次があげられます。</p>
+<ul>
+<li>レイアウトスラッシングを発生させる関数を実行しない、もしくはキャッシュする</li>
+<li><code>Window.requestAnimationFrame()</code> を利用する</li>
+</ul>
+<p>参考までに</p>
+<ul>
+<li><a href="https://web.dev/avoid-large-complex-layouts-and-layout-thrashing/#avoid-forced-synchronous-layouts">https://web.dev/avoid-large-complex-layouts-and-layout-thrashing/#avoid-forced-synchronous-layouts</a></li>
+</ul>
+<p>DEMO は、次のページにもあります。</p>
+<ul>
+<li><a href="https://googlesamples.github.io/web-fundamentals/tools/chrome-devtools/rendering-tools/forcedsync.html">https://googlesamples.github.io/web-fundamentals/tools/chrome-devtools/rendering-tools/forcedsync.html</a></li>
+</ul>
+<h2 id="paint-と-composite">Paint と Composite</h2>
+<p>Paint もコストがかかります。そこで、Composite に任せることで、メインスレッドを開放し、パフォーマンスが良くなります。
+具体的には、コンポジットで動作する transform や opasity とかがあります。</p>
+<p>具体的な例を出しましょう。
+次の例は、四角のボックスを左右に動かすサンプルです。
+左右に動かす手段に、CSS の left のパターンと、transform のパターンを試してみます。</p>
+<pre><code class="language-html">&lt;style&gt;
+  @keyframes return {
+    50% {
+      left: 200px;
+    }
+    100% {
+      left: 0px;
+    }
+    /* 50% {
+      transform: translateX(200px);
+    }
+    100% {
+      transform: translateX(0px);
+    } */
+  }
+
+  .box {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    left: 0px;
+    border: 1px solid black;
+  }
+  .trans {
+    animation-name: return;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+  }
+&lt;/style&gt;
+&lt;div class="box trans"&gt;&lt;/div&gt;
+</code></pre>
+<p>transform の場合は、left の部分をコメントアウトし、transform 部分をコメントアウトを外します。</p>
+<p>このファイルをブラウザで開き、Performance タブで計測し、<code>Event Log</code> を確認します。</p>
+<p>left の場合、layout,paint,composite が発生しています。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_1.png?ar=1396%3A1193" alt="css_trigger_1" width="1396" height="1193" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_1.png?ar=1396%3A1193 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_1.png?ar=1396%3A1193 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_1.png?ar=1396%3A1193 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_1.png?ar=1396%3A1193 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_1.png?ar=1396%3A1193 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_1.png?ar=1396%3A1193 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>transform の場合、composite のみ発生しています。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_2.png?ar=1435%3A1186" alt="css_trigger_2" width="1435" height="1186" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_2.png?ar=1435%3A1186 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_2.png?ar=1435%3A1186 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_2.png?ar=1435%3A1186 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_2.png?ar=1435%3A1186 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_2.png?ar=1435%3A1186 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1656936814/silver-birder.github.io/blog/css_trigger_2.png?ar=1435%3A1186 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>このように、composite のみで動く CSS プロパティを選ぶと、軽量になります。
+次のサイトには、CSS のどのプロパティがレイアウト・ペイント・コンポジットどれを更新するのか分かります。</p>
+<ul>
+<li><a href="https://csstriggers.com/">https://csstriggers.com/</a></li>
+</ul>
+<p>また、DevTools の Layers タブを開くと、ペイントのカウント回数やレイアウトが見れます。</p>
+<p>left の場合の Layers は、次の画像です。
+数秒経過しただけで、ペイントカウントが、数百を超えました。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_1.png?ar=1664%3A1974" alt="devtools_layout_1" width="1664" height="1974" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_1.png?ar=1664%3A1974 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_1.png?ar=1664%3A1974 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_1.png?ar=1664%3A1974 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_1.png?ar=1664%3A1974 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_1.png?ar=1664%3A1974 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_1.png?ar=1664%3A1974 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>transform の場合の Layers は、次の画像です。
+ペイントカウントが、たったの 2 回に留まりました。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_2.png?ar=1664%3A1974" alt="devtools_layout_2" width="1664" height="1974" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_2.png?ar=1664%3A1974 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_2.png?ar=1664%3A1974 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_2.png?ar=1664%3A1974 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_2.png?ar=1664%3A1974 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_2.png?ar=1664%3A1974 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1656941210/silver-birder.github.io/blog/devtools_layout_2.png?ar=1664%3A1974 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<h2 id="終わりに">終わりに</h2>
+<p>レイアウトやペイントについて、調査をしていると、意図せずレイアウトやペイントを実行させていた人も、いるかもしれません。
+パフォーマンスは、必要になったときにチューニングすればよいと思いますが、基本知識として本記事についての情報は、知っておいて損はないと思います。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://gist.github.com/paulirish/5d52fb081b3570c81e3a">https://gist.github.com/paulirish/5d52fb081b3570c81e3a</a></li>
+<li><a href="https://dev.opera.com/articles/efficient-javascript/">https://dev.opera.com/articles/efficient-javascript/</a></li>
+</ul>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>ブラウザ</li><li>フロントエンド</li></ul></footer></article></main></body></html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一足遅れて Kubernetes を学び始める - 10. config&amp;storage その1 -</title><meta name="description" content="前回 一足遅れて Kubernetes を学び始める - 09. discovery&amp;LB その2 -では、様々なserviceを学習しました。今回は、config&amp;storageのconfigを学びます。"><meta name="keywords" content="クラウドインフラ,Kubernetes,config"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">17</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-23"><span class="visually-hidden">2019年5月23日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">23</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 10. config&amp;storage その1 -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
+<ol>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_01/">一足遅れて Kubernetes を学び始める - 01. 環境選択編 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_02/">一足遅れて Kubernetes を学び始める - 02. Docker For Mac -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_03/">一足遅れて Kubernetes を学び始める - 03. Raspberry Pi -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_04/">一足遅れて Kubernetes を学び始める - 04. kubectl -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_05/">一足遅れて Kubernetes を学び始める - 05. workloads その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_06/">一足遅れて Kubernetes を学び始める - 06. workloads その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_07/">一足遅れて Kubernetes を学び始める - 07. workloads その 3 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_08/">一足遅れて Kubernetes を学び始める - 08. discovery&amp;LB その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_09/">一足遅れて Kubernetes を学び始める - 09. discovery&amp;LB その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_10/">一足遅れて Kubernetes を学び始める - 10. config&amp;storage その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_11/">一足遅れて Kubernetes を学び始める - 11. config&amp;storage その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_12/">一足遅れて Kubernetes を学び始める - 12. リソース制限 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_13/">一足遅れて Kubernetes を学び始める - 13. ヘルスチェックとコンテナライフサイクル -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_14/">一足遅れて Kubernetes を学び始める - 14. スケジューリング -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_15/">一足遅れて Kubernetes を学び始める - 15. セキュリティ -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_16/">一足遅れて Kubernetes を学び始める - 16. コンポーネント -</a></li>
+</ol>
+<h2 id="前回">前回</h2>
+<p><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_09/">一足遅れて Kubernetes を学び始める - 09. discovery&amp;LB その 2 -</a>では、様々な service を学習しました。
+今回は、config&amp;storage の config を学びます。</p>
+<h2 id="configstorage">config&amp;storage</h2>
+<p>Kubernetes には、下記のようにリソースの種類が存在します。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left">リソースの分類</th>
+<th style="text-align: left">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left">Workloads リソース</td>
+<td style="text-align: left">コンテナの実行に関するリソース</td>
+</tr>
+<tr>
+<td style="text-align: left">Discovery＆LB リソース</td>
+<td style="text-align: left">コンテナを外部公開するようなエンドポイントを提供するリソース</td>
+</tr>
+<tr>
+<td style="text-align: left">Config＆Storage リソース</td>
+<td style="text-align: left">設定・機密情報・永続化ボリュームなどに関するリソース</td>
+</tr>
+<tr>
+<td style="text-align: left">Cluster リソース</td>
+<td style="text-align: left">セキュリティやクォータなどに関するリソース</td>
+</tr>
+<tr>
+<td style="text-align: left">Metadata リソース</td>
+<td style="text-align: left">リソースを操作する系統のリソース</td>
+</tr>
+</tbody>
+</table>
+<p>※ <a href="https://thinkit.co.jp/article/13610">Kubernetes の Workloads リソース（その 1）</a></p>
+<h2 id="環境変数">環境変数</h2>
+<p>静的設定や、Pod やコンテナの情報を設定、シークレットでの設定があるみたいです。</p>
+<pre><code class="language-yaml">## sample-env.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-env
+  labels:
+    app: sample-app
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:1.12
+      env:
+        - name: MAX_CONNECTION
+          value: "100"
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: LIMITS_CPU
+          valueFrom:
+            resourceFieldRef:
+              containerName: nginx-container
+              resource: limits.cpu
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-env.yaml
+pi@raspi001:~/tmp $ k exec -it sample-env env
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+...
+MAX_CONNECTION=100
+POD_IP=10.244.1.97
+LIMITS_CPU=4
+...
+</code></pre>
+<p>MAX_CONNECTION は、静的に設定できています。
+Pod やコンテナの設定は、POD_IP,KIMITS_CPU で設定できています。
+Pod やコンテナの情報は、<code>k get pods sample-env -o yaml</code>で得ることができます。ふむふむ。</p>
+<h2 id="secret">Secret</h2>
+<p>パスワードなどの機密情報を Secret で暗号化してくれます。
+手段の種類が下記のようにいくつかあります。</p>
+<ul>
+<li>Generic</li>
+<li>TLS</li>
+<li>Docker Repository</li>
+<li>Service Account</li>
+</ul>
+<p>Generic の場合は、スキーマレスなため、汎用性の高い指定が可能になります。それを使ってみようと思います。(TLS の場合は、tls.crt,tls.key が必要）</p>
+<p>使い方して、ファイル参照、envfile 参照、直接指定、マニュフェスト指定の４パターンです。それぞれ試してみます。</p>
+<h2 id="ファイル参照">ファイル参照</h2>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ echo -n "root" &gt; ./username
+pi@raspi001:~/tmp $ echo -n "rootpassword" &gt; ./password
+pi@raspi001:~/tmp $ k create secret generic --save-config sample-db-auth --from-file=./username --from-file=./password
+pi@raspi001:~/tmp $ sudo apt-get install jq
+pi@raspi001:~/tmp $ k get secrets sample-db-auth -o json | jq .data
+{
+  "password": "cm9vdHBhc3N3b3Jk",
+  "username": "cm9vdA=="
+}
+</code></pre>
+<h2 id="envfile-参照">envfile 参照</h2>
+<pre><code class="language-text">## env-secret.txt
+username=root
+password=rootpassword
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k create secret generic --save-config sample-db-auth2 --from-env-file ./env-secret.txt
+pi@raspi001:~/tmp $ k get secrets sample-db-auth2 -o json | jq .data
+{
+  "password": "cm9vdHBhc3N3b3Jk",
+  "username": "cm9vdA=="
+}
+</code></pre>
+<h2 id="直接指定">直接指定</h2>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k create secret generic --save-config sample-db-auth3 --from-literal=username=root --from-literal=password=rootpassword
+pi@raspi001:~/tmp $ k get secrets sample-db-auth3 -o json | jq .data
+{
+  "password": "cm9vdHBhc3N3b3Jk",
+  "username": "cm9vdA=="
+}
+</code></pre>
+<h2 id="マニュフェスト指定">マニュフェスト指定</h2>
+<pre><code class="language-yaml">## sample-db-auth.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sample-db-auth4
+type: Opaque
+data:
+  username: cm9vdA== # root
+  password: cm9vdHBhc3N3b3Jk # rootpassword
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-db-auth.yaml
+pi@raspi001:~/tmp $ k get secrets sample-db-auth4 -o json | jq .data
+{
+  "password": "cm9vdHBhc3N3b3Jk",
+  "username": "cm9vdA=="
+}
+</code></pre>
+<p>どれも、正しく動きましたね。プロダクトとしては使わないと思いますが、お試しで確認するには
+Generic は扱いやすくて良いですね。</p>
+<p>では、設定した値を使ってみましょう。</p>
+<h2 id="secret-の利用">Secret の利用</h2>
+<p>手段として、環境変数か Volume かの 2 つです。</p>
+<h2 id="環境変数から-secret-を使う">環境変数から Secret を使う</h2>
+<pre><code class="language-yaml">## sample-secret-single-env.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-secret-single-env
+spec:
+  containers:
+    - name: secret-container
+      image: nginx:1.12
+      env:
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: sample-db-auth
+              key: username
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-secret-single-env.yaml
+pi@raspi001:~/tmp $ k exec -it sample-secret-single-env env | grep DB_USERNAME
+DB_USERNAME=root
+</code></pre>
+<p>環境変数から使う場合、値が固定されてしまいます。（静的）</p>
+<h2 id="volume-から-secret-を使う">Volume から Secret を使う</h2>
+<pre><code class="language-yaml">## sample-secret-single-volume.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-secret-single-volume
+spec:
+  containers:
+    - name: secret-container
+      image: nginx:1.12
+      volumeMounts:
+        - name: config-volume
+          mountPath: /config
+  volumes:
+    - name: config-volume
+      secret:
+        secretName: sample-db-auth
+        items:
+          - key: username
+            path: username.txt
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-secret-single-volume.yaml
+pi@raspi001:~/tmp $ k exec -it sample-secret-single-volume cat /config/username.txt
+root
+</code></pre>
+<p>こちらは、動的に書き換えることができるそうです。逐次 Volume を見ているんでしょうね。（環境変数の場合、コンテン起動した時点で固定される）</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ cat &lt;&lt; EOF | k apply -f -
+&gt; apiVersion: v1
+&gt; kind: Secret
+&gt; metadata:
+&gt;   name: sample-db-auth
+&gt; type: Opaque
+&gt; data:
+&gt;  username: YMRtaW4=
+&gt;  # root &gt; admin
+&gt; EOF
+pi@raspi001:~/tmp $ k exec -it sample-secret-single-volume cat /config/username.txt
+amin
+</code></pre>
+<p>動的に書き換わっていますね。OK!</p>
+<p>※ admin の a が文字化けしていた…</p>
+<h2 id="configmap">ConfigMap</h2>
+<p>設定情報を Key-Value 形式で登録することができます。
+こちらも手段としては、ファイル参照、直接参照、マニフェスト参照があります。
+さっきと同じなので、ファイル参照のみ試してみます。</p>
+<pre><code class="language-text">## sample.txt
+hogehoge
+fugafuga
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k create configmap --save-config sample-configmap --from-file=./sample.txt
+pi@raspi001:~/tmp $ k get configmaps sample-configmap -o json | jq .data
+{
+  "sample.txt": "hogehoge\nfugafuga\n"
+}
+</code></pre>
+<p>secret と同じ感じですね。これって、どんなファイルでも(1MB まで)保存できちゃうそうです。
+secret と同様で、設定したデータは環境変数、Volume の２つから参照可能です。</p>
+<h2 id="お片付け">お片付け</h2>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-env.yaml -f sample-db-auth.yaml -f sample-secret-single-env.yaml -f sample-secret-single-volume.yaml
+pi@raspi001:~/tmp $ k delete secret sample-db-auth sample-db-auth2 sample-db-auth3
+pi@raspi001:~/tmp $ k delete configmap sample-configmap
+</code></pre>
+<h2 id="最後に">最後に</h2>
+<p>環境変数の設定方法について、学びました。
+個人開発で、外部サービスをアプリケーションに組み込む際、
+API_KEY を環境変数として登録して開発しています。
+今回は、Generic で Secret を保存しましたが、プロダクトでは、
+service_account を使うのが一般的なのでしょうか？</p>
+<p>次回は、Storage について学習します。
+<a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_11/">こちら</a>です。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>クラウドインフラ</li></ul></footer></article></main></body></html>

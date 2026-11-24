@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ERNIE-ViLG を Google Colaboratory で動かしてみた</title><meta name="description" content="ERNIE-ViLG というのが、&quot;二次元キャラ&quot; に強いという記事を目にしました。実際に使ってみようと、次のページで試したんですが、レスポンスがイマイチでした。そこで、次の記事を参考にして、ERNIE-ViLG を Google Colaboratory で動かすようにしました。"><meta name="keywords" content="AI,Google,クローリング"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">90</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-09-03"><span class="visually-hidden">2022年9月3日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">09</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span></span></time></p></div><div class="notebook-heading"><h1>ERNIE-ViLG を Google Colaboratory で動かしてみた</h1></div></header><div class="notebook-body"><p>ERNIE-ViLG というのが、“二次元キャラ” に強いという記事を目にしました。
+実際に使ってみようと、次のページで試したんですが、レスポンスがイマイチでした。</p>
+<ul>
+<li><a href="https://huggingface.co/spaces/PaddlePaddle/ERNIE-ViLG">https://huggingface.co/spaces/PaddlePaddle/ERNIE-ViLG</a></li>
+</ul>
+<p>そこで、<a href="https://github.com/PaddlePaddle/PaddleHub/tree/develop/modules/image/text_to_image/ernie_vilg">公式ページ</a>を参考にして、ERNIE-ViLG を Google Colaboratory を書こうと思いました。</p>
+<h2 id="google-colaboratory-で動かす">Google Colaboratory で動かす</h2>
+<p>実際に作ったものは、次のモノです。</p>
+<ul>
+<li><a href="https://colab.research.google.com/github/silverbirder/DEMO-PaddlePaddle-PaddleHub-ERNIE-ViLG/blob/main/src/DEMO_PaddlePaddle_PaddleHub_ERNIE_ViLG.ipynb">DEMO_PaddlePaddle_PaddleHub_ERNIE_ViLG</a></li>
+</ul>
+<p>中身については、正直良くわかっていないですが(<a href="https://github.com/PaddlePaddle/PaddleHub/tree/develop/modules/image/text_to_image/ernie_vilg">公式ページ</a> 通りに試しただけ)、簡単に紹介しようと思います。</p>
+<h2 id="準備">準備</h2>
+<p>次のコマンドを叩いて、ERNIE-ViLG の準備をします。(GPU 環境でないと動作しません)</p>
+<pre><code class="language-bash">pip install paddlepaddle-gpu -U
+pip install paddlehub==2.1.0
+</code></pre>
+<pre><code class="language-python">import paddlehub
+paddlehub.server_check()
+</code></pre>
+<pre><code class="language-bash">hub install ernie_vilg
+</code></pre>
+<h2 id="ernie-vilg-を使う">ERNIE-ViLG を使う</h2>
+<p>使うのは、2 つのパターンがあります。</p>
+<ol>
+<li>CLI で実行する(hub コマンド)</li>
+<li>Python で実行する(hub ライブラリ)</li>
+</ol>
+<p>CLI の場合は、次のとおりです。</p>
+<pre><code class="language-bash">hub run ernie_vilg --text_prompts "宁静的小镇" --style "油画" --output_dir ernie_vilg_out
+</code></pre>
+<p>Python の場合は、次のとおりです。</p>
+<pre><code class="language-python">import paddlehub as hub
+
+module = hub.Module(name="ernie_vilg")
+text_prompts = ["宁静的小镇"]
+images = module.generate_image(text_prompts=text_prompts, style='油画', output_dir='./ernie_vilg_out/')
+</code></pre>
+<p>オプションは、次の説明の通りです。</p>
+<ul>
+<li>text_prompts
+<ul>
+<li>生成したい画像の内容を記述した入力文</li>
+</ul>
+</li>
+<li>style
+<ul>
+<li>スタイルで画像を生成することが可能
+<ul>
+<li>油画 (油絵)</li>
+<li>水彩 (水彩画)</li>
+<li>粉笔画 (パステル)</li>
+<li>卡通 (漫画, カートゥーン)</li>
+<li>儿童画 (子供向け)</li>
+<li>蜡笔画 (クレヨン)</li>
+<li>探索无限 (無限大を探る)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>topk
+<ul>
+<li>生成する画像数（最大 6 枚）</li>
+</ul>
+</li>
+<li>output_dir
+<ul>
+<li>保存先のディレクトリ (デフォルト:ernievilg_output)</li>
+</ul>
+</li>
+</ul>
+<p>※ <a href="https://github.com/PaddlePaddle/PaddleHub/tree/develop/modules/image/text_to_image/ernie_vilg#3api">ERNIE-ViLG#API</a></p>
+<p>text_prompts や style は、中国語で書く必要があります。</p>
+<h2 id="google-colaboratory-で-画像を簡単に見たい">Google Colaboratory で 画像を簡単に見たい</h2>
+<p>ERNIE-ViLG を動かすと、出力ファイルが Google Colaboratory のフォルダに入ります。
+画像を見るためには、画像をダウンロードして、開くという手間があります。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/download_image_on_browser.png?ar=1854%3A1152" alt="download_image_on_browser" width="1854" height="1152" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/download_image_on_browser.png?ar=1854%3A1152 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/download_image_on_browser.png?ar=1854%3A1152 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/download_image_on_browser.png?ar=1854%3A1152 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/download_image_on_browser.png?ar=1854%3A1152 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/download_image_on_browser.png?ar=1854%3A1152 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/download_image_on_browser.png?ar=1854%3A1152 1280w" sizes="min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>そこで、フォルダを Google Drive と同期するという機能があります。
+これを使えば、保存先を Google Drive にしておけば、Google Drive の UI 上から画像を見ることができます。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/mount_google_drive.png?ar=2030%3A1254" alt="mount_google_drive" width="2030" height="1254" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/mount_google_drive.png?ar=2030%3A1254 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/mount_google_drive.png?ar=2030%3A1254 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/mount_google_drive.png?ar=2030%3A1254 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/mount_google_drive.png?ar=2030%3A1254 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/mount_google_drive.png?ar=2030%3A1254 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1662183656/silver-birder.github.io/blog/mount_google_drive.png?ar=2030%3A1254 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>めちゃくちゃ便利なので、ぜひ使ってみてください。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>AI</li><li>Google</li><li>クローリング</li></ul></footer></article></main></body></html>

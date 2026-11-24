@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>記事の表示サンプル</title><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">1</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2026-11-16T00:00:00+09:00"><span class="visually-hidden">2026年11月16日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2026</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">16</span></span></time></p></div><div class="notebook-heading"><h1>記事の表示サンプル</h1></div></header><div class="notebook-body"><p>見出し、本文、リスト、引用、コード、表、画像を一つの記事で見比べるためのサンプルです。各要素の行間、余白、折り返しと、その前後で罫線との位置が揃うかを確認します。</p>
+<h2 id="本文と文字の装飾">本文と文字の装飾</h2>
+<p>今日は少し肌寒かったので、散歩の前に温かいお茶をいれました。窓辺に置いたノートを開いて、昨日の出来事を短く書き留めます。長い文章が複数行に折り返されたときも、同じ間隔で落ち着いて読み進められるでしょうか。</p>
+<p>次の段落です。段落間の空きが一行分になり、文字が罫線の下側に沿って見えるかを確認します。句読点、かぎ括弧「こういう文字」、英数字の <code>ABC 123</code> も含めています。</p>
+<p>これは<strong>太字の文章</strong>、こちらは<em>斜体の文章</em>、そして<del>取り消し線の文章</del>です。</p>
+<p>文中のリンクは<a href="/blog/contents/20261101/">ブログの記事</a>へ移動します。長いURLが画面からはみ出さないかも確認します。</p>
+<p><a href="https://example.com/very/long/article/path/for/checking/how/a/link/wraps/inside/the/notebook/without/overflowing?category=notebook&amp;view=sample">https://example.com/very/long/article/path/for/checking/how/a/link/wraps/inside/the/notebook/without/overflowing?category=notebook&amp;view=sample</a></p>
+<p>ここで明示的に改行します。<br>
+改行後も、罫線との間隔が変わらないかを確認します。</p>
+<h2 id="見出しの階層">見出しの階層</h2>
+<p>このページのタイトルが見出し1、この行の上が見出し2です。</p>
+<h3 id="見出し3少し細かい話">見出し3：少し細かい話</h3>
+<p>見出しの直後に置いた段落です。見出しと本文で文字の大きさが変わっても、罫線の位置が途切れないかを確認します。</p>
+<h4 id="見出し4補足の話">見出し4：補足の話</h4>
+<p>本文へ戻ったときの読みやすさを確認します。</p>
+<h5 id="見出し5小さな区切り">見出し5：小さな区切り</h5>
+<p>短い段落を挟みます。</p>
+<h6 id="見出し6最も深い区切り">見出し6：最も深い区切り</h6>
+<p>深い階層の見出しです。</p>
+<h3 id="長い見出しが複数行に折り返されたときも文字と罫線が重ならずに読めるかを確認するための例">長い見出しが複数行に折り返されたときも、文字と罫線が重ならずに読めるかを確認するための例</h3>
+<p>折り返す見出しの次に置いた本文です。小さい画面でも前後の余白が自然につながるかを見ます。</p>
+<h2 id="箇条書き">箇条書き</h2>
+<ul>
+<li>短い項目です。</li>
+<li>長い項目です。二行以上に折り返されたとき、二行目以降の文字の位置と行間が揃うかを確認します。画面を狭くすると違いが分かりやすくなります。</li>
+<li>入れ子のある項目です。
+<ul>
+<li>二段目の項目です。</li>
+<li>二段目からさらに深くします。
+<ul>
+<li>三段目の項目です。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最後の項目は<strong>太字</strong>と<code>インラインコード</code>を含みます。</li>
+</ul>
+<p>リストが終わった後の本文です。リストの前後で余白が広がりすぎないかを確認します。</p>
+<h3 id="番号付きリスト">番号付きリスト</h3>
+<ol>
+<li>最初の手順です。</li>
+<li>次の手順は少し長めに書きます。一つの手順が何行かに折り返されたときに、番号と本文の位置関係が崩れないかを確認します。
+<ol>
+<li>手順の中の手順です。</li>
+<li>二つ目の小さな手順です。</li>
+</ol>
+</li>
+<li>最後の手順です。</li>
+</ol>
+<h3 id="段落を含むリスト">段落を含むリスト</h3>
+<ul>
+<li>
+<p>一つ目の項目の最初の段落です。</p>
+<p>同じ項目の中にある二つ目の段落です。段落間の空きと、次の項目との空きを見比べます。</p>
+</li>
+<li>
+<p>二つ目の項目です。</p>
+</li>
+</ul>
+<h2 id="引用">引用</h2>
+<blockquote>
+<p>ノートを開いて、今日の出来事を一つだけ書いてみます。引用が複数行に折り返されても、本文と同じ間隔で読めるでしょうか。</p>
+<p>引用の中の二つ目の段落です。</p>
+<ul>
+<li>引用の中の箇条書きです。</li>
+<li>もう一つの項目です。</li>
+</ul>
+<blockquote>
+<p>引用の中に、さらに引用を入れています。</p>
+</blockquote>
+</blockquote>
+<p>引用が終わった後の段落です。</p>
+<h2 id="コード">コード</h2>
+<p>文中の <code>const message = 'こんにちは';</code> が周囲の日本語と同じ行に収まるかを確認します。</p>
+<pre><code class="language-javascript">const notes = ['散歩に出かけた', '温かいお茶を飲んだ'];
+
+function summarize(items) {
+  return items.map((item, index) =&gt; `${index + 1}. ${item}`).join('\n');
+}
+
+console.log(summarize(notes));
+</code></pre>
+<p>コードブロックの直後に置いた段落です。ブロックの高さや余白の影響で、ここから罫線との位置がずれていないかを確認します。</p>
+<h3 id="横に長いコード">横に長いコード</h3>
+<pre><code class="language-text">This_is_a_deliberately_long_unbroken_line_for_checking_horizontal_scrolling_inside_a_code_block_without_widening_the_entire_article_or_clipping_its_surrounding_text.
+
+空行を挟んだ後の行です。
+</code></pre>
+<h2 id="表">表</h2>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>確認すること</th>
+<th>状態</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>見出し</td>
+<td>文字の大きさと前後の余白</td>
+<td>確認中</td>
+</tr>
+<tr>
+<td>リスト</td>
+<td>入れ子と折り返し</td>
+<td>確認中</td>
+</tr>
+<tr>
+<td>画像</td>
+<td>縦横比と表示サイズ</td>
+<td>確認中</td>
+</tr>
+</tbody>
+</table>
+<p>表の直後の本文です。表の各行だけでなく、本文へ戻ったときの罫線との位置も確認します。</p>
+<h3 id="横に広い表">横に広い表</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>月曜日</th>
+<th>火曜日</th>
+<th>水曜日</th>
+<th>木曜日</th>
+<th>金曜日</th>
+<th>土曜日</th>
+<th>日曜日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>朝の予定</td>
+<td>散歩と朝ごはん</td>
+<td>ノートを書く</td>
+<td>洗濯をする</td>
+<td>買い物に出る</td>
+<td>本を読む</td>
+<td>公園に行く</td>
+<td>ゆっくり休む</td>
+</tr>
+<tr>
+<td>夜の予定</td>
+<td>夕食を作る</td>
+<td>映画を見る</td>
+<td>片付けをする</td>
+<td>手紙を書く</td>
+<td>早めに寝る</td>
+<td>日記を書く</td>
+<td>翌週の準備</td>
+</tr>
+</tbody>
+</table>
+<h2 id="画像とキャプション">画像とキャプション</h2>
+<p>本文の流れを妨げない大きさに抑えた例です。画像を選ぶと元の画像を開きます。写真を切り抜かず、縦横比を保っています。</p>
+<h3 id="横長の画像">横長の画像</h3>
+<figure>
+  <a href="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_1280/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg">
+    <img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_416/q_auto/f_auto/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg" alt="開封前の布団のパッケージ" width="416" height="312" loading="lazy" decoding="async" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_208/q_auto/f_auto/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg 208w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_312/q_auto/f_auto/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg 312w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_416/q_auto/f_auto/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg 416w" sizes="auto, min(26rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))">
+  </a>
+  <figcaption>横長の写真。高さ312pxを目安に縮小した例です。</figcaption>
+</figure>
+<p>画像の次の段落です。画像とキャプションの高さが半端になっても、本文が罫線に戻るかを確認します。</p>
+<h3 id="縦長の画像">縦長の画像</h3>
+<figure>
+  <a href="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_1280/v1793534298/silver-birder.github.io/blog/potg6bbdpvg7uz9d3mvi.jpg">
+    <img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_234/q_auto/f_auto/v1793534298/silver-birder.github.io/blog/potg6bbdpvg7uz9d3mvi.jpg" alt="星と月の模様がある布団" width="234" height="312" loading="lazy" decoding="async" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_117/q_auto/f_auto/v1793534298/silver-birder.github.io/blog/potg6bbdpvg7uz9d3mvi.jpg 117w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_176/q_auto/f_auto/v1793534298/silver-birder.github.io/blog/potg6bbdpvg7uz9d3mvi.jpg 176w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_234/q_auto/f_auto/v1793534298/silver-birder.github.io/blog/potg6bbdpvg7uz9d3mvi.jpg 234w" sizes="auto, min(14.625rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))">
+  </a>
+  <figcaption>縦長の写真も同じ高さに抑えた例です。長いキャプションが二行以上に折り返されたときの行間と、本文へ戻る位置も確認します。</figcaption>
+</figure>
+<h3 id="小さな画像">小さな画像</h3>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_768/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg" alt="小さく表示した布団のパッケージ" data-notebook-rows="4" style="--notebook-image-rows: 4" loading="lazy" decoding="async" /></p>
+<p>画像の高さを罫線4行分に指定した例です。</p>
+<h2 id="区切り線">区切り線</h2>
+<p>ここから話題を切り替えます。</p>
+<hr>
+<p>区切り線を挟んだ後の本文です。ノートの罫線との見分けや、上下の余白を確認します。</p>
+<h2 id="最後の段落">最後の段落</h2>
+<p>一通りの要素を通り過ぎた後も、本文と罫線の位置が揃っているかを確認します。これは完成した装飾の見本ではなく、調整が必要なところを見つけるためのページです。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div></article></main></body></html>

@@ -1,0 +1,982 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>苦手なCSSを克服しよう</title><meta name="description" content="こんにちは。CSSは苦手ですか？私は苦手でした。苦手でしたが、実務を経験していくうちに、だんだんとできる範囲が増えていき楽しくなってきました。本記事では1つのサンプルページを見ながら、CSSをどう考えて使っているのか解説したいと思います。読者の皆さんの、CSSに対する苦手意識が少しでも克服できれば幸いです。サンプルページのセクションごとに独立して解説しているので、読みたいところだけ読んでくださいね。"><meta name="keywords" content="フロントエンド"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">141</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-07-27"><span class="visually-hidden">2025年7月27日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">07</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">27</span></span></time></p></div><div class="notebook-heading"><h1>苦手なCSSを克服しよう</h1></div></header><div class="notebook-body"><p>こんにちは。CSSは苦手ですか？私は苦手でした。
+苦手でしたが、実務を経験していくうちに、だんだんとできる範囲が増えていき楽しくなってきました。</p>
+<p>本記事では1つのサンプルページを見ながら、CSSをどう考えて使っているのか解説したいと思います。
+読者の皆さんの、CSSに対する苦手意識が少しでも克服できれば幸いです。</p>
+<p>サンプルページのセクションごとに独立して解説しているので、読みたいところだけ読んでくださいね。</p>
+<h2 id="サンプルページ">サンプルページ</h2>
+<p>サンプルページは、以下のURLにあります。</p>
+<ul>
+<li><a href="https://learn-layout.vercel.app">https://learn-layout.vercel.app</a></li>
+</ul>
+<p><a href="https://learn-layout.vercel.app"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663" alt="サンプルページ" width="2940" height="1663" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663 1280w" sizes="min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<p>サンプルページのソースコードは、以下のリポジトリにあります。
+勉強のお供に、お手元にダウンロードしておいてください。</p>
+<ul>
+<li><a href="https://github.com/silverbirder/learn-css">https://github.com/silverbirder/learn-css</a></li>
+</ul>
+<p>HTMLとCSSのみで作成しているため、ブラウザさえあればすぐに動かすことができます。
+また、JavaScriptは一切使用していません。</p>
+<h3 id="サンプルページの内容">サンプルページの内容</h3>
+<p>このサンプルページは、よくあるSaaSのランディングページを想定しています。
+サービス名は「CSS AI」で、AI駆動のCSSスタイリングプラットフォームを提供する架空のサービスです。
+このサンプルページのセクションは、以下のとおりです。</p>
+<ul>
+<li>ヒーローセクション
+<ul>
+<li>「CSS AI」のタイトル・サブタイトル・説明文・ボタンを画面全体に大きく表示</li>
+</ul>
+</li>
+<li>主要機能セクション
+<ul>
+<li>6つの機能をアイコン・タイトル・説明文でカード形式で紹介</li>
+</ul>
+</li>
+<li>対応技術セクション
+<ul>
+<li>GPT-4やClaudeなど複数の技術タグを横並び表示</li>
+</ul>
+</li>
+<li>デモセクション
+<ul>
+<li>左側にデモ動画、右側に3ステップの使用手順を解説</li>
+</ul>
+</li>
+<li>お客様の声セクション
+<ul>
+<li>複数のレビューカードを横スクロール可能な形で表示</li>
+</ul>
+</li>
+<li>料金プランセクション
+<ul>
+<li>スターター・プロ・エンタープライズの3つのプランを比較表示</li>
+</ul>
+</li>
+</ul>
+<p>どれも、よくあるランディングページのセクションだと思います。</p>
+<h3 id="サンプルページで学べること">サンプルページで学べること</h3>
+<p>個人の感想ですが、CSSを使って楽しくなってきたと実感したのは、 <strong>FlexboxやGridを使ったレイアウトができる</strong> ようになった頃からです。
+テキストや画像を思い通りの場所に配置できるようになると、楽しくなってきたのです。</p>
+<p>サンプルページでは、<a href="https://every-layout.dev/">Every Layout</a> を参考にしていて、よくあるレイアウトパターンを取り入れています。
+各セクションでは、以下のレイアウトを学ぶことができます。</p>
+<ul>
+<li>ヒーローセクション
+<ul>
+<li>タイトル、サブタイトル、説明文、ボタンを上下左右中央に配置しています。</li>
+</ul>
+</li>
+<li>主要機能セクション
+<ul>
+<li>主要機能を2行3列で表示し、横幅が狭くなると列数が減るようにしています。</li>
+</ul>
+</li>
+<li>対応技術セクション
+<ul>
+<li>技術タグを横に並べ、横幅が狭くなると折り返して表示するようにしています。</li>
+</ul>
+</li>
+<li>デモセクション
+<ul>
+<li>横幅が広いときは動画と説明を横に並べ、狭くなると動画が上、説明が下に落ちるようにしています。</li>
+</ul>
+</li>
+<li>お客様の声セクション
+<ul>
+<li>レビューカードを横に並べ、横幅が狭くなると横スクロールできるようにしています。</li>
+</ul>
+</li>
+<li>料金プランセクション
+<ul>
+<li>3つのプランを横並びにしつつ、ブラウザの横幅が狭くなると縦に並ぶようにしています。</li>
+</ul>
+</li>
+</ul>
+<p>また、本記事では解説しませんが、以下のコンテンツもあります。気になる方がいましたら、ぜひ<a href="https://github.com/silverbirder/learn-css">サンプルページのリポジトリ</a>を覗いてみてください。</p>
+<ul>
+<li>グローバルヘッダー
+<ul>
+<li>画面上部にヘッダー固定</li>
+<li>ある程度の横幅になると3本線のハンバーガーメニューに切り替わる</li>
+</ul>
+</li>
+<li>画面上部に戻るボタン
+<ul>
+<li>画面右下に、固定で配置</li>
+</ul>
+</li>
+</ul>
+<p>ぜひ、さまざまなブラウザサイズで確認してみてください！</p>
+<h3 id="サンプルページで学ばないこと">サンプルページで学ばないこと</h3>
+<p>学ばないことについて明記しておきます。</p>
+<p><strong>私がCSSの苦手意識になった1つが、CSSプロパティの多さです</strong> 。
+たくさんあるCSSプロパティの中から、どれを使ったら良いのか、正直使いこなせるとは思いませんでした。</p>
+<p>そこで、本記事ではレイアウトに関する以下のCSSプロパティを使います。
+各CSSプロパティのリンクは、MDN Web Docs（以降、MDNと呼称）のページを参照しています。
+サンプルページのCSSを読むときに、下記のMDNリンクを活用してくださいね。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/CSS/display">display</a>
+<ul>
+<li>flex関連
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/CSS/flex-direction">flex-direction</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/flex-wrap">flex-wrap</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/flex-basis">flex-basis</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/flex-grow">flex-grow</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/flex-shrink">flex-shrink</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/CSS/align-items">align-items</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/justify-content">justify-content</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/gap">gap</a></li>
+</ul>
+</li>
+<li>grid関連
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/CSS/grid-template-columns">grid-template-columns</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/grid-template-rows">grid-template-rows</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/grid-template-areas">grid-template-areas</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/CSS/grid-area">grid-area</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/grid-row">grid-row</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/gap">gap</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/row-gap">row-gap</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/column-gap">column-gap</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>位置関連
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/CSS/position">position</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/CSS/top">top</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/right">right</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/bottom">bottom</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/left">left</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/CSS/transform">transform</a></li>
+</ul>
+</li>
+<li>spacing関連
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/CSS/padding">padding</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/margin">margin</a></li>
+</ul>
+</li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/CSS/width">width</a>, <a href="https://developer.mozilla.org/ja/docs/Web/CSS/height">height</a></li>
+</ul>
+<h2 id="上記以外のcssプロパティは本記事では気にしないでください">上記以外のCSSプロパティは、本記事では気にしないでください</h2>
+<h2 id="前提となる知識">前提となる知識</h2>
+<p>サンプルページを学ぶ前に、CSSレイアウトについての前提知識をMDNを参考にして紹介します。
+本記事では、書字方向は横書きを前提としています。あまり覚える部分を増やしたくないからです。</p>
+<h3 id="ボックスモデル">ボックスモデル</h3>
+<p>HTMLをCSSでスタイリングする際、その要素をボックスモデルという長方形の形で表現します。
+ボックスモデルの説明は、以下の通りです。</p>
+<blockquote>
+<p>ブラウザーのレンダリングエンジンは文書をレイアウトする際に、それぞれの要素を標準的な CSS 基本ボックスモデルに基づいた長方形のボックスとして表現します。 CSS はこれらのボックスの寸法、位置、プロパティ（色、背景、境界の幅など）を決定します。<br>
+<a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model">https://developer.mozilla.org/ja/docs/Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model</a></p>
+</blockquote>
+<p>具体的な図は、以下の通りです。</p>
+<p><a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_548/q_auto/f_auto/v1693363991/silver-birder.github.io/blog/boxmodel.png?ar=548%3A386" alt="CSS 基本ボックスモデル入門 - CSS: カスケーディングスタイルシート | MDN" width="548" height="386" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_274/q_auto/f_auto/v1693363991/silver-birder.github.io/blog/boxmodel.png?ar=548%3A386 274w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_411/q_auto/f_auto/v1693363991/silver-birder.github.io/blog/boxmodel.png?ar=548%3A386 411w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_548/q_auto/f_auto/v1693363991/silver-birder.github.io/blog/boxmodel.png?ar=548%3A386 548w" sizes="auto, min(34.25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<p>ボックスモデルには、以下の4つ領域があります。</p>
+<ul>
+<li>コンテンツ領域
+<ul>
+<li>文字や画像などの実際のコンテンツ</li>
+</ul>
+</li>
+<li>境界領域
+<ul>
+<li>コンテンツの周りの線</li>
+<li>CSSプロパティ: border</li>
+</ul>
+</li>
+<li>パディング領域
+<ul>
+<li>コンテンツとボーダーの間のスペース</li>
+<li>CSSプロパティ: padding</li>
+</ul>
+</li>
+<li>マージン領域
+<ul>
+<li>ボーダーの外側のスペース</li>
+<li>CSSプロパティ: margin</li>
+</ul>
+</li>
+</ul>
+<p>実際にボックスモデルがどのようになっているかは、ブラウザにあるDevToolsを使うと確認できます。</p>
+<p><a href="https://developer.chrome.com/docs/devtools/css/reference?hl=ja#box-model"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1764465397/he-box-model-diagram-c955156cbf7bd_1920_pr2zrl.png?ar=2078%3A1312" alt="CSS 機能リファレンス | Chrome DevTools | Chrome for Developers" width="2078" height="1312" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1764465397/he-box-model-diagram-c955156cbf7bd_1920_pr2zrl.png?ar=2078%3A1312 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1764465397/he-box-model-diagram-c955156cbf7bd_1920_pr2zrl.png?ar=2078%3A1312 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1764465397/he-box-model-diagram-c955156cbf7bd_1920_pr2zrl.png?ar=2078%3A1312 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1764465397/he-box-model-diagram-c955156cbf7bd_1920_pr2zrl.png?ar=2078%3A1312 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1764465397/he-box-model-diagram-c955156cbf7bd_1920_pr2zrl.png?ar=2078%3A1312 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1764465397/he-box-model-diagram-c955156cbf7bd_1920_pr2zrl.png?ar=2078%3A1312 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<p>DevToolsを使うことで、paddingやmargin、borderの値が視覚的に確認できるようになります。</p>
+<h3 id="通常フローとブロックとインライン">通常フローとブロックとインライン</h3>
+<p>HTML要素は、aタグやspanタグのようなインライン要素、divタグやpタグのようなブロック要素という分け方があります。
+どの要素がブロック要素かインライン要素かは、<a href="html.spec.whatwg.org">HTML Standard - html.spec.whatwg.org</a>で “display” と検索すると分かります。
+HTML要素のブロック・インラインは、CSSのdisplayプロパティで変更できます。</p>
+<p>どのようにコンテンツが並ぶかというと、以下の図の様にブロックの場合は下方向に並び、インラインの場合は横方向に並びます。</p>
+<p><a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_display/Block_and_inline_layout_in_normal_flow"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_521/q_auto/f_auto/v1764465442/mdn-horizontal_b8fqjv.png?ar=521%3A382" alt="通常フローでのブロック及びインラインレイアウト - CSS: カスケーディングスタイルシート | MDN" width="521" height="382" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_261/q_auto/f_auto/v1764465442/mdn-horizontal_b8fqjv.png?ar=521%3A382 261w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_391/q_auto/f_auto/v1764465442/mdn-horizontal_b8fqjv.png?ar=521%3A382 391w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_521/q_auto/f_auto/v1764465442/mdn-horizontal_b8fqjv.png?ar=521%3A382 521w" sizes="auto, min(32.5625rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<h4 id="ブロック要素とインライン要素の仕様">ブロック要素とインライン要素の仕様</h4>
+<p>ブロック要素とインライン要素についての仕様があります。
+このセクションは読み飛ばしてもらっても構いませんが、知識として知っておくと良いでしょう。</p>
+<p>まず、ブロック要素の仕様は、以下の通りです。</p>
+<blockquote>
+<p>既定では、 <strong>ブロック要素はインライン方向の空間をすべて消費する</strong> ので、段落は広がり、包含ブロックの中で可能な限り大きくなります。ブロック要素に幅を設定した場合、段落が横に並ぶ空間があったとしても、 <strong>段落は下へ下へと配置されます</strong> 。それぞれは包含ブロックの先頭側の反対側から始まりますので、その書字方向で文章が始まる場所になります。<br>
+<a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_display/Block_and_inline_layout_in_normal_flow">https://developer.mozilla.org/ja/docs/Web/CSS/CSS_display/Block_and_inline_layout_in_normal_flow</a></p>
+</blockquote>
+<p>ブロック要素は、下に下に配置され、横幅いっぱいに広がります。</p>
+<p>また、マージンの相殺という仕様もあります。</p>
+<blockquote>
+<p>仕様書では、ブロック要素間のマージンは相殺されると説明されています。つまり、 <strong>上マージンを持つ要素がに下マージンを持つ要素の直後に来た場合</strong> 、空間の合計はこれら 2 つのマージンの合計になるのではなく、 <strong>マージンが相殺</strong> され、本質的には 2 つのマージンのうち <strong>大きい方のマージン</strong> と同じくらいの大きさになるということです。<br>
+<a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_display/Block_and_inline_layout_in_normal_flow">https://developer.mozilla.org/ja/docs/Web/CSS/CSS_display/Block_and_inline_layout_in_normal_flow</a></p>
+</blockquote>
+<p>インラインの場合、以下の仕様があります。</p>
+<blockquote>
+<p>.  インライン要素は、その特定の書字方向で文章が進む方向に次々と表示されます。インライン要素がボックスを持っていると考えることはあまりありませんが、 CSS のすべての要素と同様にボックスを持っています。これらのインラインボックスは、次から次へと配置されています。 <strong>すべてのボックスを含むブロックに十分な空間がない場合、ボックスは新しい行に分割されます</strong> 。生成された行は行ボックスと呼ばれています<br>
+<a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_display/Block_and_inline_layout_in_normal_flow">https://developer.mozilla.org/ja/docs/Web/CSS/CSS_display/Block_and_inline_layout_in_normal_flow</a></p>
+</blockquote>
+<p>当たり前ですが、インライン要素は横いっぱいまで広がると、折り返して次の行に配置されます。</p>
+<h3 id="フレックスボックスレイアウト">フレックスボックスレイアウト</h3>
+<p>ブロック・インライン要素は、単純に1つ並べるだけです。
+しかしそう単純なレイアウトは少ないかと思います。縦横自由に配置したい時があります。</p>
+<p>そこで、フレックスボックスレイアウトの出番です。私は、この <strong>フレックスボックスレイアウトを使い慣れることで、苦手意識が少しずつ克服できました</strong> 。</p>
+<p>フレックスボックスレイアウトの説明は、以下の通りです。</p>
+<blockquote>
+<p>CSS フレックスボックスレイアウト (CSS flexible box layout) は、ユーザーインターフェイスの設計に最適化された CSS ボックスモデルと、 <strong>一次元のアイテムのレイアウト</strong> を定義します。フレックスレイアウトモデルでは、フレックスコンテナーの子は任意の方向にレイアウトすることができ、また使われていない空間を埋めるために伸長したり、あるいは親のあふれることを避けるために収縮したりと、 <strong>そのサイズを「伸縮」することができます</strong> 。子の水平方向と垂直方向の両方の整列を、容易に操作することが可能です。<br>
+<a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_flexible_box_layout">https://developer.mozilla.org/ja/docs/Web/CSS/CSS_flexible_box_layout</a></p>
+</blockquote>
+<p>フレックスボックスレイアウトの例は、以下の図の通りです。</p>
+<p><a href="https://developer.mozilla.org/ja/docs/Learn_web_development/Core/CSS_layout/Flexbox"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_563/q_auto/f_auto/v1764465481/flex_terms_om58mi.png?ar=563%3A333" alt="フレックスボックス - ウェブ開発の学習 | MDN" width="563" height="333" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_282/q_auto/f_auto/v1764465481/flex_terms_om58mi.png?ar=563%3A333 282w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_423/q_auto/f_auto/v1764465481/flex_terms_om58mi.png?ar=563%3A333 423w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_563/q_auto/f_auto/v1764465481/flex_terms_om58mi.png?ar=563%3A333 563w" sizes="auto, min(35.1875rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<p>display: flex を指定した要素は、フレックスコンテナとなり、子要素を任意の方向に配置できます。
+以下のように、flex-directionというCSSプロパティを使うことで、横に並べるか縦に並べるか自由に決めることができます。</p>
+<p><a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox"><img src="https://res.cloudinary.com/silverbirder/image/upload/v1764465511/basics1_wibboh.svg?ar=1225.324%3A347.782" alt="フレックスボックスの基本概念 - CSS: カスケーディングスタイルシート | MDN"></a></p>
+<p><a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox"><img src="https://res.cloudinary.com/silverbirder/image/upload/v1764465542/basics2_kd0wdl.svg?ar=500.2%3A612.185" alt="フレックスボックスの基本概念 - CSS: カスケーディングスタイルシート | MDN"></a></p>
+<p>フレックスボックスレイアウトの特徴は、 <strong>伸縮性</strong> です。
+CSSプロパティの flex-grow (フレックス成長率)、flex-shrink (フレックス縮小係数)、flex-basis (初期の寸法) を使うことで、アイテムのサイズを伸ばしたり縮めたりできます。
+これは、レスポンシブデザインを実現する上で非常に便利です。
+サンプルページでは、 <strong>デモセクションや料金プランセクションでこの伸縮性の特性を活用しています</strong> 。</p>
+<p>以下は、伸縮性の例です。以下のように、フレックスコンテナの中に3つのフレックスアイテムがある場合を考えます。</p>
+<p><a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_flexible_box_layout/Controlling_ratios_of_flex_items_along_the_main_axis"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_634/q_auto/f_auto/v1764465611/ratios2_jdsfpu.png?ar=634%3A100" alt="主軸方向のフレックスアイテムの比率の制御 - CSS: カスケーディングスタイルシート | MDN" width="634" height="100" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_317/q_auto/f_auto/v1764465611/ratios2_jdsfpu.png?ar=634%3A100 317w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_476/q_auto/f_auto/v1764465611/ratios2_jdsfpu.png?ar=634%3A100 476w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_634/q_auto/f_auto/v1764465611/ratios2_jdsfpu.png?ar=634%3A100 634w" sizes="auto, min(39.625rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<p>右側のスペースが開いているため、フレックスアイテムはそのスペースを埋めるように伸びます。</p>
+<p><a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_flexible_box_layout/Controlling_ratios_of_flex_items_along_the_main_axis"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_634/q_auto/f_auto/v1764465611/ratios3_zhshmo.png?ar=634%3A100" alt="主軸方向のフレックスアイテムの比率の制御 - CSS: カスケーディングスタイルシート | MDN" width="634" height="100" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_317/q_auto/f_auto/v1764465611/ratios3_zhshmo.png?ar=634%3A100 317w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_476/q_auto/f_auto/v1764465611/ratios3_zhshmo.png?ar=634%3A100 476w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_634/q_auto/f_auto/v1764465611/ratios3_zhshmo.png?ar=634%3A100 634w" sizes="auto, min(39.625rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<p>ちなみに、以下の図のようにフレックスボックスはDevToolsで可視化することができます。</p>
+<p><a href="https://developer.chrome.com/docs/devtools/css/flexbox?hl=ja#examine"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196" alt="CSS Flexbox レイアウトを検査してデバッグする | Chrome DevTools | Chrome for Developers" width="1998" height="1196" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<h3 id="グリッドレイアウト">グリッドレイアウト</h3>
+<p>他のレイアウト方法として、グリッドレイアウトがあります。
+フレックスボックスレイアウトの様な伸縮性はありませんが、 <strong>グリッドレイアウトは2次元のレイアウト</strong> が得意です。1次元ももちろん含まれます。</p>
+<p>グリッドレイアウトの説明は、以下の通りです。</p>
+<blockquote>
+<p>CSS グリッドレイアウト (Grid Layout) は、ウェブ用の 2 次元レイアウトシステムです。 コンテンツを行と列に整理することができ、複雑なレイアウトの作成を簡素化する多くの機能を提供します。<br>
+<a href="https://developer.mozilla.org/ja/docs/Learn_web_development/Core/CSS_layout/Grids">https://developer.mozilla.org/ja/docs/Learn_web_development/Core/CSS_layout/Grids</a>
+グリッドとは、水平方向と垂直方向の線を集めたもので、デザイン要素を並べて表示することができます。 ページ間を移動するときに要素が跳び回ったり幅が変わったりしないようなデザインを作成するのに役立ちます。<br>
+<a href="https://developer.mozilla.org/ja/docs/Learn_web_development/Core/CSS_layout/Grids#%E3%82%B0%E3%83%AA%E3%83%83%E3%83%89%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88%E3%81%A8%E3%81%AF">https://developer.mozilla.org/ja/docs/Learn_web_development/Core/CSS_layout/Grids#%E3%82%B0%E3%83%AA%E3%83%83%E3%83%89%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88%E3%81%A8%E3%81%AF</a></p>
+</blockquote>
+<p>グリッドの例としては、以下の図のように行・列を簡単に定義できます。</p>
+<p><a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_grid_layout/Basic_concepts_of_grid_layout#%E3%82%B0%E3%83%AA%E3%83%83%E3%83%89%E3%82%BB%E3%83%AB"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196" alt="グリッドレイアウトの基本概念 - CSS: カスケーディングスタイルシート | MDN" width="1998" height="1196" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1764465642/change-justify-content-f-c2b95dc213b96_1920_wvrkvs.png?ar=1998%3A1196 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<p>グリッドを使えば、ヘッダー、サイドバー、メイン、フッターといった以下のようなレイアウトも簡単に構築できます。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446214/silver-birder.github.io/blog/grid-sample-article.png?ar=1508%3A1150" alt="グリッドレイアウトのサンプル" width="1508" height="1150" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446214/silver-birder.github.io/blog/grid-sample-article.png?ar=1508%3A1150 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446214/silver-birder.github.io/blog/grid-sample-article.png?ar=1508%3A1150 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446214/silver-birder.github.io/blog/grid-sample-article.png?ar=1508%3A1150 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446214/silver-birder.github.io/blog/grid-sample-article.png?ar=1508%3A1150 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446214/silver-birder.github.io/blog/grid-sample-article.png?ar=1508%3A1150 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446214/silver-birder.github.io/blog/grid-sample-article.png?ar=1508%3A1150 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>ちなみに、以下の図のようにグリッドレイアウトはDevToolsで可視化することができます。</p>
+<p><a href="https://developer.chrome.com/docs/devtools/css/grid?hl=ja"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1764465704/layout-pane-7a3117d2d859_1920_fqcisu.png?ar=2582%3A1690" alt="CSS グリッド レイアウトを検査する | Chrome DevTools | Chrome for Developers" width="2582" height="1690" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1764465704/layout-pane-7a3117d2d859_1920_fqcisu.png?ar=2582%3A1690 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1764465704/layout-pane-7a3117d2d859_1920_fqcisu.png?ar=2582%3A1690 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1764465704/layout-pane-7a3117d2d859_1920_fqcisu.png?ar=2582%3A1690 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1764465704/layout-pane-7a3117d2d859_1920_fqcisu.png?ar=2582%3A1690 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1764465704/layout-pane-7a3117d2d859_1920_fqcisu.png?ar=2582%3A1690 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1764465704/layout-pane-7a3117d2d859_1920_fqcisu.png?ar=2582%3A1690 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<h3 id="重ね合わせコンテキスト">重ね合わせコンテキスト</h3>
+<p>フレックスボックスやグリッドレイアウトは、通常フローで要素を配置します。
+通常フローとは別に、重ね合わせコンテキスト（stacking context）という概念があります。</p>
+<p>重ね合わせコンテキストの説明は、以下の通りです。</p>
+<blockquote>
+<p>.  重ね合わせコンテキスト (Stacking context) は、ビューポートまたはウェブページに面していると想定されるユーザーに対する <strong>仮想的な Z 軸に沿って並べられた HTML 要素の三次元の概念化</strong> です。 HTML 要素は、要素の属性に基づいてこの空間を優先度つきの順序で占有します
+<a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_positioned_layout/Stacking_context">https://developer.mozilla.org/ja/docs/Web/CSS/CSS_positioned_layout/Stacking_context</a></p>
+</blockquote>
+<p>Z軸の高い位置が前面に表示され、Z軸の低い位置が背面に表示されます。<br>
+Z軸の同じ位置にある要素は、重なり順序を考慮する必要があります。z-indexで重なり順序を変更できます。</p>
+<p>重ね合わせコンテキストは、<a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_positioned_layout/Stacking_context#%E8%A7%A3%E8%AA%AC">重ね合わせコンテキスト - CSS: カスケーディングスタイルシート | MDN</a> に書いてある通り、以下のような場合に生成されます。</p>
+<ul>
+<li>position の値が absolute または relative であり、かつ z-index の値が auto 以外の要素</li>
+<li>position の値が fixed または sticky の要素（sticky はすべてのモバイルブラウザーにありますが、古いデスクトップブラウザーにはありません）。</li>
+<li>省略</li>
+</ul>
+<p>このあたりは、文章で説明するよりも実践を通して学ぶ方が理解しやすいと思いますので、 <strong>雰囲気だけ掴んでおいてください</strong> 。（私自身が説明できるほど理解していないので）</p>
+<p>よくあるケースとしては、positionプロパティを使った位置指定です。以下のHTMLが定番かと思います。</p>
+<pre><code class="language-html">&lt;!-- 親要素 --&gt;
+&lt;div style="position: relative;"&gt;
+  &lt;!-- 子要素は、親の相対位置を基準に絶対位置で配置されます --&gt;
+  &lt;div style="position: absolute; top: 0; left: 0;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>起点となる親要素に position: relative を指定し、子要素に position: absolute を指定することで、親要素の位置を基準に子要素を配置できます。</p>
+<h3 id="ブラウザに計算させる">ブラウザに計算させる</h3>
+<p>レイアウトを構築していくと、widthを100pxのように絶対値（固定）で定義することがあります。
+これは、特定のブラウザサイズであればうまくいくかもしれません。
+しかし、以下のような問題が発生する可能性があります。</p>
+<ul>
+<li>ブラウザの縦横の幅が変わると、レイアウトが崩れる</li>
+<li>表示するデータが変動すると、レイアウトが崩れる</li>
+</ul>
+<p>そのため、できる限りブラウザに計算させる方法をお勧めします。
+具体的には、以下のような方法があります。</p>
+<ul>
+<li>単位を%やdvw、cqwなど相対単位を積極的に使用する
+<ul>
+<li>max-widthで固定値で制限値をかける</li>
+</ul>
+</li>
+<li>calc()を使用して、計算させる
+<ul>
+<li>calc(100% - 20px)のように、相対値と固定値を組み合わせる</li>
+</ul>
+</li>
+</ul>
+<p>もし固定で値を定義した際には、 <strong>“ブラウザサイズやデータが変わったらどうなるのか？”</strong> を想像しましょう。</p>
+<h2 id="サンプルページのセクション">サンプルページのセクション</h2>
+<p>長くなりましたが、それではサンプルページのセクションを見ていきましょう。
+再掲ですが、サンプルページとリポジトリは以下のURLにあります。</p>
+<ul>
+<li><a href="https://learn-layout.vercel.app">https://learn-layout.vercel.app</a></li>
+<li><a href="https://github.com/silverbirder/learn-css">https://github.com/silverbirder/learn-css</a></li>
+</ul>
+<h3 id="共通変数">共通変数</h3>
+<p>サンプルページでは、スペースや色、フォントサイズをCSS変数で定義しています。
+これは、CSSの値を設定する際に、var(–spacing-xs) のように使用します。
+決まったスペースやフォントサイズを決めておくと、全体のデザインが統一されるため、お勧めです。</p>
+<h3 id="全体セクション">全体セクション</h3>
+<p>ヒーローやヘッダー・フッターを除いたセクションは、以下のHTMLで囲むようにしています。</p>
+<pre><code class="language-html">&lt;div class="container"&gt;
+  &lt;section&gt;
+    &lt;h2&gt;タイトル&lt;/h2&gt;
+    &lt;div&gt;コンテンツ&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;section&gt;
+    &lt;h2&gt;タイトル&lt;/h2&gt;
+    &lt;div&gt;コンテンツ&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- 省略 --&gt;
+&lt;/div&gt;
+</code></pre>
+<p>各セクションには、セクションタイトルとコンテンツが含まれています。
+全体のレイアウトを整えるため、横幅の制限と左右中央寄せを行います。
+横幅制限をかけないと、画面横いっぱいにコンテンツが広がってしまうため、視線が散漫になってしまいます。
+そのため、横幅制限をかけることで、規則的なレイアウトを実現できます。</p>
+<p>具体的なCSSは、以下のとおりです。</p>
+<pre><code class="language-css">.container {
+  /* 横幅を制限します */
+  max-width: var(--breakpoint-desktop);
+  /* 横幅を左右中央寄せにします */
+  margin-left: auto;
+  margin-right: auto;
+}
+</code></pre>
+<h2 id="ヒーロー">ヒーロー</h2>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663" alt="ヒーローセクション - laptop" width="2940" height="1663" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-laptop.png?ar=2940%3A1663 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-mobile.png?ar=1290%3A2796" alt="ヒーローセクション - mobile" width="1290" height="2796" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-mobile.png?ar=1290%3A2796 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-mobile.png?ar=1290%3A2796 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-mobile.png?ar=1290%3A2796 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-mobile.png?ar=1290%3A2796 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-mobile.png?ar=1290%3A2796 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-hero-mobile.png?ar=1290%3A2796 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>ヒーローセクションは、でかでかとタイトルを目立つ様に配置しています。
+上記画像から、自分ならどう作るか、HTMLとCSSを想像してみましょう。
+想像してみると、以下について気づくかもしれません。</p>
+<ul>
+<li>画面全体に広がっている</li>
+<li>画面の上下左右中央に配置されている</li>
+<li>3つの要素が縦に並んでいる
+<ul>
+<li>タイトルとサブタイトル</li>
+<li>説明文</li>
+<li>ボタン</li>
+</ul>
+</li>
+</ul>
+<p>まず、以下のHTMLを書いてみたとしましょう。
+HTMLはトップダウンで書いていき、関連しそうな要素を適切なタグでグループ化しています。</p>
+<pre><code class="language-html">&lt;section class="hero-cover"&gt;
+  &lt;main class="hero-container"&gt;
+    &lt;hgroup&gt;
+      &lt;h1&gt;CSS AI&lt;/h1&gt;
+      &lt;p&gt;AI駆動CSSスタイリング&lt;wbr /&gt;プラットフォーム&lt;/p&gt;
+    &lt;/hgroup&gt;
+    &lt;div&gt;
+      &lt;p&gt;
+        次世代AIがあなたのCSSを自動最適化。
+      &lt;/p&gt;
+      &lt;p&gt;
+        自然言語でスタイルを指定するだけで、美しいCSSコードを瞬時に生成します。
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="cluster"&gt;
+      &lt;button&gt;今すぐ始める&lt;/button&gt;
+      &lt;button&gt;詳細を見る&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+&lt;/section&gt;
+</code></pre>
+<p>次は、CSSを書いてみましょう。CSSには、それぞれコメントを残しています。</p>
+<pre><code class="language-css">.hero-cover {
+  /* 上下左右中央の配置します。 */
+  /* 他にも方法は色々ありますが、こちらの書き方がシンプルで良いでしょう */
+  display: grid;
+  place-items: center;
+
+  /* 最小の高さを、ビューポートの最大まで広げます */
+  min-height: 100dvh;
+}
+
+.hero-container {
+  /* 左右中央寄せにしつつ、コンテンツの横を制限させます */
+  display: grid;
+  /* 1列で、横幅いっぱいに表示します */
+  grid-template-columns: 1fr;
+  /* 左右中央寄せにします */
+  justify-items: center;
+  /* 横幅を制限します */
+  max-width: var(--breakpoint-desktop);
+
+  /* 余白の調整 */
+  gap: var(--spacing-lg); /* 子要素の間隔を指定 */
+  padding: 0 var(--spacing-base); /* 左右の余白を指定 */
+}
+
+.cluster {
+  /* ボタンを単純に横に並べる */
+  display: flex;
+  /* ボタンを折り返す */
+  /* ボタンが増えたり、横幅が狭くなると効果を発揮します */
+  flex-wrap: wrap;
+
+  /* 余白の調整 */
+  gap: var(--spacing-sm);
+}
+</code></pre>
+<p>dvh などの単位は、<a href="https://developer.mozilla.org/ja/docs/Web/CSS/length">length - CSS: カスケーディングスタイルシート | MDN</a>を参照してください。</p>
+<h2 id="主要機能">主要機能</h2>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-laptop.png?ar=2940%3A1663" alt="主要機能セクション - laptop" width="2940" height="1663" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-laptop.png?ar=2940%3A1663 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-laptop.png?ar=2940%3A1663 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-laptop.png?ar=2940%3A1663 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-laptop.png?ar=2940%3A1663 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-laptop.png?ar=2940%3A1663 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-laptop.png?ar=2940%3A1663 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-mobile.png?ar=1290%3A2796" alt="主要機能セクション - mobile" width="1290" height="2796" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-mobile.png?ar=1290%3A2796 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-mobile.png?ar=1290%3A2796 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-mobile.png?ar=1290%3A2796 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-mobile.png?ar=1290%3A2796 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-mobile.png?ar=1290%3A2796 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-features-mobile.png?ar=1290%3A2796 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>主要機能セクションでは、このサービスが提供する機能を6つ紹介します。
+6つの主要機能を横2行3列で表示します。各機能には、アイコンとタイトル、説明があります。</p>
+<p>上記画像から、自分ならどう作るか、HTMLとCSSを想像してみましょう。
+想像してみると、以下について気づくかもしれません。</p>
+<ul>
+<li>2行3列の2次元グリッドが扱いやすそう
+<ul>
+<li>横幅に応じて、3行2列、1行6列、と変化させたい</li>
+</ul>
+</li>
+<li>機能の中のコンテンツは、シンプルに上から下に並べる</li>
+</ul>
+<p>まず、以下のHTMLを書いてみたとしましょう。
+HTMLはトップダウンで書いていき、関連しそうな要素を適切なタグでグループ化しています。</p>
+<pre><code class="language-html">&lt;section class="section"&gt;
+  &lt;h2&gt;主要機能&lt;/h2&gt;
+  &lt;div class="feature-grid"&gt;
+    &lt;div class="feature-card"&gt;
+      &lt;div class="card-icon"&gt;🤖&lt;/div&gt;
+      &lt;h3 class="card-title"&gt;AI CSS生成&lt;/h3&gt;
+      &lt;p class="card-description"&gt;
+        自然言語でデザインを記述するだけで、最適化されたCSSコードを自動生成。
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="feature-card"&gt;
+      &lt;div class="card-icon"&gt;🎨&lt;/div&gt;
+      &lt;h3 class="card-title"&gt;スマートスタイル提案&lt;/h3&gt;
+      &lt;p class="card-description"&gt;
+        AIがデザインパターンを分析し、美しいスタイルを自動提案。クリエイティブな発想をサポート。
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;!-- 省略 --&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre>
+<p>次は、CSSを書いてみましょう。CSSには、それぞれコメントを残しています。</p>
+<pre><code class="language-css">.section {
+  display: grid;
+  /* 1列で、横幅いっぱいに表示します */
+  grid-template-columns: 1fr;
+
+  /* 余白の調整 */
+  gap: var(--spacing-md); /* 見出しとコンテンツの間隔を指定 */
+}
+
+.feature-grid {
+  /* 列数を変更しやすいように、ローカル変数に定義 */
+  --_column: 1;
+
+  display: grid;
+  /* 指定する列数で分割 */
+  grid-template-columns: repeat(var(--_column), 1fr);
+
+  /* 余白の調整 */
+  gap: var(--spacing-sm); /* 各機能の間隔を指定 */
+
+  /* tabletの列数 */
+  @media (min-width: 40rem) {
+    --_column: 2;
+  }
+
+  /* laptopの列数 */
+  @media (min-width: 48rem) {
+    --_column: 3;
+  }
+}
+
+.feature-card {
+  display: grid;
+  /* 親グリッドから子グリッドを入れ子にします */
+  grid-template-rows: subgrid;
+
+  /* グリッドアイテムを縦に並べる */
+  grid-template-areas:
+    "icon"
+    "title"
+    "description";
+
+  /* サブグリッドとして、3つの行があることを明示 */
+  grid-row: span 3;
+
+  /* 余白の調整 */
+  padding: var(--spacing-base); /* 自身のカードの内側の余白を指定 */
+
+  /* 装飾 */
+  border: 1px solid var(--color-border); /* 枠線の装飾 */
+}
+
+.card-icon {
+  /* grid-template-areasで指定された名前を定義する */
+  grid-area: icon;
+}
+
+.card-title {
+  /* grid-template-areasで指定された名前を定義する */
+  grid-area: title;
+}
+
+.card-description {
+  /* grid-template-areasで指定された名前を定義する */
+  grid-area: description;
+}
+</code></pre>
+<p>サブグリッドについては、<a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_grid_layout/Subgrid">サブグリッド - CSS: カスケーディングスタイルシート | MDN</a>を参照してください。<br>
+サブグリッドを使うことで、機能カードの中のアイコン、タイトル、説明文が縦のラインで揃うようになります。
+これは、例えば、1つのタイトルが2行になった場合、全体のタイトルの行が2行となり縦のラインが維持され、重宝します。</p>
+<h3 id="対応技術">対応技術</h3>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-laptop.png?ar=2940%3A1663" alt="対応技術セクション - laptop" width="2940" height="1663" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-laptop.png?ar=2940%3A1663 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-laptop.png?ar=2940%3A1663 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-laptop.png?ar=2940%3A1663 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-laptop.png?ar=2940%3A1663 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-laptop.png?ar=2940%3A1663 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-laptop.png?ar=2940%3A1663 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-mobile.png?ar=1290%3A2796" alt="対応技術セクション - mobile" width="1290" height="2796" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-mobile.png?ar=1290%3A2796 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-mobile.png?ar=1290%3A2796 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-mobile.png?ar=1290%3A2796 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-mobile.png?ar=1290%3A2796 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-mobile.png?ar=1290%3A2796 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-support-tech-mobile.png?ar=1290%3A2796 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>対応技術セクションでは、たくさんの技術タグを横に並べて表示しています。技術タグはこれからも増えていく可能性があります。</p>
+<p>上記画像から、自分ならどう作るか、HTMLとCSSを想像してみましょう。 想像してみると、以下について気づくかもしれません。</p>
+<ul>
+<li>技術タグは左右中央に配置されている</li>
+<li>横がある一定を超えると、下に折り返されている</li>
+</ul>
+<p>まず、以下のHTMLを書いてみたとしましょう。 HTMLはトップダウンで書いていき、関連しそうな要素を適切なタグでグループ化しています。</p>
+<pre><code class="language-html">&lt;section class="section"&gt;
+  &lt;h2&gt;対応技術&lt;/h2&gt;
+  &lt;div class="cluster"&gt;
+    &lt;span class="tech-tag"&gt;GPT-4&lt;/span&gt;
+    &lt;span class="tech-tag"&gt;Claude&lt;/span&gt;
+    &lt;!-- 省略 --&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre>
+<p>次は、CSSを書いてみましょう。CSSには、それぞれコメントを残しています。</p>
+<pre><code class="language-css">.section {
+  display: grid;
+  /* 1列で、横幅いっぱいに表示します */
+  grid-template-columns: 1fr;
+
+  /* 余白の調整 */
+  gap: var(--spacing-md); /* 見出しとコンテンツの間隔を指定 */
+}
+
+.cluster {
+  /* ボタンを単純に横に並べる */
+  display: flex;
+  /* ボタンを折り返す */
+  /* ボタンが増えたり、横幅が狭くなると効果を発揮します */
+  flex-wrap: wrap;
+  /* 左右中央に寄せる */
+  justify-content: center;
+
+  /* 余白の調整 */
+  gap: var(--spacing-sm); /* タグの間隔を指定 */
+}
+
+.tech-tag {
+  /* 余白の調整 */
+  padding: var(--spacing-xs) var(--spacing-sm); /* タグの内側の余白を指定 */
+
+  /* 装飾 */
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+</code></pre>
+<h3 id="デモ">デモ</h3>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-laptop.png?ar=2940%3A1663" alt="デモセクション - laptop" width="2940" height="1663" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-laptop.png?ar=2940%3A1663 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-laptop.png?ar=2940%3A1663 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-laptop.png?ar=2940%3A1663 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-laptop.png?ar=2940%3A1663 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-laptop.png?ar=2940%3A1663 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-laptop.png?ar=2940%3A1663 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-mobile.png?ar=1290%3A2796" alt="デモセクション - mobile" width="1290" height="2796" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-mobile.png?ar=1290%3A2796 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-mobile.png?ar=1290%3A2796 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-mobile.png?ar=1290%3A2796 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-mobile.png?ar=1290%3A2796 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-mobile.png?ar=1290%3A2796 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-demo-mobile.png?ar=1290%3A2796 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>デモセクションでは、デモ動画が左にあり、右にデモの説明ステップがリスト形式で表示されています。
+上記画像から、自分ならどう作るか、HTMLとCSSを想像してみましょう。
+想像してみると、以下について気づくかもしれません。</p>
+<ul>
+<li>laptopでは、デモ動画が左にあり、説明ステップが右に配置されている</li>
+<li>mobileでは、デモ動画が上にあり、説明ステップが下に配置されている</li>
+</ul>
+<p>まず、以下のHTMLを書いてみたとしましょう。 HTMLはトップダウンで書いていき、関連しそうな要素を適切なタグでグループ化しています。</p>
+<pre><code class="language-html">&lt;section class="section"&gt;
+  &lt;h2&gt;デモ&lt;/h2&gt;
+  &lt;div class="sidebar"&gt;
+    &lt;div class="sidebar-video"&gt;
+      &lt;div class="demo-video"&gt;
+        &lt;h3&gt;ライブデモ&lt;/h3&gt;
+        &lt;p&gt;実際のCSS AIの動作をご覧ください&lt;/p&gt;
+        &lt;button&gt;デモを開始&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="sidebar-steps"&gt;
+      &lt;div class="step-items"&gt;
+        &lt;div class="step-item"&gt;
+          &lt;strong class="step-item-title"&gt;1. 要望を自然言語で入力&lt;/strong&gt;
+          &lt;p class="step-item-description"&gt;
+            「モダンなカードデザインを作って」など、自然な言葉でデザインを指示
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="step-item"&gt;
+          &lt;strong class="step-item-title"&gt;2. AIがCSSを自動生成&lt;/strong&gt;
+          &lt;p class="step-item-description"&gt;高度なAIが最適化されたCSSコードを瞬時に生成&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="step-item"&gt;
+          &lt;strong class="step-item-title"&gt;3. プレビュー・調整・適用&lt;/strong&gt;
+          &lt;p class="step-item-description"&gt;リアルタイムプレビューで確認し、微調整してプロジェクトに適用&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre>
+<p>次は、CSSを書いてみましょう。CSSには、それぞれコメントを残しています。</p>
+<pre><code class="language-css">.section {
+  display: grid;
+  /* 1列で、横幅いっぱいに表示します */
+  grid-template-columns: 1fr;
+
+  /* 余白の調整 */
+  gap: var(--spacing-md); /* 見出しとコンテンツの間隔を指定 */
+}
+
+.sidebar {
+  display: flex;
+  /* 説明ステップを折り返せるようにする */
+  flex-wrap: wrap;
+
+  /* 余白の調整 */
+  gap: var(--spacing-base); /* デモと説明ステップの間隔を指定 */
+}
+
+.sidebar-video {
+  flex-basis: 25rem; /* デモの基本幅を指定（最小限の見せたいサイズ） */
+  flex-grow: 1;      /* 余白があれば少し広がる */
+}
+
+.sidebar-steps {
+  flex-grow: 999;  /* スペースが余れば優先的に広がるようにする */
+  flex-basis: 50%; /* 横幅は最低50%を確保する（デモが25remなのでバランスを取る） */
+}
+
+.demo-video {
+  /* デモ動画のコンテンツを縦に並べる */
+  display: flex;
+  flex-direction: column;
+
+  /* 余白の調整 */
+  gap: var(--spacing-md);       /* デモ動画のコンテンツの間隔を指定 */
+  padding: var(--spacing-base); /* デモ動画の内側の余白を指定 */
+
+  /* 装飾 */
+  background-color: var(--color-border);
+}
+
+.step-items {
+  display: grid;
+  /* 1列で、横幅いっぱいに表示します */
+  grid-template-columns: 1fr;
+
+  /* 余白の調整 */
+  gap: var(--spacing-sm); /* タイトルと説明文の間隔を指定 */
+}
+
+.step-item {
+  display: grid;
+  /* 親グリッドから子グリッドを入れ子にします */
+  grid-template-rows: subgrid;
+
+  /* グリッドアイテムを縦に並べる */
+  grid-template-areas:
+    "title"
+    "description";
+
+  /* サブグリッドとして、2つの行があることを明示 */
+  grid-row: span 2;
+
+  /* 余白の調整 */
+  padding: var(--spacing-base); /* ステップアイテムの内側の余白を指定 */
+
+  /* 装飾 */
+  border-top: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-black);
+}
+
+.step-item-title {
+  /* grid-template-areasで指定された名前を定義する */
+  grid-area: title;
+}
+
+.step-item-description {
+  /* grid-template-areasで指定された名前を定義する */
+  grid-area: description;
+}
+</code></pre>
+<p>今回のレイアウトを、サイドバーパターンと呼びます。
+このレイアウトは、横幅が広いとサイドバーが横に並び、横幅が狭くなるとサイドバーが下に折り返されるパターンです。
+この手法については、<a href="https://www.joren.co/flex-grow-9999-hack/">Flex-grow 9999 Hack</a> を参考にしています。</p>
+<p>サブグリッドについては、<a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_grid_layout/Subgrid">サブグリッド - CSS: カスケーディングスタイルシート | MDN</a>を参照してください。</p>
+<h3 id="お客様の声">お客様の声</h3>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-laptop.png?ar=2940%3A1663" alt="お客様の声セクション - laptop" width="2940" height="1663" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-laptop.png?ar=2940%3A1663 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-laptop.png?ar=2940%3A1663 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-laptop.png?ar=2940%3A1663 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-laptop.png?ar=2940%3A1663 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-laptop.png?ar=2940%3A1663 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-laptop.png?ar=2940%3A1663 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-mobile.png?ar=1290%3A2796" alt="お客様の声セクション - mobile" width="1290" height="2796" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-mobile.png?ar=1290%3A2796 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-mobile.png?ar=1290%3A2796 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-mobile.png?ar=1290%3A2796 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-mobile.png?ar=1290%3A2796 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-mobile.png?ar=1290%3A2796 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-reviews-mobile.png?ar=1290%3A2796 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>お客様の声セクションでは、感想をカード形式で表示し、横並びさせます。</p>
+<p>上記画像から、自分ならどう作るか、HTMLとCSSを想像してみましょう。
+想像してみると、以下について気づくかもしれません。</p>
+<ul>
+<li>途中でカードが途切れている
+<ul>
+<li>横スクロールできると伝えるためのデザイン</li>
+</ul>
+</li>
+</ul>
+<p>まず、以下のHTMLを書いてみたとしましょう。 HTMLはトップダウンで書いていき、関連しそうな要素を適切なタグでグループ化しています。</p>
+<pre><code class="language-html">&lt;section class="section"&gt;
+  &lt;h2&gt;お客様の声&lt;/h2&gt;
+  &lt;div class="reel"&gt;
+    &lt;div class="review-card"&gt;
+      &lt;div&gt;
+        "CSS AIを使い始めてから、コーディング時間が半分になりました。"
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;strong&gt;田中様&lt;/strong&gt; - フロントエンドエンジニア
+      &lt;/div&gt;
+      &lt;div&gt;★★★★★&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="review-card"&gt;
+      &lt;div&gt;
+        "自然言語でデザインを指示するだけで、想像以上の美しいCSSが生成されます。"
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;strong&gt;佐藤様&lt;/strong&gt; - UIデザイナー
+      &lt;/div&gt;
+      &lt;div&gt;★★★★★&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- 省略 --&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre>
+<p>次は、CSSを書いてみましょう。CSSには、それぞれコメントを残しています。</p>
+<pre><code class="language-css">.section {
+  display: grid;
+  /* 1列で、横幅いっぱいに表示します */
+  grid-template-columns: 1fr;
+
+  /* 余白の調整 */
+  gap: var(--spacing-md); /* 見出しとコンテンツの間隔を指定 */
+}
+
+.reel {
+  /* flexboxで横に並べる */
+  display: flex;
+  /* 横スクロールを許可 */
+  overflow-x: auto;
+
+  /* アイテム間の間隔 */
+  --_gap: var(--spacing-sm);
+  gap: var(--_gap);
+
+  &amp; &gt; * {
+    /* 1.5列分表示 */
+    /* 0.5分非表示になるため、横スクロールできるように見える */
+    --_column: 1.5;
+
+    flex-grow: 0;   /* 伸びない */
+    flex-shrink: 0; /* 縮まない */
+
+    /* 指定された列数ぶん表示されるように幅を計算 */
+    flex-basis: calc(
+      (100% - (var(--_gap) * (var(--_column) - 1))) / var(--_column)
+    );
+
+    /* tabletの列数 */
+    @media (min-width: 40rem) {
+      --_column: 2.5;
+    }
+
+    /* laptopの列数 */
+    @media (min-width: 48rem) {
+      --_column: 3.5;
+    }
+  }
+}
+
+.review-card {
+  display: grid;
+
+  /* 余白の調整 */
+  row-gap: var(--spacing-sm);   /* グリッド行の間隔を指定 */
+  padding: var(--spacing-base); /* レビューカードの内側の余白を指定 */
+
+  /* 装飾 */
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+}
+</code></pre>
+<h3 id="料金プラン">料金プラン</h3>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-laptop.png?ar=2940%3A1663" alt="料金プランセクション - laptop" width="2940" height="1663" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-laptop.png?ar=2940%3A1663 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-laptop.png?ar=2940%3A1663 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-laptop.png?ar=2940%3A1663 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-laptop.png?ar=2940%3A1663 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-laptop.png?ar=2940%3A1663 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-laptop.png?ar=2940%3A1663 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-mobile.png?ar=1290%3A2796" alt="料金プランセクション - mobile" width="1290" height="2796" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-mobile.png?ar=1290%3A2796 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-mobile.png?ar=1290%3A2796 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-mobile.png?ar=1290%3A2796 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-mobile.png?ar=1290%3A2796 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-mobile.png?ar=1290%3A2796 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1753446196/silver-birder.github.io/blog/learn-layout-pricing-mobile.png?ar=1290%3A2796 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>料金プランでは、3つのプランをカード上に表示します。
+上記画像から、自分ならどう作るか、HTMLとCSSを想像してみましょう。
+想像してみると、以下について気づくかもしれません。</p>
+<ul>
+<li>プランは、同じ幅で表示する。</li>
+<li>横幅がある小ささになると、全て縦に並ぶようになる。</li>
+<li>プランの上に、人気のバッジがある。</li>
+</ul>
+<p>まず、以下のHTMLを書いてみたとしましょう。 HTMLはトップダウンで書いていき、関連しそうな要素を適切なタグでグループ化しています。</p>
+<pre><code class="language-html">&lt;section class="section"&gt;
+  &lt;h2&gt;料金プラン&lt;/h2&gt;
+  &lt;div class="price-items"&gt;
+    &lt;div class="price-item"&gt;
+      &lt;h4 class="plan-name"&gt;スターター&lt;/h4&gt;
+      &lt;div class="plan-price"&gt;¥980&lt;span&gt;/月&lt;/span&gt;&lt;/div&gt;
+      &lt;div class="plan-features"&gt;
+        &lt;div class="plan-feature"&gt;✓ 基本AI CSS生成&lt;/div&gt;
+        &lt;div class="plan-feature"&gt;✓ 月100回まで生成&lt;/div&gt;
+        &lt;!-- 省略 --&gt;
+      &lt;/div&gt;
+      &lt;button class="btn btn-outline"&gt;選択する&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="price-item popular"&gt;
+      &lt;div class="popular-badge"&gt;人気&lt;/div&gt;
+      &lt;h4 class="plan-name"&gt;プロ&lt;/h4&gt;
+      &lt;div class="plan-price"&gt;¥2,980&lt;span&gt;/月&lt;/span&gt;&lt;/div&gt;
+      &lt;div class="plan-features"&gt;
+        &lt;div class="plan-feature"&gt;✓ 高度なAI機能&lt;/div&gt;
+        &lt;div class="plan-feature"&gt;✓ 無制限生成&lt;/div&gt;
+        &lt;!-- 省略 --&gt;
+      &lt;/div&gt;
+      &lt;button class="btn btn-primary"&gt;選択する&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="price-item"&gt;
+      &lt;h4 class="plan-name"&gt;エンタープライズ&lt;/h4&gt;
+      &lt;div class="plan-price"&gt;お問い合わせ&lt;/div&gt;
+      &lt;div class="plan-features"&gt;
+        &lt;div class="plan-feature"&gt;✓ カスタムAIモデル&lt;/div&gt;
+        &lt;div class="plan-feature"&gt;✓ 専用API&lt;/div&gt;
+        &lt;!-- 省略 --&gt;
+      &lt;/div&gt;
+      &lt;button class="btn btn-outline"&gt;相談する&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre>
+<p>次は、CSSを書いてみましょう。CSSには、それぞれコメントを残しています。</p>
+<pre><code class="language-css">.section {
+  display: grid;
+  /* 1列で、横幅いっぱいに表示します */
+  grid-template-columns: 1fr;
+
+  /* 余白の調整 */
+  gap: var(--spacing-md); /* 見出しとコンテンツの間隔を指定 */
+}
+
+.price-items {
+  display: flex;
+  /* プランカードを折り返せるようにする */
+  flex-wrap: wrap;
+
+  /* 余白の調整 */
+  gap: var(--spacing-md); /* プランカードの間隔を指定 */
+
+  &amp; &gt; * {
+    /* すべて同じ比率で伸びるようにする */
+    flex-grow: 1;
+
+    /* 横幅に応じて縦並び ⇄ 横並びが切り替わるように調整 */
+    /* 横幅が45rem未満では縦並び、それ以上では横並びになる */
+    flex-basis: calc((45rem - 100%) * 999);
+  }
+}
+
+.price-item {
+  /* 子要素の絶対配置（例: 人気バッジ）を基準にするための基点 */
+  position: relative;
+
+  display: grid;
+  grid-template:
+    /* プラン名を表示する行 */
+    "name" auto
+    /* 空行（スペースなし、調整用） */
+    "." 0
+    /* 価格を表示する行 */
+    "price" auto
+    /* 空行（価格と機能リストの間にスペースを入れる） */
+    "." var(--spacing-md)
+    /* 機能リストを表示する行 */
+    "features" auto
+    /* 空行（機能リストとボタンの間にスペースを入れる） */
+    "." var(--spacing-md)
+    /* ボタンを表示する行 */
+    "button" auto / auto; /* 列幅は自動（1列レイアウト） */
+
+    /* 余白の調整 */
+    padding: var(--spacing-base); /* プランカードの内側の余白を指定 */
+
+  /* 装飾 */
+  border: 1px solid var(--color-border);
+
+  &amp;.popular {
+    /* 人気プランは枠線を強調 */
+    border-color: var(--color-black);
+  }
+
+  &amp; &gt; button {
+    /* grid-template-areasで指定された名前を定義する */
+    grid-area: button;
+    width: fit-content;  /* ボタン幅を内容に合わせる */
+    margin: 0 auto;      /* 左右中央寄せ */
+  }
+}
+
+.popular-badge {
+  /* 親要素 (.price-item) を基準に絶対位置で配置する */
+  position: absolute;
+
+  /* 上にずらして、カードの外にはみ出すように配置 */
+  top: -1rem;
+  /* 横中央に配置するために、左端を中央に設定 */
+  left: 50%;
+  /* 左に50%分ずらして、左右中央に揃える */
+  /* 横方向の中央寄せテクニック */
+  transform: translateX(-50%);
+
+  /* バッジの装飾 */
+  background-color: var(--color-black);
+  color: var(--color-white);
+
+  /* 余白の調整 */
+  padding: var(--spacing-xs) var(--spacing-sm); /* 上下左右の余白を指定 */
+}
+
+.plan-name {
+  /* grid-template-areasで指定された名前を定義する */
+  grid-area: name;
+}
+
+.plan-price {
+  /* grid-template-areasで指定された名前を定義する */
+  grid-area: price;
+  text-align: center;
+
+  &amp; &gt; span {
+    /* 単位との間隔 */
+    margin-left: var(--spacing-xs);
+  }
+}
+
+.plan-features {
+  /* grid-template-areasで指定された名前を定義する */
+  grid-area: features;
+  display: grid;
+  /* 1列で、横幅いっぱいに表示します */
+  grid-template-columns: 1fr;
+
+  /* 余白の調整 */
+  gap: var(--spacing-xs);       /* 特徴の間隔を指定 */
+  padding: 0 var(--spacing-sm); /* 左右の余白を指定 */
+}
+
+.plan-feature {
+  /* 余白の調整 */
+  padding: var(--spacing-xs) 0; /* 上下の余白を指定 */
+
+  /* 装飾 */
+  border-bottom: 1px solid var(--color-border);
+}
+</code></pre>
+<h2 id="終わりに">終わりに</h2>
+<p>最後まで読んでいただき、ありがとうございます。
+読者の皆さんの、CSSに対する苦手意識が少しでも克服できれば幸いです。
+他にもこんなのが知りたい、という要望があれば、ぜひコメントやXなどで教えてください。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>フロントエンド</li></ul></footer></article></main></body></html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TikTokスクレイプ基盤をGCP上で構築してハマったこと</title><meta name="description" content="TikTokへスクレイプするバッチをGCP上で構築しました。GCP構築のシステム設計話と、その構築時に、ハマったことを共有します。"><meta name="keywords" content="サービス,クラウドインフラ,成果物,クローリング"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">63</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2021-08-28"><span class="visually-hidden">2021年8月28日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2021</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">08</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">28</span></span></time></p></div><div class="notebook-heading"><h1>TikTokスクレイプ基盤をGCP上で構築してハマったこと</h1></div></header><div class="notebook-body"><p>TikTok へスクレイプするバッチを GCP 上で構築しました。
+GCP 構築のシステム設計話と、その構築時に、ハマったことを共有します。</p>
+<h2 id="きっかけ">きっかけ</h2>
+<p>2020 年、最もダウンロードされたアプリが Facebook を抜いて <strong>TikTok</strong> が一位になったそうです。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://gigazine.net/news/20210811-tiktok-overtakes-facebook/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>ついにTikTokがFacebookを抜いて「世界で最もダウンロードされたアプリ」に</strong><span class="link-card-description" data-astro-cid-p7ia6262>2019年の時点で世界で最もダウンロードされたアプリはFacebook Messengerでしたが、新たな調査で、2019年には第4位だったTikTokが2020年には第1位に躍り出ていたことが判明しました。またアメリカとイギリスにおいて、TikTokの合計再生時間はYouTubeを超えたことも伝えられています。</span><span class="link-card-domain" data-astro-cid-p7ia6262>gigazine.net</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/abbb17e6234440aa63087f65ecb038c9e7c4691489a5c0e7dde130e52bedafdc.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>私も TikTok を利用しています。</p>
+<p>ネットサーフィンをしている時に、<a href="https://www.npmjs.com/package/tiktok-scraper">tiktok-scraper</a>というライブラリを<a href="https://workers.cloudflare.com/works">cloudflare のサイト</a>で発見しました。これを使って、TikTok の情報収集できるんじゃないかなと思い始めましたのがきっかけです。</p>
+<p>※ スクレイプは私的利用であることが前提です。また、TikTok へ負荷をかけないようスクレイプ間隔に配慮しましょう。</p>
+<h2 id="tiktok-scraper">tiktok-scraper</h2>
+<p><a href="https://www.npmjs.com/package/tiktok-scraper">https://www.npmjs.com/package/tiktok-scraper</a></p>
+<blockquote>
+<p>Scrape and download useful information from TikTok.
+No login or password are required.
+This is not an official API support and etc. This is just a scraper that is using TikTok Web API to scrape media and related meta information.</p>
+</blockquote>
+<p>上記とおり、TikTok の WebAPI を通してスクレイプします。
+ライブラリでは、特定の TikTok 動画をダウンロードすることができますが、次の切り口で、TikTok 動画を一括ダウンロードすることもできます。</p>
+<ul>
+<li>ユーザー</li>
+<li>ハッシュタグ</li>
+<li>トレンド</li>
+<li>音楽</li>
+</ul>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1630224934/silver-birder.github.io/blog/tiktok_scraper_doc1.png?ar=1596%3A886" alt="動画をダウンロード" width="1596" height="886" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1630224934/silver-birder.github.io/blog/tiktok_scraper_doc1.png?ar=1596%3A886 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1630224934/silver-birder.github.io/blog/tiktok_scraper_doc1.png?ar=1596%3A886 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1630224934/silver-birder.github.io/blog/tiktok_scraper_doc1.png?ar=1596%3A886 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1630224934/silver-birder.github.io/blog/tiktok_scraper_doc1.png?ar=1596%3A886 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1630224934/silver-birder.github.io/blog/tiktok_scraper_doc1.png?ar=1596%3A886 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1630224934/silver-birder.github.io/blog/tiktok_scraper_doc1.png?ar=1596%3A886 1280w" sizes="min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc2.png?ar=1584%3A896" alt="様々な切り口で、動画をダウンロード" width="1584" height="896" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc2.png?ar=1584%3A896 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc2.png?ar=1584%3A896 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc2.png?ar=1584%3A896 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc2.png?ar=1584%3A896 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc2.png?ar=1584%3A896 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc2.png?ar=1584%3A896 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>加えて、メタ情報(フォロワー数やいいね数など)も手に入ります。</p>
+<p>中には、ユーザー画像や動画カバー画像などの TikTok CDN へのリンクもあります。(<code>https://p16-sign-va.tiktokcdn.com</code>)</p>
+<p>リンクには、有効期限を示す文字が含まれており、一定の時間が経過すると <code>Access Denied</code> となります。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc3.png?ar=1594%3A900" alt="様々な切り口で、メタ情報をダウンロード" width="1594" height="900" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc3.png?ar=1594%3A900 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc3.png?ar=1594%3A900 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc3.png?ar=1594%3A900 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc3.png?ar=1594%3A900 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc3.png?ar=1594%3A900 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1630224935/silver-birder.github.io/blog/tiktok_scraper_doc3.png?ar=1594%3A900 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>手に入れられない情報は、 <strong>ログインが必要なもの</strong> です。
+例えば、私がフォローしているユーザーとかです。
+その情報が欲しかったので、どうにかして手に入れました。(詳細は省きます)
+そのユーザー情報を使って、先程のユーザーという切り口で TikTok の動画やメタ情報を収集するバッチを作ろうと考えました。</p>
+<p>※ WebAPI を叩きすぎると、TikTok 側のブラックリストに追加され、アクセス拒否されます。</p>
+<h2 id="システム設計">システム設計</h2>
+<p>バッチを動かす環境ですが、プライベートでよく使っている GCP 上で構築しようと思いました。
+バッチで収集したデータを閲覧する Web アプリケーションも作ろうと考え、Netlify と React で動かすことにしました。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1630404283/silver-birder.github.io/blog/tiktok_scraper_web_app_sample.png?ar=816%3A1730" alt="Webアプリケーション UI" width="816" height="1730" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1630404283/silver-birder.github.io/blog/tiktok_scraper_web_app_sample.png?ar=816%3A1730 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1630404283/silver-birder.github.io/blog/tiktok_scraper_web_app_sample.png?ar=816%3A1730 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1630404283/silver-birder.github.io/blog/tiktok_scraper_web_app_sample.png?ar=816%3A1730 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1630404283/silver-birder.github.io/blog/tiktok_scraper_web_app_sample.png?ar=816%3A1730 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_816/q_auto/f_auto/v1630404283/silver-birder.github.io/blog/tiktok_scraper_web_app_sample.png?ar=816%3A1730 816w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<h2 id="目的">目的</h2>
+<p>私がフォローしているユーザーの TikTok 動画やメタ情報を集めること。</p>
+<h2 id="io">I/O</h2>
+<ul>
+<li>インプット
+<ul>
+<li>ユーザー情報</li>
+</ul>
+</li>
+<li>アウトプット
+<ul>
+<li>TikTok 動画</li>
+<li>メタ情報</li>
+</ul>
+</li>
+</ul>
+<h2 id="gcp-リソース選定">GCP リソース選定</h2>
+<ul>
+<li>TikTok 動画
+<ul>
+<li>Cloud Storage へ保存</li>
+</ul>
+</li>
+<li>メタ情報
+<ul>
+<li>Cloud SQL へ保存</li>
+</ul>
+</li>
+<li>コンピューティングリソース
+<ul>
+<li>Cloud Run</li>
+</ul>
+</li>
+</ul>
+<h2 id="設計図">設計図</h2>
+<p>実際に構築した GCP のシステム設計図が、次の画像のとおりです。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1630160345/silver-birder.github.io/blog/tiktok_scrape_platform_overviews.png?ar=722%3A566" alt="tiktok scrape platform overviews" width="722" height="566" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1630160345/silver-birder.github.io/blog/tiktok_scrape_platform_overviews.png?ar=722%3A566 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1630160345/silver-birder.github.io/blog/tiktok_scrape_platform_overviews.png?ar=722%3A566 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1630160345/silver-birder.github.io/blog/tiktok_scrape_platform_overviews.png?ar=722%3A566 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1630160345/silver-birder.github.io/blog/tiktok_scrape_platform_overviews.png?ar=722%3A566 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_722/q_auto/f_auto/v1630160345/silver-birder.github.io/blog/tiktok_scrape_platform_overviews.png?ar=722%3A566 722w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>GCP リソースの用途は、次のとおりです。</p>
+<table>
+<thead>
+<tr>
+<th>GCP リソース</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cloud Scheduler</td>
+<td>バッチ起動のスケジュールを管理</td>
+</tr>
+<tr>
+<td>Cloud Worlflows</td>
+<td>バッチのワークフローを制御</td>
+</tr>
+<tr>
+<td>Cloud Run</td>
+<td>役割に応じて処理</td>
+</tr>
+<tr>
+<td>PubSub</td>
+<td>Cloud Run を繋げる</td>
+</tr>
+<tr>
+<td>Cloud Storage</td>
+<td>動画を保存</td>
+</tr>
+<tr>
+<td>AutoML Vision</td>
+<td>動画のカバー画像をラベル検出</td>
+</tr>
+<tr>
+<td>Cloud SQL</td>
+<td>全てのメタ情報を管理</td>
+</tr>
+</tbody>
+</table>
+<p>各 Clour Run の役割は、次のとおりです。</p>
+<table>
+<thead>
+<tr>
+<th>Cloud Run 名</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loader</td>
+<td>ユーザー情報を読み込む</td>
+</tr>
+<tr>
+<td>Processor</td>
+<td>一連の処理を行む</td>
+</tr>
+<tr>
+<td>Scraper</td>
+<td>TikTok へスクレイプする</td>
+</tr>
+<tr>
+<td>Storer</td>
+<td>渡された情報を保存する</td>
+</tr>
+<tr>
+<td>Uploader</td>
+<td>動画をダウンロードし、Storage へアップロードする</td>
+</tr>
+<tr>
+<td>Visioner</td>
+<td>画像を(Vision API を通して)ラベル情報を抽出する</td>
+</tr>
+<tr>
+<td>API</td>
+<td>Cloud SQL とのインターフェース</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ハマったこと">ハマったこと</h2>
+<h2 id="cloud-workflows-の制限が厳しい">Cloud Workflows の制限が厳しい</h2>
+<p>当初、PubSub は使わずに、Cloud Run の連携は Cloud Workflows で行おうと考えていました。
+PubSub でワークフローを制御するよりも、Cloud Workflows の yaml でワークフローを制御した方が分かりやすいと思ったからです。
+具体的には、Cloud Run へ HTTP リクエストし、HTTP レスポンスに応じて、次の Cloud Run を呼び出そうと考えていました。</p>
+<p>ただ、Cloud Workflows には、次のページに書いてあるとおり、いくつかの制限があります。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://cloud.google.com/workflows/quotas?hl=ja" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>割り当てと上限 | Workflows | Google Cloud Documentation</strong><span class="link-card-domain" data-astro-cid-p7ia6262>cloud.google.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/7e05d4b6bf19383edd9f9ac76e5c2bcf31844ed8cdad1e423d19bd5997b3786a.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>特に困ったのが、全ての変数のメモリ合計が、 <strong>64kb</strong> だということです。
+HTTP レスポンスの Body を変数保持する構成を取ると、そのサイズを考慮しなければいけません。
+いくつかやり方を見直してみたのですが、思うような形に仕上げることができず、断念しました。
+結果、PubSub を使って Cloud Run を連携することになりました。
+Cloud Workflows は、バッチのキック、通知などをすることとなりました。</p>
+<h2 id="firestore-のページカーソルに-2-ページ以降への移動が難しい">Firestore のページカーソルに ±2 ページ以降への移動が難しい</h2>
+<p>GCP でデータストレージで、無料枠がある Firestore を当初使っていました。
+理由は、単純に GCP 無料枠として Firestore があったからです。</p>
+<p>当初、Firestore を使って、バッチと Web アプリを書いていました。
+Web アプリには、バッチで収集した TikTok の動画を一覧表示する View を用意しました。</p>
+<p>閲覧する TikTok 動画が多くなると、ページネーションが欲しくなりました。
+そこで、Firestore でページネーションの実現方法を調べてみると、次の資料を発見しました。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://firebase.google.com/docs/firestore/query-data/query-cursors?hl=ja" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>クエリカーソルを使用してデータにページを設定する | Firestore | Firebase</strong><span class="link-card-description" data-astro-cid-p7ia6262>クエリカーソルを使用して Cloud Firestore でデータをページ分けするためのガイド。</span><span class="link-card-domain" data-astro-cid-p7ia6262>firebase.google.com</span></span></a></div>
+<p>これを見ると、ページネーションは、現在位置から ±1 ページの移動は簡単です。
+資料にあるサンプルコードのように、<code>startAfter</code>を使えばよいだけです。</p>
+<pre><code class="language-javascript">var first = db.collection("cities").orderBy("population").limit(25);
+
+return first.get().then((documentSnapshots) =&gt; {
+  // Get the last visible document
+  var lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+  console.log("last", lastVisible);
+
+  // Construct a new query starting at this document,
+  // get the next 25 cities.
+  var next = db
+    .collection("cities")
+    .orderBy("population")
+    .startAfter(lastVisible)
+    .limit(25);
+});
+</code></pre>
+<p>しかし、現在位置から ±2 ページ目以降への遷移がしたい場合は、どうすれば良いでしょうか。
+上記のサンプルコードで言えば、<code>first</code>をコピペして<code>second</code>変数を生成するのでしょうか。
+それよりも、<code>offset</code>メソッドがほしいところです。
+しかし、次の資料を発見し、諦めることになります。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://firebase.google.com/docs/firestore/best-practices?hl=ja" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Cloud Firestore のベスト プラクティス | Firebase</strong><span class="link-card-description" data-astro-cid-p7ia6262>セキュリティ ルールやデータ モデリングなど、Cloud Firestore のベスト プラクティスに関するガイド。</span><span class="link-card-domain" data-astro-cid-p7ia6262>firebase.google.com</span></span></a></div>
+<blockquote>
+<p>オフセットは使用しないでください。その代わりにカーソルを使用します。オフセットを使用すると、スキップされたドキュメントがアプリケーションに返されなくなりますが、内部ではスキップされたドキュメントも引き続き取得されています。スキップされたドキュメントはクエリのレイテンシに影響し、このようなドキュメントの取得に必要な読み取りオペレーションは課金対象になります。</p>
+</blockquote>
+<p>という訳で、クエリカーソルを推奨されています。</p>
+<p>解決策としては、順序を示すフィールドがあれば、解決するかもしれません。
+例えば、<code>order</code>というフィールドを用意し、1,2,3 とインクリメントしたデータがあれば、クリアできるかもしれません。
+<code>startAfter</code>の引数は document オブジェクトだけではなく、orderBy 句で指定したフィールドの変数を含めることができます。</p>
+<pre><code class="language-javascript">var next = db.collection("cities").orderBy("order").startAfter(50).limit(25);
+</code></pre>
+<p>これだと、1 ページ 25 個のデータを表示するならば、3 ページ目(51~75)を取得できます。(<code>startAfter</code>は開始点を含めません)</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://cloud.google.com/nodejs/docs/reference/firestore/latest/firestore/query" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Class Query (9.4.1) | Node.js client libraries | Google Cloud Documentation</strong><span class="link-card-domain" data-astro-cid-p7ia6262>cloud.google.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/7e05d4b6bf19383edd9f9ac76e5c2bcf31844ed8cdad1e423d19bd5997b3786a.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>そもそも、ドキュメントベースの設計よりも、RDB の設計に慣れていた私は、
+Firestore よりも、Cloud SQL の方が扱いやすいと思いました。
+そこで、データストレージを Firestore から Cloud SQL へ切り替えることとしました。
+改修自体、Cloud Run の役割が明確に分離されていたので、一部の処理を書き換えるだけで、簡単にできました。</p>
+<h2 id="eventac-のリソース選択が物足りない">Eventac のリソース選択が物足りない</h2>
+<p>Cloud Run と PubSub の連携には、Eventac を使用します。</p>
+<p><a href="https://cloud.google.com/blog/ja/products/serverless/eventarc-unified-eventing-experience-google-cloud">https://cloud.google.com/blog/ja/products/serverless/eventarc-unified-eventing-experience-google-cloud</a></p>
+<blockquote>
+<p>昨年 10 月、60 を超える Google Cloud ソースから Cloud Run にイベントを送信できる新しいイベント機能、Eventarc を発表いたしました。Eventarc は、さまざまなソースから監査ログを読み取り、それらを CloudEvents 形式のイベントとして Cloud Run サービスに送信します。また、カスタム アプリケーションの Pub/Sub トピックからイベントを読み取ることもできます。</p>
+</blockquote>
+<p>この Eventarc のソースとして、Cloud Storage の Object.create をトリガーとして設計を考えていました。
+しかし、そのイベントをフィルタリングする選択肢は、2 つしかありません。</p>
+<p><a href="https://cloud.google.com/blog/ja/products/serverless/demystifying-event-filters-eventarc">https://cloud.google.com/blog/ja/products/serverless/demystifying-event-filters-eventarc</a></p>
+<p>できるのは、執筆時点(2021 年 8 月)で、次の 2 つです。</p>
+<ul>
+<li>All resource</li>
+<li>Specific resource</li>
+</ul>
+<p>All resource は、Cloud Storage の全てのバケットにおける Object.create イベントがトリガーとなります。
+Specific resource は、特定の Obeject 名が Object.create された場合のみ、トリガーとなります。
+欲しいなと思ったのは、Specific resouce の正規表現によるフィルタリング、任意のバケットやフォルダの配下で限定など
+のフィルタリングです。例えば、<code>gs://bucket/folder/*.json</code> のような形式です。現状は、<code>gs://bucket/folder/A.json</code>とするしかありません。</p>
+<p>今回は、PubSub のイベントのみでトリガーするようにしました。</p>
+<h2 id="pubsub-をトリガーとする-cloudrun-で-http-レスポンス-500-を返却するとpubsub-が再試行される">PubSub をトリガーとする CloudRun で HTTP レスポンス 500 を返却すると、PubSub が再試行される</h2>
+<p>Cloud Run で、5XX 系のエラーとなった場合、PubSub の再試行されます。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://cloud.google.com/pubsub/docs/admin?hl=ja#using_retry_policies" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>トピックの作成 | Pub/Sub | Google Cloud Documentation</strong><span class="link-card-domain" data-astro-cid-p7ia6262>cloud.google.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/7e05d4b6bf19383edd9f9ac76e5c2bcf31844ed8cdad1e423d19bd5997b3786a.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>何度も PubSub が実行されると、Cloud Run のコンピューティングリソースが消費され続けます。
+そうすると、課金が発生するので、対策が必要です。</p>
+<h2 id="cloud-workflows-の処理はあまりカスタマイズできない">Cloud Workflows の処理は、あまりカスタマイズできない</h2>
+<p>Cloud Workflows は、あくまでワークフローの管理です。
+変数処理などは、基本的に使わず、ワークフローのタスクを連結するだけにした方が良いです。
+次の資料には、Cloud Workflows で使える標準機能です。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://cloud.google.com/workflows/docs/reference/stdlib/overview" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Standard library overview | Workflows | Google Cloud Documentation</strong><span class="link-card-domain" data-astro-cid-p7ia6262>cloud.google.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/7e05d4b6bf19383edd9f9ac76e5c2bcf31844ed8cdad1e423d19bd5997b3786a.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>ワークフローのタスクを並列処理する機能は、まだ実験段階なので、本番環境は使えないようです。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://cloud.google.com/workflows/docs/reference/stdlib/experimental.executions/map" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Function: experimental.executions.map | Workflows | Google Cloud Documentation</strong><span class="link-card-domain" data-astro-cid-p7ia6262>cloud.google.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/7e05d4b6bf19383edd9f9ac76e5c2bcf31844ed8cdad1e423d19bd5997b3786a.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<h2 id="終わりに">終わりに</h2>
+<p>システム設計変更が度々変更がありつつも、目的とする TikTok 動画やメタ情報を収集することは達成できました。
+変更があったとしても、役割をできる限り小さく保つことで、変更に柔軟に対応することができます。
+また、実際に動かすことで、気付けるポイントもあるので、フィードバックサイクルを短くすることも大切です。</p>
+<p>まだまだ改善する余地はあります。ユーザー情報という切り口で情報収集していましたが、トレンドやハッシュタグなどからも
+取得できるようにしたいです。また、ユーザーの RSS を作ることで、金銭的な節約もしてみたいと思っています。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>サービス</li><li>クラウドインフラ</li><li>成果物</li><li>クローリング</li></ul></footer></article></main></body></html>

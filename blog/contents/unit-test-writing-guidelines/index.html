@@ -1,0 +1,639 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>単体テストコードのお作法</title><meta name="description" content="こんにちは! @silverbirder です。今回、私が心掛けている単体テストコードを書く上でのお作法について共有します。読者の皆さんが、より良い単体テストコードを書く一助になれば幸いです。"><meta name="keywords" content="テスト"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">146</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-10-20"><span class="visually-hidden">2025年10月20日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">20</span></span></time></p></div><div class="notebook-heading"><h1>単体テストコードのお作法</h1></div></header><div class="notebook-body"><p>こんにちは! <a href="https://github.com/silverbirder">@silverbirder</a> です。
+今回、私が心掛けている単体テストコードを書く上でのお作法について共有します。
+読者の皆さんが、より良い単体テストコードを書く一助になれば幸いです。</p>
+<h2 id="本記事の前提">本記事の前提</h2>
+<ul>
+<li>例では テストフレームワークとして Vitest を使用しますが、考え方は他の技術にも活かせると思います。
+<ul>
+<li>言語は、TypeScriptを使用しています。</li>
+</ul>
+</li>
+<li>本文ではアプリ本体を「プロダクションコード」、検証用のコードを「テストコード」と呼びます。</li>
+</ul>
+<h3 id="単体テストとは">単体テストとは</h3>
+<p>単体テストは、関数やクラス、コンポーネントなど最小単位の振る舞いが仕様どおりかを確かめるテストです。
+内部の実装を踏まえて分岐やパスを確認する、ホワイトボックステストが基本になります。</p>
+<h2 id="テストを書く目的">テストを書く目的</h2>
+<p>テストを書く目的は次の3つだと私は考えています。</p>
+<ul>
+<li>手動確認を減らして開発効率を高める</li>
+<li>バグの再混入を防いで品質を守る</li>
+<li>振る舞いを言語化して仕様をはっきりさせる</li>
+</ul>
+<p>単体テストコードを書くことで、自動化された検証が増え、手動での確認作業が減ります。
+また、テストがあることでリファクタリングや機能追加の際に既存機能が壊れていないかを素早くチェックでき、品質を保ちやすくなります。
+さらに、テストコードは仕様を言語化したドキュメントの役割も果たし、実装の意図を明確にします。</p>
+<h2 id="読みやすさを最優先にする">読みやすさを最優先にする</h2>
+<p>プロダクションコードはユーザー体験そのものを左右するため、パフォーマンスや使いやすさを最適化する設計が求められます。</p>
+<p>対してテストコードは開発者が読むためのドキュメントです。
+機能が想定どおりに振る舞うかを確認する手段であり、実装理解を助ける説明書でもあります。
+複雑な抽象化や過剰な最適化よりも、仕様がそのまま読める構造が大切です。</p>
+<p>だからこそ、 <strong>テストコードでは「読みやすさ」を最優先にします。</strong>
+ここからは、読みやすさを保つ具体的な工夫を紹介します。</p>
+<h2 id="今回のサンプルコード">今回のサンプルコード</h2>
+<p>ここからは、EC サイトによくある、カートの合計金額を求める関数 “calculateCartTotal” を題材にします。
+クーポン割引と消費税を加味して合計を返すシンプルなロジックです。
+細かいロジックを読んで頂く必要はなく、コメントで補足していますので、全体の流れをざっくり把握できれば十分です。</p>
+<pre><code class="language-ts">// カートアイテム
+type CartItem = {
+  id: string;
+  // 商品名
+  name: string;
+  // 単価
+  price: number;
+  // 数量
+  quantity: number;
+};
+
+// クーポン
+type Coupon = {
+  // 割引タイプ(今回は%固定のみ)
+  type: "percent";
+  // 割引値（%）
+  value: number;
+  // 適用条件: 最小購入金額
+  minAmount?: number;
+  // 適用期限
+  expiresAt?: Date;
+};
+
+// 消費税（軽減税率）
+const TAX_RATE = 0.8;
+
+/** カート全体の合計 */
+export const calculateCartTotal = (
+  items: CartItem[],
+  coupon?: Coupon
+): number =&gt; {
+  // 小計を計算
+  const subtotal = calculateSubtotal(items);
+  let discountedSubtotal = subtotal;
+
+  // クーポンが存在し、適用可能な場合のみ適用
+  if (coupon &amp;&amp; isCouponApplicable(subtotal, coupon)) {
+    discountedSubtotal = applyCoupon(subtotal, coupon);
+  }
+
+  // 税込み価格を計算して返す
+  return calculateTotalWithTax(discountedSubtotal);
+};
+
+/** 小計を計算 */
+const calculateSubtotal = (items: CartItem[]): number =&gt;
+  items.reduce((sum, item) =&gt; sum + item.price * item.quantity, 0);
+
+/** クーポンが適用可能かを判定する */
+const isCouponApplicable = (subtotal: number, coupon: Coupon): boolean =&gt; {
+  const now = new Date();
+
+  // 期限切れや最小購入金額未満の場合は適用不可
+  if (coupon.expiresAt &amp;&amp; coupon.expiresAt &lt; now) return false;
+  if (coupon.minAmount &amp;&amp; subtotal &lt; coupon.minAmount) return false;
+
+  return true;
+};
+
+/** クーポンを適用 */
+const applyCoupon = (subtotal: number, coupon?: Coupon): number =&gt; {
+  if (!coupon) return subtotal;
+  return subtotal * (1 - coupon.value / 100);
+};
+
+/** 税込み価格を計算 */
+const calculateTotalWithTax = (subtotal: number): number =&gt;
+  Math.round(subtotal * (1 + TAX_RATE));
+</code></pre>
+<h2 id="テストコードの作法">テストコードの作法</h2>
+<h3 id="共通準備-モックデータを整える">共通準備: モックデータを整える</h3>
+<p>まずはテスト対象を呼び出すためのデータを揃えます。
+今回の題材ならモックのアイテムとクーポンを生成する関数を持っておくと便利です。</p>
+<pre><code class="language-ts">const generateItem = (override: Partial&lt;CartItem&gt; = {}): CartItem =&gt; ({
+  id: "item-001",
+  name: "Wireless Mouse",
+  price: 4980,
+  quantity: 1,
+  ...override,
+});
+
+const generateCoupon = (override: Partial&lt;Coupon&gt; = {}): Coupon =&gt; ({
+  type: "percent",
+  value: 15,
+  minAmount: 5000,
+  expiresAt: new Date("2025-12-31T23:59:59Z"),
+  ...override,
+});
+</code></pre>
+<p>モックデータの値は、できるだけ本番に近しいデータを用意しましょう。
+その方が、具体的なシナリオがイメージしやすくなります。</p>
+<h3 id="arrange-act-assert-を徹底する">Arrange-Act-Assert を徹底する</h3>
+<p>テストは概ね「Arrange→Act→Assert」（AAA）の順で進みます。</p>
+<ol>
+<li>Arrange: 前提データやモックを用意する</li>
+<li>Act: テスト対象に対して操作を実行する</li>
+<li>Assert: 結果が期待どおりか検証する</li>
+</ol>
+<p><strong>このサイクルは1ケースにつき1回に絞るのが鉄則</strong> です。
+Assert 後に別の Act→Assert を足すと、ケースの目的が増え、読解コストが一気に跳ね上がります。</p>
+<p>以下は、AAAパターンを守った例です。</p>
+<pre><code class="language-ts">it("should calculate total with tax when no coupon", () =&gt; {
+  // Arrange
+  const items = [
+    generateItem({ price: 2000, quantity: 2 }),
+    generateItem({ price: 5000 }),
+  ];
+
+  const subtotal = 2000 * 2 + 5000;
+  const expectedTotal = subtotal * (1 + TAX_RATE);
+
+  // Act
+  const total = calculateCartTotal(items);
+
+  // Assert
+  expect(total).toBe(expectedTotal);
+});
+</code></pre>
+<p>逆に、AAAパターンを崩した例です。</p>
+<pre><code class="language-ts">it("should calculate total with tax when coupon is applied", () =&gt; {
+  // Arrange
+  const items = [
+    generateItem({ price: 2000, quantity: 2 }),
+    generateItem({ price: 5000 }),
+  ];
+  const coupon = generateCoupon({ value: 10 });
+
+  const subtotal = 2000 * 2 + 5000;
+  const discountedSubtotal = subtotal * (1 - coupon.value / 100);
+  const expectedTotal = discountedSubtotal * (1 + TAX_RATE);
+
+  // Act
+  const total = calculateCartTotal(items, coupon);
+
+  // Assert
+  expect(total).toBe(expectedTotal);
+
+  // Act (NG)
+  const totalWithoutCoupon = calculateCartTotal(items);
+
+  // Assert (NG)
+  expect(totalWithoutCoupon).toBe(subtotal * (1 + TAX_RATE));
+});
+</code></pre>
+<h3 id="ロジックを畳まず愚直に書く">ロジックを畳まず愚直に書く</h3>
+<p>ループや条件分岐は一見スマートでも、読む側には余計な追跡コストがかかります。
+テストでは可読性を優先し、ロジックを畳まずそのまま書き下ろす方が好みです。</p>
+<pre><code class="language-ts">// NG
+const items = [];
+for (let i = 0; i &lt; 3; i++) {
+  items.push(generateItem({ price: 1000 * (i + 1), quantity: i + 1 }));
+}
+</code></pre>
+<pre><code class="language-ts">// OK
+const items = [
+  generateItem({ price: 1000, quantity: 1 }),
+  generateItem({ price: 2000, quantity: 2 }),
+  generateItem({ price: 3000, quantity: 3 }),
+];
+</code></pre>
+<p>大量のデータを用意する必要がある場合は、件数を指定したモック生成関数を用意すると良いでしょう。</p>
+<p>加えて、 <strong>期待値を算出する際に本番コードと同じ計算手順を複製するのは避けます</strong> 。
+本番側にバグがあってもテストが同じ計算をしていれば検知できないためです。</p>
+<pre><code class="language-ts">// NG
+const expectedTotal = items.reduce((sum, item) =&gt; sum + item.price * item.quantity, 0) * (1 + TAX_RATE);
+</code></pre>
+<pre><code class="language-ts">// OK
+const expectedTotal = 14000 * (1 + TAX_RATE);
+</code></pre>
+<p>また変数を定義する際は、抽象的な名前よりも具体的な名前を付けると意図が伝わりやすくなります。</p>
+<pre><code class="language-ts">// NG
+const value = 14000 * (1 + TAX_RATE);
+</code></pre>
+<pre><code class="language-ts">// OK
+const expectedTotal = 14000 * (1 + TAX_RATE);
+</code></pre>
+<h3 id="テストケース名とマッチャーを自然文にする">テストケース名とマッチャーを自然文にする</h3>
+<p>テストケースの説明文が曖昧だと、コードを追わないと意図がつかめません。
+自然な文章にして、読むだけで狙いが伝わるように整えます。
+また、抽象的な語を避けて、状況と期待結果まで書き切りましょう。</p>
+<pre><code class="language-ts">// NG
+it('should work correctly', () =&gt; {
+  // ...
+})
+
+// OK
+it('should calculate total with tax when no coupon', () =&gt; {
+  // ...
+})
+</code></pre>
+<p>私の場合は “it should … when …” の骨格に揃え、条件や期待結果を自然文で並べています。</p>
+<p>マッチャーも同じです。“expect … to …” が文として読めるものを選ぶと、コード全体が平叙文になります。</p>
+<pre><code class="language-ts">// NG
+// Arrange
+const list = ['A', 'B', 'C'];
+
+// Assert
+expect(list.includes('A')).toBe(true)
+</code></pre>
+<pre><code class="language-ts">// OK
+// Arrange
+const list = ['A', 'B', 'C'];
+
+// Assert
+expect(list).toContain('A')
+</code></pre>
+<p>さらに、否定形より肯定形で表現した方が読みやすくなります。</p>
+<pre><code class="language-ts">// NG
+// Arrange
+const isDisabled = false;
+
+// Assert
+expect(isDisabled).not.toBe(true);
+</code></pre>
+<pre><code class="language-ts">// OK
+// Arrange
+const isEnabled = true;
+
+// Assert
+expect(isEnabled).toBe(true);
+</code></pre>
+<h3 id="テストケース単位で完結させる">テストケース単位で完結させる</h3>
+<p>テストを書いていると共通化したくなる処理が自然と出てきます。
+関数化するのは良いのですが、テストケース名から離れた場所を行き来しないと中身が分からない構成は避けたいところです。
+<strong>できるだけテストケース内で見通せる形に保ちます</strong> 。</p>
+<pre><code class="language-ts">// NG
+const generateItems = () =&gt; [
+  generateItem({ price: 2000, quantity: 2 }),
+  generateItem({ price: 5000 }),
+];
+
+it("should calculate total with tax when no coupon", () =&gt; {
+  const items = generateItems(); // NG
+
+  const subtotal = 2000 * 2 + 5000;
+  const expectedTotal = subtotal * (1 + TAX_RATE);
+
+  const total = calculateCartTotal(items);
+
+  expect(total).toBe(expectedTotal);
+});
+</code></pre>
+<pre><code class="language-ts">// OK
+const generateItem = (override: Partial&lt;CartItem&gt; = {}): CartItem =&gt; ({
+  id: "item-001",
+  name: "Wireless Mouse",
+  price: 4980,
+  quantity: 1,
+  ...override,
+});
+
+it("should calculate total with tax when no coupon", () =&gt; {
+  // Arrange
+  const items = [
+    generateItem({ price: 2000, quantity: 2 }),
+    generateItem({ price: 5000 }),
+  ];
+
+  const subtotal = 2000 * 2 + 5000;
+  const expectedTotal = subtotal * (1 + TAX_RATE);
+
+  // Act
+  const total = calculateCartTotal(items);
+
+  // Assert
+  expect(total).toBe(expectedTotal);
+});
+</code></pre>
+<p>どちらも共通化のテクニックですが、前者はモックの中身を知るために “generateItems” を読み解く必要があります。
+後者は “generateItem({ price: 2000, quantity: 2 })” のようにテスト内で値を指定しているため、その場で意図が分かります。
+共通化は便利でも、テストケースから離れた依存が増えるほど読解コストが跳ね上がります。
+テストケース内で、見通しの良い形に保ちましょう。</p>
+<h3 id="グルーピングのネストを浅く保つ">グルーピングのネストを浅く保つ</h3>
+<p>テストケースが増えると共通の前提でグルーピングしたくなりますが、入れ子を重ねすぎると文脈をたどる手間が増えます。
+例えば次のようにグループを3階層にすると、最深部のケースを読む際に上位の条件を逐一思い出さなければなりません。</p>
+<pre><code class="language-ts">// 1階層
+describe("calculateCartTotal", () =&gt; {
+  // 2階層
+  describe("when coupon is applied", () =&gt; {
+    // 3階層
+    describe("and coupon is valid", () =&gt; {
+      it("should calculate total with tax after discount", () =&gt; {
+        // ...
+      });
+    });
+    // 3階層
+    describe("and coupon is expired", () =&gt; {
+      it("should calculate total with tax without discount", () =&gt; {
+        // ...
+      });
+    });
+  });
+});
+</code></pre>
+<p>ネストが深いほど読み手の負荷が高まるため、基本的には避けたいところです。
+ただし、共通の前提で整理したくなる場面もあるはずです。
+その場合でも階層は 2 までにとどめ、テストケース名に状況を織り込んでフラットに並べるのがおすすめです。</p>
+<pre><code class="language-ts">// 1階層
+describe("calculateCartTotal", () =&gt; {
+  it("should calculate total with tax after discount when coupon is valid", () =&gt; {
+    // ...
+  });
+
+  it("should calculate total with tax without discount when coupon is expired", () =&gt; {
+    // ...
+  });
+});
+</code></pre>
+<h3 id="未実装機能をテストで記録する">未実装機能をテストで記録する</h3>
+<p>開発を進めていると「仕様は決まっているが、実装は後回し」というケースがよくあります。
+まずは未実装のプロダクトコードに TODO が残っている一例です。</p>
+<pre><code class="language-ts">// 将来対応予定
+const applyCoupon = (subtotal: number, coupon?: Coupon): number =&gt; {
+  // TODO: Implement coupon application logic
+  return subtotal;
+};
+</code></pre>
+<p>仕様が固まっているなら、先にテストで期待値を記録しておくと実装忘れを防げます。
+Vitest なら「今は失敗していてよい」ことを表現できる “it.fails” が便利です。</p>
+<pre><code class="language-ts">it.fails("should apply coupon when coupon is valid", () =&gt; {
+  // Arrange
+  const subtotal = 1000;
+  const coupon = generateCoupon({ value: 10 });
+  const expectedTotal = 900;
+
+  // Act
+  const total = applyCoupon(subtotal, coupon);
+
+  // Assert
+  expect(total).toBe(expectedTotal);
+});
+</code></pre>
+<p>テストをまだ書けない場合は “it.skip” や “it.todo” で意図だけ残す方法もあります。</p>
+<pre><code class="language-ts">it.todo("should apply coupon when coupon is valid");
+</code></pre>
+<p>未完了のテストを一覧したいときはタグで印を付け、“–testNamePattern” で絞り込むと追跡しやすくなります。</p>
+<pre><code class="language-ts">it.todo("should apply coupon when coupon is valid @coupon");
+</code></pre>
+<p>テスト実行時は次のように検索します。</p>
+<pre><code class="language-bash">vitest --testNamePattern="@coupon"
+</code></pre>
+<p>フィーチャーが完成したら、“fails” や “todo” が出力に残っていないことを確認し、未実装記録を順次解消していきます。</p>
+<h3 id="並び順で意図を伝える">並び順で意図を伝える</h3>
+<p>テストの並びには（個人的には）意味を持たせたくないものの、私は「正常系→準異常系→異常系」の順に並べることが多いです。
+最初に Happy Path を示すと、続くケースが何を守るためのガードなのか読み手が掴みやすくなります。</p>
+<p>例えば、以下のような順番です。</p>
+<pre><code class="language-ts">// 正常系
+it("should calculate total with tax when no coupon", () =&gt; {
+  // ...
+});
+it("should calculate total with tax when coupon is applied", () =&gt; {
+  // ...
+});
+// 準異常系
+it("should calculate total with tax when coupon is expired", () =&gt; {
+  // ...
+});
+// 異常系
+it('should throw error when coupon type is unknown', () =&gt; {
+  // ...
+});
+</code></pre>
+<h3 id="アサートは細かく明示する">アサートは細かく明示する</h3>
+<p>テストは「何を確認したのか」を明確に残す必要があります。
+特に戻り値がオブジェクトや複数行テキストのとき、 <strong>ざっくりとしたアサートだとバグをすり抜けさせがちです</strong> 。
+値だけでなく、呼び出し回数や引数まで丁寧に検証しましょう。</p>
+<pre><code class="language-ts">// NG
+const summary = formatOrderSummary(order);
+// summary が存在することだけを確認
+expect(summary).toBeTruthy();
+
+// OK
+expect(summary).toEqual({
+  total: 14000,
+  itemCount: 3,
+  hasDiscount: true,
+});
+</code></pre>
+<p>フロントエンドでは HTML の検証も同様です。
+要素が存在するだけでなく、どこにどんなテキストが描画されているかまで確認します。</p>
+<pre><code class="language-ts">// Arrange &amp; Act
+const html = `
+  &lt;section&gt;
+    &lt;h2&gt;Cart total&lt;/h2&gt;
+    &lt;p data-testid="cart-total"&gt;-&lt;/p&gt;
+    &lt;p data-testid="contact"&gt;Call us: 03-1234-5678&lt;/p&gt;
+  &lt;/section&gt;
+`;
+
+// Assert
+// NG
+expect(html.includes("-")).toBe(true);
+
+// OK
+const dom = new DOMParser().parseFromString(html, "text/html");
+const total = dom.querySelector('[data-testid="cart-total"]');
+expect(total?.textContent).toContain("-");
+
+// NOTE: 実際は @testing-library/react の screen.getByRole などを用いますが、
+// ここではライブラリに依存しない例として DOMParser を使っています。
+</code></pre>
+<p>同様に、モック関数は呼び出し回数と引数を合わせて検証します。</p>
+<pre><code class="language-ts">// Arrange
+const logger = vi.fn();
+
+// Act
+notifyMissingCoupon(logger);
+
+// Assert
+expect(logger).toHaveBeenCalledTimes(1);
+expect(logger).toHaveBeenCalledWith({
+  level: "warn",
+  message: "Coupon is missing",
+});
+</code></pre>
+<p>検証対象が大きすぎるときは “expect.objectContaining” などを使い、必要な部分だけを確実に見るようにします。</p>
+<pre><code class="language-ts">// Arrange
+const logger = vi.fn();
+
+// Act
+notifyMissingCoupon(logger);
+
+// Assert
+expect(logger).toHaveBeenCalledWith(
+  expect.objectContaining({
+    level: "warn",
+    message: "Coupon is missing",
+  })
+);
+</code></pre>
+<h3 id="パラメータの網羅性を確保する">パラメータの網羅性を確保する</h3>
+<p>期待結果が入力パラメータに左右されるときは、境界値や同値分割を意識して網羅的に押さえます。
+列挙が増えそうならパラメタライズドテストを使い、ON/OFF のような二択も迷うくらいなら両方書いてしまった方が早いです。</p>
+<p>例えば、クーポン適用の有無の関数 “isCouponApplicable” の場合、以下のようにテストケースを分けます。</p>
+<pre><code class="language-ts">it.each`
+  subtotal | minAmount    | expected
+  ${1000}  | ${undefined} | ${true}
+  ${1000}  | ${1001}      | ${true}
+  ${1000}  | ${1000}      | ${true}
+  ${1000}  | ${999}       | ${false}
+`("should return $expected when subtotal=$subtotal and minAmount=$minAmount", ({ subtotal, minAmount, expected }) =&gt; {
+  // Arrange
+  const coupon = { type: "percent", value: 10, minAmount };
+
+  // Act
+  const result = isCouponApplicable(subtotal, coupon);
+
+  // Assert
+  expect(result).toBe(expected);
+});
+</code></pre>
+<h3 id="状態遷移はケースを分割する">状態遷移はケースを分割する</h3>
+<p>状態遷移を伴うオブジェクトをテストするとき、 <strong>1ケースで一連の流れをなぞると途中で失敗した時点で残りの検証が実行されません</strong> 。
+遷移ごとにテストを分けて、どの状態で落ちたのかを明確にすると安心です。</p>
+<p>例えば、以下のような簡易のカートクラスを考えます。
+このクラスは、カートの状態を管理し、アイテムの追加やチェックアウトを行います。</p>
+<pre><code class="language-ts">export enum CartState {
+  Empty = "Empty",
+  Active = "Active",
+  CheckedOut = "CheckedOut",
+}
+
+export class Cart {
+  private total = 0;
+  private state = CartState.Empty;
+
+  add(price: number) {
+    if (this.state === CartState.CheckedOut) throw new Error("Already checked out");
+    this.total += price;
+    this.state = CartState.Active;
+  }
+
+  checkout() {
+    if (this.state !== CartState.Active) throw new Error("Cannot checkout");
+    this.total = 0;
+    this.state = CartState.CheckedOut;
+  }
+
+  getState() {
+    return this.state;
+  }
+
+  getTotal() {
+    return this.total;
+  }
+}
+</code></pre>
+<p>このカートを例に、状態ごとにケースを切り分けてみます。<br>
+以下は、1ケースで状態遷移を追う例です。</p>
+<pre><code class="language-ts">// NG
+it("should be Empty state when initialized, Active state after adding an item, and CheckedOut state after checkout", () =&gt; {
+  // Act
+  const cart = new Cart();
+
+  // Assert
+  expect(cart.getState()).toBe(CartState.Empty);
+
+  // Act
+  cart.add(1000);
+
+  // Assert
+  expect(cart.getState()).toBe(CartState.Active);
+
+  // Act
+  cart.checkout();
+
+  // Assert
+  expect(cart.getState()).toBe(CartState.CheckedOut);
+});
+</code></pre>
+<p>以下は、状態ごとにケースを分けた例です。</p>
+<pre><code class="language-ts">// OK
+it("should be Empty state when initialized", () =&gt; {
+  // Act
+  const cart = new Cart();
+
+  // Assert
+  expect(cart.getState()).toBe(CartState.Empty);
+});
+it("should be Active state after adding an item", () =&gt; {
+  // Arrange
+  const cart = new Cart();
+
+  // Act
+  cart.add(1000);
+
+  // Assert
+  expect(cart.getState()).toBe(CartState.Active);
+});
+it("should be CheckedOut state after checkout", () =&gt; {
+  // Arrange
+  const cart = new Cart();
+  cart.add(1000);
+
+  // Act
+  cart.checkout();
+
+  // Assert
+  expect(cart.getState()).toBe(CartState.CheckedOut);
+});
+</code></pre>
+<h3 id="責務ごとにテストの深さを調整する">責務ごとにテストの深さを調整する</h3>
+<p>単体テストでも結合テストでも、対象の責務に合わせて深さを決めます。
+1つの関数で他のモジュールを呼ぶ場合、呼び出し先の詳細まで二重にテストする必要はありません。
+例としてバリデーション関数とそれを利用する送信関数を考えます。</p>
+<pre><code class="language-ts">// バリデーション関数
+export const isValidEmail = (email: string): boolean =&gt; {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+// それを使用した関数
+export const sendEmail = (email: string): boolean =&gt; {
+  if (!isValidEmail(email)) {
+    throw new Error("Invalid email");
+  }
+  // メール送信処理
+  return true;
+};
+</code></pre>
+<p>このとき “sendEmail” のテストで “isValidEmail” の全パターンを再度検証する必要はありません。
+“sendEmail” では「有効なら送る」「無効ならエラーを投げる」ことを確認し、“isValidEmail” の細かい条件は別のテストで保証します。</p>
+<pre><code class="language-ts">// sendEmail のテストコード
+it("should send email when email is valid", () =&gt; {
+  // Arrange
+  const validEmail = "test@example.com";
+
+  // Act
+  const result = sendEmail(validEmail);
+
+  // Assert
+  expect(result).toBe(true);
+});
+
+it("should throw error when email is invalid", () =&gt; {
+  // Arrange
+  const invalidEmail = "invalid-email";
+
+  // Act &amp; Assert
+  expect(() =&gt; sendEmail(invalidEmail)).toThrow("Invalid email");
+});
+</code></pre>
+<pre><code class="language-ts">// isValidEmail のテストコード
+it.each`
+  email                 | expected
+  ${"test@example.com"} | ${true}
+  ${"invalid-email"}    | ${false}
+`("should return $expected for email: $email", ({ email, expected }) =&gt; {
+  // Act
+  const result = isValidEmail(email);
+  // Assert
+  expect(result).toBe(expected);
+});
+</code></pre>
+<h3 id="テスト警告を潰す習慣を持つ">テスト警告を潰す習慣を持つ</h3>
+<p>テスト実行時に流れる警告は放っておかないでください。
+原因によっては環境によって落ちるフレークテストの兆候です。
+ログに黄色い行が残ったら、まず警告の出所を突き止めて解消する習慣を付けましょう。</p>
+<h2 id="終わりに">終わりに</h2>
+<p>テストコードは「読み手に何を伝えたいか」を意識すると自然と整っていきます。
+AAA で流れを揃え、愚直に書き、言葉とアサートを丁寧にするだけで再読性はぐっと上がります。
+明日以降の自分やチームが迷わないよう、今回紹介した工夫を少しずつ取り入れてみてください。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>テスト</li></ul></footer></article></main></body></html>

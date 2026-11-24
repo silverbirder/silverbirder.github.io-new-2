@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Markdownで執筆するなら、WebComponentsが使えるSSG、Rocketがオススメ！</title><meta name="description" content="Markdownでブログやドキュメントを書いていますか？執筆活動に集中したいのに、Markdownだけだとかゆいところに手が届かないもどかしさ、感じたことありませんか？そんな方に、MarkdownとWebComponentsがシームレスに統合できる静的サイトジェネレータ(以降、SSGと呼ぶ)、Rocketをおすすめします。"><meta name="keywords" content="フロントエンド,成果物"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">70</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2021-12-24"><span class="visually-hidden">2021年12月24日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2021</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">12</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">24</span></span></time></p></div><div class="notebook-heading"><h1>Markdownで執筆するなら、WebComponentsが使えるSSG、Rocketがオススメ！</h1></div></header><div class="notebook-body"><p>Markdown でブログやドキュメントを書いていますか？
+執筆活動に集中したいのに、Markdown だけだとかゆいところに手が届かないもどかしさ、感じたことありませんか？</p>
+<p>そんな方に、Markdown と WebComponents がシームレスに統合できる静的サイトジェネレータ(以降、SSG と呼ぶ)、Rocket をおすすめします。</p>
+<h2 id="対象読者">対象読者</h2>
+<ul>
+<li>(ブログなど)執筆活動に集中したい人
+<ul>
+<li>執筆に、Markdown を利用している</li>
+</ul>
+</li>
+<li>執筆したコンテンツを SSG で公開している人</li>
+<li>SSG の移行コストを極力減らしたい人</li>
+</ul>
+<h2 id="そもそもmarkdown-って何">そもそも、Markdown って何</h2>
+<p>Markdown は、Qiita や Zenn、はてなブログなどの各サービス(以降、執筆サービスと呼ぶ)、に使われていたり、Git リポジトリの説明書として README.md を書いたりしますよね。</p>
+<p>その Markdown ですが、どういう目的で作られたモノなのでしょうか。</p>
+<p><a href="https://daringfireball.net/projects/markdown/">Daring Fireball: Markdown</a> から引用します。</p>
+<blockquote>
+<p>Markdown is a text-to-HTML conversion tool for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).</p>
+</blockquote>
+<p>Markdown は、 <strong>Web ライター</strong> 向けに開発された PlainText から HTML へ変換するためのツールです。
+また、Markdown には <strong>書きやすさ、読みやすさが大切</strong> です。</p>
+<p>Web ライターは、ブログ記事やネット広告の文章など、Web 向けコンテンツを執筆する人です。
+そう、 <strong>執筆</strong> です。Markdown は、執筆のための道具です。</p>
+<p>そのため、ブログ記事や Git リポジトリの説明書に Markdown を用いるのは、目的に合っています。
+逆に、構造的な特徴を利用して、一種のデータファイルとして Markdown を使ったり、ショッピングやゲームといったアプリケーションに Markdown を使うのは、目的に反します。</p>
+<h2 id="markdown-と-html">Markdown と HTML</h2>
+<p>Markdown には、見出しや箇条書き、テーブルなどの記法(シンタックス)があります。
+これらの記法を用いて、構造的に記事を書くことができます。</p>
+<p>執筆で欲しい記法がなかった場合は、どうしたら良いでしょうか。</p>
+<p><a href="https://daringfireball.net/projects/markdown/syntax">Daring Fireball: Markdown Syntax Documentation</a> より引用します。</p>
+<blockquote>
+<p>For any markup that is not covered by Markdown’s syntax, you simply use HTML itself. There’s no need to preface it or delimit it to indicate that you’re switching from Markdown to HTML; you just use the tags.</p>
+</blockquote>
+<p>Markdown には HTML が使えます。執筆サービスの Markdown で、HTML を書いてみると、恐らく使えるはずです。</p>
+<p>Markdown は HTML へ変換するという目的を考えると、HTML が使用できるというのは納得できると思います。
+ただし、 <strong>HTML を使用することで、読みやすさや書きやすさは少し悪くなってしまうため、多用は避けなければいけません</strong> 。</p>
+<h2 id="html-では物足りない">HTML では物足りない</h2>
+<p>執筆サービスを使ってみるとわかると思いますが、おおよそ次の機能が提供されています。</p>
+<ul>
+<li>埋め込み(Embed)コンテンツ
+<ul>
+<li>URL を書くと、Description やタイトル、画像を表示してくれる</li>
+</ul>
+</li>
+<li>目次(TOC)生成
+<ul>
+<li>文章の見出しを収集し、目次を生成してくれる</li>
+</ul>
+</li>
+</ul>
+<p>これらの機能によって、執筆したコンテンツが読みやすくなったり、執筆の効率性が向上したりします。
+当たり前ですが、Markdown には、そのような機能が存在しません。
+Markdown は、記法を定義しているだけなので、Markdown に機能拡張を望んでいる訳ではありません。</p>
+<p>しかし、執筆をしていくと、それらの機能が <strong>どうしても欲しくなってきます</strong> 。
+機能がなくても、Markdown 記法を駆使すれば、埋め込みコンテンツっぽく表示できますし、目次も手動で生成できます。
+ただ、本来執筆に集中したいのに、見出しが増えるたびに、目次を手動更新するというのは、非効率的です。</p>
+<p>その非効率、どうしたら良いでしょうか。</p>
+<h3 id="案-1-markdown-から-html-への変換処理で機能拡張する">案 1. Markdown から HTML への変換処理で、機能拡張する</h3>
+<p>Markdown から HTML への変換処理で、埋め込みコンテンツや目次生成といった機能を拡張します。
+具体的な話をした方が分かりやすいと思うので、目次生成を例にして、説明します。</p>
+<p>説明しやすいために自前で変換処理を書きますが、本来は、Hugo や GatsbyJS、MDX などを想定しています。</p>
+<p><a href="https://jsprimer.net/use-case/nodecli/md-to-html/">Markdown を HTML に変換する · JavaScript Primer #jsprimer</a> がちょうど分かりやすかったので参考にします。</p>
+<p>Markdown と変換処理の transform.js を、次のものとします。</p>
+<pre><code class="language-markdown">## Header1
+
+Hello, World
+</code></pre>
+<pre><code class="language-javascript">// transform.js
+const fs = require("fs");
+const { marked } = require("marked"); // markdownをhtmlへ変換してくれる
+
+const markdown = fs.readFileSync("README.md", { encoding: "utf-8" });
+const html = marked(markdown);
+console.log(html);
+</code></pre>
+<p>transform.js は、とてもシンプルです。README.md を html に変換して標準出力するだけです。
+実行してみましょう。</p>
+<pre><code class="language-bash">node transform.js
+&lt;h1 id="header1"&gt;Header1&lt;/h1&gt;
+&lt;p&gt;Hello, World&lt;/p&gt;
+</code></pre>
+<p>期待通り、HTML が出力されました。次は、目次生成です。
+はてなブログでは、目次生成に <code>[:contents]</code> というマーカーを書くと、そこが目次となります。
+脱線ですが、<a href="https://github.com/remarkjs/remark">remark</a> という、Markdown に変換処理をしてくれるツールがあります。</p>
+<p>目次生成のサンプルコードを書いていきます。</p>
+<pre><code class="language-markdown">[:contents]
+
+## Header1
+
+Hello, World
+</code></pre>
+<pre><code class="language-javascript">// transform.js
+const fs = require("fs");
+const { marked } = require("marked"); // markdownをhtmlへ変換してくれる
+
+const markdown = fs.readFileSync("README.md", { encoding: "utf-8" });
+reMarkdown = markdown
+  // TODO: replaceの第2引数の固定を動的に設定
+  .replace(/\[:contents\]/g, '&lt;div id="toc"&gt;&lt;ul&gt;&lt;li&gt;Header1&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;');
+const html = marked(reMarkdown);
+console.log(html);
+</code></pre>
+<p>とても馬鹿げているコードだと思いますが、伝えたいことが書けているので、これで良いです。
+実行してみます。</p>
+<pre><code class="language-bash">node transform.js
+&lt;div id="toc"&gt;&lt;ul&gt;&lt;li&gt;Header1&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+&lt;h1 id="header1"&gt;Header1&lt;/h1&gt;
+&lt;p&gt;Hello, World&lt;/p&gt;
+</code></pre>
+<p>期待通り、Markdown の目次が生成されています。
+これは簡単な例ですが、機能拡張していくと、transform.js の処理が増えたり、README.md にマーカーがたくさん書かれていきます。</p>
+<p>このように変換処理に機能拡張するのは、変換処理に機能を一任できるというメリットがあります。
+ですが、 <strong>Markdown が変換処理に依存してしまう</strong> こととなってしまいます。
+これは、変換処理を違うものへ移行するときに <strong>移行コスト</strong> が発生してしまいます。</p>
+<p>また、Markdown 自体に、 <strong>Markdown 記法や HTML でもないマーカーを埋める</strong> というのも、ちょっと違和感を感じます。</p>
+<h3 id="案-2-webcomponents-で機能拡張する">案 2. WebComponents で、機能拡張する</h3>
+<p>WebComponents は、Web 標準技術の 1 つで、HTML 要素を独自にカスタマイズできる機能(Custom Elements)があります。
+例えば、目次生成するための HTML 要素、<code>&lt;generate-toc&gt;</code>を WebComponents で開発したとします。
+この HTML 要素は、全ての見出しテキストを収集し、箇条書きで表示するだけの WebComponents だとします。</p>
+<p>Markdown のイメージは、次のとおりになります。</p>
+<pre><code class="language-markdown">&lt;generate-toc /&gt;
+
+## Header1
+
+Hello, World
+</code></pre>
+<p>この Markdown を、任意の HTML 変換処理(さきほどの transform.js でも可)をすると、次の結果になります。</p>
+<pre><code class="language-html">&lt;generate-toc /&gt;
+
+&lt;h1 id="header1"&gt;Header1&lt;/h1&gt;
+&lt;p&gt;Hello, World&lt;/p&gt;
+</code></pre>
+<p>Markdown は HTML を許容するため、<code>&lt;generate-toc /&gt;</code>が、そのまま HTML 出力されます。
+このままだと、ブラウザが <code>generate-toc</code> を識別できません。そのため、<code>generate-toc</code>を定義したコード、つまり WebComponents を読み込む必要があります。
+例えば、次のようなコードを読み込みます。</p>
+<pre><code class="language-html">&lt;script&gt;
+  class GenerateToc extends HTMLElement {
+    constructor() {
+      super();
+      const shadow = this.attachShadow({ mode: "open" });
+      // TODO: 見出しを収集し、箇条書きのHTMLを構築する処理
+      shadow.innerHTML = `&lt;div id="toc"&gt;&lt;ul&gt;&lt;li&gt;Header1&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;`;
+    }
+  }
+  customElements.define("generate-toc", GenerateToc);
+&lt;/script&gt;
+</code></pre>
+<p>これで、ブラウザは <code>generate-toc</code>を識別できるようになったため、期待通り目次が表示されます。</p>
+<p>WebComponents を利用するメリットは、 <strong>変換処理に依存せず WebComponents に依存します</strong> 。ブラウザの標準技術に依存するというのは、全く問題ありません。
+変換処理の移行をしても、WebComponents のコードがあれば、同じ動作が実現できます。</p>
+<p>また、再掲ですが、Markdown に次の文章があったとしても、Markdown の仕様に反しません。</p>
+<pre><code class="language-markdown">&lt;generate-toc /&gt;
+
+## Header1
+
+Hello, World
+</code></pre>
+<p>Markdown の目的や仕様、Web というプラットフォームを考慮すると、Markdown と WebComponents の組み合わせは、相性が良いと思います。</p>
+<h2 id="ようやく登場rocket">ようやく登場、Rocket</h2>
+<p>お待たせしました、ようやく Rocket の登場です。</p>
+<p>Rocket は、Markdown と WebComponents をシームレスに統合できる SSG です。
+Modern Web と呼ばれる Web 標準技術の開発支援を行うプロジェクトがあり、その中のサブプロジェクトとして<a href="https://rocket.modern-web.dev/">rocket</a>があります。
+他のサブプロジェクトとして、<a href="https://modern-web.dev/docs/test-runner/overview/">テストランナー</a>と<a href="https://modern-web.dev/docs/dev-server/overview/">開発サーバー</a>の<a href="https://modern-web.dev/">modern-web</a>、WebComponents の開発、テスト、リンターなどの<a href="https://open-wc.org/">open-wc</a>があります。</p>
+<p>Rocket の事例は、次のものがあります。</p>
+<ul>
+<li><a href="https://modern-web.dev/">https://modern-web.dev/</a></li>
+<li><a href="https://rocket.modern-web.dev/">https://rocket.modern-web.dev/</a></li>
+<li><a href="https://open-wc.org/">https://open-wc.org/</a></li>
+<li><a href="https://apolloelements.dev/">https://apolloelements.dev/</a></li>
+</ul>
+<p>Rocket は、技術的には、Eleventy という SSG の Wrapper になります。
+Eleventy は、Markdown を HTML へ変換してくれます。Rocket は、その Eleventy に Modern Web の技術(WebComponents,TestRunner,DevServer)を混ぜています。</p>
+<h3 id="modern-web-って">Modern Web って</h3>
+<p>Javascript を使って開発すると、Babel のトランスパイラ、ESLint のリンター、Jest のテスター、Webpack のビルダーなど、扱うツールが多く、必要以上に複雑になり、開発者は疲弊してしまいます。
+本来、開発に注力すべきなのに、それらの複雑さによって、アジリティ低下につながることを、開発者は知っています。</p>
+<p>そこで、WebComponents や、ESModules といった Web 標準技術で開発することで、複雑さといったものを軽減していく狙いが、Modern Web にはあります。</p>
+<p>※ JSDOM のようなブラウザ API をモックすることでテストするのではなく、本来動いているブラウザでテストするテストランナーもあります。</p>
+<p>Modern Web は、そういった Web 標準技術の開発を支援します。</p>
+<h2 id="rocket-の特徴">Rocket の特徴</h2>
+<p><a href="https://rocket.modern-web.dev/">Rocket のホームページ</a>に、Rocket の特徴を 6 つ書いてあります。
+しかし、本記事の流れ的に Markdown と WebComponents の統合についてを説明すべきだと思うので、次の 1 つだけ特徴を紹介して、その他は割愛します。</p>
+<ul>
+<li>Meta Framework
+<ul>
+<li>Build on top of giants like Eleventy, Rollup, and Modern Web.</li>
+</ul>
+</li>
+</ul>
+<p>Eleventy や(話題にしていませんでしたが)Rollup、Modern Web という巨人の肩に乗ることで、Rocket の魅力があると思っています。</p>
+<p>これまでの話で、『Eleventy で Markdown を HTML に変換して、WebComponents を読み込ませればよいでしょ？Rocket 必要？』と思う方がいるかもしれません。実際、その 2 つだけあれば充分だと思います。</p>
+<p>ただ、Modern Web というプロジェクト支援があると、開発アジリティは向上します。
+具体的には、Markdown や Javascript 変更による自動リロード、<a href="https://www.11ty.dev/docs/plugins/image/">Eleventy の画像変換処理</a>、<a href="https://rocket.modern-web.dev/tools/check-html-links/overview/">Markdown のリンク先チェック</a>などがあります。
+まあ、必須ではないので Eleventy と WebComponents でも良いと思いますが、私は Rocket を使います。</p>
+<h2 id="markdown-javascript">Markdown Javascript</h2>
+<p>Markdown と WebComponents の統合について説明します。</p>
+<p>Rocket には、Markdown Javascript という機能があります。これは内部的に MDJS というライブラリを使っています。
+以下に、MDJS についての InfoQ の記事がありますので、よければご参照ください。</p>
+<ul>
+<li><a href="https://www.infoq.com/jp/news/2020/08/mdjs-markdown-web-components/">新しい MDJS マークアップ言語により JavaScript を Markdown に追加してインタラクティブなドキュメント作成が可能に</a></li>
+</ul>
+<p>Markdown Javascript は、Markdown に Javascript を記入でき、インタラクティブに実行できる機能を備えています。
+例えば、次のような Markdown を書いたとします。</p>
+<pre><code class="language-markdown">```js script
+console.log("Hello, World");
+```
+</code></pre>
+<p>これを書いて、Rocket で実行すると、ブラウザの開発ツールのコンソール画面に <code>Hello, World</code>と表示されます。
+これを応用して、WebComponents を定義することもできます。</p>
+<pre><code class="language-markdown">```js script
+class MyDiv extends HTMLElement {
+  constructor() {
+    super();
+    const shadow = this.attachShadow({ mode: "open" });
+    shadow.innerHTML = `Hello, World`;
+  }
+}
+
+customElements.define("my-div", MyDiv);
+```text
+
+&lt;my-div&gt;&lt;/my-div&gt;
+</code></pre>
+<p>これを Rocket で実行すると、画面に <code>Hello World</code> と表示されます。
+このように、Markdown 上に WebComponents を定義し、インタラクティブに実行されるため、 <strong>即座に WebComponents を使うことができます</strong> 。</p>
+<p>使い捨ての WebComponents であればこれで良いのですが、使いまわしたいときがあると思います。
+そういう場合は、共通する箇所に WebComponents を定義するのが良いでしょう。
+Numjucks の script ヘッダに、共通化したい WebComponents を書いてあげると、どの Markdown からでも定義した WebComponents を使えます。</p>
+<h3 id="bare-import-のサポート">Bare Import のサポート</h3>
+<p>Rocket は、Modern Web の<a href="https://modern-web.dev/docs/dev-server/overview/">開発サーバー</a>を内部で使用しています。開発サーバーには、<a href="https://modern-web.dev/blog/introducing-modern-web/#highlights-1">Bare Import をサポートしています</a>。</p>
+<p>Bare Import の例を示します。
+事前に <code>npm install canvas-confetti</code> インストールしていることを前提とした場合、次の Markdown は<code>confetti()</code>が実行されます。</p>
+<pre><code class="language-markdown">```js script
+import confetti from "canvas-confetti";
+confetti();
+```
+</code></pre>
+<p>このように、相対パスや絶対パスを意識せず Bare で指定できるようになります。</p>
+<h3 id="webcomponents-のコミュニティからライブラリを使う">WebComponents のコミュニティからライブラリを使う</h3>
+<p>独自に WebComponents を書かなくても、次の WebComponents のコミュニティサイトから良さそうなものを使うこともできます。</p>
+<ul>
+<li><a href="https://www.webcomponents.org/">webcomponents.org</a></li>
+</ul>
+<p>例えば、<a href="https://www.webcomponents.org/element/emoji-picker-element">emoji-picker-element</a>という WebComponents を使ってみたいとします。emoji-picker-element は、絵文字キーボードの UI に似ています。Mac なら、command + control + スペースキー で表示されます。</p>
+<p>使い方は、簡単です。
+先ほどと同じく、<code>npm install emoji-picker-element</code> でインストールしておけば、次の Markdown を書くだけで <code>&lt;emoji-picker-element&gt;</code>が使えます。</p>
+<pre><code class="language-markdown">```js script
+import "emoji-picker-element";
+```text
+
+&lt;emoji-picker&gt;&lt;/emoji-picker&gt;
+</code></pre>
+<h2 id="宣伝">宣伝</h2>
+<p>WebComponents についての入門書を Amazon で、500 円で販売しています。
+今回の Rocket については書いていませんが、<a href="https://open-wc.org/">open-wc</a>のテストについて触れています。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/gp/product/B08CY2QCFV/">はじめての Web Components 入門: 4 つの基本機能から関連ライブラリまで</a></li>
+</ul>
+<p>また、私のポートフォリオページを Rocket で作成しています。このブログも Markdown で執筆しています。よければご覧ください。</p>
+<ul>
+<li><a href="https://silverbirder.github.io/">silverbirder’s page</a>
+<ul>
+<li>このブログの Markdown ファイルは、<a href="https://github.com/silverbirder/silverbirder.github.io/blob/main/docs/blog/contents/intro_rocket.md">こちら</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="終わりに">終わりに</h2>
+<p>Rocket の紹介が、随分と後ろの方になってしまいました。前置きが長すぎたかもしれません。
+少しでも誰かのお役に立てればと思います。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>フロントエンド</li><li>成果物</li></ul></footer></article></main></body></html>

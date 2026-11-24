@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GMailをGCalendarに登録するサービス rMinc を作ってみた</title><meta name="description" content="ターゲットユーザー * GMailとGCalendarを使っている人 メールを開くって面倒じゃないですか？ 例えば、次のようなメールを受信していたとします。* アマゾンで商品を購入した際、お届け予定日が記載されたメール * 映画館(TOHOシネマ)でネット予約した際、上映日が記載されたメール * ホテルをネット予約した際、宿泊日が記載されたメール"><meta name="keywords" content="成果物,Google,rMinc,GMail"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">41</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2020-02-17"><span class="visually-hidden">2020年2月17日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2020</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">02</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">17</span></span></time></p></div><div class="notebook-heading"><h1>GMailをGCalendarに登録するサービス rMinc を作ってみた</h1></div></header><div class="notebook-body"><h2 id="ターゲットユーザー">ターゲットユーザー</h2>
+<ul>
+<li>GMail と GCalendar を使っている人</li>
+</ul>
+<h2 id="メールを開くって面倒じゃないですか">メールを開くって面倒じゃないですか</h2>
+<p>例えば、次のようなメールを受信していたとします。</p>
+<ul>
+<li>アマゾンで商品を購入した際、お届け予定日が記載されたメール</li>
+<li>映画館(TOHO シネマ)でネット予約した際、上映日が記載されたメール</li>
+<li>ホテルをネット予約した際、宿泊日が記載されたメール</li>
+</ul>
+<p>『いつ商品が届くのかな？メールを確認しよう』が、 <strong>面倒と感じませんか</strong> ？私は面倒と思います。
+Google は気を利かせて、次のような予定を勝手に登録してくれることがあります。（良い悪いがありますが…）</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614431051/silver-birder.github.io/blog/unknownorganizer_google_calendar.png?ar=680%3A820" alt="unknownorganizer@calendar.google.com" width="680" height="820" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1614431051/silver-birder.github.io/blog/unknownorganizer_google_calendar.png?ar=680%3A820 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1614431051/silver-birder.github.io/blog/unknownorganizer_google_calendar.png?ar=680%3A820 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614431051/silver-birder.github.io/blog/unknownorganizer_google_calendar.png?ar=680%3A820 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_680/q_auto/f_auto/v1614431051/silver-birder.github.io/blog/unknownorganizer_google_calendar.png?ar=680%3A820 680w" sizes="min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>この気を利かせるかどうかは、Google の判断によるため未知数です。
+先程あげた例のメールも、同様のことが勝手にしてくれたら良いな〜と思っていました。
+そこで、rMinc というツールを作りました。</p>
+<p>※ 昔、<a href="https://github.com/silverbirder/gas-for-amazon-calendar">gas-for-amazon-calendar</a>という、アマゾンからのお届け予定日が記載しているメールを GCalendar に登録するツールを作りましたが、
+アマゾンのメールに特化しすぎてしまい、汎用性がないものとなりました。</p>
+<h2 id="rminc-is-何">rMinc is 何</h2>
+<p><a href="https://www.npmjs.com/package/@silverbirder/rminc">https://www.npmjs.com/package/@silverbirder/rminc</a></p>
+<blockquote>
+<p>rMinc is the Google Apps Script Library that register Mail in Calendar.</p>
+</blockquote>
+<p>以下サービスからの GMail が届いたときに、その内容を抽出して GCalendar に登録します。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/">Amazon</a>
+<ul>
+<li>発送のお知らせ (お届け予定日)</li>
+</ul>
+</li>
+<li><a href="https://www.tohotheater.jp/">TOHO CINEMAS</a>
+<ul>
+<li>チケット購入完了のお知らせ (上映日)</li>
+</ul>
+</li>
+<li><a href="https://shokutakubin.com/">食宅便</a>
+<ul>
+<li>配送手配のお知らせ (お届け予定日)</li>
+</ul>
+</li>
+</ul>
+<p>また、これ以外にも対応したいサービスがあると思うので、カスタマイズして使えるようにしました。
+詳しくは、<a href="https://github.com/silverbirder/rMinc/blob/master/README.md">README.md</a>をご確認下さい。</p>
+<p>概要はこんな感じです。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1581769421/rMinc/rMinc_overview.png?ar=1852%3A1036" alt="overview" width="1852" height="1036" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1581769421/rMinc/rMinc_overview.png?ar=1852%3A1036 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1581769421/rMinc/rMinc_overview.png?ar=1852%3A1036 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1581769421/rMinc/rMinc_overview.png?ar=1852%3A1036 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1581769421/rMinc/rMinc_overview.png?ar=1852%3A1036 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1581769421/rMinc/rMinc_overview.png?ar=1852%3A1036 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1581769421/rMinc/rMinc_overview.png?ar=1852%3A1036 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<ol>
+<li>特定キーワードでメールを抽出
+<ol>
+<li>アマゾンなら、<a href="https://github.com/silverbirder/rMinc/blob/master/src/user/mailRule/amazonMailRule.ts#L61">from:(shipment-tracking@amazon.co.jp) 発送</a></li>
+</ol>
+</li>
+<li>メールの下記を抽出
+<ol>
+<li>タイトル</li>
+<li>本文
+<ol>
+<li>イベント開始日&amp;終了日 (予定日とか）</li>
+<li>場所 (配達先とか)</li>
+</ol>
+</li>
+<li>メールのリンク</li>
+</ol>
+</li>
+<li>抽出した内容を GCalendar に登録</li>
+</ol>
+<p>実際に使ってみるとこんな感じになります。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1581760683/rMinc/rMinc_sample.png?ar=1854%3A1032" alt="example" width="1854" height="1032" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1581760683/rMinc/rMinc_sample.png?ar=1854%3A1032 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1581760683/rMinc/rMinc_sample.png?ar=1854%3A1032 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1581760683/rMinc/rMinc_sample.png?ar=1854%3A1032 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1581760683/rMinc/rMinc_sample.png?ar=1854%3A1032 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1581760683/rMinc/rMinc_sample.png?ar=1854%3A1032 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1280/q_auto/f_auto/v1581760683/rMinc/rMinc_sample.png?ar=1854%3A1032 1280w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>小さくて見えないと思いますが、お届け予定日、タイトル、配達先、メールリンクが登録されています。</p>
+<p>このツール(<a href="https://github.com/silverbirder/rMinc/blob/master/sample/sample.js">sample.js</a>)を GAS 上で <strong>定期的に動かしておくだけ</strong> で、自動的に GCalendar へ予定登録されます。当たり前ですが、無料です。</p>
+<p>※ RMinc は、<a href="https://github.com/silverbirder/rMinc/blob/master/README.md">README.md</a>にある APP ID を登録する必要あり</p>
+<h2 id="最後に">最後に</h2>
+<p>Google Apps Script は、エンジニアにとって、とても強力な武器です。特に、G Suite を積極的に使っている人にとっては、欠かせないものです。</p>
+<p>こういった <strong>かゆいところに手が届く</strong> ことができるのは、Google Apps Script の魅力的なところです。
+ぜひぜひ、積極的に活用していきたいですね！</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>成果物</li><li>Google</li></ul></footer></article></main></body></html>

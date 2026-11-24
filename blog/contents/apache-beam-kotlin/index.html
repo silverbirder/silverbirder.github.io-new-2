@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Apache Beam + Kotlin 開発 実践入門</title><meta name="description" content="どうも、こんにちは。Re:ゼロ2期 始まりましたね、 @silverbirderです。最近、仕事の関係上、Apache Beam + Kotlin を使うことになりました。それらの技術が一切知らなかったので、この記事に学んだことを書いていきます。"><meta name="keywords" content="Kotlin,Apache Beam"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">49</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2020-07-10"><span class="visually-hidden">2020年7月10日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2020</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">07</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span></span></time></p></div><div class="notebook-heading"><h1>Apache Beam + Kotlin 開発 実践入門</h1></div></header><div class="notebook-body"><p>どうも、こんにちは。Re:ゼロ 2 期 始まりましたね 👏、 <a href="https://twitter.com/silverbirder">@silverbirder</a> です。
+最近、仕事の関係上、Apache Beam + Kotlin を使うことになりました。それらの技術が一切知らなかったので、この記事に学んだことを書いていきます ✍️。</p>
+<p>サンプルリポジトリは、下記に載せています。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/silverbirder/apache-beam-kotlin-example/tree/master/src/main/kotlin" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>apache-beam-kotlin-example/src/main/kotlin at master · silverbirder/apache-beam-kotlin-example</strong><span class="link-card-description" data-astro-cid-p7ia6262>My first learning the Kotlin. Contribute to silverbirder/apache-beam-kotlin-example development by creating an account on GitHub.</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span></a></div>
+<h2 id="apache-beam-とは">Apache Beam とは</h2>
+<p><a href="https://www.st-hakky-blog.com/entry/2020/04/29/172220">https://www.st-hakky-blog.com/entry/2020/04/29/172220</a></p>
+<p><strong>Batch や Streaming を 1 つのパイプライン処理</strong> として実現できるデータパイプライン、それが Apache Beam です。(Batch + Stream → Beam)</p>
+<p>言語は、Java, Python, Go(experimental)が選べます。 また、パイプライン上で実行する環境のことをランナーと呼び、Cloud Dataflow や Apache Flink、Apache Spark などがあります。</p>
+<p>※ Streaming 処理は、サーバーの能力がボトルネックになりがちです。そこで、Cloud Dataflow という GCP のマネージドサービスを使用すると、その問題が解消されます。</p>
+<p>機械学習など豊富な <strong>分析ライブラリ</strong> を使いたい場合は、Python、 <strong>型安全な</strong> 開発をしたい場合は、Java を選べば良いかなと思います。</p>
+<p>今回は、Java を選びました。モダンな書き方ができる Kotlin でコーディングします。</p>
+<h2 id="セットアップ">セットアップ</h2>
+<p>ソフトウェアバージョンは、次のとおりです。</p>
+<pre><code class="language-shell">java -version
+openjdk version "1.8.0_252"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_252-b09)
+OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.252-b09, mixed mode)
+</code></pre>
+<p>IDE として intelliJ を使用しており、Kotlin SDK(1.3.72)が内蔵しています。</p>
+<pre><code class="language-shell">git clone https://github.com/silverbirder/apache-beam-kotlin-example.git &amp;&amp; cd apache-beam-kotlin-example
+./gradlew build
+</code></pre>
+<h2 id="パイプライン処理の概要">パイプライン処理の概要</h2>
+<pre><code class="language-shell">1. データの入力する(input → PCollection)
+2. 入力されたデータを変形させる (PCollection → PTransform → PCollection)
+3. 加工したデータを出力する (PCollection → output)
+</code></pre>
+<p>PCollection は、ひとかたまりのデータセットだと思って下さい。</p>
+<p>よくあるサンプルコード <a href="https://github.com/silverbirder/apache-beam-kotlin-example/blob/master/src/main/kotlin/WordCount.kt">WordCount</a> を例に進めます。</p>
+<p>※ 元々は、<a href="https://github.com/apache/beam/blob/master/examples/kotlin/src/main/java/org/apache/beam/examples/kotlin/WordCount.kt">ApacheBeam 公式の WordCount</a>があったのですが、ローカルマシン単体で動かせないため、多少アレンジしました。WordCount は、ある文章から単語を抽出しカウントを取るだけです。</p>
+<p>メインのコードは、こちらです。動かすときは、IDE からデバッグ実行します。（この辺りは省略します。詳しくは Makefile を見て下さい 🙇‍♂️）</p>
+<pre><code class="language-kotlin">@JvmStatic
+fun main(args: Array&lt;String&gt;) {
+    val options = (PipelineOptionsFactory.fromArgs(*args).withValidation().`as`(WordCountOptions::class.java))
+    runWordCount(options)
+}
+
+@JvmStatic
+fun runWordCount(options: WordCountOptions) {
+    // パイプラインを作る（空っぽ）
+    val p = Pipeline.create(options)
+
+         // Textファイルからデータを入力する → PCollection
+        p.apply("ReadLines", TextIO.read().from(options.inputFile))
+
+        // PCollectionをPTransformで変形させる
+        .apply(CountWords())
+        .apply(MapElements.via(FormatAsTextFn()))
+
+        // Textファイルにデータ(PCollection)を出力する
+        .apply&lt;PDone&gt;("WriteCounts", TextIO.write().to(options.output))
+
+    // パイプラインを実行する
+    p.run().waitUntilFinish()
+}
+</code></pre>
+<h2 id="ptransform">PTransform</h2>
+<p>Apache Beam のコアとなる PTransform についてサンプルコードを載せます。</p>
+<h2 id="pardo">ParDo</h2>
+<p>ParDo は、PCollection を好きなように加工することができます。
+最も、柔軟に処理を書くことができます。</p>
+<pre><code class="language-kotlin">    // PTransformによる変形処理
+    public class CountWords : PTransform&lt;PCollection&lt;String&gt;, PCollection&lt;KV&lt;String, Long&gt;&gt;&gt;() {
+        override fun expand(lines: PCollection&lt;String&gt;): PCollection&lt;KV&lt;String, Long&gt;&gt; {
+
+            // 文章を単語に分割する
+            val words = lines.apply(ParDo.of(ExtractWordsFn()))
+
+            // 分割された単語をカウントする
+            val wordCounts = words.apply(Count.perElement())
+            return wordCounts
+        }
+    }
+
+    public class ExtractWordsFn : DoFn&lt;String, String&gt;() {
+        @ProcessElement
+        fun processElement(@Element element: String, receiver: DoFn.OutputReceiver&lt;String&gt;) {
+        ...
+    }
+</code></pre>
+<h2 id="groupbykey">GroupByKey</h2>
+<p>Key-Value(KV)の PCollection を Key でグルーピングします。</p>
+<pre><code class="language-kotlin">import java.lang.Iterable as JavaIterable
+
+// PCollection&lt;KV&lt;String, Long&gt;&gt;
+val wordCounts = words.apply(Count.perElement())
+
+// PCollection&lt;KV&lt;String, JavaIterable&lt;Long&gt;&gt;&gt;
+val groupByWord = wordCounts.apply(GroupByKey.create&lt;String, Long&gt;()) as PCollection&lt;KV&lt;String, JavaIterable&lt;Long&gt;&gt;&gt;
+</code></pre>
+<p>Kotlin では、Iterable が動作できないため、Java の Iterable を使う必要があります。</p>
+<h2 id="flatten">Flatten</h2>
+<p>複数の PCollection を 1 つの PCollection に結合します。</p>
+<pre><code class="language-kotlin">// PCollection&lt;KV&lt;String, Long&gt;&gt;
+val wordCounts = words.apply(Count.perElement())
+
+// PCollectionList&lt;KV&lt;String, Long&gt;&gt;
+val wordCountsDouble = PCollectionList.of(wordCounts).and(wordCounts)
+
+// PCollection&lt;KV&lt;String, Long&gt;&gt;
+val flattenWordCount = wordCountsDouble.apply(Flatten.pCollections())
+</code></pre>
+<h2 id="combine">Combine</h2>
+<p>PCollection の要素を結合します。
+GroupByKey の Key 毎に要素を結合する方法と、PCollection 毎に要素を結合する方法があります。
+今回は、GroupByKey のサンプルコードです。</p>
+<pre><code class="language-kotlin">// PCollection&lt;KV&lt;String, Long&gt;&gt;
+val wordCounts = words.apply(Count.perElement())
+
+// PCollection&lt;KV&lt;String, Long&gt;&gt;
+val sumWordsByKey = wordCounts.apply(Sum.longsPerKey())
+</code></pre>
+<h2 id="partition">Partition</h2>
+<p>PCollection を任意の数でパーティション分割します。</p>
+<pre><code class="language-kotlin">// PCollection&lt;KV&lt;String, Long&gt;&gt;
+val wordCounts = words.apply(Count.perElement())
+
+// PCollection&lt;KV&lt;String, Long&gt;&gt;
+var 10wordCounts = wordCounts.apply(Partition.of(10, PartitionFunc()))
+</code></pre>
+<h2 id="streaming-と-windowing">Streaming と Windowing</h2>
+<p>パイプラインを、そのまま使えば Batch 実行となります。
+Batch は、有限のデータに対し、Streaming は無限のデータに対して使います。
+無限のデータを処理するのは、Windowing というものを使い、無限を有限のデータにカットして、処理します。</p>
+<p>Streaming 処理するためには、下記のようにコードにします。</p>
+<pre><code class="language-kotlin">    @JvmStatic
+    fun main(args: Array&lt;String&gt;) {
+        val options = (PipelineOptionsFactory.fromArgs(*args).withValidation().`as`(WordCountOptions::class.java))
+        runWordCount(options)
+    }
+
+    @JvmStatic
+    fun runWordCount(options: WordCountOptions) {
+        val p = Pipeline.create(options)
+        p.apply("ReadLines",
+                        TextIO
+                        .read()
+                        .from("./src/main/kotlin/*.json")
+                        // fromで指定したファイルがないか監視する。(入力値は無限)
+                        //  10秒ごとに監視、5分間変更がなければ終了。
+                        .watchForNewFiles(standardSeconds(10), afterTimeSinceNewOutput(standardMinutes(5)))
+             )
+
+            // 30秒間毎にWindowingする。（無限のデータを、有限のデータにカットする）
+            .apply(Window.into&lt;String&gt;(FixedWindows.of(standardSeconds(30))))
+            .apply(CountWords())
+            .apply(MapElements.via(FormatAsTextFn()))
+            .apply&lt;PDone&gt;("WriteCounts", TextIO.write().to(options.output).withWindowedWrites().withNumShards(1))
+        p.run().waitUntilFinish()
+    }
+</code></pre>
+<h2 id="テストコード">テストコード</h2>
+<p>Apache Beam もテストコードが書けます。
+サンプルコードは、<a href="https://github.com/silverbirder/apache-beam-kotlin-example/blob/master/src/test/kotlin/WordCountTest.kt">こちら</a>です。</p>
+<p>実行するパイプラインを TestPipeline にすることで、テストができます。</p>
+<pre><code class="language-kotlin">import org.apache.beam.sdk.testing.TestPipeline
+
+fun countWordsTest() {
+        // Arrange
+        val p: Pipeline = TestPipeline.create().enableAbandonedNodeEnforcement(false)
+        val input: PCollection&lt;String&gt; = p.apply(Create.of(WORDS)).setCoder(StringUtf8Coder.of())
+        val output: PCollection&lt;KV&lt;String, Long&gt;&gt;? = input.apply(CountWords())
+
+        // Act
+        p.run()
+
+        // Assert
+        PAssert.that&lt;KV&lt;String, Long&gt;&gt;(output).containsInAnyOrder(COUNTS_ARRAY)
+    }
+
+    companion object {
+        val WORDS: List&lt;String&gt; = listOf(
+            "hi there", "hi", "hi sue bob",
+            "hi sue", "", "bob hi"
+        )
+        val COUNTS_ARRAY = listOf(
+            KV.of("hi", 5L),
+            KV.of("there", 2L),
+            KV.of("sue", 2L),
+            KV.of("bob", 2L)
+        )
+    }
+</code></pre>
+<h2 id="終わりに">終わりに</h2>
+<p>Apache Beam は、他にも Side input や Additional outputs などがあります。
+使いこなせるためにも、これからも頑張っていきます！</p>
+<p>さて、Re:ゼロ 2 期を見ましょう 👍</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>Kotlin</li></ul></footer></article></main></body></html>

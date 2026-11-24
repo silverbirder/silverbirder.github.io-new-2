@@ -1,0 +1,283 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一足遅れて Kubernetes を学び始める - 12. リソース制限 -</title><meta name="description" content="前回 一足遅れて Kubernetes を学び始める - 11. config&amp;storage その2 -では、storageについて学習しました。今回は、リソース制限について学習します。"><meta name="keywords" content="クラウドインフラ,Kubernetes,リソース制限"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">19</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-29"><span class="visually-hidden">2019年5月29日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">29</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 12. リソース制限 -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
+<ol>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_01/">一足遅れて Kubernetes を学び始める - 01. 環境選択編 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_02/">一足遅れて Kubernetes を学び始める - 02. Docker For Mac -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_03/">一足遅れて Kubernetes を学び始める - 03. Raspberry Pi -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_04/">一足遅れて Kubernetes を学び始める - 04. kubectl -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_05/">一足遅れて Kubernetes を学び始める - 05. workloads その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_06/">一足遅れて Kubernetes を学び始める - 06. workloads その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_07/">一足遅れて Kubernetes を学び始める - 07. workloads その 3 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_08/">一足遅れて Kubernetes を学び始める - 08. discovery&amp;LB その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_09/">一足遅れて Kubernetes を学び始める - 09. discovery&amp;LB その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_10/">一足遅れて Kubernetes を学び始める - 10. config&amp;storage その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_11/">一足遅れて Kubernetes を学び始める - 11. config&amp;storage その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_12/">一足遅れて Kubernetes を学び始める - 12. リソース制限 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_13/">一足遅れて Kubernetes を学び始める - 13. ヘルスチェックとコンテナライフサイクル -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_14/">一足遅れて Kubernetes を学び始める - 14. スケジューリング -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_15/">一足遅れて Kubernetes を学び始める - 15. セキュリティ -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_16/">一足遅れて Kubernetes を学び始める - 16. コンポーネント -</a></li>
+</ol>
+<h2 id="前回">前回</h2>
+<p><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_11/">一足遅れて Kubernetes を学び始める - 11. config&amp;storage その 2 -</a>では、storage について学習しました。
+今回は、リソース制限について学習します。</p>
+<p>※ リソースの種類から、次は「Metadata」だったのですが、kubernetes 完全ガイドによると直接説明するのではなく、内容ベースで説明されていましたので、それに準拠します。</p>
+<h2 id="リソース制限">リソース制限</h2>
+<p>kubernetes で管理するコンテナに対して、リソース制限をかけることができます。主に CPU やメモリに対して制限をかけることができますが、Device Plugins を使うことで GPU にも制限をかけることもできます。</p>
+<p>※ CPU の指定方法は、1vCPU を 1000millicores(m)とする単位となります。</p>
+<h2 id="requests-と-limits">requests と limits</h2>
+<p>request は、使用するリソースの下限値です。
+limits は、使用するリソースの上限値です。</p>
+<p>request は、空きノードに指定するリソースがなければスケジューリングされませんが、limits は、関係なくスケジューリングされます。</p>
+<p>とにもかくにも、試してみましょう。</p>
+<p>まず、現状確認です。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k get node
+NAME       STATUS   ROLES    AGE   VERSION
+raspi001   Ready    master   31d   v1.14.1
+raspi002   Ready    worker   31d   v1.14.1
+raspi003   Ready    worker   30d   v1.14.1
+pi@raspi001:~/tmp $ k get nodes -o jsonpath='{.items[?(@.metadata.name!="raspi001")].status.allocatable.memory}'
+847048Ki 847048Ki
+pi@raspi001:~/tmp $ k get nodes -o jsonpath='{.items[?(@.metadata.name!="raspi001")].status.allocatable.cpu}'
+4 4
+pi@raspi001:~/tmp $ k get nodes -o jsonpath='{.items[?(@.metadata.name!="raspi001")].status.capacity.memory}'
+949448Ki 949448Ki
+pi@raspi001:~/tmp $ k get nodes -o jsonpath='{.items[?(@.metadata.name!="raspi001")].status.capacity.cpu}'
+4 4
+
+</code></pre>
+<p>jsonpath の使い方は、<a href="https://kubernetes.io/docs/reference/kubectl/jsonpath/">こちら</a>にあります。</p>
+<p>allocatable が Pod に配置できるリソース量で、capacity は Node 全体での配置できるリソース量です。
+これだけだと、現在使っているリソース量が不明なので個別に調べます。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k describe node raspi002
+...
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests     Limits
+  --------           --------     ------
+  cpu                200m (5%)    200m (5%)
+  memory             150Mi (18%)  150Mi (18%)
+  ephemeral-storage  0 (0%)       0 (0%)
+...
+pi@raspi001:~/tmp $ k describe node raspi003
+...
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests     Limits
+  --------           --------     ------
+  cpu                400m (10%)   300m (7%)
+  memory             320Mi (38%)  420Mi (50%)
+  ephemeral-storage  0 (0%)       0 (0%)
+...
+</code></pre>
+<p>現状のリソース状況を表にすると下記のとおりです。</p>
+<table>
+<thead>
+<tr>
+<th>node</th>
+<th>allocatable / (memory/cpu)</th>
+<th>capacity / (memory/cpu)</th>
+<th>used / (memory/cpu)</th>
+<th>remain / (memory/cpu)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>raspi002</td>
+<td>847,048Ki/4000m</td>
+<td>949,448Ki/4000m</td>
+<td>150,000Ki/200m</td>
+<td>697,048Ki/3800m</td>
+</tr>
+<tr>
+<td>raspi003</td>
+<td>847,048Ki/4000m</td>
+<td>949,448Ki/4000m</td>
+<td>320,000Ki/400m</td>
+<td>527,048Ki/3600m</td>
+</tr>
+</tbody>
+</table>
+<p>では、リソース制限を試してみましょう。</p>
+<pre><code class="language-yaml">## sample-resource.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-resource
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.12
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "300m"
+            limits:
+              memory: "256Mi"
+              cpu: "600m"
+</code></pre>
+<p>apply する pod で要求する memory の下限合計は 384Mi(128Mi×3),cpu は 900m(300m×3)です。
+これだと、pod が run するはずです。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-resource.yaml
+pi@raspi001:~/tmp $ k get pods
+NAME                                      READY   STATUS    RESTARTS   AGE
+sample-resource-785cd54844-7n89t          1/1     Running   0          108s
+sample-resource-785cd54844-9b5f9          1/1     Running   0          108s
+sample-resource-785cd54844-whj7x          1/1     Running   0          108s
+</code></pre>
+<p>期待通りですね。
+今度はリソース制限になる状態を試してみます。</p>
+<p>全 WorkerNode の memory 下限合計は 1,224Mi(697,048Ki+527,048Ki)です。
+これを超えるように先程のマニフェストを更新します。
+replica 数を 3 にしましたが、10 にすれば良いですね（1,280Mi)</p>
+<p>期待動作として、9 個(128Mi*9=1,152Mi)は Running で、1 個(128Mi)は Pending になるはずです。</p>
+<p>sample-resource.yaml の replica を 10 に変更したあと ↓</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-resource.yaml
+pi@raspi001:~/tmp $ k get pods
+NAME                                      READY   STATUS    RESTARTS   AGE
+sample-resource-785cd54844-7n89t          1/1     Running   0          6m19s
+sample-resource-785cd54844-9b5f9          1/1     Running   0          6m19s
+sample-resource-785cd54844-dffsd          1/1     Running   0          61s
+sample-resource-785cd54844-jmkv6          1/1     Running   0          61s
+sample-resource-785cd54844-k9vcb          1/1     Running   0          61s
+sample-resource-785cd54844-l4smf          0/1     Pending   0          60s
+sample-resource-785cd54844-n4hl7          1/1     Running   0          60s
+sample-resource-785cd54844-th4bp          0/1     Pending   0          60s
+sample-resource-785cd54844-whj7x          1/1     Running   0          6m19s
+sample-resource-785cd54844-xclsk          1/1     Running   0          60s
+</code></pre>
+<p>あれ、2 つ Pending になっていますね。もしかして、Node の空きリソースが中途半端にないからですかね。
+確認してみましょう。</p>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k describe node raspi002
+...
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests     Limits
+  --------           --------     ------
+  cpu                1700m (42%)  3200m (80%)
+  memory             790Mi (95%)  1430Mi (172%)
+  ephemeral-storage  0 (0%)       0 (0%)
+...
+pi@raspi001:~/tmp $ k describe node raspi003
+...
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests     Limits
+  --------           --------     ------
+  cpu                1300m (32%)  2100m (52%)
+  memory             704Mi (85%)  1188Mi (143%)
+  ephemeral-storage  0 (0%)       0 (0%)
+...
+</code></pre>
+<p>raspi002 は、847Mi 中 790Mi 使っています。１つの Pod を追加するためのリソース（128Mi）はないですね。
+raspi003 は、847Mi 中 704Mi 使っています。こちらは空いている気がするのですが、なぜでしょうか。</p>
+<p>ここで、memory の<code>704Mi (85%)</code>というところに着目すると、100%だった場合は 828Mi ということになります。
+確かに、それだと 704Mi+128Mi=832Mi でオーバーしています。</p>
+<p>では、allocatable で表示されていた 847Mi との違いは何でしょうか。
+allocatable というのは、全ての namespace にある pod も込みのリソース配置可能量だからです。
+default だけでなく、kube-system など他の namespace にある pod も、もちろんリソースを消費しています。
+828Mi というのは、default で使えるリソース配置可能量ではないでしょうか。（現在の namespace は default)</p>
+<p>ちなみに、Limits は、100%を超えていますね…。ひぇ〜…。</p>
+<h2 id="cluster-autoscaler">Cluster Autoscaler</h2>
+<p>需要に応じて Kubernetes Node を自動的に追加されていく機能です。
+これが動作するタイミングは、Pod が Pending になったときに動作します。
+つまり、先程の例であったように、requests の下限によってスケールします。</p>
+<p>そのため、requests が高すぎるために、実際はロードアベレージが低くてもスケールしてしまったり、
+requests が低すぎるために、実際は高負荷でもスケールしなくなったりします。
+requests は、パフォーマンステストをしつつ最適化していきましょう。</p>
+<h2 id="limitrange">LimitRange</h2>
+<p>さっきの例でもあったように、それぞれに対して requests,limit を設定しても良いのですが、
+もっと便利なものがあります。それが LimitRange です。
+これは、Namespace に対して CPU やメモリのリソースの最小値や最大値を設定できます。
+設定可能な制限項目として、下記があります。</p>
+<ul>
+<li>default
+<ul>
+<li>デフォルトの Limits</li>
+</ul>
+</li>
+<li>defaultRequest
+<ul>
+<li>デフォルトの Requests</li>
+</ul>
+</li>
+<li>max
+<ul>
+<li>最大リソース</li>
+</ul>
+</li>
+<li>min
+<ul>
+<li>最小リソース</li>
+</ul>
+</li>
+<li>maxLimitRequestRatio
+<ul>
+<li>Limits/Requests の割合</li>
+</ul>
+</li>
+</ul>
+<p>また、制限する対象は、Container,Pod,PersistentVolumeClaim があります。
+実運用する際は、きちんと定義しておきましょう。（プロバイダーによってはデフォルトで設定されているものもあるそうです）</p>
+<h2 id="resourcequota">ResourceQuota</h2>
+<p>ResourceQuota を使うことで、Namespace ごとに「作成可能なリソース数の制限」と「リソース使用量の制限」ができます。
+「作成可能なリソース数の制限」を試そうと思います。</p>
+<pre><code class="language-yaml">## sample-resourcequota.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: sample-resourcequota
+  namespace: default
+spec:
+  hard:
+    # 作成可能なリソースの数
+    count/pods: 5
+</code></pre>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-resource.yaml
+pi@raspi001:~/tmp $ k apply -f sample-resourcequota.yaml
+pi@raspi001:~/tmp $ k apply -f sample-resource.yaml
+pi@raspi001:~/tmp $ k get pods
+NAME                                      READY   STATUS    RESTARTS   AGE
+sample-resource-785cd54844-dll8t          1/1     Running   0          38s
+sample-resource-785cd54844-ljr7q          1/1     Running   0          39s
+sample-resource-785cd54844-r6txh          1/1     Running   0          38s
+sample-resource-785cd54844-sb6sq          1/1     Running   0          38s
+sample-resource-785cd54844-3ffeg          1/1     Running   0          38s
+</code></pre>
+<p>こうすると、pods が 5 個までしか作成できないので、sample-resource.yaml を適用しても 5 個までしか作成されません。
+replica のような場合は、特に警告がなく単純に作られませんでした。
+configmap を 5 個までに制限して、1 つずつ configmap を apply すると、警告がでるそうです。</p>
+<h2 id="horizontalpodautoscalerhpa">HorizontalPodAutoscaler(HPA)</h2>
+<p>HPA は、Deployment,ReplicaSet で管理する Pod の CPU 負荷などに応じて自動的にスケールするリソースです。
+30 秒に１回の頻度でスケールするかチェックしています。</p>
+<p>必要なレプリカ数は、下記の数式で表します。</p>
+<ul>
+<li>必要なレプリカ数 = ceil(sum(Pod の現在の CPU 使用率)/targetAverageUtilization)</li>
+</ul>
+<p><a href="https://qiita.com/sheepland/items/37ea0b77df9a4b4c9d80">Kubernetes の Pod と Node の Auto Scaling について</a>で、</p>
+<blockquote>
+<p>auto scaling は target value に近づくように pod 数が調整されるということ。</p>
+</blockquote>
+<p>という文がわかりやすかったです。つまり、targetAverageUtilization が 50 なら、全体の CPU 使用率が 50%になるよう調整されます。
+今回、試そうと考えたのですが、metrics-server を install していないため、動作確認できませんでした。
+また今度 install して試してみようと思います。</p>
+<h2 id="verticalpodautoscalervpa">VerticalPodAutoscaler(VPA)</h2>
+<p>VPA は、コンテナに割り当てる CPU やメモリのリソース割当をスケールさせるリソースです。
+これは、HPA のスケールアウトではなく、Pod のスケールアップを行うものです。</p>
+<h2 id="お片付け">お片付け</h2>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-resource.yaml -f sample-resourcequota.yaml
+</code></pre>
+<h2 id="最後に">最後に</h2>
+<p>今回は、Requests や Limits を操作してリソース制限をしてみました。
+どれがいくらリソースを消費しているのか確認する術を学び、
+ついでに jsonpath の使い方も知りました。
+次回は、<a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_13/">こちら</a>です。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>クラウドインフラ</li></ul></footer></article></main></body></html>

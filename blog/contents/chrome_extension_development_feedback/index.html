@@ -1,0 +1,222 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Chrome拡張機能(Manifest V3)の開発で知ったこと</title><meta name="description" content="皆さん、Chrome拡張機能をご存知ですか？Chrome拡張機能は、Chromeブラウザをカスタマイズするための機能です。Chrome拡張機能の概要について詳しく知りたい方は、What are extensions? - Chrome Developersをご覧ください。"><meta name="keywords" content="ブラウザ,成果物,Chrome拡張機能,Manifest V3"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">71</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-01-16"><span class="visually-hidden">2022年1月16日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">01</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">16</span></span></time></p></div><div class="notebook-heading"><h1>Chrome拡張機能(Manifest V3)の開発で知ったこと</h1></div></header><div class="notebook-body"><p>皆さん、Chrome 拡張機能をご存知ですか？
+Chrome 拡張機能は、Chrome ブラウザをカスタマイズするための機能です。</p>
+<p>私は、Chrome 拡張機能を過去(数年前)に 2 つ作っていて、その当時は、Chrome 拡張機能の仕様である Manifest V2 に従っていました。
+そして、今再び、Chrome 拡張機能で作りたいものができたので、久々に作ろうと決意しました。
+作ろうと思ったものの、どうやら今の Chrome 拡張機能の仕様は Manifest V3 を推奨しているようです。
+そこで、今回、開発した際に知ったことをまとめようと思います。</p>
+<p>ちなみに、実際に作ったものは次のものです。</p>
+<ul>
+<li><a href="https://github.com/silverbirder/chrome-extensions-tiktok-scraping-downloader">https://github.com/silverbirder/chrome-extensions-tiktok-scraping-downloader</a>
+<ul>
+<li>上にある図が、この Chrome 拡張機能の設計図になります</li>
+</ul>
+</li>
+</ul>
+<p>※ Chrome 拡張機能の概要について詳しく知りたい方は、<a href="https://developer.chrome.com/docs/extensions/mv3/overview/">What are extensions? - Chrome Developers</a>をご覧ください。</p>
+<h2 id="chrome-extensions-components">Chrome Extensions Components</h2>
+<p>Chrome 拡張機能は、主に次の 4 つのコンポーネントが存在します。</p>
+<ul>
+<li><a href="https://developer.chrome.com/docs/extensions/mv3/service_workers/">Background Scripts</a>
+<ul>
+<li>サービスワーカー上で動作し、ブラウザ上のイベント駆動(ページ遷移やブックマーク差所など)で反応します。</li>
+<li><a href="https://developer.chrome.com/docs/extensions/mv3/manifest/">manifest</a>の <code>background</code>フィールドで設定します。</li>
+</ul>
+</li>
+<li><a href="https://developer.chrome.com/docs/extensions/mv3/content_scripts/">Content Scripts</a>
+<ul>
+<li>Web ページのコンテキスト上で動作し、DOM へアクセスできます。</li>
+<li><a href="https://developer.chrome.com/docs/extensions/mv3/manifest/">manifest</a>の <code>content_scripts</code>フィールドで設定します。</li>
+</ul>
+</li>
+<li><a href="https://developer.chrome.com/docs/extensions/mv3/user_interface/">UI Elements</a>
+<ul>
+<li>URL バーの右側にあるボタンを押した(Action)際に表示される UI です。</li>
+<li>ブラウザ体験を損なわさない最低限の機能だけの提供を推奨されています。</li>
+<li><a href="https://developer.chrome.com/docs/extensions/mv3/manifest/">manifest</a>の <code>action</code>フィールドで設定します。</li>
+</ul>
+</li>
+<li><a href="https://developer.chrome.com/docs/extensions/mv3/options/">Options Page</a>
+<ul>
+<li>Chrome 拡張機能アイコンを右クリックして、オプションを選択すると表示される UI です。</li>
+<li>Chrome 拡張機能をカスタマイズしたい設定ページに使います。</li>
+<li><a href="https://developer.chrome.com/docs/extensions/mv3/manifest/">manifest</a>の <code>options_page</code>フィールドで設定します。</li>
+</ul>
+</li>
+</ul>
+<p>私なりに、これらのコンポーネントの使い分けを考えると、次になります。</p>
+<ul>
+<li>DOM へアクセスする必要がある
+<ul>
+<li>Content Scripts を使う</li>
+</ul>
+</li>
+<li>ページに依存しない処理がある
+<ul>
+<li>Background Scripts を使う</li>
+</ul>
+</li>
+<li>環境変数の設定が必要
+<ul>
+<li>Option Page</li>
+</ul>
+</li>
+</ul>
+<p>UI Elements は、基本的に必要ないのかなと思いました。</p>
+<h2 id="debug">Debug</h2>
+<p>デバッグって、どうやるんでしょうか。</p>
+<ul>
+<li><a href="https://developer.chrome.com/docs/extensions/mv3/tut_debugging/">Debugging extensions - Chrome Developers</a></li>
+</ul>
+<p>こちらにやり方が書いてありました。
+私なりに解釈した結果、次の 2 つで使い分けるのかなと思います。</p>
+<hr>
+<ul>
+<li>① そもそも、Chrome 拡張機能がロードできない場合</li>
+</ul>
+<p>manifest.json ファイルに記述で誤りがあるなどで、Chrome 拡張機能がロードできない場面があります。
+そういうときは、次の手順を実行します。</p>
+<ol>
+<li><code>chrome://extensions</code> へアクセス</li>
+<li>次の図にあるような ERROR ボタンをクリック</li>
+</ol>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1642325181/silver-birder.github.io/blog/chrome_extensions_debug.png?ar=780%3A404" alt="chrome extensions debug" width="780" height="404" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1642325181/silver-birder.github.io/blog/chrome_extensions_debug.png?ar=780%3A404 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1642325181/silver-birder.github.io/blog/chrome_extensions_debug.png?ar=780%3A404 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1642325181/silver-birder.github.io/blog/chrome_extensions_debug.png?ar=780%3A404 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1642325181/silver-birder.github.io/blog/chrome_extensions_debug.png?ar=780%3A404 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_780/q_auto/f_auto/v1642325181/silver-birder.github.io/blog/chrome_extensions_debug.png?ar=780%3A404 780w" sizes="min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>恐らく、何かしらエラーメッセージが出力されていると思います。
+それを解決しましょう。</p>
+<hr>
+<ul>
+<li>② ① 以外の場合</li>
+</ul>
+<p>Chrome 拡張機能はロードできるが、期待通りに動作しない場面があると思います。
+そういうときは、DevTools を開きましょう。</p>
+<ul>
+<li>Background Scripts の場合
+<ul>
+<li><code>chrome://extensions</code> へアクセスし、<code>inspect views</code>の右にあるリンクをクリック。(上図)
+<ul>
+<li>DevTools が開きます。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Content Scripts, UI Elements, Options Page の場合
+<ul>
+<li>UI 上で右クリックして <code>Inspect</code> をクリック
+<ul>
+<li>DevTools が開きます。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>DevTools には、console タブがあるはずです。そこのログメッセージを確認しましょう。</p>
+<h2 id="message-passing">Message Passing</h2>
+<p>各コンポーネント間で、通信するのは、どうしたら良いのでしょうか。
+例えば、Content Scripts から Background Scripts へデータを渡したいときなどです。
+次の資料が、参考になります。</p>
+<ul>
+<li><a href="https://developer.chrome.com/docs/extensions/mv3/messaging/">Message passing - Chrome Developers</a></li>
+</ul>
+<p>資料を読むと、次のようなパターンの通信ができるようです。</p>
+<ul>
+<li>各コンポーネント間の通信
+<ul>
+<li>Background Scripts ⇔ Content Scripts など</li>
+</ul>
+</li>
+<li>Chrome 拡張機能間の通信
+<ul>
+<li>A Chrome 拡張機能 ⇔ B Chrome 拡張機能</li>
+<li>Chrome 拡張機能の ID を使って通信します</li>
+</ul>
+</li>
+<li>Web ページからの通信(Sending messages from web pages)
+<ul>
+<li>Web ページ ⇔ Chrome 拡張機能のコンポーネント</li>
+</ul>
+</li>
+</ul>
+<p>通信の具体的なコードは、<code>chrome.runtime.sendMessage</code>メソッドを使います。
+Background Scripts から Content Scripts へ通信する場合、どの Chrome タブに送信するか<code>chrome.tabs.query</code>で事前に id を見つけておく必要があります。</p>
+<p>また、後で紹介しますが、<code>Web Accessible Resources</code>でアクセス可能な Javascript を Web ページへ Inject(<code>document.querySelector('body').append()</code>)した場合、その Javascript と Content Scripts の通信は、<code>window.postMessage</code>と<code>window.addEventListener</code>を使いましょう。
+<code>chrome.runtime</code>が使えないので。</p>
+<h2 id="web-accessible-resources">Web Accessible Resources</h2>
+<p>Content Scripts から Web ページの DOM へアクセスできますが、window オブジェクトにある変数へアクセスすることができません。</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/12395722/can-the-window-object-be-modified-from-a-chrome-extension">‘javascript - Can the window object be modified from a Chrome extension? - Stack Overflow’</a></li>
+</ul>
+<p>window オブジェクトへアクセスするには、Web Accessible Resources を使う方法があります。</p>
+<ul>
+<li><a href="https://developer.chrome.com/docs/extensions/mv3/manifest/web_accessible_resources/">Manifest - Web Accessible Resources - Chrome Developers</a></li>
+</ul>
+<hr>
+<p>具体的にコードで説明しましょう。</p>
+<p>manifest.json で必要なフィールドの例は、次のとおりです。</p>
+<pre><code class="language-json">{
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "js": ["content-script.js"],
+      "matches": ["https://*/*"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["web_accessible_resources.js"],
+      "matches": ["https://*/*"]
+    }
+  ]
+}
+</code></pre>
+<p>Content Scripts と Web Accessible Resources の Javascript は次のとおりです。</p>
+<pre><code class="language-javascript">// content-script.js
+const injectScript = (filePath, tag) =&gt; {
+  var node = document.getElementsByTagName(tag)[0];
+  var script = document.createElement("script");
+  script.setAttribute("type", "text/javascript");
+  script.setAttribute("src", filePath);
+  node.appendChild(script);
+};
+injectScript(chrome.runtime.getURL("web_accessible_resources.js"), "body");
+</code></pre>
+<pre><code class="language-javascript">// web_accessible_resources.js
+console.log(window["hoge"]);
+// Content Scriptsへ通信する場合は、window.postMessageを使います。
+</code></pre>
+<p>このように、web_accessible_resources.js を Web ページの body タグへ append します。
+その web_accessible_resources.js では、window オブジェクトにアクセスすることができます。</p>
+<h2 id="chromewebrequest-api">chrome.webRequest API</h2>
+<p>Chrome ブラウザでネットワークトラフィックを監視する Chrome 拡張機能の API があります。
+それが、<code>chrome.webRequest</code>です。</p>
+<ul>
+<li><a href="https://developer.chrome.com/docs/extensions/reference/webRequest/">chrome.webRequest - Chrome Developers</a></li>
+</ul>
+<p>これがあれば、Web ページでどういうリクエストが発生しているか分かるようになります。
+manifest.json のフィールドで、<code>host_permissions</code>の設定が必要です。</p>
+<hr>
+<p>サンプルで、Background Scripts のコードを紹介します。
+まず、manifest.json の必要なフィールドを書きます。</p>
+<pre><code class="language-json">{
+  "manifest_version": 3,
+  "host_permissions": ["https://*/*"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
+</code></pre>
+<p>次に、Web ページからリクエストが完了(onCompleted)したイベントを監視するコードを書きます。</p>
+<pre><code class="language-javascript">// background.js
+chrome.webRequest.onCompleted.addListener(
+  async (details) =&gt; {
+    console.log(`request url is ${details.url}`);
+  },
+  {
+    urls: ["https://*/*"],
+  },
+  ["responseHeaders"] // responseHeadersをdetailsオブジェクトに含めることができます。
+);
+</code></pre>
+<p>この details にはリクエストの URL が含まれています。さらに詳しく知りたい人は、<a href="https://developer.chrome.com/docs/extensions/reference/webRequest/#event-onCompleted">こちら</a>をご確認ください。</p>
+<h2 id="最後に">最後に</h2>
+<p>Chrome 拡張機能、久々に開発してみると、進化しすぎていてキャッチアップに苦労しました。
+私と同じような方の助けになれば、幸いです。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>ブラウザ</li><li>成果物</li></ul></footer></article></main></body></html>

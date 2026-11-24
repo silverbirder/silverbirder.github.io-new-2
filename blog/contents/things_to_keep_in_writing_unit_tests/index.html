@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ユニットテストを書く上で守りたいこと</title><meta name="description" content="背景 普段、業務でユニットテストを書いたり、レビューをしたりしています。ユニットテストがあることは良いことなのですが、困ったことがあります。それは、ユニットテストのルールが明確じゃない点です。そのため、人によって、ユニットテストの書き方がマチマチで、なんとかしたいなと困っています。"><meta name="keywords" content="テスト,ユニットテスト"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">38</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2020-01-12"><span class="visually-hidden">2020年1月12日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2020</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">01</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">12</span></span></time></p></div><div class="notebook-heading"><h1>ユニットテストを書く上で守りたいこと</h1></div></header><div class="notebook-body"><h2 id="背景">背景</h2>
+<p>普段、業務でユニットテストを書いたり、レビューをしたりしています。
+ユニットテストがあることは良いことなのですが、困ったことがあります。</p>
+<p>それは、ユニットテストのルールが明確じゃない点です。
+そのため、人によって、ユニットテストの書き方がマチマチで、なんとかしたいなと困っています。</p>
+<ul>
+<li>１つのテストケースに、Assert が複数あり、散在している。</li>
+<li>似たようなテストデータの構築が、いろいろなテストケースにある。</li>
+<li>テストする関数名が、パット見よくわからない。</li>
+</ul>
+<p>本記事では、ユニットテストを書く上で守ってほしいことをピックアップしました。</p>
+<h2 id="守って欲しいこと">守って欲しいこと</h2>
+<h2 id="1-可読性のあるテストコード">1. 可読性のあるテストコード</h2>
+<h3 id="11-テストメソッド名の統一">1.1. テストメソッド名の統一</h3>
+<p>テストメソッドの命名規則は、あったほうがよいです。
+テストランナーツールの実行結果では、関数名を表示されることがあります。
+そこから『どういうテストをしていたのか』が読んで分かると、わざわざテストの中身を見る必要はありません。</p>
+<p>下記のような命名規則が良いそうです。</p>
+<ul>
+<li>テスト対象のメソッドの名前。</li>
+<li>それがテストされるシナリオ。</li>
+<li>シナリオが呼び出されたときに想定される動作。</li>
+</ul>
+<pre><code class="language-text">// Bad
+Test_Single
+</code></pre>
+<pre><code class="language-text">// Good
+Add_SingleNumber_ReturnsSameNumber
+</code></pre>
+<p>※<a href="https://docs.microsoft.com/ja-jp/dotnet/core/testing/unit-testing-best-practices#naming-your-tests">テストの名前付け</a>より引用</p>
+<p>※『正しく表示されていること』という期待値は、極力避けましょう。具体的な値を期待値に設定しましょう。</p>
+<h3 id="12-論理制御を避ける">1.2. 論理制御を避ける</h3>
+<p>if や for 等の制御は、テストコードの見通しが悪くなるため、極力避けましょう。
+共通化するよりも、愚直に書いたほうが読みやすいです。パフォーマンスは、そこまで気にしなくて良いですから。</p>
+<h3 id="13-マジックナンバーを避ける">1.3. マジックナンバーを避ける</h3>
+<p>プロダクトコードでは、ちゃんとマジックナンバーを避けていても、
+テストコードでは、マジックナンバーを使っていることがあります。
+横着せずに、ちゃんと適切な変数名で表現しましょう。</p>
+<h3 id="14-テストデータを外部ファイルに切り出す">1.4. テストデータを外部ファイルに切り出す</h3>
+<p>テストコードを書いていると、テストに必要なテストデータの構築をする必要があります。
+テストケース毎に書いても良いですが、見通しを良くするためにテストデータを別ファイルに分けましょう。
+ただ、２つ以上のテストケースで参照される場合のみにしておきましょう。</p>
+<p>テストデータは、プログラミング言語の相性に良い構造化ファイルを使うと良いです。</p>
+<ul>
+<li>JSON</li>
+<li>CSV</li>
+<li>XML</li>
+<li>YAML</li>
+</ul>
+<h3 id="15-テストケースの構成を統一する">1.5. テストケースの構成を統一する</h3>
+<p>テストケースは、3 つの構成で記述すると読みやすいです。</p>
+<ul>
+<li>Arrange (準備)</li>
+<li>Act (実行)</li>
+<li>Assert (検証)</li>
+</ul>
+<p>これらを上から順番に実行されるようにテストコードを書いていきましょう。</p>
+<pre><code class="language-text">// Bad
+Arrange =&gt; Act =&gt; Arrange =&gt; Act =&gt; Assert
+</code></pre>
+<p>のように順番を Mix するよりも、</p>
+<pre><code class="language-text">// Good
+Arrange =&gt; Arrange =&gt; Act =&gt; =&gt; Act =&gt; Assert
+</code></pre>
+<p>のように順番を揃えるほうが読みやすいです。</p>
+<h3 id="16-１つのテストケースで複数の検証をしない">1.6. １つのテストケースで複数の検証をしない</h3>
+<p>１つのテストケースに、複数の検証を行ってしまうと、何のテストケースなのかわかりにくくなってしまいます。そのため、検証するのは 1 つに絞るようにしましょう。
+例外としては、コンストラクタの検証です。インスタンス化したオブジェクトの属性（プロパティ）値を検証することがあるので、その際は、複数の検証を許可します。</p>
+<h3 id="17-テストコードは最小限に">1.7. テストコードは最小限に</h3>
+<p>テスト対象のインスタンスに、 <strong>検証しない・不必要な</strong> データの設定することは、余計な混乱を招くため、やめましょう。
+また、設定するデータは、hoge などの意味のない値を設定するのではなく、本物に近いデータを設定しましょう。</p>
+<h2 id="2-matcher-の活用">2. Matcher の活用</h2>
+<h3 id="21-自然言語に近い形式で-assert-する">2.1. 自然言語に近い形式で Assert する</h3>
+<p>検証すべき変数を Boolean の形に変換し、AssertTrue することが多々あります。
+しかし、読みやすさの観点でいうと、Matcher に標準で備わっている関数を使う方が読みやすいです。</p>
+<pre><code class="language-text">// Bad
+assertTrue(actual.contains('hello'))
+</code></pre>
+<pre><code class="language-text">// Good
+assertThat(actual, hasItems('hello'))
+-&gt; assert that actual has items "hello".
+</code></pre>
+<h3 id="22-変数名をわかりやすくする">2.2. 変数名をわかりやすくする</h3>
+<p>テストコードを書くときは、期待する値を Expect, 実際の値を Actual という
+変数名にしましょう。そうすると、何を検証しているのかわかりやすくなります。</p>
+<p>また、モックやスタブ、スパイと言ったテストコードでよく出てくる用語を変数名で使用する際、きちんと使い分けをしましょう。モックという変数名なのに、実際はスタブのような使い方をしていると、誤解を招いて困ります。</p>
+<h2 id="3-テストパターン">3. テストパターン</h2>
+<h3 id="31-ホワイトボックステストとブラックボックステスト">3.1. ホワイトボックステストとブラックボックステスト</h3>
+<p>テストコードを書いている人は、基本的には内部仕様を把握しているはずなので、ホワイトボックスでテストを書くことが多いと思います。
+また、網羅性を高めるために、パラメータテスト（組み合わせテスト）や、同値、境界値のようなブラックボックステストも書くのも良いでしょう。</p>
+<h3 id="32-正常準正常異常系">3.2. 正常・準正常・異常系</h3>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正常系テスト</td>
+<td>標準的な振る舞いをテスト</td>
+</tr>
+<tr>
+<td>準正常系テスト</td>
+<td>バリデーションエラー等のエラーに対するテスト</td>
+</tr>
+<tr>
+<td>異常系テスト</td>
+<td>API 接続エラー等のエラーに対するテスト</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-fail-のテスト">3.3. Fail のテスト</h3>
+<p>テストコードに、予期しない処理が走った場合、強制的に Fail にさせることも大切です。
+例えば、『非推奨な機能が使用された場合、Fail にさせる』は便利です。</p>
+<h3 id="34-private-メソッドの検証">3.4. private メソッドの検証</h3>
+<p>private メソッドの検証は、public メソッド経由で検証しましょう。</p>
+<h2 id="4-大量にあるテストコード">4. 大量にあるテストコード</h2>
+<h3 id="41-プロダクトコードと同じ階層構造">4.1. プロダクトコードと同じ階層構造</h3>
+<p>プロダクトコードと同様に、テストコードもフォルダ毎にグループピングすると良いでしょう。
+横並びにテストコードがあると、読みにくくなるからです。</p>
+<p>例えば、プロダクトコードと全く同じ階層構造のフォルダ構成にすると良いかも知れません。</p>
+<h3 id="42-単位を分けたテストコード">4.2. 単位を分けたテストコード</h3>
+<p>次のような単位でグルーピングすると良いです。</p>
+<ul>
+<li>初期化処理を含めた単位でグループ化
+<ul>
+<li>ex. 在庫している商品が“空”の場合、 “1 つ”だけの場合、 “複数”の場合</li>
+</ul>
+</li>
+</ul>
+<p>よくあるテストクラスを継承してテストクラスを作るケースがありますが、避けたほうがよいでしょう。いつの間にか、必要以上の巨大な機能が備わってしまっています。Setup や Teardown に、必要な処理をセットしましょう。</p>
+<h3 id="43-テスト実行時間が長くなってしまったら">4.3. テスト実行時間が長くなってしまったら</h3>
+<p>下記のいずれかを試すと良いでしょう。</p>
+<ul>
+<li>テストの実行環境を強化する（マシンスペック）</li>
+<li>並列にする</li>
+<li>実行するテストを絞り込む</li>
+</ul>
+<p>そもそものプロダクトコードのパフォーマンスが悪いのであれば、そちらを改善するのが一番良いでしょう。</p>
+<h2 id="終わりに">終わりに</h2>
+<p>書いていて、感じたことは『テストコードは、読みやすさが大事』という点です。
+プロダクトコードの書き方と、テストコードの書き方は、似ているようで違います。
+プロダクトコードでは、保守性の高い洗練されたクラス設計や、ハイパフォーマンスが発揮される処理が求められることがあります。しかし、テストコードはそれらを求められていないと思います。</p>
+<p>テストコードには、プロダクトコードの仕様を <strong>素直に表現されたドキュメント</strong> として扱われるべきです。
+意図が伝わりづらいテストコードがあった場合、『このテストケースが落ちているけど、なんで？』と疑問を持ち、『落ちているのが正しいの？』と疑心暗鬼に陥ってしまいます。それはとても残念です。そんなことにならないためにも、テストコードは、『読みやすさ』を大切にして設計すべきと思います。</p>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li><a href="https://www.amazon.co.jp/dp/477415377X">JUnit 実践入門 ~体系的に学ぶユニットテストの技法 (WEB+DB PRESS plus)</a></li>
+<li><a href="https://docs.microsoft.com/ja-jp/dotnet/core/testing/unit-testing-best-practices">.NET Core と .NET Standard での単体テストのベスト プラクティス</a></li>
+</ul>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>テスト</li></ul></footer></article></main></body></html>

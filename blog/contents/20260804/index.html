@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ブローガスト4日目: Sentry 調査が捗った話</title><meta name="description" content="最近お仕事で、エラートラッキングツールでお馴染みの Sentry を使ったエラー調査が捗りました。 その出来事を書こうと思います。 調査はしんどい 緊急性が高くないケースの調査をしていたのですが、ほったらかしにしていた大量のissueを捌い"><meta name="keywords" content="仕事,Sentry,ブローガスト,Blaugust"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">429</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2026-08-04T20:44:00+09:00"><span class="visually-hidden">2026年8月4日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2026</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">08</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">04</span></span></time></p></div><div class="notebook-heading"><h1>ブローガスト4日目: Sentry 調査が捗った話</h1></div></header><div class="notebook-body"><p>最近お仕事で、エラートラッキングツールでお馴染みの Sentry を使ったエラー調査が捗りました。<br>
+その出来事を書こうと思います。</p>
+<h2 id="調査はしんどい">調査はしんどい</h2>
+<p>緊急性が高くないケースの調査をしていたのですが、ほったらかしにしていた大量のissueを捌いていました。<br>
+issue で発生しているエラーの調査ってしんどいです。<br>
+エラーがなぜ発生したのかを再現する手順を確定させた上で、どのようにして修正するのか方針を決めて、<br>
+修正検証して issue を閉じる、までが長くてしんどいです。</p>
+<p>原因調査をする要因を絞り込んでいく作業だけでなくて、ライブラリ起因などの不具合や振る舞いを深く理解しないといけないのも、しんどいです。</p>
+<h2 id="両面から攻める">両面から攻める</h2>
+<p>AI (Codex) を使って、Sentry の API や MCP を利用することで、一緒に調査を手伝ってくれます。<br>
+<strong>私はトップダウン式で攻めて AI にはボトムアップ式に攻めます。</strong></p>
+<p>私の方で、以下のような情報を整理します。</p>
+<ul>
+<li>どこから辿ってきたか
+<ul>
+<li>状態遷移に依存したロジックがあるか？</li>
+</ul>
+</li>
+<li>誰が実行したのか
+<ul>
+<li>ユーザーの属性に依存したロジックがあるか？</li>
+</ul>
+</li>
+<li>いつ実行されたのか
+<ul>
+<li>実行タイミングに依存したロジックがあるか？</li>
+</ul>
+</li>
+<li>どのデータが使われたか
+<ul>
+<li>データに依存したロジックがあるか？</li>
+</ul>
+</li>
+</ul>
+<p>『xロールの人が、yの日に、zのページにアクセスして…、』と状況整理します。</p>
+<h2 id="ai-ボトムアップ式">AI ボトムアップ式</h2>
+<p>私が状況整理している間には、AI にボトムアップ式に調べさせます。<br>
+エラーが発生している箇所は確定（error throw）しているので、そこがなぜ発生したのかを逆算させます。<br>
+そうすると、さまざまなパターンの発生ルートを列挙してくれます。<br>
+『xxの分岐を通るには、yyの条件が成立する必要があり…』など。</p>
+<p>またこれが個人的にありがたいのですが、<strong>ライブラリへの深い調査です</strong>。<br>
+今のWebアプリは、さまざまなOSSを使わさせ貰って成り立っていることが多いです。<br>
+Webフレームワークやルーティング、APIクライアントなど巨大なライブラリだと、調査が大変なんです。<br>
+ローカル環境では、ライブラリのソースコードが難読化などして読みにくかったりすることもあったりで、<br>
+ライブラリを手元にチェックアウトして調べる、みたいなことを昔はよくしていました。<br>
+あとは issue などで上がっていないかを漁ったりしてバグなのか仕様なのかを調べたり。</p>
+<p>この作業はできるのですが、負担が大きいんです。<br>
+よく知っているコードのリバースエンジニアリングでもしんどいのに、<br>
+あまり知らないコードのリバースエンジニアリングは予測推測するので、<br>
+<strong>頭の中で分岐がたくさん生まれて記憶するのがしんどいです</strong>。</p>
+<p>ITヲタクな AI は、こういう調査が得意と思っていて、<br>
+逆算する際にライブラリの挙動についても調べてくれるのです。<br>
+具体的なソースコードをGitHub リンク付きで 『ここの挙動が影響して…』などと教えてくれます。</p>
+<p>さらに良いのは、<strong>issue 発生時のライブラリのバージョンで調べてくれます。</strong><br>
+今なんでか再現しないけど昔は発生していた、というときにライブラリが直してくれた、<br>
+というのもよくあるので、こういうのも AI はSentry の イベント発生時点でのソースコードをgit 履歴を調べて、<br>
+その当時のライブラリバージョンで調査してくれます。<br>
+『ライブラリ v1.1 では問題が発生していましたが、v1.2 で yy という修正が入ったため、解決されたようです』というのも教えてくれます。</p>
+<p><strong>技術的な側面をボトムアップ式にAI</strong> が、<br>
+<strong>業務ドメイン的な側面をトップダウン式に私</strong> が調べることで、<br>
+Sentry エラー調査が捗った、また勉強になった今日この頃でした。</p>
+<p>もちろん、ボトムアップ式な選択肢が全て間違っているというのもよくあるので、<br>
+選択肢を疑ってかかり、自身が納得できるロジックで再現性を確認する必要があります。</p>
+<h2 id="終わりに">終わりに</h2>
+<p>まあ、それでもしんどいんですよね。<br>
+1日20件ぐらいのissueを片っ端から整理していたのですが、<br>
+ハマると時間と精神を大きく消費しちゃいます。<br>
+日々綺麗にしましょうね。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>仕事</li></ul></footer></article></main></body></html>

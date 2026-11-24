@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Web Componentsの良さ</title><meta name="description" content="Web Components を人にお勧めしたいんです。メリット・デメリットをかんたんにまとめたいと思います。Web Components is 何https://www.webcomponents.org/specs より引用します。"><meta name="keywords" content="フロントエンド,Web Components"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">73</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-03-01"><span class="visually-hidden">2022年3月1日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">01</span></span></time></p></div><div class="notebook-heading"><h1>Web Componentsの良さ</h1></div></header><div class="notebook-body"><p>Web Components を人にお勧めしたいんです。メリット・デメリットをかんたんにまとめたいと思います。</p>
+<h2 id="web-components-is-何">Web Components is 何</h2>
+<p><a href="https://www.webcomponents.org/specs">https://www.webcomponents.org/specs</a> より引用します。</p>
+<blockquote>
+<p>Web components is a meta-specification made possible by four other specifications:<br>
+The Custom Elements specification<br>
+The shadow DOM specification<br>
+The HTML Template specification<br>
+The ES Module specification</p>
+</blockquote>
+<p>WebComponents は、ブラウザの 4 つの API で実現可能となるメタ仕様です。</p>
+<blockquote>
+<p>These four specifications can be used on their own but combined allow developers to define their own tags (custom element), whose styles are encapsulated and isolated (shadow dom), that can be restamped many times (template), and have a consistent way of being integrated into applications (es module).</p>
+</blockquote>
+<p>div や span といった HTML タグがブラウザ標準にありますが、WebComponents は、独自のタグを定義することができます。</p>
+<h2 id="メリット">メリット</h2>
+<ul>
+<li>環境適合性
+<ul>
+<li>フレームワークに依存しないので、Rails など Web フレームワークへの適用が容易です。</li>
+</ul>
+</li>
+<li>軽量
+<ul>
+<li>ブラウザ API のみ使用するので、ロードするアセットはありません。</li>
+</ul>
+</li>
+<li>シンプル
+<ul>
+<li>HTML タグを使う要領で、WebComponents を使います。</li>
+</ul>
+</li>
+<li>サンドボックス
+<ul>
+<li>Shadow DOM のおかげで、CSS のスタイルが独自のタグの外に漏れません。</li>
+</ul>
+</li>
+</ul>
+<h2 id="デメリット">デメリット</h2>
+<ul>
+<li>パフォーマンス
+<ul>
+<li>React のような描画最適化は、ありません。</li>
+</ul>
+</li>
+<li>機能性
+<ul>
+<li>ブラウザ API の影響を、受けます。</li>
+</ul>
+</li>
+<li>SEO
+<ul>
+<li>Web Components は Javascript 実行が必須です。そのため、SSR は実現できません。</li>
+</ul>
+</li>
+</ul>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>フロントエンド</li></ul></footer></article></main></body></html>

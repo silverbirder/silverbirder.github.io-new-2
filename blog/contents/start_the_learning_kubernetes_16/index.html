@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一足遅れて Kubernetes を学び始める - 16. コンポーネント -</title><meta name="description" content="前回 一足遅れて Kubernetes を学び始める - 15. セキュリティ -では、RBACによる権限について学習しました。今回は最後にKubernetesのコンポーネントについて学習します。"><meta name="keywords" content="クラウドインフラ,Kubernetes,コンポーネント"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">24</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-06-10"><span class="visually-hidden">2019年6月10日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">06</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 16. コンポーネント -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
+<ol>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_01/">一足遅れて Kubernetes を学び始める - 01. 環境選択編 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_02/">一足遅れて Kubernetes を学び始める - 02. Docker For Mac -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_03/">一足遅れて Kubernetes を学び始める - 03. Raspberry Pi -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_04/">一足遅れて Kubernetes を学び始める - 04. kubectl -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_05/">一足遅れて Kubernetes を学び始める - 05. workloads その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_06/">一足遅れて Kubernetes を学び始める - 06. workloads その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_07/">一足遅れて Kubernetes を学び始める - 07. workloads その 3 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_08/">一足遅れて Kubernetes を学び始める - 08. discovery&amp;LB その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_09/">一足遅れて Kubernetes を学び始める - 09. discovery&amp;LB その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_10/">一足遅れて Kubernetes を学び始める - 10. config&amp;storage その 1 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_11/">一足遅れて Kubernetes を学び始める - 11. config&amp;storage その 2 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_12/">一足遅れて Kubernetes を学び始める - 12. リソース制限 -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_13/">一足遅れて Kubernetes を学び始める - 13. ヘルスチェックとコンテナライフサイクル -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_14/">一足遅れて Kubernetes を学び始める - 14. スケジューリング -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_15/">一足遅れて Kubernetes を学び始める - 15. セキュリティ -</a></li>
+<li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_16/">一足遅れて Kubernetes を学び始める - 16. コンポーネント -</a></li>
+</ol>
+<h2 id="前回">前回</h2>
+<p><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_15/">一足遅れて Kubernetes を学び始める - 15. セキュリティ -</a>では、RBAC による権限について学習しました。今回は最後に Kubernetes のコンポーネントについて学習します。</p>
+<h2 id="コンポーネント">コンポーネント</h2>
+<p>Kubernetes では、下記のような構成になっています。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1639816831/silver-birder.github.io/blog/kubernetes_master.png?ar=878%3A404" alt="kubernetes_master.png" width="878" height="404" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1639816831/silver-birder.github.io/blog/kubernetes_master.png?ar=878%3A404 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1639816831/silver-birder.github.io/blog/kubernetes_master.png?ar=878%3A404 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1639816831/silver-birder.github.io/blog/kubernetes_master.png?ar=878%3A404 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1639816831/silver-birder.github.io/blog/kubernetes_master.png?ar=878%3A404 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_878/q_auto/f_auto/v1639816831/silver-birder.github.io/blog/kubernetes_master.png?ar=878%3A404 878w" sizes="min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>※ <a href="https://kubernetes.io/docs/concepts/architecture/cloud-controller/">https://kubernetes.io/docs/concepts/architecture/cloud-controller/</a></p>
+<p>それぞれのコンポーネントについて学習します。</p>
+<h2 id="現状確認">現状確認</h2>
+<pre><code class="language-shell">pi@raspi001:~/tmp $ k get nodes
+NAME       STATUS   ROLES    AGE   VERSION
+raspi001   Ready    master   42d   v1.14.1
+raspi002   Ready    worker   42d   v1.14.1
+raspi003   Ready    worker   42d   v1.14.1
+pi@raspi001:~/tmp $ k get pods -n kube-system -o=wide
+NAME                               READY   STATUS    RESTARTS   AGE   IP             NODE       NOMINATED NODE   READINESS GATES
+coredns-fb8b8dccf-mtzvd            1/1     Running   34         37d   10.244.0.26    raspi001   &lt;none&gt;           &lt;none&gt;
+coredns-fb8b8dccf-nv6dj            1/1     Running   81         37d   10.244.2.151   raspi003   &lt;none&gt;           &lt;none&gt;
+etcd-raspi001                      1/1     Running   31         42d   192.168.3.32   raspi001   &lt;none&gt;           &lt;none&gt;
+kube-apiserver-raspi001            1/1     Running   95         42d   192.168.3.32   raspi001   &lt;none&gt;           &lt;none&gt;
+kube-controller-manager-raspi001   1/1     Running   89         42d   192.168.3.32   raspi001   &lt;none&gt;           &lt;none&gt;
+kube-flannel-ds-arm-4s22p          1/1     Running   73         38d   192.168.3.34   raspi003   &lt;none&gt;           &lt;none&gt;
+kube-flannel-ds-arm-7nnbj          1/1     Running   88         38d   192.168.3.33   raspi002   &lt;none&gt;           &lt;none&gt;
+kube-flannel-ds-arm-ckwq5          1/1     Running   86         38d   192.168.3.32   raspi001   &lt;none&gt;           &lt;none&gt;
+kube-proxy-6fwl5                   1/1     Running   31         42d   192.168.3.32   raspi001   &lt;none&gt;           &lt;none&gt;
+kube-proxy-wgjdq                   1/1     Running   28         42d   192.168.3.33   raspi002   &lt;none&gt;           &lt;none&gt;
+kube-proxy-zvmqf                   1/1     Running   28         42d   192.168.3.34   raspi003   &lt;none&gt;           &lt;none&gt;
+kube-scheduler-raspi001            1/1     Running   87         42d   192.168.3.32   raspi001   &lt;none&gt;           &lt;none&gt;
+</code></pre>
+<p>下記は、MasterNode で動いています。</p>
+<ul>
+<li>etcd-raspi001</li>
+<li>kube-apiserver-raspi001</li>
+<li>kube-controller-manager-raspi001</li>
+<li>kube-scheduler-raspi001</li>
+</ul>
+<p>下記は、全 Node で動いています。</p>
+<ul>
+<li>kube-flannel-ds</li>
+<li>kube-proxy</li>
+</ul>
+<p>coredns は、Master1 台と Worker1 台で動いています。</p>
+<p>※ <a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_03/">このとき</a>に設定しました。</p>
+<h2 id="etcd">etcd</h2>
+<p>MasterNode に存在するコンポーネントです。
+分散 Key-ValueStore である etcd は、Kubernetes のクラスタにある全情報が保存されています。そのため、単一障害にならないようクラスタを組むことが推奨されているみたいです。ここのデータにアクセスするのは kube-apiserver から経由しなければなりません。
+直接確認したい場合は、etcdctl を使ってみると良いです。</p>
+<h2 id="kube-apiserver">kube-apiserver</h2>
+<p>MasterNode に存在するコンポーネントです。
+KubernetesAPI を提供するコンポーネントです。kube-scheduler や kube-controller-manager,kubelet から呼ばれます。
+etcd に対してリソースを管理するだけで、Pod の起動はしません。</p>
+<h2 id="kube-scheduler">kube-scheduler</h2>
+<p>MasterNode に存在するコンポーネントです。
+Node 情報が未割り当ての Pod を検知して、その Pod に Node を割り当てるリクエストを kube-apiserver に送ります。
+割り当てるだけであって、Pod を起動させません。Node を割り当てる際、NodeAffinity や Taints などを考慮に入れます。</p>
+<h2 id="kubelet">kubelet</h2>
+<p>各 Node 上で動作するコンポーネントです。未割り当てだった Node が割り当てられたことを検知し、
+実際に Pod を起動します。</p>
+<h2 id="kube-controller-manager">kube-controller-manager</h2>
+<p>MasterNode に存在するコンポーネントです。
+様々なコントローラを実行するコンポーネントです。Deployment や ControllerReplicaSetController では、
+状態を監視し、期待する Pod 数と現在の Pod 数を見ます。kube-apiserver に対して、過不足分の Pod を調整するよう要求します。
+その後は、さきほどの kube-scheduler,kubelet の一連の流れになります。</p>
+<h2 id="kube-proxy">kube-proxy</h2>
+<p>各 Node 上で動作するコンポーネントです。NodePort や ClusterIP 宛のトラフィックを転送します。</p>
+<h2 id="kube-dns">kube-dns</h2>
+<p>kubernetes クラスタ内の名前解決やサービスディスカバリに利用される DNS サーバです。
+私の環境では、CoreDNS を使っていました。</p>
+<h2 id="そのほか">そのほか</h2>
+<h2 id="customresourcedefinitioncrdと-operator">CustomResourceDefinition(CRD)と Operator</h2>
+<p>CRD は独自のリソースを定義できるリソースです。このような拡張性をもたせることで、様々な開発が進められます。
+CRD は、単なる Kubernetes オブジェクトなだけなので、Operator というカスタムコントローラをセットで作る必要があります。
+Operator Framework と呼ばれるもので簡単に作成できるそうです。</p>
+<h2 id="最後に">最後に</h2>
+<p>ようやく Kubernetes 完全ガイドの内容を読み切ることができました。
+当初は、ここまで記事にアウトプットし続けるつもりはなかったです。
+実際に kubernetes を raspberryPi 上で動かしてみると、
+いろいろな発見があってのめり込んでしまいました。</p>
+<p>ただ、<a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_12/">一足遅れて Kubernetes を学び始める - 12. リソース制限 -</a>ぐらいから、いろいろとあって、
+書籍の内容を、ほぼそのまま使わさせてもらいました。（笑)</p>
+<p>これからは、実際に GKE を使ってアプリケーション開発をしてみようと思います。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>クラウドインフラ</li></ul></footer></article></main></body></html>

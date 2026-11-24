@@ -1,0 +1,443 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GDG DevFest Tokyo 2019に参加したら、Webの未来にワクワクした</title><meta name="description" content="GDG DevFest Tokyo 2019というイベントに参加してきました。最近はプライベートの都合上、中々時間が取れていませんでした。しかし今回、会社の都合上、良い感じに時間を確保できたため、こちらのイベントに参加してきました。`大阪→東京` でわざわざ新幹線を使ってまで参加しましたが、それに見合う発見が多くありました。今回、私が学んだ内容について、報告しようかなと思います。"><meta name="keywords" content="レポート,Google,ブラウザ,GDG DevFest Tokyo"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">35</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-12-16"><span class="visually-hidden">2019年12月16日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">12</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">16</span></span></time></p></div><div class="notebook-heading"><h1>GDG DevFest Tokyo 2019に参加したら、Webの未来にワクワクした</h1></div></header><div class="notebook-body"><p>GDG DevFest Tokyo 2019 というイベントに参加してきました。
+最近はプライベートの都合上、中々時間が取れていませんでした。
+しかし今回、会社の都合上、良い感じに時間を確保できたため、こちらのイベントに参加してきました。
+<code>大阪→東京</code> でわざわざ新幹線を使ってまで参加しましたが、それに見合う発見が多くありました。
+今回、私が学んだ内容について、報告しようかなと思います。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614429063/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Sponsor.jpg?ar=900%3A1200" alt="GDG DevFest Tokyo 2019 スポンサー" width="900" height="1200" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1614429063/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Sponsor.jpg?ar=900%3A1200 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1614429063/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Sponsor.jpg?ar=900%3A1200 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614429063/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Sponsor.jpg?ar=900%3A1200 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1614429063/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Sponsor.jpg?ar=900%3A1200 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_900/q_auto/f_auto/v1614429063/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Sponsor.jpg?ar=900%3A1200 900w" sizes="min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614429118/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Lantern.jpg?ar=1200%3A900" alt="GDG DevFest Tokyo 2019 提灯" width="1200" height="900" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1614429118/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Lantern.jpg?ar=1200%3A900 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1614429118/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Lantern.jpg?ar=1200%3A900 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614429118/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Lantern.jpg?ar=1200%3A900 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1614429118/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Lantern.jpg?ar=1200%3A900 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1614429118/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Lantern.jpg?ar=1200%3A900 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1200/q_auto/f_auto/v1614429118/silver-birder.github.io/blog/GDG_DevFest_Tokyo_2019_Lantern.jpg?ar=1200%3A900 1200w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://gdg-tokyo.connpass.com/event/137666/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GDG DevFest Tokyo 2019 (2019/12/14 11:00〜)</strong><span class="link-card-description" data-astro-cid-p7ia6262>## イベント概要 / Summary GDG DevFest Tokyo 2019 を今年も開催します！ DevFest は、Google Developer Group (GDG) コミュニティによって世界各地で開かれるデベロッパー向けイベントです。東京では、Android、Google Cloud Platform（GCP）、Web、Firebase、Machine Learning （ML）、Assistant、Flutter、Goといった様々な技術の最新情報や現場でのノウハウを一日で学べるコミュニティイベントとして開催しています。去年に引き続き 4 回目の開催となります。 ...</span><span class="link-card-domain" data-astro-cid-p7ia6262>gdg-tokyo.connpass.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/f9fcb928074808b69939d8ae94672ce0bb519ca4767f509b9d02b5a2c66d7c12.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<h2 id="gdg-devfest-tokyo-2019">GDG DevFest Tokyo 2019</h2>
+<blockquote>
+<p>DevFest は、Google Developer Group (GDG) コミュニティによって世界各地で開かれるデベロッパー向けイベントです。東京では、Android、Google Cloud Platform（GCP）、Web、Firebase、Machine Learning （ML）、Assistant、Flutter、Go といった様々な技術の最新情報や現場でのノウハウを一日で学べるコミュニティイベントとして開催しています。去年に引き続き 4 回目の開催となります。</p>
+</blockquote>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://tokyo.gdgjapan.org/devfest2019" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GDG Tokyo</strong><span class="link-card-description" data-astro-cid-p7ia6262>GDG Tokyoは主にGoogleのテクノロジーに興味のある人たちで情報を共有しあう集いです。平日夜や週末にオンラインでで勉強会等を行っています。</span><span class="link-card-domain" data-astro-cid-p7ia6262>tokyo.gdgjapan.org</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/d9012b288d259fccf845dafd46d3a362260f419ae5b311d94eb5bbdecc13bca6.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>GDG DevFest Tokyo 2019</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DevFest Day1 / 2019 年 12 月 14 日（土）</td>
+<td>Sessions、Codelab、After Party / 11:00 開始（開場 10:30 予定）18:00 終了 / ※終了後、懇親会パーティ開催します。 / 開催場所：国立大学法人電気通信大学 / 〒 182-8585 東京都調布市調布ヶ丘 1-5-1</td>
+</tr>
+<tr>
+<td>DevFest Day1 / 2019 年 12 月 15 日（日）</td>
+<td>Special Hands-on、Office Tour / 14:00 〜 17:00 予定 / ※14 日にご参加いただいた方の中から抽選で 100 名ご招待 / 開催場所：Google Japan / 〒 150-0002 東京都渋谷区渋谷 3 丁目 21−3</td>
+</tr>
+</tbody>
+</table>
+<p>私は、DevFest Day1 のみの参加でした。
+開催場所は、 <strong>電気通信大学</strong> です。スタッフさんの多くは学生さんだったと思います。積極的にサポートされていた姿は、立派だなと勉強になりました。</p>
+<h2 id="devfests">DevFests</h2>
+<blockquote>
+<p>DevFests are community-led developer events hosted by Google Developer Groups around the globe. GDGs are focused on community building and learning about Google’s technologies.</p>
+</blockquote>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://devfest.withgoogle.com/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>DevFest | Google for Developers</strong><span class="link-card-description" data-astro-cid-p7ia6262>DevFest is a global, decentralized tech conference hosted by the Google Developer Groups (GDG) community.</span><span class="link-card-domain" data-astro-cid-p7ia6262>devfest.withgoogle.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/fdeb224fd4cf8c0c13704c17c90df84282632b64717927117a226a4737734fdb.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>DevFests 自体は、グローバルで活動されている GDG がホストのイベントです。
+下の図は、 <strong>2019 年</strong> の活動実績&amp;予定です。全国各地で広く活発的に行われていることが分かると思います。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614428965/silver-birder.github.io/blog/find_an_upcoming_community-led_dev_fest_near_yo.png?ar=1200%3A621" alt="Find an upcoming community-led DevFest near yo" width="1200" height="621" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1614428965/silver-birder.github.io/blog/find_an_upcoming_community-led_dev_fest_near_yo.png?ar=1200%3A621 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1614428965/silver-birder.github.io/blog/find_an_upcoming_community-led_dev_fest_near_yo.png?ar=1200%3A621 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614428965/silver-birder.github.io/blog/find_an_upcoming_community-led_dev_fest_near_yo.png?ar=1200%3A621 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1614428965/silver-birder.github.io/blog/find_an_upcoming_community-led_dev_fest_near_yo.png?ar=1200%3A621 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1614428965/silver-birder.github.io/blog/find_an_upcoming_community-led_dev_fest_near_yo.png?ar=1200%3A621 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1200/q_auto/f_auto/v1614428965/silver-birder.github.io/blog/find_an_upcoming_community-led_dev_fest_near_yo.png?ar=1200%3A621 1200w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>また、コミュニティの Youtube のチャンネルもあります。</p>
+<p><a href="https://www.youtube.com/channel/UCXDc-ckqru8BgppXbCt0APw">https://www.youtube.com/channel/UCXDc-ckqru8BgppXbCt0APw</a></p>
+<p>動画には、文字起こしとして 英語(自動生成)だけでなく、 <strong>英語(CC)</strong> もあります。
+英語のリスニングが苦手な人でも、文字から理解できるようになっています。こういう配慮はさすがですね。</p>
+<h2 id="google-developer-experts-gde">Google Developer Experts (GDE)</h2>
+<p>今回登壇されている方の多くが、 <strong>Google Developer Experts (GDE)</strong> という言葉を仰っていました。
+最初は『Google 社内の何かしらのポジションか？』と思っていましたが、違っていました。</p>
+<blockquote>
+<p>A global program to recognize individuals who are experts and thought leaders in one or more Google technologies. These professionals actively contribute and support the developer and startup ecosystems around the world, helping them build and launch highly innovative apps.</p>
+</blockquote>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://developers.google.com/community/experts" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Google Developer Experts - Google for Developers</strong><span class="link-card-description" data-astro-cid-p7ia6262>Apply to join the Google Developer Experts community, a global network of professionals full of technology experts, influencers, and thought leaders.</span><span class="link-card-domain" data-astro-cid-p7ia6262>developers.google.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/2716047b873c4c256aaf6ea26e58081dd84a30654c9fb9e3ef193c24aadcb7f0.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>GDE の人は、端的に言うと『Google のテクノロジを開発者やスタートアップ企業らに対して支援・啓蒙活動をしている Google 外の人』です。
+GDE になるためには、Google、Google パートナーからの紹介から入る必要があるそうです。</p>
+<h2 id="sessions">Sessions</h2>
+<p>今回のセッションでは、次のようなカテゴリでグループ分けされていました。</p>
+<ul>
+<li>Android</li>
+<li>Assistant</li>
+<li>Cloud</li>
+<li>Design</li>
+<li>Firebase</li>
+<li>Flutter</li>
+<li>Go</li>
+<li>ML</li>
+<li>Web</li>
+<li>misc (other かな)</li>
+</ul>
+<p>私は、Web が好きな人なので、そのカテゴリを積極的に選んでいきました。</p>
+<h2 id="keynote2-円周率世界記録への道">Keynote2: 円周率世界記録への道</h2>
+<p>Speaker: 岩尾 エマ はるかさん</p>
+<p>こちらの記事が、今回の話のテーマとなります。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://it.srad.jp/story/19/03/17/043207/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>srad.jp</strong><span class="link-card-description" data-astro-cid-p7ia6262>tech news aggregator,open source software updates,IT community discussions</span><span class="link-card-domain" data-astro-cid-p7ia6262>it.srad.jp</span></span></a></div>
+<p>岩尾 エマ はるかさんのお話は、おおよそ<a href="https://en.wikipedia.org/wiki/Emma_Haruka_Iwao">Wiki</a>に記載があるとおりです。</p>
+<p>今回の発表の話にあった、以下の話が印象的でした。</p>
+<ul>
+<li>Linkedin 経由で Google からのオファーがあり、『５回面接をして、ようやく合格した』</li>
+</ul>
+<p>岩尾さんは、『面接するのは無料』という精神で、何度も Try し続けて合格を勝ち取った人です。同じ大阪出身だそうで、納得しました。（笑）</p>
+<p>また、元々英語は得意な方ではなかったという話も紹介されていました。
+私も英語について悩んでおり、とても共感する部分が多かったです。
+<code>英語ができることによって、選択肢は広がる</code> という当たり前の話があったのですが、
+『語学が苦手だけど、Google(海外)で勤務できるようになった』という岩尾さんの経歴を知ると、頑張ってみようと思えました。
+とても感謝しています。</p>
+<h2 id="chrome-dev-summit-2019-recap">Chrome Dev Summit 2019: Recap</h2>
+<p>Speaker: 矢倉 眞隆さん</p>
+<p>Chrome Dev Summit(CDS) は、今まで以下のようなテーマが中心でした。</p>
+<ul>
+<li>2013
+<ul>
+<li>Web API, パフォーマンス</li>
+</ul>
+</li>
+<li>2015
+<ul>
+<li>PWA</li>
+</ul>
+</li>
+</ul>
+<p>そして、今回の CDS では今までの <strong>ゴリゴリの JS</strong> 話から少し外れたものもいくつかあり、
+その紹介をされていました。</p>
+<h3 id="html-と-css">HTML と CSS</h3>
+<h4 id="html-isnt-done">HTML isn’t done</h4>
+<p><a href="https://www.youtube.com/watch?v=ZFvPLrKZywA">https://www.youtube.com/watch?v=ZFvPLrKZywA</a></p>
+<p>HTML は、まだ成熟されたものではなく、まだまだ改善の余地があるという考えから、
+いくつかの改善提案の話が紹介されていました。</p>
+<p>丸裸な純粋の HTML でも、わかりやすい UI を標準で表現できるのであれば、ユーザーにとっては
+ありがたいことですよね。だって、いろんなサイトのいろんな UI を知らなくて済むのですから。
+個人的(開発者)には、Edge が Chromium ベースになることが、とても嬉しいです。
+リリースが 2020 年 1 月 15 日だそうなので、もう間もなくですね。</p>
+<h4 id="next-generation-web-styling">Next-generation web styling</h4>
+<p><a href="https://www.youtube.com/watch?v=-oyeaIirVC0">https://www.youtube.com/watch?v=-oyeaIirVC0</a></p>
+<p>scroll-snap という機能は、スクロールの制御を CSS で実現しようとしています。
+従来は、Javascript でハックな技を駆使していましたが、不要となります。
+デザイナーだけでなく、JS を担当するエンジニアも必見です。</p>
+<h3 id="js-seo">JS +SEO</h3>
+<p>SEO の話がありました。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://www.suzukikenichi.com/blog/how-to-make-your-content-shine-on-google-search/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Google 検索でコンテンツを輝かせる方法 from #ChromeDevSummit 2019</strong><span class="link-card-description" data-astro-cid-p7ia6262>Chrome Dev Summit 2019 での検索にフォーカスしたセッションをレポートする。セッションスピーカーは Martin Splitt（マーティン・スプリット）氏、セッションタイトルは “How to make your content shine on Google Search”（Google 検索でコンテンツを輝かせる方法）。</span><span class="link-card-domain" data-astro-cid-p7ia6262>www.suzukikenichi.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/debceeeda37441b027ba20a8d4dcf64a678e073b58953d6d7b3ddc21dff69758.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>Googlebot が最新の Chromium ベースになったことで、Chrome でブラウザを動かすのと同じような振る舞いになるそうです。
+今までは、Chrome 41 ベースで Googlebot が動いていたため、新しい JavaScript 構文やブラウザ API を使えなかったそうです。
+また、ShadowDOM にも対応しているので、これは WebComponents を推進していることになるのでしょうか。</p>
+<h3 id="リアルワールド指向のパフォーマンス">リアルワールド指向のパフォーマンス</h3>
+<p>開発環境で Javascript を動かしたとしても、本番環境で動かすと実は遅かったりします。
+それは、Javascript による処理が複雑化していることも要因となります。
+この現象は、ネットワーク通信が悪い環境（海外）であれば、より明確に実感するはずです。
+このようなケースを考慮したテスト環境が必要なのではないかと、私は思います。</p>
+<p>以下の記事にある通り、Google は「遅い」と感じるページに警告を出してくれます。</p>
+<p><a href="https://jp.techcrunch.com/2019/11/12/2019-11-11-google-chrome-to-identify-and-label-slow-websites/">https://jp.techcrunch.com/2019/11/12/2019-11-11-google-chrome-to-identify-and-label-slow-websites/</a></p>
+<p>パフォーマンス計測ツールを活用することで、事前に確認しておきましょう。</p>
+<ul>
+<li>web.dev</li>
+<li>PageSpeed Insights</li>
+<li>Lighthouse</li>
+</ul>
+<p>また、Javascript をシングルスレッドによる低パフォーマンスに対するアプローチ方法を紹介されていました。</p>
+<p><a href="https://www.youtube.com/watch?v=7Rrv9qFMWNM">https://www.youtube.com/watch?v=7Rrv9qFMWNM</a></p>
+<p>詳しくは、下記をご参考下さい。</p>
+<p><a href="https://medium.com/lazy-learning/my-summary-of-the-main-thread-is-overworked-underpaid-chrome-dev-summit-2019-cd65efdf1ce1">https://medium.com/lazy-learning/my-summary-of-the-main-thread-is-overworked-underpaid-chrome-dev-summit-2019-cd65efdf1ce1</a></p>
+<h2 id="ネイティブアプリと-web-アプリの差を埋めるにはproject-fugu-とマルチスレッドプログラミング">ネイティブアプリと Web アプリの差を埋めるには：Project Fugu とマルチスレッドプログラミング</h2>
+<p>Speaker: 清水 智公さん</p>
+<h3 id="ネイティブアプリと-web-アプリの差">ネイティブアプリと Web アプリの差</h3>
+<p>Web アプリは、ブラウザ上で動作するのものです。ブラウザから提供されている API を通して、Web アプリを構築します。
+しかし、ブラウザからマシンのネイティブな部分、例えばマシンにあるファイルにアクセスしたり、ファイルをマシンに
+保存したりする操作はできません。この制限は、ブラウザが安全性を担保するためのトレードオフであり、仕方がありません。</p>
+<h3 id="project-fugu">Project Fugu</h3>
+<blockquote>
+<p>Fugu’s mission is to close the capabilities gap with native to enable developers to build new experiences on the web while preserving everything that is great about the web.</p>
+</blockquote>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://www.chromium.org/teams/web-capabilities-fugu" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Web Capabilities (Project Fugu 🐡)</strong><span class="link-card-domain" data-astro-cid-p7ia6262>www.chromium.org</span></span></a></div>
+<p>Project Fugu とは、ネイティブとのギャップを縮めるために、(Chrome)ブラウザからネイティブな部分を操作する試みのプロジェクトのことです。
+ネイティブ部分を操作するため、誤った使い方をするととても危険です。
+そのような危険性を、『毒』を持つふぐの名前を借りて Project Fugu というそうです。</p>
+<p>提案中の機能一覧は、下記のシートになります。</p>
+<p><a href="http://goo.gle/fugu-api-tracker">http://goo.gle/fugu-api-tracker</a></p>
+<p>この中には、例えば『Contact Picker API』というものがあります。
+名前の通り、ネイティブアプリに登録されている電話帳にアクセスできるようになります。
+これにより、例えば『シェアしたいユーザーの情報を電話帳より取得する』ことが実現できます。</p>
+<h3 id="worker">Worker</h3>
+<p>ブラウザは、Task(Event→Scripting→Rendering→Painting)という単位で動作します。
+これは、1 つのメインスレッドのみで動作します。</p>
+<p>ブラウザにおける fps の目標値は 60fps だそうです。</p>
+<blockquote>
+<p>60fps のフレームレートがなめらかなパフォーマンスの目標値であり、あるイベントに対して必要なすべての更新に与えられた時間は 16.7 ミリ秒です。</p>
+</blockquote>
+<p><a href="https://developer.mozilla.org/ja/docs/Tools/Performance/Frame_rate">https://developer.mozilla.org/ja/docs/Tools/Performance/Frame_rate</a></p>
+<p>1Task を実行するのに 16.7 ミリ秒を超えてしまうと、ガタガタした動作になってしまいます。
+そこで、Web Worker という技術で解決しようと考えました。</p>
+<blockquote>
+<p>Web Worker は、ウェブコンテンツがスクリプトをバックグラウンドのスレッドで実行するためのシンプルな手段です。</p>
+</blockquote>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://developer.mozilla.org/ja/docs/Web/API/Web_Workers_API/Using_web_workers" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>ウェブワーカーの使用 - Web API | MDN</strong><span class="link-card-description" data-astro-cid-p7ia6262>ウェブワーカーは、ウェブコンテンツがスクリプトをバックグラウンドのスレッドで実行するためのシンプルな手段です。ワーカースレッドは、ユーザーインターフェイスを妨げることなくタスクを実行できます。さらに、 fetch() や XMLHttpRequest など API を用いて、ネットワークリクエストを行うことができます。ワーカーが生成されると、それを作成した JavaScript コードが指定するイベントハンドラーにメッセージを投稿することで、そのコードにメッセージを送ることができます（逆も同様）。</span><span class="link-card-domain" data-astro-cid-p7ia6262>developer.mozilla.org</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/cd9c29f984266adc4e163c03fff748da3b3177b4c8f2cf68a2e7518649856353.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>しかし、スレッド間のメッセージパッシングが複雑化してしまう問題があるそうです。
+その問題を、さらに解決するため、GoogleChromeLabs は、comlink なるライブラリを開発しました。</p>
+<blockquote>
+<p>Comlink makes WebWorkers enjoyable. Comlink is a tiny library (1.1kB), that removes the mental barrier of thinking about postMessage and hides the fact that you are working with workers.</p>
+</blockquote>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/GoogleChromeLabs/comlink" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - GoogleChromeLabs/comlink: Comlink makes WebWorkers enjoyable.</strong><span class="link-card-description" data-astro-cid-p7ia6262>Comlink makes WebWorkers enjoyable. Contribute to GoogleChromeLabs/comlink development by creating an account on GitHub.</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/22a4e367de1d05ea46aba53c04b5077e95710919acb887f2e0b43b195abd4d43.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>Web Worker におけるメッセージパッシングの複雑さが comlink によって減少するそうです。</p>
+<p>※ atomics.wait() atomics.notify()の話もありました。</p>
+<h2 id="how-to-distribute-your-web-app-インストール可能なウェブアプリ">How to Distribute Your Web App? 「インストール」可能なウェブアプリ</h2>
+<p>Speaker: 宍戸 俊哉さん<br>
+タイトル通り、Web アプリをどのようにして配布するのかというテーマで、
+様々な手段の紹介をされていました。</p>
+<h3 id="pwa">PWA</h3>
+<p>Web 好きならご存知の Progressive Web App (PWA)のお話です。
+Web アプリに対して、よくある PWA 機能は次のとおりです。</p>
+<ul>
+<li>オフラインで閲覧</li>
+<li>Push 通知</li>
+<li>フルスクリーン</li>
+</ul>
+<p>PWA は、Web アプリでありながら、ネイティブアプリにとても近い存在に位置しています。</p>
+<p>例えば、サンタトラッカーという Web アプリがとても良い例です。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://santatracker.google.com/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Google Santa Tracker</strong><span class="link-card-description" data-astro-cid-p7ia6262>Explore, play and learn with Santa&#39;s elves all December long</span><span class="link-card-domain" data-astro-cid-p7ia6262>santatracker.google.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/37eb334f41c23040575d9fe3a910771097854328b271a6cd10cd8cffa1644c88.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>ソースコードも公開されており、PWA として良い参考例になります。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/google/santa-tracker-web" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - google/santa-tracker-web: The source code to Santa Tracker&#39;s website, by Google</strong><span class="link-card-description" data-astro-cid-p7ia6262>The source code to Santa Tracker&#39;s website, by Google - google/santa-tracker-web</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/5fea5e6a630013a86386fd33b020f28cebecf39fc35cef81f7b4f5ca844184fa.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>この Web アプリを『ホーム画面に追加』し、その追加されたアプリを起動してみて下さい。
+ネイティブアプリと似たユーザー体験ができるはずです。</p>
+<h3 id="ブラウザのブックマークで良いのでは">ブラウザのブックマークで良いのでは</h3>
+<p>わざわざ『ホーム画面に追加』しなくても、ブックマークを使えばよいのでは？
+という議論がありました。
+話の主となっていたのは、モバイルファーストというキーワードでした。
+現在、モバイルからのブックマーク利用率はとても小さいみたいですが、
+『え？普通に利用しているけど』と反感してしまいました。私が遅れているのでしょうか。
+今の時代、『ホーム画面に追加』が多いのでしょうか。少し疑問です。</p>
+<h3 id="インストールを促す手段">インストールを促す手段</h3>
+<p>PWA をインストールしてもらう場合、Mini-infobar というもので誘導します。
+ただ、この Mini-infobar はヘルパーとして使われるため、別途 UI を用意する必要があるそうです。</p>
+<blockquote>
+<p>The mini-infobar is only meant as a helper, and it will go away in the future.</p>
+</blockquote>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://developers.google.com/web/fundamentals/app-install-banners/promoting-install-mobile" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Muster für die Förderung der PWA-Installation | Articles | web.dev</strong><span class="link-card-description" data-astro-cid-p7ia6262>Installation progressiver Web-Apps und Best Practices</span><span class="link-card-domain" data-astro-cid-p7ia6262>developers.google.com</span></span></a></div>
+<p>ただ、既にネイティブアプリがある場合、PWA のインストール要求したくありません。
+そんなときは、『既にネイティブアプリをインストールしているかどうか』判断する仕組みが既にあるそうです。(origin trials)</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://web.dev/get-installed-related-apps/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>آیا برنامه شما نصب شده است؟ Get Installed Related Apps API به شما خواهد گفت! | Capabilities | Chrome for Developers</strong><span class="link-card-description" data-astro-cid-p7ia6262>Get Installed Related Apps API یک API پلت فرم وب است که به شما امکان می دهد بررسی کنید که آیا برنامه وب پیشرو (PWA)، برنامه Android یا برنامه Universal Windows Platform (UWP) روی دستگاه فعلی نصب شده است یا خیر.</span><span class="link-card-domain" data-astro-cid-p7ia6262>web.dev</span></span></a></div>
+<h3 id="desktop-pwa">Desktop PWA</h3>
+<p>モバイルだけでなく、Desktop にも PWA を適用できます。</p>
+<p>先程紹介したサンタトラッカーは、Desktop PWA にも対応しています。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://santatracker.google.com/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Google Santa Tracker</strong><span class="link-card-description" data-astro-cid-p7ia6262>Explore, play and learn with Santa&#39;s elves all December long</span><span class="link-card-domain" data-astro-cid-p7ia6262>santatracker.google.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/37eb334f41c23040575d9fe3a910771097854328b271a6cd10cd8cffa1644c88.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>アドレスバーにある+ボタンよりインストールできます。</p>
+<h3 id="trusted-web-activities-twa">Trusted Web Activities (TWA)</h3>
+<blockquote>
+<p>Trusted Web Activity は、Android アプリ内で Chrome ブラウザを全画面で実行します。</p>
+</blockquote>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://developers-jp.googleblog.com/2019/03/trusted-web-activity.html" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Trusted Web Activity のご紹介</strong><span class="link-card-description" data-astro-cid-p7ia6262>Trusted Web Activity（TWA）を使って Android アプリ内で Chrome ブラウザを全画面表示すれば、ウェブコンテンツをアプリそのもののように提供することができます。</span><span class="link-card-domain" data-astro-cid-p7ia6262>developers-jp.googleblog.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/6ed17f193a5d262c9016897b3fc94c31852767fa41073a00efe08ad19d49ac52.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>Android アプリでも、PWA が実現できるみたいです。</p>
+<blockquote>
+<p>TWA は、Android アプリの全画面ウェブ コンテンツで WebView では利用できない Chrome 機能を使いたい場合や、Chrome ブラウザとオリジン ストレージを共有することでユーザーのナビゲーションが便利になる場合などに適しています。</p>
+</blockquote>
+<p>私は Android ユーザーはないので、GooglePlay からアプリをダウンロードできません。</p>
+<ul>
+<li>Rakuten Pasha</li>
+<li>OYO Rooms</li>
+</ul>
+<p>のようなものが TWA 対応しているそうです。
+会社内で使うアプリ(勤怠, 経費, etc)を、TWA として配信することも１つの使い道と紹介されていました。</p>
+<p>TWA の開発には、次のライブラリが便利だそうです。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/GoogleChromeLabs/llama-pack" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - GoogleChromeLabs/bubblewrap: Bubblewrap is a Command Line Interface (CLI) that helps developers to create a Project for an Android application that launches an existing Progressive Web App (PWAs) using a Trusted Web Activity.</strong><span class="link-card-description" data-astro-cid-p7ia6262>Bubblewrap is a Command Line Interface (CLI) that helps developers to create a Project for an Android application that launches an existing Progressive Web App (PWAs) using a Trusted Web Activity. ...</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/7dc08ff0be8bad6a38ec11414d0930980a32b315cefa4880fe6d76dd2d196f84.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<h3 id="web-packaging">Web Packaging</h3>
+<p>PWA や Destop PWA, TWA といったもので、様々なところから Web アプリを
+配布する手段が増えました。では、オフラインの場合はどうでしょうか。
+その場合は、Web Packaging の Web Bundles が使えます。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/WICG/webpackage" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - WICG/webpackage: Web packaging format</strong><span class="link-card-description" data-astro-cid-p7ia6262>Web packaging format. Contribute to WICG/webpackage development by creating an account on GitHub.</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span></a></div>
+<p>Web Packaging には、大きく２つのものが含まれています。</p>
+<ul>
+<li>Signed HTTP exchanges</li>
+<li>Web Bundles</li>
+</ul>
+<p>前者は、AMP ページの URL を google ホストから元のホストへ戻す際に有効だそうです。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://amp.dev/documentation/guides-and-tutorials/optimize-and-measure/signed-exchange/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Serve AMP using signed exchanges</strong><span class="link-card-domain" data-astro-cid-p7ia6262>amp.dev</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/59a145258b469c14517106056d7e05e1b01735491660d6874050bb4edaccd0e5.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>後者は、Web のアプリケーションを人まとまりにし、オフライン上で提供することができるそうです。</p>
+<p><a href="https://www.youtube.com/watch?v=xAujz66la3Y">https://www.youtube.com/watch?v=xAujz66la3Y</a></p>
+<p>※ chrome canary フラグを有効化する必要あり</p>
+<h2 id="yearly-web-2019">Yearly Web 2019</h2>
+<p>Speaker: Jxck さん<br>
+2019 に起きた Web に関する Topic をざっくりと紹介されていました。
+<a href="https://blog.jxck.io">ご本人のブログ</a>に、詳細が載っていますので、こちらでは項目だけリストアップします。</p>
+<table>
+<thead>
+<tr>
+<th>Topics</th>
+<th>補足</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dark Mode, High Contrast Mode</td>
+<td></td>
+</tr>
+<tr>
+<td>portal tag</td>
+<td>画面遷移を CSS でアレンジするアレ。まだバグが多い</td>
+</tr>
+<tr>
+<td>WebAssembly</td>
+<td></td>
+</tr>
+<tr>
+<td>WebAuthN</td>
+<td>Authenticator を使った認証 API</td>
+</tr>
+<tr>
+<td>ES2019</td>
+<td>nullish coalescing/ optional chaining</td>
+</tr>
+<tr>
+<td>Intelligent Tracking Prevention</td>
+<td>合意のないトラッキングはダメ!ゼッタイ!</td>
+</tr>
+<tr>
+<td>Project Fugu</td>
+<td></td>
+</tr>
+<tr>
+<td>DNS over HTTPS/TLS</td>
+<td>DNS クエリも暗号化</td>
+</tr>
+<tr>
+<td>Edge Chromium</td>
+<td></td>
+</tr>
+<tr>
+<td>WebPackaging</td>
+<td></td>
+</tr>
+<tr>
+<td>WebTransport WebCodecs</td>
+<td>ゲームで役立つ?</td>
+</tr>
+<tr>
+<td>WebComponents v0 → v1</td>
+<td></td>
+</tr>
+<tr>
+<td>Same Site Cookie Lax by default</td>
+<td>Cookie を同じサイトでしか送られなくする</td>
+</tr>
+<tr>
+<td>TLS 1.0/1.1 → 1.2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="perspective-of-angular-in-2020">Perspective of Angular in 2020</h2>
+<p>Speaker:稲富 駿さん</p>
+<p>セッション内容は、Angular における 2019 年のアップデート内容と、2020 年とその先の未来についてです。</p>
+<p>以下を要チェック！</p>
+<ul>
+<li><a href="https://dev.to/angular-jp">dev.to/angular-jp</a></li>
+<li><a href="https://community.angular.jp/">community.angular.jp</a></li>
+</ul>
+<p>ちなみに、私は Augular の v2 で止まっています。（笑）</p>
+<h3 id="updates-in-2019">Updates in 2019</h3>
+<p>Angular の価値(values)は、</p>
+<ul>
+<li>Apps That users to use</li>
+<li>Apps That developers to use</li>
+<li>Community where everyone feels welcome</li>
+</ul>
+<p>という 3 点あるそうです。私にとっては、v2 へのアップデートで大変つらい記憶がありますが…。</p>
+<p>2019 年,2020 年における Angular のバージョンは、</p>
+<ul>
+<li>2019-05
+<ul>
+<li>v7.x</li>
+<li>v8.x</li>
+</ul>
+</li>
+<li>2020-Q1
+<ul>
+<li>v9.x</li>
+</ul>
+</li>
+<li>2020-Q3
+<ul>
+<li>v10.x</li>
+</ul>
+</li>
+</ul>
+<p>こうみると、メジャーアップデートの更新がとても早いですね。
+追いつくのが大変そうです。</p>
+<h4 id="v7x">v7.x</h4>
+<ul>
+<li>Size Budgets by default
+<ul>
+<li>バンドル時のサイズを制限する機能</li>
+<li>パフォーマンス向上を期待</li>
+</ul>
+</li>
+<li>CDK Drag&amp;Drop
+<ul>
+<li>手軽に Drag&amp;Drop を実行可能</li>
+</ul>
+</li>
+<li>Virtual Scroll
+<ul>
+<li>画面に見えているものだけ DOM 構築される</li>
+<li>パフォーマンス向上を期待</li>
+</ul>
+</li>
+<li>Bazel
+<ul>
+<li>gulp のようなビルドシステム</li>
+<li>Opt-in support</li>
+</ul>
+</li>
+</ul>
+<h4 id="v8x">v8.x</h4>
+<ul>
+<li>Differential Loading by Default
+<ul>
+<li>ブラウザによって、polyfill の量をコントロール</li>
+<li>レガシーの部分はそのまま。モダンブラウザの polyfill の量が削減</li>
+<li>パフォーマンス向上を期待</li>
+</ul>
+</li>
+<li>Dynamic Import for Lazy Loading</li>
+<li>Support Module Web Worker</li>
+<li>ng deploy
+<ul>
+<li>production build していない deploy が多くなかった。</li>
+<li>かならず –prod となる。</li>
+</ul>
+</li>
+</ul>
+<p>主にパフォーマンス向上に取り組んだ 1 年だったそうです。
+Angular は All-in-One なフレームワークなため、どうしてもアプリケーションのコード量が
+他フレームワークに比べると多いと思います。そうすると、アプリケーションを読み込む際に、
+必要以上にロードされ、パフォーマンスが問題視されていたのでしょうか。</p>
+<h3 id="roadmap-2020">Roadmap 2020</h3>
+<p>2020 年の Angular はどんなものになるのか、紹介されていました。</p>
+<h4 id="v9x">v9.x</h4>
+<ul>
+<li>Ivy by Default
+<ul>
+<li>Ivy は、angular の次世代コンパイラだそうです</li>
+</ul>
+</li>
+<li>CDK Clipboard API</li>
+<li>CDK Testing Harness
+<ul>
+<li>コンポーネントのテストをより抽象化</li>
+<li>await 処理が簡単になった</li>
+</ul>
+</li>
+<li>@angular/components</li>
+<li>Strict Type -checking in templates</li>
+</ul>
+<p>2019 年はパフォーマンスというユーザーのための取り組みで、
+2020 年は開発者向けの取り組みが多いという印象でした。</p>
+<h3 id="imagine-the-future">Imagine the Future</h3>
+<p>今までの Angular は、エンタープライズ向けのアプリや、
+小規模のアプリに使われていました。</p>
+<p>次は、Billion のユーザ向けアプリをターゲットにするそうです。
+そのためには、そのアプリに寄り添った機能提供ができるようにと考えているみたいです。
+例えば、SEO やアクセシビリティ、国際化といった観点です。</p>
+<h2 id="終わりに">終わりに</h2>
+<p>Web の進化は早いなと実感した濃い一日でした。
+吸収しすぎて、消化が追いつかないですね、ワクワクが止まらないです。</p>
+<p>GDE の方々は、どの方も専門領域がとても詳しく、かつ、説明の仕方が上手という印象を持ちました。
+私も GDE になってみたいので、得意分野を見つけるところから始めようと思います。</p>
+<p>また来年 GDG イベントありましたら、参加したいなと思います！</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>レポート</li><li>Google</li><li>ブラウザ</li></ul></footer></article></main></body></html>

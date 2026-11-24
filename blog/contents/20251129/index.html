@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>StorybookのcomposeStoryとVitestのtoMatchScreenshotを組み合わせたVRT</title><meta name="description" content="Web フロントエンドの UI 開発では、私の中では Storybook は、ほぼ必須なツールです。UI カタログとして使うだけでなく、 **ビジュアルリグレッションテスト（VRT）** にも活用したいと常々思っています。"><meta name="keywords" content="フロントエンド,テスト"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">181</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-11-29"><span class="visually-hidden">2025年11月29日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">29</span></span></time></p></div><div class="notebook-heading"><h1>StorybookのcomposeStoryとVitestのtoMatchScreenshotを組み合わせたVRT</h1></div></header><div class="notebook-body"><p>Web フロントエンドの UI 開発では、私の中では Storybook は、ほぼ必須なツールです。<br>
+UI カタログとして使うだけでなく、 <strong>ビジュアルリグレッションテスト（VRT）</strong> にも活用したいと常々思っています。</p>
+<p>VRT が必要になる場面としては、たとえば次のようなケースがあります。</p>
+<ul>
+<li>共通コンポーネントのデザイン修正後、依存コンポーネントの崩れを検知したい</li>
+<li>デザイントークンやテーマ変更の影響範囲を確認したい</li>
+<li>ライブラリアップデート時にデザイン差分を確認したい</li>
+</ul>
+<p>Storybook の以下のドキュメントでは、Visual Tests は Chromatic の利用が紹介されています。</p>
+<ul>
+<li><a href="https://storybook.js.org/docs/writing-tests/visual-testing">Visual tests | Storybook docs</a></li>
+</ul>
+<p>ただ、さまざまな理由から Chromatic に依存したくないこともあります。</p>
+<h2 id="vitest-の-browser-mode-と-tomatchscreenshot">Vitest の Browser Mode と toMatchScreenshot</h2>
+<p>ここで役に立つのが、Vitest に追加された Browser Mode です。<br>
+ヘッドレスブラウザ（Chromium など）上での UI テストが可能になりました。</p>
+<ul>
+<li><a href="https://vitest.dev/guide/browser">Browser Mode | Guide | Vitest</a></li>
+</ul>
+<p>さらに、 <code>toMatchScreenshot</code> により、スクリーンショットを比較する VRT ができるようになりました。</p>
+<ul>
+<li><a href="https://vitest.dev/guide/browser/visual-regression-testing.html">Visual Regression Testing | Vitest</a></li>
+</ul>
+<h2 id="storybook-の-composestory-と組み合わせる">Storybook の composeStory と組み合わせる</h2>
+<p>Storybook には <code>composeStory</code>（および <code>composeStories</code>）というAPIがあり、<br>
+Storybook の Story オブジェクトをテストコード内で利用できます。</p>
+<ul>
+<li><a href="https://storybook.js.org/docs/writing-tests/integrations/stories-in-unit-tests">Stories in unit tests | Storybook docs</a></li>
+</ul>
+<p>これを使うことで、</p>
+<ul>
+<li>Storybook に定義した UI 状態（Story）</li>
+<li>Vitest のスクリーンショット比較（toMatchScreenshot）</li>
+</ul>
+<p>をそのままつなげて、Chromatic なしで Storybook の Story を VRT できるようになります。</p>
+<h2 id="実際に対応したコミット">実際に対応したコミット</h2>
+<p>実際にこの方法を試したコミットはこちらです。</p>
+<ul>
+<li><a href="https://github.com/silverbirder/fequest/commit/13a331b029a406781d500f1ce88a26cf924b3918">https://github.com/silverbirder/fequest/commit/13a331b029a406781d500f1ce88a26cf924b3918</a></li>
+</ul>
+<p>上記コミットには、Vitest 側の不具合修正を早めに取り込みたかったため、patch を当てています。</p>
+<ul>
+<li>参考: <a href="https://github.com/vitest-dev/vitest/issues/8853">https://github.com/vitest-dev/vitest/issues/8853</a></li>
+</ul>
+<p>使用した環境は次のとおりです。</p>
+<ul>
+<li><code>@storybook/react-vite</code></li>
+<li><code>vitest-browser-react</code></li>
+</ul>
+<p>当初は <code>@storybook/nextjs-vite</code> で試していたものの、Next.js の <code>next/navigation</code> 周りの mock エラーに苦戦し、一旦断念しました。<br>
+再挑戦すれ解決できる可能性はありますが、今回は <code>@storybook/react-vite</code> を使用しています。</p>
+<h2 id="サンプルコンポーネント">サンプルコンポーネント</h2>
+<pre><code class="language-tsx">// my-input.tsx
+import { Input } from "&lt;path to shadcn input component&gt;";
+import { ComponentProps } from "react";
+
+type Props = ComponentProps&lt;typeof Input&gt;;
+
+export const MyInput = ({ ...rest }: Props) =&gt; {
+  return &lt;Input {...rest} /&gt;;
+};
+</code></pre>
+<h2 id="storybook-側のファイル">Storybook 側のファイル</h2>
+<pre><code class="language-tsx">// my-input.stories.tsx
+import type { Meta, StoryObj } from "@storybook/react-vite";
+
+import { MyInput } from "./my-input";
+
+const meta = {
+  component: MyInput,
+} satisfies Meta&lt;typeof MyInput&gt;;
+
+export default meta;
+type Story = StoryObj&lt;typeof meta&gt;;
+
+export const Default: Story = {};
+</code></pre>
+<h2 id="vitest-の-vrt-テストコード">Vitest の VRT テストコード</h2>
+<pre><code class="language-tsx">// my-input.spec.tsx
+import { composeStories } from "@storybook/react-vite";
+import { describe, expect, it } from "vitest";
+import { render } from "vitest-browser-react";
+
+import * as stories from "./my-input.stories";
+
+const { Default } = composeStories(stories);
+
+describe("MyInput", () =&gt; {
+  it("matches Default story screenshot", async () =&gt; {
+    const { getByTestId } = await render(
+      &lt;div data-testid="test"&gt;
+        &lt;Default /&gt;
+      &lt;/div&gt;,
+    );
+
+    await expect(getByTestId("test")).toMatchScreenshot();
+  });
+});
+</code></pre>
+<p>このテストを実行すると、Default Story のスクリーンショットが保存され、<br>
+次回以降はその差分が検知されるようになります。</p>
+<h2 id="これで-storybook-の-story-を全部-vrt-できる">これで Storybook の Story を全部 VRT できる</h2>
+<p><code>composeStories</code> と <code>toMatchScreenshot</code> を組み合わせることで、</p>
+<ul>
+<li>Storybook の Story をそのままテストに読み込む</li>
+<li>Story 全パターンに対してスクリーンショット比較を行う</li>
+<li>Chromatic なしで VRT ができる</li>
+</ul>
+<p>という、シンプルな構成で VRT ができそうです。<br>
+Storybook と Vitest という、どちらもメジャーな OSS だけで実現できるため、外部依存を減らせる点も魅力的です。</p>
+<h2 id="追記">追記</h2>
+<p><code>@storybook/nextjs-vite</code> でもスクリーンショット VRT が動作することを確認できました。
+ポイントは、以下で紹介されている <code>vite-plugin-storybook-nextjs</code> を導入する必要があったことです。</p>
+<ul>
+<li><a href="https://storybook.js.org/docs/api/portable-stories/portable-stories-vitest">Portable stories in Vitest | Storybook docs</a></li>
+</ul>
+<p>私の環境では monorepo を採用しているため、<code>vite.config.ts</code> に次のような設定を追加しました。</p>
+<pre><code class="language-ts">// vite.config.ts
+import nextjs from "vite-plugin-storybook-nextjs";
+
+export default defineConfig({
+  plugins: [nextjs({dir: "../../apps/user"})],
+});
+</code></pre>
+<p>テストの書き方ですが、上記の紹介した形式だと、以下のエラーが発生しました。</p>
+<blockquote>
+<p>SB_FRAMEWORK_NEXTJS_0002 (NextjsRouterMocksNotAvailable): Tried to access router mocks from “next/router” but they were not created yet. You might be running code in an unsupported environment.</p>
+</blockquote>
+<p>そこで、以下のようなテストの書き方に変更したら動作しました。</p>
+<pre><code class="language-tsx">// my-input.spec.tsx
+import { composeStories } from "@storybook/react-vite";
+import { describe, expect, it } from "vitest";
+import { render } from "vitest-browser-react";
+
+import * as stories from "./my-input.stories";
+
+const { Default } = composeStories(stories);
+
+describe("MyInput", () =&gt; {
+  it("matches Default story screenshot", async () =&gt; {
+    await Default.run();
+
+    await expect(document.body).toMatchScreenshot();
+  });
+});
+</code></pre>
+<p>修正したコミットは以下になります。</p>
+<ul>
+<li><a href="https://github.com/silverbirder/fequest/commit/d8ef4ddbb52ab78d954f1db2d95b727d6f46d81c">https://github.com/silverbirder/fequest/commit/d8ef4ddbb52ab78d954f1db2d95b727d6f46d81c</a></li>
+</ul>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>フロントエンド</li><li>テスト</li></ul></footer></article></main></body></html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>単体テストを全通り書くんじゃない！</title><meta name="description" content="AIの進化によって、プロダクションコードに対するテストコードは、以前と比べて格段に書きやすくなったと感じています。 単体テストに関する基本的なお作法については、以前に以下の記事で整理しました。 興味があれば、参考として読んでもらえると嬉しい"><meta name="keywords" content="テスト"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">222</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2026-01-09"><span class="visually-hidden">2026年1月9日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2026</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">01</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">09</span></span></time></p></div><div class="notebook-heading"><h1>単体テストを全通り書くんじゃない！</h1></div></header><div class="notebook-body"><p>AIの進化によって、プロダクションコードに対するテストコードは、以前と比べて格段に書きやすくなったと感じています。</p>
+<p>単体テストに関する基本的なお作法については、以前に以下の記事で整理しました。<br>
+興味があれば、参考として読んでもらえると嬉しいです。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://zenn.dev/silverbirder/articles/e62ad1be9cdb40" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>単体テストコードのお作法</strong><span class="link-card-domain" data-astro-cid-p7ia6262>zenn.dev</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/f4157453e9b23612b90c71981e0349e3f987bb24e8312f43111a83120f582a88.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>保守や運用の観点で見ると、プロダクションコードを修正した際に、既存のテストが壊れ、そのテストを修理しながら既存機能を担保していく、という点で、単体テストは有効に機能します。</p>
+<p>一方で、テストカバレッジ100%のように、すべての分岐や条件を網羅するテストを書くことについては、費用対効果の面で疑問を感じることもあります。<br>
+どこかで「おおよそ75%程度を目安にすればよい」という話を聞いた記憶もあり、現実的な落とし所を探る必要があるように思います。</p>
+<p>AIの力によって、さまざまなパターンのテストを比較的簡単に書けるようになった今だからこそ、どこまでテストを書くべきか、という点で迷いが生まれています。</p>
+<h2 id="単体テストを書いていなかった頃の開発体験">単体テストを書いていなかった頃の開発体験</h2>
+<p>今から10年ほど前、SIerとして業務システムの新規開発に携わっていた頃、単体テストコードを書かずに開発を進めた経験があります。<br>
+当時はPHPを用いてWebサービスを構築しており、開発プロセスとしてはV字モデルを採用していました。</p>
+<p>実装した機能は、画面を手動で操作して期待通りに動作することを確認し、その後Subversionに登録して次の機能実装へ進みます。<br>
+すべての機能実装が終わった段階で、Excelにまとめられたテスト仕様書をもとに、自分が実装していない画面に対して、ひたすら手動で確認作業を行っていました。</p>
+<p>テスト中に不具合が見つかれば修正を行い、再び同じテストをやり直します。<br>
+このサイクルを繰り返し、ようやく納期に間に合わせて成果物を完成させ、本番環境へ反映し、最終的に発注元に操作してもらう、という流れでした。</p>
+<p>手動テストは人が行う以上、どうしても見落としが発生します。<br>
+また、修正のたびに同じ操作を繰り返す必要があり、規模が大きくなるほど確認項目も増え、負担が大きくなっていきました。私が携わったプロジェクトでは、プロジェクトの関係のないメンバーを何十名もかき集めて、20人近くで みんなで手動テストしていたこともあります。</p>
+<h2 id="テストコードを書く理由の根っこ">テストコードを書く理由の根っこ</h2>
+<p>このような経験から、手動テストを自動化したいという思いが、自分の中でテストコードを書く動機として根付いています。</p>
+<p>テストと一口に言っても、いわゆるテストピラミッドの考え方のように、単体テスト、統合テスト、E2Eテストなど、役割は分かれます。<br>
+それでも、根底にある目的は昔から変わっていないと感じています。</p>
+<ul>
+<li>手動テストにかかる時間を減らすこと</li>
+<li>人による確認ミスを減らすこと</li>
+</ul>
+<h2 id="どこまでテストを書くかという判断">どこまでテストを書くかという判断</h2>
+<p>単体テストですべてのパターンを網羅することよりも、もし手動で確認するとしたら、どのような操作を行うかを意識しながらテストを書く方が、自分の好みに合っています。</p>
+<p>数値のバリデーションのように、境界で挙動が変わるものについては、境界値を意識したテストを書きたくなりますし、プロパティベーステストのような手法を取り入れるのも自然だと思います。<br>
+また、複数の状態の組み合わせによって出力が変わるロジックについては、パラメタライズドテストが有効だと感じています。</p>
+<p>個人的には、循環的複雑度が高そうなロジックについては、意図的にテストケースを厚めに書きます。<br>
+一方で、単純な処理については、代表的な1パターンを確認できれば十分と考え、その時点でテストを終えることも少なくありません。</p>
+<p>サンプルコードを示さず、考え方だけを書き連ねましたが、今の自分のテストに対するスタンスは、このようなものです。最後までお読みいただきありがとうございました。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>テスト</li></ul></footer></article></main></body></html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Fequestを作る — 機能リクエストを見える化するサービス</title><meta name="description" content="久しぶりにWebアプリを開発します。これまでの成果物は、以下にまとめています。"><meta name="keywords" content="成果物,機能リクエスト"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">153</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-11-01"><span class="visually-hidden">2025年11月1日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">01</span></span></time></p></div><div class="notebook-heading"><h1>Fequestを作る — 機能リクエストを見える化するサービス</h1></div></header><div class="notebook-body"><h2 id="はじめに">はじめに</h2>
+<p>久しぶりにWebアプリを開発します。<br>
+これまでの成果物は、以下にまとめています。</p>
+<ul>
+<li><a href="https://sites.google.com/view/silverbirders-services">silverbirder’s services</a></li>
+</ul>
+<p>今回のテーマは、「機能リクエストを投稿・閲覧できるWebアプリ」です。</p>
+<h2 id="なぜ作るのか">なぜ作るのか</h2>
+<p>個人開発では、MVPとして小さく作り、少しずつ機能を追加していくことが多いです。<br>
+しかし、開発後に「やり残した機能」がそのまま放置されることもあります。</p>
+<p>ユーザーからすると、「この機能は今後追加されるのか？」「それとも実装予定がないのか？」がわかりません。<br>
+そこで、ユーザーが直接リクエストを投稿でき、開発者やユーザーが一覧で確認できる仕組みを作ろうと思いました。</p>
+<h2 id="技術構成">技術構成</h2>
+<p>今回は、 <strong>管理画面とユーザー画面の2面構成</strong> に挑戦します。<br>
+仕事ではよく使う構成ですが、個人開発ではまだ試したことがなかったので挑戦してみます。</p>
+<p>技術スタックは、使ってみたいものを優先して選びました。</p>
+<ul>
+<li><strong>Next.js 16</strong></li>
+<li><strong>Turborepo</strong> によるモノレポ構成</li>
+<li><strong>Vitest Browser Mode</strong> のテスト構成</li>
+<li><strong>Testcontainers</strong> と <strong>Cucumber</strong> によるE2Eテスト</li>
+<li><strong>tRPC</strong> と <strong>Drizzle ORM</strong> のAPI通信
+<ul>
+<li>いつも使っているお気に入り</li>
+</ul>
+</li>
+</ul>
+<p>新しい環境でセットアップしていくと、「知らなかった機能や設定」に出会えるのが楽しいですね。<br>
+このプロセス自体が勉強になります。</p>
+<h2 id="プロジェクト概要">プロジェクト概要</h2>
+<p>リポジトリは以下に公開しています。</p>
+<ul>
+<li><a href="https://github.com/silverbirder/fequest">https://github.com/silverbirder/fequest</a></li>
+</ul>
+<p>サービス名は <strong>Fequest（フィークエスト）</strong> 。<br>
+これは「Feature Request」をもとにした造語です。</p>
+<h2 id="個人開発への思い">個人開発への思い</h2>
+<p>最近はSNSなどで「個人開発×マネタイズ」や「どう広めるか」が注目されがちです。<br>
+でも、私の場合は少し違います。</p>
+<p>私の個人開発は、 <strong>「作りたいから作る」</strong> が100%。<br>
+「新しい技術に挑戦したい」「不便を解決したい」、それが動機です。<br>
+利益よりも、作ること自体が目的であり楽しみです。</p>
+<h2 id="おわりに">おわりに</h2>
+<p>もしこのプロジェクトに興味を持ってくださった方は、<br>
+GitHubリポジトリを <strong>Watch</strong> してもらえると嬉しいです。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>成果物</li></ul></footer></article></main></body></html>

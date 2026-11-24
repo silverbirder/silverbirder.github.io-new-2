@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GitHub ActionsとPull Requestを活用した、同期の自動化</title><meta name="description" content="あけまして、おめでとうございます。神社のおみくじで、人生はじめて大吉を引きました、silverbirder です。普段の業務で、FigmaのデザイントークンやAPIのスキーマファイル、i18nのメッセージファイルなどを、フロントエンドへ同期するコミュニケーションが不毛に感じています。そこで、GitHub ActionsとPull Requestを活用して、同期コミュニケーションを削減する仕組みを紹介します。"><meta name="keywords" content="DevOps,開発ツール"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">98</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2023-01-03"><span class="visually-hidden">2023年1月3日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2023</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">01</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span></span></time></p></div><div class="notebook-heading"><h1>GitHub ActionsとPull Requestを活用した、同期の自動化</h1></div></header><div class="notebook-body"><p>あけまして、おめでとうございます。神社のおみくじで、人生はじめて大吉を引きました、silverbirder です。</p>
+<p>普段の業務で、Figma のデザイントークンや API のスキーマファイル、i18n のメッセージファイルなどを、フロントエンドへ同期するコミュニケーションが不毛に感じています。そこで、GitHub Actions と Pull Request を活用して、同期コミュニケーションを削減する仕組みを紹介します。</p>
+<p>目新しい情報はないかもしれませんが、同じお困りごとを持つ人へ助けになれば、幸いです。</p>
+<h2 id="github-actions-で使用するもの">GitHub Actions で使用するもの</h2>
+<p>今回紹介する仕組みの核となるのが GitHub Actions の repository-dispatch トリガーです。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://docs.github.com/ja/rest/repos/repos?apiVersion=2022-11-28#create-a-repository-dispatch-event" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>リポジトリの REST API エンドポイント - GitHubドキュメント</strong><span class="link-card-description" data-astro-cid-p7ia6262>REST API を使って、GitHub 上のリポジトリを管理します。</span><span class="link-card-domain" data-astro-cid-p7ia6262>docs.github.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/9722ffd1d82e7c6da0f6e14fe8385057ac3f3e7afa67f3b9c9d14aec246951ce.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>このトリガーは、GitHub API を経由して、GitHub Actions のワークフローを起動することができます。そのため、次のように 異なるリポジトリでの GitHub Actions ワークフローを連携できます。</p>
+<p><a href="https://mermaid.live/edit#pako:eNp9kD1rwzAQhv-KuDmmuymeSrbSoaugXKRzLLA-erqDhJD_XslO6RCoBiGO59UrPTdw2ROMUOlbKTl6C3hmjDaZtlAlJ40nYpv2SUGW4ELBJOZDFmKD1ZyDLHr6Yiq5Bsl8fdVKnDDSS-7M9Jw9cm77_9m5M5T89Fu-FQ7TtIVHQxdyKmT-soMPtaC4Zec37pl3TCg0FF3Xgfu3q8ABInHE4JuKW09baGWRLIzt6GlGXcWCTfeGdi2f1-RgFFY6gBbfLnyYg3HGtbYp-f6m913vZvn-A1JSg1Q"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693362902/silver-birder.github.io/blog/efac2e9d6d0821370603fe52c9cac4017da30ca64df4949c264605124386e36d.png?ar=672%3A293" alt="repository_dispatchで別リポジトリのワークフローを起動する流れ" width="672" height="293" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1693362902/silver-birder.github.io/blog/efac2e9d6d0821370603fe52c9cac4017da30ca64df4949c264605124386e36d.png?ar=672%3A293 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1693362902/silver-birder.github.io/blog/efac2e9d6d0821370603fe52c9cac4017da30ca64df4949c264605124386e36d.png?ar=672%3A293 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693362902/silver-birder.github.io/blog/efac2e9d6d0821370603fe52c9cac4017da30ca64df4949c264605124386e36d.png?ar=672%3A293 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_672/q_auto/f_auto/v1693362902/silver-birder.github.io/blog/efac2e9d6d0821370603fe52c9cac4017da30ca64df4949c264605124386e36d.png?ar=672%3A293 672w" sizes="min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<p>repository-dispatch と create-pull-request は、次の GitHub Actions です。</p>
+<ul>
+<li><a href="https://github.com/peter-evans/repository-dispatch">https://github.com/peter-evans/repository-dispatch</a>
+<ul>
+<li>repository-dispatch-event を dispatch する Action</li>
+</ul>
+</li>
+<li><a href="https://github.com/peter-evans/create-pull-request">https://github.com/peter-evans/create-pull-request</a>
+<ul>
+<li>Pull Request を作成する Action</li>
+</ul>
+</li>
+</ul>
+<p>これらの GitHub Actions を使わずに <code>gh</code> などを使って代替できますが、便利なモノを使って楽をします。</p>
+<h2 id="github-リポジトリ以外からのトリガー">GitHub リポジトリ以外からのトリガー</h2>
+<p>GitHub のリポジトリ(username/other)からトリガーだけでなく、他のサービスからでもトリガーできます。例えば、Google Sheets からだと、Google Apps Script から GitHub API を呼べばよいです。</p>
+<p><a href="https://mermaid.live/edit#pako:eNplkMtqwzAQRX9l0DqmexMMgdK0i0IhW0OYSDexQK9Ko9IQ8u-V7ZYsqpU03Dm6nJvS0UD1quCzImg8W75k9mOgdrhKDNWfkMewThJnsdomDkKHCRDiQpcYLw7HMr_L_9xLjmHNWZnq6ZiRYrES83VbC3Jgj6fznEEww99HC7wbhmW5J83OkUygvZXXeqLdx9v2wemMLYlFTx2-EGSghvO0X2rRLqVCB51tkhW9IB9ofENXAekMFnSpOtfl2UYRtVEe2bM1zdBt3h5VK-Exqr5dDc5cnYxqDPcWnW0drkGrXnLFRtVkGvBXqOrP7EqbwsyV31fri_z7DxDMiec"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693362926/silver-birder.github.io/blog/207138540b3a001131d8bda0a09520285fb6b001d967242fbca20b8c8db88e0e.png?ar=856%3A293" alt="Google Sheets（GAS）からGitHub Actionsを起動する流れ" width="856" height="293" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1693362926/silver-birder.github.io/blog/207138540b3a001131d8bda0a09520285fb6b001d967242fbca20b8c8db88e0e.png?ar=856%3A293 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1693362926/silver-birder.github.io/blog/207138540b3a001131d8bda0a09520285fb6b001d967242fbca20b8c8db88e0e.png?ar=856%3A293 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693362926/silver-birder.github.io/blog/207138540b3a001131d8bda0a09520285fb6b001d967242fbca20b8c8db88e0e.png?ar=856%3A293 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1693362926/silver-birder.github.io/blog/207138540b3a001131d8bda0a09520285fb6b001d967242fbca20b8c8db88e0e.png?ar=856%3A293 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_856/q_auto/f_auto/v1693362926/silver-birder.github.io/blog/207138540b3a001131d8bda0a09520285fb6b001d967242fbca20b8c8db88e0e.png?ar=856%3A293 856w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<p>他にも、Kibela の outgoing webhook を、Server が受けて、Server が GitHub API を呼び出す方法があります。</p>
+<p><a href="https://mermaid.live/edit#pako:eNplkVtrwzAMhf-K8XPD3k0JDMYujMFgr4ah2Gpi6ttsOVsp_e9z4oxC5wcjDudIH9KZq6CRC57xq6BX-GBgTOCkZ_VBoeCLGzBJ35QIiYwyETyxoxnQwn89Y5qXxK3-mEL9IbPR0FSGz4QxZEMhnfalZjw4vDssHvS6_xvYhnR93wrBStRAuOlMrXbKN-aGIDYUllChmTGz15YKhVRwzviRfeMwhXBs-Wav-RVVMAXWMpqQPRl6LgO7f3_ZX6k7bXIEUlOHc2XoW481em2BP6hK5VUJK3YXi7VdWnadie-4w-TA6Lr_85KWvA5zKLmopcYDFEuSS3-p1uUWHyevuKBUcMfbHrZzcXEAm6uKekF7azddT3v5BVs-q2Y"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693362959/silver-birder.github.io/blog/e3da40e838b6c83226e0337b3e7e920b1eadb09c1be118fa6ab9087d0a5e35ba.png?ar=1051%3A415" alt="KibelaのWebhook経由でGitHub Actionsを起動する流れ" width="1051" height="415" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1693362959/silver-birder.github.io/blog/e3da40e838b6c83226e0337b3e7e920b1eadb09c1be118fa6ab9087d0a5e35ba.png?ar=1051%3A415 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1693362959/silver-birder.github.io/blog/e3da40e838b6c83226e0337b3e7e920b1eadb09c1be118fa6ab9087d0a5e35ba.png?ar=1051%3A415 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693362959/silver-birder.github.io/blog/e3da40e838b6c83226e0337b3e7e920b1eadb09c1be118fa6ab9087d0a5e35ba.png?ar=1051%3A415 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1693362959/silver-birder.github.io/blog/e3da40e838b6c83226e0337b3e7e920b1eadb09c1be118fa6ab9087d0a5e35ba.png?ar=1051%3A415 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1693362959/silver-birder.github.io/blog/e3da40e838b6c83226e0337b3e7e920b1eadb09c1be118fa6ab9087d0a5e35ba.png?ar=1051%3A415 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1051/q_auto/f_auto/v1693362959/silver-birder.github.io/blog/e3da40e838b6c83226e0337b3e7e920b1eadb09c1be118fa6ab9087d0a5e35ba.png?ar=1051%3A415 1051w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<p>Server は、IFTTT や Zapier のようなサービスでも良いですし、自前のサーバーでも良いでしょう。</p>
+<h2 id="自動-commit">自動 commit</h2>
+<p>schema ファイルから、型を生成したい(yarn codegen)こともあると思います。そういうときは、次のフローを追加します。</p>
+<p><a href="https://mermaid.live/edit#pako:eNp9kU9rwzAMxb-K8WmDhNGOHhZGTmO3scOuhqHYSmqI_0yWYaH0u89OOnboqA_CiN-TeHonqYNB2cmEXxm9xhcLE4FTXpQHmYPPbkBSfutEILbaRvAs3vmIJCCJyfIxD5-EMSTLgZbnnJA8OHwIlemvta8USr2tHSuD3vS_y9eFbd-v4k7gN-rMKP60rbEpAuvjxq_cNa8JgbGNeZ5bqrYTbzyhZkHTcLd72jViv38s5XC4_3fYAuRFvd2E_ua2YrCtd2x1cK7-NdtwkRRzspEOyYE1JYRTbStZbDpUsitfgyPkmZVU_lzQOuhj8Vp2TBkbmaMpVi6ZyW6EOZUumnqNty3YNd_zD41uqeo"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693362977/silver-birder.github.io/blog/84bd13ddb0d7a355068241f2f6a56fad73521f96b19930891ace4a223c2aeee0.png?ar=672%3A505" alt="コード生成後に自動コミットしてPRを作る流れ" width="672" height="505" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1693362977/silver-birder.github.io/blog/84bd13ddb0d7a355068241f2f6a56fad73521f96b19930891ace4a223c2aeee0.png?ar=672%3A505 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1693362977/silver-birder.github.io/blog/84bd13ddb0d7a355068241f2f6a56fad73521f96b19930891ace4a223c2aeee0.png?ar=672%3A505 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693362977/silver-birder.github.io/blog/84bd13ddb0d7a355068241f2f6a56fad73521f96b19930891ace4a223c2aeee0.png?ar=672%3A505 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_672/q_auto/f_auto/v1693362977/silver-birder.github.io/blog/84bd13ddb0d7a355068241f2f6a56fad73521f96b19930891ace4a223c2aeee0.png?ar=672%3A505 672w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<p>git-auto-commit-action は、変更したファイルを git commit するだけの Action です。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/stefanzweifel/git-auto-commit-action" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - stefanzweifel/git-auto-commit-action: Automatically commit and push changed files back to GitHub with this GitHub Action for the 80% use case.</strong><span class="link-card-description" data-astro-cid-p7ia6262>Automatically commit and push changed files back to GitHub with this GitHub Action for the 80% use case. - stefanzweifel/git-auto-commit-action</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/52f03216561fd85e192297416068ca5d62f60b385cb9ca6034b9775bcd78b109.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>create-pull-request だけでも、自動 commit することができます。私は、次のケースで使用しました。</p>
+<ul>
+<li>Figma の<a href="https://github.com/lukasoppermann/design-tokens">Design Tokens</a>で、Figma 上から Pull Request を作成する。
+<ul>
+<li>GitHub Actions で、style dictionary の build したものを commit したい</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-yml">on:
+  pull_request:
+    types: [opened]
+jobs:
+  update:
+    if: startsWith(github.head_ref, 'figma/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: npm ci
+      - run: npx style-dictionary build
+      - uses: stefanzweifel/git-auto-commit-action@v4
+</code></pre>
+<h2 id="preview">Preview</h2>
+<p>Figma のデザイントークンや、i18n のメッセージファイルを更新したとき、Preview できる仕組みがあると、画面の確認ができて、良いです。</p>
+<p><a href="https://mermaid.live/edit#pako:eNp9kUtLAzEUhf9KyEqhg7TShYPMqnQnLtwOSJqczgQmD29u1FL6301mFBcVs7iEw3fu8yx1MJCtTHjL8Bo7qwZSrveiPJU5-OwOoN4vSlTEVtuoPItnHkFCJTFYHvPhlRBDshzo9JgTyCuHu1CZ7tq7p1Di_95jZeBN91N8Lth03WxuBT6hM0P8ehtjU1Ssx4WfuWteExSjiXmaGqpjJ154gmZBw-Fm_bBeic3mvoTt9vbPZJHwbvEhdohTODl4TgtXGpYr6UBOWVMWe65yL0vrDr1sy9fgqPLEvez9paB1yS8nr2XLlLGSOZrS3vcdZHtUUyoqTJ3waTnWfLPLF6JHmvQ"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693362979/silver-birder.github.io/blog/77341dff8054c17e4df812bd7d2bf51737cc4e3c3ce113168e878f8030b18a31.png?ar=672%3A429" alt="PR更新をPreview環境で確認する流れ" width="672" height="429" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1693362979/silver-birder.github.io/blog/77341dff8054c17e4df812bd7d2bf51737cc4e3c3ce113168e878f8030b18a31.png?ar=672%3A429 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1693362979/silver-birder.github.io/blog/77341dff8054c17e4df812bd7d2bf51737cc4e3c3ce113168e878f8030b18a31.png?ar=672%3A429 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693362979/silver-birder.github.io/blog/77341dff8054c17e4df812bd7d2bf51737cc4e3c3ce113168e878f8030b18a31.png?ar=672%3A429 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_672/q_auto/f_auto/v1693362979/silver-birder.github.io/blog/77341dff8054c17e4df812bd7d2bf51737cc4e3c3ce113168e878f8030b18a31.png?ar=672%3A429 672w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<p>例えば、vercel や chromatic の preview です。</p>
+<ul>
+<li><a href="https://vercel.com/docs/concepts/deployments/preview-deployments">https://vercel.com/docs/concepts/deployments/preview-deployments</a></li>
+<li><a href="https://www.chromatic.com/docs/review">https://www.chromatic.com/docs/review</a></li>
+</ul>
+<h2 id="サンプルコード">サンプルコード</h2>
+<p>i18n のメッセージファイルをフロントエンドへ同期する GitHub Actions を、紹介します。</p>
+<table>
+<thead>
+<tr>
+<th>repository</th>
+<th>やること</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username/frontend</td>
+<td>i18n のメッセージファイルを利用</td>
+</tr>
+<tr>
+<td>username/message</td>
+<td>i18n のメッセージファイルを管理</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://mermaid.live/edit#pako:eNp9kk9LxDAQxb9KyGFR2CrepEgviuChJ68FmU1m22gziZNELct-d9M_6yKum0MIk_fLPCZvJ5XTKEsZ8D0hKXww0DLYhkRekKKjZDfIDS0VFR2LGkOAFmugvPN844GjUcYDRVELCKI1sUubF0bvgsnUcYCMoHFazvz1V_ykV3ez9PbUYOkq4Op33aKqqrLkRfKWWviRfIaIgpzc0uHzlevwdGlWK0mnU-hW17K8GShFPiFKmXs6KDQJniIatFOuqN-ACbRIiHnZuXS56Ty8LJizNLCp74veBx_iCf1HkIQ90-n7xg_DH4Kjb53g0WK4Z-ZLIDqUL0JRz9kyDaQzkMWuUUxGhWLUbmWuWjB6Jyd3Ug3MnZosZFlPmrcQupjIxvaZ-mYo-eBlCwjJ1zL-UeWqMlyC33IVdTjmOs5j1Ms9987Oeuw"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693363954/silver-birder.github.io/blog/253d2d7c485f079449b9bf2b259f325d45156b1d538d78bda0c158049af50dfe.png?ar=1032%3A659" alt="messageリポジトリ更新をfrontendへ同期してPRを作る流れ" width="1032" height="659" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1693363954/silver-birder.github.io/blog/253d2d7c485f079449b9bf2b259f325d45156b1d538d78bda0c158049af50dfe.png?ar=1032%3A659 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1693363954/silver-birder.github.io/blog/253d2d7c485f079449b9bf2b259f325d45156b1d538d78bda0c158049af50dfe.png?ar=1032%3A659 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693363954/silver-birder.github.io/blog/253d2d7c485f079449b9bf2b259f325d45156b1d538d78bda0c158049af50dfe.png?ar=1032%3A659 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1693363954/silver-birder.github.io/blog/253d2d7c485f079449b9bf2b259f325d45156b1d538d78bda0c158049af50dfe.png?ar=1032%3A659 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1693363954/silver-birder.github.io/blog/253d2d7c485f079449b9bf2b259f325d45156b1d538d78bda0c158049af50dfe.png?ar=1032%3A659 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1032/q_auto/f_auto/v1693363954/silver-birder.github.io/blog/253d2d7c485f079449b9bf2b259f325d45156b1d538d78bda0c158049af50dfe.png?ar=1032%3A659 1032w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<pre><code class="language-yml">## &lt;username/message&gt;/.github/workflows/main.yml
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "i18n/**"
+jobs:
+  dispath:
+    name: Setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: peter-evans/repository-dispatch@v1
+        with:
+          repository: username/frontend
+          token: ${{ secrets.PAT }}
+          event-type: create-pull-request-message
+          client-payload: '{"ref": "${{ github.ref }}"}'
+</code></pre>
+<pre><code class="language-yml">## &lt;username/frontend&gt;/.github/workflows/main.yml
+on:
+  repository_dispatch:
+    types: [create-pull-request-message]
+jobs:
+  createPullRequest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          repository: username/message
+          ref: ${{ github.event.client_payload.ref }}
+          path: "tmp/"
+      - run: |
+          mv tmp/message.json src/message.json
+          rm -rf tmp
+      - uses: actions/setup-node@v3
+      - run: npm ci
+      - run: yarn generate:message
+      - uses: peter-evans/create-pull-request@v4
+</code></pre>
+<h2 id="受け入れテストをマークダウンで管理">受け入れテストをマークダウンで管理</h2>
+<p>安心してマージできるように、受け入れテストを整備しておきましょう。</p>
+<p>具体的には、<a href="https://cucumber.io/">cucumber</a>で仕様書を<a href="https://github.com/cucumber/gherkin/blob/main/MARKDOWN_WITH_GHERKIN.md">Markdown(MARKDOWN_WITH_GHERKIN)</a>で管理します。</p>
+<p>例えば、次のような仕様書です。</p>
+<pre><code class="language-markdown">## Feature: Staying alive
+
+This is about actually staying alive,
+not the [Bee Gees song](https://www.youtube.com/watch?v=I_izvAbhExY).
+
+## Rule: If you don't eat you die
+
+![xkcd](https://res.cloudinary.com/silverbirder/image/upload/v1693363969/silver-birder.github.io/blog/lunch_2x.png?ar=604%3A801)
+
+`@important` `@essential`
+
+### Scenario Outline: eating
+
+- Given there are &lt;start&gt; cucumbers
+- When I eat &lt;eat&gt; cucumbers
+- Then I should have &lt;left&gt; cucumbers
+
+#### Examples:
+
+| start | eat | left |
+| ----- | --- | ---- |
+| 12    | 5   | 7    |
+| 20    | 5   | 15   |
+</code></pre>
+<p>この Markdown も、GitHub Actions で Pull Request するフローに載せましょう。新しいシナリオが追加された場合、(cucumber のライブラリ上) テストコードが存在しないとエラーとなります。</p>
+<p>機能で担保したいシナリオを Markdown で管理していくことで、次のメリットがあります。</p>
+<ul>
+<li>仕様が明確になる</li>
+<li>CI で受け入れテスト(cucumber)を動かし成功すると、仕様を満たす状態 となる</li>
+</ul>
+<h2 id="ハマったこと">ハマったこと</h2>
+<h3 id="github-actions-bot-の-commit-で他のワークフローをトリガーできない">GitHub Actions Bot の commit で、他のワークフローをトリガーできない</h3>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/orgs/community/discussions/27028" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Github actions workflow not triggering with tag push · community · Discussion #27028</strong><span class="link-card-description" data-astro-cid-p7ia6262>I have a workflow with 2 actions. The first action is triggered when a push is made to the branch and pushes new git tag and the second action is triggered when after a new tag is pushed. However, ...</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/a5e0a159a0185779bc9d7097eff91e5055b4177bc0870cb0c50555426964f507.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>token に、PAT を渡すように変更すれば解決します。</p>
+<p>他の解決策としては、workflow_run のトリガーを使えます。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#workflow_run" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>ワークフローをトリガーするイベント - GitHubドキュメント</strong><span class="link-card-description" data-astro-cid-p7ia6262>GitHubで特定のアクティビティが発生したとき、スケジュールされた時刻、またはGitHub外のイベントが発生したときに実行されるようにワークフローを構成できます。</span><span class="link-card-domain" data-astro-cid-p7ia6262>docs.github.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/a21f56948d47343c9c2b1a6192b1e8df3641cc259fe29aa87394a03c81afa0a4.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>ただし、デフォルトブランチでのみ動作します。</p>
+<h3 id="repository-dispatch-の-post-はjson-で制限がある">repository-dispatch の POST は、JSON で制限がある</h3>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/peter-evans/repository-dispatch#client-payload" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - peter-evans/repository-dispatch: A GitHub action to create a repository dispatch event</strong><span class="link-card-description" data-astro-cid-p7ia6262>A GitHub action to create a repository dispatch event - peter-evans/repository-dispatch</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span></a></div>
+<p>同期したいファイルを json に変換して、dispatch する event ペイロードに含めようと、当初考えていました。ただ、次の懸念があったため、却下しました。</p>
+<ul>
+<li>json にしてしまうとコメントが消える</li>
+<li>JSON のバイトサイズに上限がある</li>
+</ul>
+<p>そこで、同期したいリポジトリの github.ref を event ペイロードに含めて、event を受けた側がソースコードをチェックアウトして使う方針に切り替えました。</p>
+<h2 id="終わりに">終わりに</h2>
+<p>GitHub Actions と Pull Request を活用することで、自動的にアプリケーションのソースコードを更新する仕組みを簡単に組み立てられます。
+このような Ops があれば、Slack でのメッセージラリーをする回数が減らせられます。ぜひ、ご活用ください。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>DevOps</li><li>開発ツール</li></ul></footer></article></main></body></html>

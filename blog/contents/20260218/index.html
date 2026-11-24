@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>iframeの難しさ</title><meta name="description" content="最近、iframeを使っています。 クライアントサイドで埋め込む想定で、iframeを使おうとしています。 色々と苦労したことがあったので、書いて残しておこうと思います。 レスポンスヘッダー 前提として、ウェブアプリケーションをプロダクショ"><meta name="keywords" content="フロントエンド,ブラウザ,iframe"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">262</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2026-02-18"><span class="visually-hidden">2026年2月18日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2026</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">02</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">18</span></span></time></p></div><div class="notebook-heading"><h1>iframeの難しさ</h1></div></header><div class="notebook-body"><p>最近、iframe を使っています。<br>
+クライアントサイドで埋め込む想定で、iframe を使おうとしています。<br>
+色々と苦労したことがあったので、書いて残しておこうと思います。</p>
+<h2 id="レスポンスヘッダー">レスポンスヘッダー</h2>
+<p>前提として、ウェブアプリケーションをプロダクションとして提供済みとします。<br>
+そのため、iframe だと ウェブサイトのURLを指定するだけで使えるので、比較的楽にできると見込んでいました。<br>
+提供するURLのレスポンスヘッダーに、X-Frame-Options や Content-Security-Policy などの調整が必要です。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Headers/X-Frame-Options">X-Frame-Options ヘッダー - HTTP | MDN - developer.mozilla.org</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Headers/Content-Security-Policy">Content-Security-Policy (CSP) ヘッダー - HTTP | MDN - developer.mozilla.org</a></li>
+</ul>
+<p>埋め込み先対象が複数存在する場合は、CSPで許可するオリジンを追加します。<br>
+<strong>埋め込み先対象が運用として増えていく場合は、この手間は面倒になるかもしれません</strong> 。</p>
+<h2 id="iframeの高さ">iframeの高さ</h2>
+<p>例えば、ノーコードツールなどでWeb制作したLPサイトに iframe を埋め込むとします。<br>
+この際、多くの場合 iframe に対してスタイルを適用します。</p>
+<pre><code class="language-css">.iframe {
+  width: 100%;
+  height: 600px;
+}
+</code></pre>
+<p>iframe の高さは、要素のサイズは読み込まないと不明なため px や vh などの単位で書くことが多いです。<br>
+この height を超える場合は、iframe の枠から見切れる状態になります。</p>
+<p>Speaker Deck のような埋め込むコンテンツが スライドのみのようなサイズが固定の場合は問題なさそうです。<br>
+しかし、埋め込むコンテンツが「本文の長さ」や「コメント数」のように、<br>
+閲覧時点のデータによって高さが変わる場合は話が変わります。<br>
+この場合、 <strong>見切れてしまうと埋め込んでいる感が浮き彫りになってしまいます。</strong></p>
+<p>システム設計や運用としてコンテンツの最大値を設けれる場合は、<br>
+iframe の height の値をその最大値より大きめにすることで、見切れることを阻止できます。</p>
+<h2 id="メディアクエリ">メディアクエリ</h2>
+<p>ある一定の横幅になれば、表示するコンテンツの構造を変えるレスポンシブな振る舞いを実現したい時があります。<br>
+それの代表的な手段の一つに、メディアクエリがあります。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Learn_web_development/Core/CSS_layout/Media_queries">メディアクエリーの基本 - ウェブ開発の学習 | MDN - developer.mozilla.org</a></li>
+</ul>
+<p>iframe の中でメディアクエリを使用すると、<br>
+メディアクエリのビューポートは埋め込み先のビューポートではなく iframe 自身になります。<br>
+そのため埋め込み先側がラップトップ並のビューポートを確保していても、<br>
+iframe の中がモバイル並の横幅だった場合、埋め込みコンテンツはモバイルの表示デザインとなります。<br>
+これが良くないというわけではなく、そういう振る舞いを理解して UI のレスポンシブ対応をする必要があります。</p>
+<p>メディアクエリのように画面全体の中の1つとして捉える方法よりも、<br>
+1つのウィジェットとしてコンテナクエリを使用する方法も悪くないかもしれません。<br>
+埋め込みコンテンツの親要素をコンテナと指定し、そのコンテナのサイズに基づいて子要素たちのサイズなどを調整するのです。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/CSS/Guides/Containment/Container_queries">CSS コンテナークエリー - CSS | MDN - developer.mozilla.org</a></li>
+</ul>
+<h2 id="ダイアログ">ダイアログ</h2>
+<p>ボタンクリックしたら前面にダイアログを表示する。<br>
+そんな機能を埋め込みコンテンツに含める場合は、どうでしょうか。</p>
+<p>ダイアログを表示している最中は、背面は灰色などで隠しつつスクロール移動させたくありません。<br>
+iframe の中の場合、背面を制御できるのは iframe の中だけです。<br>
+iframe から埋め込み先に対して何もできません。（イベント送信してホスト側に対応するなどなら別ですが）</p>
+<p>また、ダイアログというのはできれば画面中央に表示されてほしいものです。<br>
+しかし、iframe の高さのところで述べたような height の大きさを大きめ（1000pxなど）の取る方針にすると、<br>
+ダイアログの表示位置を埋め込み先画面上の中央に表示するのが難しいのです。</p>
+<p>代案としてはクリックイベントからx,y座標を取得できるため、<br>
+それらの情報からクリックした近くにダイアログを出すという方法は実現できそうです。<br>
+<strong>埋め込み先の情報を iframe 側から知る術</strong> がないため、それを使った設計（例えばスクロール量）も厳しそうです。</p>
+<h2 id="web-component">Web Component</h2>
+<p>iframe のような埋め込み先のドキュメントと独立させた要素は、これまで書いた通りWebデザインの観点で都合が悪い時があります。<br>
+そこで、埋め込み先のドキュメントに自然に溶け込めるための方法として、 <strong>Web Component</strong> が使えるかもしれません。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/API/Web_components">ウェブコンポーネント - Web API | MDN - developer.mozilla.org</a></li>
+</ul>
+<p>Web Component の場合、独自のカスタム要素を定義した (例: <code>&lt;my-super-page /&gt;</code>) JavaScript ファイルを用意します。<br>
+そのファイルを script タグで読み込んだ後に <code>&lt;my-super-page /&gt;</code> 要素を書くだけで使えます。<br>
+要素に属性を渡せることが可能なので、<code>&lt;my-super-page page="2" /&gt;</code> のように文字列をカスタム要素に渡せます。</p>
+<p>Web Component を使用する箇所は、JavaScript を有効化する必要があるため注意が必要です。<br>
+また、根拠は不明ですが SEO 観点でよろしくない というのは聞いたことがあります。</p>
+<p>もし、 <strong>Web Component が使えるなら先のWebデザインの都合が悪いポイントはなんとかなるかもしれません。</strong><br>
+さらに、 Web Component には Shadow DOM という文書から対象DOMをカプセル化する方法があります。<br>
+カプセル化による恩恵としては、スタイルを埋め込み先へ漏洩しないところや Web Component 内部を壊すこともできなくなります。<br>
+埋め込みとしては、良い恩恵かと思います。</p>
+<h2 id="終わりに">終わりに</h2>
+<p>iframe って手軽に使えて便利なんですよね。<br>
+今回の学びを、後世に活かしたいかと思います…!</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>フロントエンド</li><li>ブラウザ</li></ul></footer></article></main></body></html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>turborepo-remote-cache でキャッシュサーバをセルフホストした</title><meta name="description" content="vercel 製の turborepo という ビルドシステムが爆速なモノレポツールがあります。爆速にする機能の 1 つに、リモートキャッシュというものがあります。この機能は vercel のキャッシュサーバを使うのですが、キャッシュサーバをセルフホストする方法もあります。今回は、それを紹介します。"><meta name="keywords" content="開発ツール"><meta name="robots" content="noindex"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">92</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-09-11"><span class="visually-hidden">2022年9月11日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">09</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span></span></time></p></div><div class="notebook-heading"><h1>turborepo-remote-cache でキャッシュサーバをセルフホストした</h1></div></header><div class="notebook-body"><p>vercel 製の turborepo という ビルドシステムが爆速なモノレポツールがあります。
+爆速にする機能の 1 つに、リモートキャッシュというものがあります。
+この機能は vercel のキャッシュサーバを使うのですが、キャッシュサーバをセルフホストする方法もあります。
+今回は、それを紹介します。</p>
+<h2 id="なぜセルフホストしたいのか">なぜ、セルフホストしたいのか</h2>
+<p>vercel のキャッシュサーバを使う場合、vercel のアカウントが必要です。
+<a href="https://vercel.com/pricing">vercel の pricing</a>を見ると、個人利用(Hobby)では無料ですが、会社(Pro)で使うとすると、<code>$20 per user / month</code> という価格になります。費用対効果に見合うならそれで良いかもしれませんが、まだそれがわからない段階でコストをかけられない場面もあると思います。そこで、<a href="https://turborepo.org/docs/core-concepts/remote-caching#custom-remote-caches">公式にも書いてある</a>とおり、キャッシュサーバをセルフホストする方法があります。</p>
+<h2 id="ローカルでやってみた">ローカルで、やってみた</h2>
+<p>実際に試してみました。ソースコードは、次のリンクにあります。</p>
+<ul>
+<li><a href="https://github.com/silverbirder/turborepo-with-selfhost-remote-cache">https://github.com/silverbirder/turborepo-with-selfhost-remote-cache</a></li>
+</ul>
+<p>手元に Git clone して、README に従って動作確認できると思います。必要なソフトウェアは、Docker と Yarn です。</p>
+<h3 id="キャッシュサーバの準備">キャッシュサーバの準備</h3>
+<p>セルフホストする場合、キャッシュサーバを建てる必要があります。
+キャッシュサーバは、<a href="https://github.com/fox1t/turborepo-remote-cache">https://github.com/fox1t/turborepo-remote-cache</a> を使うと良いです。
+Docker イメージが公開されているので、それを使っても良いですし、自前で <code>docker build</code> しても良いです。</p>
+<ul>
+<li>Docker イメージ
+<ul>
+<li><a href="https://hub.docker.com/r/fox1t/turborepo-remote-cache">https://hub.docker.com/r/fox1t/turborepo-remote-cache</a></li>
+</ul>
+</li>
+</ul>
+<p>キャッシュサーバには、最低でも次の 2 つを環境変数を設定する必要があります。</p>
+<ul>
+<li>TURBO_TOKEN
+<ul>
+<li>turborepo と api を繋げるための TOKEN</li>
+</ul>
+</li>
+<li>STORAGE_PATH
+<ul>
+<li>キャッシュオブジェクトを保存するパス</li>
+<li>STORAGE_PROVIDER が <code>s3</code> を指定する場合は、バケット名</li>
+</ul>
+</li>
+</ul>
+<p>簡単にするため、次の.env ファイルを用意しました。</p>
+<pre><code class="language-text">## .env
+TURBO_TOKEN=mytoken
+STORAGE_PATH=/storage/
+</code></pre>
+<p>あとは、キャッシュサーバを起動するために、docker-compose を書きます。</p>
+<pre><code class="language-yml">## docker-compose.yml
+services:
+  remote-cache:
+    image: fox1t/turborepo-remote-cache:latest
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+</code></pre>
+<p>次のコマンドで、キャッシュサーバを起動しましょう。</p>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+<p>これで、キャッシュサーバは PORT:3000 番 で起動します。</p>
+<h3 id="turbo-build">turbo build</h3>
+<p>では、実際に turborepo からつながるか、試してみます。</p>
+<p>turborepo は、<code>npx create-turbo@latest</code> で作成できます。
+作成後、作成したフォルダで次のコマンドを実行します。</p>
+<pre><code class="language-bash">yarn
+yarn turbo run build --team="team_myteam" --token="mytoken" --api="http://localhost:3000"
+</code></pre>
+<p>turbo コマンドのオプションで、3 つ指定します。</p>
+<ul>
+<li>team
+<ul>
+<li>キャッシュを保存するときの名前空間の役割</li>
+</ul>
+</li>
+<li>token
+<ul>
+<li>先程定義した環境変数</li>
+</ul>
+</li>
+<li>api
+<ul>
+<li>キャッシュサーバの URL</li>
+</ul>
+</li>
+</ul>
+<p>実行すると次のログが表示されるはずです。</p>
+<pre><code class="language-bash">yarn run v1.22.19
+turbo run build --team=team_myteam --token=mytoken --api=http://localhost:3000
+• Packages in scope: docs, eslint-config-custom, tsconfig, ui, web
+• Running build in 5 packages
+• Remote computation caching enabled
+web:build: cache miss, executing 082bae5de9b1745f
+docs:build: cache miss, executing 5a55c6367c8caf01
+...
+</code></pre>
+<p><code>Remote computation caching enabled</code> で、リモートキャッシュが有効となりました。
+初回の場合、cache miss となります。ハッシュ値は、<code>web: 082bae5de9b1745f</code> と <code>docs:5a55c6367c8caf01</code> になります。
+キャッシュがローカルに保存されるため、削除します。</p>
+<pre><code class="language-bash">rm -rf node_modules/.cache/turbo
+</code></pre>
+<p>ではもう一度、turbo build してみましょう。</p>
+<pre><code class="language-bash">yarn turbo run build --team="team_myteam" --token="mytoken" --api="http://localhost:3000"
+yarn run v1.22.19
+/Users/silverbirder/docker/node/turborepo-with-selfhost-remote-cache/node_modules/.bin/turbo run build --team=team_myteam --token=mytoken --api=http://localhost:3000
+• Packages in scope: docs, eslint-config-custom, tsconfig, ui, web
+• Running build in 5 packages
+• Remote computation caching enabled
+docs:build: cache hit, replaying output 5a55c6367c8caf01
+web:build: cache hit, replaying output 082bae5de9b1745f
+</code></pre>
+<p>どうでしょうか、<code>cache hit</code> と表示されています。手元にキャッシュがないのにも関わらず、リモートのキャッシュサーバにキャッシュがあるため、<code>cache hit</code> となります！</p>
+<h3 id="キャッシュオブジェクト">キャッシュオブジェクト</h3>
+<p>キャッシュのオブジェクトは、ハッシュ値名で、アウトプット(file やログ)のバイナリになります。
+Docker コンテナ内で見ると、次のようなファイルが置かれています。</p>
+<pre><code class="language-bash">ls -hl storage/team_myteam/
+total 5392
+-rw-r--r--  1 silverbirder  staff   1.3M Sep 11 16:20 082bae5de9b1745f
+-rw-r--r--  1 silverbirder  staff   1.3M Sep 11 16:20 5a55c6367c8caf01
+</code></pre>
+<p>–team オプションで指定した名前で、フォルダが作成されています。
+そのため、team 毎にキャッシュが作成されます。</p>
+<h3 id="キャッシュとは">キャッシュとは</h3>
+<p>turborepo のキャッシュについては、<a href="https://turborepo.org/docs/core-concepts/caching">公式</a> を読むと良いでしょう。</p>
+<p>ざっくりいうと、次の流れで cache miss,cache hit になります。</p>
+<ol>
+<li>turbo build を実行</li>
+<li>turbo.json の<code>build</code>タスクの inputs(ソースコードなど)や環境変数をハッシュ化</li>
+<li>キャッシュが既にローカルまたはリモートに存在していなければ、cache miss</li>
+<li>turbo.json の<code>build</code>タスクの outputs(dist フォルダ、標準出力など)をバイナリ化し、ハッシュ名で保存</li>
+</ol>
+<p>3 の手順で、キャッシュが存在していれば、<code>cache hit</code> となり、outputs が復元します。</p>
+<h2 id="クラウドでやってみた">クラウドで、やってみた</h2>
+<p>キャッシュサーバは、AWS や GCP などのクラウドベンダーにあるコンピューティングリソースへデプロイしましょう。
+Docker イメージがあるので、AppRunner や CloudRun が楽にできそうです。</p>
+<p>キャッシュストレージは、いまのところ AWS S3 のみ対応とのことです。
+AWS S3 のクライアントは、<a href="https://zenn.dev/mizchi/articles/s3-compatible-client">S3Client を使っているため、GCS にも対応可能</a>です。まあ README に従うなら、S3 に配置するのがベターでしょう。コンピューティングリソースを動かす IAM は、ストレージリソースへの READ/WRITE 権限を足しましょう。</p>
+<h2 id="おわりに">おわりに</h2>
+<p>セルフホストして、リモートキャッシュが使えるようになりました。
+まだ運用したことがないので、課題を実感していません。引き続き、利用してみようと思います。</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>開発ツール</li></ul></footer></article></main></body></html>

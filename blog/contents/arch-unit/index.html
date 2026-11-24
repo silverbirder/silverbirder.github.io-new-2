@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="color-scheme" content="only light"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TypescriptでArchUnitしてみた</title><meta name="description" content="ArchUnitをというものを最近知りました。依存関係のテストができるそうです。さっそく試してみたいと思いますので、その備忘録として残しておきます。"><meta name="keywords" content="フロントエンド,テスト,バックエンド,ArchUnit,TypeScript"><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css" media="print" onload="const showStyles=()=&gt;requestAnimationFrame(()=&gt;requestAnimationFrame(()=&gt;this.setAttribute('media','all')));if(document.readyState==='complete')showStyles();else window.addEventListener('load',showStyles,{once:true})"><noscript><link rel="stylesheet" href="/silverbirder.github.io-new-2/fonts/site.css"></noscript><link rel="preconnect" href="https://res.cloudinary.com"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DfR9Wmr5.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.B0WPuXaT.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">57</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2020-11-28"><span class="visually-hidden">2020年11月28日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2020</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">28</span></span></time></p></div><div class="notebook-heading"><h1>TypescriptでArchUnitしてみた</h1></div></header><div class="notebook-body"><p>ArchUnit をというものを最近知りました。依存関係のテストができるそうです。さっそく試してみたいと思いますので、その備忘録として残しておきます。</p>
+<h2 id="archunit">ArchUnit</h2>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://www.archunit.org/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Unit test your Java architecture</strong><span class="link-card-description" data-astro-cid-p7ia6262>Start enforcing your architecture within 30 minutes using the test setup you already have.</span><span class="link-card-domain" data-astro-cid-p7ia6262>www.archunit.org</span></span></a></div>
+<blockquote>
+<p>ArchUnit is a free, simple and extensible library for checking the architecture of your Java code using any plain Java unit test framework. That is, ArchUnit can check dependencies between packages and classes, layers and slices, check for cyclic dependencies and more. It does so by analyzing given Java bytecode, importing all classes into a Java code structure.</p>
+</blockquote>
+<p>Java のアーキテクチャをテストできるライブラリで、パッケージやクラス、レイヤー、スライス（？）の依存関係をテストできるそうです。
+そこで、親の顔よりも見たこの図をテストしたいと思います。</p>
+<p><a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693376915/silver-birder.github.io/blog/CleanArchitecture.jpg?ar=772%3A567" alt="Clean Coder Blog > The Clean Architecture" width="772" height="567" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1693376915/silver-birder.github.io/blog/CleanArchitecture.jpg?ar=772%3A567 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1693376915/silver-birder.github.io/blog/CleanArchitecture.jpg?ar=772%3A567 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1693376915/silver-birder.github.io/blog/CleanArchitecture.jpg?ar=772%3A567 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1693376915/silver-birder.github.io/blog/CleanArchitecture.jpg?ar=772%3A567 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_772/q_auto/f_auto/v1693376915/silver-birder.github.io/blog/CleanArchitecture.jpg?ar=772%3A567 772w" sizes="min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></a></p>
+<h2 id="typescript-でも-archunit-したい">Typescript でも ArchUnit したい</h2>
+<p>ArchUnit は Java 製です。私は Typescript の ArchUnit がしたいです。
+そこで、良さげなライブラリを発見しました。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/MaibornWolff/ts-arch" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - ts-arch/ts-arch: An architecture unit test framework for Typescript</strong><span class="link-card-description" data-astro-cid-p7ia6262>An architecture unit test framework for Typescript - ts-arch/ts-arch</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/7b10ae4512b7b3a68e0ccad0c686567ff2ddc173e37101e9da9c14cff715b7c9.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>特に拘りなく、アーキテクチャのテストができれば何でも良いかなと思います。
+極端な話、ソースコードを AST パースし、依存関係を抽出できれば自作できるんじゃないかと思います。</p>
+<h2 id="試してみた">試してみた</h2>
+<p>試したソースコードは、下記に置いています。ご参考下さい。</p>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/silverbirder/try-archunit" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/try-archunit</strong><span class="link-card-description" data-astro-cid-p7ia6262>Contribute to silverbirder/try-archunit development by creating an account on GitHub.</span><span class="link-card-domain" data-astro-cid-p7ia6262>github.com</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/696c9c98dd69b025d86c3987e3729a650da627f719f44553d63248531e24366b.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<p>全体のソースコードツリーは次の構成です。</p>
+<pre><code class="language-text">src
+└ 1_enterprise_business_rules
+  └ entities
+    └ Entity.ts
+└ 2_application_business_rules
+  └ use_cases
+    └ UseCase.ts
+└ 3_interface_adapters
+  └ controllers
+    └ Controller.ts
+  └ gateways
+    └ Gateway.ts
+  └ presenters
+    └ Presenter.ts
+└ 4_frameworks_and_drivers
+  └ web
+    └ Web.ts
+└ clean_architecture.puml
+└ clean_architecture.test.ts
+</code></pre>
+<p>各プロダクトコードは、下の階層のファイルを import しているだけとします。</p>
+<pre><code class="language-typescript">// src/4_frameworks_and_drivers/web/Web.ts
+import "../../3_interface_adapters/gateways/Gateway";
+import "../../3_interface_adapters/controllers/Controller";
+import "../../3_interface_adapters/presenters/Presenter";
+</code></pre>
+<pre><code class="language-typescript">// src/3_interface_adapters/controllers/Controller.ts
+import "../../2_application_business_rules/use_cases/UseCase";
+</code></pre>
+<pre><code class="language-typescript">// src/2_application_business_rules/use_cases/UseCase.ts
+import "../../1_enterprise_business_rules/entities/Entity";
+</code></pre>
+<pre><code class="language-typescript">// src/1_enterprise_business_rules/entities/Entity.ts
+</code></pre>
+<p>下記ファイルにある UML のコンポーネント図で依存関係を表します。</p>
+<pre><code class="language-text">## clean_architecture.puml
+@startuml
+  component [4_frameworks_and_drivers] #Blue
+  component [3_interface_adapters] #Green
+  component [2_application_business_rules] #Red
+  component [1_enterprise_business_rules] #Yellow
+
+  4_frameworks_and_drivers --&gt; 3_interface_adapters
+  3_interface_adapters --&gt; 2_application_business_rules
+  2_application_business_rules --&gt; 1_enterprise_business_rules
+@enduml
+</code></pre>
+<p>UML を可視化すると、下記の図のとおりです。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_470/q_auto/f_auto/v1614430164/silver-birder.github.io/blog/clean_architecture.puml.png?ar=470%3A684" alt="clean_architecture.puml" width="470" height="684" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_235/q_auto/f_auto/v1614430164/silver-birder.github.io/blog/clean_architecture.puml.png?ar=470%3A684 235w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_353/q_auto/f_auto/v1614430164/silver-birder.github.io/blog/clean_architecture.puml.png?ar=470%3A684 353w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_470/q_auto/f_auto/v1614430164/silver-birder.github.io/blog/clean_architecture.puml.png?ar=470%3A684 470w" sizes="auto, min(29.375rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>テストコードは、下記のとおりです。</p>
+<pre><code class="language-typescript">// clean_architecture.test.ts
+describe("architecture", () =&gt; {
+  it("Check dependency", async () =&gt; {
+    const architectureUml = path.resolve(__dirname, "clean_architecture.puml");
+    const violations = await slicesOfProject()
+      .definedBy("src/(**)/")
+      .should()
+      .adhereToDiagramInFile(architectureUml)
+      .check();
+    await expect(violations).toEqual([]);
+  });
+});
+</code></pre>
+<p>このテストケースは PASS します。</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422" alt="src/clean_architecture.test.ts > architecture > Check dependency #Succeed" width="962" height="422" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_962/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422 962w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>では、違反コードを書いてみます。</p>
+<pre><code class="language-typescript">// src/3_interface_adapters/controllers/Controller.ts
+import "../../2_application_business_rules/use_cases/UseCase";
+import "../../4_frameworks_and_drivers/web/Web";
+</code></pre>
+<p>3 レイヤーが上位の 4 レイヤーを使用しています。この状態でテストを実行すると、</p>
+<p><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564" alt="src/clean_architecture.test.ts > architecture > Check dependency #Failed" width="1200" height="564" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_320/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564 320w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_480/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564 480w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_640/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564 640w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_720/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564 720w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_960/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564 960w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_1200/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564 1200w" sizes="auto, min(40rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem)))"></p>
+<p>見事 Failed となりました。つまり、依存関係の誤りを自動的に検出することができます。</p>
+<h2 id="最後に">最後に</h2>
+<p>規模が大きなプロジェクトほど、依存関係が複雑になりがちです。(Java でいう) パッケージやクラスの依存関係を適切に設計できていたとしても、誰かが壊しかねません。せっかく設計したのに壊されるのは、とても残念なので、テストコードで守ってあげましょう！</p>
+</div><div class="notebook-bottom" aria-hidden="true"></div><footer class="notebook-tags"><span id="article-tags-label">タグ</span><ul aria-labelledby="article-tags-label"><li>フロントエンド</li><li>テスト</li><li>バックエンド</li></ul></footer></article></main></body></html>
