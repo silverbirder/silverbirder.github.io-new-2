@@ -28,7 +28,10 @@ const path = Astro.url.pathname;
     position: sticky;
     inset-block-start: var(--primitive-space-none);
     z-index: var(--site-header-layer);
-    padding-block-end: var(--semantic-border-width-hairline);
+    --site-header-border-color: transparent;
+
+    /* 境界線の領域をブラウザのピクセル丸めに合わせる。 */
+    border-block-end: var(--semantic-border-width-hairline) solid var(--site-header-border-color);
     background: var(--semantic-color-background-page);
   }
 
