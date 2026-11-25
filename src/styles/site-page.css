@@ -11,5 +11,6 @@
 
 .site-page a {
   color: var(--semantic-color-text-link);
+  text-decoration-thickness: var(--semantic-border-width-hairline);
   text-underline-offset: var(--semantic-text-link-underline-offset);
 }

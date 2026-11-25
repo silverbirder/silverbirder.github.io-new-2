@@ -1,0 +1,306 @@
+---
+interface Props {
+  months: string[];
+}
+
+const { months } = Astro.props;
+const dates = months.map((month, index) => {
+  const [year, number] = month.split('-');
+  return {
+    id: `month-${month}`,
+    label: `${year}年${Number(number)}月`,
+    year,
+    startsYear: !months[index - 1]?.startsWith(year),
+    ordinal: Number(year) * 12 + Number(number),
+  };
+});
+const latestMonth = dates[0]?.ordinal ?? 0;
+const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
+---
+
+{dates.length > 0 && (
+  <dialog
+    id="archive-month-dialog"
+    class="month-dialog"
+    aria-labelledby="archive-month-dialog-title"
+  >
+    <form method="dialog" class="month-dialog-header">
+      <h2 id="archive-month-dialog-title">年月を選ぶ</h2>
+      <button type="submit" aria-label="閉じる">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-width="0.6"
+          aria-hidden="true"
+        >
+          <path d="m6 6 12 12M18 6 6 18" />
+        </svg>
+      </button>
+    </form>
+    <div class="month-dialog-list">
+      {[...Map.groupBy(dates, ({ year }) => year)].map(([year, group]) => (
+        <section class="month-dialog-year">
+          <h3>{year}年</h3>
+          <ul>
+            {group.map(({ id, label }) => (
+              <li>
+                <a
+                  href={`#${id}`}
+                  aria-label={label}
+                  aria-current={id === dates[0].id ? 'location' : undefined}
+                >
+                  {label.slice(5)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </dialog>
+)}
+
+{dates.length > 0 && (
+  <nav class="month-nav" aria-label="年月で移動" data-month-nav>
+    <ol class="month-nav-track" data-month-track={slots} style={`--month-slots: ${slots}`}>
+      {dates.map(({ id, label, year, startsYear, ordinal }, index) => {
+        const slot = latestMonth - ordinal + 1;
+        return (
+          <li style={`--month-slot: ${slot}`}>
+            <a
+              href={`#${id}`}
+              aria-label={label}
+              draggable="false"
+              aria-current={index === 0 ? 'location' : undefined}
+              class:list={['month-nav-link', { 'month-nav-year': startsYear }]}
+              data-month-slot={slot}
+            >
+              {startsYear && (
+                <span class="month-nav-year-label" aria-hidden="true">
+                  {year}
+                </span>
+              )}
+              <span class="month-nav-tooltip" aria-hidden="true">
+                {label}
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ol>
+  </nav>
+)}
+
+<script src="../scripts/blog-month-nav.ts"></script>
+
+<style is:global>
+  .month-nav {
+    --month-track-length: min(40rem, 70svh);
+    --month-tick-length: 0.3125rem;
+    --month-year-tick-length: 0.625rem;
+    --month-dot-size: 0.375rem;
+    --month-dot-radius: calc(var(--month-dot-size) * var(--primitive-ratio-half));
+    --month-label-center: calc(var(--primitive-size-full) * var(--primitive-ratio-half));
+    --month-label-offset: calc(-1 * var(--month-label-center));
+
+    position: sticky;
+    inset-block-start: calc(
+      var(--component-site-header-offset) + var(--semantic-space-page-gutter)
+    );
+    align-self: start;
+    padding-inline-end: var(--semantic-space-control-block);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .month-nav-track {
+    --month-slots: 1;
+
+    display: grid;
+    grid-template-rows: repeat(var(--month-slots), minmax(var(--primitive-space-none), 1fr));
+    block-size: min(var(--month-track-length), calc(var(--month-slots) * var(--primitive-space-4)));
+    margin: var(--primitive-space-none);
+    padding: var(--primitive-space-none);
+    border-inline-end: var(--semantic-border-width-hairline) solid
+      var(--semantic-color-border-paper);
+    list-style: none;
+    touch-action: none;
+    user-select: none;
+  }
+
+  .month-nav-track > li {
+    --month-slot: 1;
+
+    grid-row: var(--month-slot);
+  }
+
+  .month-nav-link {
+    position: relative;
+    display: block;
+    block-size: var(--primitive-size-full);
+    color: var(--semantic-color-text-link);
+    text-decoration: none;
+  }
+
+  .month-nav-link::before {
+    position: absolute;
+    inset-block-start: var(--month-label-center);
+    inset-inline-end: var(--primitive-space-none);
+    inline-size: var(--month-tick-length);
+    block-size: var(--semantic-border-width-hairline);
+    background: var(--semantic-color-border-paper);
+    content: '';
+  }
+
+  .month-nav-year::before {
+    inline-size: var(--month-year-tick-length);
+    background: var(--semantic-color-text-link);
+  }
+
+  .month-nav-year-label,
+  .month-nav-tooltip {
+    position: absolute;
+    inset-block-start: var(--month-label-center);
+    transform: translateY(var(--month-label-offset));
+    font-size: var(--primitive-font-size-xs);
+    line-height: var(--semantic-line-height-body);
+  }
+
+  .month-nav-year-label {
+    inset-inline-end: var(--primitive-space-4);
+  }
+
+  .month-nav-tooltip {
+    inset-inline-end: calc(var(--primitive-size-full) + var(--semantic-space-control-block));
+    display: none;
+    padding-inline: var(--semantic-space-control-block);
+    background: var(--semantic-color-text-link);
+    color: var(--semantic-color-background-page);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .month-nav-link:focus-visible > .month-nav-tooltip {
+    display: block;
+  }
+
+  @media (hover: hover) {
+    .month-nav-link:hover > .month-nav-tooltip {
+      display: block;
+    }
+  }
+
+  .month-nav-link:is(:hover, :focus-visible)::before,
+  .month-nav-link[aria-current='location']::before {
+    background: var(--semantic-color-accent);
+  }
+
+  .month-nav-link[aria-current='location']::after {
+    position: absolute;
+    inset-block-start: calc(var(--month-label-center) - var(--month-dot-radius));
+    inset-inline-end: calc(var(--semantic-border-width-hairline) - var(--month-dot-radius));
+    inline-size: var(--month-dot-size);
+    block-size: var(--month-dot-size);
+    border-radius: var(--primitive-radius-full);
+    background: var(--semantic-color-accent);
+    pointer-events: none;
+    content: '';
+  }
+  .month-dialog {
+    --month-dialog-width: 21rem;
+    --month-dialog-radius: 0.75rem;
+    --month-dialog-list-height: 58svh;
+    --month-dialog-choice-size: 2.5rem;
+
+    box-sizing: border-box;
+    inline-size: min(
+      var(--month-dialog-width),
+      calc(
+        var(--primitive-size-full) - var(--semantic-space-page-gutter) *
+          var(--primitive-ratio-double)
+      )
+    );
+    padding: var(--semantic-space-control-inline);
+    border: var(--semantic-border-width-hairline) solid var(--semantic-color-border-subtle);
+    border-radius: var(--month-dialog-radius);
+    background: var(--semantic-color-background-page);
+  }
+
+  .month-dialog :is(h2, h3, ul) {
+    margin: var(--primitive-space-none);
+  }
+
+  .month-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-end: var(--semantic-space-control-block);
+  }
+
+  .month-dialog h2 {
+    font-size: var(--semantic-font-size-heading);
+  }
+
+  .month-dialog-list {
+    max-block-size: var(--month-dialog-list-height);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .month-dialog-year {
+    display: grid;
+    grid-template-columns: auto minmax(var(--primitive-space-none), 1fr);
+    gap: var(--semantic-space-control-block);
+    padding-block: var(--semantic-space-control-block);
+    border-block-start: var(--semantic-border-width-hairline) solid
+      var(--semantic-color-border-subtle);
+  }
+
+  .month-dialog h3 {
+    color: var(--semantic-color-accent);
+    font-size: var(--semantic-font-size-label);
+    line-height: var(--month-dialog-choice-size);
+  }
+
+  .month-dialog ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: var(--primitive-space-none);
+    list-style: none;
+  }
+
+  .month-dialog :is(button, a) {
+    color: var(--semantic-color-text-link);
+    font-size: var(--semantic-font-size-label);
+  }
+
+  .month-dialog button {
+    display: grid;
+    place-items: center;
+    padding: var(--semantic-space-control-block);
+    border: none;
+    background: var(--semantic-color-background-page);
+    cursor: pointer;
+  }
+
+  .month-dialog a {
+    display: grid;
+    place-items: center;
+    inline-size: var(--month-dialog-choice-size);
+    block-size: var(--month-dialog-choice-size);
+    text-decoration: none;
+  }
+
+  .month-dialog a:is(:hover, :focus-visible, [aria-current='location']) {
+    background: var(--semantic-color-background-muted);
+  }
+
+  @media (width <= 48rem) {
+    .month-nav {
+      display: none;
+    }
+  }
+</style>

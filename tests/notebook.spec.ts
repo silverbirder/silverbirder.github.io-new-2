@@ -5,7 +5,10 @@ test.use({
   baseURL: 'http://127.0.0.1:4350',
   viewport: { width: 1280, height: 900 },
   deviceScaleFactor: 2,
-  launchOptions: { executablePath: process.env.CHROME_PATH, args: ['--no-sandbox'] },
+  launchOptions: {
+    executablePath: process.env.CHROME_PATH,
+    args: ['--no-sandbox'],
+  },
 });
 
 async function auditText(page: Page) {
@@ -111,8 +114,8 @@ async function auditNativeSelection(
 ) {
   const target = page.locator(selector).first();
   if (!(await target.count())) return;
-  await target.scrollIntoViewIfNeeded();
   const area = await target.evaluate((element) => {
+    element.scrollIntoView({ block: 'center' });
     element.closest('pre')?.scrollTo({ left: 0 });
     const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
     let node: Node | null;

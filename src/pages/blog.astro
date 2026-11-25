@@ -1,4 +1,5 @@
 ---
+import BlogMonthNav from '../components/BlogMonthNav.astro';
 import { articleSlug } from '../lib/article-slug';
 import { getBlogArticles } from '../lib/blog-articles';
 import Layout from '../layouts/Layout.astro';
@@ -12,29 +13,87 @@ const sorted = (await getBlogArticles())
   }))
   .toSorted((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 const years = Map.groupBy(sorted, ({ publishedAt }) => publishedAt.slice(0, 4));
+const months = [...new Set(sorted.map(({ publishedAt }) => publishedAt.slice(0, 7)))];
 ---
 
 <Layout title="ブログ" currentPage="blog">
-  <div class="site-page">
-    {[...years].map(([year, articles]) => (
-      <section class="archive-year" aria-labelledby={`archive-${year}`}>
-        <h2 id={`archive-${year}`}>{year}年</h2>
-        <ul>
-          {articles.map(({ url, title, publishedAt }) => (
-            <li>
-              <a href={url}>
-                <time datetime={publishedAt}>{publishedAt.slice(5, 10).replace('-', ' / ')}</time>
-                <span>{title}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))}
+  <div class="site-page blog-archive">
+    <div class="archive-entries">
+      {[...years].map(([year, articles]) => (
+        <section class="archive-year" aria-labelledby={`archive-${year}`}>
+          <div class="archive-year-header">
+            <h2 id={`archive-${year}`}>{year}年</h2>
+          </div>
+          <ul>
+            {articles.map(({ url, title, publishedAt }, index) => {
+              const month = publishedAt.slice(0, 7);
+              const startsMonth = !articles[index - 1]?.publishedAt.startsWith(month);
+
+              return (
+                <li id={startsMonth ? `month-${month}` : undefined}>
+                  <a href={url}>
+                    <time datetime={publishedAt}>
+                      {publishedAt.slice(5, 10).replace('-', ' / ')}
+                    </time>
+                    <span>{title}</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
+    </div>
+    {months.length > 0 && (
+      <button
+        class="archive-month-button"
+        type="button"
+        aria-label="年月で移動"
+        aria-haspopup="dialog"
+        aria-controls="archive-month-dialog"
+        data-open-month-dialog
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-width="0.6"
+          aria-hidden="true"
+        >
+          <path d="M3 10V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3Z" fill="currentColor" stroke="none" />
+          <rect x="3" y="5" width="18" height="16" rx="2" />
+          <path d="M7 3v4m10-4v4M3 10h18m-13 4h1m3 0h1m3 0h1m-9 3h1m3 0h1" />
+        </svg>
+      </button>
+    )}
+    <BlogMonthNav months={months} />
   </div>
 </Layout>
 
-<style>
+<style is:global>
+  .blog-archive {
+    --page-top-space: var(--semantic-space-control-inline);
+    --archive-nav-width: 5.5rem;
+    --archive-nav-gap: clamp(var(--semantic-space-control-block), 4vw, 3rem);
+    --archive-anchor-offset: 1.25rem;
+
+    display: grid;
+    grid-template-columns: minmax(var(--primitive-space-none), 1fr) var(--archive-nav-width);
+    gap: var(--archive-nav-gap);
+    max-inline-size: calc(var(--page-width) + var(--archive-nav-gap) + var(--archive-nav-width));
+  }
+
+  .archive-year li[id] {
+    scroll-margin-block-start: var(--archive-anchor-offset);
+  }
+
+  .archive-year a > span {
+    overflow-wrap: anywhere;
+  }
+
   .archive-year {
     --archive-year-width: 6rem;
     --archive-date-width: 3.75rem;
@@ -47,9 +106,25 @@ const years = Map.groupBy(sorted, ({ publishedAt }) => publishedAt.slice(0, 4));
     margin-block-end: var(--archive-year-spacing);
   }
 
+  .archive-year-header,
+  .archive-month-button {
+    position: sticky;
+    align-self: start;
+  }
+
+  .archive-year-header {
+    inset-block-start: calc(
+      var(--component-site-header-offset) + var(--semantic-space-control-inline)
+    );
+    padding-block-start: var(--archive-row-spacing);
+  }
+
+  .archive-month-button {
+    display: none;
+  }
+
   .archive-year h2 {
     margin: var(--primitive-space-none);
-    padding-block-start: var(--archive-row-spacing);
     color: var(--semantic-color-accent);
     font-size: var(--semantic-font-size-heading);
   }
@@ -73,9 +148,8 @@ const years = Map.groupBy(sorted, ({ publishedAt }) => publishedAt.slice(0, 4));
     text-decoration: none;
   }
 
-  .archive-year a:hover span,
-  .archive-year a:focus-visible span {
-    text-decoration: underline;
+  .archive-year a:is(:hover, :focus-visible) span {
+    text-decoration: underline var(--semantic-border-width-hairline);
   }
 
   .archive-year time {
@@ -84,10 +158,54 @@ const years = Map.groupBy(sorted, ({ publishedAt }) => publishedAt.slice(0, 4));
     white-space: nowrap;
   }
 
-  @media (width <= 38rem) {
+  @media (width <= 48rem) {
+    .blog-archive,
     .archive-year {
       grid-template-columns: minmax(var(--primitive-space-none), 1fr);
-      gap: var(--semantic-space-control-block);
+      gap: var(--primitive-space-none);
+    }
+
+    .blog-archive {
+      --page-top-space: var(--semantic-space-control-block);
+      --archive-anchor-offset: 3rem;
+      --archive-header-layer: 1;
+      --archive-calendar-button-size: 2.5rem;
+
+      grid-template-areas: 'entries';
+    }
+
+    .archive-entries,
+    .archive-month-button {
+      grid-area: entries;
+    }
+
+    .archive-year-header,
+    .archive-month-button {
+      inset-block-start: var(--component-site-header-offset);
+      z-index: var(--archive-header-layer);
+    }
+
+    .archive-year-header {
+      align-content: center;
+      min-block-size: var(--archive-calendar-button-size);
+      margin-inline: calc(
+        var(--semantic-space-page-gutter) - var(--semantic-space-page-gutter) *
+          var(--primitive-ratio-double)
+      );
+      padding: var(--primitive-space-none) var(--semantic-space-page-gutter);
+      backdrop-filter: blur(var(--primitive-space-2));
+    }
+
+    .archive-month-button {
+      justify-self: end;
+      display: grid;
+      place-items: center;
+      inline-size: var(--archive-calendar-button-size);
+      block-size: var(--archive-calendar-button-size);
+      padding: var(--primitive-space-none);
+      border: none;
+      background: none;
+      color: var(--semantic-color-text-link);
     }
   }
 </style>
