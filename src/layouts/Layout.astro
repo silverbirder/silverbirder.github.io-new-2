@@ -54,6 +54,13 @@ const fontStylesheet = `${base}fonts/${fontName}.css`;
       <link rel="stylesheet" href={fontStylesheet} />
     )}
     {article && <link rel="preconnect" href="https://res.cloudinary.com" />}
+    <style is:inline>
+      @media (prefers-reduced-motion: no-preference) {
+        @view-transition {
+          navigation: auto;
+        }
+      }
+    </style>
     <style is:global>
       :root {
         color-scheme: only light;
