@@ -6,7 +6,7 @@ publishedAt: '2026-11-16T00:00:00+09:00'
 index: false
 ---
 
-見出し、本文、リスト、引用、コード、表、画像を一つの記事で見比べるためのサンプルです。各要素の行間、余白、折り返しと、その前後で罫線との位置が揃うかを確認します。
+見出し、本文、リスト、引用、コード、表、画像、埋め込みを一つの記事で見比べるためのサンプルです。各要素の行間、余白、折り返しと、その前後で罫線との位置が揃うかを確認します。
 
 ## 本文と文字の装飾
 
@@ -148,6 +148,28 @@ This_is_a_deliberately_long_unbroken_line_for_checking_horizontal_scrolling_insi
 ![小さく表示した布団のパッケージ](https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_144/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg?ar=144%3A108)
 
 小さめに表示した画像の例です。
+
+## 埋め込み
+
+YouTube
+
+https://www.youtube.com/watch?v=4E1J1un37Rw
+
+CodePen
+
+https://codepen.io/silverbirder/pen/gbYwrOa
+
+X
+
+https://x.com/Ikegami_Ryoichi/status/1788907078305861806
+
+Instagram
+
+https://www.instagram.com/p/DEgz2ltSki8/
+
+Bluesky
+
+https://bsky.app/profile/silverbirder.bsky.social/post/3mlhy3wwajk2t
 
 ## 区切り線
 

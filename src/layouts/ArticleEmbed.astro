@@ -1,0 +1,86 @@
+---
+import type { ArticleEmbed } from '../lib/insert-link-cards';
+
+interface Props {
+  embed: ArticleEmbed;
+}
+const { embed } = Astro.props;
+const names = {
+  bluesky: 'Bluesky',
+  codepen: 'CodePen',
+  instagram: 'Instagram',
+  x: 'X',
+  youtube: 'YouTube',
+};
+const title = names[embed.provider];
+const playerStyles = {
+  youtube:
+    '--embed-ratio: 16 / 9; --embed-min-height: 200px; aspect-ratio: var(--embed-ratio); min-height: var(--embed-min-height); height: auto;',
+  codepen:
+    '--embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));',
+};
+---
+
+{'src' in embed && (
+  <>
+    <div data-embed={embed.provider} style="margin-block-end: var(--primitive-space-none);">
+      <iframe
+        src={embed.src}
+        title={`${title}の埋め込み`}
+        loading="lazy"
+        allow="encrypted-media; picture-in-picture; fullscreen"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+        style={`width: var(--primitive-size-full); border: var(--primitive-space-none); ${playerStyles[embed.provider]}`}
+      />
+    </div>
+    <p>
+      <a href={embed.url}>{title}で開く</a>
+    </p>
+  </>
+)}
+{embed.provider === 'x' && (
+  <div data-embed={embed.provider} style="display: flow-root;">
+    <blockquote
+      class="twitter-tweet"
+      data-lang="ja"
+      data-dnt="true"
+      style="margin: var(--primitive-space-none);"
+    >
+      <p>
+        <a href={embed.url}>Xで投稿を開く</a>
+      </p>
+    </blockquote>
+  </div>
+)}
+{embed.provider === 'instagram' && (
+  <div data-embed={embed.provider} style="display: flow-root;">
+    <blockquote
+      class="instagram-media"
+      data-instgrm-permalink={embed.url}
+      data-instgrm-version="14"
+      data-instgrm-captioned
+      style="margin: var(--primitive-space-none); min-width: var(--primitive-space-none); max-width: var(--primitive-size-full);"
+    >
+      <p>
+        <a href={embed.url}>Instagramで投稿を開く</a>
+      </p>
+    </blockquote>
+  </div>
+)}
+{embed.provider === 'bluesky' && (
+  <div data-embed={embed.provider} style="display: flow-root;">
+    <blockquote
+      data-bluesky-actor={embed.actor}
+      data-bluesky-record={embed.record}
+      data-bluesky-embed-color-mode="system"
+      style="margin: var(--primitive-space-none);"
+    >
+      <p>
+        <a href={embed.url}>Blueskyで投稿を開く</a>
+      </p>
+    </blockquote>
+  </div>
+)}
+
+<script src="../scripts/bluesky-embeds.ts"></script>

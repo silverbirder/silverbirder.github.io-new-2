@@ -320,7 +320,7 @@ time .notebook-meta-parts {
 }
 
 @supports (height: calc-size(auto, size)) {
-  .notebook-body :is(video, iframe) {
+  .notebook-body :is(video, iframe:not([data-embed] *)) {
     height: calc-size(auto, round(up, size, var(--component-notebook-rule-spacing)));
   }
 }
@@ -354,6 +354,10 @@ time .notebook-meta-parts {
 
 .notebook-body iframe {
   border: var(--primitive-space-none);
+}
+
+.notebook-body [data-embed] iframe {
+  box-sizing: content-box;
 }
 
 .notebook-body code {

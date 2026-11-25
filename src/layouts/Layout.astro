@@ -1,5 +1,4 @@
 ---
-import 'kiso.css';
 import '../styles/tokens.css';
 import SiteHeader from './SiteHeader.astro';
 
@@ -62,6 +61,15 @@ const fontStylesheet = `${base}fonts/${fontName}.css`;
       }
     </style>
     <style is:global>
+      @import 'kiso.css' layer(kiso);
+
+      @layer kiso {
+        /* 埋め込み先が書き換えるiframeの高さ属性を使う。 */
+        :where([data-embed] iframe) {
+          block-size: revert-layer;
+        }
+      }
+
       :root {
         color-scheme: only light;
         background-color: var(--semantic-color-background-page);
