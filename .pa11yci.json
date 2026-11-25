@@ -42,6 +42,7 @@
       "actions": [
         "click element nav a[href='/blog/']",
         "wait for path to be /blog/",
+        "wait for element html:active-view-transition to be removed",
         "click element main a",
         "wait for element .notebook-body to be visible"
       ]
