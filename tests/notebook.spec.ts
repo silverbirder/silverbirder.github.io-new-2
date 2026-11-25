@@ -179,6 +179,8 @@ async function auditNativeSelection(
 }
 
 async function openArticle(page: Page, route: string, root: number) {
+  // 外部ウィジェットの読み込みに依存せず、記事と代替リンクを検査する。
+  await page.route('https://**/*', (request) => request.abort());
   await page.goto(route);
   await expect(page.locator('.notebook-body')).toBeVisible();
   const deferredFont = page.locator('link[href$="/fonts/site.css"][media="print"]');

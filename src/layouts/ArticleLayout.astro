@@ -1,7 +1,8 @@
 ---
+import ArticleEmbed from './ArticleEmbed.astro';
 import Layout from './Layout.astro';
 import LinkCard from './LinkCard.astro';
-import { insertLinkCards } from '../lib/insert-link-cards';
+import { insertArticleBlocks } from '../lib/insert-link-cards';
 import type { BlogLinkCard } from '../lib/blog-link-card-source';
 import '../styles/tokens.css';
 import '../styles/article.css';
@@ -21,9 +22,12 @@ type Props = {
   };
 };
 const { frontmatter, noindex, sharedFont, linkCards } = Astro.props;
-const blocks = linkCards?.length
-  ? insertLinkCards(await Astro.slots.render('default'), linkCards)
-  : undefined;
+const blocks = insertArticleBlocks(await Astro.slots.render('default'), linkCards);
+const providers = new Set(
+  blocks.flatMap((block) =>
+    typeof block !== 'string' && 'provider' in block ? [block.provider] : [],
+  ),
+);
 const ruleImage = `${import.meta.env.BASE_URL}notebook-rule.svg`;
 const tickImage = `${import.meta.env.BASE_URL}notebook-ticks.svg`;
 const [year, month, day] = frontmatter.publishedAt.slice(0, 10).split('-');
@@ -82,20 +86,22 @@ const dateLabel = `${year}年${Number(month)}月${Number(day)}日`;
       </div>
     </header>
     <div class="notebook-body">
-      {blocks ? (
-        blocks.map((block) =>
-          typeof block === 'string' ? (
-            // eslint-disable-next-line astro/no-set-html-directive -- Only the already-rendered Astro slot is reused here.
-            <Fragment set:html={block} />
-          ) : (
-            <LinkCard card={block} />
-          ),
-        )
-      ) : (
-        <slot />
-      )}
+      {blocks.map((block) => {
+        if (typeof block === 'string') {
+          // eslint-disable-next-line astro/no-set-html-directive -- Only the already-rendered Astro slot is reused here.
+          return <Fragment set:html={block} />;
+        }
+        if ('provider' in block) return <ArticleEmbed embed={block} />;
+        return <LinkCard card={block} />;
+      })}
     </div>
     <div class="notebook-bottom" aria-hidden="true"></div>
+    {providers.has('x') && (
+      <script is:inline async src="https://platform.twitter.com/widgets.js"></script>
+    )}
+    {providers.has('instagram') && (
+      <script is:inline async src="https://www.instagram.com/embed.js"></script>
+    )}
     {tags.length > 0 && (
       <footer class="notebook-tags">
         <span id="article-tags-label">タグ</span>

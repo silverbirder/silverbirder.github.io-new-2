@@ -1,6 +1,11 @@
 {
   "$schema": "https://unpkg.com/knip/schema.json",
-  "entry": ["src/layouts/ArticleLayout.astro", "src/scripts/blog-month-nav.ts"],
+  "entry": [
+    "src/layouts/ArticleLayout.astro",
+    "src/scripts/blog-month-nav.ts",
+    "src/scripts/bluesky-embeds.mts"
+  ],
   "project": ["src/**/*.{astro,ts,js,mjs}", "*.{mjs,ts}"],
+  "ignoreDependencies": ["kiso.css"],
   "ignoreBinaries": ["actionlint", "jq"]
 }
