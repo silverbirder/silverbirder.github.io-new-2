@@ -64,8 +64,10 @@ function setupMonthNavigation() {
 
     const { top, height } = track.getBoundingClientRect();
     const slot = ((event.clientY - top) / height) * slotCount + 0.5;
-    const closest = months.reduce((nearest, month) =>
-      Math.abs(month.slot - slot) < Math.abs(nearest.slot - slot) ? month : nearest,
+    const closest = months.reduce(
+      (nearest, month) =>
+        Math.abs(month.slot - slot) < Math.abs(nearest.slot - slot) ? month : nearest,
+      first,
     );
     if (closest.target === lastTarget) return;
     closest.target.scrollIntoView({ block: 'start' });
