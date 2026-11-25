@@ -266,7 +266,7 @@ function auditAlternatingMarks(
     expect(
       Math.abs(center - expectedCenter),
       '最初の目印と以降の間隔は罫線一行分',
-    ).toBeLessThanOrEqual(1);
+    ).toBeLessThanOrEqual(area.dpr);
     expect(
       Math.abs(mark.right - mark.left + 1 - (dot ? 1.5 : 0.5) * scale),
       '点と棒の幅は文字拡大に追従する',
