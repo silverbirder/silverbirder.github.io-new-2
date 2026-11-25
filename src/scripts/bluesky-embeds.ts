@@ -14,23 +14,22 @@ async function didFor(actor: string): Promise<string | undefined> {
   }
 }
 
-async function embedPosts() {
-  const identifiers = new Map<string, Promise<string | undefined>>();
-  await Promise.all(
-    posts.map(async (post) => {
-      const { blueskyActor: actor, blueskyRecord: record } = post.dataset;
-      if (!actor || !record) return;
-      const lookup = identifiers.get(actor) ?? didFor(actor);
-      identifiers.set(actor, lookup);
-      const did = await lookup;
-      if (did) post.dataset.blueskyUri = `at://${did}/app.bsky.feed.post/${record}`;
-    }),
-  );
+const identifiers = new Map<string, Promise<string | undefined>>();
+await Promise.all(
+  posts.map(async (post) => {
+    const { blueskyActor: actor, blueskyRecord: record } = post.dataset;
+    if (!actor || !record) return;
+    const lookup = identifiers.get(actor) ?? didFor(actor);
+    identifiers.set(actor, lookup);
+    const did = await lookup;
+    if (did) post.dataset.blueskyUri = `at://${did}/app.bsky.feed.post/${record}`;
+  }),
+);
 
-  if (!posts.some((post) => post.dataset.blueskyUri)) return;
+if (posts.some((post) => post.dataset.blueskyUri)) {
   const script = document.createElement('script');
   script.src = 'https://embed.bsky.app/static/embed.js';
   document.head.append(script);
 }
 
-if (posts.length) void embedPosts();
+export {};

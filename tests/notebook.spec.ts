@@ -454,6 +454,8 @@ for (const size of sizes) {
       await auditMetadata(page, info);
     });
     test('本文罫線に丸がなく、別色の上下線に点と細い棒が交互に並ぶ', async ({ page }, info) => {
+      // 外部の埋め込みが読み込まれる前の状態で、上下の罫線を検査する。
+      await page.route('https://**/*', (route) => route.abort());
       await openArticle(page, '/samples/notebook/', size.root);
       await auditRulingMarks(page, info);
     });

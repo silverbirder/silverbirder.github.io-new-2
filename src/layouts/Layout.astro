@@ -70,6 +70,11 @@ const fontStylesheet = `${base}fonts/${fontName}.css`;
         }
       }
 
+      .notebook-body [data-embed] iframe {
+        box-sizing: content-box;
+        height: revert-layer;
+      }
+
       :root {
         color-scheme: only light;
         background-color: var(--semantic-color-background-page);
