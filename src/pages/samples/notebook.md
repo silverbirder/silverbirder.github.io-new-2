@@ -135,29 +135,19 @@ This_is_a_deliberately_long_unbroken_line_for_checking_horizontal_scrolling_insi
 
 ### 横長の画像
 
-<figure>
-  <a href="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_1280/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg">
-    <img src="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_768/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg" alt="開封前の布団のパッケージ" width="416" height="312" loading="lazy" decoding="async" />
-  </a>
-  <figcaption>横長の写真。高さ312pxを目安に縮小した例です。</figcaption>
-</figure>
+[![開封前の布団のパッケージ。横長の写真。高さ312pxを目安に縮小した例です。](https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_768/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg?ar=416%3A312)](https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_1280/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg)
 
 画像の次の段落です。画像とキャプションの高さが半端になっても、本文が罫線に戻るかを確認します。
 
 ### 縦長の画像
 
-<figure>
-  <a href="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_1280/v1793534298/silver-birder.github.io/blog/potg6bbdpvg7uz9d3mvi.jpg">
-    <img src="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_768/v1793534298/silver-birder.github.io/blog/potg6bbdpvg7uz9d3mvi.jpg" alt="星と月の模様がある布団" width="234" height="312" loading="lazy" decoding="async" />
-  </a>
-  <figcaption>縦長の写真も同じ高さに抑えた例です。長いキャプションが二行以上に折り返されたときの行間と、本文へ戻る位置も確認します。</figcaption>
-</figure>
+[![星と月の模様がある布団。縦長の写真も同じ高さに抑えた例です。長いキャプションが二行以上に折り返されたときの行間と、本文へ戻る位置も確認します。](https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_768/v1793534298/silver-birder.github.io/blog/potg6bbdpvg7uz9d3mvi.jpg?ar=234%3A312)](https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_1280/v1793534298/silver-birder.github.io/blog/potg6bbdpvg7uz9d3mvi.jpg)
 
 ### 小さな画像
 
-<p><img src="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_768/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg" alt="小さく表示した布団のパッケージ" data-notebook-rows="4" style="--notebook-image-rows: 4" loading="lazy" decoding="async" /></p>
+![小さく表示した布団のパッケージ](https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,w_144/v1793534296/silver-birder.github.io/blog/mqitxyovnhd6qysojkab.jpg?ar=144%3A108)
 
-画像の高さを罫線4行分に指定した例です。
+小さめに表示した画像の例です。
 
 ## 区切り線
 

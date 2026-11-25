@@ -301,6 +301,7 @@
     }
   },
   "component": {
+    "notebook-photo-width": { "value": "25rem", "type": "dimension" },
     "notebook-meta-separator-gap": { "value": "{primitive.space-1}", "type": "string" },
     "notebook-meta-dot-size": {
       "value": "calc({component.notebook-rule-spacing} * {component.notebook-meta-dot-radius-ratio} * {primitive.ratio-double})",

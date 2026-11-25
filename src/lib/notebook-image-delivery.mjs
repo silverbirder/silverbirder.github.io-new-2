@@ -1,11 +1,14 @@
-import { parseFragment, serialize } from 'parse5';
+import { defaultTreeAdapter, html, parseFragment, serialize } from 'parse5';
 import tokens from '../styles/design-tokens.json' with { type: 'json' };
 
 const primitive = tokens.primitive;
-const readingWidth = primitive['measure-md'].value;
+const photoWidth = Number.parseFloat(tokens.component['notebook-photo-width'].value);
+const frameClass = 'notebook-photo-frame';
+const captionClass = 'notebook-photo-caption';
+const frameInset = primitive['space-2'].value;
 const lineHeight = Number.parseFloat(primitive['line-height-md'].value);
 const gutter = `clamp(${primitive['space-4'].value}, ${primitive['space-fluid'].value}, ${primitive['space-8'].value})`;
-const availableWidth = `calc(100vw - ${gutter} - ${gutter})`;
+const availableWidth = `calc(100vw - ${gutter} - ${gutter} - ${primitive['space-2'].value} - 2 * ${frameInset})`;
 const pixelsPerRem = 16;
 const maxDensity = primitive['ratio-double'].value;
 const deliverySteps = [0.5, 0.75, 1, 1.125, 1.5, maxDensity];
@@ -32,7 +35,7 @@ function delivery(properties, url, parts) {
   if (!rows && properties.srcSet) return;
 
   const imageWidth = rows ? (rows * lineHeight * width) / height : width / pixelsPerRem;
-  const maxWidth = Math.min(imageWidth, Number.parseFloat(readingWidth));
+  const maxWidth = Math.min(imageWidth, photoWidth);
   const sourceSize = `min(${maxWidth}rem, ${availableWidth})`;
   const candidate = (factor) =>
     Math.max(1, Math.min(width, Math.ceil(maxWidth * pixelsPerRem * factor)));
@@ -64,20 +67,55 @@ function imageProperties(original, data, group) {
 }
 const hastPropertyNames = { srcset: 'srcSet', fetchpriority: 'fetchPriority' };
 
+function captionText(alt) {
+  return typeof alt === 'string' ? alt.trim() : '';
+}
+
+function frameHtmlImage(image, caption) {
+  const parent = image.parentNode;
+  if (
+    parent.attrs?.some(
+      ({ name, value }) => name === 'class' && value.split(/\s+/u).includes(frameClass),
+    )
+  ) {
+    return false;
+  }
+
+  const frame = defaultTreeAdapter.createElement('span', html.NS.HTML, [
+    { name: 'class', value: frameClass },
+  ]);
+  defaultTreeAdapter.insertBefore(parent, frame, image);
+  defaultTreeAdapter.detachNode(image);
+  defaultTreeAdapter.appendChild(frame, image);
+  if (caption) {
+    const label = defaultTreeAdapter.createElement('span', html.NS.HTML, [
+      { name: 'class', value: captionClass },
+      { name: 'aria-hidden', value: 'true' },
+    ]);
+    defaultTreeAdapter.insertText(label, caption);
+    defaultTreeAdapter.appendChild(frame, label);
+  }
+  return true;
+}
+
 function walk(node, data, group) {
-  if (node.tagName === 'img') {
-    const original = Object.fromEntries(
-      node.attrs.map(({ name, value }) => [hastPropertyNames[name] ?? name, value]),
-    );
-    const properties = imageProperties(original, data, group);
-    if (!properties) return false;
+  if (node.tagName !== 'img') {
+    return [...(node.childNodes ?? [])].map((child) => walk(child, data, group)).some(Boolean);
+  }
+
+  const original = Object.fromEntries(
+    node.attrs.map(({ name, value }) => [hastPropertyNames[name] ?? name, value]),
+  );
+  const properties = imageProperties(original, data, group);
+  if (properties) {
     node.attrs = Object.entries(properties).map(([name, value]) => ({
       name: name.toLowerCase(),
       value: String(value),
     }));
-    return true;
   }
-  return (node.childNodes ?? []).map((child) => walk(child, data, group)).some(Boolean);
+
+  const image = node.parentNode.tagName === 'picture' ? node.parentNode : node;
+  return frameHtmlImage(image, captionText(original.alt)) || Boolean(properties);
 }
 
 export default {
@@ -85,15 +123,31 @@ export default {
   element: {
     filter: ['img'],
     visit(node, context) {
-      const group = context.parent(node) ?? node;
-      const properties = imageProperties(node.properties, context.data, group);
+      const parent = context.parent(node);
+      const properties = imageProperties(node.properties, context.data, parent ?? node);
       for (const [key, value] of Object.entries(properties ?? {})) {
         if (value !== node.properties[key]) context.setProperty(node, key, value);
       }
+      const caption = captionText(node.properties.alt);
+      context.wrapNode(parent?.tagName === 'picture' ? parent : node, {
+        type: 'element',
+        tagName: 'span',
+        properties: { className: [frameClass] },
+        children: caption
+          ? [
+              {
+                type: 'element',
+                tagName: 'span',
+                properties: { className: [captionClass], ariaHidden: 'true' },
+                children: [{ type: 'text', value: caption }],
+              },
+            ]
+          : [],
+      });
     },
   },
   raw(node, context) {
-    if (!node.value.includes('res.cloudinary.com')) return;
+    if (!/<img[\s/>]/iu.test(node.value)) return;
     const fragment = parseFragment(node.value);
     if (walk(fragment, context.data, node)) context.setField(node, 'value', serialize(fragment));
   },

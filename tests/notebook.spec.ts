@@ -39,6 +39,8 @@ async function auditText(page: Page) {
 
     function inspect(node: Text) {
       const parent = node.parentElement!;
+      // 写真のキャプションは白い台紙の中に揃える。
+      if (parent.closest('.notebook-photo-caption')) return;
       const style = getComputedStyle(parent);
       ctx.font = `${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
       for (const { segment, index } of segmenter.segment(node.data)) {
