@@ -180,7 +180,7 @@ time .notebook-meta-parts {
 
 /* Normalize nested browser defaults before snapping the outer block height. */
 .notebook-body :where(ul, ol, blockquote),
-.notebook-body :is(li, figure, figcaption) {
+.notebook-body :is(li, figure) {
   margin-block: var(--primitive-space-none);
 }
 
@@ -190,7 +190,7 @@ time .notebook-meta-parts {
 
 /* cap is the actual font metric: the first baseline is anchored, not guessed. */
 @supports (text-box: trim-both cap alphabetic) {
-  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, figcaption, pre, th, td) {
+  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, pre, th, td) {
     text-box: trim-both cap alphabetic;
     padding-block: calc(
         var(--component-notebook-rule-spacing) - var(--primitive-font-metric-cap) -
@@ -218,7 +218,7 @@ time .notebook-meta-parts {
     height: calc-size(auto, round(up, size, var(--component-notebook-rule-spacing)));
   }
 
-  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, figcaption, pre, th, td) {
+  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, pre, th, td) {
     height: calc-size(auto, round(nearest, size, var(--component-notebook-rule-spacing)));
   }
 
