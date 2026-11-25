@@ -23,11 +23,6 @@ type Props = {
 };
 const { frontmatter, noindex, sharedFont, linkCards } = Astro.props;
 const blocks = insertArticleBlocks(await Astro.slots.render('default'), linkCards);
-const providers = new Set(
-  blocks.flatMap((block) =>
-    typeof block !== 'string' && 'provider' in block ? [block.provider] : [],
-  ),
-);
 const ruleImage = `${import.meta.env.BASE_URL}notebook-rule.svg`;
 const tickImage = `${import.meta.env.BASE_URL}notebook-ticks.svg`;
 const [year, month, day] = frontmatter.publishedAt.slice(0, 10).split('-');
@@ -96,12 +91,6 @@ const dateLabel = `${year}年${Number(month)}月${Number(day)}日`;
       })}
     </div>
     <div class="notebook-bottom" aria-hidden="true"></div>
-    {providers.has('x') && (
-      <script is:inline async src="https://platform.twitter.com/widgets.js"></script>
-    )}
-    {providers.has('instagram') && (
-      <script is:inline async src="https://www.instagram.com/embed.js"></script>
-    )}
     {tags.length > 0 && (
       <footer class="notebook-tags">
         <span id="article-tags-label">タグ</span>
