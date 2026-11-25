@@ -31,5 +31,3 @@ if (posts.some((post) => post.dataset.blueskyUri)) {
   script.src = 'https://embed.bsky.app/static/embed.js';
   document.head.append(script);
 }
-
-export {};
