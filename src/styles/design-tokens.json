@@ -301,6 +301,11 @@
     }
   },
   "component": {
+    "site-header-height": { "value": "3.75rem", "type": "string" },
+    "site-header-offset": {
+      "value": "calc({component.site-header-height} + {semantic.border-width-hairline})",
+      "type": "string"
+    },
     "notebook-photo-width": { "value": "25rem", "type": "dimension" },
     "notebook-meta-separator-gap": { "value": "{primitive.space-1}", "type": "string" },
     "notebook-meta-dot-size": {

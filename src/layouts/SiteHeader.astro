@@ -23,19 +23,24 @@ const path = Astro.url.pathname;
 
 <style>
   .site-header {
+    --site-header-layer: 2;
+
+    position: sticky;
+    inset-block-start: var(--primitive-space-none);
+    z-index: var(--site-header-layer);
+    background: var(--semantic-color-background-page);
     border-block-end: var(--semantic-border-width-hairline) solid
       var(--semantic-color-border-subtle);
   }
 
   .site-header-inner {
     --header-width: 60rem;
-    --header-height: 3.75rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--semantic-space-control-inline);
     max-inline-size: var(--header-width);
-    min-block-size: var(--header-height);
+    min-block-size: var(--component-site-header-height);
     margin-inline: auto;
     padding-inline: var(--semantic-space-page-gutter);
   }
@@ -70,6 +75,6 @@ const path = Astro.url.pathname;
 
   nav a:hover,
   nav a[aria-current='page'] {
-    text-decoration: underline;
+    text-decoration: underline var(--semantic-border-width-hairline);
   }
 </style>

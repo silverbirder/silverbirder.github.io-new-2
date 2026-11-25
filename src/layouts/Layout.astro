@@ -60,6 +60,10 @@ const fontStylesheet = `${base}fonts/${fontName}.css`;
         background-color: var(--semantic-color-background-page);
       }
 
+      :root:has(.site-header) {
+        scroll-padding-block-start: var(--component-site-header-offset);
+      }
+
       body {
         font-family: var(--semantic-font-family-body);
         font-synthesis: none;
