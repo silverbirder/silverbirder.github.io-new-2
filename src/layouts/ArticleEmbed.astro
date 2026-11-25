@@ -15,7 +15,7 @@ const names = {
 const title = names[embed.provider];
 const playerStyles = {
   youtube:
-    '--embed-ratio: 16 / 9; --embed-min-height: 200px; aspect-ratio: var(--embed-ratio); min-height: var(--embed-min-height); height: auto;',
+    '--embed-rows: 10; --embed-columns: 18; max-width: calc(var(--component-notebook-rule-spacing) * var(--embed-columns)); height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows)); margin-inline: auto;',
   codepen:
     '--embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));',
 };
@@ -28,10 +28,14 @@ const playerStyles = {
         src={embed.src}
         title={`${title}の埋め込み`}
         loading="lazy"
-        allow="encrypted-media; picture-in-picture; fullscreen"
+        allow={
+          embed.provider === 'youtube'
+            ? 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+            : undefined
+        }
         allowfullscreen
         referrerpolicy="strict-origin-when-cross-origin"
-        style={`width: var(--primitive-size-full); border: var(--primitive-space-none); ${playerStyles[embed.provider]}`}
+        style={`display: block; width: var(--primitive-size-full); border: var(--primitive-space-none); ${playerStyles[embed.provider]}`}
       />
     </div>
     <p>
@@ -40,17 +44,25 @@ const playerStyles = {
   </>
 )}
 {embed.provider === 'x' && (
-  <div data-embed={embed.provider} style="display: flow-root;">
-    <blockquote
-      class="twitter-tweet"
-      data-lang="ja"
-      data-dnt="true"
-      style="margin: var(--primitive-space-none);"
-    >
-      <p>
-        <a href={embed.url}>Xで投稿を開く</a>
-      </p>
-    </blockquote>
+  <div
+    data-embed={embed.provider}
+    data-x-post={embed.url.split('/').at(-1)}
+    style="display: flow-root;"
+  >
+    <p data-x-fallback>
+      <a href={embed.url}>Xで投稿を開く</a>
+    </p>
+    <template>
+      <section style="--x-card-width: 550px; max-width: var(--x-card-width); margin-inline: auto; padding: var(--primitive-space-4); overflow-wrap: anywhere; background: var(--semantic-color-background-page); border: var(--semantic-border-width-hairline) solid var(--semantic-color-border-paper);">
+        <a href={embed.url} aria-label="Xで投稿を開く">
+          <strong data-x-author></strong>
+          <span data-x-handle></span>
+        </a>
+        <p data-x-text style="white-space: pre-wrap;"></p>
+        <div data-x-media></div>
+        <time data-x-date></time>
+      </section>
+    </template>
   </div>
 )}
 {embed.provider === 'instagram' && (
@@ -70,17 +82,12 @@ const playerStyles = {
 )}
 {embed.provider === 'bluesky' && (
   <div data-embed={embed.provider} style="display: flow-root;">
-    <blockquote
-      data-bluesky-actor={embed.actor}
-      data-bluesky-record={embed.record}
-      data-bluesky-embed-color-mode="system"
-      style="margin: var(--primitive-space-none);"
-    >
-      <p>
-        <a href={embed.url}>Blueskyで投稿を開く</a>
-      </p>
-    </blockquote>
+    <p data-bluesky-actor={embed.actor} data-bluesky-record={embed.record}>
+      <a href={embed.url}>Blueskyで投稿を開く</a>
+    </p>
   </div>
 )}
 
 <script src="../scripts/bluesky-embeds.mts"></script>
+<script src="../scripts/x-embeds.mts"></script>
+<script src="../scripts/instagram-embeds.mts"></script>

@@ -3,7 +3,9 @@
   "entry": [
     "src/layouts/ArticleLayout.astro",
     "src/scripts/blog-month-nav.ts",
-    "src/scripts/bluesky-embeds.mts"
+    "src/scripts/bluesky-embeds.mts",
+    "src/scripts/instagram-embeds.mts",
+    "src/scripts/x-embeds.mts"
   ],
   "project": ["src/**/*.{astro,ts,js,mjs}", "*.{mjs,ts}"],
   "ignoreDependencies": ["kiso.css"],
