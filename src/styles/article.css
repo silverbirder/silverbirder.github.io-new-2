@@ -88,8 +88,11 @@ time .notebook-meta-parts {
   justify-self: end;
 }
 
-.notebook-heading {
+.notebook-header {
   position: relative;
+}
+
+.notebook-heading {
   padding: var(--semantic-space-control-block) var(--primitive-space-none);
   border-block: var(--semantic-border-width-hairline) solid var(--semantic-color-border-paper);
 }
@@ -101,12 +104,12 @@ time .notebook-meta-parts {
   border-block-start: var(--semantic-border-width-hairline) solid var(--semantic-color-border-paper);
 }
 
-.notebook-heading::after,
+.notebook-header::after,
 .notebook-bottom::after {
   content: '';
   position: absolute;
   inset-inline: var(--component-notebook-tick-inset) var(--primitive-space-none);
-  top: calc(var(--primitive-size-full) + var(--semantic-border-width-hairline));
+  top: var(--primitive-size-full);
   height: var(--component-notebook-tick-height);
   pointer-events: none;
   background-color: var(--semantic-color-border-paper);
@@ -247,7 +250,7 @@ time .notebook-meta-parts {
 
 .notebook-body a {
   color: var(--semantic-color-text-link);
-  text-decoration: underline;
+  text-decoration: underline var(--semantic-border-width-hairline);
   text-underline-offset: var(--semantic-text-link-underline-offset);
 }
 

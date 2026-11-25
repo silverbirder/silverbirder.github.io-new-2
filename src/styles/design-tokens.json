@@ -197,7 +197,7 @@
   "semantic": {
     "color-background-page": { "value": "{primitive.palette-neutral-0}", "type": "string" },
     "color-border-paper": { "value": "{primitive.palette-cyan-200}", "type": "string" },
-    "border-width-hairline": { "value": "{primitive.size-css-pixel}", "type": "string" },
+    "border-width-hairline": { "value": "0.5px", "type": "dimension" },
     "space-control-block": { "value": "{primitive.space-2}", "type": "string" },
     "space-control-inline": { "value": "{primitive.space-4}", "type": "string" },
     "font-size-label": { "value": "{primitive.font-size-sm}", "type": "string" },

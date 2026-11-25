@@ -95,8 +95,8 @@ const thumbnail = card.image && import.meta.env.BASE_URL + 'link-card/' + card.i
         to right,
         var(--paper-clear) var(--margin-line-inset),
         var(--semantic-color-border-subtle) var(--margin-line-inset)
-          calc(var(--margin-line-inset) + var(--primitive-size-css-pixel)),
-        var(--paper-clear) calc(var(--margin-line-inset) + var(--primitive-size-css-pixel))
+          calc(var(--margin-line-inset) + var(--semantic-border-width-hairline)),
+        var(--paper-clear) calc(var(--margin-line-inset) + var(--semantic-border-width-hairline))
       ),
       var(--paper-tint);
     box-shadow: var(--shadow-x) var(--shadow-x) var(--shadow-blur)
@@ -107,7 +107,7 @@ const thumbnail = card.image && import.meta.env.BASE_URL + 'link-card/' + card.i
   }
 
   .link-card:focus-visible {
-    outline: var(--semantic-border-width-hairline) solid var(--semantic-color-text-link);
+    outline: var(--primitive-size-css-pixel) solid var(--semantic-color-text-link);
     outline-offset: var(--primitive-space-1);
   }
 
@@ -167,7 +167,7 @@ const thumbnail = card.image && import.meta.env.BASE_URL + 'link-card/' + card.i
   }
 
   .link-card:hover .link-card-title {
-    text-decoration: underline;
+    text-decoration: underline var(--semantic-border-width-hairline);
   }
 
   .link-card-description,
