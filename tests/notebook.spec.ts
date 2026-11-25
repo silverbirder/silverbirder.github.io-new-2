@@ -179,6 +179,8 @@ async function auditNativeSelection(
 }
 
 async function openArticle(page: Page, route: string, root: number) {
+  // 外部ウィジェットの読み込みに依存せず、記事と代替リンクを検査する。
+  await page.route('https://**/*', (request) => request.abort());
   await page.goto(route);
   await expect(page.locator('.notebook-body')).toBeVisible();
   const deferredFont = page.locator('link[href$="/fonts/site.css"][media="print"]');
@@ -454,8 +456,6 @@ for (const size of sizes) {
       await auditMetadata(page, info);
     });
     test('本文罫線に丸がなく、別色の上下線に点と細い棒が交互に並ぶ', async ({ page }, info) => {
-      // 外部の埋め込みが読み込まれる前の状態で、上下の罫線を検査する。
-      await page.route('https://**/*', (route) => route.abort());
       await openArticle(page, '/samples/notebook/', size.root);
       await auditRulingMarks(page, info);
     });
