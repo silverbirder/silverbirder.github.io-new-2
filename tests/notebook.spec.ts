@@ -268,7 +268,7 @@ function auditAlternatingMarks(
       '最初の目印と以降の間隔は罫線一行分',
     ).toBeLessThanOrEqual(1);
     expect(
-      Math.abs(mark.right - mark.left + 1 - (dot ? 1.5 : 1) * scale),
+      Math.abs(mark.right - mark.left + 1 - (dot ? 1.5 : 0.5) * scale),
       '点と棒の幅は文字拡大に追従する',
     ).toBeLessThanOrEqual(paintTolerance);
     expect(
@@ -287,7 +287,9 @@ async function auditRulingMarks(page: Page, info: TestInfo) {
     const bodyBox = body.getBoundingClientRect();
     const bottom = document.querySelector('.notebook-bottom')!;
     const step = Number.parseFloat(getComputedStyle(body).lineHeight);
-    const tickHeight = Number.parseFloat(getComputedStyle(heading, '::after').height);
+    const tickHeight = Number.parseFloat(
+      getComputedStyle(heading.parentElement!, '::after').height,
+    );
     const lineWidth = Number.parseFloat(getComputedStyle(heading).borderBottomWidth);
     const x = Math.floor(bodyBox.left);
     const y = Math.floor(headingBox.bottom - lineWidth);

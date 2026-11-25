@@ -14,7 +14,7 @@
     "prepare": "husky",
     "check": "mkdir -p .cache/tmp .cache/quality && ASTRO_TELEMETRY_DISABLED=1 ASTRO_BASE=/ npm_config_cache=\"$PWD/.cache/npm\" PUPPETEER_CACHE_DIR=\"$PWD/.cache/puppeteer\" TMPDIR=\"$PWD/.cache/tmp\" run-s check:static test",
     "check:static": "run-p format:check lint:js lint:astro lint:css lint:md lint:config typecheck lint:unused lint:duplicates audit",
-    "lint:css": "npm run tokens:build && stylelint \"src/**/*.{css,astro}\" --max-warnings 0",
+    "lint:css": "npm run tokens:build && stylelint \"src/**/*.{css,astro}\" --max-warnings 0 && node scripts/lint-hairlines.mjs",
     "lint:md": "markdownlint-cli2",
     "lint:config": "npm run lint:package && npm run lint:registry && actionlint && sh -n .husky/pre-commit",
     "lint:package": "npmPkgJsonLint . --ignorePath .gitignore --maxWarnings 0 && npm ci --dry-run --ignore-scripts --no-audit --no-fund",
