@@ -4,7 +4,7 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.BuBOI7yN.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.Bmint_wR.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">134</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2024-12-16"><span class="visually-hidden">2024年12月16日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2024</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">12</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">16</span></span></time></p></div><div class="notebook-heading"><h1>フロントエンド開発者のためのCSS設計ガイド：メンテナンス性を高める10の実践</h1></div></header><div class="notebook-body"><p>こんにちは、Webフロントエンド開発者のみなさま。silverbirderと申します。</p>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.Bmint_wR.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DWMfOIbz.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta"><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">134</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2024-12-16"><span class="visually-hidden">2024年12月16日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2024</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">12</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">16</span></span></time></p></div><div class="notebook-heading"><h1>フロントエンド開発者のためのCSS設計ガイド：メンテナンス性を高める10の実践</h1></div></header><div class="notebook-body"><p>こんにちは、Webフロントエンド開発者のみなさま。silverbirderと申します。</p>
 <p>突然ですが、みなさんは普段どのようにCSSを設計していますか？愚直にプロパティを書いていますか？それとも、何かしらのルールがありますか？</p>
 <p>私自身、この1年間、スタイルに関わるさまざまな開発を経験してきました。その経験から、CSS設計に関するプラクティスが少しずつ固まってきました。そこで今回は、私が得た知見の中から <strong>10つの考え</strong> を共有したいと思います。これらの考えが、みなさんのCSS設計に少しでも役立つヒントになれば幸いです。</p>
 <h2 id="css設計">CSS設計</h2>
@@ -33,7 +33,7 @@
   background-color: lightblue;
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/gbYwrOa">https://codepen.io/silverbirder/pen/gbYwrOa</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/gbYwrOa" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/gbYwrOa">CodePenで開く</a></p><script type="module">var e=Array.from(document.querySelectorAll(`[data-bluesky-actor]`));async function t(e){if(e.startsWith(`did:`))return e;let t=new URL(`https://public.api.bsky.app/xrpc/com.atproto.identity.resolveHandle`);t.searchParams.set(`handle`,e);try{let e=await fetch(t,{signal:AbortSignal.timeout(3e3)});if(!e.ok)return;let{did:n}=await e.json();if(typeof n==`string`&&/^did:[\w.:%-]+$/u.test(n))return n}catch{}}var n=new Map;if(await Promise.all(e.map(async e=>{let{blueskyActor:r,blueskyRecord:i}=e.dataset;if(!r||!i)return;let a=n.get(r)??t(r);n.set(r,a);let o=await a;o&&(e.dataset.blueskyUri=`at://${o}/app.bsky.feed.post/${i}`)})),e.some(e=>e.dataset.blueskyUri)){let e=document.createElement(`script`);e.src=`https://embed.bsky.app/static/embed.js`,document.head.append(e)}</script>
 <p>このコードでは、以下のようにスペースを調整しています。</p>
 <ul>
 <li><code>.item</code>間に <code>0.25rem</code> のスペース</li>
@@ -69,7 +69,7 @@
   background-color: lightblue;
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/xbKEVYo">https://codepen.io/silverbirder/pen/xbKEVYo</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/xbKEVYo" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/xbKEVYo">CodePenで開く</a></p>
 <p>この方法では、以下のようなメリットがあります。</p>
 <ul>
 <li>親要素（<code>.wrapper</code>）が、子要素（<code>.item</code>）の間のスペースを調整</li>
@@ -126,7 +126,7 @@
   height: 80px;
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/vEBXGjG">https://codepen.io/silverbirder/pen/vEBXGjG</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/vEBXGjG" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/vEBXGjG">CodePenで開く</a></p>
 <p>このようなスタイルが絶対に悪いわけではありません。状況によっては適切な場合もあります。
 しかし、 <strong>固定値を多用すると、次のような理由でレイアウトが崩れるリスクが高まります</strong> 。</p>
 <ul>
@@ -154,7 +154,7 @@
   height: 100%;
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/jENMqxz">https://codepen.io/silverbirder/pen/jENMqxz</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/jENMqxz" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/jENMqxz">CodePenで開く</a></p>
 <p>この修正では、以下のような柔軟性が得られます。</p>
 <ul>
 <li>親要素に応じて自動で調整されるサイズ</li>
@@ -431,7 +431,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   height: 200px;
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/KwPgzJx">https://codepen.io/silverbirder/pen/KwPgzJx</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/KwPgzJx" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/KwPgzJx">CodePenで開く</a></p>
 <p>このコードでは、<code>z-index</code> の値に基づいて、<code>layer2（lightgreen）</code>が一番上に表示されます。
 このように要素が増えると、<code>z-index</code> の値を管理するのが複雑になります。</p>
 <p>そこで、<code>z-index</code> の値も共通変数として定義すると、管理が簡単になります。</p>
@@ -519,7 +519,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   z-index: 1;
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/mybrPoW">https://codepen.io/silverbirder/pen/mybrPoW</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/mybrPoW" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/mybrPoW">CodePenで開く</a></p>
 <p>重ね合わせコンテキストについて視覚的に理解したくなると思う方には、以下のChrome拡張機能がオススメです。</p>
 <ul>
 <li><a href="https://chromewebstore.google.com/detail/css-stacking-context-insp/apjeljpachdcjkgnamgppgfkmddadcki?hl=ja">CSS Stacking Context inspector - Chrome ウェブストア</a></li>
@@ -537,7 +537,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   box-shadow: 6px 6px 6px 0px rgba(0, 0, 0, 0.45);
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/GgKNEwQ">https://codepen.io/silverbirder/pen/GgKNEwQ</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/GgKNEwQ" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/GgKNEwQ">CodePenで開く</a></p>
 <p><code>box-shadow</code> は以下の要素を定義できます。</p>
 <ul>
 <li>影の方向 (x軸、y軸)</li>
@@ -587,7 +587,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   box-shadow: var(--shadow-layer-3);
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/WbeoOVm">https://codepen.io/silverbirder/pen/WbeoOVm</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/WbeoOVm" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/WbeoOVm">CodePenで開く</a></p>
 <h4 id="position-absolute-を使用する際の注意点">position: absolute を使用する際の注意点</h4>
 <p><code>position: absolute</code> を使う場合、基準となる祖先要素に <code>position: relative</code> などを設定する必要があります。 <strong>設定しない場合、ルート要素(html)が基準となってしまいます</strong> 。以下の例のように、必ず <code>position: relative</code> をつけましょう。</p>
 <pre><code class="language-html">&lt;div class="wrapper"&gt;
@@ -616,7 +616,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   left: 0px;
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/jENMqJp">https://codepen.io/silverbirder/pen/jENMqJp</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/jENMqJp" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/jENMqJp">CodePenで開く</a></p>
 <p>この設定により、<code>.text</code> 要素は <code>.wrapper</code> を基準に配置されます。基準を明示的に設定することで、意図した配置が確実になります。</p>
 <h3 id="flex-で要素を伸縮させる">flex で要素を伸縮させる</h3>
 <p>要素を縦横に柔軟に配置する際には、<code>display: flex</code> を使用することが一般的です。
@@ -638,7 +638,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   }
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/RNbGaOK">https://codepen.io/silverbirder/pen/RNbGaOK</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/RNbGaOK" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/RNbGaOK">CodePenで開く</a></p>
 <p><code>flex</code> の大きな特徴は、 <strong>フレックスコンテナ内でアイテムの伸縮を制御できる点</strong> です。主に以下の3つのプロパティを利用します。</p>
 <ul>
 <li><code>flex-grow</code>: 残りの空間をどれだけ占めるか（デフォルト: 0）。</li>
@@ -679,7 +679,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   background-color: lightpink;
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/NPKRNmY">https://codepen.io/silverbirder/pen/NPKRNmY</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/NPKRNmY" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/NPKRNmY">CodePenで開く</a></p>
 <p>この例では、<code>.with-sidebar</code> をフレックスコンテナとして定義し、アイテムごとに伸縮を設定しています。
 さらに、<code>.not-sidebar</code> に <code>min-width</code> を指定することで、幅が足りなくなった場合は <code>flex-wrap</code> により自動的に折り返します。</p>
 <p>結果として、以下のようなレスポンシブデザインが実現します。</p>
@@ -737,7 +737,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   };
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/azomNgb">https://codepen.io/silverbirder/pen/azomNgb</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/azomNgb" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/azomNgb">CodePenで開く</a></p>
 <p><code>display: contents</code> を指定すると、 <strong>その要素は「なかったこと」として扱われます。</strong>
 以下のようにブラウザ上で解釈されます。</p>
 <pre><code class="language-html">&lt;div class="card"&gt;
@@ -769,7 +769,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   color: red;
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/jENMqjv">https://codepen.io/silverbirder/pen/jENMqjv</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/jENMqjv" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/jENMqjv">CodePenで開く</a></p>
 <p>この場合、<code>.wrapper</code> で定義したスタイルが <code>.text</code> 要素にも適用され、期待する結果が得られます。
 しかし、この設計には問題が潜んでいます。</p>
 <h4 id="問題点-意図しない継承のリスク">問題点: 意図しない継承のリスク</h4>
@@ -782,7 +782,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/qEWaZeO">https://codepen.io/silverbirder/pen/qEWaZeO</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/qEWaZeO" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/qEWaZeO">CodePenで開く</a></p>
 <p>ここでは、<code>Thank you</code> にも <code>font-size</code> や <code>color</code> といったスタイルが適用されます。
 これが意図通りであれば問題ありません。しかし規模が大きくなると、このような継承は意図しないデザインの崩れや混乱を引き起こす原因になります。</p>
 <h4 id="解決策-テキストスタイルをテキストに適用する">解決策: テキストスタイルをテキストに適用する</h4>
@@ -800,7 +800,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   }
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/qEWaNWb">https://codepen.io/silverbirder/pen/qEWaNWb</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/qEWaNWb" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/qEWaNWb">CodePenで開く</a></p>
 <p>また、汎用的に使用するテキストスタイルは、以下のようにクラスを分離して定義するのが良いでしょう。</p>
 <pre><code class="language-css">.wrapper {
   /* レイアウトスタイル */
@@ -840,7 +840,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   border: 1px solid black;
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/OPLRXLz">https://codepen.io/silverbirder/pen/OPLRXLz</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/OPLRXLz" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/OPLRXLz">CodePenで開く</a></p>
 <p>この場合、表示される <code>.wrapper</code> の横幅は <code>100px</code> ではなく、ボーダーとパディングを加えた <code>104px</code> になります。</p>
 <h4 id="解決策-box-sizing-プロパティを使う">解決策: box-sizing プロパティを使う</h4>
 <p>こうした問題を解決するために、<code>box-sizing</code> プロパティを使います。
@@ -854,7 +854,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   box-sizing: border-box;
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/azomZbz">https://codepen.io/silverbirder/pen/azomZbz</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/azomZbz" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/azomZbz">CodePenで開く</a></p>
 <p>これにより、要素の外側のサイズが意図通りに計算され、デザインの予測がしやすくなります。</p>
 <h4 id="グローバル設定での注意点">グローバル設定での注意点</h4>
 <p>多くのプロジェクトでは、全ての要素に対して <code>box-sizing: border-box;</code> を適用するスタイルを採用しています。</p>
@@ -911,7 +911,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   }
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/NPKRrWz">https://codepen.io/silverbirder/pen/NPKRrWz</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/NPKRrWz" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/NPKRrWz">CodePenで開く</a></p>
 <p>このままでは、カードごとに高さが異なり、全体が揃いません。</p>
 <h4 id="解決策-サブグリッドの活用">解決策: サブグリッドの活用</h4>
 <p><code>subgrid</code> を使用すると、縦のラインを揃えることができます。以下の例では、サブグリッドを活用してカードの要素間の位置を揃えています。</p>
@@ -940,7 +940,7 @@ CSSではカスタムプロパティ、CSS-in-JSではJavaScript変数、Sassで
   }
 }
 </code></pre>
-<p><a href="https://codepen.io/silverbirder/pen/JoPRKoY">https://codepen.io/silverbirder/pen/JoPRKoY</a></p>
+<div data-embed="codepen" style="margin-block-end: var(--primitive-space-none);"><iframe src="https://codepen.io/silverbirder/embed/JoPRKoY" title="CodePenの埋め込み" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width: var(--primitive-size-full); border: var(--primitive-space-none); --embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));"></iframe></div><p><a href="https://codepen.io/silverbirder/pen/JoPRKoY">CodePenで開く</a></p>
 <p>この設定により、カード内の要素の高さが統一され、縦のラインが揃います。</p>
 <h4 id="他の解決策">他の解決策</h4>
 <p>サブグリッドが適用しにくい場合、以下の方法を検討してください。</p>
