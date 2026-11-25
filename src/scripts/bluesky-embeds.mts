@@ -28,7 +28,7 @@ if (posts.length) {
     };
     if (typeof id !== 'string' || typeof height !== 'number') return;
     const entry = frames.get(id);
-    if (!entry || event.source !== entry.frame.contentWindow) return;
+    if (!entry?.frame.contentWindow || event.source !== entry.frame.contentWindow) return;
     if (!Number.isFinite(height) || height <= 0) return;
     entry.frame.height = String(Math.ceil(height));
     entry.fallback.hidden = true;
@@ -46,7 +46,12 @@ await Promise.all(
     if (!did) return;
 
     const id = String(index);
-    const url = new URL(origin + '/embed/' + did + '/app.bsky.feed.post/' + record);
+    const url = new URL(origin);
+    // 公式iframeに渡すDIDの区切りはコロンで残す。
+    const didSegment = encodeURIComponent(did).replaceAll('%3A', ':');
+    url.pathname = ['/embed', didSegment, 'app.bsky.feed.post', encodeURIComponent(record)].join(
+      '/',
+    );
     url.searchParams.set('colorMode', 'system');
     url.searchParams.set('id', id);
 
