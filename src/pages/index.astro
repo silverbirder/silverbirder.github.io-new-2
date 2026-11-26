@@ -574,7 +574,11 @@ const titleWave = `
           <path d="M2 10.6 12 2 22 10.6 H19.9 L12 3.9 4.1 10.6 Z M4.7 10.1 V24.4 H19.3 V10.1 M4.2 24.4 H19.8" />
           <path d="M8.9 14.2 V10.9 a3.1 3.1 0 0 1 6.2 0 V14.2 Z" />
           <circle cx="12" cy="19.45" r="3.65" />
-          <path d="M10.36 18.21 12 19.45 13.93 18.36 M12 16.46 V17.08 M12 21.82 V22.44 M9.01 19.45 H9.63 M14.37 19.45 H14.99" />
+          <path d="M12 16.46 V17.08 M12 21.82 V22.44 M9.01 19.45 H9.63 M14.37 19.45 H14.99" />
+          <g class="home-clock-hands" transform="translate(12 19.45)" visibility="hidden">
+            <path d="M0 0 V-1.45" />
+            <path d="M0 0 V-2.2" />
+          </g>
           <g class="home-clock-pendulum">
             <path d="M12 24.4 V28.65" />
             <circle cx="12" cy="30.1" r="1.45" />
@@ -602,4 +606,5 @@ const titleWave = `
       </div>
     </div>
   </section>
+  <script src="../scripts/home-clock.ts"></script>
 </Layout>
