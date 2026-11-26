@@ -325,9 +325,10 @@ async function auditRulingMarks(page: Page, info: TestInfo) {
   await info.attach('ruling-marks', { body: screenshot, contentType: 'image/png' });
   const png = PNG.sync.read(screenshot);
   const heading = auditAlternatingMarks(png, area);
+  const rulingOnlyStyle = '.notebook-body > * { visibility: hidden; }';
   const bodyImage = await page.screenshot({
     clip: area.bodyClip,
-    style: '.notebook-body > * { visibility: hidden; }',
+    style: rulingOnlyStyle,
     path: info.outputPath('body-ruling.png'),
   });
   await info.attach('body-ruling', { body: bodyImage, contentType: 'image/png' });
@@ -348,16 +349,20 @@ async function auditRulingMarks(page: Page, info: TestInfo) {
   await bottomTarget.scrollIntoViewIfNeeded();
   const bottomArea = await bottomTarget.evaluate((element) => {
     const box = element.getBoundingClientRect();
+    const lastBlock = element.previousElementSibling!.lastElementChild!;
+    const contentGap = box.top - lastBlock.getBoundingClientRect().bottom;
     const x = Math.floor(box.left);
     const y = Math.floor(box.top);
     const width = Math.floor(box.width);
     return {
       width,
+      contentGap,
       leftOffset: box.left - x,
       clip: { x, y, width, height: Math.ceil(box.bottom - y + 1) },
       edgeClip: { x, y: box.top - 4, width, height: 4 },
     };
   });
+  expect(Math.abs(bottomArea.contentGap), '本文の最後に空行を入れない').toBeLessThan(0.05);
   const bottomImage = await page.screenshot({
     clip: bottomArea.clip,
     path: info.outputPath('bottom-marks.png'),
@@ -376,7 +381,9 @@ async function auditRulingMarks(page: Page, info: TestInfo) {
       '上下の点と棒は同じ高さ',
     ).toBeLessThanOrEqual(2);
   }
-  const edge = PNG.sync.read(await page.screenshot({ clip: bottomArea.edgeClip }));
+  const edge = PNG.sync.read(
+    await page.screenshot({ clip: bottomArea.edgeClip, style: rulingOnlyStyle }),
+  );
   expect(paintedColumns(edge, 0, edge.height - 1), '下端の線の上に半円が残らない').toHaveLength(0);
 }
 

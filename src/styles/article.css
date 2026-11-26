@@ -156,7 +156,6 @@ time .notebook-meta-parts {
   position: relative;
   isolation: isolate;
   display: flow-root;
-  padding-block: var(--primitive-space-none) var(--component-notebook-rule-spacing);
 }
 
 /* The SVG supplies the shape; its visible color is managed here. */
