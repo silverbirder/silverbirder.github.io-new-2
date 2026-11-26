@@ -53,6 +53,7 @@ const fontStylesheet = `${base}fonts/${fontName}.css`;
       <link rel="stylesheet" href={fontStylesheet} />
     )}
     {article && <link rel="preconnect" href="https://res.cloudinary.com" />}
+    <slot name="head" />
     <style is:inline>
       @media (prefers-reduced-motion: no-preference) {
         @view-transition {

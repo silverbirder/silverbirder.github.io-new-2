@@ -26,6 +26,354 @@ const titleWave = `
 ---
 
 <Layout {title} currentPage="home">
+  <Fragment slot="head">
+    <style is:inline>
+      .home {
+        --home-vertical-space: clamp(3.5rem, 9vh, 5.5rem);
+        --home-gap: clamp(1.5rem, 4vw, 2.5rem);
+        --home-nav-link-padding: 0.35em;
+        --home-window-width: min(60vw, 22rem);
+        --furniture-gap: clamp(0.5rem, 2.25vw, 2rem);
+        --furniture-floor: calc(var(--home-vertical-space) + var(--home-window-width) * 1.25);
+        --furniture-baseline-offset: 0 -100%;
+        --room-edge: clamp(0.375rem, 1.3vw, 1rem);
+        --room-spacing: clamp(0.25rem, 1.25vw, 1rem);
+        /* Approximate dimensions in centimeters, scaled together beside the window. */
+        --sofa-reference-width: 152;
+        --desk-reference-width: 124;
+        --display-shelf-reference-width: 50;
+        --display-shelf-reference-height: 158;
+        --furniture-side-width: max(
+          var(--sofa-reference-width),
+          var(--desk-reference-width) + var(--display-shelf-reference-width)
+        );
+        --furniture-side-space: calc(
+          (100vw - var(--home-window-width)) / 2 - var(--furniture-gap) - var(--room-edge) -
+            var(--room-spacing)
+        );
+        --furniture-unit: min(
+          1.15px,
+          calc(var(--furniture-side-space) / var(--furniture-side-width))
+        );
+        --desk-width: calc(var(--furniture-unit) * var(--desk-reference-width));
+        --display-shelf-width: calc(var(--furniture-unit) * var(--display-shelf-reference-width));
+        --sofa-width: calc(var(--furniture-unit) * var(--sofa-reference-width));
+        --desk-left: calc((100% + var(--home-window-width)) / 2 + var(--furniture-gap));
+        --display-shelf-left: calc(var(--desk-left) + var(--desk-width) + var(--room-spacing));
+        --sofa-right: calc(var(--desk-left) + var(--room-spacing));
+
+        position: relative;
+        display: grid;
+        justify-items: center;
+        gap: var(--home-gap);
+        padding: var(--home-vertical-space) var(--semantic-space-page-gutter);
+        color: var(--semantic-color-text-primary);
+        text-align: center;
+      }
+
+      .home-favorite-jacket {
+        --jacket-width: calc(var(--furniture-unit) * 86);
+        --sofa-back-height: calc(var(--furniture-unit) * 78);
+        --jacket-collar-opacity: 0.34;
+        --jacket-cuffs-opacity: 0.29;
+        --jacket-texture-opacity: 0.72;
+
+        inset-block-end: var(--sofa-back-height);
+        justify-self: center;
+        inline-size: var(--jacket-width);
+      }
+
+      .home-jacket-collar,
+      .home-jacket-cuffs {
+        fill: var(--semantic-color-text-link);
+        stroke: none;
+      }
+
+      .home-jacket-collar {
+        fill-opacity: var(--jacket-collar-opacity);
+      }
+
+      .home-jacket-cuffs {
+        fill-opacity: var(--jacket-cuffs-opacity);
+      }
+
+      .home-jacket-texture {
+        stroke-opacity: var(--jacket-texture-opacity);
+      }
+
+      .home-cuckoo-clock {
+        --clock-width: calc(var(--furniture-unit) * 26);
+        --clock-left: calc(
+          var(--display-shelf-left) + (var(--display-shelf-width) - var(--clock-width)) / 2
+        );
+        --display-shelf-height: calc(var(--furniture-unit) * var(--display-shelf-reference-height));
+        --clock-shelf-gap: calc(var(--furniture-unit) * 16);
+        --clock-bottom: calc(
+          var(--furniture-floor) - var(--display-shelf-height) - var(--clock-shelf-gap)
+        );
+
+        inset-block-start: var(--clock-bottom);
+        inset-inline-start: var(--clock-left);
+        inline-size: var(--clock-width);
+      }
+
+      .home-clock-pendulum {
+        transform-box: fill-box;
+        transform-origin: center top;
+      }
+
+      @property --clock-pendulum-phase {
+        syntax: '<angle>';
+        inherits: false;
+        initial-value: 0deg;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .home-clock-pendulum {
+          /* A seconds pendulum takes one second between turning points. */
+          --pendulum-duration: 2s;
+          --pendulum-amplitude: 10deg;
+
+          rotate: calc(var(--pendulum-amplitude) * cos(var(--clock-pendulum-phase)));
+          animation: home-clock-swing var(--pendulum-duration) linear infinite;
+        }
+
+        @keyframes home-clock-swing {
+          to {
+            --clock-pendulum-phase: 1turn;
+          }
+        }
+      }
+
+      .home-computer-desk {
+        inset-inline-start: var(--desk-left);
+        inline-size: var(--desk-width);
+      }
+
+      .home-sofa-plush-outline {
+        fill: var(--semantic-color-text-link);
+      }
+
+      .home-sofa-plush-texture {
+        stroke: var(--semantic-color-background-page);
+      }
+
+      .home-shelf-boards {
+        fill: var(--semantic-color-background-page);
+      }
+
+      .home-display-shelf {
+        inset-inline-start: var(--display-shelf-left);
+        inline-size: var(--display-shelf-width);
+      }
+
+      .home-room,
+      .home-work-room {
+        display: contents;
+      }
+
+      .home-living-room {
+        display: grid;
+        inset-inline-end: var(--sofa-right);
+        inline-size: var(--sofa-width);
+      }
+
+      .home-sofa-drawing {
+        --sofa-drawing-width: 100%;
+
+        inline-size: var(--sofa-drawing-width);
+        block-size: auto;
+        overflow: visible;
+      }
+
+      .home-computer-desk,
+      .home-display-shelf,
+      .home-living-room {
+        inset-block-start: var(--furniture-floor);
+      }
+
+      .home-cuckoo-clock,
+      .home-computer-desk,
+      .home-display-shelf,
+      .home-living-room {
+        translate: var(--furniture-baseline-offset);
+      }
+
+      .home-favorite-jacket,
+      .home-cuckoo-clock,
+      .home-computer-desk,
+      .home-display-shelf,
+      .home-living-room {
+        position: absolute;
+        block-size: auto;
+        overflow: visible;
+        fill: none;
+        stroke: var(--semantic-color-text-link);
+        stroke-width: var(--semantic-border-width-hairline);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        pointer-events: none;
+      }
+
+      .home-cuckoo-clock :is(path, rect, circle),
+      .home-computer-desk :is(path, rect),
+      .home-display-shelf :is(path, rect, circle),
+      .home-living-room path {
+        vector-effect: non-scaling-stroke;
+      }
+
+      @media (max-width: 37.5rem) {
+        .home {
+          --furniture-unit: clamp(0.54px, 0.17vw, 0.7px);
+          --mobile-room-height: calc(var(--furniture-unit) * 215);
+          --mobile-room-gap: clamp(1rem, 6vw, 2.5rem);
+        }
+
+        .home-room {
+          display: flex;
+          align-items: end;
+          min-block-size: var(--mobile-room-height);
+          gap: var(--mobile-room-gap);
+        }
+
+        .home-living-room,
+        .home-work-room {
+          position: relative;
+        }
+
+        .home-living-room {
+          inset: auto;
+          translate: none;
+        }
+
+        .home-work-room {
+          display: grid;
+          grid-template-columns: var(--desk-width) var(--display-shelf-width);
+          grid-template-areas: 'desk shelf';
+          align-items: end;
+          column-gap: var(--room-spacing);
+        }
+
+        .home-computer-desk,
+        .home-display-shelf {
+          position: static;
+          translate: none;
+        }
+
+        .home-computer-desk {
+          grid-area: desk;
+        }
+
+        .home-display-shelf {
+          grid-area: shelf;
+        }
+
+        .home-cuckoo-clock {
+          --clock-mobile-right: calc((var(--display-shelf-width) - var(--clock-width)) / 2);
+          --clock-mobile-bottom: calc(var(--display-shelf-height) + var(--clock-shelf-gap));
+
+          inset-block: auto var(--clock-mobile-bottom);
+          inset-inline: auto var(--clock-mobile-right);
+          translate: none;
+        }
+      }
+
+      .home-intro h1 {
+        --title-size: clamp(2.5rem, 6vw, 3.5rem);
+        --title-line-height: 1.18;
+        --title-tracking: -0.04em;
+
+        display: flex;
+        inline-size: max-content;
+        margin: var(--primitive-space-none) auto;
+        font-family: var(--semantic-font-family-heading);
+        font-size: var(--title-size);
+        line-height: var(--title-line-height);
+        letter-spacing: var(--title-tracking);
+      }
+
+      .home-title-wave {
+        position: absolute;
+        inline-size: var(--primitive-space-none);
+        block-size: var(--primitive-space-none);
+      }
+
+      .home-title-letter {
+        --letter-seam: url('#home-title-seam-0');
+        --letter-blue: url('#home-title-blue-0');
+
+        position: relative;
+      }
+
+      @supports (clip-path: url('#home-title-seam-0')) {
+        @media screen and (forced-colors: none) {
+          .home-title-letter::before,
+          .home-title-letter::after {
+            content: attr(data-letter);
+            position: absolute;
+            inset: var(--primitive-space-none);
+            pointer-events: none;
+            user-select: none;
+          }
+
+          .home-title-letter::before {
+            color: var(--semantic-color-background-page);
+            clip-path: var(--letter-seam);
+          }
+
+          .home-title-letter::after {
+            color: var(--semantic-color-text-link);
+            clip-path: var(--letter-blue);
+          }
+        }
+      }
+
+      @media screen and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+        .home-title-water {
+          --water-duration: 5.4s;
+          --water-phase: 0s;
+          --water-shift: 6%;
+          --water-tilt: 3deg;
+
+          transform-box: fill-box;
+          transform-origin: center;
+          animation: home-title-slosh var(--water-duration) ease-in-out var(--water-phase) infinite;
+        }
+      }
+
+      @keyframes home-title-slosh {
+        0%,
+        100% {
+          transform: translateX(calc(var(--water-shift) * var(--primitive-scale-negative)))
+            skewY(var(--water-tilt));
+        }
+
+        50% {
+          transform: translateX(var(--water-shift))
+            skewY(calc(var(--water-tilt) * var(--primitive-scale-negative)));
+        }
+      }
+
+      .home-intro nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--primitive-space-6);
+        margin-block-start: var(--primitive-space-6);
+      }
+
+      .home-intro nav a {
+        padding-block: var(--home-nav-link-padding);
+        border-block-end: var(--semantic-border-width-hairline) solid var(--semantic-color-accent);
+        color: var(--semantic-color-text-link);
+        text-decoration: none;
+      }
+
+      .home-intro nav a:hover {
+        color: var(--semantic-color-accent);
+      }
+    </style>
+  </Fragment>
   <section class="home">
     <HomeWindow />
     <div class="home-room" aria-hidden="true">
@@ -87,54 +435,56 @@ const titleWave = `
               stroke-opacity="0.65"
             />
             <g class="home-sofa-plush" transform="translate(118.3 -13.12) scale(0.58)">
-              <path d={plushOutline} />
-              <path d={plushTexture} stroke-opacity="0.63" />
+              <path class="home-sofa-plush-outline" d={plushOutline} />
+              <path class="home-sofa-plush-texture" d={plushTexture} stroke-opacity="0.63" />
             </g>
           </g>
         </svg>
       </div>
       <div class="home-work-room">
         <svg class="home-display-shelf" viewBox="0 0 50 158" aria-hidden="true">
+          <path d="M2 158 8 6 H10.8 L4.8 158 Z M45.2 158 39.2 6 H42 L48 158 Z" />
+          <g class="home-shelf-message">
+            <rect x="12.5" y="2" width="25" height="24" rx="0.45" />
+            <path
+              d="M20 5.5 H30 M16.2 10.8 Q17.4 10 19 10.8 M23.8 10.8 Q25 12 26.2 10.8 M31 10.8 H34
+                     M16.2 17.8 H19.2 M23.8 17.8 H26.4 M31 17.8 Q32.3 16.6 34 17.8 M20 23 H30"
+            />
+            <circle cx="17.7" cy="10.7" r="2.5" />
+            <circle cx="25" cy="10.7" r="2.5" />
+            <circle cx="32.3" cy="10.7" r="2.5" />
+            <circle cx="17.7" cy="17.7" r="2.5" />
+            <circle cx="25" cy="17.7" r="2.5" />
+            <circle cx="32.3" cy="17.7" r="2.5" />
+          </g>
+          <g class="home-shelf-featured-book">
+            <path
+              d="M16.8 52.7 17.9 32.8 H32.5 L33.5 52.7 Z
+                     M15.2 52.7 H35 V54.4 H15.2 Z M18 54.4 L17.5 56 M32.2 54.4 L32.7 56
+                     M20.3 39 H30 V43.2 H20.3 Z M21.6 39 V37.4 H23 V39 M24.6 39 V37.4 H26 V39 M27.7 39 V37.4 H29.1 V39
+                     M20.3 46 H30 M20.3 48.4 H27.8"
+            />
+          </g>
+          <g class="home-shelf-book-spines">
+            <path
+              d="M12 87 V67 H16.3 V87 M16.3 67 H20.6 V87 M20.6 67 H24.9 V87
+                     M24.9 71 H29.2 V87 M29.2 71 H33.5 V87 M33.5 71 H37.8 V87
+                     M13.3 70 H15 M17.6 70 H19.3 M21.9 70 H23.6
+                     M26.2 74 H27.9 M30.5 74 H32.2 M34.8 74 H36.5"
+            />
+          </g>
+          <g class="home-shelf-plush" transform="translate(-15.7 18) scale(0.84)">
+            <path d={plushOutline} />
+            <path d={plushTexture} stroke-opacity="0.63" />
+            <path d="M44 112 q1.2 -1.8 2.4 0 M53 112 q1.2 -1.8 2.4 0 M47.9 115 q2 1.6 4 0" />
+          </g>
           <path
-            d="M2 158 8 6 H10.8 L4.8 158 Z M45.2 158 39.2 6 H42 L48 158 Z
-               M8 26 H42 L43 28 H7 Z M7 28 V29.8 H43 V28
-               M6.7 56 H43.3 L44.6 58.6 H5.4 Z M5.4 58.6 V60.4 H44.6 V58.6
-               M5.5 87 H44.5 L46 90.1 H4 Z M4 90.1 V91.9 H46 V90.1
-               M4.1 118 H45.9 L47.5 121.7 H2.5 Z M2.5 121.7 V123.5 H47.5 V121.7
-               M2.9 149 H47.1 L49 153.3 H1 Z M1 153.3 V155.1 H49 V153.3"
-          />
-          <path
-            d="M10.5 26 V3 Q17.3 1.5 24 3.4 Q32 1.7 39 3.8 L40.1 26
-               M24 3.4 L24.5 26 M12.5 24 H22 M26.6 24.2 H37.4"
-          />
-          <circle cx="16.6" cy="9.7" r="2.1" />
-          <circle cx="20.7" cy="16.4" r="2.1" />
-          <circle cx="29.6" cy="10.3" r="2.1" />
-          <circle cx="34.6" cy="17.4" r="2.1" />
-          <path
-            d="M25.2 52.3 26.5 33.2 H38.6 L39.9 52.3
-               M24.1 52.3 H41.3 V54.6 H24.1 Z M26.7 54.6 L26.1 56 M38.7 54.6 L39.3 56
-               M28.8 39.1 H36.2 V43.4 H28.8 Z M30.1 37.5 V39.1 M33.6 37.5 V39.1"
-          />
-          <path
-            d="M12 56 C8 54.6 8.6 50.5 9.2 47.4 Q7.3 46.1 8.5 44.6
-               Q9.4 43.6 10.9 44.8 C12.3 42.4 15.7 42.1 18.1 44.3
-               Q19.8 43.8 20.4 45.4 Q20.8 46.4 19.9 47.4 C21.5 50.7 21.3 54.7 18.5 56
-               M11.9 54.9 Q12.2 50.4 16 50.7 Q18.9 51.2 19 54.8 M13.4 48.8 Q15.4 50 17 48.8"
-          />
-          <circle cx="12.6" cy="46.7" r="1.3" />
-          <circle cx="16.6" cy="46.5" r="1.3" />
-          <path
-            d="M18.6 87 C15 85.8 15.1 81.7 17.4 79.2 C13.4 80.4 10.3 78.5 11.4 75.6
-               Q12.4 73.9 16.2 73.6 C16.5 68.6 20.1 65.8 25.4 66.8
-               C31.7 67.4 33.9 73.2 31 77.4 Q34.5 79.7 34.7 84.3 Q33.7 86.3 30.3 87
-               M24.6 67.5 C24 71.4 26.2 77.9 29 77.5 Q31.2 76.9 30.8 73.3
-               M18.6 84.8 Q21.4 82.2 25.5 84.1 M18.6 72.8 Q19.5 72 20.5 72.8"
-          />
-          <circle cx="12.6" cy="75.6" r="1" />
-          <path
-            d="M8 114 C9.2 104.5 15.7 97.2 25 97.2 C34.3 97.2 40.8 104.5 42 114
-               Q42 118 25 118 Q8 118 8 114 Z M9.4 111.9 Q25 115.6 40.6 111.9"
+            class="home-shelf-boards"
+            d="M8 26 H42 L43 28 V29.8 H7 V28 Z M7 28 H43
+               M6.7 56 H43.3 L44.6 58.6 V60.4 H5.4 V58.6 Z M5.4 58.6 H44.6
+               M5.5 87 H44.5 L46 90.1 V91.9 H4 V90.1 Z M4 90.1 H46
+               M4.1 118 H45.9 L47.5 121.7 V123.5 H2.5 V121.7 Z M2.5 121.7 H47.5
+               M2.9 149 H47.1 L49 153.3 V155.1 H1 V153.3 Z M1 153.3 H49"
           />
         </svg>
         <svg class="home-cuckoo-clock" viewBox="2 2 20 29.55" aria-hidden="true">
@@ -161,7 +511,8 @@ const titleWave = `
             <path d="M40 64.5 H92 V66.8 H40 Z M42 66.8 V73 H44.2 V66.8 M87.8 66.8 V73 H90 V66.8" />
           </g>
           <g class="home-desk-macbook">
-            <path d="M97.3 70.5 L100.3 40.1 H121.8 L118.8 70.5 Z M96.3 70.5 H119.8 V73 H96.3 Z" />
+            <rect x="106" y="40.1" width="6.8" height="30.4" rx="0.3" />
+            <path d="M103.5 70.5 H115.3 V73 H103.5 Z" />
           </g>
           <path d="M48 71.6 H75.9 L77 73 H46.9 Z" />
         </svg>
@@ -207,335 +558,3 @@ const titleWave = `
     </div>
   </section>
 </Layout>
-
-<style>
-  .home {
-    --home-vertical-space: clamp(3.5rem, 9vh, 5.5rem);
-    --home-gap: clamp(1.5rem, 4vw, 2.5rem);
-    --home-nav-link-padding: 0.35em;
-    --home-window-width: min(60vw, 22rem);
-    --furniture-gap: clamp(0.5rem, 2.25vw, 2rem);
-    --furniture-floor: calc(var(--home-vertical-space) + var(--home-window-width) * 1.25);
-    --furniture-baseline-offset: 0 -100%;
-    --room-edge: clamp(0.375rem, 1.3vw, 1rem);
-    --room-spacing: clamp(0.25rem, 1.25vw, 1rem);
-    /* Approximate dimensions in centimeters, scaled together beside the window. */
-    --sofa-reference-width: 152;
-    --desk-reference-width: 124;
-    --display-shelf-reference-width: 50;
-    --display-shelf-reference-height: 158;
-    --furniture-side-width: max(
-      var(--sofa-reference-width),
-      var(--desk-reference-width) + var(--display-shelf-reference-width)
-    );
-    --furniture-side-space: calc(
-      (100vw - var(--home-window-width)) / 2 - var(--furniture-gap) - var(--room-edge) -
-        var(--room-spacing)
-    );
-    --furniture-unit: min(1.15px, calc(var(--furniture-side-space) / var(--furniture-side-width)));
-    --desk-width: calc(var(--furniture-unit) * var(--desk-reference-width));
-    --display-shelf-width: calc(var(--furniture-unit) * var(--display-shelf-reference-width));
-    --sofa-width: calc(var(--furniture-unit) * var(--sofa-reference-width));
-    --desk-left: calc((100% + var(--home-window-width)) / 2 + var(--furniture-gap));
-    --display-shelf-left: calc(var(--desk-left) + var(--desk-width) + var(--room-spacing));
-    --sofa-right: calc(var(--desk-left) + var(--room-spacing));
-
-    position: relative;
-    display: grid;
-    justify-items: center;
-    gap: var(--home-gap);
-    padding: var(--home-vertical-space) var(--semantic-space-page-gutter);
-    color: var(--semantic-color-text-primary);
-    text-align: center;
-  }
-
-  .home-favorite-jacket {
-    --jacket-width: calc(var(--furniture-unit) * 86);
-    --sofa-back-height: calc(var(--furniture-unit) * 78);
-    --jacket-collar-opacity: 0.34;
-    --jacket-cuffs-opacity: 0.29;
-    --jacket-texture-opacity: 0.72;
-
-    inset-block-end: var(--sofa-back-height);
-    justify-self: center;
-    inline-size: var(--jacket-width);
-  }
-
-  .home-jacket-collar,
-  .home-jacket-cuffs {
-    fill: var(--semantic-color-text-link);
-    stroke: none;
-  }
-
-  .home-jacket-collar {
-    fill-opacity: var(--jacket-collar-opacity);
-  }
-
-  .home-jacket-cuffs {
-    fill-opacity: var(--jacket-cuffs-opacity);
-  }
-
-  .home-jacket-texture {
-    stroke-opacity: var(--jacket-texture-opacity);
-  }
-
-  .home-cuckoo-clock {
-    --clock-width: calc(var(--furniture-unit) * 26);
-    --clock-left: calc(
-      var(--display-shelf-left) + (var(--display-shelf-width) - var(--clock-width)) / 2
-    );
-    --display-shelf-height: calc(var(--furniture-unit) * var(--display-shelf-reference-height));
-    --clock-shelf-gap: calc(var(--furniture-unit) * 16);
-    --clock-bottom: calc(
-      var(--furniture-floor) - var(--display-shelf-height) - var(--clock-shelf-gap)
-    );
-
-    inset-block-start: var(--clock-bottom);
-    inset-inline-start: var(--clock-left);
-    inline-size: var(--clock-width);
-  }
-
-  .home-clock-pendulum {
-    transform-box: fill-box;
-    transform-origin: center top;
-  }
-
-  @property --clock-pendulum-phase {
-    syntax: '<angle>';
-    inherits: false;
-    initial-value: 0deg;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .home-clock-pendulum {
-      /* A seconds pendulum takes one second between turning points. */
-      --pendulum-duration: 2s;
-      --pendulum-amplitude: 10deg;
-
-      rotate: calc(var(--pendulum-amplitude) * cos(var(--clock-pendulum-phase)));
-      animation: home-clock-swing var(--pendulum-duration) linear infinite;
-    }
-
-    @keyframes home-clock-swing {
-      to {
-        --clock-pendulum-phase: 1turn;
-      }
-    }
-  }
-
-  .home-computer-desk {
-    inset-inline-start: var(--desk-left);
-    inline-size: var(--desk-width);
-  }
-
-  .home-display-shelf {
-    inset-inline-start: var(--display-shelf-left);
-    inline-size: var(--display-shelf-width);
-  }
-
-  .home-room,
-  .home-work-room {
-    display: contents;
-  }
-
-  .home-living-room {
-    display: grid;
-    inset-inline-end: var(--sofa-right);
-    inline-size: var(--sofa-width);
-  }
-
-  .home-sofa-drawing {
-    --sofa-drawing-width: 100%;
-
-    inline-size: var(--sofa-drawing-width);
-    block-size: auto;
-    overflow: visible;
-  }
-
-  .home-computer-desk,
-  .home-display-shelf,
-  .home-living-room {
-    inset-block-start: var(--furniture-floor);
-  }
-
-  .home-cuckoo-clock,
-  .home-computer-desk,
-  .home-display-shelf,
-  .home-living-room {
-    translate: var(--furniture-baseline-offset);
-  }
-
-  .home-favorite-jacket,
-  .home-cuckoo-clock,
-  .home-computer-desk,
-  .home-display-shelf,
-  .home-living-room {
-    position: absolute;
-    block-size: auto;
-    overflow: visible;
-    fill: none;
-    stroke: var(--semantic-color-text-link);
-    stroke-width: var(--semantic-border-width-hairline);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    pointer-events: none;
-  }
-
-  .home-cuckoo-clock :is(path, rect, circle),
-  .home-computer-desk :is(path, rect),
-  .home-display-shelf :is(path, rect, circle),
-  .home-living-room path {
-    vector-effect: non-scaling-stroke;
-  }
-
-  @media (max-width: 37.5rem) {
-    .home {
-      --furniture-unit: clamp(0.54px, 0.17vw, 0.7px);
-      --mobile-room-height: calc(var(--furniture-unit) * 215);
-      --mobile-room-gap: clamp(1rem, 6vw, 2.5rem);
-    }
-
-    .home-room {
-      display: flex;
-      align-items: end;
-      min-block-size: var(--mobile-room-height);
-      gap: var(--mobile-room-gap);
-    }
-
-    .home-living-room,
-    .home-work-room {
-      position: relative;
-    }
-
-    .home-living-room {
-      inset: auto;
-      translate: none;
-    }
-
-    .home-work-room {
-      display: grid;
-      grid-template-columns: var(--desk-width) var(--display-shelf-width);
-      grid-template-areas: 'desk shelf';
-      align-items: end;
-      column-gap: var(--room-spacing);
-    }
-
-    .home-computer-desk,
-    .home-display-shelf {
-      position: static;
-      translate: none;
-    }
-
-    .home-computer-desk {
-      grid-area: desk;
-    }
-
-    .home-display-shelf {
-      grid-area: shelf;
-    }
-
-    .home-cuckoo-clock {
-      --clock-mobile-right: calc((var(--display-shelf-width) - var(--clock-width)) / 2);
-      --clock-mobile-bottom: calc(var(--display-shelf-height) + var(--clock-shelf-gap));
-
-      inset-block: auto var(--clock-mobile-bottom);
-      inset-inline: auto var(--clock-mobile-right);
-      translate: none;
-    }
-  }
-
-  .home-intro h1 {
-    --title-size: clamp(2.5rem, 6vw, 3.5rem);
-    --title-line-height: 1.18;
-    --title-tracking: -0.04em;
-
-    display: flex;
-    inline-size: max-content;
-    margin: var(--primitive-space-none) auto;
-    font-family: var(--semantic-font-family-heading);
-    font-size: var(--title-size);
-    line-height: var(--title-line-height);
-    letter-spacing: var(--title-tracking);
-  }
-
-  .home-title-wave {
-    position: absolute;
-    inline-size: var(--primitive-space-none);
-    block-size: var(--primitive-space-none);
-  }
-
-  .home-title-letter {
-    --letter-seam: url('#home-title-seam-0');
-    --letter-blue: url('#home-title-blue-0');
-
-    position: relative;
-  }
-
-  @supports (clip-path: url('#home-title-seam-0')) {
-    @media screen and (forced-colors: none) {
-      .home-title-letter::before,
-      .home-title-letter::after {
-        content: attr(data-letter);
-        position: absolute;
-        inset: var(--primitive-space-none);
-        pointer-events: none;
-        user-select: none;
-      }
-
-      .home-title-letter::before {
-        color: var(--semantic-color-background-page);
-        clip-path: var(--letter-seam);
-      }
-
-      .home-title-letter::after {
-        color: var(--semantic-color-text-link);
-        clip-path: var(--letter-blue);
-      }
-    }
-  }
-
-  @media screen and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
-    .home-title-water {
-      --water-duration: 5.4s;
-      --water-phase: 0s;
-      --water-shift: 6%;
-      --water-tilt: 3deg;
-
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: home-title-slosh var(--water-duration) ease-in-out var(--water-phase) infinite;
-    }
-  }
-
-  @keyframes home-title-slosh {
-    0%,
-    100% {
-      transform: translateX(calc(var(--water-shift) * var(--primitive-scale-negative)))
-        skewY(var(--water-tilt));
-    }
-
-    50% {
-      transform: translateX(var(--water-shift))
-        skewY(calc(var(--water-tilt) * var(--primitive-scale-negative)));
-    }
-  }
-
-  .home-intro nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--primitive-space-6);
-    margin-block-start: var(--primitive-space-6);
-  }
-
-  .home-intro nav a {
-    padding-block: var(--home-nav-link-padding);
-    border-block-end: var(--semantic-border-width-hairline) solid var(--semantic-color-accent);
-    color: var(--semantic-color-text-link);
-    text-decoration: none;
-  }
-
-  .home-intro nav a:hover {
-    color: var(--semantic-color-accent);
-  }
-</style>
