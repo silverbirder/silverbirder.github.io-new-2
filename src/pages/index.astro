@@ -150,14 +150,6 @@ const titleWave = `
         inline-size: var(--desk-width);
       }
 
-      .home-sofa-plush-outline {
-        fill: var(--semantic-color-text-link);
-      }
-
-      .home-sofa-plush-texture {
-        stroke: var(--semantic-color-background-page);
-      }
-
       .home-shelf-boards {
         fill: var(--semantic-color-background-page);
       }
@@ -435,8 +427,8 @@ const titleWave = `
               stroke-opacity="0.65"
             />
             <g class="home-sofa-plush" transform="translate(118.3 -13.12) scale(0.58)">
-              <path class="home-sofa-plush-outline" d={plushOutline} />
-              <path class="home-sofa-plush-texture" d={plushTexture} stroke-opacity="0.63" />
+              <path d={plushOutline} />
+              <path d={plushTexture} stroke-opacity="0.63" />
             </g>
           </g>
         </svg>
