@@ -117,6 +117,7 @@ const months = [...new Set(sorted.map(({ publishedAt }) => publishedAt.slice(0, 
       var(--component-site-header-offset) + var(--semantic-space-control-inline)
     );
     padding-block-start: var(--archive-row-spacing);
+    background-color: var(--semantic-color-background-page);
   }
 
   .archive-month-button {
@@ -193,7 +194,6 @@ const months = [...new Set(sorted.map(({ publishedAt }) => publishedAt.slice(0, 
           var(--primitive-ratio-double)
       );
       padding: var(--primitive-space-none) var(--semantic-space-page-gutter);
-      backdrop-filter: blur(var(--primitive-space-2));
     }
 
     .archive-month-button {
