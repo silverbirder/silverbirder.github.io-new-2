@@ -150,6 +150,18 @@ const titleWave = `
         inline-size: var(--desk-width);
       }
 
+      .home-olaf-dark,
+      .home-olaf-cap {
+        fill: var(--semantic-color-text-link);
+      }
+
+      .home-olaf-cap {
+        --olaf-cap-opacity: 0.32;
+
+        fill-opacity: var(--olaf-cap-opacity);
+      }
+
+      .home-olaf-fur,
       .home-shelf-boards {
         fill: var(--semantic-color-background-page);
       }
@@ -368,6 +380,44 @@ const titleWave = `
   </Fragment>
   <section class="home">
     <HomeWindow />
+    <div class="home-intro">
+      <svg class="home-title-wave" aria-hidden="true" focusable="false">
+        <defs>
+          {titleLetters.map(({ waterId, seamId, blueId, phase }) => (
+            <>
+              <path
+                id={waterId}
+                class="home-title-water"
+                d={titleWave}
+                style={`--water-phase: ${phase}`}
+              />
+              <clipPath id={seamId} clipPathUnits="objectBoundingBox">
+                <use href={`#${waterId}`} />
+              </clipPath>
+              <clipPath id={blueId} clipPathUnits="objectBoundingBox">
+                <use href={`#${waterId}`} y=".015" />
+              </clipPath>
+            </>
+          ))}
+        </defs>
+      </svg>
+      <h1 aria-label={title}>
+        {titleLetters.map(({ letter, seamId, blueId }) => (
+          <span
+            class="home-title-letter"
+            aria-hidden="true"
+            data-letter={letter}
+            style={`--letter-seam: url(#${seamId}); --letter-blue: url(#${blueId})`}
+          >
+            {letter}
+          </span>
+        ))}
+      </h1>
+      <nav aria-label="サイト内のページ">
+        <a href={`${base}me/`}>自己紹介</a>
+        <a href={`${base}blog/`}>ブログ</a>
+      </nav>
+    </div>
     <div class="home-room" aria-hidden="true">
       <div class="home-living-room" aria-hidden="true">
         <svg class="home-favorite-jacket" viewBox="0 0 116 136" aria-hidden="true">
@@ -465,10 +515,38 @@ const titleWave = `
                      M26.2 74 H27.9 M30.5 74 H32.2 M34.8 74 H36.5"
             />
           </g>
-          <g class="home-shelf-plush" transform="translate(-15.7 18) scale(0.84)">
-            <path d={plushOutline} />
-            <path d={plushTexture} stroke-opacity="0.63" />
-            <path d="M44 112 q1.2 -1.8 2.4 0 M53 112 q1.2 -1.8 2.4 0 M47.9 115 q2 1.6 4 0" />
+          <g class="home-shelf-olaf" transform="translate(3.5 16.52) scale(0.86)">
+            <path
+              class="home-olaf-fur"
+              d="M19.4 109.4 C16.6 110.2 17.8 112.4 14.9 114.2
+                     Q13.4 116.2 16.2 116.5 L18.4 115.5 Q17.7 118 21.9 118 H28
+                     Q32.2 118 31.4 115.5 L33.6 116.5 Q36.4 116.2 35 114.2
+                     C32.1 112.4 33.3 110.2 30.5 109.4 Z"
+            />
+            <path
+              class="home-olaf-dark"
+              d="M16.2 95.7 Q10.3 96.2 10.6 104.2 Q10.9 106.8 14.2 106
+                     L17.3 101 Z M33.8 95.7 Q39 96.8 39.7 103.1 Q38.8 106.2 35.7 105.7
+                     L32.7 101 Z"
+            />
+            <path
+              class="home-olaf-fur"
+              d="M14.8 100.4 C15.1 94.9 18 92.5 24.8 92.5
+                     C31.6 92.5 34.8 95 35.2 100.3 C36.7 108 33.5 112.2 25 112.2
+                     C16.5 112.2 13.3 108 14.8 100.4 Z"
+            />
+            <path
+              class="home-olaf-cap"
+              d="M18.4 94.7 Q18.5 90.9 22.1 89.6 Q26 88.3 29.6 90.5
+                     Q31.1 91.7 31.5 93.8 Q28.3 95.7 24.6 94.6 Q21.3 95.5 18.4 94.7 Z"
+            />
+            <path
+              d="M22 93.6 Q23.3 91.7 26.9 92.4 M18.9 100.2 Q21.2 98.4 24.2 99.4
+                     M25.8 99.4 Q28.8 98.4 31.1 100.2 M21.2 99.4 Q21.6 101.3 22.6 99.3
+                     M27.4 99.3 Q28.4 101.3 28.8 99.4 M21.8 107.4 Q23 109.2 25 107.8 Q27 109.2 28.2 107.4
+                     M20.8 112.7 Q25 113.9 29.2 112.7 M22.1 116.7 Q25 115.5 27.8 116.7"
+            />
+            <circle class="home-olaf-dark" cx="25" cy="103.8" r="1.8" />
           </g>
           <path
             class="home-shelf-boards"
@@ -509,44 +587,6 @@ const titleWave = `
           <path d="M48 71.6 H75.9 L77 73 H46.9 Z" />
         </svg>
       </div>
-    </div>
-    <div class="home-intro">
-      <svg class="home-title-wave" aria-hidden="true" focusable="false">
-        <defs>
-          {titleLetters.map(({ waterId, seamId, blueId, phase }) => (
-            <>
-              <path
-                id={waterId}
-                class="home-title-water"
-                d={titleWave}
-                style={`--water-phase: ${phase}`}
-              />
-              <clipPath id={seamId} clipPathUnits="objectBoundingBox">
-                <use href={`#${waterId}`} />
-              </clipPath>
-              <clipPath id={blueId} clipPathUnits="objectBoundingBox">
-                <use href={`#${waterId}`} y=".015" />
-              </clipPath>
-            </>
-          ))}
-        </defs>
-      </svg>
-      <h1 aria-label={title}>
-        {titleLetters.map(({ letter, seamId, blueId }) => (
-          <span
-            class="home-title-letter"
-            aria-hidden="true"
-            data-letter={letter}
-            style={`--letter-seam: url(#${seamId}); --letter-blue: url(#${blueId})`}
-          >
-            {letter}
-          </span>
-        ))}
-      </h1>
-      <nav aria-label="サイト内のページ">
-        <a href={`${base}me/`}>自己紹介</a>
-        <a href={`${base}blog/`}>ブログ</a>
-      </nav>
     </div>
   </section>
 </Layout>
