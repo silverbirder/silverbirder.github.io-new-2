@@ -1,0 +1,7 @@
+.notebook-body iframe[src^='https://codesandbox.io/embed/'] {
+  --codesandbox-embed-height: 24rem;
+
+  width: var(--primitive-size-full);
+  height: var(--codesandbox-embed-height);
+  height: round(up, var(--codesandbox-embed-height), var(--component-notebook-rule-spacing));
+}
