@@ -3,6 +3,7 @@ import '../styles/tokens.css';
 import '../styles/link-icons.css';
 import { addExternalLinkIcons } from '../lib/external-link-icons';
 import { authorName, siteDescription, siteName, siteUrl } from '../lib/site';
+import { siteOpenGraphPages } from '../lib/site-open-graph';
 import SiteAnalytics from '../components/SiteAnalytics.astro';
 import SiteHeader from './SiteHeader.astro';
 
@@ -46,6 +47,10 @@ const documentTitle = currentPage === 'home' ? title : `${title} | ${siteName}`;
 const base = import.meta.env.BASE_URL;
 const path = article ? canonicalPath : page.path;
 const canonical = path === undefined ? undefined : siteUrl(path);
+const siteImage = siteOpenGraphPages[currentPage];
+const ogImagePath = article ? `${path}opengraph-image` : siteImage.imagePath;
+const ogImageUrl = canonical && siteUrl(`${base}${ogImagePath}.png`);
+const ogImageAlt = article ? title : siteImage.title;
 const articleDescription = canonical ? siteDescription : undefined;
 const summary = description?.trim() || (article ? articleDescription : page.description);
 const blockIndexing = noindex || base !== '/' || canonical === undefined;
@@ -82,7 +87,15 @@ const content = addExternalLinkIcons(await Astro.slots.render('default'), Astro.
         <meta property="og:title" content={title} />
         {summary && <meta property="og:description" content={summary} />}
         <meta property="og:url" content={canonical} />
-        <meta name="twitter:card" content="summary" />
+        {ogImageUrl && (
+          <>
+            <meta property="og:image" content={ogImageUrl} />
+            <meta property="og:image:alt" content={ogImageAlt} />
+            <meta name="twitter:image" content={ogImageUrl} />
+            <meta name="twitter:image:alt" content={ogImageAlt} />
+          </>
+        )}
+        <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
         <meta name="twitter:creator" content={`@${authorName}`} />
         <meta name="twitter:title" content={title} />
         {summary && <meta name="twitter:description" content={summary} />}
