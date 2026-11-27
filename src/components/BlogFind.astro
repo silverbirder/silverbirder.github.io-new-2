@@ -1,4 +1,5 @@
 ---
+import BlogActiveFilter from './BlogActiveFilter.astro';
 import { getTaggedBlogArchive } from '../lib/blog-articles';
 import BlogTagList from './BlogTagList.astro';
 
@@ -31,6 +32,7 @@ const tagMonths = new Map(
       class={modal ? 'archive-find-dialogs' : 'archive-find-panel'}
       aria-label={modal ? undefined : '記事を絞り込む'}
     >
+      {!modal && <BlogActiveFilter {tag} />}
       <Panel
         id={id}
         class={modal ? 'archive-find-dialog' : undefined}
@@ -79,6 +81,10 @@ const tagMonths = new Map(
 
   .archive-find-dialogs {
     display: contents;
+  }
+
+  .archive-find-panel > .archive-current-filter {
+    flex: none;
   }
 
   .archive-find-panel > #archive-tags-panel {

@@ -1,0 +1,65 @@
+---
+interface Props {
+  tag?: string;
+}
+
+const { tag } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<div class="archive-current-filter" hidden={!tag}>
+  <span class="archive-current-filter-label" title={tag}>
+    {tag}
+  </span>
+  <a
+    class="archive-clear-filter"
+    href={`${base}blog/`}
+    aria-label={tag ? `${tag}の絞り込みを解除` : '検索を解除'}
+  >
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="0.75"
+      stroke-linecap="round"
+      aria-hidden="true"
+    >
+      <path d="m6 6 12 12M18 6 6 18" />
+    </svg>
+  </a>
+</div>
+
+<style>
+  .archive-current-filter:not([hidden]) {
+    display: flex;
+    align-items: center;
+    min-inline-size: var(--primitive-space-none);
+    color: var(--semantic-color-text-link);
+    font-size: var(--semantic-font-size-label);
+  }
+
+  .archive-current-filter-label {
+    --archive-filter-label-lines: 2;
+    --archive-filter-label-leading: 1.25;
+
+    display: -webkit-box;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--archive-filter-label-lines);
+    line-height: var(--archive-filter-label-leading);
+  }
+
+  .archive-clear-filter {
+    --archive-clear-filter-size: 1.5rem;
+
+    flex: none;
+    display: grid;
+    place-items: center;
+    inline-size: var(--archive-clear-filter-size);
+    block-size: var(--archive-calendar-button-size, var(--archive-clear-filter-size));
+    color: inherit;
+  }
+</style>

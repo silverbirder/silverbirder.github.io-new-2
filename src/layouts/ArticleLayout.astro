@@ -1,4 +1,6 @@
 ---
+import BlogTagList from '../components/BlogTagList.astro';
+import { articleTags } from '../lib/blog-tags';
 import ArticleEmbed from './ArticleEmbed.astro';
 import Layout from './Layout.astro';
 import LinkCard from './LinkCard.astro';
@@ -27,7 +29,7 @@ const blocks = insertArticleBlocks(await Astro.slots.render('default'), linkCard
 const ruleImage = `${import.meta.env.BASE_URL}notebook-rule.svg`;
 const tickImage = `${import.meta.env.BASE_URL}notebook-ticks.svg`;
 const [year, month, day] = frontmatter.publishedAt.slice(0, 10).split('-');
-const tags = [...new Set(frontmatter.tags?.map((tag) => tag.trim()).filter(Boolean))];
+const tags = articleTags(frontmatter.tags);
 const keywords = [
   ...new Set(
     [...tags, ...(frontmatter.keywords ?? []).map((keyword) => keyword.trim())].filter(Boolean),
@@ -94,12 +96,7 @@ const dateLabel = `${year}年${Number(month)}月${Number(day)}日`;
     <div class="notebook-bottom" aria-hidden="true"></div>
     {tags.length > 0 && (
       <footer class="notebook-tags">
-        <span id="article-tags-label">タグ</span>
-        <ul aria-labelledby="article-tags-label">
-          {tags.map((tag) => (
-            <li>{tag}</li>
-          ))}
-        </ul>
+        <BlogTagList {tags} />
       </footer>
     )}
   </article>
