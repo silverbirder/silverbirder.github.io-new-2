@@ -1,4 +1,3 @@
-/* oxlint-disable eslint/no-await-in-loop -- Each width check depends on the previous result. */
 import { jaModel, Parser } from 'budoux';
 
 const parser = new Parser(jaModel);
@@ -9,32 +8,40 @@ type Fits = (text: string) => Promise<boolean>;
 
 async function truncate(text: string, fits: Fits) {
   const characters = Array.from(graphemes.segment(text), ({ segment }) => segment);
-  while (characters.length && !(await fits(characters.join('').trimEnd() + '…'))) {
+
+  async function shorten(): Promise<string> {
+    const candidate = characters.join('').trimEnd() + '…';
+    if (!characters.length || (await fits(candidate))) return candidate;
     characters.pop();
+    return shorten();
   }
-  return characters.join('').trimEnd() + '…';
+
+  return shorten();
 }
 
 export async function wrapOgTitle(title: string, fits: Fits) {
   const lines: string[] = [];
-  let current = '';
   const content = title.trim();
   if (!content) return lines;
   if (await fits(content)) return [content];
 
-  for (const phrase of parser.parse(content)) {
+  const phrases = parser.parse(content);
+
+  async function addPhrase(index: number, current: string): Promise<string[]> {
+    const phrase = phrases[index];
+    if (phrase === undefined) return current ? [...lines, current.trimEnd()] : lines;
+
     const next = (current + phrase).trimStart();
-    if (await fits(next)) {
-      current = next;
-      continue;
-    }
+    if (await fits(next)) return addPhrase(index + 1, next);
     if (!current || lines.length === maxLines - 1) {
       return [...lines, await truncate(current || next, fits)];
     }
+
     lines.push(current.trimEnd());
-    current = phrase.trimStart();
-    if (!(await fits(current))) return [...lines, await truncate(current, fits)];
+    const start = phrase.trimStart();
+    if (!(await fits(start))) return [...lines, await truncate(start, fits)];
+    return addPhrase(index + 1, start);
   }
 
-  return current ? [...lines, current.trimEnd()] : lines;
+  return addPhrase(0, '');
 }
