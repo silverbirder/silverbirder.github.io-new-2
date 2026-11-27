@@ -1,6 +1,6 @@
 (() => {
   const config = document.currentScript?.dataset;
-  if (!config || location.origin !== config.analyticsOrigin) return;
+  if (location.origin !== config?.analyticsOrigin) return;
 
   function loadTag(src) {
     const tag = document.createElement('script');
