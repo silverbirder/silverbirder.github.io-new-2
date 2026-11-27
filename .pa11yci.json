@@ -43,7 +43,8 @@
         "click element nav a[href='/blog/']",
         "wait for path to be /blog/",
         "wait for element html:active-view-transition to be removed",
-        "click element main a",
+        "wait for element .archive-entry-link to be visible",
+        "click element .archive-entry-link",
         "wait for element .notebook-body to be visible"
       ]
     }
