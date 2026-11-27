@@ -1,6 +1,7 @@
 ---
 import BlogTagList from '../components/BlogTagList.astro';
 import { articleTags } from '../lib/blog-articles';
+import { authorName, siteName, siteUrl } from '../lib/site';
 import ArticleEmbed from './ArticleEmbed.astro';
 import Layout from './Layout.astro';
 import LinkCard from './LinkCard.astro';
@@ -11,6 +12,7 @@ import '../styles/article.css';
 import './codesandbox-embed.css';
 
 type Props = {
+  canonicalPath?: string;
   noindex?: boolean;
   sharedFont?: boolean;
   linkCards?: BlogLinkCard[];
@@ -24,7 +26,7 @@ type Props = {
     keywords?: string[] | null;
   };
 };
-const { frontmatter, noindex, sharedFont, linkCards } = Astro.props;
+const { canonicalPath, frontmatter, noindex, sharedFont, linkCards } = Astro.props;
 const blocks = insertArticleBlocks(await Astro.slots.render('default'), linkCards);
 const ruleImage = `${import.meta.env.BASE_URL}notebook-rule.svg`;
 const tickImage = `${import.meta.env.BASE_URL}notebook-ticks.svg`;
@@ -34,19 +36,47 @@ const keywords = [
   ...new Set(
     [...tags, ...(frontmatter.keywords ?? []).map((keyword) => keyword.trim())].filter(Boolean),
   ),
-].join(',');
+];
+const articleUrl = canonicalPath && siteUrl(canonicalPath);
+const jsonLd =
+  articleUrl &&
+  JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: frontmatter.title,
+    description: frontmatter.summary?.trim() || undefined,
+    datePublished: frontmatter.publishedAt,
+    keywords: keywords.length ? keywords : undefined,
+    author: { '@type': 'Person', name: authorName, url: siteUrl('me/') },
+    publisher: {
+      '@type': 'Organization',
+      name: siteName,
+      logo: { '@type': 'ImageObject', url: siteUrl('silverbirder-avatar.png') },
+    },
+    url: articleUrl,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': articleUrl },
+  }).replaceAll('<', '\\u003c');
 const dateLabel = `${year}年${Number(month)}月${Number(day)}日`;
 ---
 
 <Layout
   title={frontmatter.title}
   description={frontmatter.summary}
-  {keywords}
+  keywords={keywords.join(',')}
+  {canonicalPath}
   currentPage="blog"
   article
   {noindex}
   {sharedFont}
 >
+  <Fragment slot="head">
+    {jsonLd && (
+      // eslint-disable-next-line astro/no-set-html-directive -- JSON is serialized and less-than signs are escaped.
+      <script type="application/ld+json" set:html={jsonLd} />
+    )}
+    {articleUrl && <meta property="article:published_time" content={frontmatter.publishedAt} />}
+    {articleUrl && tags.map((tag) => <meta property="article:tag" content={tag} />)}
+  </Fragment>
   <article
     class="notebook"
     data-pagefind-body

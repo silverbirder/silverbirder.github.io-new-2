@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { articleSlug } from '../../../lib/article-slug';
+import { articlePath } from '../../../lib/site';
 import { getBlogArticles } from '../../../lib/blog-articles';
 import { loadLinkCards } from '../../../lib/blog-link-card-source';
 import ArticleLayout from '../../../layouts/ArticleLayout.astro';
@@ -53,6 +54,7 @@ const linkCards = linkCardSnapshot.articles.get(article.id);
 ---
 
 <ArticleLayout
+  canonicalPath={articlePath(article.id)}
   frontmatter={{ ...article.data, number }}
   {noindex}
   sharedFont={sharedFont}
