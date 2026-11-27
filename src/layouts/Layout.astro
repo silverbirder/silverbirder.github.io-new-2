@@ -88,6 +88,9 @@ const content = addExternalLinkIcons(await Astro.slots.render('default'), Astro.
         {summary && <meta name="twitter:description" content={summary} />}
       </>
     )}
+    <link rel="icon" type="image/png" sizes="32x32" href={`${base}icon/32`} />
+    <link rel="apple-touch-icon" href={`${base}apple-icon`} />
+    <link rel="manifest" href={`${base}manifest.webmanifest`} />
     <link rel="alternate" type="application/rss+xml" title={siteName} href={`${base}rss.xml`} />
     <link rel="me" href="https://github.com/silverbirder" />
     <link rel="webmention" href="https://webmention.io/silverbirder.github.io/webmention" />
