@@ -3,6 +3,7 @@ import '../styles/tokens.css';
 import '../styles/link-icons.css';
 import { addExternalLinkIcons } from '../lib/external-link-icons';
 import { authorName, siteDescription, siteName, siteUrl } from '../lib/site';
+import SiteAnalytics from '../components/SiteAnalytics.astro';
 import SiteHeader from './SiteHeader.astro';
 
 interface Props {
@@ -70,6 +71,7 @@ const content = addExternalLinkIcons(await Astro.slots.render('default'), Astro.
         content={`${blockIndexing ? 'noindex' : 'index'},follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1`}
       />
     )}
+    {canonical && <SiteAnalytics />}
     {canonical && (
       <>
         <link rel="canonical" href={canonical} />
