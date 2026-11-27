@@ -1,7 +1,62 @@
-const monthFromLink = (link: HTMLAnchorElement) => link.hash.slice('#month-'.length);
+type MonthSearch = {
+  months: ReadonlySet<string>;
+  select: (month: string) => void;
+};
 
-function archiveMonthTarget(month: string) {
-  return document.getElementById(`month-${month}`);
+let monthSearch: MonthSearch | undefined;
+const monthFromLink = (link: HTMLAnchorElement) => link.hash.slice('#month-'.length);
+const monthsChanged = 'archive-months-changed';
+const loadedMonths = new Map<string, HTMLElement>();
+
+export function archiveMonthTarget(month: string) {
+  return monthSearch ? loadedMonths.get(month) : document.getElementById(`month-${month}`);
+}
+
+export function refreshArchiveMonthTargets() {
+  loadedMonths.clear();
+  if (monthSearch) {
+    for (const row of document.querySelectorAll<HTMLElement>(
+      '[data-archive-month]:not([hidden])',
+    )) {
+      const month = row.dataset.archiveMonth;
+      if (month && !loadedMonths.has(month)) loadedMonths.set(month, row);
+    }
+  }
+  window.dispatchEvent(new Event(monthsChanged));
+}
+
+function setDialogMonths(search?: MonthSearch) {
+  for (const section of document.querySelectorAll<HTMLElement>('[data-month-dialog-year]')) {
+    for (const link of section.querySelectorAll('a')) {
+      link
+        .closest('li')
+        ?.toggleAttribute('hidden', !!search && !search.months.has(monthFromLink(link)));
+    }
+    section.hidden = !section.querySelector('li:not([hidden])');
+  }
+}
+
+export function setArchiveMonthSearch(search?: MonthSearch) {
+  monthSearch = search;
+  const nav = document.querySelector<HTMLElement>('[data-month-nav]');
+  const trigger = document.querySelector<HTMLButtonElement>('[data-open-month-dialog]');
+  const empty = search?.months.size === 0;
+  if (nav) nav.hidden = empty;
+  if (trigger) trigger.hidden = empty;
+
+  let previousYear = '';
+  for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-month-nav] a')) {
+    const month = monthFromLink(link);
+    const visible = !search || search.months.has(month);
+    link.closest('li')?.toggleAttribute('hidden', !visible);
+    if (!visible) continue;
+    const year = month.slice(0, 4);
+    link.classList.toggle('month-nav-year', year !== previousYear);
+    previousYear = year;
+  }
+
+  setDialogMonths(search);
+  refreshArchiveMonthTargets();
 }
 
 function setupTagMonthPreview(track: HTMLOListElement, links: readonly HTMLAnchorElement[]) {
@@ -97,13 +152,21 @@ function setupMonthNavigation() {
   window.addEventListener('scroll', scheduleUpdate, { passive: true });
   window.addEventListener('resize', scheduleUpdate);
   window.addEventListener('pageshow', scheduleUpdate);
+  window.addEventListener(monthsChanged, scheduleUpdate);
   scheduleUpdate();
+
+  track.addEventListener('click', (event) => {
+    const link = event.target instanceof Element ? event.target.closest('a') : null;
+    if (!link || !monthSearch) return;
+    event.preventDefault();
+    monthSearch.select(monthFromLink(link));
+  });
 
   let dragStart: { id: number; y: number } | undefined;
   let lastTarget: HTMLElement | undefined;
 
   track.addEventListener('pointerdown', (event) => {
-    if (event.isPrimary && event.button === 0) {
+    if (!monthSearch && event.isPrimary && event.button === 0) {
       dragStart = { id: event.pointerId, y: event.clientY };
       lastTarget = undefined;
     }
@@ -162,6 +225,13 @@ function setupMonthDialog() {
     if (!(event.target instanceof HTMLAnchorElement)) return;
     const link = event.target;
     const month = monthFromLink(link);
+    if (monthSearch) {
+      event.preventDefault();
+      dialog.close();
+      monthSearch.select(month);
+      return;
+    }
+
     const target = archiveMonthTarget(month);
     if (!target) return;
     event.preventDefault();
@@ -174,20 +244,3 @@ function setupMonthDialog() {
 
 setupMonthNavigation();
 setupMonthDialog();
-
-function setupTagDialog() {
-  const trigger = document.querySelector('[aria-controls="archive-tags-dialog"]');
-  const dialog = document.querySelector<HTMLDialogElement>('#archive-tags-dialog');
-  if (!trigger || !dialog) return;
-
-  trigger.addEventListener('click', () => {
-    dialog.showModal();
-    dialog.querySelector('[data-active-tag]')?.scrollIntoView({ block: 'nearest' });
-  });
-
-  window.matchMedia('(width <= 48rem)').addEventListener('change', ({ matches }) => {
-    if (!matches && dialog.open) dialog.close();
-  });
-}
-
-setupTagDialog();

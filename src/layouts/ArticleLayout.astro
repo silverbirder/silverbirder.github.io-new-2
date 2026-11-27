@@ -49,11 +49,14 @@ const dateLabel = `${year}年${Number(month)}月${Number(day)}日`;
 >
   <article
     class="notebook"
+    data-pagefind-body
+    data-pagefind-sort={`date:${frontmatter.publishedAt}`}
+    data-pagefind-filter={`month:${frontmatter.publishedAt.slice(0, 7)}`}
     data-publication-id={frontmatter.publicationId}
     style={`--notebook-rule-image: url("${ruleImage}"); --notebook-tick-image: url("${tickImage}")`}
   >
     <header class="notebook-header">
-      <div class="notebook-meta">
+      <div class="notebook-meta" data-pagefind-ignore>
         {frontmatter.number !== undefined && (
           <p class="notebook-entry notebook-number">
             <span class="notebook-entry-label notebook-meta-parts" lang="en">
@@ -95,7 +98,7 @@ const dateLabel = `${year}年${Number(month)}月${Number(day)}日`;
     </div>
     <div class="notebook-bottom" aria-hidden="true"></div>
     {tags.length > 0 && (
-      <footer class="notebook-tags">
+      <footer class="notebook-tags" data-pagefind-ignore>
         <BlogTagList {tags} />
       </footer>
     )}

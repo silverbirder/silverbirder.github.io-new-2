@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "npm run tokens:build && astro dev --host 0.0.0.0",
-    "build": "node scripts/sync-cms-articles.mjs && npm run tokens:build && astro build",
+    "build": "node scripts/sync-cms-articles.mjs && npm run tokens:build && astro build && npm run search:build",
+    "search:build": "pagefind --site dist --glob \"blog/contents/*/index.html\" --force-language ja",
     "tokens:build": "style-dictionary build --config style-dictionary.config.json",
     "preview": "astro preview --host 0.0.0.0",
     "lint:js": "oxlint . --deny-warnings",
@@ -66,6 +67,7 @@
     "oxfmt": "0.77.0",
     "oxlint": "1.92.0",
     "pa11y-ci": "5.0.0",
+    "pagefind": "1.6.0",
     "pngjs": "7.0.0",
     "postcss": "8.5.32",
     "postcss-html": "2.0.0",

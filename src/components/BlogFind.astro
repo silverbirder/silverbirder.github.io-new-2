@@ -1,12 +1,13 @@
 ---
-import BlogActiveFilter from './BlogActiveFilter.astro';
 import { getTaggedBlogArchive } from '../lib/blog-articles';
+import BlogActiveFilter from './BlogActiveFilter.astro';
 import BlogTagList from './BlogTagList.astro';
 
 interface Props {
   tag?: string;
 }
 const { tag } = Astro.props;
+const base = import.meta.env.BASE_URL;
 const taggedArchive = await getTaggedBlogArchive();
 const tags = [...taggedArchive]
   .toSorted(
@@ -20,50 +21,75 @@ const tagMonths = new Map(
     [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0, 7)))].join(' '),
   ]),
 );
+const panels = [
+  { name: 'search', title: '記事を検索' },
+  { name: 'tags', title: 'タグ一覧' },
+];
 ---
 
 {[false, true].map((modal) => {
   const Group = modal ? 'div' : 'section';
-  const Panel = modal ? 'dialog' : 'div';
-  const id = modal ? 'archive-tags-dialog' : 'archive-tags-panel';
-  const headingId = `${id}-title`;
   return (
     <Group
       class={modal ? 'archive-find-dialogs' : 'archive-find-panel'}
       aria-label={modal ? undefined : '記事を絞り込む'}
     >
       {!modal && <BlogActiveFilter {tag} />}
-      <Panel
-        id={id}
-        class={modal ? 'archive-find-dialog' : undefined}
-        aria-labelledby={modal ? headingId : undefined}
-      >
-        {modal && (
-          <header>
-            <h2 id={headingId}>タグ一覧</h2>
-            <form method="dialog">
-              <button type="submit" aria-label="閉じる" class="archive-find-close">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="0.6"
-                  stroke-linecap="round"
-                  aria-hidden="true"
-                >
-                  <path d="m6 6 12 12M18 6 6 18" />
-                </svg>
-              </button>
-            </form>
-          </header>
-        )}
-        {tags.length > 0 && (
-          <BlogTagList {tags} activeTag={tag} tagMonths={modal ? undefined : tagMonths} />
-        )}
-        {tags.length === 0 && <p>タグ付きの記事はまだありません。</p>}
-      </Panel>
+      {panels.map(({ name, title }) => {
+        const Panel = modal ? 'dialog' : 'div';
+        const id = `archive-${name}-${modal ? 'dialog' : 'panel'}`;
+        const headingId = `${id}-title`;
+        return (
+          <Panel
+            id={id}
+            class={modal ? 'archive-find-dialog' : undefined}
+            aria-labelledby={modal ? headingId : undefined}
+          >
+            {modal && (
+              <header>
+                <h2 id={headingId}>{title}</h2>
+                <form method="dialog">
+                  <button type="submit" aria-label="閉じる" class="archive-find-close">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="0.6"
+                      stroke-linecap="round"
+                      aria-hidden="true"
+                    >
+                      <path d="m6 6 12 12M18 6 6 18" />
+                    </svg>
+                  </button>
+                </form>
+              </header>
+            )}
+            {name === 'search' && (
+              <form
+                action={`${base}blog/`}
+                method="get"
+                class="archive-search-form"
+                role="search"
+                data-blog-search
+              >
+                <input
+                  type="search"
+                  name="q"
+                  placeholder="キーワード"
+                  aria-label="タイトル・本文を検索"
+                />
+                <button type="submit">検索</button>
+              </form>
+            )}
+            {name === 'tags' && tags.length > 0 && (
+              <BlogTagList {tags} activeTag={tag} tagMonths={modal ? undefined : tagMonths} />
+            )}
+            {name === 'tags' && tags.length === 0 && <p>タグ付きの記事はまだありません。</p>}
+          </Panel>
+        );
+      })}
     </Group>
   );
 })}
@@ -83,13 +109,61 @@ const tagMonths = new Map(
     display: contents;
   }
 
-  .archive-find-panel > .archive-current-filter {
+  .archive-find-panel > :is(.archive-current-filter, #archive-search-panel) {
     flex: none;
   }
 
   .archive-find-panel > #archive-tags-panel {
     min-block-size: var(--primitive-space-none);
     overflow-y: auto;
+  }
+
+  .archive-search-form {
+    display: flex;
+    gap: var(--primitive-space-1);
+  }
+
+  .archive-search-form input {
+    flex: auto;
+    min-inline-size: var(--primitive-space-none);
+  }
+
+  .archive-search-form :is(input, button) {
+    padding: var(--primitive-space-1) var(--primitive-space-2);
+    border: var(--semantic-border-width-hairline) solid var(--semantic-color-border-subtle);
+    border-radius: var(--primitive-space-1);
+    background: var(--semantic-color-background-page);
+    font-size: var(--semantic-font-size-label);
+  }
+
+  .archive-search-form button {
+    flex: none;
+    color: var(--semantic-color-text-link);
+    background-image: linear-gradient(
+      var(--semantic-color-background-muted),
+      var(--semantic-color-background-muted)
+    );
+    background-repeat: no-repeat;
+    background-size: var(--archive-search-fill-size, var(--primitive-space-none))
+      var(--primitive-size-full);
+    transition: background-size var(--component-archive-fill-duration) ease-out;
+    cursor: pointer;
+  }
+
+  .archive-search-form button:is(:active, :focus-visible) {
+    --archive-search-fill-size: var(--primitive-size-full);
+  }
+
+  @media (hover: hover) {
+    .archive-search-form button:hover {
+      --archive-search-fill-size: var(--primitive-size-full);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .archive-search-form button {
+      transition: none;
+    }
   }
 
   .archive-find-dialog header {
@@ -112,6 +186,20 @@ const tagMonths = new Map(
     background: none;
     color: var(--semantic-color-text-link);
     cursor: pointer;
+  }
+
+  .archive-find-dialog .archive-search-form {
+    display: grid;
+    gap: var(--semantic-space-control-block);
+  }
+
+  .archive-find-dialog .archive-search-form button {
+    justify-self: end;
+  }
+
+  .archive-find-dialog .archive-search-form :is(input, button) {
+    padding-block: var(--primitive-space-2);
+    font-size: var(--semantic-font-size-body);
   }
 
   .archive-find-dialog .archive-find-tags {

@@ -12,12 +12,16 @@ interface Props {
   tag?: string;
 }
 const { entries, tag } = Astro.props;
+const base = import.meta.env.BASE_URL;
 const years = Map.groupBy(entries, ({ publishedAt }) => publishedAt.slice(0, 4));
 const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0, 7)))];
 ---
 
 <Layout title={tag ? `${tag}の記事` : 'ブログ'} currentPage="blog">
   <div class="site-page blog-archive">
+    {!tag && (
+      <p class="archive-search-status" data-search-status data-site-base={base} role="status" />
+    )}
     <div class="archive-actions">
       <BlogActiveFilter {tag} />
       {months.length > 0 && (
@@ -45,6 +49,28 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
           </svg>
         </button>
       )}
+      <button
+        class="archive-action"
+        type="button"
+        aria-label="記事を検索"
+        aria-haspopup="dialog"
+        aria-controls="archive-search-dialog"
+        data-open-find-dialog
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="0.6"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <circle cx="10" cy="10" r="7" />
+          <path d="m15 15 6 6" />
+        </svg>
+      </button>
       <button
         class="archive-action"
         type="button"
@@ -102,11 +128,12 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
           </ul>
         </section>
       ))}
+      {!tag && <div data-search-tail hidden aria-hidden="true"></div>}
     </div>
   </div>
 </Layout>
 
-<script src="../scripts/blog-month-nav.ts"></script>
+<script src="../scripts/blog-search.ts"></script>
 
 <style is:global>
   .site-page.blog-archive {
@@ -310,5 +337,29 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
     .archive-month-button[hidden] {
       display: none;
     }
+  }
+
+  .archive-search-status {
+    grid-area: intro;
+    margin: var(--primitive-space-none);
+    margin-block-end: var(--semantic-space-control-block);
+  }
+
+  .archive-search-status:is(:empty, [data-announcement-only]) {
+    position: absolute;
+    inline-size: var(--primitive-size-css-pixel);
+    block-size: var(--primitive-size-css-pixel);
+    overflow: hidden;
+    clip-path: inset(var(--primitive-size-full));
+    white-space: nowrap;
+  }
+
+  .archive-year[hidden],
+  .archive-year li[hidden] {
+    display: none;
+  }
+
+  .archive-entries [data-search-tail] {
+    min-block-size: var(--primitive-size-css-pixel);
   }
 </style>

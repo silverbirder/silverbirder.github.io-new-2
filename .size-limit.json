@@ -8,5 +8,26 @@
     "limit": "40 kB",
     "gzip": true
   },
-  { "name": "Client JavaScript", "path": "dist/**/*.js", "limit": "0 B", "brotli": false }
+  {
+    "name": "Client JavaScript",
+    "path": [
+      "dist/**/*.js",
+      "!dist/pagefind/*.js",
+      "!dist/_astro/BlogArchive.astro_astro_type_script_index_*_lang.*.js"
+    ],
+    "limit": "0 B",
+    "brotli": false
+  },
+  {
+    "name": "Blog archive controls",
+    "path": "dist/_astro/BlogArchive.astro_astro_type_script_index_*_lang.*.js",
+    "limit": "12 kB",
+    "brotli": false
+  },
+  {
+    "name": "Pagefind search runtime",
+    "path": ["dist/pagefind/pagefind.js", "dist/pagefind/pagefind-worker.js"],
+    "limit": "100 kB",
+    "brotli": false
+  }
 ]
