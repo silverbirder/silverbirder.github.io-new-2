@@ -2,12 +2,14 @@
 import '../styles/tokens.css';
 import '../styles/link-icons.css';
 import { addExternalLinkIcons } from '../lib/external-link-icons';
+import { authorName, siteDescription, siteName, siteUrl } from '../lib/site';
 import SiteHeader from './SiteHeader.astro';
 
 interface Props {
   title: string;
   description?: string | null;
   keywords?: string;
+  canonicalPath?: string;
   currentPage: 'home' | 'blog' | 'me';
   article?: boolean;
   noindex?: boolean;
@@ -17,13 +19,35 @@ const {
   title,
   description,
   keywords,
+  canonicalPath,
   currentPage,
   article = false,
   noindex,
   sharedFont,
 } = Astro.props;
-const summary = description?.trim();
+const pageMetadata = {
+  home: {
+    path: '',
+    description: 'silverbirder のホームページ。ブログ記事や自己紹介などを掲載しています。',
+  },
+  blog: {
+    path: 'blog/',
+    description: 'ジブンノートのブログ記事一覧。技術や日々の学びをまとめています。',
+  },
+  me: {
+    path: 'me/',
+    description:
+      'ジブンノートについての紹介ページ。職歴や成果物、お気に入りの技術などを掲載しています。',
+  },
+};
+const page = pageMetadata[currentPage];
+const documentTitle = currentPage === 'home' ? title : `${title} | ${siteName}`;
 const base = import.meta.env.BASE_URL;
+const path = article ? canonicalPath : page.path;
+const canonical = path === undefined ? undefined : siteUrl(path);
+const articleDescription = canonical ? siteDescription : undefined;
+const summary = description?.trim() || (article ? articleDescription : page.description);
+const blockIndexing = noindex || base !== '/' || canonical === undefined;
 const fontName = currentPage === 'home' ? 'home' : 'site';
 const deferFont = sharedFont || (currentPage === 'blog' && !article);
 const fontStylesheet = `${base}fonts/${fontName}.css`;
@@ -36,10 +60,35 @@ const content = addExternalLinkIcons(await Astro.slots.render('default'), Astro.
     <meta charset="utf-8" />
     <meta name="color-scheme" content="only light" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{documentTitle}</title>
     {summary && <meta name="description" content={summary} />}
     {keywords && <meta name="keywords" content={keywords} />}
-    {noindex && <meta name="robots" content="noindex" />}
+    {blockIndexing && <meta name="robots" content="noindex" />}
+    {canonical && (
+      <meta
+        name="googlebot"
+        content={`${blockIndexing ? 'noindex' : 'index'},follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1`}
+      />
+    )}
+    {canonical && (
+      <>
+        <link rel="canonical" href={canonical} />
+        <meta name="author" content={authorName} />
+        <meta property="og:site_name" content={siteName} />
+        <meta property="og:locale" content="ja_JP" />
+        <meta property="og:type" content={article ? 'article' : 'website'} />
+        <meta property="og:title" content={title} />
+        {summary && <meta property="og:description" content={summary} />}
+        <meta property="og:url" content={canonical} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:creator" content={`@${authorName}`} />
+        <meta name="twitter:title" content={title} />
+        {summary && <meta name="twitter:description" content={summary} />}
+      </>
+    )}
+    <link rel="alternate" type="application/rss+xml" title={siteName} href={`${base}rss.xml`} />
+    <link rel="me" href="https://github.com/silverbirder" />
+    <link rel="webmention" href="https://webmention.io/silverbirder.github.io/webmention" />
     {deferFont ? (
       <>
         <link
