@@ -1,5 +1,5 @@
 [
-  { "name": "CSS total", "path": "dist/_astro/*.css", "limit": "10 kB", "gzip": true },
+  { "name": "CSS total", "path": "dist/_astro/*.css", "limit": "11 kB", "gzip": true },
   { "name": "Home HTML", "path": "dist/index.html", "limit": "40 kB", "gzip": true },
   { "name": "Blog HTML", "path": "dist/blog/index.html", "limit": "40 kB", "gzip": true },
   {

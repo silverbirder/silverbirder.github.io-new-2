@@ -1,0 +1,312 @@
+---
+import BlogFind from './BlogFind.astro';
+import BlogMonthNav from './BlogMonthNav.astro';
+import BlogTagList from './BlogTagList.astro';
+import type { BlogArchiveEntry } from '../lib/blog-articles';
+import Layout from '../layouts/Layout.astro';
+import '../styles/site-page.css';
+
+interface Props {
+  entries: BlogArchiveEntry[];
+  tag?: string;
+}
+const { entries, tag } = Astro.props;
+const years = Map.groupBy(entries, ({ publishedAt }) => publishedAt.slice(0, 4));
+const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0, 7)))];
+---
+
+<Layout title={tag ? `${tag}の記事` : 'ブログ'} currentPage="blog">
+  <div class="site-page blog-archive">
+    <div class="archive-actions">
+      {months.length > 0 && (
+        <button
+          class="archive-action archive-month-button"
+          type="button"
+          aria-label="年月で移動"
+          aria-haspopup="dialog"
+          aria-controls="archive-month-dialog"
+          data-open-month-dialog
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="0.6"
+            aria-hidden="true"
+          >
+            <path d="M3 10V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3Z" fill="currentColor" stroke="none" />
+            <rect x="3" y="5" width="18" height="16" rx="2" />
+            <path d="M7 3v4m10-4v4M3 10h18m-13 4h1m3 0h1m3 0h1m-9 3h1m3 0h1" />
+          </svg>
+        </button>
+      )}
+      <button
+        class="archive-action"
+        type="button"
+        aria-label="タグ一覧"
+        aria-haspopup="dialog"
+        aria-controls="archive-tags-dialog"
+        data-open-find-dialog
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="0.6"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M3 14 14 3h7v7L10 21Z" />
+          <circle cx="16" cy="8" r="2" />
+        </svg>
+      </button>
+    </div>
+    <aside class="archive-sidebar" aria-label="記事を探す">
+      <BlogMonthNav months={months} />
+      <BlogFind {tag} />
+    </aside>
+    <div class="archive-entries">
+      {[...years].map(([year, articles]) => (
+        <section class="archive-year" aria-labelledby={`archive-${year}`}>
+          <div class="archive-year-header">
+            <h2 id={`archive-${year}`}>{year}年</h2>
+          </div>
+          <ul>
+            {articles.map(({ url, title, publishedAt, tags }, index) => {
+              const month = publishedAt.slice(0, 7);
+              const startsMonth = !articles[index - 1]?.publishedAt.startsWith(month);
+
+              return (
+                <li
+                  class="archive-entry"
+                  id={startsMonth ? `month-${month}` : undefined}
+                  data-archive-month={month}
+                >
+                  <a class="archive-entry-link" href={url}>
+                    <time datetime={publishedAt}>
+                      {publishedAt.slice(5, 10).replace('-', ' / ')}
+                    </time>
+                    <span>{title}</span>
+                  </a>
+                  {tags.length > 0 && <BlogTagList {tags} class="archive-entry-tags" />}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<script src="../scripts/blog-month-nav.ts"></script>
+
+<style is:global>
+  .site-page.blog-archive {
+    --page-top-space: var(--semantic-space-control-inline);
+    --archive-nav-width: 13rem;
+    --archive-nav-gap: clamp(var(--semantic-space-control-block), 4vw, 3rem);
+    --archive-anchor-offset: 1.25rem;
+
+    display: grid;
+    isolation: isolate;
+    grid-template-columns: minmax(var(--primitive-space-none), 1fr) var(--archive-nav-width);
+    column-gap: var(--archive-nav-gap);
+    grid-template-areas: 'intro sidebar' 'entries sidebar';
+    grid-template-rows: auto minmax(var(--primitive-space-none), 1fr);
+    max-inline-size: calc(var(--page-width) + var(--archive-nav-gap) + var(--archive-nav-width));
+  }
+
+  .archive-sidebar {
+    --archive-sidebar-top: calc(var(--component-site-header-offset) + var(--page-top-space));
+    --archive-sidebar-available-height: calc(
+      100dvh - var(--archive-sidebar-top) - var(--semantic-space-control-block)
+    );
+
+    position: sticky;
+    inset-block-start: var(--archive-sidebar-top);
+    grid-area: sidebar;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    max-block-size: var(--archive-sidebar-available-height);
+    gap: var(--semantic-space-control-block);
+  }
+
+  .archive-sidebar > .month-nav {
+    flex: none;
+  }
+
+  .archive-actions {
+    display: none;
+  }
+
+  .archive-entries {
+    grid-area: entries;
+  }
+
+  .archive-entry {
+    border-block-end: var(--semantic-border-width-hairline) solid
+      var(--semantic-color-border-subtle);
+    scroll-margin-block-start: var(--archive-anchor-offset);
+  }
+
+  .archive-entry-link > span {
+    overflow-wrap: anywhere;
+  }
+
+  .archive-year {
+    --archive-year-width: 6rem;
+    --archive-date-width: 3.75rem;
+    --archive-tag-column-width: min(9.5rem, 32%);
+    --archive-title-min-width: 22ch;
+    --archive-column-gap: var(--primitive-space-2);
+    --archive-column-flex: 1;
+    --archive-row-spacing: 0.75rem;
+    --archive-year-spacing: 2.5rem;
+
+    display: grid;
+    grid-template-columns: var(--archive-year-width) minmax(var(--primitive-space-none), 1fr);
+    gap: var(--semantic-space-control-inline);
+    margin-block-end: var(--archive-year-spacing);
+  }
+
+  .archive-year-header {
+    position: sticky;
+    align-self: start;
+    inset-block-start: calc(
+      var(--component-site-header-offset) + var(--semantic-space-control-inline)
+    );
+    padding-block-start: var(--archive-row-spacing);
+    background-color: var(--semantic-color-background-page);
+  }
+
+  .archive-year h2 {
+    margin: var(--primitive-space-none);
+    color: var(--semantic-color-accent);
+    font-size: var(--semantic-font-size-heading);
+  }
+
+  .archive-year > ul {
+    margin: var(--primitive-space-none);
+    padding: var(--primitive-space-none);
+    border-block-start: var(--semantic-border-width-hairline) solid
+      var(--semantic-color-border-subtle);
+    list-style: none;
+  }
+
+  .archive-entry-link {
+    --archive-entry-link-width: max(
+      calc(var(--archive-date-width) + var(--archive-row-spacing) + var(--archive-title-min-width)),
+      calc(
+        var(--primitive-size-full) - var(--archive-tag-column-width) - var(--archive-column-gap) -
+          var(--primitive-size-css-pixel)
+      )
+    );
+
+    flex: var(--archive-column-flex) var(--archive-column-flex) var(--archive-entry-link-width);
+    min-inline-size: var(--primitive-space-none);
+    max-inline-size: var(--primitive-size-full);
+    display: grid;
+    grid-template-columns: var(--archive-date-width) minmax(var(--primitive-space-none), 1fr);
+    gap: var(--archive-row-spacing);
+    line-height: var(--semantic-line-height-body);
+    text-decoration: none;
+  }
+
+  .archive-entry:not([hidden]) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: var(--primitive-space-1) var(--archive-column-gap);
+    padding-block: var(--archive-row-spacing);
+  }
+
+  .archive-entry .archive-entry-tags {
+    flex: var(--archive-column-flex) var(--archive-column-flex) var(--archive-tag-column-width);
+    min-inline-size: var(--primitive-space-none);
+    justify-content: flex-end;
+  }
+
+  .archive-entry-link:is(:hover, :focus-visible) > span {
+    text-decoration: underline var(--semantic-border-width-hairline);
+  }
+
+  .archive-year time {
+    font-size: var(--semantic-font-size-label);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  @media (width <= 48rem) {
+    .site-page.blog-archive,
+    .archive-year {
+      grid-template-columns: minmax(var(--primitive-space-none), 1fr);
+      gap: var(--primitive-space-none);
+    }
+
+    .site-page.blog-archive {
+      --page-top-space: var(--semantic-space-control-block);
+      --archive-anchor-offset: 3rem;
+      --archive-header-layer: 1;
+      --archive-actions-layer: 2;
+      --archive-calendar-button-size: 2.5rem;
+      --archive-year-label-room: 5.25rem;
+
+      grid-template-areas: 'intro' 'entries';
+    }
+
+    .archive-sidebar {
+      display: contents;
+    }
+
+    .archive-year-header,
+    .archive-actions {
+      inset-block-start: var(--component-site-header-offset);
+      z-index: var(--archive-header-layer);
+    }
+
+    .archive-year-header {
+      align-content: center;
+      min-block-size: var(--archive-calendar-button-size);
+      margin-inline: calc(
+        var(--semantic-space-page-gutter) - var(--semantic-space-page-gutter) *
+          var(--primitive-ratio-double)
+      );
+      padding: var(--primitive-space-none) var(--semantic-space-page-gutter);
+    }
+
+    .archive-actions {
+      grid-area: entries;
+      position: sticky;
+      z-index: var(--archive-actions-layer);
+      align-self: start;
+      justify-self: end;
+      display: flex;
+      max-inline-size: calc(var(--primitive-size-full) - var(--archive-year-label-room));
+      background-color: var(--semantic-color-background-page);
+    }
+
+    .archive-action {
+      flex: none;
+      display: grid;
+      place-items: center;
+      inline-size: var(--archive-calendar-button-size);
+      block-size: var(--archive-calendar-button-size);
+      padding: var(--primitive-space-none);
+      border: none;
+      background: none;
+      color: var(--semantic-color-text-link);
+      cursor: pointer;
+    }
+
+    .archive-month-button[hidden] {
+      display: none;
+    }
+  }
+</style>
