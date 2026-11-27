@@ -17,7 +17,9 @@ const thumbnail = card.image && import.meta.env.BASE_URL + 'link-card/' + card.i
     <span class="link-card-copy">
       <strong class="link-card-title">{card.title}</strong>
       {card.description && <span class="link-card-description">{card.description}</span>}
-      <span class="link-card-domain">{card.domain}</span>
+      <span class="link-card-domain" data-link-label>
+        {card.domain}
+      </span>
     </span>
     {thumbnail && (
       <img

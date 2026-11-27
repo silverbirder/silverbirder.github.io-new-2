@@ -247,6 +247,37 @@ time .notebook-meta-parts {
   font-synthesis: style;
 }
 
+.notebook-body del {
+  text-decoration-line: line-through;
+  text-decoration-style: double;
+  /* stylelint-disable-next-line declaration-property-value-allowed-list -- 記事の取り消し線は1pxの二重線にする。 */
+  text-decoration-thickness: var(--primitive-size-css-pixel);
+}
+
+@media screen and (forced-colors: none) {
+  .notebook-body del {
+    --strike-gap: 4px;
+    --strike-center-offset: 0.15em;
+    --strike-color: currentColor;
+    --strike-clear: transparent;
+    --strike-second-line: calc(var(--primitive-size-css-pixel) + var(--strike-gap));
+    --strike-height: calc(var(--strike-second-line) + var(--primitive-size-css-pixel));
+
+    text-decoration: none;
+    box-decoration-break: clone;
+    background-image: linear-gradient(
+      to bottom,
+      var(--strike-color) var(--primitive-size-css-pixel),
+      var(--strike-clear) var(--primitive-size-css-pixel) var(--strike-second-line),
+      var(--strike-color) var(--strike-second-line)
+    );
+    background-position: center
+      calc(var(--primitive-size-full) * var(--primitive-ratio-half) + var(--strike-center-offset));
+    background-repeat: no-repeat;
+    background-size: var(--primitive-size-full) var(--strike-height);
+  }
+}
+
 .notebook-body a {
   color: var(--semantic-color-text-link);
   text-decoration: underline var(--semantic-border-width-hairline);

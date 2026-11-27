@@ -18,6 +18,8 @@ index: false
 
 文中のリンクは[ブログの記事](/blog/contents/20261101/)へ移動します。長いURLが画面からはみ出さないかも確認します。
 
+[GitHub](https://github.com/silverbirder) と [こぶりー](https://kobliy.vercel.app/about) は外部リンクです。
+
 https://example.com/very/long/article/path/for/checking/how/a/link/wraps/inside/the/notebook/without/overflowing?category=notebook&view=sample
 
 ここで明示的に改行します。<br>
