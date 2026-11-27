@@ -1,0 +1,23 @@
+---
+import { siteUrl } from '../lib/site';
+
+const rootBuild = import.meta.env.BASE_URL === '/' && import.meta.env.PROD;
+const gaId =
+  rootBuild && /^G-[A-Z0-9]+$/u.test(process.env.GA_ID ?? '') ? process.env.GA_ID : undefined;
+const clarityId =
+  rootBuild && /^[A-Za-z0-9]+$/u.test(process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID ?? '')
+    ? process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID
+    : undefined;
+const origin = new URL(siteUrl()).origin;
+---
+
+{(gaId || clarityId) && (
+  <script
+    is:inline
+    defer
+    src={`${import.meta.env.BASE_URL}site-analytics.js`}
+    data-analytics-origin={origin}
+    data-ga-id={gaId}
+    data-clarity-id={clarityId}
+  />
+)}

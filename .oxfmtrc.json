@@ -10,6 +10,7 @@
     ".yomiyasu/**",
     "yomiyasu-work/**",
     ".husky/_/**",
-    "package-lock.json"
+    "package-lock.json",
+    "public/google104dc4a90e5158de.html"
   ]
 }
