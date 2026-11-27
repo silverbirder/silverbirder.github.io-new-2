@@ -40,7 +40,7 @@ export async function getTaggedBlogArchive() {
   return tagged;
 }
 
-function articleTags(tags?: readonly string[] | null) {
+export function articleTags(tags?: readonly string[] | null) {
   return [...new Set(tags?.map((tag) => tag.trim()).filter(Boolean))];
 }
 

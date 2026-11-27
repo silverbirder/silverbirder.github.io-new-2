@@ -301,6 +301,7 @@
     }
   },
   "component": {
+    "archive-fill-duration": { "value": "160ms", "type": "string" },
     "site-header-height": { "value": "3rem", "type": "string" },
     "site-header-offset": {
       "value": "calc({component.site-header-height} + {semantic.border-width-hairline})",
