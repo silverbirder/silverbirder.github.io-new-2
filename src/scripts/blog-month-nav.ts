@@ -1,20 +1,74 @@
+const monthFromLink = (link: HTMLAnchorElement) => link.hash.slice('#month-'.length);
+
+function archiveMonthTarget(month: string) {
+  return document.getElementById(`month-${month}`);
+}
+
+function setupTagMonthPreview(track: HTMLOListElement, links: readonly HTMLAnchorElement[]) {
+  const tags = document.querySelectorAll<HTMLAnchorElement>(
+    '#archive-tags-panel [data-tag-months]',
+  );
+  let hovered: HTMLAnchorElement | undefined;
+  let focused: HTMLAnchorElement | undefined;
+
+  const update = () => {
+    const tag = hovered ?? focused;
+    const months = new Set(tag?.dataset.tagMonths?.split(' '));
+    track.toggleAttribute('data-tag-preview-active', !!tag);
+    for (const link of links) {
+      link.toggleAttribute('data-tag-preview', months.has(monthFromLink(link)));
+    }
+  };
+
+  for (const tag of tags) {
+    tag.addEventListener('pointerenter', ({ pointerType }) => {
+      if (pointerType === 'touch') return;
+      hovered = tag;
+      update();
+    });
+    tag.addEventListener('pointerleave', () => {
+      if (hovered !== tag) return;
+      hovered = undefined;
+      update();
+    });
+    tag.addEventListener('focus', () => {
+      if (!tag.matches(':focus-visible')) return;
+      focused = tag;
+      update();
+    });
+    tag.addEventListener('blur', () => {
+      if (focused !== tag) return;
+      focused = undefined;
+      update();
+    });
+  }
+}
+
 function setupMonthNavigation() {
-  const monthNav = document.querySelector('[data-month-nav]');
-  const track = monthNav?.querySelector<HTMLOListElement>('[data-month-track]');
+  const track = document.querySelector<HTMLOListElement>('[data-month-track]');
   if (!track) return;
 
   const slotCount = Number(track.dataset.monthTrack);
-  const months = Array.from(track.querySelectorAll('a')).flatMap((link) => {
-    const target = document.getElementById(link.hash.slice(1));
-    return target ? [{ link, target, slot: Number(link.dataset.monthSlot) }] : [];
-  });
-  const first = months[0];
-  if (!first) return;
+  const links = [...track.querySelectorAll<HTMLAnchorElement>('a')];
+  setupTagMonthPreview(track, links);
+  const getMonths = () =>
+    links.flatMap((link) => {
+      if (link.closest('li')?.hidden) return [];
+      const target = archiveMonthTarget(monthFromLink(link));
+      return target ? [{ link, target, slot: Number(link.dataset.monthSlot) }] : [];
+    });
 
-  let current = first.link;
+  let current: HTMLAnchorElement | undefined = links[0];
   let animation = 0;
   const updateMonth = () => {
     animation = 0;
+    const months = getMonths();
+    const first = months[0];
+    if (!first) {
+      current?.removeAttribute('aria-current');
+      current = undefined;
+      return;
+    }
     const scrollMargin = Number.parseFloat(
       window.getComputedStyle(first.target).scrollMarginBlockStart,
     );
@@ -32,7 +86,7 @@ function setupMonthNavigation() {
     const next = visible?.link ?? first.link;
     if (next === current) return;
 
-    current.removeAttribute('aria-current');
+    current?.removeAttribute('aria-current');
     next.setAttribute('aria-current', 'location');
     current = next;
   };
@@ -62,6 +116,9 @@ function setupMonthNavigation() {
       track.setPointerCapture(event.pointerId);
     }
 
+    const months = getMonths();
+    const first = months[0];
+    if (!first) return;
     const { top, height } = track.getBoundingClientRect();
     const slot = ((event.clientY - top) / height) * slotCount + 0.5;
     const closest = months.reduce(
@@ -88,7 +145,7 @@ function setupMonthDialog() {
   const dialog = document.querySelector<HTMLDialogElement>('#archive-month-dialog');
   const trigger = document.querySelector('[data-open-month-dialog]');
   if (!dialog || !trigger) return;
-  const choices = Array.from(dialog.querySelectorAll('a'));
+  const choices = [...dialog.querySelectorAll('a')];
 
   trigger.addEventListener('click', () => {
     const current = document.querySelector<HTMLAnchorElement>(
@@ -103,13 +160,13 @@ function setupMonthDialog() {
 
   dialog.addEventListener('click', (event) => {
     if (!(event.target instanceof HTMLAnchorElement)) return;
-    const { hash } = event.target;
-    const target = document.getElementById(hash.slice(1));
+    const link = event.target;
+    const month = monthFromLink(link);
+    const target = archiveMonthTarget(month);
     if (!target) return;
-
     event.preventDefault();
     dialog.close();
-    window.location.hash = hash;
+    window.location.hash = link.hash;
     target.scrollIntoView({ block: 'start' });
     target.querySelector('a')?.focus({ preventScroll: true });
   });
@@ -117,3 +174,20 @@ function setupMonthDialog() {
 
 setupMonthNavigation();
 setupMonthDialog();
+
+function setupTagDialog() {
+  const trigger = document.querySelector('[aria-controls="archive-tags-dialog"]');
+  const dialog = document.querySelector<HTMLDialogElement>('#archive-tags-dialog');
+  if (!trigger || !dialog) return;
+
+  trigger.addEventListener('click', () => {
+    dialog.showModal();
+    dialog.querySelector('[data-active-tag]')?.scrollIntoView({ block: 'nearest' });
+  });
+
+  window.matchMedia('(width <= 48rem)').addEventListener('change', ({ matches }) => {
+    if (!matches && dialog.open) dialog.close();
+  });
+}
+
+setupTagDialog();

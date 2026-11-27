@@ -1,0 +1,19 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import BlogArchive from '../../../components/BlogArchive.astro';
+import { getTaggedBlogArchive } from '../../../lib/blog-articles';
+import { blogTagSlug } from '../../../lib/blog-tags';
+
+export const getStaticPaths = (async () => {
+  const tagged = await getTaggedBlogArchive();
+  return [...tagged].map(([tag, entries]) => ({
+    params: { tag: blogTagSlug(tag) },
+    props: { tag, entries },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { tag, entries } = Astro.props;
+---
+
+<BlogArchive {tag} {entries} />

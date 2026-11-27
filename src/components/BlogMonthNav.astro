@@ -43,7 +43,7 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
     </form>
     <div class="month-dialog-list">
       {[...Map.groupBy(dates, ({ year }) => year)].map(([year, group]) => (
-        <section class="month-dialog-year">
+        <section class="month-dialog-year" data-month-dialog-year>
           <h3>{year}年</h3>
           <ul>
             {group.map(({ id, label }) => (
@@ -79,11 +79,9 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
               class:list={['month-nav-link', { 'month-nav-year': startsYear }]}
               data-month-slot={slot}
             >
-              {startsYear && (
-                <span class="month-nav-year-label" aria-hidden="true">
-                  {year}
-                </span>
-              )}
+              <span class="month-nav-year-label" aria-hidden="true">
+                {year}
+              </span>
               <span class="month-nav-tooltip" aria-hidden="true">
                 {label}
               </span>
@@ -95,11 +93,9 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
   </nav>
 )}
 
-<script src="../scripts/blog-month-nav.ts"></script>
-
 <style is:global>
   .month-nav {
-    --month-track-length: min(40rem, 70svh);
+    --month-track-length: min(21rem, 36svh);
     --month-tick-length: 0.3125rem;
     --month-year-tick-length: 0.625rem;
     --month-dot-size: 0.375rem;
@@ -107,11 +103,6 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
     --month-label-center: calc(var(--primitive-size-full) * var(--primitive-ratio-half));
     --month-label-offset: calc(-1 * var(--month-label-center));
 
-    position: sticky;
-    inset-block-start: calc(
-      var(--component-site-header-offset) + var(--semantic-space-page-gutter)
-    );
-    align-self: start;
     padding-inline-end: var(--semantic-space-control-block);
     font-variant-numeric: tabular-nums;
   }
@@ -169,12 +160,17 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
     line-height: var(--semantic-line-height-body);
   }
 
+  .month-nav :is(li[hidden], .month-nav-link:not(.month-nav-year) .month-nav-year-label),
+  .month-dialog [hidden] {
+    display: none;
+  }
+
   .month-nav-year-label {
     inset-inline-end: var(--primitive-space-4);
   }
 
   .month-nav-tooltip {
-    inset-inline-end: calc(var(--primitive-size-full) + var(--semantic-space-control-block));
+    inset-inline-start: var(--primitive-space-none);
     display: none;
     padding-inline: var(--semantic-space-control-block);
     background: var(--semantic-color-text-link);
@@ -198,6 +194,10 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
     background: var(--semantic-color-accent);
   }
 
+  .month-nav-track[data-tag-preview-active] .month-nav-link:not([data-tag-preview])::before {
+    visibility: hidden;
+  }
+
   .month-nav-link[aria-current='location']::after {
     position: absolute;
     inset-block-start: calc(var(--month-label-center) - var(--month-dot-radius));
@@ -209,15 +209,14 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
     pointer-events: none;
     content: '';
   }
-  .month-dialog {
-    --month-dialog-width: 21rem;
-    --month-dialog-radius: 0.75rem;
-    --month-dialog-list-height: 58svh;
-    --month-dialog-choice-size: 2.5rem;
+  .month-dialog,
+  .archive-find-dialog {
+    --archive-dialog-width: 21rem;
+    --archive-dialog-radius: 0.75rem;
 
     box-sizing: border-box;
     inline-size: min(
-      var(--month-dialog-width),
+      var(--archive-dialog-width),
       calc(
         var(--primitive-size-full) - var(--semantic-space-page-gutter) *
           var(--primitive-ratio-double)
@@ -225,8 +224,13 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
     );
     padding: var(--semantic-space-control-inline);
     border: var(--semantic-border-width-hairline) solid var(--semantic-color-border-subtle);
-    border-radius: var(--month-dialog-radius);
+    border-radius: var(--archive-dialog-radius);
     background: var(--semantic-color-background-page);
+  }
+
+  .month-dialog {
+    --month-dialog-list-height: 58svh;
+    --month-dialog-choice-size: 2.5rem;
   }
 
   .month-dialog :is(h2, h3, ul) {

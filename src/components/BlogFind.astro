@@ -1,0 +1,124 @@
+---
+import { getTaggedBlogArchive } from '../lib/blog-articles';
+import BlogTagList from './BlogTagList.astro';
+
+interface Props {
+  tag?: string;
+}
+const { tag } = Astro.props;
+const taggedArchive = await getTaggedBlogArchive();
+const tags = [...taggedArchive]
+  .toSorted(
+    ([left, leftEntries], [right, rightEntries]) =>
+      rightEntries.length - leftEntries.length || left.localeCompare(right, 'ja'),
+  )
+  .map(([name]) => name);
+const tagMonths = new Map(
+  [...taggedArchive].map(([name, entries]) => [
+    name,
+    [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0, 7)))].join(' '),
+  ]),
+);
+---
+
+{[false, true].map((modal) => {
+  const Group = modal ? 'div' : 'section';
+  const Panel = modal ? 'dialog' : 'div';
+  const id = modal ? 'archive-tags-dialog' : 'archive-tags-panel';
+  const headingId = `${id}-title`;
+  return (
+    <Group
+      class={modal ? 'archive-find-dialogs' : 'archive-find-panel'}
+      aria-label={modal ? undefined : '記事を絞り込む'}
+    >
+      <Panel
+        id={id}
+        class={modal ? 'archive-find-dialog' : undefined}
+        aria-labelledby={modal ? headingId : undefined}
+      >
+        {modal && (
+          <header>
+            <h2 id={headingId}>タグ一覧</h2>
+            <form method="dialog">
+              <button type="submit" aria-label="閉じる" class="archive-find-close">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="0.6"
+                  stroke-linecap="round"
+                  aria-hidden="true"
+                >
+                  <path d="m6 6 12 12M18 6 6 18" />
+                </svg>
+              </button>
+            </form>
+          </header>
+        )}
+        {tags.length > 0 && (
+          <BlogTagList {tags} activeTag={tag} tagMonths={modal ? undefined : tagMonths} />
+        )}
+        {tags.length === 0 && <p>タグ付きの記事はまだありません。</p>}
+      </Panel>
+    </Group>
+  );
+})}
+
+<style is:global>
+  .archive-find-panel {
+    display: flex;
+    flex-direction: column;
+    min-block-size: var(--primitive-space-none);
+    gap: var(--semantic-space-control-block);
+    padding-block-start: var(--semantic-space-control-block);
+    border-block-start: var(--semantic-border-width-hairline) solid
+      var(--semantic-color-border-subtle);
+  }
+
+  .archive-find-dialogs {
+    display: contents;
+  }
+
+  .archive-find-panel > #archive-tags-panel {
+    min-block-size: var(--primitive-space-none);
+    overflow-y: auto;
+  }
+
+  .archive-find-dialog header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-end: var(--semantic-space-control-block);
+  }
+
+  .archive-find-dialog h2 {
+    margin: var(--primitive-space-none);
+    font-size: var(--semantic-font-size-heading);
+  }
+
+  .archive-find-close {
+    display: grid;
+    place-items: center;
+    padding: var(--semantic-space-control-block);
+    border: none;
+    background: none;
+    color: var(--semantic-color-text-link);
+    cursor: pointer;
+  }
+
+  .archive-find-dialog .archive-find-tags {
+    --tag-list-height: 52svh;
+
+    max-block-size: var(--tag-list-height);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  @media (width <= 48rem) {
+    .archive-find-panel {
+      display: none;
+    }
+  }
+</style>
