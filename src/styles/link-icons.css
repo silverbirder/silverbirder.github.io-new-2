@@ -1,0 +1,30 @@
+a .external-link-favicon,
+a .external-link-mark {
+  --link-icon-size: 0.875em;
+  --link-icon-offset: -0.1em;
+
+  position: relative;
+  inset-block-start: var(--link-icon-offset);
+  display: inline-block;
+  inline-size: var(--link-icon-size);
+  block-size: var(--link-icon-size);
+  vertical-align: middle;
+}
+
+a .external-link-favicon {
+  margin-inline-end: var(--primitive-space-1);
+  object-fit: contain;
+}
+
+a .external-link-mark {
+  margin-inline-start: var(--primitive-space-1);
+}
+
+a .external-link-tail {
+  white-space: nowrap;
+}
+
+a .external-link-tail::before {
+  /* WORD JOINER keeps the arrow with the end of the link label. */
+  content: '\2060';
+}
