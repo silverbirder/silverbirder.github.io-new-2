@@ -515,18 +515,21 @@ test('スマートフォン幅で遅れて読み込まれた本文フォント�
   await page.setViewportSize({ width: 390, height: 844 });
   await page.route('https://**/*', (route) => route.abort());
 
-  const requested = Promise.withResolvers<void>();
-  const release = Promise.withResolvers<void>();
-  await page.route('**/fonts/rounded-x-mplus-1c-regular-core.woff2', async (route) => {
-    requested.resolve();
-    await release.promise;
+  const font = '**/fonts/rounded-x-mplus-1c-regular-core.woff2';
+  const requested = page.waitForRequest(font);
+  let releaseFont!: () => void;
+  const released = new Promise<void>((resolve) => {
+    releaseFont = resolve;
+  });
+  await page.route(font, async (route) => {
+    await released;
     await route.continue();
   });
   await page.goto('/samples/notebook/', { waitUntil: 'domcontentloaded' });
   const paragraph = page.locator('.notebook-body > p').filter({ hasText: /^次の段落です。/ });
 
   try {
-    await requested.promise;
+    await requested;
     await expect(paragraph).toBeVisible();
     expect(await paragraph.evaluate(() => document.fonts.status)).toBe('loading');
     const wraps = await paragraph.evaluate(
@@ -534,7 +537,7 @@ test('スマートフォン幅で遅れて読み込まれた本文フォント�
     );
     expect(wraps).toBe(true);
   } finally {
-    release.resolve();
+    releaseFont();
   }
 
   await page.evaluate(() => document.fonts.ready);
