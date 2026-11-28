@@ -385,8 +385,7 @@ time .notebook-meta-parts {
   background: var(--semantic-color-background-page);
 }
 
-.notebook-photo-frame > img,
-.notebook-photo-frame > picture > img {
+.notebook-photo-frame img {
   box-shadow: var(--primitive-space-none) var(--primitive-space-none) var(--primitive-space-none)
     var(--semantic-border-width-hairline) var(--semantic-color-border-subtle);
 }
