@@ -513,11 +513,12 @@ time .notebook-meta-parts {
   --quote-mark-height: 1.5rem;
   --quote-mark-inset: var(--primitive-space-2);
   --quote-radius: 0.8rem;
+  --quote-block-padding: calc(var(--component-notebook-rule-spacing) * var(--primitive-ratio-half));
 
   position: relative;
+  inset-block-start: var(--quote-block-padding);
   display: flow-root;
-  padding: var(--component-notebook-rule-spacing) var(--semantic-space-quote-indent)
-    var(--primitive-space-none);
+  padding: var(--quote-block-padding) var(--semantic-space-quote-indent);
   border-radius: var(--quote-radius);
   background: var(--semantic-color-background-page);
 }
@@ -543,7 +544,7 @@ time .notebook-meta-parts {
 
 .notebook-body blockquote::after {
   content: '”' / '';
-  inset-block-end: var(--quote-mark-offset);
+  inset-block-end: calc(var(--quote-mark-offset) + var(--primitive-space-2));
   inset-inline-end: var(--quote-mark-inset);
 }
 
@@ -560,13 +561,18 @@ time .notebook-meta-parts {
   --inline-code-text-saturation: 64.34%;
   --inline-code-text-lightness: 25.29%;
 
-  line-height: var(--primitive-space-none);
-  padding-inline: var(--primitive-space-1);
-  border-radius: var(--inline-code-radius);
-  background-color: hsl(
+  --inline-code-background: hsl(
     var(--inline-code-background-hue) var(--inline-code-background-saturation)
       var(--inline-code-background-lightness)
   );
+  --inline-code-background-gap: 0.25em;
+
+  line-height: var(--primitive-space-none);
+  padding-inline: var(--primitive-space-1);
+  border-radius: var(--inline-code-radius);
+  background: linear-gradient(var(--inline-code-background), var(--inline-code-background)) center /
+    var(--primitive-size-full) calc(var(--primitive-size-full) - var(--inline-code-background-gap))
+    no-repeat;
   color: hsl(
     var(--inline-code-text-hue) var(--inline-code-text-saturation) var(--inline-code-text-lightness)
   );
