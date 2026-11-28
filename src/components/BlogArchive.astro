@@ -2,7 +2,6 @@
 import BlogActiveFilter from './BlogActiveFilter.astro';
 import BlogFind from './BlogFind.astro';
 import BlogMonthNav from './BlogMonthNav.astro';
-import BlogTagList from './BlogTagList.astro';
 import type { BlogArchiveEntry } from '../lib/blog-articles';
 import Layout from '../layouts/Layout.astro';
 import '../styles/site-page.css';
@@ -95,17 +94,44 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
       </button>
     </div>
     <aside class="archive-sidebar" aria-label="記事を探す">
-      <BlogMonthNav months={months} />
       <BlogFind {tag} />
     </aside>
+    <div class="archive-month-navigation">
+      <p class="archive-current-year" aria-hidden="true" data-archive-current-year>
+        {months[0]?.slice(0, 4)}年
+      </p>
+      <BlogMonthNav months={months} />
+    </div>
     <div class="archive-entries">
+      {!tag && (
+        <div
+          class="archive-year archive-search-skeleton"
+          data-search-skeleton
+          hidden
+          aria-hidden="true"
+        >
+          <div class="archive-year-header">
+            <span class="archive-skeleton-bar archive-skeleton-year" />
+          </div>
+          <ul>
+            {Array.from({ length: 6 }, () => (
+              <li class="archive-entry">
+                <div class="archive-entry-link">
+                  <span class="archive-skeleton-bar archive-skeleton-date" />
+                  <span class="archive-skeleton-bar archive-skeleton-title" />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {[...years].map(([year, articles]) => (
         <section class="archive-year" aria-labelledby={`archive-${year}`}>
           <div class="archive-year-header">
             <h2 id={`archive-${year}`}>{year}年</h2>
           </div>
           <ul>
-            {articles.map(({ url, title, publishedAt, tags }, index) => {
+            {articles.map(({ url, title, publishedAt }, index) => {
               const month = publishedAt.slice(0, 7);
               const startsMonth = !articles[index - 1]?.publishedAt.startsWith(month);
 
@@ -121,7 +147,6 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
                     </time>
                     <span>{title}</span>
                   </a>
-                  {tags.length > 0 && <BlogTagList {tags} class="archive-entry-tags" />}
                 </li>
               );
             })}
@@ -136,11 +161,21 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
 <script src="../scripts/blog-search.ts"></script>
 
 <style is:global>
-  .site-page.blog-archive {
-    --page-top-space: var(--semantic-space-control-inline);
+  :root:has(.blog-archive) {
+    --archive-content-width: 52rem;
     --archive-nav-width: 13rem;
     --archive-nav-gap: clamp(var(--semantic-space-control-block), 4vw, 3rem);
+    --archive-layout-width: calc(
+      var(--archive-content-width) + var(--archive-nav-gap) + var(--archive-nav-width)
+    );
+  }
+
+  .site-page.blog-archive {
+    --page-top-space: var(--semantic-space-control-inline);
     --archive-anchor-offset: 1.25rem;
+    --archive-year-width: 6rem;
+    --archive-articles-column: 2;
+    --archive-sticky-top: calc(var(--component-site-header-offset) + var(--page-top-space));
 
     display: grid;
     isolation: isolate;
@@ -148,17 +183,16 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
     column-gap: var(--archive-nav-gap);
     grid-template-areas: 'intro sidebar' 'entries sidebar';
     grid-template-rows: auto minmax(var(--primitive-space-none), 1fr);
-    max-inline-size: calc(var(--page-width) + var(--archive-nav-gap) + var(--archive-nav-width));
+    max-inline-size: var(--archive-layout-width);
   }
 
   .archive-sidebar {
-    --archive-sidebar-top: calc(var(--component-site-header-offset) + var(--page-top-space));
     --archive-sidebar-available-height: calc(
-      100dvh - var(--archive-sidebar-top) - var(--semantic-space-control-block)
+      100dvh - var(--archive-sticky-top) - var(--semantic-space-control-block)
     );
 
     position: sticky;
-    inset-block-start: var(--archive-sidebar-top);
+    inset-block-start: var(--archive-sticky-top);
     grid-area: sidebar;
     align-self: start;
     display: flex;
@@ -167,8 +201,24 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
     gap: var(--semantic-space-control-block);
   }
 
-  .archive-sidebar > .month-nav {
-    flex: none;
+  .archive-month-navigation {
+    position: sticky;
+    inset-block-start: var(--archive-sticky-top);
+    grid-area: entries;
+    align-self: start;
+    justify-self: start;
+    inline-size: var(--archive-year-width);
+    z-index: var(--archive-month-layer);
+    --archive-month-layer: 1;
+  }
+
+  :where(.archive-month-navigation:not(:has(> .month-nav:not([hidden])))) .archive-current-year {
+    display: none;
+  }
+
+  .archive-current-year {
+    margin-block-end: var(--semantic-space-control-inline);
+    font-weight: var(--semantic-font-weight-heading);
   }
 
   .archive-actions {
@@ -182,6 +232,7 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
   .archive-entry {
     border-block-end: var(--semantic-border-width-hairline) solid
       var(--semantic-color-border-subtle);
+    padding-block: var(--archive-row-spacing);
     scroll-margin-block-start: var(--archive-anchor-offset);
   }
 
@@ -190,12 +241,7 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
   }
 
   .archive-year {
-    --archive-year-width: 6rem;
     --archive-date-width: 3.75rem;
-    --archive-tag-column-width: min(9.5rem, 32%);
-    --archive-title-min-width: 22ch;
-    --archive-column-gap: var(--primitive-space-2);
-    --archive-column-flex: 1;
     --archive-row-spacing: 0.75rem;
     --archive-year-spacing: 2.5rem;
 
@@ -211,14 +257,30 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
     inset-block-start: calc(
       var(--component-site-header-offset) + var(--semantic-space-control-inline)
     );
-    padding-block-start: var(--archive-row-spacing);
     background-color: var(--semantic-color-background-page);
   }
 
-  .archive-year h2 {
-    margin: var(--primitive-space-none);
+  .archive-year h2,
+  .archive-current-year {
+    margin-block-start: var(--primitive-space-none);
     color: var(--semantic-color-accent);
     font-size: var(--semantic-font-size-heading);
+    text-box: trim-start cap alphabetic;
+  }
+
+  @media (width > 48rem) {
+    section.archive-year > .archive-year-header {
+      position: absolute;
+      clip-path: inset(var(--primitive-size-full));
+    }
+
+    .archive-year > ul {
+      grid-column: var(--archive-articles-column);
+    }
+  }
+
+  .archive-year h2 {
+    margin-block-end: var(--primitive-space-none);
   }
 
   .archive-year > ul {
@@ -230,36 +292,11 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
   }
 
   .archive-entry-link {
-    --archive-entry-link-width: max(
-      calc(var(--archive-date-width) + var(--archive-row-spacing) + var(--archive-title-min-width)),
-      calc(
-        var(--primitive-size-full) - var(--archive-tag-column-width) - var(--archive-column-gap) -
-          var(--primitive-size-css-pixel)
-      )
-    );
-
-    flex: var(--archive-column-flex) var(--archive-column-flex) var(--archive-entry-link-width);
-    min-inline-size: var(--primitive-space-none);
-    max-inline-size: var(--primitive-size-full);
     display: grid;
     grid-template-columns: var(--archive-date-width) minmax(var(--primitive-space-none), 1fr);
     gap: var(--archive-row-spacing);
     line-height: var(--semantic-line-height-body);
     text-decoration: none;
-  }
-
-  .archive-entry:not([hidden]) {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: start;
-    gap: var(--primitive-space-1) var(--archive-column-gap);
-    padding-block: var(--archive-row-spacing);
-  }
-
-  .archive-entry .archive-entry-tags {
-    flex: var(--archive-column-flex) var(--archive-column-flex) var(--archive-tag-column-width);
-    min-inline-size: var(--primitive-space-none);
-    justify-content: flex-end;
   }
 
   .archive-entry-link:is(:hover, :focus-visible) > span {
@@ -270,6 +307,12 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
     font-size: var(--semantic-font-size-label);
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
+  }
+
+  @media (48rem < width < 79rem) {
+    .site-page.blog-archive {
+      --archive-year-width: 9rem;
+    }
   }
 
   @media (width <= 48rem) {
@@ -290,8 +333,13 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
       grid-template-areas: 'intro' 'entries';
     }
 
-    .archive-sidebar {
+    .archive-sidebar,
+    .archive-month-navigation {
       display: contents;
+    }
+
+    .archive-current-year {
+      display: none;
     }
 
     .archive-year-header,
@@ -308,6 +356,10 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
           var(--primitive-ratio-double)
       );
       padding: var(--primitive-space-none) var(--semantic-space-page-gutter);
+    }
+
+    .archive-year h2 {
+      text-box: normal;
     }
 
     .archive-actions {
@@ -337,6 +389,49 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
     .archive-month-button[hidden] {
       display: none;
     }
+  }
+
+  .archive-search-skeleton {
+    --skeleton-year-width: 4.5rem;
+    --skeleton-title-width: 28ch;
+    --skeleton-short-title-width: 18ch;
+    --skeleton-bar-height: 0.625em;
+  }
+
+  .archive-skeleton-bar {
+    display: block;
+    align-self: center;
+    inline-size: var(--primitive-size-full);
+    block-size: var(--skeleton-bar-height);
+    --skeleton-base-color-weight: 84%;
+
+    border-radius: calc(var(--primitive-space-1) * var(--primitive-ratio-half));
+    background: color-mix(
+      in srgb,
+      var(--semantic-color-border-subtle) var(--skeleton-base-color-weight),
+      var(--semantic-color-text-link)
+    );
+  }
+
+  .archive-skeleton-year {
+    inline-size: var(--skeleton-year-width);
+    font-size: var(--semantic-font-size-heading);
+  }
+
+  .archive-skeleton-date {
+    inline-size: var(--primitive-space-8);
+  }
+
+  .archive-skeleton-title {
+    max-inline-size: var(--skeleton-title-width);
+  }
+
+  .archive-search-skeleton li:nth-child(even) .archive-skeleton-title {
+    max-inline-size: var(--skeleton-short-title-width);
+  }
+
+  .archive-search-skeleton .archive-entry-link {
+    min-block-size: calc(var(--semantic-line-height-body) * var(--semantic-font-size-body));
   }
 
   .archive-search-status {

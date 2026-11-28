@@ -128,6 +128,7 @@ const { tags, activeTag, tagMonths, class: className } = Astro.props;
 
   .archive-find-tags a > span {
     min-inline-size: var(--primitive-space-none);
+    text-box: trim-both cap alphabetic;
   }
 
   .archive-find-tags a > span::before {

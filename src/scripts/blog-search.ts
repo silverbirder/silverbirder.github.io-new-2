@@ -16,6 +16,31 @@ type Pagefind = {
 
 const resultPageSize = 8;
 
+function setupDialogDismissFallback() {
+  if ('closedBy' in HTMLDialogElement.prototype) return;
+
+  for (const dialog of document.querySelectorAll<HTMLDialogElement>('dialog[closedby="any"]')) {
+    const outside = (event: MouseEvent) => {
+      if (event.target !== dialog) return false;
+      const { left, right, top, bottom } = dialog.getBoundingClientRect();
+      return (
+        event.clientX < left ||
+        event.clientX > right ||
+        event.clientY < top ||
+        event.clientY > bottom
+      );
+    };
+    let pressedOutside = false;
+    dialog.addEventListener('pointerdown', (event) => {
+      pressedOutside = outside(event);
+    });
+    dialog.addEventListener('click', (event) => {
+      if (pressedOutside && outside(event)) dialog.close();
+      pressedOutside = false;
+    });
+  }
+}
+
 function setupFindDialogs() {
   for (const trigger of document.querySelectorAll<HTMLButtonElement>('[data-open-find-dialog]')) {
     const id = trigger.getAttribute('aria-controls');
@@ -66,8 +91,9 @@ function getSearchElements(status: HTMLElement) {
       return label && clear ? [{ filter, label, clear }] : [];
     },
   );
-  if (!entries || !tail) return;
-  return { entries, forms, tail, base, filterDisplays };
+  const skeleton = entries?.querySelector<HTMLElement>('[data-search-skeleton]');
+  if (!entries || !skeleton || !tail) return;
+  return { entries, forms, skeleton, tail, base, filterDisplays };
 }
 
 const termFromUrl = () => new URL(location.href).searchParams.get('q')?.trim() ?? '';
@@ -75,7 +101,13 @@ const termFromUrl = () => new URL(location.href).searchParams.get('q')?.trim() ?
 function setupSearch(status: HTMLElement) {
   const elements = getSearchElements(status);
   if (!elements) return;
-  const { entries, forms, tail, base, filterDisplays } = elements;
+  const { entries, forms, skeleton, tail, base, filterDisplays } = elements;
+
+  const setLoading = (loading: boolean) => {
+    skeleton.hidden = !loading;
+    if (loading) entries.setAttribute('aria-busy', 'true');
+    else entries.removeAttribute('aria-busy');
+  };
 
   const report = (message: string, announcementOnly = false) => {
     status.toggleAttribute('data-announcement-only', announcementOnly);
@@ -87,9 +119,9 @@ function setupSearch(status: HTMLElement) {
   let request = 0;
   let shown = 0;
   let selectedMonth = '';
-  const years = entries.querySelectorAll<HTMLElement>('.archive-year');
+  const years = entries.querySelectorAll<HTMLElement>('section.archive-year');
   const rows = new Map(
-    [...entries.querySelectorAll<HTMLAnchorElement>('.archive-entry-link')].map((link) => [
+    [...entries.querySelectorAll<HTMLAnchorElement>('a.archive-entry-link')].map((link) => [
       link.pathname,
       link.closest('li'),
     ]),
@@ -177,12 +209,13 @@ function setupSearch(status: HTMLElement) {
   const search = async (term: string) => {
     const current = ++request;
     const active = resetSearch(term);
+    setLoading(active);
     if (!active) {
       report('');
       return;
     }
 
-    report('検索中…');
+    report('検索中…', true);
     try {
       pagefind ??= loadSearchEngine();
       const module = await pagefind;
@@ -201,6 +234,8 @@ function setupSearch(status: HTMLElement) {
       if (current === request) {
         report('検索結果を読み込めませんでした。もう一度お試しください。');
       }
+    } finally {
+      if (current === request) setLoading(false);
     }
   };
 
@@ -258,6 +293,7 @@ function setupSearch(status: HTMLElement) {
   if (termFromUrl()) void search(termFromUrl());
 }
 
+setupDialogDismissFallback();
 setupFindDialogs();
 const status = document.querySelector<HTMLElement>('[data-search-status]');
 if (status) setupSearch(status);
