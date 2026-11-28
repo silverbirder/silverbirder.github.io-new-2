@@ -197,7 +197,8 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
     align-self: start;
     display: flex;
     flex-direction: column;
-    max-block-size: var(--archive-sidebar-available-height);
+    justify-content: safe end;
+    block-size: var(--archive-sidebar-available-height);
     gap: var(--semantic-space-control-block);
   }
 
