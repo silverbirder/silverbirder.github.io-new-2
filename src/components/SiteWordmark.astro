@@ -1,18 +1,12 @@
 ---
 import { siteName } from '../lib/site';
 
-interface Props {
-  animated?: boolean;
-}
-
-const { animated = false } = Astro.props;
-const prefix = animated ? 'home' : 'header';
 const phaseStep = 0.52;
 const titleLetters = [...siteName].map((letter, index) => ({
   letter,
-  waterId: `${prefix}-title-water-${index}`,
-  seamId: `${prefix}-title-seam-${index}`,
-  blueId: `${prefix}-title-blue-${index}`,
+  waterId: `wordmark-water-${index}`,
+  seamId: `wordmark-seam-${index}`,
+  blueId: `wordmark-blue-${index}`,
   phase: `${(-index * phaseStep).toFixed(2)}s`,
 }));
 const titleWave = `
@@ -24,22 +18,22 @@ const titleWave = `
 `;
 ---
 
-<span class:list={['site-wordmark', { 'wordmark-animated': animated }]} aria-hidden="true">
+<span class="site-wordmark" aria-hidden="true">
   <svg class="wordmark-wave" aria-hidden="true" focusable="false">
     <defs>
       {titleLetters.map(({ waterId, seamId, blueId, phase }) => (
         <>
-          <path
-            id={waterId}
-            class="wordmark-water"
-            d={titleWave}
-            style={`--water-phase: ${phase}`}
-          />
+          <path id={waterId} d={titleWave} />
           <clipPath id={seamId} clipPathUnits="objectBoundingBox">
-            <use href={`#${waterId}`} />
+            <use class="wordmark-water" href={`#${waterId}`} style={`--water-phase: ${phase}`} />
           </clipPath>
           <clipPath id={blueId} clipPathUnits="objectBoundingBox">
-            <use href={`#${waterId}`} y=".015" />
+            <use
+              class="wordmark-water"
+              href={`#${waterId}`}
+              y=".015"
+              style={`--water-phase: ${phase}`}
+            />
           </clipPath>
         </>
       ))}
@@ -109,7 +103,7 @@ const titleWave = `
   }
 
   @media screen and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
-    .wordmark-animated .wordmark-water {
+    .wordmark-water {
       --water-duration: 5.4s;
       --water-phase: 0s;
       --water-shift: 6%;
