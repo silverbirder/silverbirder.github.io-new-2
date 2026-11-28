@@ -116,7 +116,7 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
           <ul>
             {Array.from({ length: 6 }, () => (
               <li class="archive-entry">
-                <div class="archive-entry-link">
+                <div class="archive-skeleton-row">
                   <span class="archive-skeleton-bar archive-skeleton-date" />
                   <span class="archive-skeleton-bar archive-skeleton-title" />
                 </div>
@@ -291,7 +291,7 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
     list-style: none;
   }
 
-  .archive-entry-link {
+  :is(.archive-entry-link, .archive-skeleton-row) {
     display: grid;
     grid-template-columns: var(--archive-date-width) minmax(var(--primitive-space-none), 1fr);
     gap: var(--archive-row-spacing);
@@ -430,7 +430,7 @@ const months = [...new Set(entries.map(({ publishedAt }) => publishedAt.slice(0,
     max-inline-size: var(--skeleton-short-title-width);
   }
 
-  .archive-search-skeleton .archive-entry-link {
+  .archive-skeleton-row {
     min-block-size: calc(var(--semantic-line-height-body) * var(--semantic-font-size-body));
   }
 
