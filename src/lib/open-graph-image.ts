@@ -155,11 +155,20 @@ export async function renderOpenGraphImage(text: Overlay[], avatar: Avatar) {
   );
   const topArtWidth = 436;
   const bottomArtWidth = 470;
+  const paperWidth = width - 2 * frameWidth;
+  const paperHeight = height - 2 * frameWidth;
+  const paperRadius = 13;
+  const paperEdge = 6;
+  const paperShadow = 8;
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
     <rect width="${width}" height="${height}" fill="${blue}"/>
+    <rect x="${frameWidth + paperShadow}" y="${frameWidth + paperShadow}"
+      width="${paperWidth}" height="${paperHeight}" rx="${paperRadius}" fill="${ink}" opacity=".28"/>
+    <rect x="${frameWidth + paperEdge}" y="${frameWidth + paperEdge}"
+      width="${paperWidth}" height="${paperHeight}" rx="${paperRadius}" fill="${paper}" opacity=".38"/>
     <rect x="${frameWidth}" y="${frameWidth}"
-      width="${width - 2 * frameWidth}" height="${height - 2 * frameWidth}" fill="${paper}"/>
+      width="${paperWidth}" height="${paperHeight}" rx="${paperRadius}" fill="${paper}"/>
     <svg x="${width - frameWidth - topArtWidth}" y="${frameWidth}" width="${topArtWidth}" height="${topArtHeight}"
       viewBox="0 0 ${topArtWidth} ${topArtMaxHeight}" preserveAspectRatio="none" overflow="visible"
       fill="none" stroke-linecap="round" stroke-linejoin="round">
