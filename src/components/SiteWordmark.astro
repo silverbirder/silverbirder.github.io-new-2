@@ -1,0 +1,136 @@
+---
+import { siteName } from '../lib/site';
+
+interface Props {
+  animated?: boolean;
+}
+
+const { animated = false } = Astro.props;
+const prefix = animated ? 'home' : 'header';
+const phaseStep = 0.52;
+const titleLetters = [...siteName].map((letter, index) => ({
+  letter,
+  waterId: `${prefix}-title-water-${index}`,
+  seamId: `${prefix}-title-seam-${index}`,
+  blueId: `${prefix}-title-blue-${index}`,
+  phase: `${(-index * phaseStep).toFixed(2)}s`,
+}));
+const titleWave = `
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+`;
+---
+
+<span class:list={['site-wordmark', { 'wordmark-animated': animated }]} aria-hidden="true">
+  <svg class="wordmark-wave" aria-hidden="true" focusable="false">
+    <defs>
+      {titleLetters.map(({ waterId, seamId, blueId, phase }) => (
+        <>
+          <path
+            id={waterId}
+            class="wordmark-water"
+            d={titleWave}
+            style={`--water-phase: ${phase}`}
+          />
+          <clipPath id={seamId} clipPathUnits="objectBoundingBox">
+            <use href={`#${waterId}`} />
+          </clipPath>
+          <clipPath id={blueId} clipPathUnits="objectBoundingBox">
+            <use href={`#${waterId}`} y=".015" />
+          </clipPath>
+        </>
+      ))}
+    </defs>
+  </svg>
+  {titleLetters.map(({ letter, seamId, blueId }) => (
+    <span
+      class="wordmark-letter"
+      aria-hidden="true"
+      data-letter={letter}
+      style={`--letter-seam: url(#${seamId}); --letter-blue: url(#${blueId})`}
+    >
+      {letter}
+    </span>
+  ))}
+</span>
+
+<style>
+  .site-wordmark {
+    --wordmark-line-height: 1.18;
+    --wordmark-tracking: -0.04em;
+
+    display: inline-flex;
+    font-family: var(--semantic-font-family-heading);
+    font-size: var(--site-wordmark-size, var(--semantic-font-size-heading));
+    font-weight: var(--semantic-font-weight-heading);
+    line-height: var(--wordmark-line-height);
+    color: var(--semantic-color-text-primary);
+    letter-spacing: var(--wordmark-tracking);
+    white-space: nowrap;
+  }
+
+  .wordmark-wave {
+    position: absolute;
+    inline-size: var(--primitive-space-none);
+    block-size: var(--primitive-space-none);
+  }
+
+  .wordmark-letter {
+    --letter-seam: none;
+    --letter-blue: none;
+
+    position: relative;
+  }
+
+  @supports (clip-path: url('#wordmark-seam-0')) {
+    @media screen and (forced-colors: none) {
+      .wordmark-letter::before,
+      .wordmark-letter::after {
+        content: attr(data-letter);
+        position: absolute;
+        inset: var(--primitive-space-none);
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .wordmark-letter::before {
+        color: var(--semantic-color-background-page);
+        clip-path: var(--letter-seam);
+      }
+
+      .wordmark-letter::after {
+        color: var(--semantic-color-text-link);
+        clip-path: var(--letter-blue);
+      }
+    }
+  }
+
+  @media screen and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+    .wordmark-animated .wordmark-water {
+      --water-duration: 5.4s;
+      --water-phase: 0s;
+      --water-shift: 6%;
+      --water-tilt: 3deg;
+
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: wordmark-slosh var(--water-duration) ease-in-out var(--water-phase) infinite;
+    }
+  }
+
+  @keyframes wordmark-slosh {
+    0%,
+    100% {
+      transform: translateX(calc(var(--water-shift) * var(--primitive-scale-negative)))
+        skewY(var(--water-tilt));
+    }
+
+    50% {
+      transform: translateX(var(--water-shift))
+        skewY(calc(var(--water-tilt) * var(--primitive-scale-negative)));
+    }
+  }
+</style>

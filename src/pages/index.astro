@@ -1,6 +1,7 @@
 ---
 import HomeWindow from '../layouts/HomeWindow.astro';
 import Layout from '../layouts/Layout.astro';
+import SiteWordmark from '../components/SiteWordmark.astro';
 
 const base = import.meta.env.BASE_URL;
 const title = 'ジブンノート';
@@ -8,21 +9,6 @@ const plushOutline =
   'M37.6 119 Q34.8 119.4 33.9 117.8 Q31.4 117.7 31.5 115.5 Q29.5 114.5 30.5 112.6 Q29.5 110.7 31 109.4 Q30.8 107.6 33 106.9 Q34.1 104.9 36.2 105 Q37.4 103.4 39.6 103.5 Q41 101.8 43.1 102 Q45.1 100.9 46 98.7 Q47 96.3 48.8 97 Q50 94.4 51.7 95.7 Q53.4 96.3 53.1 98.2 Q53.5 100.5 55.9 101.8 Q57.8 101.9 58.8 103.6 Q61.2 103.8 62.1 105.6 Q64.2 105.9 64.7 108 Q66.8 108.8 66.1 110.9 Q67.2 112.5 65.9 114.3 Q66.1 116.1 64.2 117 Q63.6 119 59.4 119';
 const plushTexture =
   'M34.8 112.1 q.85 -1.1 1.7 0 M38.1 114.2 q.9 -1.1 1.8 -.15 M42 110.8 q.8 -1.1 1.6 -.3 M57 111 q.75 -1.05 1.6 .1 M59 114.3 q.95 -.9 1.7 .1';
-const phaseStep = 0.52;
-const titleLetters = [...title].map((letter, index) => ({
-  letter,
-  waterId: `home-title-water-${index}`,
-  seamId: `home-title-seam-${index}`,
-  blueId: `home-title-blue-${index}`,
-  phase: `${(-index * phaseStep).toFixed(2)}s`,
-}));
-const titleWave = `
-  M -.24 .52
-  C -.04 .52 .07 .485 .26 .485
-  S .58 .55 .72 .55
-  S 1 .51 1.24 .51
-  V 1.25 H -.24 Z
-`;
 ---
 
 <Layout {title} currentPage="home">
@@ -271,79 +257,9 @@ const titleWave = `
       }
 
       .home-intro h1 {
-        --title-size: clamp(2.5rem, 6vw, 3.5rem);
-        --title-line-height: 1.18;
-        --title-tracking: -0.04em;
+        --site-wordmark-size: clamp(2.5rem, 6vw, 3.5rem);
 
-        display: flex;
-        inline-size: max-content;
         margin: var(--primitive-space-none) auto;
-        font-family: var(--semantic-font-family-heading);
-        font-size: var(--title-size);
-        line-height: var(--title-line-height);
-        letter-spacing: var(--title-tracking);
-      }
-
-      .home-title-wave {
-        position: absolute;
-        inline-size: var(--primitive-space-none);
-        block-size: var(--primitive-space-none);
-      }
-
-      .home-title-letter {
-        --letter-seam: url('#home-title-seam-0');
-        --letter-blue: url('#home-title-blue-0');
-
-        position: relative;
-      }
-
-      @supports (clip-path: url('#home-title-seam-0')) {
-        @media screen and (forced-colors: none) {
-          .home-title-letter::before,
-          .home-title-letter::after {
-            content: attr(data-letter);
-            position: absolute;
-            inset: var(--primitive-space-none);
-            pointer-events: none;
-            user-select: none;
-          }
-
-          .home-title-letter::before {
-            color: var(--semantic-color-background-page);
-            clip-path: var(--letter-seam);
-          }
-
-          .home-title-letter::after {
-            color: var(--semantic-color-text-link);
-            clip-path: var(--letter-blue);
-          }
-        }
-      }
-
-      @media screen and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
-        .home-title-water {
-          --water-duration: 5.4s;
-          --water-phase: 0s;
-          --water-shift: 6%;
-          --water-tilt: 3deg;
-
-          transform-box: fill-box;
-          transform-origin: center;
-          animation: home-title-slosh var(--water-duration) ease-in-out var(--water-phase) infinite;
-        }
-      }
-
-      @keyframes home-title-slosh {
-        0%,
-        100% {
-          transform: translateX(calc(var(--water-shift) * var(--primitive-scale-negative)))
-            skewY(var(--water-tilt));
-        }
-
-        50% {
-          transform: translateX(var(--water-shift))
-            skewY(calc(var(--water-tilt) * var(--primitive-scale-negative)));
-        }
       }
 
       .home-intro nav {
@@ -369,37 +285,8 @@ const titleWave = `
   <section class="home">
     <HomeWindow />
     <div class="home-intro">
-      <svg class="home-title-wave" aria-hidden="true" focusable="false">
-        <defs>
-          {titleLetters.map(({ waterId, seamId, blueId, phase }) => (
-            <>
-              <path
-                id={waterId}
-                class="home-title-water"
-                d={titleWave}
-                style={`--water-phase: ${phase}`}
-              />
-              <clipPath id={seamId} clipPathUnits="objectBoundingBox">
-                <use href={`#${waterId}`} />
-              </clipPath>
-              <clipPath id={blueId} clipPathUnits="objectBoundingBox">
-                <use href={`#${waterId}`} y=".015" />
-              </clipPath>
-            </>
-          ))}
-        </defs>
-      </svg>
       <h1 aria-label={title}>
-        {titleLetters.map(({ letter, seamId, blueId }) => (
-          <span
-            class="home-title-letter"
-            aria-hidden="true"
-            data-letter={letter}
-            style={`--letter-seam: url(#${seamId}); --letter-blue: url(#${blueId})`}
-          >
-            {letter}
-          </span>
-        ))}
+        <SiteWordmark animated />
       </h1>
       <nav aria-label="サイト内のページ">
         <a href={`${base}me/`}>自己紹介</a>
