@@ -220,7 +220,7 @@ time .notebook-meta-parts {
 
 /* cap is the actual font metric: the first baseline is anchored, not guessed. */
 @supports (text-box: trim-both cap alphabetic) {
-  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, th, td) {
+  .notebook-body :is(h1, h2, h3, h4, h5, h6, th, td) {
     text-box: trim-both cap alphabetic;
     padding-block: calc(
         var(--component-notebook-rule-spacing) - var(--primitive-font-metric-cap) -
@@ -234,11 +234,6 @@ time .notebook-meta-parts {
       var(--component-notebook-rule-spacing) + var(--component-notebook-rule-spacing) -
         var(--primitive-font-metric-cap) - var(--semantic-space-text-baseline-gap)
     );
-  }
-
-  .notebook-body p:has(br) {
-    text-box: normal;
-    padding-block: var(--primitive-space-none);
   }
 
   .notebook-body :is(ul, ol) :is(ul, ol, li, p) {
@@ -569,7 +564,7 @@ time .notebook-meta-parts {
 
   line-height: var(--primitive-space-none);
   padding-inline: var(--primitive-space-1);
-  border-radius: var(--inline-code-radius);
+  border-radius: calc(var(--inline-code-radius) + var(--inline-code-background-gap));
   background: linear-gradient(var(--inline-code-background), var(--inline-code-background)) center /
     var(--primitive-size-full) calc(var(--primitive-size-full) - var(--inline-code-background-gap))
     no-repeat;
