@@ -4,6 +4,7 @@ import tokens from '../styles/design-tokens.json' with { type: 'json' };
 const primitive = tokens.primitive;
 const photoWidth = Number.parseFloat(tokens.component['notebook-photo-width'].value);
 const frameClass = 'notebook-photo-frame';
+const frameClasses = [frameClass, 'notebook-sticker'];
 const captionClass = 'notebook-photo-caption';
 const frameInset = primitive['space-2'].value;
 const lineHeight = Number.parseFloat(primitive['line-height-md'].value);
@@ -82,7 +83,7 @@ function frameHtmlImage(image, caption) {
   }
 
   const frame = defaultTreeAdapter.createElement('span', html.NS.HTML, [
-    { name: 'class', value: frameClass },
+    { name: 'class', value: frameClasses.join(' ') },
   ]);
   defaultTreeAdapter.insertBefore(parent, frame, image);
   defaultTreeAdapter.detachNode(image);
@@ -132,7 +133,7 @@ export default {
       context.wrapNode(parent?.tagName === 'picture' ? parent : node, {
         type: 'element',
         tagName: 'span',
-        properties: { className: [frameClass] },
+        properties: { className: frameClasses },
         children: caption
           ? [
               {

@@ -13,35 +13,26 @@ const names = {
   youtube: 'YouTube',
 };
 const title = names[embed.provider];
-const playerStyles = {
-  youtube:
-    '--embed-rows: 10; --embed-columns: 18; max-width: calc(var(--component-notebook-rule-spacing) * var(--embed-columns)); height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows)); margin-inline: auto;',
-  codepen:
-    '--embed-rows: 10; height: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));',
-};
 ---
 
 {'src' in embed && (
-  <>
-    <div data-embed={embed.provider} style="margin-block-end: var(--primitive-space-none);">
-      <iframe
-        src={embed.src}
-        title={`${title}の埋め込み`}
-        loading="lazy"
-        allow={
-          embed.provider === 'youtube'
-            ? 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-            : undefined
-        }
-        allowfullscreen
-        referrerpolicy="strict-origin-when-cross-origin"
-        style={`display: block; width: var(--primitive-size-full); border: var(--primitive-space-none); ${playerStyles[embed.provider]}`}
-      />
-    </div>
-    <p>
+  <div class="embed-player" data-embed={embed.provider}>
+    <iframe
+      src={embed.src}
+      title={`${title}の埋め込み`}
+      loading="lazy"
+      allow={
+        embed.provider === 'youtube'
+          ? 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+          : undefined
+      }
+      allowfullscreen
+      referrerpolicy="strict-origin-when-cross-origin"
+    />
+    <p class="embed-source">
       <a href={embed.url}>{title}で開く</a>
     </p>
-  </>
+  </div>
 )}
 {embed.provider === 'x' && (
   <div
@@ -49,14 +40,19 @@ const playerStyles = {
     data-x-post={embed.url.split('/').at(-1)}
     style="display: flow-root;"
   >
-    <p data-x-fallback>
+    <p class="embed-source" data-x-fallback>
       <a href={embed.url}>Xで投稿を開く</a>
     </p>
     <template>
-      <section style="--x-card-width: 550px; max-width: var(--x-card-width); margin-inline: auto; padding: var(--primitive-space-4); overflow-wrap: anywhere; background: var(--semantic-color-background-page); border: var(--semantic-border-width-hairline) solid var(--semantic-color-border-paper);">
-        <a href={embed.url} aria-label="Xで投稿を開く">
-          <strong data-x-author></strong>
-          <span data-x-handle></span>
+      <section class="x-post-card">
+        <a class="x-post-source" href={embed.url} aria-label="Xで投稿を開く">
+          <span class="x-post-author">
+            <strong data-x-author></strong>
+            <span data-x-handle></span>
+          </span>
+          <span class="x-post-source-mark" aria-hidden="true">
+            X
+          </span>
         </a>
         <p data-x-text style="white-space: pre-wrap;"></p>
         <div data-x-media></div>
@@ -74,7 +70,7 @@ const playerStyles = {
       data-instgrm-captioned
       style="margin: var(--primitive-space-none); min-width: var(--primitive-space-none); max-width: var(--primitive-size-full);"
     >
-      <p>
+      <p class="embed-source">
         <a href={embed.url}>Instagramで投稿を開く</a>
       </p>
     </blockquote>
@@ -82,7 +78,7 @@ const playerStyles = {
 )}
 {embed.provider === 'bluesky' && (
   <div data-embed={embed.provider} style="display: flow-root;">
-    <p data-bluesky-actor={embed.actor} data-bluesky-record={embed.record}>
+    <p class="embed-source" data-bluesky-actor={embed.actor} data-bluesky-record={embed.record}>
       <a href={embed.url}>Blueskyで投稿を開く</a>
     </p>
   </div>
@@ -91,3 +87,72 @@ const playerStyles = {
 <script src="../scripts/bluesky-embeds.mts"></script>
 <script src="../scripts/x-embeds.mts"></script>
 <script src="../scripts/instagram-embeds.mts"></script>
+
+<style>
+  .embed-player {
+    --embed-rows: 10;
+
+    margin-inline: auto;
+  }
+
+  .embed-player[data-embed='youtube'] {
+    --embed-columns: 18;
+
+    max-inline-size: calc(var(--component-notebook-rule-spacing) * var(--embed-columns));
+  }
+
+  .embed-player > iframe {
+    display: block;
+    inline-size: var(--primitive-size-full);
+    block-size: calc(var(--component-notebook-rule-spacing) * var(--embed-rows));
+    border: var(--primitive-space-none);
+  }
+
+  .embed-source {
+    text-align: end;
+  }
+
+  [data-embed='x'] {
+    --x-card-width: 550px;
+  }
+
+  [data-x-fallback] {
+    max-inline-size: var(--x-card-width);
+    margin-inline: auto;
+  }
+
+  [data-bluesky-actor] {
+    --bluesky-fallback-width: 600px;
+
+    max-inline-size: var(--bluesky-fallback-width);
+    margin-inline: auto;
+  }
+
+  .x-post-card {
+    max-inline-size: var(--x-card-width);
+    margin-inline: auto;
+    padding: var(--primitive-space-4);
+    border: var(--semantic-border-width-hairline) solid var(--semantic-color-text-link);
+    border-radius: var(--primitive-space-2);
+    background: var(--semantic-color-background-page);
+    overflow-wrap: anywhere;
+  }
+
+  .x-post-source {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: var(--primitive-space-2);
+    text-decoration: none;
+  }
+
+  .x-post-source:is(:hover, :focus-visible) .x-post-author {
+    text-decoration: underline var(--semantic-border-width-hairline);
+  }
+
+  .x-post-source-mark {
+    flex: none;
+    color: var(--semantic-color-text-primary);
+    font-weight: var(--semantic-font-weight-heading);
+  }
+</style>

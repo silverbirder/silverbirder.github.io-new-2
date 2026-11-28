@@ -7,8 +7,7 @@ const thumbnail = card.image && import.meta.env.BASE_URL + 'link-card/' + card.i
 ---
 
 <div class="link-card-block">
-  <a class="link-card" href={card.url}>
-    <span class="link-card-tape" aria-hidden="true"></span>
+  <a class="link-card notebook-sticker" href={card.url}>
     <span class="link-card-holes" aria-hidden="true">
       <span></span>
       <span></span>
@@ -59,28 +58,6 @@ const thumbnail = card.image && import.meta.env.BASE_URL + 'link-card/' + card.i
       var(--primitive-palette-blue-700-hue) var(--primitive-palette-blue-700-saturation)
         var(--primitive-palette-blue-700-lightness) / var(--primitive-opacity-35)
     );
-    --tape-width: 3.6rem;
-    --tape-height: 0.95rem;
-    --tape-angle: -6deg;
-    --tape-pattern-angle: 135deg;
-    --tape-band-width: 3px;
-    --tape-band-lightness: 66%;
-    --tape-band: hsl(
-      var(--primitive-palette-sage-hue) var(--primitive-palette-sage-saturation)
-        var(--tape-band-lightness) / var(--primitive-opacity-70)
-    );
-    --tape-edge: polygon(
-      0 0,
-      100% 0,
-      95% 24%,
-      100% 48%,
-      96% 75%,
-      100% 100%,
-      0 100%,
-      5% 76%,
-      0 50%,
-      4% 24%
-    );
     --card-line-height: 1.45;
     --card-line-limit: 2;
     --thumbnail-fraction: 25%;
@@ -101,8 +78,7 @@ const thumbnail = card.image && import.meta.env.BASE_URL + 'link-card/' + card.i
         var(--paper-clear) calc(var(--margin-line-inset) + var(--semantic-border-width-hairline))
       ),
       var(--paper-tint);
-    box-shadow: var(--shadow-x) var(--shadow-x) var(--shadow-blur)
-      var(--semantic-color-border-subtle);
+    box-shadow: var(--notebook-paper-shadow);
     line-height: var(--card-line-height);
     color: var(--semantic-color-text-primary);
     text-decoration: none;
@@ -113,32 +89,9 @@ const thumbnail = card.image && import.meta.env.BASE_URL + 'link-card/' + card.i
     outline-offset: var(--primitive-space-1);
   }
 
-  .link-card-tape,
   .link-card-holes {
     position: absolute;
     pointer-events: none;
-  }
-
-  .link-card-tape {
-    inset-block-start: calc(
-      var(--tape-height) * var(--primitive-ratio-half) * var(--primitive-layer-decoration)
-    );
-    inset-inline-start: calc(
-      (var(--primitive-size-full) - var(--tape-width)) * var(--primitive-ratio-half)
-    );
-    inline-size: var(--tape-width);
-    block-size: var(--tape-height);
-    background: repeating-linear-gradient(
-      var(--tape-pattern-angle),
-      var(--tape-band) var(--primitive-space-none) var(--tape-band-width),
-      var(--semantic-color-background-selection) var(--tape-band-width)
-        calc(var(--tape-band-width) * var(--primitive-ratio-double))
-    );
-    transform: rotate(var(--tape-angle));
-    clip-path: var(--tape-edge);
-  }
-
-  .link-card-holes {
     inset-block: var(--primitive-space-1);
     inset-inline-start: var(--hole-inset);
     display: flex;

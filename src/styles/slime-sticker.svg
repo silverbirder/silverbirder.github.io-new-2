@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 12 12">
+  <defs>
+    <path id="sticker"
+      d="M6 2.35
+        C6.45 2.35 6.49 3.02 6.93 3.66
+        C7.65 4.72 10.52 4.91 10.52 7.33
+        C10.52 9.08 8.38 9.83 6 9.83
+        C3.62 9.83 1.48 9.08 1.48 7.33
+        C1.48 4.91 4.35 4.72 5.07 3.66
+        C5.51 3.02 5.55 2.35 6 2.35 Z" />
+    <linearGradient id="frosted" x2="0" y2="1">
+      <stop stop-color="white"/>
+      <stop offset=".55" stop-color="hsl(196, 50%, 78%)"/>
+      <stop offset="1" stop-color="hsl(196, 50%, 78%)"/>
+    </linearGradient>
+  </defs>
+  <use href="#sticker" x=".06" y=".4" fill="hsl(207, 58.14%, 33.725%)" opacity=".16"/>
+  <use href="#sticker" fill="url(#frosted)"/>
+  <ellipse cx="5.68" cy="5.62" rx="2.49" ry="1.09" transform="rotate(-14 5.68 5.62)"
+    fill="white" opacity=".13"/>
+  <path d="M3.26 6.94Q3.37 6.07 4.10 5.70" fill="none" stroke="white" opacity=".38"
+    stroke-width="0.176470588" stroke-linecap="round"/>
+  <use href="#sticker" fill="none" stroke="hsl(207, 58.14%, 33.725%)" stroke-width="0.176470588"
+    stroke-linejoin="round"/>
+</svg>
