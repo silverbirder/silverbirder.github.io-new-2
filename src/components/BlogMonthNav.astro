@@ -22,6 +22,7 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
   <dialog
     id="archive-month-dialog"
     class="month-dialog"
+    closedby="any"
     aria-labelledby="archive-month-dialog-title"
   >
     <form method="dialog" class="month-dialog-header">
@@ -82,6 +83,7 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
               <span class="month-nav-year-label" aria-hidden="true">
                 {year}
               </span>
+              <span class="month-nav-tick-hit" aria-hidden="true" />
               <span class="month-nav-tooltip" aria-hidden="true">
                 {label}
               </span>
@@ -101,23 +103,31 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
     --month-dot-size: 0.375rem;
     --month-dot-radius: calc(var(--month-dot-size) * var(--primitive-ratio-half));
     --month-label-center: calc(var(--primitive-size-full) * var(--primitive-ratio-half));
-    --month-label-offset: calc(-1 * var(--month-label-center));
+    --month-label-offset: calc(var(--month-label-center) * var(--primitive-scale-negative));
+    --month-tooltip-gap: var(--primitive-space-2);
+    --month-tooltip-layer: 1;
 
-    padding-inline-end: var(--semantic-space-control-block);
+    font-size: var(--primitive-font-size-xs);
     font-variant-numeric: tabular-nums;
   }
 
   .month-nav-track {
     --month-slots: 1;
+    --month-track-size: min(
+      var(--month-track-length),
+      calc(var(--month-slots) * var(--primitive-space-4))
+    );
 
     display: grid;
+    inline-size: max-content;
     grid-template-rows: repeat(var(--month-slots), minmax(var(--primitive-space-none), 1fr));
-    block-size: min(var(--month-track-length), calc(var(--month-slots) * var(--primitive-space-4)));
+    block-size: var(--month-track-size);
     margin: var(--primitive-space-none);
     padding: var(--primitive-space-none);
-    border-inline-end: var(--semantic-border-width-hairline) solid
+    border-inline-start: var(--semantic-border-width-hairline) solid
       var(--semantic-color-border-paper);
     list-style: none;
+    pointer-events: none;
     touch-action: none;
     user-select: none;
   }
@@ -130,8 +140,10 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
 
   .month-nav-link {
     position: relative;
-    display: block;
+    display: flex;
+    align-items: center;
     block-size: var(--primitive-size-full);
+    padding-inline-start: var(--primitive-space-4);
     color: var(--semantic-color-text-link);
     text-decoration: none;
   }
@@ -139,7 +151,7 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
   .month-nav-link::before {
     position: absolute;
     inset-block-start: var(--month-label-center);
-    inset-inline-end: var(--primitive-space-none);
+    inset-inline-start: var(--primitive-space-none);
     inline-size: var(--month-tick-length);
     block-size: var(--semantic-border-width-hairline);
     background: var(--semantic-color-border-paper);
@@ -153,11 +165,8 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
 
   .month-nav-year-label,
   .month-nav-tooltip {
-    position: absolute;
-    inset-block-start: var(--month-label-center);
-    transform: translateY(var(--month-label-offset));
-    font-size: var(--primitive-font-size-xs);
     line-height: var(--semantic-line-height-body);
+    white-space: nowrap;
   }
 
   .month-nav :is(li[hidden], .month-nav-link:not(.month-nav-year) .month-nav-year-label),
@@ -165,18 +174,35 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
     display: none;
   }
 
-  .month-nav-year-label {
-    inset-inline-end: var(--primitive-space-4);
+  .month-nav-year-label,
+  .month-nav-tick-hit {
+    pointer-events: auto;
+  }
+
+  .month-nav-tick-hit {
+    position: absolute;
+    inset-block: var(--primitive-space-none);
+    inset-inline-start: calc(var(--month-dot-radius) * var(--primitive-scale-negative));
+    inline-size: calc(var(--month-year-tick-length) + var(--month-dot-radius));
   }
 
   .month-nav-tooltip {
-    inset-inline-start: var(--primitive-space-none);
+    position: absolute;
+    inset-block-start: var(--month-label-center);
+    inset-inline-start: calc(var(--primitive-size-full) + var(--month-tooltip-gap));
+    transform: translateY(var(--month-label-offset));
+    z-index: var(--month-tooltip-layer);
     display: none;
     padding-inline: var(--semantic-space-control-block);
     background: var(--semantic-color-text-link);
     color: var(--semantic-color-background-page);
-    white-space: nowrap;
     pointer-events: none;
+  }
+
+  @media (width >= 79rem) {
+    .month-nav-tooltip {
+      inset-inline: auto calc(var(--primitive-size-full) + var(--month-tooltip-gap));
+    }
   }
 
   .month-nav-link:focus-visible > .month-nav-tooltip {
@@ -194,14 +220,17 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
     background: var(--semantic-color-accent);
   }
 
-  .month-nav-track[data-tag-preview-active] .month-nav-link:not([data-tag-preview])::before {
+  .month-nav-track[data-tag-preview-active] .month-nav-link:not([data-tag-preview])::before,
+  .month-nav-track[data-tag-preview-active]
+    .month-nav-link:not([data-tag-preview])
+    > .month-nav-tick-hit {
     visibility: hidden;
   }
 
   .month-nav-link[aria-current='location']::after {
     position: absolute;
     inset-block-start: calc(var(--month-label-center) - var(--month-dot-radius));
-    inset-inline-end: calc(var(--semantic-border-width-hairline) - var(--month-dot-radius));
+    inset-inline-start: calc(var(--semantic-border-width-hairline) - var(--month-dot-radius));
     inline-size: var(--month-dot-size);
     block-size: var(--month-dot-size);
     border-radius: var(--primitive-radius-full);
@@ -300,6 +329,22 @@ const slots = latestMonth - (dates.at(-1)?.ordinal ?? latestMonth) + 1;
 
   .month-dialog a:is(:hover, :focus-visible, [aria-current='location']) {
     background: var(--semantic-color-background-muted);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :is(.month-dialog, .archive-find-dialog)[open] {
+      --archive-dialog-start-offset: var(--primitive-space-2);
+      --archive-dialog-duration: 180ms;
+
+      animation: archive-dialog-open var(--archive-dialog-duration) ease-out;
+    }
+
+    @keyframes archive-dialog-open {
+      from {
+        opacity: var(--primitive-space-none);
+        translate: var(--primitive-space-none) var(--archive-dialog-start-offset);
+      }
+    }
   }
 
   @media (width <= 48rem) {

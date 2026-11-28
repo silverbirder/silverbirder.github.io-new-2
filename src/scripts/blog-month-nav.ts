@@ -101,7 +101,8 @@ function setupTagMonthPreview(track: HTMLOListElement, links: readonly HTMLAncho
 
 function setupMonthNavigation() {
   const track = document.querySelector<HTMLOListElement>('[data-month-track]');
-  if (!track) return;
+  const yearHeading = document.querySelector('[data-archive-current-year]');
+  if (!track || !yearHeading) return;
 
   const slotCount = Number(track.dataset.monthTrack);
   const links = [...track.querySelectorAll<HTMLAnchorElement>('a')];
@@ -143,6 +144,7 @@ function setupMonthNavigation() {
 
     current?.removeAttribute('aria-current');
     next.setAttribute('aria-current', 'location');
+    yearHeading.textContent = `${monthFromLink(next).slice(0, 4)}年`;
     current = next;
   };
 
