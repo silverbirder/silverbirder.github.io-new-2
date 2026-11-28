@@ -8,16 +8,12 @@ a .external-link-mark {
   display: inline-block;
   inline-size: var(--link-icon-size);
   block-size: var(--link-icon-size);
+  margin-inline: var(--primitive-space-1);
   vertical-align: middle;
 }
 
 a .external-link-favicon {
-  margin-inline-end: var(--primitive-space-1);
   object-fit: contain;
-}
-
-a .external-link-mark {
-  margin-inline-start: var(--primitive-space-1);
 }
 
 a .external-link-tail {
