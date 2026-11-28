@@ -4,13 +4,49 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2022-05-28" data-pagefind-filter="month:2022-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">79</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-05-28"><span class="visually-hidden">2022年5月28日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">28</span></span></time></p></div><div class="notebook-heading"><h1>Micro Frontendsで組成するフラグメントをWeb Componentsで定義してModule Federationで共有する</h1></div></header><div class="notebook-body"><p>Micro Frontends(以降、MFE)で組成するフラグメントを Web Components で定義して Module Federation で共有する方法を、ざっくり紹介します。</p>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2022-05-28" data-pagefind-filter="month:2022-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">79</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-05-28"><span class="visually-hidden">2022年5月28日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">28</span></span></time></p></div><div class="notebook-heading"><h1>Micro Frontendsで組成するフラグメントをWeb Componentsで定義してModule Federationで共有する</h1></div></header><div class="notebook-body"><p>Micro Frontends(以降、MFE)で組成するフラグメントを Web Components で定義して Module Federation で共有する方法を、ざっくり紹介します。</p>
 <p>サンプルコードは、次のリポジトリにあります。</p>
 <ul>
-<li><a href="https://github.com/silverbirder/playground/tree/main/node/web-components-is-api-for-micro-frontends"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/silverbirder/playground/tree/main/node/web-components-is-api-for-micro-frontends<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://github.com/silverbirder/playground/tree/main/node/web-components-is-api-for-micro-frontends"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/silverbirder/playground/tree/main/node/web-components-is-api-for-micro-frontends<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <p>※ MFE については、以下のブログ記事をお読みください。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://silverbirder.github.io/blog/contents/mfe/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>［覚書］ Micro Frontends</strong><span class="link-card-description" data-astro-cid-p7ia6262>Micro Frontends とは?皆さん、 **Micro Fronends** (以下、MFE)をご存知でしょうか。説明をざっくりしますと、Microservicesの考え方をフロントエンドまで拡張した考え方です。Microservicesは、バックエンド側で適用される事例をよく耳にしますが、フロントエンドでの適用事例は、あまり聞いたことがありません。</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262>silverbirder.github.io</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/f59f0b7f7f28b8b57f2c375b28d3c1f2c0b65b1091455a844778e61a5ab9cc46.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://silverbirder.github.io/blog/contents/mfe/" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>［覚書］ Micro Frontends</strong><span class="link-card-description" data-astro-cid-p7ia6262>Micro Frontends とは?皆さん、 **Micro Fronends** (以下、MFE)をご存知でしょうか。説明をざっくりしますと、Microservicesの考え方をフロントエンドまで拡張した考え方です。Microservicesは、バックエンド側で適用される事例をよく耳にしますが、フロントエンドでの適用事例は、あまり聞いたことがありません。</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262>silverbirder.github.io</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/f59f0b7f7f28b8b57f2c375b28d3c1f2c0b65b1091455a844778e61a5ab9cc46.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <h2 id="用語">用語</h2>
 <ul>
 <li>フラグメント
@@ -50,45 +86,43 @@
 <p>検索ボタンのフラグメント(Web Components)を書きます。
 それは、ボタンとクリックハンドラを定義した簡単なものです。
 フレームワークは、React を選択しました。</p>
-<pre><code class="language-typescript">// ./packages/team-search/src/components/SearchButton/SearchButton.tsx
-import React, { createContext } from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-
-export const CustomElementContext = createContext&lt;HTMLElement&gt;(
-  document.createElement("div")
-);
-
-export class SearchButton extends HTMLElement {
-  connectedCallback() {
-    const mountPoint = document.createElement("span");
-    this.attachShadow({ mode: "open" }).appendChild(mountPoint);
-    ReactDOM.createRoot(mountPoint as HTMLElement).render(
-      &lt;React.StrictMode&gt;
-        &lt;CustomElementContext.Provider value={this}&gt;
-          &lt;App /&gt;
-        &lt;/CustomElementContext.Provider&gt;
-      &lt;/React.StrictMode&gt;
-    );
-  }
-}
-</code></pre>
-<pre><code class="language-typescript">// ./packages/team-search/src/components/SearchButton/App.tsx
-import { useContext } from "react";
-import { CustomElementContext } from "./SearchButton";
-
-const App = () =&gt; {
-  const customElement = useContext(CustomElementContext);
-  const onClick = () =&gt; {
-    customElement.dispatchEvent(
-      new CustomEvent("search", { detail: { num: Math.random() } })
-    );
-  };
-  return &lt;button onClick={onClick}&gt;Search&lt;/button&gt;;
-};
-
-export default App;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// ./packages/team-search/src/components/SearchButton/SearchButton.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> React</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">createContext</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> ReactDOM</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react-dom/client</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> App</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./App</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#BB9AF7"> CustomElementContext</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> createContext</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">HTMLElement</span><span style="color:#89DDFF">&gt;</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#C0CAF5">  document</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">createElement</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">div</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#BB9AF7"> class</span><span style="color:#C0CAF5"> SearchButton</span><span style="color:#9D7CD8;font-style:italic"> extends</span><span style="color:#BB9AF7"> HTMLElement</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  connectedCallback</span><span style="color:#9ABDF5">()</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> mountPoint</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> document</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">createElement</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">span</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">attachShadow</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">mode</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">open</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">appendChild</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">mountPoint</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    ReactDOM</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">createRoot</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">mountPoint</span><span style="color:#89DDFF"> as</span><span style="color:#C0CAF5"> HTMLElement</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">render</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#C0CAF5">React</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">StrictMode</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">        &lt;</span><span style="color:#C0CAF5">CustomElementContext</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Provider</span><span style="color:#C0CAF5"> value</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{</span><span style="color:#C0CAF5">this</span><span style="color:#9ABDF5">}</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">          &lt;</span><span style="color:#C0CAF5">App</span><span style="color:#89DDFF"> /</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">        &lt;</span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5">CustomElementContext</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Provider</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5">React</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">StrictMode</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// ./packages/team-search/src/components/SearchButton/App.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">useContext</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">CustomElementContext</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./SearchButton</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> App</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> customElement</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useContext</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">CustomElementContext</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#7AA2F7"> onClick</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">    customElement</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">dispatchEvent</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#89DDFF">      new</span><span style="color:#7AA2F7"> CustomEvent</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">search</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">detail</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">num</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Math</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">random</span><span style="color:#9ABDF5">() } })</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> &lt;</span><span style="color:#C0CAF5">button</span><span style="color:#C0CAF5"> onClick</span><span style="color:#9ABDF5">={</span><span style="color:#73DACA">onClick</span><span style="color:#9ABDF5">}&gt;</span><span style="color:#C0CAF5">Search</span><span style="color:#BB9AF7">&lt;</span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5">button</span><span style="color:#BB9AF7">&gt;</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#7DCFFF"> default</span><span style="color:#C0CAF5"> App</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>この Web Components は、<code>&lt;search-button /&gt;</code> と書いて使います。</p>
 <p>他のフラグメントと連携する場合、カスタムイベントを使います。
 この Web Components は、クリックボタンを押したら、<code>CustomEvent("search", { detail: &lt;object&gt; })</code> というカスタムイベントを発火します。</p>
@@ -114,47 +148,45 @@ Web Components へデータを与える手段は 3 つあります。(さらに�
 </li>
 </ul>
 <p>今回は、HTML 属性を選択しました。</p>
-<pre><code class="language-typescript">// ./packages/team-content/src/components/JsonDiv/JsonDiv.tsx
-import ReactDOM from "react-dom/client";
-import App from "./App";
-
-export class JsonDiv extends HTMLElement {
-  root: ReactDOM.Root | undefined;
-  static get observedAttributes() {
-    return ["value"];
-  }
-
-  attributeChangedCallback() {
-    const value = this.getAttribute("value") || ("{}" as string);
-    const props = { json: value };
-    if (this.root) {
-      this.root.render(&lt;App {...props} /&gt;);
-    }
-  }
-
-  connectedCallback() {
-    const value = this.getAttribute("value") || ("{}" as string);
-    const props = { json: value };
-    const mountPoint = document.createElement("span");
-    this.attachShadow({ mode: "open" }).appendChild(mountPoint);
-    this.root = ReactDOM.createRoot(mountPoint as HTMLElement);
-    this.root.render(&lt;App {...props} /&gt;);
-  }
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// ./packages/team-content/src/components/JsonDiv/JsonDiv.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> ReactDOM</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react-dom/client</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> App</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./App</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#BB9AF7"> class</span><span style="color:#C0CAF5"> JsonDiv</span><span style="color:#9D7CD8;font-style:italic"> extends</span><span style="color:#BB9AF7"> HTMLElement</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  root</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> ReactDOM</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">Root</span><span style="color:#89DDFF"> |</span><span style="color:#0DB9D7"> undefined</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  static</span><span style="color:#BB9AF7"> get</span><span style="color:#7AA2F7"> observedAttributes</span><span style="color:#9ABDF5">()</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    return</span><span style="color:#9ABDF5"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">value</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  attributeChangedCallback</span><span style="color:#9ABDF5">()</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> value</span><span style="color:#89DDFF"> =</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getAttribute</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">value</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">||</span><span style="color:#9ABDF5"> (</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">{}</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> as</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> props</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">json</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> value</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">    if</span><span style="color:#9ABDF5"> (</span><span style="color:#F7768E">this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">root</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#F7768E">      this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">root</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">render</span><span style="color:#9ABDF5">(&lt;</span><span style="color:#C0CAF5">App</span><span style="color:#9ABDF5"> {</span><span style="color:#F7768E;font-weight:bold">...</span><span style="color:#C0CAF5">props</span><span style="color:#9ABDF5">} /&gt;)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  connectedCallback</span><span style="color:#9ABDF5">()</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> value</span><span style="color:#89DDFF"> =</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getAttribute</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">value</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">||</span><span style="color:#9ABDF5"> (</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">{}</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> as</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> props</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">json</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> value</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> mountPoint</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> document</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">createElement</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">span</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">attachShadow</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">mode</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">open</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">appendChild</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">mountPoint</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">root</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> ReactDOM</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">createRoot</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">mountPoint</span><span style="color:#89DDFF"> as</span><span style="color:#C0CAF5"> HTMLElement</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">root</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">render</span><span style="color:#9ABDF5">(&lt;</span><span style="color:#C0CAF5">App</span><span style="color:#9ABDF5"> {</span><span style="color:#F7768E;font-weight:bold">...</span><span style="color:#C0CAF5">props</span><span style="color:#9ABDF5">} /&gt;)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>この Web Components は、<code>&lt;json-div value="{}" /&gt;</code> のように使います。</p>
-<pre><code class="language-typescript">// ./packages/team-content/src/components/JsonDiv/App.tsx
-type AppProps = {
-  json: string;
-};
-
-const App = (props: AppProps) =&gt; {
-  const { json } = props;
-  return &lt;div&gt;{json}&lt;/div&gt;;
-};
-
-export default App;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// ./packages/team-content/src/components/JsonDiv/App.tsx</span></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> AppProps</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  json</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> App</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">props</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> AppProps</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#89DDFF"> {</span><span style="color:#BB9AF7"> json</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> props</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> &lt;</span><span style="color:#C0CAF5">div</span><span style="color:#9ABDF5">&gt;{</span><span style="color:#C0CAF5">json</span><span style="color:#9ABDF5">}</span><span style="color:#BB9AF7">&lt;</span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5">div</span><span style="color:#BB9AF7">&gt;</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#7DCFFF"> default</span><span style="color:#C0CAF5"> App</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p><code>App.tsx</code>は、与えられた json を<code>&lt;div&gt;</code>で表示しているだけです。</p>
 <h2 id="組成">組成</h2>
 <p>これまで紹介したフラグメントを組成します。
@@ -165,7 +197,7 @@ export default App;
 <h2 id="module-federation">Module Federation</h2>
 <p>Module Federation は、Webpack@5 から導入された機能です。</p>
 <ul>
-<li><a href="https://webpack.js.org/concepts/module-federation/"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/webpack.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://webpack.js.org/concepts/module-federation/<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://webpack.js.org/concepts/module-federation/"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/webpack.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://webpack.js.org/concepts/module-federation/<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <blockquote>
 <p>Each build acts as a container and also consumes other builds as containers. This way each build is able to access any other exposed module by loading it from its container.</p>
@@ -175,135 +207,129 @@ export default App;
 <p>具体的なコードを紹介します。</p>
 <h3 id="コンテナ化">コンテナ化</h3>
 <p>検索ボタンをコンテナ化してみます。(JSON を表示するフラグメントも同様のコードです)</p>
-<pre><code class="language-typescript">// .packages/team-search/src/remoteEntry.ts
-export { SearchButton } from "./SearchButton";
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// .packages/team-search/src/remoteEntry.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">SearchButton</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./SearchButton</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>何をコンテナとして提供するか export します。
 次に、webpack の plugins コードを定義します。</p>
-<pre><code class="language-javascript">// .packages/team-search/webpack.config.js
-...
-const config = {
-  entry: "./src/index",
-  plugins: [
-    new ModuleFederationPlugin({
-      name: "search",
-      filename: "remoteEntry.js",
-      exposes: {
-        "./App": "./src/remoteEntry",
-      },
-      shared: {
-        react: {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: "^18.0.0",
-          eager: true,
-        },
-        "react-dom": {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: "^18.0.0",
-          eager: true,
-        },
-      },
-    }),
-  ]
-};
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#51597D;font-style:italic">// .packages/team-search/webpack.config.js</span></span>
+<span class="line"><span style="color:#F7768E;font-weight:bold">...</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> config</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  entry</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./src/index</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  plugins</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span></span>
+<span class="line"><span style="color:#89DDFF">    new</span><span style="color:#7AA2F7"> ModuleFederationPlugin</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#73DACA">      name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">search</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">      filename</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">remoteEntry.js</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">      exposes</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">./App</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./src/remoteEntry</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">      }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">      shared</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#41A6B5">        react</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#41A6B5">          singleton</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#41A6B5">          strictVersion</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#41A6B5">          requiredVersion</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^18.0.0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#41A6B5">          eager</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">        }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">react-dom</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#41A6B5">          singleton</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#41A6B5">          strictVersion</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#41A6B5">          requiredVersion</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^18.0.0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#41A6B5">          eager</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">        }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">      }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  ]</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E;font-weight:bold">...</span></span></code></pre><figcaption class="notebook-code-language">JAVASCRIPT</figcaption></figure>
 <p>先程の export したファイルを exposes で設定します。
 ライブラリの重複ロードを防ぐために shared を設定します。
 これで、SearchButton をコンテナ化し提供できるようになりました。</p>
 <h3 id="組成-1">組成</h3>
 <p>では、コンテナをロードする組成側のビルド(webpack)を見てみます。</p>
-<pre><code class="language-javascript">// ./webpack.config.js
-const URL_MAP = {
-  content: process.env.CONTENT_URL || "http://localhost:3001",
-  search: process.env.SEARCH_URL || "http://localhost:4001",
-};
-
-const config = {
-  entry: "./src/index",
-  plugins: [
-    new ModuleFederationPlugin({
-      name: "all",
-      remotes: {
-        content: `content@${URL_MAP.content}/remoteEntry.js`,
-        search: `search@${URL_MAP.search}/remoteEntry.js`,
-      },
-      shared: {
-        react: {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: "^18.0.0",
-        },
-        "react-dom": {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: "^18.0.0",
-        },
-      },
-    }),
-  ],
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#51597D;font-style:italic">// ./webpack.config.js</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> URL_MAP</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  content</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> process</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">env</span><span style="color:#89DDFF">.</span><span style="color:#FF9E64">CONTENT_URL</span><span style="color:#BB9AF7"> ||</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">http://localhost:3001</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  search</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> process</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">env</span><span style="color:#89DDFF">.</span><span style="color:#FF9E64">SEARCH_URL</span><span style="color:#BB9AF7"> ||</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">http://localhost:4001</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> config</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  entry</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./src/index</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  plugins</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span></span>
+<span class="line"><span style="color:#89DDFF">    new</span><span style="color:#7AA2F7"> ModuleFederationPlugin</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#73DACA">      name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">all</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">      remotes</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#41A6B5">        content</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> `</span><span style="color:#9ECE6A">content@</span><span style="color:#7DCFFF">${</span><span style="color:#0DB9D7">URL_MAP</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">content</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">/remoteEntry.js</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#41A6B5">        search</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> `</span><span style="color:#9ECE6A">search@</span><span style="color:#7DCFFF">${</span><span style="color:#0DB9D7">URL_MAP</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">search</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">/remoteEntry.js</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">      }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">      shared</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#41A6B5">        react</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#41A6B5">          singleton</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#41A6B5">          strictVersion</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#41A6B5">          requiredVersion</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^18.0.0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">        }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">react-dom</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#41A6B5">          singleton</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#41A6B5">          strictVersion</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#41A6B5">          requiredVersion</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^18.0.0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">        }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">      }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  ]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">JAVASCRIPT</figcaption></figure>
 <p>remotes で、コンテナをロードする URL を設定します。
 次に、entry コードです。</p>
-<pre><code class="language-typescript">// ./src/index.ts
-// @see: https://webpack.js.org/concepts/module-federation/#uncaught-error-shared-module-is-not-available-for-eager-consumption
-import("./bootstrap");
-export {};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// ./src/index.ts</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// @see: https://webpack.js.org/concepts/module-federation/#uncaught-error-shared-module-is-not-available-for-eager-consumption</span></span>
+<span class="line"><span style="color:#89DDFF">import</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">./bootstrap</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9ABDF5"> {}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p><code>@see</code>を読むと分かりますが、entry コードは、<code>import</code>で動的ロードする必要があります。
 次に、bootstrap コードです。</p>
-<pre><code class="language-typescript">// ./src/bootstrap.tsx
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-root.render(
-  &lt;React.StrictMode&gt;
-    &lt;App /&gt;
-  &lt;/React.StrictMode&gt;
-);
-</code></pre>
-<pre><code class="language-typescript">// ./src/App.tsx
-import { useEffect } from "react";
-
-const App = () =&gt; {
-  useEffect(() =&gt; {
-    import("content/App").then((module) =&gt; {
-      const { JsonDiv } = module;
-      if (customElements.get("json-div") === undefined) {
-        customElements.define("json-div", JsonDiv);
-      }
-    });
-    import("search/App").then((module) =&gt; {
-      const { SearchButton } = module;
-      if (customElements.get("search-button") === undefined) {
-        customElements.define("search-button", SearchButton);
-      }
-      const SearchButtonElement = document.querySelector("search-button");
-      SearchButtonElement?.addEventListener("search", ((e: CustomEvent) =&gt; {
-        document
-          .querySelector("json-div")
-          ?.setAttribute("value", JSON.stringify(e.detail));
-      }) as EventListener);
-    });
-  }, []);
-
-  return (
-    &lt;&gt;
-      &lt;search-button /&gt;
-      &lt;json-div /&gt;
-    &lt;/&gt;
-  );
-};
-
-export default App;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// ./src/bootstrap.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> React</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> ReactDOM</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react-dom/client</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> App</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./App</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> root</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> ReactDOM</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">createRoot</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#C0CAF5">  document</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getElementById</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">root</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF"> as</span><span style="color:#C0CAF5"> HTMLElement</span></span>
+<span class="line"><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">root</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">render</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#BB9AF7">  &lt;</span><span style="color:#C0CAF5">React</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">StrictMode</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">    &lt;</span><span style="color:#C0CAF5">App</span><span style="color:#89DDFF"> /</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">  &lt;</span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5">React</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">StrictMode</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// ./src/App.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">useEffect</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> App</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  useEffect</span><span style="color:#9ABDF5">(() </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#89DDFF">    import</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">content/App</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">then</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">module</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">      const</span><span style="color:#89DDFF"> {</span><span style="color:#BB9AF7"> JsonDiv</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF"> =</span><span style="color:#0DB9D7"> module</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">      if</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">customElements</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">get</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">json-div</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">===</span><span style="color:#FF9E64"> undefined</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#C0CAF5">        customElements</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">define</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">json-div</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> JsonDiv</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">      }</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">    import</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">search/App</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">then</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">module</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">      const</span><span style="color:#89DDFF"> {</span><span style="color:#BB9AF7"> SearchButton</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF"> =</span><span style="color:#0DB9D7"> module</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">      if</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">customElements</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">get</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">search-button</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">===</span><span style="color:#FF9E64"> undefined</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#C0CAF5">        customElements</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">define</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">search-button</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> SearchButton</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">      }</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">      const</span><span style="color:#BB9AF7"> SearchButtonElement</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> document</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">querySelector</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">search-button</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">      SearchButtonElement</span><span style="color:#89DDFF">?.</span><span style="color:#7AA2F7">addEventListener</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">search</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ((</span><span style="color:#E0AF68">e</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> CustomEvent</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">        document</span></span>
+<span class="line"><span style="color:#89DDFF">          .</span><span style="color:#7AA2F7">querySelector</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">json-div</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#89DDFF">          ?.</span><span style="color:#7AA2F7">setAttribute</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">value</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> JSON</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">stringify</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">e</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">detail</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">      }) </span><span style="color:#89DDFF">as</span><span style="color:#C0CAF5"> EventListener</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> [])</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#BB9AF7">    &lt;&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#C0CAF5">search</span><span style="color:#89DDFF">-</span><span style="color:#C0CAF5">button</span><span style="color:#89DDFF"> /</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#C0CAF5">json</span><span style="color:#89DDFF">-</span><span style="color:#C0CAF5">div</span><span style="color:#89DDFF"> /</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">    &lt;</span><span style="color:#89DDFF">/</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#7DCFFF"> default</span><span style="color:#C0CAF5"> App</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>ここにある <code>import("content/App")</code> や<code>import("search/App")</code> がコンテナを動的ロードしているところです。
 ロードするものは、Web Components なので<code>customElements.define</code>で定義します。
 また、<code>search-button</code>の<code>search</code>イベントハンドラをリッスンし、イベントデータを<code>json-div</code>の<code>value</code>属性に設定する処理を書きます。

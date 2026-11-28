@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2019-06-07" data-pagefind-filter="month:2019-06" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">23</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-06-07"><span class="visually-hidden">2019年6月7日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">06</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">07</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 15. セキュリティ -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2019-06-07" data-pagefind-filter="month:2019-06" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">23</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-06-07"><span class="visually-hidden">2019年6月7日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">06</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">07</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 15. セキュリティ -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
 <ol>
 <li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_01/">一足遅れて Kubernetes を学び始める - 01. 環境選択編 -</a></li>
 <li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_02/">一足遅れて Kubernetes を学び始める - 02. Docker For Mac -</a></li>
@@ -27,43 +63,40 @@
 <p><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_14/">一足遅れて Kubernetes を学び始める - 14. スケジューリング -</a>では、Affinity などで Pod のスケジューリングについて学習しました。今回は、セキュリティについて学習します。</p>
 <h2 id="サービスアカウント">サービスアカウント</h2>
 <p>Pod で実行するためのプロセスを制御するために割り振られるアカウントのことをサービスアカウントというそうです。</p>
-<pre><code class="language-yaml">## sample-serviceaccount.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: sample-serviceaccount
-  namespace: default
-imagePullSecrets:
-  - name: hogehoge
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-serviceaccount.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> ServiceAccount</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-serviceaccount</span></span>
+<span class="line"><span style="color:#F7768E">  namespace</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> default</span></span>
+<span class="line"><span style="color:#F7768E">imagePullSecrets</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">  -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> hogehoge</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
 <p>これを apply してみます。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-serviceaccount.yaml
-pi@raspi001:~/tmp $ k get serviceaccounts sample-serviceaccount -o yaml
-...
-secrets:
-- name: sample-serviceaccount-token-4xhgm
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-serviceaccount.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> serviceaccounts</span><span style="color:#9ECE6A"> sample-serviceaccount</span><span style="color:#E0AF68"> -o</span><span style="color:#9ECE6A"> yaml</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">secrets:</span></span>
+<span class="line"><span style="color:#C0CAF5">-</span><span style="color:#9ECE6A"> name:</span><span style="color:#9ECE6A"> sample-serviceaccount-token-4xhgm</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>サービスアカウントが作成されました。また、imagePullSecrets の内容が secrets に登録されました。(sample-serviceaccount-token-4xhgm)
 imagePullSecrets は private な docker レジストリに使います。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k get secrets sample-serviceaccount-token-4xhgm -o yaml
-apiVersion: v1
-data:
-  ca.crt: ...
-  namespace: ZGVmYXVsdA==
-  token: ...
-kind: Secret
-metadata:
-  annotations:
-    kubernetes.io/service-account.name: sample-serviceaccount
-    kubernetes.io/service-account.uid: 4bd076da-8854-11e9-af26-b827eb8ccd80
-  creationTimestamp: "2019-06-06T12:12:04Z"
-  name: sample-serviceaccount-token-4xhgm
-  namespace: default
-  resourceVersion: "584634"
-  selfLink: /api/v1/namespaces/default/secrets/sample-serviceaccount-token-4xhgm
-  uid: 4bfbe8bb-8854-11e9-af26-b827eb8ccd80
-type: kubernetes.io/service-account-token
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> secrets</span><span style="color:#9ECE6A"> sample-serviceaccount-token-4xhgm</span><span style="color:#E0AF68"> -o</span><span style="color:#9ECE6A"> yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">apiVersion:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#C0CAF5">data:</span></span>
+<span class="line"><span style="color:#C0CAF5">  ca.crt:</span><span style="color:#9ECE6A"> ...</span></span>
+<span class="line"><span style="color:#C0CAF5">  namespace:</span><span style="color:#9ECE6A"> ZGVmYXVsdA==</span></span>
+<span class="line"><span style="color:#C0CAF5">  token:</span><span style="color:#9ECE6A"> ...</span></span>
+<span class="line"><span style="color:#C0CAF5">kind:</span><span style="color:#9ECE6A"> Secret</span></span>
+<span class="line"><span style="color:#C0CAF5">metadata:</span></span>
+<span class="line"><span style="color:#C0CAF5">  annotations:</span></span>
+<span class="line"><span style="color:#C0CAF5">    kubernetes.io/service-account.name:</span><span style="color:#9ECE6A"> sample-serviceaccount</span></span>
+<span class="line"><span style="color:#C0CAF5">    kubernetes.io/service-account.uid:</span><span style="color:#9ECE6A"> 4bd076da-8854-11e9-af26-b827eb8ccd80</span></span>
+<span class="line"><span style="color:#C0CAF5">  creationTimestamp:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">2019-06-06T12:12:04Z</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C0CAF5">  name:</span><span style="color:#9ECE6A"> sample-serviceaccount-token-4xhgm</span></span>
+<span class="line"><span style="color:#C0CAF5">  namespace:</span><span style="color:#9ECE6A"> default</span></span>
+<span class="line"><span style="color:#C0CAF5">  resourceVersion:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">584634</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C0CAF5">  selfLink:</span><span style="color:#9ECE6A"> /api/v1/namespaces/default/secrets/sample-serviceaccount-token-4xhgm</span></span>
+<span class="line"><span style="color:#C0CAF5">  uid:</span><span style="color:#9ECE6A"> 4bfbe8bb-8854-11e9-af26-b827eb8ccd80</span></span>
+<span class="line"><span style="color:#0DB9D7">type</span><span style="color:#9ECE6A">:</span><span style="color:#9ECE6A"> kubernetes.io/service-account-token</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>認証に必要な token が登録されていますね。</p>
 <h2 id="rbac-role-based-access-control">RBAC (Role Based Access Control)</h2>
 <p>RBAC は、さきほど作成したサービスアカウントと、どういった操作を許可するのかを定めた Role を紐付け(RoleBinding)して、権限管理をします。1 つの Role に対して複数のサービスアカウントを RoleBinding できます。</p>
@@ -117,126 +150,112 @@ type: kubernetes.io/service-account-token
 <p>新しく作ったサービスアカウントでコンテキストを作成し、そのアカウントから Pod 情報を取得できるか試してみます。
 そのためには、サービスアカウントの認証情報を通しておく必要があります。</p>
 <p>※ Role と ClusterRole に大きな違いはないため、Role を試します。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ TOKEN=$(k get secret/sample-serviceaccount-token-jd279 -o json | jq -r .data.token)
-pi@raspi001:~/tmp $ DECODE_TOKEN=$(echo -n $TOKEN | base64 -d)
-pi@raspi001:~/tmp $ k config set-credentials sample-serviceaccount --token $DECODE_TOKEN
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">TOKEN=</span><span style="color:#89DDFF">$(</span><span style="color:#C0CAF5">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> secret/sample-serviceaccount-token-jd279</span><span style="color:#E0AF68"> -o</span><span style="color:#9ECE6A"> json</span><span style="color:#89DDFF"> |</span><span style="color:#C0CAF5"> jq</span><span style="color:#E0AF68"> -r</span><span style="color:#9ECE6A"> .data.token</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">DECODE_TOKEN=</span><span style="color:#89DDFF">$(</span><span style="color:#0DB9D7">echo</span><span style="color:#E0AF68"> -n</span><span style="color:#C0CAF5"> $TOKEN</span><span style="color:#89DDFF"> |</span><span style="color:#C0CAF5"> base64</span><span style="color:#E0AF68"> -d</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> config</span><span style="color:#9ECE6A"> set-credentials</span><span style="color:#9ECE6A"> sample-serviceaccount</span><span style="color:#E0AF68"> --token</span><span style="color:#C0CAF5"> $DECODE_TOKEN</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>では、コンテキスト(sample-sa-context)を作成して、それを使用します。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k config set-context sample-sa-context --user sample-serviceaccount --cluster kubernetes
-pi@raspi001:~/tmp $ k config use-context sample-sa-context
-pi@raspi001:~/tmp $ k config get-contexts
-CURRENT   NAME                          CLUSTER      AUTHINFO                NAMESPACE
-          kubernetes-admin@kubernetes   kubernetes   kubernetes-admin
-* sample-sa-context             kubernetes   sample-serviceaccount
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> config</span><span style="color:#9ECE6A"> set-context</span><span style="color:#9ECE6A"> sample-sa-context</span><span style="color:#E0AF68"> --user</span><span style="color:#9ECE6A"> sample-serviceaccount</span><span style="color:#E0AF68"> --cluster</span><span style="color:#9ECE6A"> kubernetes</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> config</span><span style="color:#9ECE6A"> use-context</span><span style="color:#9ECE6A"> sample-sa-context</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> config</span><span style="color:#9ECE6A"> get-contexts</span></span>
+<span class="line"><span style="color:#C0CAF5">CURRENT</span><span style="color:#9ECE6A">   NAME</span><span style="color:#9ECE6A">                          CLUSTER</span><span style="color:#9ECE6A">      AUTHINFO</span><span style="color:#9ECE6A">                NAMESPACE</span></span>
+<span class="line"><span style="color:#C0CAF5">          kubernetes-admin@kubernetes</span><span style="color:#9ECE6A">   kubernetes</span><span style="color:#9ECE6A">   kubernetes-admin</span></span>
+<span class="line"><span style="color:#89DDFF">*</span><span style="color:#A9B1D6"> sample-sa-context             kubernetes   sample-serviceaccount</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>新たに作成したサービスアカウントで Pod の情報が取得できるか試してみます。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k get po
-Error from server (Forbidden): pods is forbidden: User "system:serviceaccount:default:sample-serviceaccount" cannot list resource "pods" in API group "" in the namespace "default"
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> po</span></span>
+<span class="line"><span style="color:#C0CAF5">Error</span><span style="color:#9ECE6A"> from</span><span style="color:#9ECE6A"> server</span><span style="color:#A9B1D6"> (Forbidden): pods is forbidden: User </span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">system:serviceaccount:default:sample-serviceaccount</span><span style="color:#89DDFF">"</span><span style="color:#A9B1D6"> cannot list resource </span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">pods</span><span style="color:#89DDFF">"</span><span style="color:#A9B1D6"> in API group </span><span style="color:#89DDFF">""</span><span style="color:#A9B1D6"> in the namespace </span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">default</span><span style="color:#89DDFF">"</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>Error になりました。sample-serviceaccount は何も Role をバインドしていないからですね。
 では、RoleBinding していきます。</p>
 <p>元に戻ります。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k config use-context kubernetes-admin@kubernetes
-</code></pre>
-<pre><code class="language-yaml">## sample-role.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: sample-role
-rules:
-  - apiGroups: [""]
-    resources: ["pods"]
-    verbs: ["get", "watch", "list"]
-</code></pre>
-<pre><code class="language-yaml">## sample-rolebinding.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: sample-rolebinding
-  namespace: default
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: sample-role
-subjects:
-  - kind: ServiceAccount
-    name: sample-serviceaccount
-    namespace: default
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-role.yaml
-pi@raspi001:~/tmp $ k apply -f sample-rolebinding.yaml
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> config</span><span style="color:#9ECE6A"> use-context</span><span style="color:#9ECE6A"> kubernetes-admin@kubernetes</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-role.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> rbac.authorization.k8s.io/v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Role</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-role</span></span>
+<span class="line"><span style="color:#F7768E">rules</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">  -</span><span style="color:#F7768E"> apiGroups</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">""</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#F7768E">    resources</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">pods</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#F7768E">    verbs</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">get</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">watch</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">list</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-rolebinding.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> rbac.authorization.k8s.io/v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> RoleBinding</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-rolebinding</span></span>
+<span class="line"><span style="color:#F7768E">  namespace</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> default</span></span>
+<span class="line"><span style="color:#F7768E">roleRef</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  apiGroup</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> rbac.authorization.k8s.io</span></span>
+<span class="line"><span style="color:#F7768E">  kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Role</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-role</span></span>
+<span class="line"><span style="color:#F7768E">subjects</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">  -</span><span style="color:#F7768E"> kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> ServiceAccount</span></span>
+<span class="line"><span style="color:#F7768E">    name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-serviceaccount</span></span>
+<span class="line"><span style="color:#F7768E">    namespace</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> default</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-role.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-rolebinding.yaml</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>では、もう一度試してみます。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k config use-context sample-sa-context
-pi@raspi001:~/tmp $ k get po
-NAME                                      READY   STATUS    RESTARTS   AGE
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> config</span><span style="color:#9ECE6A"> use-context</span><span style="color:#9ECE6A"> sample-sa-context</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> po</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                                      READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>おお、取得できました！
 もとに戻しておきます。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k config use-context kubernetes-admin@kubernetes
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> config</span><span style="color:#9ECE6A"> use-context</span><span style="color:#9ECE6A"> kubernetes-admin@kubernetes</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <h2 id="securitycontext">SecurityContext</h2>
 <p>コンテナに対してセキュリティ設定をすることができます。
 例えば、Capabilities の追加・削除、実行するユーザ、グループの変更、ファイルの ReadOnly 化などができるそうです。</p>
-<pre><code class="language-yaml">## sample-capabilities.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: sample-capabilities
-spec:
-  containers:
-    - name: nginx-container
-      image: nginx:1.12
-      securityContext:
-        capabilities:
-          add: ["SYS_ADMIN"]
-          drop: ["AUDIT_WRITE"]
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-capabilities.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Pod</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-capabilities</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">      image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#F7768E">      securityContext</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">        capabilities</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          add</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">SYS_ADMIN</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#F7768E">          drop</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">AUDIT_WRITE</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
 <p>apply し、中身を確認してみます。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-capabilities.yaml
-pi@raspi001:~/tmp $ k exec -it sample-capabilities /bin/bash
-root@sample-capabilities:/# apt update &amp;&amp; apt install libcap2-bin
-root@sample-capabilities:/# capsh --print | grep Current
-Current: = cap_chown,cap_dac_override,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,cap_setpcap,cap_net_bind_service,cap_net_raw,cap_sys_chroot,cap_sys_admin,cap_mknod,cap_setfcap+eip
-root@sample-capabilities:/# exit
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-capabilities.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-capabilities</span><span style="color:#9ECE6A"> /bin/bash</span></span>
+<span class="line"><span style="color:#C0CAF5">root@sample-capabilities:/#</span><span style="color:#9ECE6A"> apt</span><span style="color:#9ECE6A"> update</span><span style="color:#89DDFF"> &amp;&amp;</span><span style="color:#C0CAF5"> apt</span><span style="color:#9ECE6A"> install</span><span style="color:#9ECE6A"> libcap2-bin</span></span>
+<span class="line"><span style="color:#C0CAF5">root@sample-capabilities:/#</span><span style="color:#9ECE6A"> capsh</span><span style="color:#E0AF68"> --print</span><span style="color:#89DDFF"> |</span><span style="color:#C0CAF5"> grep</span><span style="color:#9ECE6A"> Current</span></span>
+<span class="line"><span style="color:#C0CAF5">Current:</span><span style="color:#9ECE6A"> =</span><span style="color:#9ECE6A"> cap_chown,cap_dac_override,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,cap_setpcap,cap_net_bind_service,cap_net_raw,cap_sys_chroot,cap_sys_admin,cap_mknod,cap_setfcap+eip</span></span>
+<span class="line"><span style="color:#C0CAF5">root@sample-capabilities:/#</span><span style="color:#9ECE6A"> exit</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>cap_sys_admin が増えてますね。audit_write は見つかりません。
 そもそも、どんな種類があるのか分からなかったので、<a href="https://qiita.com/muddydixon/items/d2982ab0846002bf3ea8"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/qiita.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">こちら<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>を参考にしました。</p>
 <h2 id="podsecuritycontext">PodSecurityContext</h2>
 <p>Pod(全てのコンテナ)に対してセキュリティ設定をすることができます。
 例えば、実行するユーザやグループの制御、root 実行を拒否したり、カーネルパラメータを上書きすることもできます。</p>
-<pre><code class="language-yaml">## sample-runuser.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: sample-runuser
-spec:
-  securityContext:
-    runAsUser: 99
-    # runAsGroup: 99
-    supplementalGroups:
-      - 1001
-      - 1002
-  containers:
-    - name: centos-container
-      image: centos:7
-      command: ["/bin/sleep", "3600"]
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-runuser.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Pod</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-runuser</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  securityContext</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    runAsUser</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 99</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    # runAsGroup: 99</span></span>
+<span class="line"><span style="color:#F7768E">    supplementalGroups</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#FF9E64"> 1001</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#FF9E64"> 1002</span></span>
+<span class="line"><span style="color:#F7768E">  containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> centos-container</span></span>
+<span class="line"><span style="color:#F7768E">      image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> centos:7</span></span>
+<span class="line"><span style="color:#F7768E">      command</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">/bin/sleep</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">3600</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
 <p>では、apply しています。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-runuser.yaml
-pi@raspi001:~/tmp $ k exec -it sample-runuser -- id
-uid=99(nobody) gid=99(nobody) groups=99(nobody),1001,1002
-pi@raspi001:~/tmp $ k exec -it sample-runuser -- ps aux | grep sleep
-nobody       1  0.0  0.0   2032   372 ?        Ss   14:02   0:00 /bin/sleep 3600
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-runuser.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-runuser</span><span style="color:#E0AF68"> --</span><span style="color:#9ECE6A"> id</span></span>
+<span class="line"><span style="color:#C0CAF5">uid</span><span style="color:#89DDFF">=</span><span style="color:#9ECE6A">99</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">nobody</span><span style="color:#9ABDF5">)</span><span style="color:#C0CAF5"> gid</span><span style="color:#89DDFF">=</span><span style="color:#9ECE6A">99</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">nobody</span><span style="color:#9ABDF5">)</span><span style="color:#C0CAF5"> groups</span><span style="color:#89DDFF">=</span><span style="color:#9ECE6A">99</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">nobody</span><span style="color:#9ABDF5">)</span><span style="color:#9ECE6A">,1001,1002</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-runuser</span><span style="color:#E0AF68"> --</span><span style="color:#9ECE6A"> ps</span><span style="color:#9ECE6A"> aux</span><span style="color:#89DDFF"> |</span><span style="color:#C0CAF5"> grep</span><span style="color:#9ECE6A"> sleep</span></span>
+<span class="line"><span style="color:#C0CAF5">nobody</span><span style="color:#FF9E64">       1</span><span style="color:#FF9E64">  0.0</span><span style="color:#FF9E64">  0.0</span><span style="color:#FF9E64">   2032</span><span style="color:#FF9E64">   372</span><span style="color:#9ECE6A"> ?</span><span style="color:#9ECE6A">        Ss</span><span style="color:#9ECE6A">   14:02</span><span style="color:#9ECE6A">   0:00</span><span style="color:#9ECE6A"> /bin/sleep</span><span style="color:#FF9E64"> 3600</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>実行したユーザが nobody(99)に変更されていますね。また、supplementalGroups で、プライマリ GID に指定の GID を追加することができます。</p>
 <h2 id="そのほか">そのほか</h2>
 <p>PodSecurityPolicy や、NetworkPolicy、そして認証、認可の AdmissionControl というものもあるそうです。</p>
 <h2 id="お片付け">お片付け</h2>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-serviceaccount.yaml -f sample-role.yaml -f sample-rolebinding.yaml -f sample-capabilities.yaml -f sample-runuser.yaml
-pi@raspi001:~/tmp $ k config delete-context sample-sa-context
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> delete</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-serviceaccount.yaml</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-role.yaml</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-rolebinding.yaml</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-capabilities.yaml</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-runuser.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> config</span><span style="color:#9ECE6A"> delete-context</span><span style="color:#9ECE6A"> sample-sa-context</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <h2 id="最後に">最後に</h2>
 <p>主に RBAC について学習しました。
 複数人で開発する際は、コンテキストを分けて開発を進めるのが良いみたいですね。

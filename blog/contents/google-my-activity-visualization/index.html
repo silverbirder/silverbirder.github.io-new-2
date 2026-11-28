@@ -4,12 +4,48 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2025-09-17" data-pagefind-filter="month:2025-09" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">144</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-09-17"><span class="visually-hidden">2025年9月17日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">09</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">17</span></span></time></p></div><div class="notebook-heading"><h1>DuckDB WASMとOPFSでGoogleマイアクティビティをブラウザ完結で可視化してみた</h1></div></header><div class="notebook-body"><p>Google マイアクティビティの履歴をブラウザだけで分析したくて、DuckDB WASMとOrigin Private File System (OPFS) を組み合わせた Web アプリを作りました。
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2025-09-17" data-pagefind-filter="month:2025-09" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">144</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-09-17"><span class="visually-hidden">2025年9月17日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">09</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">17</span></span></time></p></div><div class="notebook-heading"><h1>DuckDB WASMとOPFSでGoogleマイアクティビティをブラウザ完結で可視化してみた</h1></div></header><div class="notebook-body"><p>Google マイアクティビティの履歴をブラウザだけで分析したくて、DuckDB WASMとOrigin Private File System (OPFS) を組み合わせた Web アプリを作りました。
 この記事ではアプリの紹介は軽めに、ブラウザ完結のデータ基盤をどう構成したのかを中心に振り返ります。
 開発したアプリとソースコードは、以下になります。</p>
 <ul>
-<li><a href="https://actviz.vercel.app"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/actviz.vercel.app.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://actviz.vercel.app<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
-<li><a href="https://github.com/silverbirder/google-myactivity-visualization"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/silverbirder/google-myactivity-visualization<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://actviz.vercel.app"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/actviz.vercel.app.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://actviz.vercel.app<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
+<li><a href="https://github.com/silverbirder/google-myactivity-visualization"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/silverbirder/google-myactivity-visualization<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <h2 id="アプリのざっくり紹介">アプリのざっくり紹介</h2>
 <p><a href="https://takeout.google.com/settings/takeout"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/takeout.google.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Google Takeout<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a> からエクスポートしたマイアクティビティの ZIPファイル をアプリにアップロードすると、ブラウザ内で以下の可視化を眺められます。</p>
@@ -24,8 +60,8 @@ Google が保持している元データは <a href="https://myactivity.google.c
 <h2 id="duckdb-wasmを選んだ理由">DuckDB WASMを選んだ理由</h2>
 <p>6年前に Chrome の検索履歴でワードクラウドを作ったときは、ブラウザの何かしらのStorageに入れていました。</p>
 <ul>
-<li><a href="https://github.com/silverbirder/google-word-cloud"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/silverbirder/google-word-cloud<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
-<li><a href="https://github.com/silverbirder/searchWordCloud"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/silverbirder/searchWordCloud<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://github.com/silverbirder/google-word-cloud"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/silverbirder/google-word-cloud<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
+<li><a href="https://github.com/silverbirder/searchWordCloud"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/silverbirder/searchWordCloud<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <p>当時の実装はもう覚えていませんが（笑）、いまならブラウザだけでどこまでやれるのか試したくなりました。
 ブラウザにDBを持つという<a href="https://zenn.dev/midorisawa07/articles/7b6b24a46925fd"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/zenn.dev.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">素人が参院議員の議案賛否検索サイトを作ってみた - zenn<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>を読んでいたこともあり、
@@ -36,26 +72,25 @@ Next.js は既存知識で片付け、今回はブラウザ内データ基盤の
 <h2 id="duckdbとopfsを繋いだ初期化">DuckDBとOPFSを繋いだ初期化</h2>
 <p>DuckDB WASM は npm の <code>@duckdb/duckdb-wasm</code> パッケージを利用します。
 バンドルされた <code>duckdb-eh.wasm</code> とワーカーを <code>public/</code> に配置し、初期化時に手動で読み込みます。</p>
-<pre><code class="language-ts">// src/contexts/duck-db/duck-db.hook.ts
-import * as duckdb from "@duckdb/duckdb-wasm";
-
-const MANUAL_BUNDLES = {
-  mvp: {
-    mainModule: "/duckdb-eh.wasm",
-    mainWorker: "/duckdb-browser-eh.worker.js",
-  },
-};
-
-const bundle = await duckdb.selectBundle(MANUAL_BUNDLES);
-const worker = new Worker(bundle.mainWorker!);
-const db = new duckdb.AsyncDuckDB(new duckdb.ConsoleLogger(), worker);
-
-await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
-await db.open({
-  path: "opfs://google-myactivity-visualization.db",
-  accessMode: duckdb.DuckDBAccessMode.READ_WRITE,
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/contexts/duck-db/duck-db.hook.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#FF9E64"> *</span><span style="color:#89DDFF"> as</span><span style="color:#0DB9D7"> duckdb</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@duckdb/duckdb-wasm</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> MANUAL_BUNDLES</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  mvp</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">    mainModule</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">/duckdb-eh.wasm</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">    mainWorker</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">/duckdb-browser-eh.worker.js</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> bundle</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> duckdb</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">selectBundle</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">MANUAL_BUNDLES</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> worker</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> Worker</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">bundle</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">mainWorker</span><span style="color:#BB9AF7">!</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> db</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#C0CAF5"> duckdb</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">AsyncDuckDB</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">new</span><span style="color:#C0CAF5"> duckdb</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">ConsoleLogger</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> worker</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">await</span><span style="color:#C0CAF5"> db</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">instantiate</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">bundle</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">mainModule</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> bundle</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">pthreadWorker</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">await</span><span style="color:#C0CAF5"> db</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">open</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#73DACA">  path</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">opfs://google-myactivity-visualization.db</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  accessMode</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> duckdb</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">DuckDBAccessMode</span><span style="color:#89DDFF">.</span><span style="color:#FF9E64">READ_WRITE</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p><code>opfs://</code> を指定すると DuckDB 側が OPFS 上のデータベースファイルを面倒見てくれるので、ページをリロードしてもテーブルが残ります。
 今回、OPFS自体の操作はDuckDB WASM側で処理されていて、Web APIを直接叩いていませんが、以下のドキュメントは一読しておきました。</p>
 <ul>
@@ -63,33 +98,30 @@ await db.open({
 </ul>
 <p>上記ドキュメントから、OPFS は HTTPS が前提と知り、ローカル開発は <code>next dev --experimental-https</code> で起動しました。</p>
 <p>アプリ側ではこの初期化処理を React Context に閉じ込め、<code>runQuery</code> などのユーティリティ経由で DuckDB を参照します。</p>
-<pre><code class="language-ts">// src/contexts/duck-db/duck-db.hook.ts
-export const runQuery = async (query: string) =&gt; {
-  const conn = await db.connect();
-  try {
-    const result = await conn.query(query);
-    return result.toArray();
-  } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
-    throw new Error(`Query failed: ${message}`);
-  } finally {
-    await conn.close();
-  }
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/contexts/duck-db/duck-db.hook.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#7AA2F7"> runQuery</span><span style="color:#89DDFF"> =</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">query</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> conn</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> db</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">connect</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">  try</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> result</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> conn</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">query</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">query</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    return</span><span style="color:#C0CAF5"> result</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toArray</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  } </span><span style="color:#BB9AF7">catch</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">err</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> message</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> err</span><span style="color:#89DDFF"> instanceof</span><span style="color:#C0CAF5"> Error</span><span style="color:#BB9AF7"> ?</span><span style="color:#C0CAF5"> err</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">message</span><span style="color:#BB9AF7"> :</span><span style="color:#7AA2F7"> String</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">err</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">    throw</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> Error</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">`</span><span style="color:#9ECE6A">Query failed: </span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">message</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  } </span><span style="color:#BB9AF7">finally</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> conn</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">close</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>React Context から <code>runQuery</code> を各コンポーネントに渡すことで、ビュー側からは SQL を書くだけで済む形にしました。</p>
 <h2 id="sqlはファイルで管理">SQLはファイルで管理</h2>
 <p>集計ロジックは SQL ファイルとして切り出し、インポートしています。</p>
-<pre><code class="language-sql">-- sample.sql
-SELECT *
-FROM activities
-LIMIT 10;
-</code></pre>
-<pre><code class="language-ts">// SomeComponent.tsx
-import sampleSql from "./sample.sql";
-
-const rows = await runQuery(sampleSql);
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- sample.sql</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span><span style="color:#89DDFF"> *</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span><span style="color:#A9B1D6"> activities</span></span>
+<span class="line"><span style="color:#7DCFFF">LIMIT</span><span style="color:#FF9E64"> 10</span><span style="color:#A9B1D6">;</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// SomeComponent.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> sampleSql</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./sample.sql</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> rows</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#7AA2F7"> runQuery</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">sampleSql</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>SQL をファイルとして保存しておくとフォーマッタをかけやすく、差分レビューもしやすいので気に入っています。
 ブラウザ内で完結するプロダクトでも、サーバーサイドと同じく SQL を直接管理できるのが地味に嬉しいポイントでした。</p>
 <h2 id="zipjsonをブラウザ内で取り込む">ZIP/JSONをブラウザ内で取り込む</h2>
@@ -104,31 +136,28 @@ DuckDBにデータを取り込むには、2つのステップを踏みます。<
 <li><a href="https://duckdb.org/docs/stable/clients/wasm/data_ingestion.html"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/duckdb.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Data Ingestion – DuckDB<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
 </ul>
 <p>私は、以下のように実装しました。</p>
-<pre><code class="language-sql">-- create_activities.sql
-CREATE TABLE IF NOT EXISTS activities AS
-SELECT
-  json_extract_string(json, '$.title') AS title
-FROM read_json_objects('__PATH__');
-</code></pre>
-<pre><code class="language-sql">-- insert_activities.sql
-INSERT INTO activities
-SELECT
-  json_extract_string(json, '$.title') AS title
-FROM read_json_objects('__PATH__');
-</code></pre>
-<pre><code class="language-ts">// handleFile.ts
-import createActivitiesSql from "./create_activities.sql";
-import insertActivitiesSql from "./insert_activities.sql";
-
-const path = `mem://activities_${Date.now()}.json`;
-const jsonText = JSON.stringify(activities);
-
-await db.registerFileText(path, jsonText);
-
-const escapedPath = path.replaceAll("'", "''");
-await runQuery(createActivitiesSql.replace("__PATH__", escapedPath));
-await runQuery(insertActivitiesSql.replace("__PATH__", escapedPath));
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- create_activities.sql</span></span>
+<span class="line"><span style="color:#89DDFF">CREATE</span><span style="color:#89DDFF"> TABLE</span><span style="color:#7AA2F7"> IF</span><span style="color:#89DDFF"> NOT</span><span style="color:#89DDFF"> EXISTS</span><span style="color:#A9B1D6"> activities </span><span style="color:#89DDFF">AS</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#A9B1D6">  json_extract_string(</span><span style="color:#89DDFF">json</span><span style="color:#A9B1D6">, </span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">$.title</span><span style="color:#89DDFF">'</span><span style="color:#A9B1D6">) </span><span style="color:#89DDFF">AS</span><span style="color:#A9B1D6"> title</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span><span style="color:#A9B1D6"> read_json_objects(</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">__PATH__</span><span style="color:#89DDFF">'</span><span style="color:#A9B1D6">);</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- insert_activities.sql</span></span>
+<span class="line"><span style="color:#7DCFFF">INSERT INTO</span><span style="color:#A9B1D6"> activities</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#A9B1D6">  json_extract_string(</span><span style="color:#89DDFF">json</span><span style="color:#A9B1D6">, </span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">$.title</span><span style="color:#89DDFF">'</span><span style="color:#A9B1D6">) </span><span style="color:#89DDFF">AS</span><span style="color:#A9B1D6"> title</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span><span style="color:#A9B1D6"> read_json_objects(</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">__PATH__</span><span style="color:#89DDFF">'</span><span style="color:#A9B1D6">);</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// handleFile.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> createActivitiesSql</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./create_activities.sql</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> insertActivitiesSql</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./insert_activities.sql</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> path</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> `</span><span style="color:#9ECE6A">mem://activities_</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">Date</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">now</span><span style="color:#9ABDF5">()</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">.json</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> jsonText</span><span style="color:#89DDFF"> =</span><span style="color:#0DB9D7"> JSON</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">stringify</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">activities</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">await</span><span style="color:#C0CAF5"> db</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">registerFileText</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">path</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> jsonText</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> escapedPath</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> path</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">replaceAll</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">'</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">''</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">await</span><span style="color:#7AA2F7"> runQuery</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">createActivitiesSql</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">replace</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">__PATH__</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> escapedPath</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">await</span><span style="color:#7AA2F7"> runQuery</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">insertActivitiesSql</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">replace</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">__PATH__</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> escapedPath</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>SQLファイル側では<code>'__PATH__'</code>のようにシングルクォート付きでプレースホルダを置いておき、最後にエスケープ済みのパスを差し込む形にしています。</p>
 <p><code>read_json_objects</code>を使うと巨大な配列もうまく処理してくれるので、150MB超の履歴でもブラウザが固まらずに済みました。
 ZIP内のJSONは1件ずつ進捗を出しながら挿入しているので、待ち時間の不安も軽減されています。<br>

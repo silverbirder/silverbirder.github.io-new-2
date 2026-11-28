@@ -4,14 +4,50 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2025-01-03" data-pagefind-filter="month:2025-01" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">135</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-01-03"><span class="visually-hidden">2025年1月3日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">01</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span></span></time></p></div><div class="notebook-heading"><h1>Testcontainersで実現する、使い捨て結合テスト環境構築とテスト実施</h1></div></header><div class="notebook-body"><p>みなさん、Testcontainersをご存知ですか？</p>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2025-01-03" data-pagefind-filter="month:2025-01" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">135</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-01-03"><span class="visually-hidden">2025年1月3日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">01</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span></span></time></p></div><div class="notebook-heading"><h1>Testcontainersで実現する、使い捨て結合テスト環境構築とテスト実施</h1></div></header><div class="notebook-body"><p>みなさん、Testcontainersをご存知ですか？</p>
 <p>Testcontainersは、Dockerコンテナを利用して実際のサービスを統合テストで手軽に使用できるオープンソースのライブラリです。
 今回、Testcontainersを使って、GitHub Actions上でRails API、MySQL、Next.jsをDockerコンテナとして起動させ、複数のテストシナリオを独立してテストすることができました。以下はその概要図です。本記事では、このテストについての解説と学びを紹介したいと思います。</p>
 <p><span class="notebook-photo-frame"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1735639067/silver-birder.github.io/blog/testcontainers-overview.png?ar=1322%3A1241" alt="概要図" width="1322" height="1241" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_200/q_auto/f_auto/v1735639067/silver-birder.github.io/blog/testcontainers-overview.png?ar=1322%3A1241 200w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_300/q_auto/f_auto/v1735639067/silver-birder.github.io/blog/testcontainers-overview.png?ar=1322%3A1241 300w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1735639067/silver-birder.github.io/blog/testcontainers-overview.png?ar=1322%3A1241 400w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_450/q_auto/f_auto/v1735639067/silver-birder.github.io/blog/testcontainers-overview.png?ar=1322%3A1241 450w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_600/q_auto/f_auto/v1735639067/silver-birder.github.io/blog/testcontainers-overview.png?ar=1322%3A1241 600w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_800/q_auto/f_auto/v1735639067/silver-birder.github.io/blog/testcontainers-overview.png?ar=1322%3A1241 800w" sizes="min(25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem) - 0.5rem - 2 * 0.5rem))"><span class="notebook-photo-caption" aria-hidden="true">概要図</span></span></p>
 <p>動くコードは、<a href="https://github.com/silverbirder/testcontainers-rails-nextjs"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">こちらのリポジトリ<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>にありますので、ご参考にしてください。
 GitHub Actionsのテストログは、<a href="https://github.com/silverbirder/testcontainers-rails-nextjs/actions/workflows/e2e.yml"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">こちら<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>にあります。</p>
 <p>ちなみに、過去にTestcontainersに関するブログ記事を書いていたので、そちらもよろしければお読みください。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://zenn.dev/silverbirder/articles/bcf9ae9b496a15" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Testcontainersを用いたNext.jsとDBの結合テスト</strong><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/zenn.dev.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">zenn.dev<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/e900896b8492e6b6d429973b98a845fd2ed83b8df3ba8f4c2f168f618eb5ad10.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://zenn.dev/silverbirder/articles/bcf9ae9b496a15" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Testcontainersを用いたNext.jsとDBの結合テスト</strong><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/zenn.dev.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">zenn.dev<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/e900896b8492e6b6d429973b98a845fd2ed83b8df3ba8f4c2f168f618eb5ad10.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <h2 id="testcontainersを使用する対象">Testcontainersを使用する対象</h2>
 <p>Testcontainersは、コンテナで管理されているサービスに対してテストを行うことができます。一方、コンテナで管理されていないサービスについても、以下のリンクにあるモジュールライブラリを利用することでテストが可能な場合があります。</p>
 <ul>
@@ -103,111 +139,109 @@ Teardownは、Vitestでいう<code>afterAll</code>や<code>afterEach</code>の�
 <p>それでは、具体的なコードを紹介していきます。</p>
 <h3 id="apiのsetupteardown">APIのSetup・Teardown</h3>
 <p>まずは、APIのSetupとTeardownについて説明します。以下に該当するコードをご覧ください。</p>
-<pre><code class="language-ts">// setup/api.ts
-import path from "path";
-import { DockerComposeEnvironment, RandomUuid } from "testcontainers";
-import { writeFileSync, unlinkSync } from "fs";
-import { join } from "path";
-
-const API_PORT = 3000;
-
-export const setupApiContainer = async () =&gt; {
-  const apiPath = path.resolve(__dirname, "../../../apps/api");
-  const apiComposeFileName = "docker-compose.yml";
-  const uuid = new RandomUuid();
-  const containerSuffix = `_${uuid.nextUuid()}`;
-  const apiEnvironment = await new DockerComposeEnvironment(
-    apiPath,
-    apiComposeFileName
-  )
-    .withEnvironment({
-      CONTAINER_SUFFIX: containerSuffix,
-    })
-    .up();
-
-  const apiContainer = apiEnvironment.getContainer(
-    `testcontainers_api${containerSuffix}`
-  );
-  const dbContainer = apiEnvironment.getContainer(
-    `testcontainers_api_db${containerSuffix}`
-  );
-
-  const networks = apiContainer.getNetworkNames();
-  const networkName = networks[0] ?? "";
-  const ip = apiContainer.getIpAddress(networkName);
-  const host = apiContainer.getHost();
-  const port = apiContainer.getMappedPort(API_PORT);
-
-  const executeSqlFile = async (sqlContent: string, fileName: string) =&gt; {
-    const tempSqlFile = join(__dirname, fileName);
-    writeFileSync(tempSqlFile, sqlContent, "utf-8");
-    try {
-      await dbContainer.copyFilesToContainer([
-        { source: tempSqlFile, target: `/temp.sql` },
-      ]);
-      const result = await dbContainer.exec([
-        "mysql",
-        "-uroot",
-        "-proot",
-        "-e",
-        "source /temp.sql",
-      ]);
-      return result.output.trim();
-    } finally {
-      unlinkSync(tempSqlFile);
-    }
-  };
-
-  return {
-    apiContainer,
-    dbContainer,
-    executeSqlFile,
-    apiInternalUrl: `http://${ip}:${API_PORT}`,
-    apiPublicUrl: `http://${host}:${port}`,
-    networkName,
-    teardown: async () =&gt; {
-      await apiEnvironment.down({ removeVolumes: true });
-    },
-  };
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// setup/api.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> path</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">path</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">DockerComposeEnvironment</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> RandomUuid</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">testcontainers</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">writeFileSync</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> unlinkSync</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">fs</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">join</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">path</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> API_PORT</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 3000</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#7AA2F7"> setupApiContainer</span><span style="color:#89DDFF"> =</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> apiPath</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> path</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">resolve</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">__dirname</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../../apps/api</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> apiComposeFileName</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">docker-compose.yml</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> uuid</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> RandomUuid</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> containerSuffix</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> `</span><span style="color:#9ECE6A">_</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">uuid</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">nextUuid</span><span style="color:#9ABDF5">()</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> apiEnvironment</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> DockerComposeEnvironment</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#C0CAF5">    apiPath</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">    apiComposeFileName</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span></span>
+<span class="line"><span style="color:#89DDFF">    .</span><span style="color:#7AA2F7">withEnvironment</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#73DACA">      CONTAINER_SUFFIX</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> containerSuffix</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span></span>
+<span class="line"><span style="color:#89DDFF">    .</span><span style="color:#7AA2F7">up</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> apiContainer</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiEnvironment</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getContainer</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#89DDFF">    `</span><span style="color:#9ECE6A">testcontainers_api</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">containerSuffix</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> dbContainer</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiEnvironment</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getContainer</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#89DDFF">    `</span><span style="color:#9ECE6A">testcontainers_api_db</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">containerSuffix</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> networks</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiContainer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getNetworkNames</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> networkName</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> networks</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">] </span><span style="color:#BB9AF7">??</span><span style="color:#89DDFF"> ""</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> ip</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiContainer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getIpAddress</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">networkName</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> host</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiContainer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getHost</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> port</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiContainer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getMappedPort</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">API_PORT</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#7AA2F7"> executeSqlFile</span><span style="color:#89DDFF"> =</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">sqlContent</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> fileName</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> tempSqlFile</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> join</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">__dirname</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> fileName</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    writeFileSync</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">tempSqlFile</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> sqlContent</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">utf-8</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">    try</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">      await</span><span style="color:#C0CAF5"> dbContainer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">copyFilesToContainer</span><span style="color:#9ABDF5">([</span></span>
+<span class="line"><span style="color:#9ABDF5">        { </span><span style="color:#73DACA">source</span><span style="color:#89DDFF">:</span><span style="color:#7DCFFF"> tempSqlFile</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> target</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> `</span><span style="color:#9ECE6A">/temp.sql</span><span style="color:#89DDFF">`</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">      ])</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">      const</span><span style="color:#BB9AF7"> result</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> dbContainer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">exec</span><span style="color:#9ABDF5">([</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">mysql</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">-uroot</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">-proot</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">-e</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">source /temp.sql</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">      ])</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">      return</span><span style="color:#C0CAF5"> result</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">output</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">trim</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    } </span><span style="color:#BB9AF7">finally</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">      unlinkSync</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">tempSqlFile</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">    apiContainer</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">    dbContainer</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">    executeSqlFile</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">    apiInternalUrl</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> `</span><span style="color:#9ECE6A">http://</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">ip</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">:</span><span style="color:#7DCFFF">${</span><span style="color:#FF9E64">API_PORT</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">    apiPublicUrl</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> `</span><span style="color:#9ECE6A">http://</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">host</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">:</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">port</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">    networkName</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#7AA2F7">    teardown</span><span style="color:#89DDFF">:</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">      await</span><span style="color:#C0CAF5"> apiEnvironment</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">down</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">removeVolumes</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p><code>DockerComposeEnvironment</code>は、docker-composeを起動するためのクラスです。各コンテナは<code>apiContainer</code>や<code>dbContainer</code>という変数で定義されており、これらに対して<code>exec</code>コマンドなどを実行することが可能です。<code>networkName</code>は、APIとWebを同一ネットワークにするために使用されます（Webのセットアップ時に利用）。Teardown時には、<code>apiEnvironment.down</code>を使用してdocker-composeを停止します。</p>
 <p>上記で参照している<code>docker-compose.yml</code>は、以下の内容です。</p>
-<pre><code class="language-yml">services:
-  db:
-    image: mysql:8.0
-    container_name: "testcontainers_api_db${CONTAINER_SUFFIX}"
-    environment:
-      DATABASE_USERNAME: root
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: api_development
-    healthcheck:
-      test: mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD
-      interval: 10s
-      timeout: 10s
-      retries: 3
-      start_period: 30s
-    ports:
-      - ":3306"
-    volumes:
-      - db_data:/var/lib/mysql
-  api:
-    build:
-      context: .
-    container_name: "testcontainers_api${CONTAINER_SUFFIX}"
-    depends_on:
-      db:
-        condition: service_healthy
-    ports:
-      - "${API_PORT-}:3000"
-    environment:
-      DATABASE_HOST: db
-      DATABASE_USERNAME: root
-      DATABASE_PASSWORD: root
-      DATABASE_PORT: 3306
-volumes:
-  db_data:
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yml"><code><span class="line"><span style="color:#F7768E">services</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  db</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> mysql:8.0</span></span>
+<span class="line"><span style="color:#F7768E">    container_name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">testcontainers_api_db${CONTAINER_SUFFIX}</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">    environment</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      DATABASE_USERNAME</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> root</span></span>
+<span class="line"><span style="color:#F7768E">      MYSQL_ROOT_PASSWORD</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> root</span></span>
+<span class="line"><span style="color:#F7768E">      MYSQL_DATABASE</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> api_development</span></span>
+<span class="line"><span style="color:#F7768E">    healthcheck</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      test</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD</span></span>
+<span class="line"><span style="color:#F7768E">      interval</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> 10s</span></span>
+<span class="line"><span style="color:#F7768E">      timeout</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> 10s</span></span>
+<span class="line"><span style="color:#F7768E">      retries</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3</span></span>
+<span class="line"><span style="color:#F7768E">      start_period</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> 30s</span></span>
+<span class="line"><span style="color:#F7768E">    ports</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">:3306</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">    volumes</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#9ECE6A"> db_data:/var/lib/mysql</span></span>
+<span class="line"><span style="color:#F7768E">  api</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    build</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      context</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> .</span></span>
+<span class="line"><span style="color:#F7768E">    container_name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">testcontainers_api${CONTAINER_SUFFIX}</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">    depends_on</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      db</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">        condition</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> service_healthy</span></span>
+<span class="line"><span style="color:#F7768E">    ports</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">${API_PORT-}:3000</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">    environment</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      DATABASE_HOST</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> db</span></span>
+<span class="line"><span style="color:#F7768E">      DATABASE_USERNAME</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> root</span></span>
+<span class="line"><span style="color:#F7768E">      DATABASE_PASSWORD</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> root</span></span>
+<span class="line"><span style="color:#F7768E">      DATABASE_PORT</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3306</span></span>
+<span class="line"><span style="color:#F7768E">volumes</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  db_data</span><span style="color:#89DDFF">:</span></span></code></pre><figcaption class="notebook-code-language">YML</figcaption></figure>
 <p><strong>重要なポイント</strong> として、<code>ports</code>の設定があります。<code>"${API_PORT-}:3000"</code>は、<code>API_PORT</code>という環境変数が設定されていない場合、ホスト側のポートが動的に決定されます。デフォルト値を指定したい場合は、<code>"${API_PORT:-3000}:3000"</code>のように記述します。ホスト側のポートを固定すると、同じポートを利用する複数のコンテナを起動できず、テストが失敗する可能性があるため、動的ポートを使用しています。</p>
 <p>工夫している点として、<code>container_name</code>の設定があります。Testcontainersでは、docker-composeで起動する際にサービスへのアクセスにコンテナ名を使用します。そのため、コンテナ名を明示的に指定しています。ただし、同じ名前のコンテナを複数起動できないため、環境変数でランダムな接尾辞を付与する仕組みを採用しています。</p>
 <p>また、<code>depends_on</code>を指定していますが、デフォルトではDBの起動完了を待たずにRailsが接続を試みて失敗することがありました。そこで、<code>healthcheck</code>を追加してDBの起動完了を確認するようにしています。</p>
@@ -217,247 +251,244 @@ volumes:
 </ul>
 <h3 id="webのsetupteardown">WebのSetup・Teardown</h3>
 <p>次に、WebのSetupとTeardownについて説明します。以下に該当するコードをご覧ください。</p>
-<pre><code class="language-ts">// setup/web.ts
-import path from "path";
-import { GenericContainer, RandomUuid } from "testcontainers";
-
-const WEB_PORT = 3200;
-
-export const setupWebContainer = async (
-  apiInternalUrl,
-  apiPublicUrl,
-  networkName
-) =&gt; {
-  const webPath = path.resolve(__dirname, "../../../apps/web");
-  const uuid = new RandomUuid();
-  const containerSuffix = `${uuid.nextUuid()}`;
-  const webContainer = await (
-    await GenericContainer.fromDockerfile(webPath)
-      .withBuildArgs({
-        API_URL: apiInternalUrl,
-        NEXT_PUBLIC_API_URL: apiPublicUrl,
-      })
-      .build(`web:${containerSuffix}`, { deleteOnExit: true })
-  )
-    .withExposedPorts(WEB_PORT)
-    .withNetworkMode(networkName)
-    .start();
-
-  const webPort = webContainer.getMappedPort(WEB_PORT);
-  const webHost = `http://${webContainer.getHost()}:${webPort}`;
-
-  return {
-    webContainer,
-    webHost,
-    teardown: async () =&gt; {
-      await webContainer.stop({ remove: true, removeVolumes: true });
-    },
-  };
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// setup/web.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> path</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">path</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">GenericContainer</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> RandomUuid</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">testcontainers</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> WEB_PORT</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 3200</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#7AA2F7"> setupWebContainer</span><span style="color:#89DDFF"> =</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#E0AF68">  apiInternalUrl</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#E0AF68">  apiPublicUrl</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#E0AF68">  networkName</span></span>
+<span class="line"><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> webPath</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> path</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">resolve</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">__dirname</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../../apps/web</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> uuid</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> RandomUuid</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> containerSuffix</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> `</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">uuid</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">nextUuid</span><span style="color:#9ABDF5">()</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> webContainer</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> GenericContainer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fromDockerfile</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">webPath</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#89DDFF">      .</span><span style="color:#7AA2F7">withBuildArgs</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#73DACA">        API_URL</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> apiInternalUrl</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">        NEXT_PUBLIC_API_URL</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> apiPublicUrl</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">      })</span></span>
+<span class="line"><span style="color:#89DDFF">      .</span><span style="color:#7AA2F7">build</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">`</span><span style="color:#9ECE6A">web:</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">containerSuffix</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">deleteOnExit</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#9ABDF5"> })</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span></span>
+<span class="line"><span style="color:#89DDFF">    .</span><span style="color:#7AA2F7">withExposedPorts</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">WEB_PORT</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#89DDFF">    .</span><span style="color:#7AA2F7">withNetworkMode</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">networkName</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#89DDFF">    .</span><span style="color:#7AA2F7">start</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> webPort</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> webContainer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getMappedPort</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">WEB_PORT</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> webHost</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> `</span><span style="color:#9ECE6A">http://</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">webContainer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getHost</span><span style="color:#9ABDF5">()</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">:</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">webPort</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">    webContainer</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">    webHost</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#7AA2F7">    teardown</span><span style="color:#89DDFF">:</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">      await</span><span style="color:#C0CAF5"> webContainer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">stop</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">remove</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> removeVolumes</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>Web側では、シンプルなDockerのみを使用するため、<code>GenericContainer.fromDockerfile</code>を利用しています。イメージをビルドする際に<code>apiInternalUrl</code>と<code>apiPublicUrl</code>を渡すことで、Next.jsのSSR時およびCSR時のフェッチを確認できるようにしています。</p>
 <p>また、Webへのアクセスを可能にするために<code>webHost</code>を<code>return</code>で返しています。Teardown時にはコンテナを停止しています。</p>
 <p>それでは、いよいよテストのコードについて紹介します。</p>
 <h2 id="test">Test</h2>
 <h3 id="ヘルスチェック">ヘルスチェック</h3>
 <p>ヘルスチェックのテストコードを紹介します。</p>
-<pre><code class="language-ts">import { chromium } from "@playwright/test";
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
-import axios from "axios";
-import { StartedTestContainer } from "testcontainers";
-import { setupApiContainer, setupWebContainer } from "../setup";
-
-describe("Health check", () =&gt; {
-  let apiContainer: StartedTestContainer;
-  let dbContainer: StartedTestContainer;
-  let webContainer: StartedTestContainer;
-  let apiPublicUrl: string;
-  let apiInternalUrl: string;
-  let executeSqlFile: (sqlContent: string, fileName: string) =&gt; Promise&lt;string&gt;;
-  let webHost: string;
-  let teardownApi: () =&gt; Promise&lt;void&gt;;
-  let teardownWeb: () =&gt; Promise&lt;void&gt;;
-
-  beforeAll(async () =&gt; {
-    const apiSetup = await setupApiContainer();
-    apiContainer = apiSetup.apiContainer;
-    apiInternalUrl = apiSetup.apiInternalUrl;
-    apiPublicUrl = apiSetup.apiPublicUrl;
-    const networkName = apiSetup.networkName;
-    dbContainer = apiSetup.dbContainer;
-    executeSqlFile = apiSetup.executeSqlFile;
-    teardownApi = apiSetup.teardown;
-
-    const webSetup = await setupWebContainer(
-      apiInternalUrl,
-      apiPublicUrl,
-      networkName
-    );
-    webContainer = webSetup.webContainer;
-    webHost = webSetup.webHost;
-    teardownWeb = webSetup.teardown;
-  });
-
-  afterAll(async () =&gt; {
-    await teardownWeb();
-    await teardownApi();
-  });
-
-  it("should perform a DB health check", async () =&gt; {
-    // Arrange
-    const checkDatabaseSQL = "SHOW DATABASES LIKE 'api_development';";
-
-    // Act
-    const dbCheckOutput = await executeSqlFile(
-      checkDatabaseSQL,
-      "check_database.sql"
-    );
-    // Assert
-    expect(dbCheckOutput).toContain("api_development");
-
-    // Arrange
-    const checkTableSQL = "SHOW TABLES IN api_development LIKE 'todos';";
-
-    // Act
-    const tableCheckOutput = await executeSqlFile(
-      checkTableSQL,
-      "check_table.sql"
-    );
-
-    // Assert
-    expect(tableCheckOutput).toContain("todos");
-  });
-
-  it("should perform an API health check", async () =&gt; {
-    // Arrange
-    const todosEndpoint = `${apiPublicUrl}/todos`;
-
-    // Act
-    const response = await axios.get(todosEndpoint);
-
-    // Assert
-    expect(response.status).toBe(200);
-    expect(Array.isArray(response.data)).toBe(true);
-  });
-
-  it("should perform a web health check", async () =&gt; {
-    // Arrange
-    const todosPageUrl = `${webHost}`;
-
-    // Act
-    const browser = await chromium.launch();
-    const page = await browser.newPage();
-    await page.goto(todosPageUrl);
-
-    // Assert
-    expect(await page.title()).toBe("Create Next App");
-  });
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">chromium</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@playwright/test</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">describe</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> it</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> expect</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> beforeAll</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> afterAll</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">vitest</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> axios</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">axios</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">StartedTestContainer</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">testcontainers</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">setupApiContainer</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> setupWebContainer</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../setup</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">describe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Health check</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#BB9AF7"> apiContainer</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> StartedTestContainer</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#BB9AF7"> dbContainer</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> StartedTestContainer</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#BB9AF7"> webContainer</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> StartedTestContainer</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#BB9AF7"> apiPublicUrl</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#BB9AF7"> apiInternalUrl</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#7AA2F7"> executeSqlFile</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">sqlContent</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> fileName</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#C0CAF5"> Promise</span><span style="color:#89DDFF">&lt;</span><span style="color:#0DB9D7">string</span><span style="color:#89DDFF">&gt;;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#BB9AF7"> webHost</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#7AA2F7"> teardownApi</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#C0CAF5"> Promise</span><span style="color:#89DDFF">&lt;</span><span style="color:#0DB9D7">void</span><span style="color:#89DDFF">&gt;;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#7AA2F7"> teardownWeb</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#C0CAF5"> Promise</span><span style="color:#89DDFF">&lt;</span><span style="color:#0DB9D7">void</span><span style="color:#89DDFF">&gt;;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  beforeAll</span><span style="color:#9ABDF5">(</span><span style="color:#9D7CD8;font-style:italic">async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> apiSetup</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#7AA2F7"> setupApiContainer</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    apiContainer</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">apiContainer</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    apiInternalUrl</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">apiInternalUrl</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    apiPublicUrl</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">apiPublicUrl</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> networkName</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">networkName</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    dbContainer</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">dbContainer</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    executeSqlFile</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">executeSqlFile</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    teardownApi</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">teardown</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> webSetup</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#7AA2F7"> setupWebContainer</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#C0CAF5">      apiInternalUrl</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">      apiPublicUrl</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">      networkName</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    webContainer</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> webSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">webContainer</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    webHost</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> webSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">webHost</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    teardownWeb</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> webSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">teardown</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  afterAll</span><span style="color:#9ABDF5">(</span><span style="color:#9D7CD8;font-style:italic">async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#7AA2F7"> teardownWeb</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#7AA2F7"> teardownApi</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should perform a DB health check</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> checkDatabaseSQL</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">SHOW DATABASES LIKE 'api_development';</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> dbCheckOutput</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#7AA2F7"> executeSqlFile</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#C0CAF5">      checkDatabaseSQL</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">      "</span><span style="color:#9ECE6A">check_database.sql</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">dbCheckOutput</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toContain</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">api_development</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> checkTableSQL</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">SHOW TABLES IN api_development LIKE 'todos';</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> tableCheckOutput</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#7AA2F7"> executeSqlFile</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#C0CAF5">      checkTableSQL</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">      "</span><span style="color:#9ECE6A">check_table.sql</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">tableCheckOutput</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toContain</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">todos</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should perform an API health check</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todosEndpoint</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> `</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">apiPublicUrl</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">/todos</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> response</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> axios</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">get</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todosEndpoint</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">response</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">status</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">200</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">Array</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">isArray</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">response</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">data</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">true</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should perform a web health check</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todosPageUrl</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> `</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">webHost</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> browser</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> chromium</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">launch</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> page</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> browser</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">newPage</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">goto</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todosPageUrl</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#BB9AF7;font-style:italic">await</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">title</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Create Next App</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>先ほど紹介したSetupは、<code>beforeAll</code>および<code>afterAll</code>で使用しています。</p>
 <p>DBのヘルスチェックでは、<code>executeSqlFile</code>を使用してデータベース名とテーブル名を確認しています。Dockerに対して<code>exec</code>コマンドを用いてテストを行っています。</p>
 <p>APIのヘルスチェックでは、<code>apiPublicUrl</code>を利用してエンドポイントのステータスおよびレスポンスデータをテストしています。</p>
 <p>Webのヘルスチェックでは、<code>webHost</code>を使用してPlaywrightでChromiumを起動し、<code>page.title</code>をテストしています。</p>
 <h3 id="結合テスト">結合テスト</h3>
 <p>Todo Appの結合テストについて紹介します。</p>
-<pre><code class="language-ts">import { describe, it, beforeAll, afterAll, beforeEach, expect } from "vitest";
-import { StartedTestContainer } from "testcontainers";
-import { setupApiContainer, setupWebContainer } from "../setup";
-import { chromium } from "@playwright/test";
-import { TodoPage } from "../pages";
-
-describe("Integration Test", () =&gt; {
-  let apiContainer: StartedTestContainer;
-  let webContainer: StartedTestContainer;
-  let apiPublicUrl: string;
-  let apiInternalUrl: string;
-  let webHost: string;
-  let teardownApi: () =&gt; Promise&lt;void&gt;;
-  let teardownWeb: () =&gt; Promise&lt;void&gt;;
-
-  beforeAll(async () =&gt; {
-    const apiSetup = await setupApiContainer();
-    apiContainer = apiSetup.apiContainer;
-    apiInternalUrl = apiSetup.apiInternalUrl;
-    apiPublicUrl = apiSetup.apiPublicUrl;
-    const networkName = apiSetup.networkName;
-    teardownApi = apiSetup.teardown;
-
-    const webSetup = await setupWebContainer(
-      apiInternalUrl,
-      apiPublicUrl,
-      networkName
-    );
-    webContainer = webSetup.webContainer;
-    webHost = webSetup.webHost;
-    teardownWeb = webSetup.teardown;
-  });
-
-  afterAll(async () =&gt; {
-    await teardownWeb();
-    await teardownApi();
-  });
-
-  beforeEach(async () =&gt; {
-    await apiContainer.exec(["bin/rails", "runner", "Todo.delete_all"]);
-  });
-
-  it("should allow adding, toggling, and deleting a todo item successfully", async () =&gt; {
-    // Arrange
-    const todosPageUrl = `${webHost}`;
-    const browser = await chromium.launch();
-    const page = await browser.newPage();
-    const todoPage = new TodoPage(page);
-    await todoPage.navigate(todosPageUrl);
-
-    // Act
-    const newTodo = "new Todo";
-    await todoPage.addTodo(newTodo);
-    await todoPage.toggleTodo(newTodo);
-    await todoPage.deleteTodoByName(newTodo);
-
-    // Assert
-    const todos = await todoPage.getTodos();
-    expect(todos).toHaveLength(0);
-
-    await browser.close();
-  });
-
-  it("should save a todo item and persist it after reload", async () =&gt; {
-    // Arrange
-    const todosPageUrl = `${webHost}`;
-    const browser = await chromium.launch();
-    const page = await browser.newPage();
-    const todoPage = new TodoPage(page);
-    await todoPage.navigate(todosPageUrl);
-
-    // Act
-    const newTodo = "persistent Todo";
-    await todoPage.addTodo(newTodo);
-    await todoPage.saveAllTodos();
-    await page.waitForTimeout(1000); // BAD!
-    await todoPage.navigate(todosPageUrl);
-
-    // Assert
-    // Web
-    const todos = await todoPage.getTodos();
-    expect(todos).toHaveLength(1);
-    expect(todos[0]).toEqual({ name: newTodo, checked: false });
-    // Rails
-    const result = await apiContainer.exec([
-      "bin/rails",
-      "runner",
-      "puts Todo.all.to_json",
-    ]);
-    const railsTodos = JSON.parse(result.output.trim());
-    expect(railsTodos).toHaveLength(1);
-    expect(railsTodos[0].name).toBe(newTodo);
-    expect(railsTodos[0].checked).toBe(false);
-
-    await browser.close();
-  });
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">describe</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> it</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> beforeAll</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> afterAll</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> beforeEach</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> expect</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">vitest</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">StartedTestContainer</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">testcontainers</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">setupApiContainer</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> setupWebContainer</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../setup</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">chromium</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@playwright/test</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">TodoPage</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../pages</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">describe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Integration Test</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#BB9AF7"> apiContainer</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> StartedTestContainer</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#BB9AF7"> webContainer</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> StartedTestContainer</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#BB9AF7"> apiPublicUrl</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#BB9AF7"> apiInternalUrl</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#BB9AF7"> webHost</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#7AA2F7"> teardownApi</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#C0CAF5"> Promise</span><span style="color:#89DDFF">&lt;</span><span style="color:#0DB9D7">void</span><span style="color:#89DDFF">&gt;;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#7AA2F7"> teardownWeb</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#C0CAF5"> Promise</span><span style="color:#89DDFF">&lt;</span><span style="color:#0DB9D7">void</span><span style="color:#89DDFF">&gt;;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  beforeAll</span><span style="color:#9ABDF5">(</span><span style="color:#9D7CD8;font-style:italic">async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> apiSetup</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#7AA2F7"> setupApiContainer</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    apiContainer</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">apiContainer</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    apiInternalUrl</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">apiInternalUrl</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    apiPublicUrl</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">apiPublicUrl</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> networkName</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">networkName</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    teardownApi</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> apiSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">teardown</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> webSetup</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#7AA2F7"> setupWebContainer</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#C0CAF5">      apiInternalUrl</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">      apiPublicUrl</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">      networkName</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    webContainer</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> webSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">webContainer</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    webHost</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> webSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">webHost</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    teardownWeb</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> webSetup</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">teardown</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  afterAll</span><span style="color:#9ABDF5">(</span><span style="color:#9D7CD8;font-style:italic">async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#7AA2F7"> teardownWeb</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#7AA2F7"> teardownApi</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  beforeEach</span><span style="color:#9ABDF5">(</span><span style="color:#9D7CD8;font-style:italic">async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> apiContainer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">exec</span><span style="color:#9ABDF5">([</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">bin/rails</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">runner</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Todo.delete_all</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">])</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should allow adding, toggling, and deleting a todo item successfully</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todosPageUrl</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> `</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">webHost</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> browser</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> chromium</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">launch</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> page</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> browser</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">newPage</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todoPage</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> TodoPage</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">page</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> todoPage</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">navigate</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todosPageUrl</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> newTodo</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">new Todo</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> todoPage</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">addTodo</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">newTodo</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> todoPage</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toggleTodo</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">newTodo</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> todoPage</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">deleteTodoByName</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">newTodo</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Assert</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todos</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> todoPage</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getTodos</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todos</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toHaveLength</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> browser</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">close</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should save a todo item and persist it after reload</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todosPageUrl</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> `</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">webHost</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> browser</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> chromium</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">launch</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> page</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> browser</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">newPage</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todoPage</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> TodoPage</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">page</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> todoPage</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">navigate</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todosPageUrl</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> newTodo</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">persistent Todo</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> todoPage</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">addTodo</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">newTodo</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> todoPage</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">saveAllTodos</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">waitForTimeout</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">1000</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span><span style="color:#51597D;font-style:italic"> // BAD!</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> todoPage</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">navigate</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todosPageUrl</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Assert</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Web</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todos</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> todoPage</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getTodos</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todos</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toHaveLength</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">1</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todos</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">])</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toEqual</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">name</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> newTodo</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> checked</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> false</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Rails</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> result</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> apiContainer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">exec</span><span style="color:#9ABDF5">([</span></span>
+<span class="line"><span style="color:#89DDFF">      "</span><span style="color:#9ECE6A">bin/rails</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">      "</span><span style="color:#9ECE6A">runner</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">      "</span><span style="color:#9ECE6A">puts Todo.all.to_json</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">    ])</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> railsTodos</span><span style="color:#89DDFF"> =</span><span style="color:#0DB9D7"> JSON</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">parse</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">result</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">output</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">trim</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">railsTodos</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toHaveLength</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">1</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">railsTodos</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">name</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">newTodo</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">railsTodos</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">checked</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">false</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> browser</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">close</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>テストを実行する前に、<code>beforeEach</code>で各テストの前に<code>await apiContainer.exec(["bin/rails", "runner", "Todo.delete_all"]);</code>を実行し、 <strong>データを削除しています</strong> 。
 この状態でPlaywrightを使用して、ブラウザ上でのテストを実施します。さらに、<code>apiContainer.exec</code>を用いて <strong>データのテストも行っています</strong> 。</p>
 <p>上記のテストのように、 <strong>コンテナに直接アクセスできる</strong> ため、Railsのコマンド実行やDBのデータ確認が可能です。これにより、単純にPlaywrightで結合テストを行うだけでなく、 <strong>必要に応じてデータの加工や準備も容易に行えます</strong> 。データだけでなく、コンテナに対して柔軟な操作をすることができます。(例えば、日付の変更、バッチの起動、イベントの発火など)
@@ -467,90 +498,89 @@ describe("Integration Test", () =&gt; {
 <p>さらに、結合テスト環境のインフラ維持やメンテナンスの手間も大きな悩みの種でした。Testcontainersを利用することで、特別な結合テスト環境を用意する必要がなくなり、 <strong>テストのたびに環境が自動的に構築・削除されます</strong> 。これにより、コスト面でも効率的であり、より安定したテスト環境を実現できます。</p>
 <h4 id="page-object-model">Page Object Model</h4>
 <p><code>TodoPage</code> については、<a href="https://playwright.dev/docs/pom"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/playwright.dev.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Page Object Model<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>を採用しています。そのため、以下のようなTodoページに対するクラスを作成しています。</p>
-<pre><code class="language-ts">import { Locator, Page } from "@playwright/test";
-
-export class TodoPage {
-  page: Page;
-  newTodoInput: Locator;
-  addButton: Locator;
-  todoCheckbox: (name: string) =&gt; Locator;
-  deleteButton: (name: string) =&gt; Locator;
-  saveAllButton: Locator;
-
-  constructor(page: Page) {
-    this.page = page;
-    this.newTodoInput = page.getByPlaceholder("Add a new todo");
-    this.addButton = page.getByRole("button", { name: "Add" });
-    this.todoCheckbox = (todoName) =&gt;
-      page
-        .locator(".todo-list li")
-        .filter({ hasText: todoName })
-        .getByRole("checkbox");
-    this.deleteButton = (todoName) =&gt;
-      page
-        .locator(".todo-list li")
-        .filter({ hasText: todoName })
-        .getByRole("button");
-    this.saveAllButton = page.getByRole("button", { name: "Save All" });
-  }
-
-  /**
-   * Navigate to the Todo app.
-   */
-  async navigate(url: string) {
-    await this.page.goto(url);
-  }
-
-  /**
-   * Add a new todo item.
-   */
-  async addTodo(text: string) {
-    await this.newTodoInput.fill(text);
-    await this.addButton.click();
-  }
-
-  /**
-   * Toggle a todo item by its name.
-   */
-  async toggleTodo(todoName: string) {
-    const checkbox = this.todoCheckbox(todoName);
-    await checkbox.check();
-  }
-
-  /**
-   * Delete a todo item by its name.
-   */
-  async deleteTodoByName(todoName: string) {
-    const deleteBtn = this.deleteButton(todoName);
-    await deleteBtn.click();
-  }
-
-  /**
-   * Save all todos.
-   */
-  async saveAllTodos() {
-    await this.saveAllButton.click();
-  }
-
-  /**
-   * Get all visible todo items with their names and checked status.
-   */
-  async getTodos() {
-    const todoItems = this.page.locator(".todo-list li");
-    const results: { name: string; checked: boolean }[] = [];
-    const itemsCount = await todoItems.count();
-
-    for (let i = 0; i &lt; itemsCount; i++) {
-      const todo = todoItems.nth(i);
-      const name = await todo.locator("span").textContent();
-      const checked = await todo.locator("input[type='checkbox']").isChecked();
-      results.push({ name: name?.trim() || "", checked });
-    }
-
-    return results;
-  }
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">Locator</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> Page</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@playwright/test</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#BB9AF7"> class</span><span style="color:#C0CAF5"> TodoPage</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  page</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Page</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#73DACA">  newTodoInput</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Locator</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#73DACA">  addButton</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Locator</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  todoCheckbox</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">name</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#C0CAF5"> Locator</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  deleteButton</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">name</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#C0CAF5"> Locator</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#73DACA">  saveAllButton</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Locator</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">  constructor</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">page</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Page</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">page</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">newTodoInput</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByPlaceholder</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Add a new todo</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">addButton</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByRole</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">button</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Add</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">todoCheckbox</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">todoName</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">      page</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">locator</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">.todo-list li</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">filter</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">hasText</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> todoName</span><span style="color:#9ABDF5"> })</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">getByRole</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">checkbox</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">deleteButton</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">todoName</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">      page</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">locator</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">.todo-list li</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">filter</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">hasText</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> todoName</span><span style="color:#9ABDF5"> })</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">getByRole</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">button</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">saveAllButton</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByRole</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">button</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Save All</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  /**</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">   * Navigate to the Todo app.</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">   */</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  async</span><span style="color:#7AA2F7"> navigate</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">url</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">goto</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">url</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  /**</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">   * Add a new todo item.</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">   */</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  async</span><span style="color:#7AA2F7"> addTodo</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">text</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">newTodoInput</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fill</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">text</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">addButton</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">click</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  /**</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">   * Toggle a todo item by its name.</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">   */</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  async</span><span style="color:#7AA2F7"> toggleTodo</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">todoName</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> checkbox</span><span style="color:#89DDFF"> =</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">todoCheckbox</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todoName</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> checkbox</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">check</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  /**</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">   * Delete a todo item by its name.</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">   */</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  async</span><span style="color:#7AA2F7"> deleteTodoByName</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">todoName</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> deleteBtn</span><span style="color:#89DDFF"> =</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">deleteButton</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todoName</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> deleteBtn</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">click</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  /**</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">   * Save all todos.</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">   */</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  async</span><span style="color:#7AA2F7"> saveAllTodos</span><span style="color:#9ABDF5">()</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">saveAllButton</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">click</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  /**</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">   * Get all visible todo items with their names and checked status.</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">   */</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  async</span><span style="color:#7AA2F7"> getTodos</span><span style="color:#9ABDF5">()</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todoItems</span><span style="color:#89DDFF"> =</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">locator</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">.todo-list li</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> results</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">name</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#89DDFF">;</span><span style="color:#73DACA"> checked</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> boolean</span><span style="color:#9ABDF5"> }[] </span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5"> []</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> itemsCount</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> todoItems</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">count</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    for</span><span style="color:#9ABDF5"> (</span><span style="color:#9D7CD8;font-style:italic">let</span><span style="color:#BB9AF7"> i</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 0</span><span style="color:#89DDFF">;</span><span style="color:#C0CAF5"> i</span><span style="color:#BB9AF7"> &lt;</span><span style="color:#C0CAF5"> itemsCount</span><span style="color:#89DDFF">;</span><span style="color:#C0CAF5"> i</span><span style="color:#89DDFF">++</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">      const</span><span style="color:#BB9AF7"> todo</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> todoItems</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">nth</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">i</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">      const</span><span style="color:#BB9AF7"> name</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> todo</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">locator</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">span</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">textContent</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">      const</span><span style="color:#BB9AF7"> checked</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> todo</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">locator</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">input[type='checkbox']</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">isChecked</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">      results</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">push</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">name</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> name</span><span style="color:#89DDFF">?.</span><span style="color:#7AA2F7">trim</span><span style="color:#9ABDF5">() </span><span style="color:#BB9AF7">||</span><span style="color:#89DDFF"> ""</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> checked</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    return</span><span style="color:#C0CAF5"> results</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>蛇足になりますが、テストサイクルを高速化するために、<code>TodoPage</code>オブジェクトの検証には<code>examples</code>フォルダを用意しています。このフォルダでは、対象ページを<code>playwright codegen</code>で開き、操作手順を自動生成しながらアクセス方法を確認・テストします。問題がないことを確認できた段階で、これらの操作を結合テストに組み込むことで、<code>TodoPage</code>の個別テストを省略することが可能になります。</p>
 <h2 id="終わりに">終わりに</h2>
 <p>いかがだったでしょうか。Testcontainersの魅力に気づきましたでしょうか。

@@ -4,9 +4,45 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2024-03-20" data-pagefind-filter="month:2024-03" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">116</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2024-03-20"><span class="visually-hidden">2024年3月20日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2024</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">20</span></span></time></p></div><div class="notebook-heading"><h1>Playwright Component Test を試してみた</h1></div></header><div class="notebook-body"><p>Playwright上で直接ブラウザ上のコンポーネントテストを実行できる「<a href="https://playwright.dev/docs/test-components"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/playwright.dev.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Playwright Component Test<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>」（以下、playwright-ct）について知り、実際に試してみました。
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2024-03-20" data-pagefind-filter="month:2024-03" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">116</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2024-03-20"><span class="visually-hidden">2024年3月20日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2024</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">20</span></span></time></p></div><div class="notebook-heading"><h1>Playwright Component Test を試してみた</h1></div></header><div class="notebook-body"><p>Playwright上で直接ブラウザ上のコンポーネントテストを実行できる「<a href="https://playwright.dev/docs/test-components"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/playwright.dev.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Playwright Component Test<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>」（以下、playwright-ct）について知り、実際に試してみました。
 この記事では、その体験を共有します。実際に使用したリポジトリは下記の通りです。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/silverbirder/react-todoMVC-2" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/react-todoMVC-2</strong><span class="link-card-description" data-astro-cid-p7ia6262>Contribute to silverbirder/react-todoMVC-2 development by creating an account on GitHub.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://github.com/silverbirder/react-todoMVC-2" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/react-todoMVC-2</strong><span class="link-card-description" data-astro-cid-p7ia6262>Contribute to silverbirder/react-todoMVC-2 development by creating an account on GitHub.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></div>
 <h2 id="準備">準備</h2>
 <p>playwright-ctはReactなど複数のフレームワークをサポートしています。
 今回は、<code>create-react-app</code>が非推奨となっているため、Next.jsを使ってアプリケーションを構築しました。
@@ -14,179 +50,173 @@
 <p>playwright-ctのセットアップは <code>npm init playwright@latest -- --ct</code>で行い、いくつかのファイルが生成されます。
 生成されたファイルのうち、<code>playwright-ct.config.ts</code> に以下のようなコードを追加しました。
 これは、Next.jsのtsconfigでpaths設定をしているので、その内容をplaywright-ctにも反映させるためです。</p>
-<pre><code class="language-ts">// playwright-ct.config.ts
-export default defineConfig({
-  ...
-  use: {
-    ...
-    ctViteConfig: {
-      resolve: {
-        alias: {
-          '#': resolve(__dirname, './'),
-        },
-      },
-    },
-  },
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// playwright-ct.config.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#7DCFFF"> default</span><span style="color:#7AA2F7"> defineConfig</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#F7768E;font-weight:bold">  ...</span></span>
+<span class="line"><span style="color:#C0CAF5">  use</span><span style="color:#A9B1D6">: </span><span style="color:#9ABDF5">{</span></span>
+<span class="line"><span style="color:#F7768E;font-weight:bold">    ...</span></span>
+<span class="line"><span style="color:#C0CAF5">    ctViteConfig</span><span style="color:#A9B1D6">: </span><span style="color:#9ABDF5">{</span></span>
+<span class="line"><span style="color:#41A6B5">      resolve</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#41A6B5">        alias</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#89DDFF">          '</span><span style="color:#9ECE6A">#</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">:</span><span style="color:#7AA2F7"> resolve</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">__dirname</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">./</span><span style="color:#89DDFF">'</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">        }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">      }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>また、todoMVCのスタイルを適用するために、<code>playwright/index.tsx</code> というファイルに、以下のコードを追加しました。</p>
-<pre><code class="language-tsx">// playwright/index.tsx
-import "todomvc-app-css/index.css";
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// playwright/index.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">todomvc-app-css/index.css</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
 <p>playwright-ctの仕組みは、 <strong>コードをコンパイルし、それをローカルWebサーバーで提供し、playwright/index.html に読み込ませて描画し、テストします</strong> 。</p>
 <h2 id="テストコードの例">テストコードの例</h2>
 <p>Todoリストコンポーネントのコードは以下のようになります。</p>
-<pre><code class="language-tsx">// todo-list.tsx
-import React from "react";
-import { Todo } from "./types";
-
-const TodoList = ({ todos, toggleTodo, deleteTodo }) =&gt; (
-  &lt;ul className="todo-list"&gt;
-    {todos.map((todo) =&gt; (
-      &lt;li key={todo.id} className={todo.completed ? "completed" : ""}&gt;
-        &lt;div className="view"&gt;
-          &lt;input
-            type="checkbox"
-            className="toggle"
-            checked={todo.completed}
-            onChange={() =&gt; toggleTodo(todo.id)}
-          /&gt;
-          &lt;label&gt;{todo.text}&lt;/label&gt;
-          &lt;button className="destroy" onClick={() =&gt; deleteTodo(todo.id)}&gt;&lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/li&gt;
-    ))}
-  &lt;/ul&gt;
-);
-
-export default TodoList;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// todo-list.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> React</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">Todo</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./types</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> TodoList</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> todos</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> toggleTodo</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> deleteTodo</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#BA3C97">  &lt;</span><span style="color:#F7768E">ul</span><span style="color:#BB9AF7"> className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">todo-list</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#7DCFFF">    {</span><span style="color:#C0CAF5">todos</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">map</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">todo</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;</span><span style="color:#F7768E">li</span><span style="color:#BB9AF7"> key</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">todo</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">id}</span><span style="color:#BB9AF7"> className</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">todo</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">completed</span><span style="color:#BB9AF7"> ?</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">completed</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> :</span><span style="color:#89DDFF"> ""</span><span style="color:#7DCFFF">}</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">        &lt;</span><span style="color:#F7768E">div</span><span style="color:#BB9AF7"> className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">view</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">input</span></span>
+<span class="line"><span style="color:#BB9AF7">            type</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">checkbox</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#BB9AF7">            className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">toggle</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#BB9AF7">            checked</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">todo</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">completed}</span></span>
+<span class="line"><span style="color:#BB9AF7">            onChange</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#9ABDF5">()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#7AA2F7"> toggleTodo</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todo</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">id</span><span style="color:#9ABDF5">)</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BA3C97">          /&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">label</span><span style="color:#BA3C97">&gt;</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">todo</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">text}</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">label</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">button</span><span style="color:#BB9AF7"> className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">destroy</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> onClick</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#9ABDF5">()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#7AA2F7"> deleteTodo</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todo</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">id</span><span style="color:#9ABDF5">)</span><span style="color:#7DCFFF">}</span><span style="color:#BA3C97">&gt;&lt;/</span><span style="color:#F7768E">button</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">        &lt;/</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;/</span><span style="color:#F7768E">li</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">    ))</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BA3C97">  &lt;/</span><span style="color:#F7768E">ul</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#7DCFFF"> default</span><span style="color:#C0CAF5"> TodoList</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
 <p>テストケースは、以下のように書きました。</p>
-<pre><code class="language-tsx">// テストケース
-import { test, expect } from "@playwright/experimental-ct-react";
-import TodoList from "./todo-list";
-
-test.use({ viewport: { width: 500, height: 500 } });
-
-test("completed状態でtodoの表示が異なること", async ({ mount, page }) =&gt; {
-  await mount(
-    &lt;TodoList
-      todos={[
-        { id: 1, text: "My Todo 1", completed: true },
-        { id: 2, text: "My Todo 2", completed: false },
-      ]}
-      toggleTodo={() =&gt; {}}
-      deleteTodo={() =&gt; {}}
-    /&gt;
-  );
-  await expect(page).toHaveScreenshot();
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// テストケース</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">test</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> expect</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@playwright/experimental-ct-react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> TodoList</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./todo-list</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">test</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">use</span><span style="color:#9ABDF5">({</span><span style="color:#73DACA"> viewport</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span><span style="color:#73DACA"> width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 500</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> height</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 500</span><span style="color:#9ABDF5"> }</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">test</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">completed状態でtodoの表示が異なること</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> (</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> mount</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> page</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  await</span><span style="color:#7AA2F7"> mount</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;</span><span style="color:#DE5971">TodoList</span></span>
+<span class="line"><span style="color:#BB9AF7">      todos</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#9ABDF5">[</span></span>
+<span class="line"><span style="color:#9ABDF5">        {</span><span style="color:#73DACA"> id</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 1</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> text</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">My Todo 1</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> completed</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">        {</span><span style="color:#73DACA"> id</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> text</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">My Todo 2</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> completed</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> false</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">      ]</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BB9AF7">      toggleTodo</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#9ABDF5">()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {}</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BB9AF7">      deleteTodo</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#9ABDF5">()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {}</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BA3C97">    /&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  await</span><span style="color:#7AA2F7"> expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">page</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toHaveScreenshot</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
 <p>playwright-ctでは <strong>本物のブラウザ環境でテストができる</strong> のが魅力です。viewportやwindowオブジェクト、WebAPIも扱えます。
 また、クロスブラウザテスト(chromium,firefox,webkit)も可能です。</p>
 <p>テストは、<code>playwright test -c playwright-ct.config.ts</code> で実行できます。</p>
 <p>次は、Next.jsのページコンポーネントのコードです。(React Server Components ではありません)</p>
-<pre><code class="language-tsx">// page.tsx
-"use client";
-
-import TodoList from "@/ui/todo-list";
-import { Todo } from "@/ui/types";
-import { useState, type KeyboardEvent } from "react";
-
-export default function Home() {
-  const [todos, setTodos] = useState&lt;Todo[]&gt;([]);
-  const [text, setText] = useState("");
-
-  const addTodo = () =&gt; {
-    if (!text) return;
-    const newTodo: Todo = { id: Date.now(), text, completed: false };
-    setTodos([...todos, newTodo]);
-    setText("");
-    const params = new URLSearchParams("");
-    params.set("added", "true");
-    window.history.pushState(null, "", `?${params.toString()}`);
-  };
-
-  const toggleTodo = (id: number) =&gt; {
-    setTodos(
-      todos.map((todo) =&gt; {
-        if (todo.id === id) {
-          return { ...todo, completed: !todo.completed };
-        }
-        return todo;
-      })
-    );
-  };
-
-  const deleteTodo = (id: number) =&gt; {
-    setTodos(todos.filter((todo) =&gt; todo.id !== id));
-  };
-
-  const handleKeydown = (e: KeyboardEvent) =&gt; {
-    if (e.key !== "Enter") {
-      return;
-    }
-    addTodo();
-  };
-
-  return (
-    &lt;section className="todoapp"&gt;
-      &lt;header className="header"&gt;
-        &lt;h1&gt;todos&lt;/h1&gt;
-        &lt;input
-          className="new-todo"
-          value={text}
-          onChange={(e) =&gt; setText(e.target.value)}
-          onKeyDown={(e) =&gt; handleKeydown(e)}
-          placeholder="What needs to be done?"
-          autoFocus
-        /&gt;
-      &lt;/header&gt;
-      &lt;main className="main"&gt;
-        &lt;TodoList
-          todos={todos}
-          toggleTodo={toggleTodo}
-          deleteTodo={deleteTodo}
-        /&gt;
-      &lt;/main&gt;
-    &lt;/section&gt;
-  );
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// page.tsx</span></span>
+<span class="line"><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">use client</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> TodoList</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@/ui/todo-list</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">Todo</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@/ui/types</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">useState</span><span style="color:#89DDFF">,</span><span style="color:#BB9AF7"> type</span><span style="color:#0DB9D7"> KeyboardEvent</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#7DCFFF"> default</span><span style="color:#BB9AF7"> function</span><span style="color:#7AA2F7"> Home</span><span style="color:#9ABDF5">()</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#89DDFF"> [</span><span style="color:#BB9AF7">todos</span><span style="color:#89DDFF">,</span><span style="color:#BB9AF7"> setTodos</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useState</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">Todo</span><span style="color:#9ABDF5">[]</span><span style="color:#89DDFF">&gt;</span><span style="color:#9ABDF5">([])</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#89DDFF"> [</span><span style="color:#BB9AF7">text</span><span style="color:#89DDFF">,</span><span style="color:#BB9AF7"> setText</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useState</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">""</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#7AA2F7"> addTodo</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">    if</span><span style="color:#9ABDF5"> (</span><span style="color:#BB9AF7">!</span><span style="color:#C0CAF5">text</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7;font-style:italic">return</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> newTodo</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Todo</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">id</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Date</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">now</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> text</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> completed</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> false</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    setTodos</span><span style="color:#9ABDF5">([</span><span style="color:#F7768E;font-weight:bold">...</span><span style="color:#7DCFFF">todos</span><span style="color:#89DDFF">,</span><span style="color:#7DCFFF"> newTodo</span><span style="color:#9ABDF5">])</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    setText</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">""</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> params</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> URLSearchParams</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">""</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    params</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">set</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">added</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">true</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">    window</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">history</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">pushState</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">null</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> ""</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> `</span><span style="color:#9ECE6A">?</span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">params</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toString</span><span style="color:#9ABDF5">()</span><span style="color:#7DCFFF">}</span><span style="color:#89DDFF">`</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#7AA2F7"> toggleTodo</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">id</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">    setTodos</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#C0CAF5">      todos</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">map</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">todo</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">        if</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">todo</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">id</span><span style="color:#BB9AF7"> ===</span><span style="color:#C0CAF5"> id</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">          return</span><span style="color:#9ABDF5"> { </span><span style="color:#F7768E;font-weight:bold">...</span><span style="color:#C0CAF5">todo</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> completed</span><span style="color:#89DDFF">:</span><span style="color:#BB9AF7"> !</span><span style="color:#C0CAF5">todo</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">completed</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">        }</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">        return</span><span style="color:#C0CAF5"> todo</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">      })</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#7AA2F7"> deleteTodo</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">id</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">    setTodos</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todos</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">filter</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">todo</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#C0CAF5"> todo</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">id</span><span style="color:#BB9AF7"> !==</span><span style="color:#C0CAF5"> id</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#7AA2F7"> handleKeydown</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">e</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> KeyboardEvent</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">    if</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">e</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">key</span><span style="color:#BB9AF7"> !==</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Enter</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">      return</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span></span>
+<span class="line"><span style="color:#7AA2F7">    addTodo</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;</span><span style="color:#F7768E">section</span><span style="color:#BB9AF7"> className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">todoapp</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;</span><span style="color:#F7768E">header</span><span style="color:#BB9AF7"> className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">header</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">        &lt;</span><span style="color:#F7768E">h1</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">todos</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">h1</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">        &lt;</span><span style="color:#F7768E">input</span></span>
+<span class="line"><span style="color:#BB9AF7">          className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">new-todo</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#BB9AF7">          value</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">text</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BB9AF7">          onChange</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">e</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#7AA2F7"> setText</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">e</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">target</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">value</span><span style="color:#9ABDF5">)</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BB9AF7">          onKeyDown</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">e</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#7AA2F7"> handleKeydown</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">e</span><span style="color:#9ABDF5">)</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BB9AF7">          placeholder</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">What needs to be done?</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#BB9AF7">          autoFocus</span></span>
+<span class="line"><span style="color:#BA3C97">        /&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;/</span><span style="color:#F7768E">header</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;</span><span style="color:#F7768E">main</span><span style="color:#BB9AF7"> className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">        &lt;</span><span style="color:#DE5971">TodoList</span></span>
+<span class="line"><span style="color:#BB9AF7">          todos</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">todos</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BB9AF7">          toggleTodo</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">toggleTodo</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BB9AF7">          deleteTodo</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">deleteTodo</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BA3C97">        /&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;/</span><span style="color:#F7768E">main</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;/</span><span style="color:#F7768E">section</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
 <p><code>addTodo</code> 関数は、敢えて <code>window.history</code> を使用しています。
 Next.jsのuseRouterのような機能を使うためには、ある程度の準備が必要となります。
 従来のテストでは、このようなwindowオブジェクトに関連する部分をモック（模倣）してテストすることが一般的でした。
 しかし、playwright-ctを使用すると、これらの本物のブラウザ機能を使ってテストを行うことが可能です。</p>
 <p>ページコンポーネントのテストコード例を、以下に示します。</p>
-<pre><code class="language-tsx">// page.test.tsx
-import { test, expect } from "@playwright/experimental-ct-react";
-import App from "./page";
-
-test.use({ viewport: { width: 500, height: 500 } });
-
-test("todosの文字が表示されること", async ({ mount }) =&gt; {
-  // Act
-  const component = await mount(&lt;App /&gt;);
-
-  // Assert
-  await expect(component).toContainText("todos");
-});
-
-test("todoを追加したらURLにaddedクエリパラメータが追加されること", async ({
-  mount,
-  page,
-}) =&gt; {
-  // Arrange
-  const component = await mount(&lt;App /&gt;);
-  await component.getByRole("textbox").fill("My Todo 1");
-
-  // Act
-  await page.keyboard.press("Enter");
-
-  // Assert
-  expect(page).toHaveURL(/added/);
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// page.test.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">test</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> expect</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@playwright/experimental-ct-react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> App</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./page</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">test</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">use</span><span style="color:#9ABDF5">({</span><span style="color:#73DACA"> viewport</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span><span style="color:#73DACA"> width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 500</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> height</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 500</span><span style="color:#9ABDF5"> }</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">test</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">todosの文字が表示されること</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> (</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> mount</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> component</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#7AA2F7"> mount</span><span style="color:#9ABDF5">(</span><span style="color:#BA3C97">&lt;</span><span style="color:#DE5971">App </span><span style="color:#BA3C97">/&gt;</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  await</span><span style="color:#7AA2F7"> expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">component</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toContainText</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">todos</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">test</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">todoを追加したらURLにaddedクエリパラメータが追加されること</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> ({</span></span>
+<span class="line"><span style="color:#C0CAF5">  mount</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">  page</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> component</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#7AA2F7"> mount</span><span style="color:#9ABDF5">(</span><span style="color:#BA3C97">&lt;</span><span style="color:#DE5971">App </span><span style="color:#BA3C97">/&gt;</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  await</span><span style="color:#C0CAF5"> component</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByRole</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">textbox</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fill</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">My Todo 1</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  await</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">keyboard</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">press</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Enter</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">page</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toHaveURL</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">/</span><span style="color:#B4F9F8">added</span><span style="color:#89DDFF">/</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
 <p>playwright-ctでは、コンポーネントに対する操作だけでなく、Playwrightのpageオブジェクトを直接操作することも可能です。
 これにより、テストのバリエーションが大きく広がり、より多角的なテストシナリオの実行が可能になります。</p>
 <h2 id="まとめ">まとめ</h2>

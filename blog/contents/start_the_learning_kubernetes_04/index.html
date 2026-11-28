@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2019-05-02" data-pagefind-filter="month:2019-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">7</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-02"><span class="visually-hidden">2019年5月2日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">02</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 04. kubectl -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2019-05-02" data-pagefind-filter="month:2019-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">7</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-02"><span class="visually-hidden">2019年5月2日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">02</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 04. kubectl -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
 <ol>
 <li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_01/">一足遅れて Kubernetes を学び始める - 01. 環境選択編 -</a></li>
 <li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_02/">一足遅れて Kubernetes を学び始める - 02. Docker For Mac -</a></li>
@@ -32,82 +68,75 @@
 <blockquote>
 <p>Kubectl is a command line interface for running commands against Kubernetes clusters</p>
 </blockquote>
-<p>※ <a href="https://kubernetes.io/docs/reference/kubectl/overview/"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/kubernetes.io.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://kubernetes.io/docs/reference/kubectl/overview/<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
+<p>※ <a href="https://kubernetes.io/docs/reference/kubectl/overview/"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/kubernetes.io.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://kubernetes.io/docs/reference/kubectl/overview/<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></p>
 <p>kubernetes を操作するための CLI です。</p>
 <p>よく使うものを私なりに整理し、入門時に最小限覚えておけば良いものをまとめました。</p>
 <h2 id="1-apply">1. apply</h2>
-<pre><code class="language-shell">pi@raspi001:~ $ cat &lt;&lt; EOF &gt; sample-pod.yaml
-apiVersion: v1
-kind: Pod
-metadata:
- name: sample-pod
-spec:
- containers:
-   - name: nginx-container
-     image: nginx:1.12
-EOF
-pi@raspi001:~ $ kubectl apply -f sample-pod.yaml
-pod/sample-pod created
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">cat</span><span style="color:#89DDFF"> &lt;&lt;</span><span style="color:#89DDFF"> EOF</span><span style="color:#89DDFF"> &gt;</span><span style="color:#9ECE6A"> sample-pod.yaml</span></span>
+<span class="line"><span style="color:#9ECE6A">apiVersion: v1</span></span>
+<span class="line"><span style="color:#9ECE6A">kind: Pod</span></span>
+<span class="line"><span style="color:#9ECE6A">metadata:</span></span>
+<span class="line"><span style="color:#9ECE6A"> name: sample-pod</span></span>
+<span class="line"><span style="color:#9ECE6A">spec:</span></span>
+<span class="line"><span style="color:#9ECE6A"> containers:</span></span>
+<span class="line"><span style="color:#9ECE6A">   - name: nginx-container</span></span>
+<span class="line"><span style="color:#9ECE6A">     image: nginx:1.12</span></span>
+<span class="line"><span style="color:#89DDFF">EOF</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">kubectl</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-pod.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-pod</span><span style="color:#9ECE6A"> created</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>Kubernetes では、基本的にはマニフェストファイルを作成し、<code>apply</code>で適用するのが一般的のようです。それは、新規作成だけでなく、更新や削除も同様です。<code>create</code>や<code>replace</code>,<code>delete</code>といった CLI もありますが、<code>apply</code>でも同様の操作ができるため、使い分ける必要はあまりありません。<code>apply</code>で登録したマニュフェストファイルは履歴として保存されています。</p>
 <p>※ <a href="https://qiita.com/tkusumi/items/0bf5417c865ef716b221"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/qiita.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Kubernetes: kubectl apply の動作<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
 <h2 id="2-set-get">2. set, get</h2>
-<pre><code class="language-shell">pi@raspi001:~ $ kubectl set image pod sample-pod nginx-container=nginx:1.13
-pod/sample-pod image updated
-pi@raspi001:~ $ kubectl get pod sample-pod
-NAME         READY   STATUS    RESTARTS   AGE
-sample-pod   1/1     Running   1          13m
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">kubectl</span><span style="color:#9ECE6A"> set</span><span style="color:#9ECE6A"> image</span><span style="color:#9ECE6A"> pod</span><span style="color:#9ECE6A"> sample-pod</span><span style="color:#9ECE6A"> nginx-container=nginx:1.13</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-pod</span><span style="color:#9ECE6A"> image</span><span style="color:#9ECE6A"> updated</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">kubectl</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pod</span><span style="color:#9ECE6A"> sample-pod</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">         READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-pod</span><span style="color:#9ECE6A">   1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   1</span><span style="color:#9ECE6A">          13m</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>kubectl では、どのリソース種類（<code>pod</code>,<code>service</code>,etc）で、どのリソース名なのかを教えてあげる必要があります。
 また、フィルタリングする機能として<code>label</code>があります。</p>
-<pre><code class="language-yaml">## sample-pod-label.yaml
-apiVersion: v1
-kind: Pod
-metadata:
- name: sample-pod
-  labels:
-   env: prod
-   app: sample
-spec:
- containers:
-   - name: nginx-container
-     image: nginx:1.12
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~ $ kubectl get pod -l env=prod
-No resources found.
-pi@raspi001:~ $ kubectl apply -f sample-pod-label.yaml
-pod/sample-pod configured
-pi@raspi001:~ $ kubectl get pod -l env=prod
-NAME         READY   STATUS    RESTARTS   AGE
-sample-pod   1/1     Running   0          7m23s
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-pod-label.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Pod</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-pod</span></span>
+<span class="line"><span style="color:#F7768E">  labels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">   env</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> prod</span></span>
+<span class="line"><span style="color:#F7768E">   app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E"> containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">   -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">     image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">kubectl</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pod</span><span style="color:#E0AF68"> -l</span><span style="color:#9ECE6A"> env=prod</span></span>
+<span class="line"><span style="color:#C0CAF5">No</span><span style="color:#9ECE6A"> resources</span><span style="color:#9ECE6A"> found.</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">kubectl</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-pod-label.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-pod</span><span style="color:#9ECE6A"> configured</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">kubectl</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pod</span><span style="color:#E0AF68"> -l</span><span style="color:#9ECE6A"> env=prod</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">         READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-pod</span><span style="color:#9ECE6A">   1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          7m23s</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>更に詳細の情報が必要な場合は、<code>describe</code>を使います。</p>
-<pre><code class="language-shell">pi@raspi001:~ $ kubectl describe pod sample-pod
-Name:               sample-pod
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">kubectl</span><span style="color:#9ECE6A"> describe</span><span style="color:#9ECE6A"> pod</span><span style="color:#9ECE6A"> sample-pod</span></span>
+<span class="line"><span style="color:#C0CAF5">Name:</span><span style="color:#9ECE6A">               sample-pod</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>※ <code>edit</code>という直接編集する方法もありますが、一時的な対応のみに利用するべきとのことです。
 せっかくの宣言的ファイルが意味ないですよね。</p>
 <p>余談ですが、<code>service</code>を<code>svc</code>という風に省略できたりします。
 ※ <a href="https://qiita.com/nagase/items/3b8f905f432abba15b5a"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/qiita.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">（備忘）kubectl コマンドでの短縮リソース名<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
 <h2 id="3-debug">3. debug</h2>
-<pre><code class="language-shell">pi@raspi001:~ $ kubectl exec -it sample-pod /bin/sh
-## exit
-pi@raspi001:~ $ kubectl logs sample-pod
-pi@raspi001:~ $ kubectl cp sample-pod.yaml sample-pod:/var/sample-pod.yaml
-pi@raspi001:~ $ kubectl port-forward sample-pod 8888:80
-Forwarding from 127.0.0.1:8888 -&gt; 80
-Forwarding from [::1]:8888 -&gt; 80
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">kubectl</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-pod</span><span style="color:#9ECE6A"> /bin/sh</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">## exit</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">kubectl</span><span style="color:#9ECE6A"> logs</span><span style="color:#9ECE6A"> sample-pod</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">kubectl</span><span style="color:#9ECE6A"> cp</span><span style="color:#9ECE6A"> sample-pod.yaml</span><span style="color:#9ECE6A"> sample-pod:/var/sample-pod.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">kubectl</span><span style="color:#9ECE6A"> port-forward</span><span style="color:#9ECE6A"> sample-pod</span><span style="color:#9ECE6A"> 8888:80</span></span>
+<span class="line"><span style="color:#C0CAF5">Forwarding</span><span style="color:#9ECE6A"> from</span><span style="color:#9ECE6A"> 127.0.0.1:8888</span><span style="color:#A9B1D6"> -</span><span style="color:#89DDFF">&gt;</span><span style="color:#FF9E64"> 80</span></span>
+<span class="line"><span style="color:#C0CAF5">Forwarding</span><span style="color:#9ECE6A"> from</span><span style="color:#A9B1D6"> [::1]:8888 -</span><span style="color:#89DDFF">&gt;</span><span style="color:#A9B1D6"> 80</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>どれも<code>pod</code>に対する操作なためリソース種類の指定はありません。どれも開発時に必要が迫られれば使う感じですね。</p>
 <h2 id="99-top">99. top</h2>
 <p>こちら、どうしても動作できませんでした… 😥😥
 今はそこまで必要としないので、一旦見送ります。
 <code>calico</code>だか<code>flannel</code>とかが関係しているっぽいのですが、理解が浅いため未解決です。</p>
 <h2 id="お片付け">お片付け</h2>
-<pre><code class="language-shell">pi@raspi001:~ $ kubectl delete pod sample-pod
-pod "sample-pod" deleted
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">kubectl</span><span style="color:#9ECE6A"> delete</span><span style="color:#9ECE6A"> pod</span><span style="color:#9ECE6A"> sample-pod</span></span>
+<span class="line"><span style="color:#C0CAF5">pod</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">sample-pod</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A"> deleted</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>複数の pod を扱っているなら、<code>delete</code>よりも<code>apply --prune</code>の方が良いですが、今回は単体 pod なので、直接<code>delete</code>しました。</p>
 <h2 id="おわりに">おわりに</h2>
 <p>入門当初は、どれほど覚えなくてはいけないのかと不安になっていたのですが、

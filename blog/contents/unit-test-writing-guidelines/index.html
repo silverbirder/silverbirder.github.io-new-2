@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2025-10-20" data-pagefind-filter="month:2025-10" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">146</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-10-20"><span class="visually-hidden">2025年10月20日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">20</span></span></time></p></div><div class="notebook-heading"><h1>単体テストコードのお作法</h1></div></header><div class="notebook-body"><p>こんにちは! <a href="https://github.com/silverbirder"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">@silverbirder<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a> です。
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2025-10-20" data-pagefind-filter="month:2025-10" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">146</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-10-20"><span class="visually-hidden">2025年10月20日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">20</span></span></time></p></div><div class="notebook-heading"><h1>単体テストコードのお作法</h1></div></header><div class="notebook-body"><p>こんにちは! <a href="https://github.com/silverbirder"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">@silverbirder<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a> です。
 今回、私が心掛けている単体テストコードを書く上でのお作法について共有します。
 読者の皆さんが、より良い単体テストコードを書く一助になれば幸いです。</p>
 <h2 id="本記事の前提">本記事の前提</h2>
@@ -40,95 +76,93 @@
 <p>ここからは、EC サイトによくある、カートの合計金額を求める関数 “calculateCartTotal” を題材にします。
 クーポン割引と消費税を加味して合計を返すシンプルなロジックです。
 細かいロジックを読んで頂く必要はなく、コメントで補足していますので、全体の流れをざっくり把握できれば十分です。</p>
-<pre><code class="language-ts">// カートアイテム
-type CartItem = {
-  id: string;
-  // 商品名
-  name: string;
-  // 単価
-  price: number;
-  // 数量
-  quantity: number;
-};
-
-// クーポン
-type Coupon = {
-  // 割引タイプ(今回は%固定のみ)
-  type: "percent";
-  // 割引値（%）
-  value: number;
-  // 適用条件: 最小購入金額
-  minAmount?: number;
-  // 適用期限
-  expiresAt?: Date;
-};
-
-// 消費税（軽減税率）
-const TAX_RATE = 0.8;
-
-/** カート全体の合計 */
-export const calculateCartTotal = (
-  items: CartItem[],
-  coupon?: Coupon
-): number =&gt; {
-  // 小計を計算
-  const subtotal = calculateSubtotal(items);
-  let discountedSubtotal = subtotal;
-
-  // クーポンが存在し、適用可能な場合のみ適用
-  if (coupon &amp;&amp; isCouponApplicable(subtotal, coupon)) {
-    discountedSubtotal = applyCoupon(subtotal, coupon);
-  }
-
-  // 税込み価格を計算して返す
-  return calculateTotalWithTax(discountedSubtotal);
-};
-
-/** 小計を計算 */
-const calculateSubtotal = (items: CartItem[]): number =&gt;
-  items.reduce((sum, item) =&gt; sum + item.price * item.quantity, 0);
-
-/** クーポンが適用可能かを判定する */
-const isCouponApplicable = (subtotal: number, coupon: Coupon): boolean =&gt; {
-  const now = new Date();
-
-  // 期限切れや最小購入金額未満の場合は適用不可
-  if (coupon.expiresAt &amp;&amp; coupon.expiresAt &lt; now) return false;
-  if (coupon.minAmount &amp;&amp; subtotal &lt; coupon.minAmount) return false;
-
-  return true;
-};
-
-/** クーポンを適用 */
-const applyCoupon = (subtotal: number, coupon?: Coupon): number =&gt; {
-  if (!coupon) return subtotal;
-  return subtotal * (1 - coupon.value / 100);
-};
-
-/** 税込み価格を計算 */
-const calculateTotalWithTax = (subtotal: number): number =&gt;
-  Math.round(subtotal * (1 + TAX_RATE));
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// カートアイテム</span></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> CartItem</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  id</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // 商品名</span></span>
+<span class="line"><span style="color:#73DACA">  name</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // 単価</span></span>
+<span class="line"><span style="color:#73DACA">  price</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // 数量</span></span>
+<span class="line"><span style="color:#73DACA">  quantity</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// クーポン</span></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> Coupon</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // 割引タイプ(今回は%固定のみ)</span></span>
+<span class="line"><span style="color:#73DACA">  type</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">percent</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // 割引値（%）</span></span>
+<span class="line"><span style="color:#73DACA">  value</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // 適用条件: 最小購入金額</span></span>
+<span class="line"><span style="color:#73DACA">  minAmount</span><span style="color:#89DDFF">?:</span><span style="color:#0DB9D7"> number</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // 適用期限</span></span>
+<span class="line"><span style="color:#73DACA">  expiresAt</span><span style="color:#89DDFF">?:</span><span style="color:#C0CAF5"> Date</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// 消費税（軽減税率）</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> TAX_RATE</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 0.8</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">/** カート全体の合計 */</span></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#7AA2F7"> calculateCartTotal</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#E0AF68">  items</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> CartItem</span><span style="color:#9ABDF5">[]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#E0AF68">  coupon</span><span style="color:#89DDFF">?:</span><span style="color:#C0CAF5"> Coupon</span></span>
+<span class="line"><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // 小計を計算</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> subtotal</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> calculateSubtotal</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">items</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  let</span><span style="color:#BB9AF7"> discountedSubtotal</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> subtotal</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // クーポンが存在し、適用可能な場合のみ適用</span></span>
+<span class="line"><span style="color:#BB9AF7">  if</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">coupon</span><span style="color:#BB9AF7"> &amp;&amp;</span><span style="color:#7AA2F7"> isCouponApplicable</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">subtotal</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> coupon</span><span style="color:#9ABDF5">)) {</span></span>
+<span class="line"><span style="color:#C0CAF5">    discountedSubtotal</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> applyCoupon</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">subtotal</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> coupon</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // 税込み価格を計算して返す</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#7AA2F7"> calculateTotalWithTax</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">discountedSubtotal</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">/** 小計を計算 */</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> calculateSubtotal</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">items</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> CartItem</span><span style="color:#9ABDF5">[])</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#BB9AF7"> =&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">  items</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">reduce</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">sum</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> item</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#C0CAF5"> sum</span><span style="color:#89DDFF"> +</span><span style="color:#C0CAF5"> item</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">price</span><span style="color:#89DDFF"> *</span><span style="color:#C0CAF5"> item</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">quantity</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> 0</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">/** クーポンが適用可能かを判定する */</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> isCouponApplicable</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">subtotal</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> coupon</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Coupon</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> boolean</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> now</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> Date</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // 期限切れや最小購入金額未満の場合は適用不可</span></span>
+<span class="line"><span style="color:#BB9AF7">  if</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">coupon</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">expiresAt</span><span style="color:#BB9AF7"> &amp;&amp;</span><span style="color:#C0CAF5"> coupon</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">expiresAt</span><span style="color:#BB9AF7"> &lt;</span><span style="color:#C0CAF5"> now</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7;font-style:italic">return</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">  if</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">coupon</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">minAmount</span><span style="color:#BB9AF7"> &amp;&amp;</span><span style="color:#C0CAF5"> subtotal</span><span style="color:#BB9AF7"> &lt;</span><span style="color:#C0CAF5"> coupon</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">minAmount</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7;font-style:italic">return</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">/** クーポンを適用 */</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> applyCoupon</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">subtotal</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> coupon</span><span style="color:#89DDFF">?:</span><span style="color:#C0CAF5"> Coupon</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">  if</span><span style="color:#9ABDF5"> (</span><span style="color:#BB9AF7">!</span><span style="color:#C0CAF5">coupon</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7;font-style:italic">return</span><span style="color:#C0CAF5"> subtotal</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#C0CAF5"> subtotal</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF"> -</span><span style="color:#C0CAF5"> coupon</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">value</span><span style="color:#89DDFF"> /</span><span style="color:#FF9E64"> 100</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">/** 税込み価格を計算 */</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> calculateTotalWithTax</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">subtotal</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#BB9AF7"> =&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">  Math</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">round</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">subtotal</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> TAX_RATE</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <h2 id="テストコードの作法">テストコードの作法</h2>
 <h3 id="共通準備-モックデータを整える">共通準備: モックデータを整える</h3>
 <p>まずはテスト対象を呼び出すためのデータを揃えます。
 今回の題材ならモックのアイテムとクーポンを生成する関数を持っておくと便利です。</p>
-<pre><code class="language-ts">const generateItem = (override: Partial&lt;CartItem&gt; = {}): CartItem =&gt; ({
-  id: "item-001",
-  name: "Wireless Mouse",
-  price: 4980,
-  quantity: 1,
-  ...override,
-});
-
-const generateCoupon = (override: Partial&lt;Coupon&gt; = {}): Coupon =&gt; ({
-  type: "percent",
-  value: 15,
-  minAmount: 5000,
-  expiresAt: new Date("2025-12-31T23:59:59Z"),
-  ...override,
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> generateItem</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">override</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Partial</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">CartItem</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {})</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> CartItem</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> ({</span></span>
+<span class="line"><span style="color:#73DACA">  id</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">item-001</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Wireless Mouse</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 4980</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  quantity</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 1</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F7768E;font-weight:bold">  ...</span><span style="color:#C0CAF5">override</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> generateCoupon</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">override</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Partial</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">Coupon</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {})</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Coupon</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> ({</span></span>
+<span class="line"><span style="color:#73DACA">  type</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">percent</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  value</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 15</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  minAmount</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 5000</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  expiresAt</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> Date</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">2025-12-31T23:59:59Z</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F7768E;font-weight:bold">  ...</span><span style="color:#C0CAF5">override</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>モックデータの値は、できるだけ本番に近しいデータを用意しましょう。
 その方が、具体的なシナリオがイメージしやすくなります。</p>
 <h3 id="arrange-act-assert-を徹底する">Arrange-Act-Assert を徹底する</h3>
@@ -141,173 +175,158 @@ const generateCoupon = (override: Partial&lt;Coupon&gt; = {}): Coupon =&gt; ({
 <p><strong>このサイクルは1ケースにつき1回に絞るのが鉄則</strong> です。
 Assert 後に別の Act→Assert を足すと、ケースの目的が増え、読解コストが一気に跳ね上がります。</p>
 <p>以下は、AAAパターンを守った例です。</p>
-<pre><code class="language-ts">it("should calculate total with tax when no coupon", () =&gt; {
-  // Arrange
-  const items = [
-    generateItem({ price: 2000, quantity: 2 }),
-    generateItem({ price: 5000 }),
-  ];
-
-  const subtotal = 2000 * 2 + 5000;
-  const expectedTotal = subtotal * (1 + TAX_RATE);
-
-  // Act
-  const total = calculateCartTotal(items);
-
-  // Assert
-  expect(total).toBe(expectedTotal);
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should calculate total with tax when no coupon</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> items</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> [</span></span>
+<span class="line"><span style="color:#7AA2F7">    generateItem</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2000</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> quantity</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#7AA2F7">    generateItem</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 5000</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  ]</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> subtotal</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 2000</span><span style="color:#89DDFF"> *</span><span style="color:#FF9E64"> 2</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> 5000</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> expectedTotal</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> subtotal</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> TAX_RATE</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> total</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> calculateCartTotal</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">items</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">total</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">expectedTotal</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>逆に、AAAパターンを崩した例です。</p>
-<pre><code class="language-ts">it("should calculate total with tax when coupon is applied", () =&gt; {
-  // Arrange
-  const items = [
-    generateItem({ price: 2000, quantity: 2 }),
-    generateItem({ price: 5000 }),
-  ];
-  const coupon = generateCoupon({ value: 10 });
-
-  const subtotal = 2000 * 2 + 5000;
-  const discountedSubtotal = subtotal * (1 - coupon.value / 100);
-  const expectedTotal = discountedSubtotal * (1 + TAX_RATE);
-
-  // Act
-  const total = calculateCartTotal(items, coupon);
-
-  // Assert
-  expect(total).toBe(expectedTotal);
-
-  // Act (NG)
-  const totalWithoutCoupon = calculateCartTotal(items);
-
-  // Assert (NG)
-  expect(totalWithoutCoupon).toBe(subtotal * (1 + TAX_RATE));
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should calculate total with tax when coupon is applied</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> items</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> [</span></span>
+<span class="line"><span style="color:#7AA2F7">    generateItem</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2000</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> quantity</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#7AA2F7">    generateItem</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 5000</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  ]</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> coupon</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> generateCoupon</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">value</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 10</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> subtotal</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 2000</span><span style="color:#89DDFF"> *</span><span style="color:#FF9E64"> 2</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> 5000</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> discountedSubtotal</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> subtotal</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF"> -</span><span style="color:#C0CAF5"> coupon</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">value</span><span style="color:#89DDFF"> /</span><span style="color:#FF9E64"> 100</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> expectedTotal</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> discountedSubtotal</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> TAX_RATE</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> total</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> calculateCartTotal</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">items</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> coupon</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">total</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">expectedTotal</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act (NG)</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> totalWithoutCoupon</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> calculateCartTotal</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">items</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert (NG)</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">totalWithoutCoupon</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">subtotal</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> TAX_RATE</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <h3 id="ロジックを畳まず愚直に書く">ロジックを畳まず愚直に書く</h3>
 <p>ループや条件分岐は一見スマートでも、読む側には余計な追跡コストがかかります。
 テストでは可読性を優先し、ロジックを畳まずそのまま書き下ろす方が好みです。</p>
-<pre><code class="language-ts">// NG
-const items = [];
-for (let i = 0; i &lt; 3; i++) {
-  items.push(generateItem({ price: 1000 * (i + 1), quantity: i + 1 }));
-}
-</code></pre>
-<pre><code class="language-ts">// OK
-const items = [
-  generateItem({ price: 1000, quantity: 1 }),
-  generateItem({ price: 2000, quantity: 2 }),
-  generateItem({ price: 3000, quantity: 3 }),
-];
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// NG</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> items</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> []</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">for</span><span style="color:#9ABDF5"> (</span><span style="color:#9D7CD8;font-style:italic">let</span><span style="color:#BB9AF7"> i</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 0</span><span style="color:#89DDFF">;</span><span style="color:#C0CAF5"> i</span><span style="color:#BB9AF7"> &lt;</span><span style="color:#FF9E64"> 3</span><span style="color:#89DDFF">;</span><span style="color:#C0CAF5"> i</span><span style="color:#89DDFF">++</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">  items</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">push</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">generateItem</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 1000</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">i</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> 1</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> quantity</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> i</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> 1</span><span style="color:#9ABDF5"> }))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// OK</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> items</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> [</span></span>
+<span class="line"><span style="color:#7AA2F7">  generateItem</span><span style="color:#9ABDF5">({</span><span style="color:#73DACA"> price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 1000</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> quantity</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 1</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#7AA2F7">  generateItem</span><span style="color:#9ABDF5">({</span><span style="color:#73DACA"> price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2000</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> quantity</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#7AA2F7">  generateItem</span><span style="color:#9ABDF5">({</span><span style="color:#73DACA"> price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3000</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> quantity</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>大量のデータを用意する必要がある場合は、件数を指定したモック生成関数を用意すると良いでしょう。</p>
 <p>加えて、 <strong>期待値を算出する際に本番コードと同じ計算手順を複製するのは避けます</strong> 。
 本番側にバグがあってもテストが同じ計算をしていれば検知できないためです。</p>
-<pre><code class="language-ts">// NG
-const expectedTotal = items.reduce((sum, item) =&gt; sum + item.price * item.quantity, 0) * (1 + TAX_RATE);
-</code></pre>
-<pre><code class="language-ts">// OK
-const expectedTotal = 14000 * (1 + TAX_RATE);
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// NG</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> expectedTotal</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> items</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">reduce</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">sum</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> item</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#C0CAF5"> sum</span><span style="color:#89DDFF"> +</span><span style="color:#C0CAF5"> item</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">price</span><span style="color:#89DDFF"> *</span><span style="color:#C0CAF5"> item</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">quantity</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> 0</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> TAX_RATE</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// OK</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> expectedTotal</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 14000</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> TAX_RATE</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>また変数を定義する際は、抽象的な名前よりも具体的な名前を付けると意図が伝わりやすくなります。</p>
-<pre><code class="language-ts">// NG
-const value = 14000 * (1 + TAX_RATE);
-</code></pre>
-<pre><code class="language-ts">// OK
-const expectedTotal = 14000 * (1 + TAX_RATE);
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// NG</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> value</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 14000</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> TAX_RATE</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// OK</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> expectedTotal</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 14000</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> TAX_RATE</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <h3 id="テストケース名とマッチャーを自然文にする">テストケース名とマッチャーを自然文にする</h3>
 <p>テストケースの説明文が曖昧だと、コードを追わないと意図がつかめません。
 自然な文章にして、読むだけで狙いが伝わるように整えます。
 また、抽象的な語を避けて、状況と期待結果まで書き切りましょう。</p>
-<pre><code class="language-ts">// NG
-it('should work correctly', () =&gt; {
-  // ...
-})
-
-// OK
-it('should calculate total with tax when no coupon', () =&gt; {
-  // ...
-})
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// NG</span></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">should work correctly</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // ...</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// OK</span></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">should calculate total with tax when no coupon</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // ...</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>私の場合は “it should … when …” の骨格に揃え、条件や期待結果を自然文で並べています。</p>
 <p>マッチャーも同じです。“expect … to …” が文として読めるものを選ぶと、コード全体が平叙文になります。</p>
-<pre><code class="language-ts">// NG
-// Arrange
-const list = ['A', 'B', 'C'];
-
-// Assert
-expect(list.includes('A')).toBe(true)
-</code></pre>
-<pre><code class="language-ts">// OK
-// Arrange
-const list = ['A', 'B', 'C'];
-
-// Assert
-expect(list).toContain('A')
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// NG</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> list</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> [</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">A</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">B</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">C</span><span style="color:#89DDFF">'</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">list</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">includes</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">A</span><span style="color:#89DDFF">'</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">true</span><span style="color:#9ABDF5">)</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// OK</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> list</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> [</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">A</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">B</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">C</span><span style="color:#89DDFF">'</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">list</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toContain</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">A</span><span style="color:#89DDFF">'</span><span style="color:#9ABDF5">)</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>さらに、否定形より肯定形で表現した方が読みやすくなります。</p>
-<pre><code class="language-ts">// NG
-// Arrange
-const isDisabled = false;
-
-// Assert
-expect(isDisabled).not.toBe(true);
-</code></pre>
-<pre><code class="language-ts">// OK
-// Arrange
-const isEnabled = true;
-
-// Assert
-expect(isEnabled).toBe(true);
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// NG</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> isDisabled</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">isDisabled</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">not</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">true</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// OK</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> isEnabled</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">isEnabled</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">true</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <h3 id="テストケース単位で完結させる">テストケース単位で完結させる</h3>
 <p>テストを書いていると共通化したくなる処理が自然と出てきます。
 関数化するのは良いのですが、テストケース名から離れた場所を行き来しないと中身が分からない構成は避けたいところです。
 <strong>できるだけテストケース内で見通せる形に保ちます</strong> 。</p>
-<pre><code class="language-ts">// NG
-const generateItems = () =&gt; [
-  generateItem({ price: 2000, quantity: 2 }),
-  generateItem({ price: 5000 }),
-];
-
-it("should calculate total with tax when no coupon", () =&gt; {
-  const items = generateItems(); // NG
-
-  const subtotal = 2000 * 2 + 5000;
-  const expectedTotal = subtotal * (1 + TAX_RATE);
-
-  const total = calculateCartTotal(items);
-
-  expect(total).toBe(expectedTotal);
-});
-</code></pre>
-<pre><code class="language-ts">// OK
-const generateItem = (override: Partial&lt;CartItem&gt; = {}): CartItem =&gt; ({
-  id: "item-001",
-  name: "Wireless Mouse",
-  price: 4980,
-  quantity: 1,
-  ...override,
-});
-
-it("should calculate total with tax when no coupon", () =&gt; {
-  // Arrange
-  const items = [
-    generateItem({ price: 2000, quantity: 2 }),
-    generateItem({ price: 5000 }),
-  ];
-
-  const subtotal = 2000 * 2 + 5000;
-  const expectedTotal = subtotal * (1 + TAX_RATE);
-
-  // Act
-  const total = calculateCartTotal(items);
-
-  // Assert
-  expect(total).toBe(expectedTotal);
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// NG</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> generateItems</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> [</span></span>
+<span class="line"><span style="color:#7AA2F7">  generateItem</span><span style="color:#9ABDF5">({</span><span style="color:#73DACA"> price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2000</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> quantity</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#7AA2F7">  generateItem</span><span style="color:#9ABDF5">({</span><span style="color:#73DACA"> price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 5000</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should calculate total with tax when no coupon</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> items</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> generateItems</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span><span style="color:#51597D;font-style:italic"> // NG</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> subtotal</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 2000</span><span style="color:#89DDFF"> *</span><span style="color:#FF9E64"> 2</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> 5000</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> expectedTotal</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> subtotal</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> TAX_RATE</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> total</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> calculateCartTotal</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">items</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">total</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">expectedTotal</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// OK</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> generateItem</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">override</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Partial</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">CartItem</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {})</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> CartItem</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> ({</span></span>
+<span class="line"><span style="color:#73DACA">  id</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">item-001</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Wireless Mouse</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 4980</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  quantity</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 1</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#F7768E;font-weight:bold">  ...</span><span style="color:#C0CAF5">override</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should calculate total with tax when no coupon</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> items</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> [</span></span>
+<span class="line"><span style="color:#7AA2F7">    generateItem</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2000</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> quantity</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#7AA2F7">    generateItem</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">price</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 5000</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  ]</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> subtotal</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 2000</span><span style="color:#89DDFF"> *</span><span style="color:#FF9E64"> 2</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> 5000</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> expectedTotal</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> subtotal</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> TAX_RATE</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> total</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> calculateCartTotal</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">items</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">total</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">expectedTotal</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>どちらも共通化のテクニックですが、前者はモックの中身を知るために “generateItems” を読み解く必要があります。
 後者は “generateItem({ price: 2000, quantity: 2 })” のようにテスト内で値を指定しているため、その場で意図が分かります。
 共通化は便利でも、テストケースから離れた依存が増えるほど読解コストが跳ね上がります。
@@ -315,325 +334,306 @@ it("should calculate total with tax when no coupon", () =&gt; {
 <h3 id="グルーピングのネストを浅く保つ">グルーピングのネストを浅く保つ</h3>
 <p>テストケースが増えると共通の前提でグルーピングしたくなりますが、入れ子を重ねすぎると文脈をたどる手間が増えます。
 例えば次のようにグループを3階層にすると、最深部のケースを読む際に上位の条件を逐一思い出さなければなりません。</p>
-<pre><code class="language-ts">// 1階層
-describe("calculateCartTotal", () =&gt; {
-  // 2階層
-  describe("when coupon is applied", () =&gt; {
-    // 3階層
-    describe("and coupon is valid", () =&gt; {
-      it("should calculate total with tax after discount", () =&gt; {
-        // ...
-      });
-    });
-    // 3階層
-    describe("and coupon is expired", () =&gt; {
-      it("should calculate total with tax without discount", () =&gt; {
-        // ...
-      });
-    });
-  });
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// 1階層</span></span>
+<span class="line"><span style="color:#7AA2F7">describe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">calculateCartTotal</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // 2階層</span></span>
+<span class="line"><span style="color:#7AA2F7">  describe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">when coupon is applied</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // 3階層</span></span>
+<span class="line"><span style="color:#7AA2F7">    describe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">and coupon is valid</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">      it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should calculate total with tax after discount</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // ...</span></span>
+<span class="line"><span style="color:#9ABDF5">      })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // 3階層</span></span>
+<span class="line"><span style="color:#7AA2F7">    describe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">and coupon is expired</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">      it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should calculate total with tax without discount</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // ...</span></span>
+<span class="line"><span style="color:#9ABDF5">      })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>ネストが深いほど読み手の負荷が高まるため、基本的には避けたいところです。
 ただし、共通の前提で整理したくなる場面もあるはずです。
 その場合でも階層は 2 までにとどめ、テストケース名に状況を織り込んでフラットに並べるのがおすすめです。</p>
-<pre><code class="language-ts">// 1階層
-describe("calculateCartTotal", () =&gt; {
-  it("should calculate total with tax after discount when coupon is valid", () =&gt; {
-    // ...
-  });
-
-  it("should calculate total with tax without discount when coupon is expired", () =&gt; {
-    // ...
-  });
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// 1階層</span></span>
+<span class="line"><span style="color:#7AA2F7">describe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">calculateCartTotal</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should calculate total with tax after discount when coupon is valid</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // ...</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should calculate total with tax without discount when coupon is expired</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // ...</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <h3 id="未実装機能をテストで記録する">未実装機能をテストで記録する</h3>
 <p>開発を進めていると「仕様は決まっているが、実装は後回し」というケースがよくあります。
 まずは未実装のプロダクトコードに TODO が残っている一例です。</p>
-<pre><code class="language-ts">// 将来対応予定
-const applyCoupon = (subtotal: number, coupon?: Coupon): number =&gt; {
-  // TODO: Implement coupon application logic
-  return subtotal;
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// 将来対応予定</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> applyCoupon</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">subtotal</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> coupon</span><span style="color:#89DDFF">?:</span><span style="color:#C0CAF5"> Coupon</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // TODO: Implement coupon application logic</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#C0CAF5"> subtotal</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>仕様が固まっているなら、先にテストで期待値を記録しておくと実装忘れを防げます。
 Vitest なら「今は失敗していてよい」ことを表現できる “it.fails” が便利です。</p>
-<pre><code class="language-ts">it.fails("should apply coupon when coupon is valid", () =&gt; {
-  // Arrange
-  const subtotal = 1000;
-  const coupon = generateCoupon({ value: 10 });
-  const expectedTotal = 900;
-
-  // Act
-  const total = applyCoupon(subtotal, coupon);
-
-  // Assert
-  expect(total).toBe(expectedTotal);
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#C0CAF5">it</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fails</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should apply coupon when coupon is valid</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> subtotal</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 1000</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> coupon</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> generateCoupon</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">value</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 10</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> expectedTotal</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 900</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> total</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> applyCoupon</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">subtotal</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> coupon</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">total</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">expectedTotal</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>テストをまだ書けない場合は “it.skip” や “it.todo” で意図だけ残す方法もあります。</p>
-<pre><code class="language-ts">it.todo("should apply coupon when coupon is valid");
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#C0CAF5">it</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">todo</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should apply coupon when coupon is valid</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>未完了のテストを一覧したいときはタグで印を付け、“–testNamePattern” で絞り込むと追跡しやすくなります。</p>
-<pre><code class="language-ts">it.todo("should apply coupon when coupon is valid @coupon");
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#C0CAF5">it</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">todo</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should apply coupon when coupon is valid @coupon</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>テスト実行時は次のように検索します。</p>
-<pre><code class="language-bash">vitest --testNamePattern="@coupon"
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">vitest</span><span style="color:#E0AF68"> --testNamePattern=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">@coupon</span><span style="color:#89DDFF">"</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>フィーチャーが完成したら、“fails” や “todo” が出力に残っていないことを確認し、未実装記録を順次解消していきます。</p>
 <h3 id="並び順で意図を伝える">並び順で意図を伝える</h3>
 <p>テストの並びには（個人的には）意味を持たせたくないものの、私は「正常系→準異常系→異常系」の順に並べることが多いです。
 最初に Happy Path を示すと、続くケースが何を守るためのガードなのか読み手が掴みやすくなります。</p>
 <p>例えば、以下のような順番です。</p>
-<pre><code class="language-ts">// 正常系
-it("should calculate total with tax when no coupon", () =&gt; {
-  // ...
-});
-it("should calculate total with tax when coupon is applied", () =&gt; {
-  // ...
-});
-// 準異常系
-it("should calculate total with tax when coupon is expired", () =&gt; {
-  // ...
-});
-// 異常系
-it('should throw error when coupon type is unknown', () =&gt; {
-  // ...
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// 正常系</span></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should calculate total with tax when no coupon</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // ...</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should calculate total with tax when coupon is applied</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // ...</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// 準異常系</span></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should calculate total with tax when coupon is expired</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // ...</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// 異常系</span></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">should throw error when coupon type is unknown</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // ...</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <h3 id="アサートは細かく明示する">アサートは細かく明示する</h3>
 <p>テストは「何を確認したのか」を明確に残す必要があります。
 特に戻り値がオブジェクトや複数行テキストのとき、 <strong>ざっくりとしたアサートだとバグをすり抜けさせがちです</strong> 。
 値だけでなく、呼び出し回数や引数まで丁寧に検証しましょう。</p>
-<pre><code class="language-ts">// NG
-const summary = formatOrderSummary(order);
-// summary が存在することだけを確認
-expect(summary).toBeTruthy();
-
-// OK
-expect(summary).toEqual({
-  total: 14000,
-  itemCount: 3,
-  hasDiscount: true,
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// NG</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> summary</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> formatOrderSummary</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">order</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// summary が存在することだけを確認</span></span>
+<span class="line"><span style="color:#7AA2F7">expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">summary</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBeTruthy</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// OK</span></span>
+<span class="line"><span style="color:#7AA2F7">expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">summary</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toEqual</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#73DACA">  total</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 14000</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  itemCount</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  hasDiscount</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>フロントエンドでは HTML の検証も同様です。
 要素が存在するだけでなく、どこにどんなテキストが描画されているかまで確認します。</p>
-<pre><code class="language-ts">// Arrange &amp; Act
-const html = `
-  &lt;section&gt;
-    &lt;h2&gt;Cart total&lt;/h2&gt;
-    &lt;p data-testid="cart-total"&gt;-&lt;/p&gt;
-    &lt;p data-testid="contact"&gt;Call us: 03-1234-5678&lt;/p&gt;
-  &lt;/section&gt;
-`;
-
-// Assert
-// NG
-expect(html.includes("-")).toBe(true);
-
-// OK
-const dom = new DOMParser().parseFromString(html, "text/html");
-const total = dom.querySelector('[data-testid="cart-total"]');
-expect(total?.textContent).toContain("-");
-
-// NOTE: 実際は @testing-library/react の screen.getByRole などを用いますが、
-// ここではライブラリに依存しない例として DOMParser を使っています。
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// Arrange &amp; Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> html</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> `</span></span>
+<span class="line"><span style="color:#9ECE6A">  &lt;section&gt;</span></span>
+<span class="line"><span style="color:#9ECE6A">    &lt;h2&gt;Cart total&lt;/h2&gt;</span></span>
+<span class="line"><span style="color:#9ECE6A">    &lt;p data-testid="cart-total"&gt;-&lt;/p&gt;</span></span>
+<span class="line"><span style="color:#9ECE6A">    &lt;p data-testid="contact"&gt;Call us: 03-1234-5678&lt;/p&gt;</span></span>
+<span class="line"><span style="color:#9ECE6A">  &lt;/section&gt;</span></span>
+<span class="line"><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Assert</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// NG</span></span>
+<span class="line"><span style="color:#7AA2F7">expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">html</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">includes</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">-</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">true</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// OK</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> dom</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> DOMParser</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">parseFromString</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">html</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">text/html</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> total</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> dom</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">querySelector</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">[data-testid="cart-total"]</span><span style="color:#89DDFF">'</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">total</span><span style="color:#89DDFF">?.</span><span style="color:#7DCFFF">textContent</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toContain</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">-</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// NOTE: 実際は @testing-library/react の screen.getByRole などを用いますが、</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// ここではライブラリに依存しない例として DOMParser を使っています。</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>同様に、モック関数は呼び出し回数と引数を合わせて検証します。</p>
-<pre><code class="language-ts">// Arrange
-const logger = vi.fn();
-
-// Act
-notifyMissingCoupon(logger);
-
-// Assert
-expect(logger).toHaveBeenCalledTimes(1);
-expect(logger).toHaveBeenCalledWith({
-  level: "warn",
-  message: "Coupon is missing",
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> logger</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> vi</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fn</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Act</span></span>
+<span class="line"><span style="color:#7AA2F7">notifyMissingCoupon</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">logger</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">logger</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toHaveBeenCalledTimes</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">1</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">logger</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toHaveBeenCalledWith</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#73DACA">  level</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">warn</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  message</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Coupon is missing</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>検証対象が大きすぎるときは “expect.objectContaining” などを使い、必要な部分だけを確実に見るようにします。</p>
-<pre><code class="language-ts">// Arrange
-const logger = vi.fn();
-
-// Act
-notifyMissingCoupon(logger);
-
-// Assert
-expect(logger).toHaveBeenCalledWith(
-  expect.objectContaining({
-    level: "warn",
-    message: "Coupon is missing",
-  })
-);
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> logger</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> vi</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fn</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Act</span></span>
+<span class="line"><span style="color:#7AA2F7">notifyMissingCoupon</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">logger</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">logger</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toHaveBeenCalledWith</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#C0CAF5">  expect</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">objectContaining</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#73DACA">    level</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">warn</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">    message</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Coupon is missing</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span></span>
+<span class="line"><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <h3 id="パラメータの網羅性を確保する">パラメータの網羅性を確保する</h3>
 <p>期待結果が入力パラメータに左右されるときは、境界値や同値分割を意識して網羅的に押さえます。
 列挙が増えそうならパラメタライズドテストを使い、ON/OFF のような二択も迷うくらいなら両方書いてしまった方が早いです。</p>
 <p>例えば、クーポン適用の有無の関数 “isCouponApplicable” の場合、以下のようにテストケースを分けます。</p>
-<pre><code class="language-ts">it.each`
-  subtotal | minAmount    | expected
-  ${1000}  | ${undefined} | ${true}
-  ${1000}  | ${1001}      | ${true}
-  ${1000}  | ${1000}      | ${true}
-  ${1000}  | ${999}       | ${false}
-`("should return $expected when subtotal=$subtotal and minAmount=$minAmount", ({ subtotal, minAmount, expected }) =&gt; {
-  // Arrange
-  const coupon = { type: "percent", value: 10, minAmount };
-
-  // Act
-  const result = isCouponApplicable(subtotal, coupon);
-
-  // Assert
-  expect(result).toBe(expected);
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#C0CAF5">it</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">each</span><span style="color:#89DDFF">`</span></span>
+<span class="line"><span style="color:#9ECE6A">  subtotal | minAmount    | expected</span></span>
+<span class="line"><span style="color:#7DCFFF">  ${</span><span style="color:#FF9E64">1000</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">  | </span><span style="color:#7DCFFF">${</span><span style="color:#FF9E64">undefined</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A"> | </span><span style="color:#7DCFFF">${</span><span style="color:#FF9E64">true</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#7DCFFF">  ${</span><span style="color:#FF9E64">1000</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">  | </span><span style="color:#7DCFFF">${</span><span style="color:#FF9E64">1001</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">      | </span><span style="color:#7DCFFF">${</span><span style="color:#FF9E64">true</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#7DCFFF">  ${</span><span style="color:#FF9E64">1000</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">  | </span><span style="color:#7DCFFF">${</span><span style="color:#FF9E64">1000</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">      | </span><span style="color:#7DCFFF">${</span><span style="color:#FF9E64">true</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#7DCFFF">  ${</span><span style="color:#FF9E64">1000</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">  | </span><span style="color:#7DCFFF">${</span><span style="color:#FF9E64">999</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">       | </span><span style="color:#7DCFFF">${</span><span style="color:#FF9E64">false</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">`</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should return $expected when subtotal=$subtotal and minAmount=$minAmount</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> (</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> subtotal</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> minAmount</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> expected</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> coupon</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">type</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">percent</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> value</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 10</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> minAmount</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> result</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> isCouponApplicable</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">subtotal</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> coupon</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">result</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">expected</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <h3 id="状態遷移はケースを分割する">状態遷移はケースを分割する</h3>
 <p>状態遷移を伴うオブジェクトをテストするとき、 <strong>1ケースで一連の流れをなぞると途中で失敗した時点で残りの検証が実行されません</strong> 。
 遷移ごとにテストを分けて、どの状態で落ちたのかを明確にすると安心です。</p>
 <p>例えば、以下のような簡易のカートクラスを考えます。
 このクラスは、カートの状態を管理し、アイテムの追加やチェックアウトを行います。</p>
-<pre><code class="language-ts">export enum CartState {
-  Empty = "Empty",
-  Active = "Active",
-  CheckedOut = "CheckedOut",
-}
-
-export class Cart {
-  private total = 0;
-  private state = CartState.Empty;
-
-  add(price: number) {
-    if (this.state === CartState.CheckedOut) throw new Error("Already checked out");
-    this.total += price;
-    this.state = CartState.Active;
-  }
-
-  checkout() {
-    if (this.state !== CartState.Active) throw new Error("Cannot checkout");
-    this.total = 0;
-    this.state = CartState.CheckedOut;
-  }
-
-  getState() {
-    return this.state;
-  }
-
-  getTotal() {
-    return this.total;
-  }
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#7DCFFF">export</span><span style="color:#BB9AF7"> enum</span><span style="color:#C0CAF5"> CartState</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  Empty</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Empty</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#7AA2F7">  Active</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Active</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#7AA2F7">  CheckedOut</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">CheckedOut</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#BB9AF7"> class</span><span style="color:#C0CAF5"> Cart</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  private</span><span style="color:#73DACA"> total</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 0</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  private</span><span style="color:#73DACA"> state</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> CartState</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Empty</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  add</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">price</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">    if</span><span style="color:#9ABDF5"> (</span><span style="color:#F7768E">this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">state</span><span style="color:#BB9AF7"> ===</span><span style="color:#C0CAF5"> CartState</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">CheckedOut</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">throw</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> Error</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Already checked out</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">total</span><span style="color:#89DDFF"> +=</span><span style="color:#C0CAF5"> price</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">state</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> CartState</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Active</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  checkout</span><span style="color:#9ABDF5">()</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">    if</span><span style="color:#9ABDF5"> (</span><span style="color:#F7768E">this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">state</span><span style="color:#BB9AF7"> !==</span><span style="color:#C0CAF5"> CartState</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Active</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">throw</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> Error</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Cannot checkout</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">total</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 0</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#F7768E">    this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">state</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> CartState</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">CheckedOut</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  getState</span><span style="color:#9ABDF5">()</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    return</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">state</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  getTotal</span><span style="color:#9ABDF5">()</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    return</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">total</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>このカートを例に、状態ごとにケースを切り分けてみます。<br>
 以下は、1ケースで状態遷移を追う例です。</p>
-<pre><code class="language-ts">// NG
-it("should be Empty state when initialized, Active state after adding an item, and CheckedOut state after checkout", () =&gt; {
-  // Act
-  const cart = new Cart();
-
-  // Assert
-  expect(cart.getState()).toBe(CartState.Empty);
-
-  // Act
-  cart.add(1000);
-
-  // Assert
-  expect(cart.getState()).toBe(CartState.Active);
-
-  // Act
-  cart.checkout();
-
-  // Assert
-  expect(cart.getState()).toBe(CartState.CheckedOut);
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// NG</span></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should be Empty state when initialized, Active state after adding an item, and CheckedOut state after checkout</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> cart</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> Cart</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">cart</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getState</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">CartState</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Empty</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#C0CAF5">  cart</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">add</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">1000</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">cart</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getState</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">CartState</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Active</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#C0CAF5">  cart</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">checkout</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">cart</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getState</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">CartState</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">CheckedOut</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>以下は、状態ごとにケースを分けた例です。</p>
-<pre><code class="language-ts">// OK
-it("should be Empty state when initialized", () =&gt; {
-  // Act
-  const cart = new Cart();
-
-  // Assert
-  expect(cart.getState()).toBe(CartState.Empty);
-});
-it("should be Active state after adding an item", () =&gt; {
-  // Arrange
-  const cart = new Cart();
-
-  // Act
-  cart.add(1000);
-
-  // Assert
-  expect(cart.getState()).toBe(CartState.Active);
-});
-it("should be CheckedOut state after checkout", () =&gt; {
-  // Arrange
-  const cart = new Cart();
-  cart.add(1000);
-
-  // Act
-  cart.checkout();
-
-  // Assert
-  expect(cart.getState()).toBe(CartState.CheckedOut);
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// OK</span></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should be Empty state when initialized</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> cart</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> Cart</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">cart</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getState</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">CartState</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Empty</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should be Active state after adding an item</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> cart</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> Cart</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#C0CAF5">  cart</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">add</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">1000</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">cart</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getState</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">CartState</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Active</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should be CheckedOut state after checkout</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> cart</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> Cart</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">  cart</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">add</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">1000</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#C0CAF5">  cart</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">checkout</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">cart</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getState</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">CartState</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">CheckedOut</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <h3 id="責務ごとにテストの深さを調整する">責務ごとにテストの深さを調整する</h3>
 <p>単体テストでも結合テストでも、対象の責務に合わせて深さを決めます。
 1つの関数で他のモジュールを呼ぶ場合、呼び出し先の詳細まで二重にテストする必要はありません。
 例としてバリデーション関数とそれを利用する送信関数を考えます。</p>
-<pre><code class="language-ts">// バリデーション関数
-export const isValidEmail = (email: string): boolean =&gt; {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
-
-// それを使用した関数
-export const sendEmail = (email: string): boolean =&gt; {
-  if (!isValidEmail(email)) {
-    throw new Error("Invalid email");
-  }
-  // メール送信処理
-  return true;
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// バリデーション関数</span></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#7AA2F7"> isValidEmail</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">email</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> boolean</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> emailRegex</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> /</span><span style="color:#BB9AF7">^</span><span style="color:#E0AF68">[</span><span style="color:#89DDFF">^</span><span style="color:#BB9AF7">\s</span><span style="color:#E0AF68">@]</span><span style="color:#89DDFF">+</span><span style="color:#B4F9F8">@</span><span style="color:#E0AF68">[</span><span style="color:#89DDFF">^</span><span style="color:#BB9AF7">\s</span><span style="color:#E0AF68">@]</span><span style="color:#89DDFF">+</span><span style="color:#C0CAF5">\.</span><span style="color:#E0AF68">[</span><span style="color:#89DDFF">^</span><span style="color:#BB9AF7">\s</span><span style="color:#E0AF68">@]</span><span style="color:#89DDFF">+</span><span style="color:#BB9AF7">$</span><span style="color:#89DDFF">/</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#C0CAF5"> emailRegex</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">test</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">email</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// それを使用した関数</span></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#7AA2F7"> sendEmail</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">email</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> boolean</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">  if</span><span style="color:#9ABDF5"> (</span><span style="color:#BB9AF7">!</span><span style="color:#7AA2F7">isValidEmail</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">email</span><span style="color:#9ABDF5">)) {</span></span>
+<span class="line"><span style="color:#BB9AF7">    throw</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> Error</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Invalid email</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // メール送信処理</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>このとき “sendEmail” のテストで “isValidEmail” の全パターンを再度検証する必要はありません。
 “sendEmail” では「有効なら送る」「無効ならエラーを投げる」ことを確認し、“isValidEmail” の細かい条件は別のテストで保証します。</p>
-<pre><code class="language-ts">// sendEmail のテストコード
-it("should send email when email is valid", () =&gt; {
-  // Arrange
-  const validEmail = "test@example.com";
-
-  // Act
-  const result = sendEmail(validEmail);
-
-  // Assert
-  expect(result).toBe(true);
-});
-
-it("should throw error when email is invalid", () =&gt; {
-  // Arrange
-  const invalidEmail = "invalid-email";
-
-  // Act &amp; Assert
-  expect(() =&gt; sendEmail(invalidEmail)).toThrow("Invalid email");
-});
-</code></pre>
-<pre><code class="language-ts">// isValidEmail のテストコード
-it.each`
-  email                 | expected
-  ${"test@example.com"} | ${true}
-  ${"invalid-email"}    | ${false}
-`("should return $expected for email: $email", ({ email, expected }) =&gt; {
-  // Act
-  const result = isValidEmail(email);
-  // Assert
-  expect(result).toBe(expected);
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// sendEmail のテストコード</span></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should send email when email is valid</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> validEmail</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">test@example.com</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> result</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> sendEmail</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">validEmail</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">result</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">true</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should throw error when email is invalid</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> invalidEmail</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">invalid-email</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act &amp; Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(() </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#7AA2F7"> sendEmail</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">invalidEmail</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toThrow</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Invalid email</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// isValidEmail のテストコード</span></span>
+<span class="line"><span style="color:#C0CAF5">it</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">each</span><span style="color:#89DDFF">`</span></span>
+<span class="line"><span style="color:#9ECE6A">  email                 | expected</span></span>
+<span class="line"><span style="color:#7DCFFF">  ${</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">test@example.com</span><span style="color:#89DDFF">"</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A"> | </span><span style="color:#7DCFFF">${</span><span style="color:#FF9E64">true</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#7DCFFF">  ${</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">invalid-email</span><span style="color:#89DDFF">"</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">    | </span><span style="color:#7DCFFF">${</span><span style="color:#FF9E64">false</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#89DDFF">`</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">should return $expected for email: $email</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> (</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> email</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> expected</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Act</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> result</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> isValidEmail</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">email</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">result</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">expected</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <h3 id="テスト警告を潰す習慣を持つ">テスト警告を潰す習慣を持つ</h3>
 <p>テスト実行時に流れる警告は放っておかないでください。
 原因によっては環境によって落ちるフレークテストの兆候です。

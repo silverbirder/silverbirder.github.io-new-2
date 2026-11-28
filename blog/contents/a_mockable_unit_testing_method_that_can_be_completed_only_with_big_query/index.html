@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2021-11-26" data-pagefind-filter="month:2021-11" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">66</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2021-11-26"><span class="visually-hidden">2021年11月26日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2021</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">26</span></span></time></p></div><div class="notebook-heading"><h1>BigQueryだけで完結するモック可能なユニットテスト手法</h1></div></header><div class="notebook-body"><p>BigQuery、皆さん使っていますか？
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2021-11-26" data-pagefind-filter="month:2021-11" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">66</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2021-11-26"><span class="visually-hidden">2021年11月26日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2021</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">26</span></span></time></p></div><div class="notebook-heading"><h1>BigQueryだけで完結するモック可能なユニットテスト手法</h1></div></header><div class="notebook-body"><p>BigQuery、皆さん使っていますか？
 私は、業務で BigQuery を使ったデータ構築をしています。
 品質担保のため、BigQuery の SQL に対してテストをしたいと考えています。
 本記事では、BigQuery だけで完結し、かつ、Mock データを差し替え可能なユニットテスト手法について、紹介します。</p>
@@ -21,53 +57,51 @@
 <blockquote>
 <p>xUnit is the collective name for several unit testing frameworks that derive their structure and functionality from Smalltalk’s SUnit.</p>
 </blockquote>
-<p>※ <a href="https://en.wikipedia.org/wiki/XUnit"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/en.wikipedia.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://en.wikipedia.org/wiki/XUnit<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
+<p>※ <a href="https://en.wikipedia.org/wiki/XUnit"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/en.wikipedia.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://en.wikipedia.org/wiki/XUnit<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></p>
 <p>xUnit は、各プログラミング言語に影響を与えました。
 Java なら JUnit、Python なら unittest(厳密には JUnit から触発)のユニットテストができます。</p>
 <h2 id="xunit-x-python">xUnit x Python</h2>
 <p>BigQuery の前に、まず Python を使ったユニットテストを紹介します。</p>
 <p>『100 円未満の果物を取得する』関数、<code>get_less_than</code>があったとします。</p>
-<pre><code class="language-python">## fruits.py
-class Fruits(object):
-    def _get_fruits(self):
-        return [
-            {"price": 130, "name": "apple"},
-            {"price": 120, "name": "banana"},
-            {"price": 110, "name": "grape"},
-            {"price": 100, "name": "lemon"},
-            {"price": 90, "name": "orange"},
-        ]
-
-    def get_less_than(self, price):
-        fruits = self._get_fruits()
-        return list(filter(lambda x: x["price"] &lt; price, fruits))
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#51597D;font-style:italic">## fruits.py</span></span>
+<span class="line"><span style="color:#BB9AF7">class</span><span style="color:#C0CAF5"> Fruits</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">object</span><span style="color:#89DDFF">)</span><span style="color:#9ABDF5">:</span></span>
+<span class="line"><span style="color:#BB9AF7">    def</span><span style="color:#7AA2F7"> _get_fruits</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">self</span><span style="color:#9ABDF5">):</span></span>
+<span class="line"><span style="color:#BB9AF7">        return</span><span style="color:#89DDFF"> [</span></span>
+<span class="line"><span style="color:#89DDFF">            {</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">price</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 130</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">apple</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#89DDFF">            {</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">price</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 120</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">banana</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#89DDFF">            {</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">price</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 110</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">grape</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#89DDFF">            {</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">price</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 100</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">lemon</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#89DDFF">            {</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">price</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 90</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">orange</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#89DDFF">        ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    def</span><span style="color:#7AA2F7"> get_less_than</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">self</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> price</span><span style="color:#9ABDF5">):</span></span>
+<span class="line"><span style="color:#A9B1D6">        fruits </span><span style="color:#89DDFF">=</span><span style="color:#F7768E"> self</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">_get_fruits</span><span style="color:#9ABDF5">()</span></span>
+<span class="line"><span style="color:#BB9AF7">        return</span><span style="color:#0DB9D7"> list</span><span style="color:#9ABDF5">(</span><span style="color:#0DB9D7">filter</span><span style="color:#9ABDF5">(</span><span style="color:#BB9AF7">lambda</span><span style="color:#E0AF68"> x</span><span style="color:#9ABDF5">:</span><span style="color:#C0CAF5"> x</span><span style="color:#9ABDF5">[</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">price</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">]</span><span style="color:#BB9AF7"> &lt;</span><span style="color:#C0CAF5"> price</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> fruits</span><span style="color:#9ABDF5">))</span></span></code></pre><figcaption class="notebook-code-language">PYTHON</figcaption></figure>
 <p><code>_get_fruits</code>関数は、簡易的なモノで、実際には実データを参照する箇所になります。</p>
 <p><code>get_less_than</code>関数に対してユニットテストを書くとすれば、次のコードになります。</p>
-<pre><code class="language-python">## test_fruits.py
-import unittest
-from unittest.mock import patch
-
-from fruits import Fruits
-
-
-class TestFruits(unittest.TestCase):
-    @patch("fruits.Fruits._get_fruits")
-    def test_get_less_than(self, mock_get_fruits):
-        # Arrange
-        mock_get_fruits.return_value = [
-            {"price": 110, "name": "apple"},
-            {"price": 100, "name": "banana"},
-            {"price": 90, "name": "orange"},
-        ]
-        fruits = Fruits()
-
-        # Act
-        actual = fruits.get_less_than(price=100)
-
-        # Assert
-        assert len(actual) == 1
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#51597D;font-style:italic">## test_fruits.py</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#A9B1D6"> unittest</span></span>
+<span class="line"><span style="color:#7DCFFF">from</span><span style="color:#A9B1D6"> unittest</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">mock </span><span style="color:#7DCFFF">import</span><span style="color:#A9B1D6"> patch</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">from</span><span style="color:#A9B1D6"> fruits </span><span style="color:#7DCFFF">import</span><span style="color:#A9B1D6"> Fruits</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">class</span><span style="color:#C0CAF5"> TestFruits</span><span style="color:#89DDFF">(</span><span style="color:#BB9AF7">unittest</span><span style="color:#89DDFF">.</span><span style="color:#BB9AF7">TestCase</span><span style="color:#89DDFF">)</span><span style="color:#9ABDF5">:</span></span>
+<span class="line"><span style="color:#89DDFF">    @</span><span style="color:#7AA2F7">patch</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">fruits.Fruits._get_fruits</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#BB9AF7">    def</span><span style="color:#7AA2F7"> test_get_less_than</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">self</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> mock_get_fruits</span><span style="color:#9ABDF5">):</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        # Arrange</span></span>
+<span class="line"><span style="color:#A9B1D6">        mock_get_fruits</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">return_value </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> [</span></span>
+<span class="line"><span style="color:#89DDFF">            {</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">price</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 110</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">apple</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#89DDFF">            {</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">price</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 100</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">banana</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#89DDFF">            {</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">price</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 90</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">orange</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#89DDFF">        ]</span></span>
+<span class="line"><span style="color:#A9B1D6">        fruits </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> Fruits</span><span style="color:#9ABDF5">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        # Act</span></span>
+<span class="line"><span style="color:#A9B1D6">        actual </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> fruits</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">get_less_than</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">price</span><span style="color:#89DDFF">=</span><span style="color:#FF9E64">100</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        # Assert</span></span>
+<span class="line"><span style="color:#BB9AF7">        assert</span><span style="color:#0DB9D7"> len</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">actual</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> ==</span><span style="color:#FF9E64"> 1</span></span></code></pre><figcaption class="notebook-code-language">PYTHON</figcaption></figure>
 <p><a href="https://docs.microsoft.com/ja-jp/dotnet/core/testing/unit-testing-best-practices#arranging-your-tests"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/docs.microsoft.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">単体テストを記述するためのベストプラクティス#テストの配置<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>にあるように、ユニットテストは、次の 3 段階で分けて書くと、分かりやすいです。</p>
 <ol>
 <li>Arrange: 配置, 準備</li>
@@ -75,42 +109,39 @@ class TestFruits(unittest.TestCase):
 <li>Assert: 検証</li>
 </ol>
 <p>ユニットテストは、次のコマンドで実行できます。</p>
-<pre><code class="language-shell">python -m unittest test_fruits
-.
-----------------------------------------------------------------------
-Ran 1 test in 0.001s
-
-OK
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">python</span><span style="color:#E0AF68"> -m</span><span style="color:#9ECE6A"> unittest</span><span style="color:#9ECE6A"> test_fruits</span></span>
+<span class="line"><span style="color:#0DB9D7">.</span></span>
+<span class="line"><span style="color:#C0CAF5">----------------------------------------------------------------------</span></span>
+<span class="line"><span style="color:#C0CAF5">Ran</span><span style="color:#FF9E64"> 1</span><span style="color:#9ECE6A"> test</span><span style="color:#9ECE6A"> in</span><span style="color:#9ECE6A"> 0.001s</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">OK</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>テストは成功しました。今度は、失敗させてみましょう。
 fruits.py のコードにある <code>get_less_than</code>のロジックを誤ったものに変更します。
 コードは、次のとおりです。</p>
-<pre><code class="language-python">## fruits.py
-class Fruits(object):
-    ...
-    def get_less_than(self, price):
-        fruits = self._get_fruits()
-        # return list(filter(lambda x: x["price"] &lt; price, fruits))
-        return list(filter(lambda x: x["price"] &lt;= price, fruits))
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#51597D;font-style:italic">## fruits.py</span></span>
+<span class="line"><span style="color:#BB9AF7">class</span><span style="color:#C0CAF5"> Fruits</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">object</span><span style="color:#89DDFF">)</span><span style="color:#9ABDF5">:</span></span>
+<span class="line"><span style="color:#E0AF68">    ...</span></span>
+<span class="line"><span style="color:#BB9AF7">    def</span><span style="color:#7AA2F7"> get_less_than</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">self</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> price</span><span style="color:#9ABDF5">):</span></span>
+<span class="line"><span style="color:#A9B1D6">        fruits </span><span style="color:#89DDFF">=</span><span style="color:#F7768E"> self</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">_get_fruits</span><span style="color:#9ABDF5">()</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        # return list(filter(lambda x: x["price"] &lt; price, fruits))</span></span>
+<span class="line"><span style="color:#BB9AF7">        return</span><span style="color:#0DB9D7"> list</span><span style="color:#9ABDF5">(</span><span style="color:#0DB9D7">filter</span><span style="color:#9ABDF5">(</span><span style="color:#BB9AF7">lambda</span><span style="color:#E0AF68"> x</span><span style="color:#9ABDF5">:</span><span style="color:#C0CAF5"> x</span><span style="color:#9ABDF5">[</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">price</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">]</span><span style="color:#BB9AF7"> &lt;=</span><span style="color:#C0CAF5"> price</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> fruits</span><span style="color:#9ABDF5">))</span></span></code></pre><figcaption class="notebook-code-language">PYTHON</figcaption></figure>
 <p>この状態で、さきほどのユニットテストを実施してみます。</p>
-<pre><code class="language-shell">python3 -m unittest test_fruits
-F
-======================================================================
-FAIL: test_get_less_than (test_fruits.TestFruits)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/unittest/mock.py", line 1348, in patched
-    return func(*newargs, **newkeywargs)
-  File "test_fruits.py", line 22, in test_get_less_than
-    assert len(actual) == 1
-AssertionError
-
-----------------------------------------------------------------------
-Ran 1 test in 0.005s
-
-FAILED (failures=1)
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">python3</span><span style="color:#E0AF68"> -m</span><span style="color:#9ECE6A"> unittest</span><span style="color:#9ECE6A"> test_fruits</span></span>
+<span class="line"><span style="color:#C0CAF5">F</span></span>
+<span class="line"><span style="color:#9ECE6A">======================================================================</span></span>
+<span class="line"><span style="color:#C0CAF5">FAIL:</span><span style="color:#9ECE6A"> test_get_less_than</span><span style="color:#A9B1D6"> (test_fruits.TestFruits)</span></span>
+<span class="line"><span style="color:#C0CAF5">----------------------------------------------------------------------</span></span>
+<span class="line"><span style="color:#C0CAF5">Traceback</span><span style="color:#A9B1D6"> (most </span><span style="color:#9ECE6A">recent</span><span style="color:#9ECE6A"> call</span><span style="color:#9ECE6A"> last</span><span style="color:#A9B1D6">):</span></span>
+<span class="line"><span style="color:#C0CAF5">  File</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/unittest/mock.py</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">,</span><span style="color:#9ECE6A"> line</span><span style="color:#9ECE6A"> 1348,</span><span style="color:#9ECE6A"> in</span><span style="color:#9ECE6A"> patched</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    return</span><span style="color:#9ECE6A"> func</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">*</span><span style="color:#A9B1D6">newargs, </span><span style="color:#89DDFF">**</span><span style="color:#A9B1D6">newkeywargs</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  File</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">test_fruits.py</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">,</span><span style="color:#9ECE6A"> line</span><span style="color:#9ECE6A"> 22,</span><span style="color:#9ECE6A"> in</span><span style="color:#9ECE6A"> test_get_less_than</span></span>
+<span class="line"><span style="color:#C0CAF5">    assert</span><span style="color:#9ECE6A"> len</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">actual</span><span style="color:#9ABDF5">)</span><span style="color:#9ECE6A"> ==</span><span style="color:#FF9E64"> 1</span></span>
+<span class="line"><span style="color:#C0CAF5">AssertionError</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">----------------------------------------------------------------------</span></span>
+<span class="line"><span style="color:#C0CAF5">Ran</span><span style="color:#FF9E64"> 1</span><span style="color:#9ECE6A"> test</span><span style="color:#9ECE6A"> in</span><span style="color:#9ECE6A"> 0.005s</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">FAILED</span><span style="color:#A9B1D6"> (failures=1)</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>期待通り、失敗しました。
 <strong>ロジックを誤る</strong> というのは、保守を続けていくと、<strong>ほぼ間違いなく発生</strong> します。
 その際、 <strong>ロジックが誤っている</strong> と気付ける、つまりデグレを気づける事が大切です。
@@ -118,58 +149,55 @@ FAILED (failures=1)
 <h2 id="xunit-x-bigquery">xUnit x BigQuery</h2>
 <p>BigQuery の場合、どのようにテストすればよいのでしょうか。
 まず、BigQuery の SQL を書くために元データを用意します。</p>
-<pre><code class="language-sql">-- fruits_ct.sql
--- destination:
---   dataset: shop
---   table: fruits
-CREATE OR REPLACE TABLE
-  shop.fruits AS
-SELECT
-  price,
-  name
-FROM (
-  SELECT
-    130 AS price,
-    "apple" AS name
-  UNION ALL
-  SELECT
-    120 AS price,
-    "banana" AS name
-  UNION ALL
-  SELECT
-    110 AS price,
-    "grape" AS name
-  UNION ALL
-  SELECT
-    100 AS price,
-    "lemon" AS name
-  UNION ALL
-  SELECT
-    90 AS price,
-    "orange" AS name )
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- fruits_ct.sql</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">-- destination:</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--   dataset: shop</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--   table: fruits</span></span>
+<span class="line"><span style="color:#89DDFF">CREATE</span><span style="color:#7DCFFF"> OR</span><span style="color:#89DDFF"> REPLACE</span><span style="color:#89DDFF"> TABLE</span></span>
+<span class="line"><span style="color:#E0AF68">  shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits</span><span style="color:#89DDFF"> AS</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#A9B1D6">  price,</span></span>
+<span class="line"><span style="color:#89DDFF">  name</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span><span style="color:#A9B1D6"> (</span></span>
+<span class="line"><span style="color:#7DCFFF">  SELECT</span></span>
+<span class="line"><span style="color:#FF9E64">    130</span><span style="color:#89DDFF"> AS</span><span style="color:#A9B1D6"> price,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">apple</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> AS</span><span style="color:#89DDFF"> name</span></span>
+<span class="line"><span style="color:#7DCFFF">  UNION ALL</span></span>
+<span class="line"><span style="color:#7DCFFF">  SELECT</span></span>
+<span class="line"><span style="color:#FF9E64">    120</span><span style="color:#89DDFF"> AS</span><span style="color:#A9B1D6"> price,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">banana</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> AS</span><span style="color:#89DDFF"> name</span></span>
+<span class="line"><span style="color:#7DCFFF">  UNION ALL</span></span>
+<span class="line"><span style="color:#7DCFFF">  SELECT</span></span>
+<span class="line"><span style="color:#FF9E64">    110</span><span style="color:#89DDFF"> AS</span><span style="color:#A9B1D6"> price,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">grape</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> AS</span><span style="color:#89DDFF"> name</span></span>
+<span class="line"><span style="color:#7DCFFF">  UNION ALL</span></span>
+<span class="line"><span style="color:#7DCFFF">  SELECT</span></span>
+<span class="line"><span style="color:#FF9E64">    100</span><span style="color:#89DDFF"> AS</span><span style="color:#A9B1D6"> price,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">lemon</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> AS</span><span style="color:#89DDFF"> name</span></span>
+<span class="line"><span style="color:#7DCFFF">  UNION ALL</span></span>
+<span class="line"><span style="color:#7DCFFF">  SELECT</span></span>
+<span class="line"><span style="color:#FF9E64">    90</span><span style="color:#89DDFF"> AS</span><span style="color:#A9B1D6"> price,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">orange</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> AS</span><span style="color:#89DDFF"> name</span><span style="color:#A9B1D6"> )</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
 <p>shop.fruits テーブルから、先程の Python コードにあった<code>get_less_than</code>関数相当の SQL を用意します。</p>
-<pre><code class="language-sql">-- fruits_less_than_100.sql
--- destination
---   dataset: shop
---   table: fruits_less_than_100
-SELECT
-  price,
-  name
-FROM
-  shop.fruits
-WHERE
-  price &lt; 100
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- fruits_less_than_100.sql</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">-- destination</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--   dataset: shop</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--   table: fruits_less_than_100</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#A9B1D6">  price,</span></span>
+<span class="line"><span style="color:#89DDFF">  name</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span></span>
+<span class="line"><span style="color:#E0AF68">  shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits</span></span>
+<span class="line"><span style="color:#7DCFFF">WHERE</span></span>
+<span class="line"><span style="color:#A9B1D6">  price </span><span style="color:#BB9AF7">&lt;</span><span style="color:#FF9E64"> 100</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
 <p>出力された<code>fruits_less_than_100</code>テーブルに対して、ユニットテストを書いてみます。</p>
-<pre><code class="language-sql">-- test_fruits_less_than_100.sql
-ASSERT
-  (
-  SELECT
-    COUNT(name) = 1
-  FROM
-    shop.fruits_less_than_100) AS "There's one fruit less than 100."
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- test_fruits_less_than_100.sql</span></span>
+<span class="line"><span style="color:#A9B1D6">ASSERT</span></span>
+<span class="line"><span style="color:#A9B1D6">  (</span></span>
+<span class="line"><span style="color:#7DCFFF">  SELECT</span></span>
+<span class="line"><span style="color:#0DB9D7">    COUNT</span><span style="color:#A9B1D6">(</span><span style="color:#89DDFF">name</span><span style="color:#A9B1D6">) </span><span style="color:#BB9AF7">=</span><span style="color:#FF9E64"> 1</span></span>
+<span class="line"><span style="color:#7DCFFF">  FROM</span></span>
+<span class="line"><span style="color:#E0AF68">    shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits_less_than_100</span><span style="color:#A9B1D6">) </span><span style="color:#89DDFF">AS</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">There's one fruit less than 100.</span><span style="color:#89DDFF">"</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
 <p>このテストにより <code>fruits_less_than_100</code>テーブルに対して、次のことを保証できました。</p>
 <ul>
 <li>price が 100 未満の fruit は 1 つ</li>
@@ -196,33 +224,31 @@ ASSERT
 </blockquote>
 <p>※ <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/table-functions"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/cloud.google.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">テーブル関数|BigQuery|Google Cloud<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
 <p>テーブル関数の定義は、次のようなサンプルコードがあります。</p>
-<pre><code class="language-sql">-- names_by_year.tvf.sql
-CREATE OR REPLACE TABLE
-  FUNCTION mydataset.names_by_year(y INT64) AS
-SELECT
-  year,
-  name,
-  SUM(number) AS total
-FROM
-  `bigquery-public-data.usa_names.usa_1910_current`
-WHERE
-  year = y
-GROUP BY
-  year,
-  name
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- names_by_year.tvf.sql</span></span>
+<span class="line"><span style="color:#89DDFF">CREATE</span><span style="color:#7DCFFF"> OR</span><span style="color:#89DDFF"> REPLACE</span><span style="color:#89DDFF"> TABLE</span></span>
+<span class="line"><span style="color:#89DDFF">  FUNCTION</span><span style="color:#E0AF68"> mydataset</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">names_by_year</span><span style="color:#A9B1D6">(y INT64) </span><span style="color:#89DDFF">AS</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#89DDFF">  year</span><span style="color:#A9B1D6">,</span></span>
+<span class="line"><span style="color:#89DDFF">  name</span><span style="color:#A9B1D6">,</span></span>
+<span class="line"><span style="color:#0DB9D7">  SUM</span><span style="color:#A9B1D6">(</span><span style="color:#BB9AF7">number</span><span style="color:#A9B1D6">) </span><span style="color:#89DDFF">AS</span><span style="color:#A9B1D6"> total</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span></span>
+<span class="line"><span style="color:#89DDFF">  `</span><span style="color:#9ECE6A">bigquery-public-data.usa_names.usa_1910_current</span><span style="color:#89DDFF">`</span></span>
+<span class="line"><span style="color:#7DCFFF">WHERE</span></span>
+<span class="line"><span style="color:#89DDFF">  year</span><span style="color:#BB9AF7"> =</span><span style="color:#A9B1D6"> y</span></span>
+<span class="line"><span style="color:#7DCFFF">GROUP BY</span></span>
+<span class="line"><span style="color:#89DDFF">  year</span><span style="color:#A9B1D6">,</span></span>
+<span class="line"><span style="color:#89DDFF">  name</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
 <p>特徴は、<code>CREATE OR REPLACE TABLE FUNCTION</code> です。関数を定義し、テーブル情報を返り値とします。今回のケースでは、<code>year, name, total</code> のフィールドを持つテーブルです。</p>
 <p>定義したテーブル関数は、次のように使います。</p>
-<pre><code class="language-sql">-- names_by_year.sql
-SELECT
-  *
-FROM
-  mydataset.names_by_year(1950)
-ORDER BY
-  total DESC
-LIMIT
-  5
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- names_by_year.sql</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#89DDFF">  *</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span></span>
+<span class="line"><span style="color:#E0AF68">  mydataset</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">names_by_year</span><span style="color:#A9B1D6">(</span><span style="color:#FF9E64">1950</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#7DCFFF">ORDER BY</span></span>
+<span class="line"><span style="color:#A9B1D6">  total </span><span style="color:#89DDFF">DESC</span></span>
+<span class="line"><span style="color:#7DCFFF">LIMIT</span></span>
+<span class="line"><span style="color:#FF9E64">  5</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
 <p>テーブル関数は、<code>FROM句</code>に使えます。私は、ここに着目しました。
 FROM 句で関数呼び出しする際、モックデータを返却できるようにできないかと考えました。</p>
 <p>そこで、次の章にある手段を発見しました。</p>
@@ -237,38 +263,37 @@ FROM 句で関数呼び出しする際、モックデータを返却できるよ
 <p>① 番目は、<code>元データをMock差し替えできるように、テーブル関数化</code> です。</p>
 <p>元データは、今回<code>shop.fruits</code>テーブルですので、Mock で差し替えられるようにテーブル関数化します。
 次のコードが、Mock 差し替え可能なテーブル関数です。</p>
-<pre><code class="language-sql">-- fruits_tvf.sql
---   function:
---    - shop.fruits_inject()
---    - shop.fruits(is_test BOOL)
-CREATE OR REPLACE TABLE
-  FUNCTION shop.fruits_inject() AS
-SELECT
-  *
-FROM (
-  SELECT
-    130 AS price,
-    "apple" AS name )
-WHERE
-  1 &lt;&gt; 1;
-CREATE OR REPLACE TABLE
-  FUNCTION shop.fruits(is_test BOOL) AS
-SELECT
-  name,
-  price
-FROM
-  shop.fruits
-WHERE
-  NOT is_test
-UNION ALL
-SELECT
-  name,
-  price
-FROM
-  shop.fruits_inject()
-WHERE
-  is_test
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- fruits_tvf.sql</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--   function:</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--    - shop.fruits_inject()</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--    - shop.fruits(is_test BOOL)</span></span>
+<span class="line"><span style="color:#89DDFF">CREATE</span><span style="color:#7DCFFF"> OR</span><span style="color:#89DDFF"> REPLACE</span><span style="color:#89DDFF"> TABLE</span></span>
+<span class="line"><span style="color:#89DDFF">  FUNCTION</span><span style="color:#E0AF68"> shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits_inject</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF"> AS</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#89DDFF">  *</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span><span style="color:#A9B1D6"> (</span></span>
+<span class="line"><span style="color:#7DCFFF">  SELECT</span></span>
+<span class="line"><span style="color:#FF9E64">    130</span><span style="color:#89DDFF"> AS</span><span style="color:#A9B1D6"> price,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">apple</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> AS</span><span style="color:#89DDFF"> name</span><span style="color:#A9B1D6"> )</span></span>
+<span class="line"><span style="color:#7DCFFF">WHERE</span></span>
+<span class="line"><span style="color:#FF9E64">  1</span><span style="color:#BB9AF7"> &lt;&gt;</span><span style="color:#FF9E64"> 1</span><span style="color:#A9B1D6">;</span></span>
+<span class="line"><span style="color:#89DDFF">CREATE</span><span style="color:#7DCFFF"> OR</span><span style="color:#89DDFF"> REPLACE</span><span style="color:#89DDFF"> TABLE</span></span>
+<span class="line"><span style="color:#89DDFF">  FUNCTION</span><span style="color:#E0AF68"> shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits</span><span style="color:#A9B1D6">(is_test BOOL) </span><span style="color:#89DDFF">AS</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#89DDFF">  name</span><span style="color:#A9B1D6">,</span></span>
+<span class="line"><span style="color:#A9B1D6">  price</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span></span>
+<span class="line"><span style="color:#E0AF68">  shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits</span></span>
+<span class="line"><span style="color:#7DCFFF">WHERE</span></span>
+<span class="line"><span style="color:#89DDFF">  NOT</span><span style="color:#A9B1D6"> is_test</span></span>
+<span class="line"><span style="color:#7DCFFF">UNION ALL</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#89DDFF">  name</span><span style="color:#A9B1D6">,</span></span>
+<span class="line"><span style="color:#A9B1D6">  price</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span></span>
+<span class="line"><span style="color:#E0AF68">  shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits_inject</span><span style="color:#9ABDF5">()</span></span>
+<span class="line"><span style="color:#7DCFFF">WHERE</span></span>
+<span class="line"><span style="color:#A9B1D6">  is_test</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
 <p>この SQL には、2 つのステートメントがあります。</p>
 <ol>
 <li>テーブル関数 shop.fruits_inject の定義</li>
@@ -293,69 +318,66 @@ WHERE
 <p>② 番目は、<code>ロジックを含んだSQLのFROM句を、①のテーブル関数に差し替えて、テーブル関数化</code> です。</p>
 <p>ロジックを含んだ SQL、今回は、<code>fruits_less_than_100</code>テーブルを関数化します。
 次のコードが、① のテーブル関数で差し替えたテーブル関数です。</p>
-<pre><code class="language-sql">-- fruits_less_than_tvf.sql
---  function:
---    - shop.fruits_less_than(is_test BOOL, p INT)
-CREATE OR REPLACE TABLE
-  FUNCTION shop.fruits_less_than(is_test BOOL,
-    p INT) AS
-SELECT
-  price,
-  name
-FROM
-  shop.fruits(is_test)
-WHERE
-  price &lt; p
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- fruits_less_than_tvf.sql</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--  function:</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--    - shop.fruits_less_than(is_test BOOL, p INT)</span></span>
+<span class="line"><span style="color:#89DDFF">CREATE</span><span style="color:#7DCFFF"> OR</span><span style="color:#89DDFF"> REPLACE</span><span style="color:#89DDFF"> TABLE</span></span>
+<span class="line"><span style="color:#89DDFF">  FUNCTION</span><span style="color:#E0AF68"> shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits_less_than</span><span style="color:#A9B1D6">(is_test BOOL,</span></span>
+<span class="line"><span style="color:#A9B1D6">    p </span><span style="color:#BB9AF7">INT</span><span style="color:#A9B1D6">) </span><span style="color:#89DDFF">AS</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#A9B1D6">  price,</span></span>
+<span class="line"><span style="color:#89DDFF">  name</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span></span>
+<span class="line"><span style="color:#E0AF68">  shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits</span><span style="color:#A9B1D6">(is_test)</span></span>
+<span class="line"><span style="color:#7DCFFF">WHERE</span></span>
+<span class="line"><span style="color:#A9B1D6">  price </span><span style="color:#BB9AF7">&lt;</span><span style="color:#A9B1D6"> p</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
 <p>FROM 句に、先程 ① 番で定義した shop.fruits テーブル関数を呼び出します。
 shop.fruits テーブル関数の引数は、shop.fruits_less_than 関数から渡ってくる<code>is_test BOOL</code>をそのままセットします。
 また、shop.fruits_less_than 関数には、<code>p INT</code>という引数も持ち、less_than の price を柔軟に対応できるようにします。</p>
 <hr>
 <p>これにて、テーブル関数化を終えました。次は、プロダクトコードとテストコードを紹介します。</p>
 <p>では、まずプロダクションコードを書きます。</p>
-<pre><code class="language-sql">-- fruits_less_than_100.sql
--- destination
---   dataset: shop
---   table: fruits_less_than_100
-SELECT
-  price,
-  name,
-FROM
-  shop.fruits_less_than(False, 100)
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- fruits_less_than_100.sql</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">-- destination</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--   dataset: shop</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--   table: fruits_less_than_100</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#A9B1D6">  price,</span></span>
+<span class="line"><span style="color:#89DDFF">  name</span><span style="color:#A9B1D6">,</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span></span>
+<span class="line"><span style="color:#E0AF68">  shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits_less_than</span><span style="color:#A9B1D6">(False, </span><span style="color:#FF9E64">100</span><span style="color:#A9B1D6">)</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
 <p>取り上げて重要なことは、ありません。プロダクションコードは、is_test を False とします。</p>
 <p>次が、本記事のメインである、 <strong>BigQuery の SQL に対するユニットテストコード</strong> です。</p>
-<pre><code class="language-sql">-- test_fruits_less_than_100.sql
--- arrange
-CREATE OR REPLACE TABLE
-  FUNCTION shop.fruits_inject() AS
-SELECT
-  110 AS price,
-  "grape" AS name
-UNION ALL
-SELECT
-  100 AS price,
-  "lemon" AS name
-UNION ALL
-SELECT
-  90 AS price,
-  "orange" AS name;
--- act
-  CREATE TEMP TABLE fruits_less_than_100 AS
-SELECT
-  price,
-  name,
-FROM
-  shop.fruits_less_than(True,
-    100);
--- assert
-ASSERT
-  (
-  SELECT
-    COUNT(name) = 1
-  FROM
-    fruits_less_than_100) AS "There's one fruit less than 100."
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- test_fruits_less_than_100.sql</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">-- arrange</span></span>
+<span class="line"><span style="color:#89DDFF">CREATE</span><span style="color:#7DCFFF"> OR</span><span style="color:#89DDFF"> REPLACE</span><span style="color:#89DDFF"> TABLE</span></span>
+<span class="line"><span style="color:#89DDFF">  FUNCTION</span><span style="color:#E0AF68"> shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits_inject</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF"> AS</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#FF9E64">  110</span><span style="color:#89DDFF"> AS</span><span style="color:#A9B1D6"> price,</span></span>
+<span class="line"><span style="color:#89DDFF">  "</span><span style="color:#9ECE6A">grape</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> AS</span><span style="color:#89DDFF"> name</span></span>
+<span class="line"><span style="color:#7DCFFF">UNION ALL</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#FF9E64">  100</span><span style="color:#89DDFF"> AS</span><span style="color:#A9B1D6"> price,</span></span>
+<span class="line"><span style="color:#89DDFF">  "</span><span style="color:#9ECE6A">lemon</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> AS</span><span style="color:#89DDFF"> name</span></span>
+<span class="line"><span style="color:#7DCFFF">UNION ALL</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#FF9E64">  90</span><span style="color:#89DDFF"> AS</span><span style="color:#A9B1D6"> price,</span></span>
+<span class="line"><span style="color:#89DDFF">  "</span><span style="color:#9ECE6A">orange</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> AS</span><span style="color:#89DDFF"> name</span><span style="color:#A9B1D6">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">-- act</span></span>
+<span class="line"><span style="color:#89DDFF">  CREATE</span><span style="color:#A9B1D6"> TEMP </span><span style="color:#89DDFF">TABLE</span><span style="color:#A9B1D6"> fruits_less_than_100 </span><span style="color:#89DDFF">AS</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#A9B1D6">  price,</span></span>
+<span class="line"><span style="color:#89DDFF">  name</span><span style="color:#A9B1D6">,</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span></span>
+<span class="line"><span style="color:#E0AF68">  shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits_less_than</span><span style="color:#A9B1D6">(True,</span></span>
+<span class="line"><span style="color:#FF9E64">    100</span><span style="color:#A9B1D6">);</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">-- assert</span></span>
+<span class="line"><span style="color:#A9B1D6">ASSERT</span></span>
+<span class="line"><span style="color:#A9B1D6">  (</span></span>
+<span class="line"><span style="color:#7DCFFF">  SELECT</span></span>
+<span class="line"><span style="color:#0DB9D7">    COUNT</span><span style="color:#A9B1D6">(</span><span style="color:#89DDFF">name</span><span style="color:#A9B1D6">) </span><span style="color:#BB9AF7">=</span><span style="color:#FF9E64"> 1</span></span>
+<span class="line"><span style="color:#7DCFFF">  FROM</span></span>
+<span class="line"><span style="color:#A9B1D6">    fruits_less_than_100) </span><span style="color:#89DDFF">AS</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">There's one fruit less than 100.</span><span style="color:#89DDFF">"</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
 <p>この SQL は、3 つのステートメントがあります。</p>
 <ol>
 <li>shop.fruits_inject 関数の上書き( <strong>モックの差し込み</strong> )</li>
@@ -366,72 +388,68 @@ ASSERT
 そうすると、shop.fruits 関数で参照する shop.fruits_inject 関数結果が、上書きされたものに切り替わります。</p>
 <p>後は、② 番で shop.fruits_less_than 関数を呼んで一時テーブル保存し、③ 番でアサーションします。</p>
 <p>では、テストを失敗させてみましょう。ロジックを含んでいる shop.fruits_less_than 関数を、次のように書き換えます。</p>
-<pre><code class="language-sql">-- fruits_less_than_tvf.sql
---  function:
---    - shop.fruits_less_than(is_test BOOL, p INT)
-CREATE OR REPLACE TABLE
-  FUNCTION shop.fruits_less_than(is_test BOOL,
-    p INT) AS
-SELECT
-  price,
-  name
-FROM
-  shop.fruits(is_test)
-WHERE
-  -- price &lt; p
-  price &lt;= p
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#51597D;font-style:italic">-- fruits_less_than_tvf.sql</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--  function:</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">--    - shop.fruits_less_than(is_test BOOL, p INT)</span></span>
+<span class="line"><span style="color:#89DDFF">CREATE</span><span style="color:#7DCFFF"> OR</span><span style="color:#89DDFF"> REPLACE</span><span style="color:#89DDFF"> TABLE</span></span>
+<span class="line"><span style="color:#89DDFF">  FUNCTION</span><span style="color:#E0AF68"> shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits_less_than</span><span style="color:#A9B1D6">(is_test BOOL,</span></span>
+<span class="line"><span style="color:#A9B1D6">    p </span><span style="color:#BB9AF7">INT</span><span style="color:#A9B1D6">) </span><span style="color:#89DDFF">AS</span></span>
+<span class="line"><span style="color:#7DCFFF">SELECT</span></span>
+<span class="line"><span style="color:#A9B1D6">  price,</span></span>
+<span class="line"><span style="color:#89DDFF">  name</span></span>
+<span class="line"><span style="color:#7DCFFF">FROM</span></span>
+<span class="line"><span style="color:#E0AF68">  shop</span><span style="color:#A9B1D6">.</span><span style="color:#E0AF68">fruits</span><span style="color:#A9B1D6">(is_test)</span></span>
+<span class="line"><span style="color:#7DCFFF">WHERE</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  -- price &lt; p</span></span>
+<span class="line"><span style="color:#A9B1D6">  price </span><span style="color:#BB9AF7">&lt;=</span><span style="color:#A9B1D6"> p</span></span></code></pre><figcaption class="notebook-code-language">SQL</figcaption></figure>
 <p>WHERE 句の price が 100 未満ではなく、100 以下になっているので、<code>orange</code>と<code>lemon</code>の 2 つが抽出されます。</p>
 <p>この関数を再度定義し、もう一度テストを実行してみましょう。
 そうすると、次のようなメッセージが出力されます。</p>
-<pre><code class="language-text">Query error: There's one fruit less than 100. at [25:1]
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Query error: There's one fruit less than 100. at [25:1]</span></span></code></pre><figcaption class="notebook-code-language">テキスト</figcaption></figure>
 <p>期待通り、テストは失敗しました！🎉</p>
 <hr>
 <p>BigQuery のユニットテストができるようになれば、次は CI に組み込みたいと思うはずです。
 BigQuery は、GCP のサービスなので、GCP の CI サービスとして有名な Cloud Build を活用しようと思います。
 Cloud Build の定義ファイルを、次に示します。</p>
-<pre><code class="language-yaml">-- cloudbuild.yaml
-steps:
-  # If you want to receive notifications from Slack, uncomment it.
-  # Then follow the README.md at the following URL to set it up.
-  # https://github.com/GoogleCloudPlatform/cloud-builders-community/tree/master/slackbot
-  # - name: "gcr.io/$PROJECT_ID/slackbot"
-  #   id: "WATCH"
-  #   args: [
-  #     "--build", "$BUILD_ID",
-  #     "--webhook", "$_SLACK_WEB_HOOK"
-  #   ]
-  - name: gcr.io/cloud-builders/gcloud-slim
-    id: fruits_ct
-    entrypoint: 'bash'
-    args: ['run_query.sh', 'fruits_ct.sql']
-  - name: gcr.io/cloud-builders/gcloud-slim
-    id: fruits_tvf
-    entrypoint: 'bash'
-    args: ['run_query.sh', 'fruits_tvf.sql']
-    waitFor:
-      - fruits_ct
-  - name: gcr.io/cloud-builders/gcloud-slim
-    id: fruits_less_than_tvf
-    entrypoint: 'bash'
-    args: ['run_query.sh', 'fruits_less_than_tvf.sql']
-    waitFor:
-      - fruits_tvf
-  - name: gcr.io/cloud-builders/gcloud-slim
-    id: test_fruits_less_than_100
-    entrypoint: 'bash'
-    args: ['run_query.sh', 'test_fruits_less_than_100.sql']
-    waitFor:
-      - fruits_less_than_tvf
-</code></pre>
-<pre><code class="language-shell">#!/bin/bash
-## run_query.sh
-if [ $# -eq 0 ]; then
-  echo "No arguments supplied"
-fi
-bq query --use_legacy_sql=false &lt; $1
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#9ECE6A">-- cloudbuild.yaml</span></span>
+<span class="line"><span style="color:#F7768E">steps</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  # If you want to receive notifications from Slack, uncomment it.</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  # Then follow the README.md at the following URL to set it up.</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  # https://github.com/GoogleCloudPlatform/cloud-builders-community/tree/master/slackbot</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  # - name: "gcr.io/$PROJECT_ID/slackbot"</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  #   id: "WATCH"</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  #   args: [</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  #     "--build", "$BUILD_ID",</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  #     "--webhook", "$_SLACK_WEB_HOOK"</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  #   ]</span></span>
+<span class="line"><span style="color:#9ABDF5">  -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> gcr.io/cloud-builders/gcloud-slim</span></span>
+<span class="line"><span style="color:#F7768E">    id</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> fruits_ct</span></span>
+<span class="line"><span style="color:#F7768E">    entrypoint</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">bash</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#F7768E">    args</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">run_query.sh</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">fruits_ct.sql</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#9ABDF5">  -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> gcr.io/cloud-builders/gcloud-slim</span></span>
+<span class="line"><span style="color:#F7768E">    id</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> fruits_tvf</span></span>
+<span class="line"><span style="color:#F7768E">    entrypoint</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">bash</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#F7768E">    args</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">run_query.sh</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">fruits_tvf.sql</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#F7768E">    waitFor</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#9ECE6A"> fruits_ct</span></span>
+<span class="line"><span style="color:#9ABDF5">  -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> gcr.io/cloud-builders/gcloud-slim</span></span>
+<span class="line"><span style="color:#F7768E">    id</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> fruits_less_than_tvf</span></span>
+<span class="line"><span style="color:#F7768E">    entrypoint</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">bash</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#F7768E">    args</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">run_query.sh</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">fruits_less_than_tvf.sql</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#F7768E">    waitFor</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#9ECE6A"> fruits_tvf</span></span>
+<span class="line"><span style="color:#9ABDF5">  -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> gcr.io/cloud-builders/gcloud-slim</span></span>
+<span class="line"><span style="color:#F7768E">    id</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> test_fruits_less_than_100</span></span>
+<span class="line"><span style="color:#F7768E">    entrypoint</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">bash</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#F7768E">    args</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">run_query.sh</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">test_fruits_less_than_100.sql</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#F7768E">    waitFor</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#9ECE6A"> fruits_less_than_tvf</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#51597D;font-style:italic">#!/bin/bash</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">## run_query.sh</span></span>
+<span class="line"><span style="color:#BB9AF7">if</span><span style="color:#89DDFF"> [</span><span style="color:#F7768E"> $#</span><span style="color:#BB9AF7"> -eq</span><span style="color:#FF9E64"> 0</span><span style="color:#89DDFF"> ];</span><span style="color:#BB9AF7"> then</span></span>
+<span class="line"><span style="color:#0DB9D7">  echo</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">No arguments supplied</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#BB9AF7">fi</span></span>
+<span class="line"><span style="color:#C0CAF5">bq</span><span style="color:#9ECE6A"> query</span><span style="color:#E0AF68"> --use_legacy_sql=false</span><span style="color:#89DDFF"> &lt;</span><span style="color:#E0AF68"> $1</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>Cloud Build を Github 等の Git プラットフォームと連携すれば、Git のイベント毎(Push,Merge,etc)にユニットテストを動かすことができます。</p>
 <p>※ サンプルの cloudbuild.yaml にある、<code>id:fruits_ct</code>や<code>id:fruits_tvf</code>、<code>id:fruits_less_than_tvf</code>は何度も実行するものではないのですが、
 記事をわかりやすくするために書いています。</p>

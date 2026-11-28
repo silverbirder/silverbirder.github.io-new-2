@@ -4,53 +4,88 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2022-08-23" data-pagefind-filter="month:2022-08" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">88</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-08-23"><span class="visually-hidden">2022年8月23日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">08</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">23</span></span></time></p></div><div class="notebook-heading"><h1>CI/CDのDaggerで、GithubActionsとCircleCIにシュッと連携してみた</h1></div></header><div class="notebook-body"><p>前々から気になっていた、CI/CD の非ベンダーロックインな Dagger というツールを試してみました。
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2022-08-23" data-pagefind-filter="month:2022-08" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">88</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-08-23"><span class="visually-hidden">2022年8月23日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">08</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">23</span></span></time></p></div><div class="notebook-heading"><h1>CI/CDのDaggerで、GithubActionsとCircleCIにシュッと連携してみた</h1></div></header><div class="notebook-body"><p>前々から気になっていた、CI/CD の非ベンダーロックインな Dagger というツールを試してみました。
 本記事では、試した内容について共有しようと思います。</p>
 <h2 id="cicd-のパイプラインを書く">CI/CD のパイプラインを書く</h2>
 <p>Dagger では、<a href="https://cuelang.org/"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/cuelang.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">CUE<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a> という言語を使って CI/CD のパイプラインを書きます。
 <a href="https://docs.dagger.io/1200/local-dev"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/docs.dagger.io.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">公式サイトのチュートリアル<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>から、そのまま使ってみます。
 コードは、次のようなものになります。</p>
-<pre><code class="language-go">package todoapp
-
-import (
- "dagger.io/dagger"
-
- "dagger.io/dagger/core"
- "universe.dagger.io/netlify"
- "universe.dagger.io/yarn"
-)
-
-dagger.#Plan &amp; {
- actions: {
-  source: core.#Source &amp; {
-   path: "."
-   exclude: [
-    "node_modules",
-    "build",
-    "*.cue",
-    "*.md",
-    ".git",
-   ]
-  }
-
-  build: yarn.#Script &amp; {
-   name:   "build"
-   source: actions.source.output
-  }
-
-  test: yarn.#Script &amp; {
-   name:   "test"
-   source: actions.source.output
-   container: env: CI: "true"
-  }
-
-  deploy: netlify.#Deploy &amp; {
-   contents: actions.build.output
-   site:     string | *"dagger-todoapp"
-  }
- }
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#BB9AF7">package</span><span style="color:#C0CAF5"> todoapp</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#89DDFF"> (</span></span>
+<span class="line"><span style="color:#89DDFF"> "</span><span style="color:#C0CAF5">dagger.io/dagger</span><span style="color:#89DDFF">"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF"> "</span><span style="color:#C0CAF5">dagger.io/dagger/core</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#89DDFF"> "</span><span style="color:#C0CAF5">universe.dagger.io/netlify</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#89DDFF"> "</span><span style="color:#C0CAF5">universe.dagger.io/yarn</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#89DDFF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">dagger</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">#</span><span style="color:#C0CAF5">Plan</span><span style="color:#89DDFF"> &amp;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7DCFFF"> actions</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7DCFFF">  source</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> core</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">#</span><span style="color:#C0CAF5">Source</span><span style="color:#89DDFF"> &amp;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7DCFFF">   path</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">.</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#7DCFFF">   exclude</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">node_modules</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">build</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">*.cue</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">*.md</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">.git</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">   ]</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">  build</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> yarn</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">#</span><span style="color:#C0CAF5">Script</span><span style="color:#89DDFF"> &amp;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7DCFFF">   name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF">   "</span><span style="color:#9ECE6A">build</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#7DCFFF">   source</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> actions</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">source</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">output</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">  test</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> yarn</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">#</span><span style="color:#C0CAF5">Script</span><span style="color:#89DDFF"> &amp;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7DCFFF">   name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF">   "</span><span style="color:#9ECE6A">test</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#7DCFFF">   source</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> actions</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">source</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">output</span></span>
+<span class="line"><span style="color:#7DCFFF">   container</span><span style="color:#89DDFF">:</span><span style="color:#7DCFFF"> env</span><span style="color:#89DDFF">:</span><span style="color:#7DCFFF"> CI</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">true</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">  deploy</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> netlify</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">#</span><span style="color:#C0CAF5">Deploy</span><span style="color:#89DDFF"> &amp;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7DCFFF">   contents</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> actions</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">build</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">output</span></span>
+<span class="line"><span style="color:#7DCFFF">   site</span><span style="color:#89DDFF">:</span><span style="color:#BB9AF7">     string</span><span style="color:#89DDFF"> |</span><span style="color:#89DDFF"> *</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">dagger-todoapp</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5"> }</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">GO</figcaption></figure>
 <p>見慣れない構文かもしれませんが、何をやっているかはなんとなく分かるんじゃないかなと思います。
 actions は、実行するものを定義していて、<code>dagger do &lt;action名&gt;</code> のようにして使います。
 上の定義にある<code>source: core.#Source</code> は、 <code>source</code> がアクション名で、<code>core</code> が実行するパッケージになります。
@@ -77,131 +112,126 @@ actions は、実行するものを定義していて、<code>dagger do &lt;acti
 </ul>
 <h2 id="ローカル環境で-dagger-を動かす">ローカル環境で Dagger を動かす</h2>
 <p>実際にローカルで動かしてみます。</p>
-<pre><code class="language-bash">dagger do test
-[✔] actions.test.container                                                                                                                11.6s
-[✔] actions.test.install.container.script                                                                                                  0.1s
-[✔] actions.source                                                                                                                         0.5s
-[✔] actions.test.install.container                                                                                                         2.3s
-[✔] actions.test.container.script                                                                                                          0.1s
-[✔] actions.test.install.container.export                                                                                                  0.0s
-[✔] actions.test.container.export                                                                                                          0.2s
-Field  Value
-logs   """\n  yarn run v1.22.17\n  $ react-scripts test\n  Done in 6.78s.\n\n  """
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">dagger</span><span style="color:#9ECE6A"> do</span><span style="color:#9ECE6A"> test</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.test.container                                                                                                                11.6s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.test.install.container.script                                                                                                  0.1s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.source                                                                                                                         0.5s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.test.install.container                                                                                                         2.3s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.test.container.script                                                                                                          0.1s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.test.install.container.export                                                                                                  0.0s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.test.container.export                                                                                                          0.2s</span></span>
+<span class="line"><span style="color:#C0CAF5">Field</span><span style="color:#9ECE6A">  Value</span></span>
+<span class="line"><span style="color:#C0CAF5">logs</span><span style="color:#89DDFF">   """</span><span style="color:#9ECE6A">\n  yarn run v1.22.17\n  $ react-scripts test\n  Done in 6.78s.\n\n  </span><span style="color:#89DDFF">"""</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>特に問題なく、PASS しています。<code>--log-format plain</code> をつけると、実行の詳細な情報が出力されます。</p>
-<pre><code class="language-bash">dagger do test --log-format plain
-8:06PM INFO  actions.test.install.container.script._write | computing
-8:06PM INFO  actions.test.container._image._dag."0"._pull | computing
-8:06PM INFO  actions.test.install.container._image._dag."0"._pull | computing
-8:06PM INFO  actions.test.container.script._write | computing
-8:06PM INFO  actions.source | computing
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">dagger</span><span style="color:#9ECE6A"> do</span><span style="color:#9ECE6A"> test</span><span style="color:#E0AF68"> --log-format</span><span style="color:#9ECE6A"> plain</span></span>
+<span class="line"><span style="color:#C0CAF5">8:06PM</span><span style="color:#9ECE6A"> INFO</span><span style="color:#9ECE6A">  actions.test.install.container.script._write</span><span style="color:#89DDFF"> |</span><span style="color:#C0CAF5"> computing</span></span>
+<span class="line"><span style="color:#C0CAF5">8:06PM</span><span style="color:#9ECE6A"> INFO</span><span style="color:#9ECE6A">  actions.test.container._image._dag.</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">0</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">._pull</span><span style="color:#89DDFF"> |</span><span style="color:#C0CAF5"> computing</span></span>
+<span class="line"><span style="color:#C0CAF5">8:06PM</span><span style="color:#9ECE6A"> INFO</span><span style="color:#9ECE6A">  actions.test.install.container._image._dag.</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">0</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">._pull</span><span style="color:#89DDFF"> |</span><span style="color:#C0CAF5"> computing</span></span>
+<span class="line"><span style="color:#C0CAF5">8:06PM</span><span style="color:#9ECE6A"> INFO</span><span style="color:#9ECE6A">  actions.test.container.script._write</span><span style="color:#89DDFF"> |</span><span style="color:#C0CAF5"> computing</span></span>
+<span class="line"><span style="color:#C0CAF5">8:06PM</span><span style="color:#9ECE6A"> INFO</span><span style="color:#9ECE6A">  actions.source</span><span style="color:#89DDFF"> |</span><span style="color:#C0CAF5"> computing</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>ちなみに、<code>actions.source</code> が実行されているのは、<code>actions.test</code>が<code>actions.source</code>に依存しているためと思います。</p>
-<pre><code class="language-bash">NETLIFY_TOKEN=USER dagger do deploy
-[✔] actions.deploy.container.script                                                                                                        0.2s
-[✔] actions.build.install.container                                                                                                        3.8s
-[✔] client.env                                                                                                                             0.0s
-[✔] actions.source                                                                                                                         0.4s
-[✔] actions.build.install.container.script                                                                                                 0.2s
-[✔] actions.build.container                                                                                                               21.0s
-[✔] actions.build.container.script                                                                                                         0.2s
-[✔] actions.deploy                                                                                                                         4.8s
-[✔] actions.build.install.container.export                                                                                                 0.1s
-[✔] actions.build.container.export                                                                                                         0.1s
-[✔] actions.deploy.container                                                                                                              91.0s
-[✔] client.filesystem."./build".write                                                                                                      0.3s
-[✔] actions.deploy.container.export                                                                                                        0.0s
-Field      Value
-site       "****-dagger-todoapp"
-url        "https://******-dagger-todoapp.netlify.app"
-deployUrl  "https://xxxx--******-dagger-todoapp.netlify.app"
-logsUrl    "https://app.netlify.com/sites/******-dagger-todoapp/deploys/xxxx"
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">NETLIFY_TOKEN</span><span style="color:#89DDFF">=</span><span style="color:#9ECE6A">USER</span><span style="color:#C0CAF5"> dagger</span><span style="color:#9ECE6A"> do</span><span style="color:#9ECE6A"> deploy</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.deploy.container.script                                                                                                        0.2s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.build.install.container                                                                                                        3.8s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> client.env                                                                                                                             0.0s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.source                                                                                                                         0.4s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.build.install.container.script                                                                                                 0.2s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.build.container                                                                                                               21.0s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.build.container.script                                                                                                         0.2s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.deploy                                                                                                                         4.8s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.build.install.container.export                                                                                                 0.1s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.build.container.export                                                                                                         0.1s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.deploy.container                                                                                                              91.0s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> client.filesystem.</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">./build</span><span style="color:#89DDFF">"</span><span style="color:#A9B1D6">.write                                                                                                      0.3s</span></span>
+<span class="line"><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">✔</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6"> actions.deploy.container.export                                                                                                        0.0s</span></span>
+<span class="line"><span style="color:#C0CAF5">Field</span><span style="color:#9ECE6A">      Value</span></span>
+<span class="line"><span style="color:#C0CAF5">site</span><span style="color:#89DDFF">       "</span><span style="color:#9ECE6A">****-dagger-todoapp</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C0CAF5">url</span><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">https://******-dagger-todoapp.netlify.app</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C0CAF5">deployUrl</span><span style="color:#89DDFF">  "</span><span style="color:#9ECE6A">https://xxxx--******-dagger-todoapp.netlify.app</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C0CAF5">logsUrl</span><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">https://app.netlify.com/sites/******-dagger-todoapp/deploys/xxxx</span><span style="color:#89DDFF">"</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>ローカル環境で、CI/CD のパイプラインコードを動かくことができました。
 次は、CI と連携したいと思います。</p>
 <h2 id="circleci-で-dagger-を動かす">CircleCI で Dagger を動かす</h2>
 <p>まずは、CircleCI で Dagger を動かしてみます。
 CircleCI の yml ファイルは、次の定義になります。</p>
-<pre><code class="language-yaml">## .circleci/config.yml
-version: 2.1
-
-jobs:
-  install-and-run-dagger:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - setup_remote_docker:
-          version: "20.10.14"
-      - run:
-          name: "Install Dagger"
-          command: |
-            cd /usr/local
-            wget -O - https://dl.dagger.io/dagger/install.sh | sudo sh
-            cd -
-      - run:
-          name: "Update project"
-          command: |
-            dagger project init
-            dagger project update
-      - run:
-          name: "Testing"
-          command: |
-            dagger do test --log-format plain
-      - run:
-          name: "Deploy to Netlify"
-          command: |
-            dagger do deploy --log-format plain
-
-workflows:
-  dagger-workflow:
-    jobs:
-      - install-and-run-dagger
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## .circleci/config.yml</span></span>
+<span class="line"><span style="color:#F7768E">version</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2.1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F7768E">jobs</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  install-and-run-dagger</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    docker</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#F7768E"> image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> cimg/base:stable</span></span>
+<span class="line"><span style="color:#F7768E">    steps</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#9ECE6A"> checkout</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#F7768E"> setup_remote_docker</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          version</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">20.10.14</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#F7768E"> run</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Install Dagger</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">          command</span><span style="color:#89DDFF">:</span><span style="color:#BB9AF7"> |</span></span>
+<span class="line"><span style="color:#9ECE6A">            cd /usr/local</span></span>
+<span class="line"><span style="color:#9ECE6A">            wget -O - https://dl.dagger.io/dagger/install.sh | sudo sh</span></span>
+<span class="line"><span style="color:#9ECE6A">            cd -</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#F7768E"> run</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Update project</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">          command</span><span style="color:#89DDFF">:</span><span style="color:#BB9AF7"> |</span></span>
+<span class="line"><span style="color:#9ECE6A">            dagger project init</span></span>
+<span class="line"><span style="color:#9ECE6A">            dagger project update</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#F7768E"> run</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Testing</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">          command</span><span style="color:#89DDFF">:</span><span style="color:#BB9AF7"> |</span></span>
+<span class="line"><span style="color:#9ECE6A">            dagger do test --log-format plain</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#F7768E"> run</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Deploy to Netlify</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">          command</span><span style="color:#89DDFF">:</span><span style="color:#BB9AF7"> |</span></span>
+<span class="line"><span style="color:#9ECE6A">            dagger do deploy --log-format plain</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F7768E">workflows</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  dagger-workflow</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    jobs</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#9ECE6A"> install-and-run-dagger</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
 <p>CircleCI の環境変数に、<code>NETLIFY_TOKEN</code>と<code>USER</code>を設定しておきます。
 この定義ファイルは、Dagger をインストールして、先程ローカル環境で動かしていた <code>dagger do test</code> や <code>dagger do deploy</code> を実行しているだけです。</p>
 <p>この定義は、CircleCI 上で PASS します。めちゃくちゃ簡単ですね。</p>
 <h2 id="githubactions-で-dagger-を動かす">GithubActions で Dagger を動かす</h2>
 <p>次は、GithubActions で Dagger を動かしてみます。
 GithubActions の yml ファイルは、次の定義になります。</p>
-<pre><code class="language-yaml">## .github/workflows/todoapp.yml
-name: todoapp
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  dagger:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clone repository
-        uses: actions/checkout@v2
-      - name: Update project
-        uses: dagger/dagger-for-github@v3
-        with:
-          version: 0.2
-          cmds: |
-            project init
-            project update
-      - name: Testing
-        uses: dagger/dagger-for-github@v3
-        with:
-          version: 0.2
-          cmds: |
-            do test
-      - name: Deploy to Netlify
-        uses: dagger/dagger-for-github@v3
-        with:
-          version: 0.2
-          cmds: |
-            do deploy
-        env:
-          USER: ${{ secrets.USER }}
-          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## .github/workflows/todoapp.yml</span></span>
+<span class="line"><span style="color:#F7768E">name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> todoapp</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF9E64">on</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  push</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    branches</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#9ECE6A"> main</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F7768E">jobs</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  dagger</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    runs-on</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> ubuntu-latest</span></span>
+<span class="line"><span style="color:#F7768E">    steps</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Clone repository</span></span>
+<span class="line"><span style="color:#F7768E">        uses</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> actions/checkout@v2</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Update project</span></span>
+<span class="line"><span style="color:#F7768E">        uses</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> dagger/dagger-for-github@v3</span></span>
+<span class="line"><span style="color:#F7768E">        with</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          version</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 0.2</span></span>
+<span class="line"><span style="color:#F7768E">          cmds</span><span style="color:#89DDFF">:</span><span style="color:#BB9AF7"> |</span></span>
+<span class="line"><span style="color:#9ECE6A">            project init</span></span>
+<span class="line"><span style="color:#9ECE6A">            project update</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Testing</span></span>
+<span class="line"><span style="color:#F7768E">        uses</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> dagger/dagger-for-github@v3</span></span>
+<span class="line"><span style="color:#F7768E">        with</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          version</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 0.2</span></span>
+<span class="line"><span style="color:#F7768E">          cmds</span><span style="color:#89DDFF">:</span><span style="color:#BB9AF7"> |</span></span>
+<span class="line"><span style="color:#9ECE6A">            do test</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Deploy to Netlify</span></span>
+<span class="line"><span style="color:#F7768E">        uses</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> dagger/dagger-for-github@v3</span></span>
+<span class="line"><span style="color:#F7768E">        with</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          version</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 0.2</span></span>
+<span class="line"><span style="color:#F7768E">          cmds</span><span style="color:#89DDFF">:</span><span style="color:#BB9AF7"> |</span></span>
+<span class="line"><span style="color:#9ECE6A">            do deploy</span></span>
+<span class="line"><span style="color:#F7768E">        env</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          USER</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> ${{ secrets.USER }}</span></span>
+<span class="line"><span style="color:#F7768E">          NETLIFY_TOKEN</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> ${{ secrets.NETLIFY_TOKEN }}</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
 <p>ここの定義も、CircleCI の定義とほとんど一緒だと思います。
 ただ、少し違うのは、GithubActions では、<code>uses: dagger/dagger-for-github@v3</code> が使えるため、
 <code>cmds</code>が、<code>do test</code> や <code>do deploy</code> のように、<code>dagger</code>を書かなくて済むようになります。</p>

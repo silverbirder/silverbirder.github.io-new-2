@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2019-05-30" data-pagefind-filter="month:2019-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">20</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-30"><span class="visually-hidden">2019年5月30日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">30</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 13. ヘルスチェックとコンテナライフサイクル -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2019-05-30" data-pagefind-filter="month:2019-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">20</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-30"><span class="visually-hidden">2019年5月30日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">30</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 13. ヘルスチェックとコンテナライフサイクル -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
 <ol>
 <li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_01/">一足遅れて Kubernetes を学び始める - 01. 環境選択編 -</a></li>
 <li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_02/">一足遅れて Kubernetes を学び始める - 02. Docker For Mac -</a></li>
@@ -60,38 +96,37 @@ LoadBalancer のサービスは、ICMP による簡易ヘルスチェックが�
 </li>
 </ul>
 <p>では、試してみましょう。</p>
-<pre><code class="language-yaml">## sample-healthcheck.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: sample-healthcheck
-  labels:
-    app: sample-app
-spec:
-  containers:
-    - name: nginx-container
-      image: nginx:1.12
-      ports:
-        - containerPort: 80
-      livenessProbe:
-        httpGet:
-          path: /index.html
-          port: 80
-          scheme: HTTP
-        timeoutSeconds: 1
-        successThreshold: 1
-        failureThreshold: 2
-        initialDelaySeconds: 5
-        periodSeconds: 3
-      readinessProbe:
-        exec:
-          command: ["ls", "/usr/share/nginx/html/50x.html"]
-        timeoutSeconds: 1
-        successThreshold: 2
-        failureThreshold: 1
-        initialDelaySeconds: 5
-        periodSeconds: 3
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-healthcheck.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Pod</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-healthcheck</span></span>
+<span class="line"><span style="color:#F7768E">  labels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">      image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#F7768E">      ports</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> containerPort</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 80</span></span>
+<span class="line"><span style="color:#F7768E">      livenessProbe</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">        httpGet</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          path</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> /index.html</span></span>
+<span class="line"><span style="color:#F7768E">          port</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 80</span></span>
+<span class="line"><span style="color:#F7768E">          scheme</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> HTTP</span></span>
+<span class="line"><span style="color:#F7768E">        timeoutSeconds</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 1</span></span>
+<span class="line"><span style="color:#F7768E">        successThreshold</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 1</span></span>
+<span class="line"><span style="color:#F7768E">        failureThreshold</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2</span></span>
+<span class="line"><span style="color:#F7768E">        initialDelaySeconds</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 5</span></span>
+<span class="line"><span style="color:#F7768E">        periodSeconds</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3</span></span>
+<span class="line"><span style="color:#F7768E">      readinessProbe</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">        exec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          command</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">ls</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">/usr/share/nginx/html/50x.html</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#F7768E">        timeoutSeconds</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 1</span></span>
+<span class="line"><span style="color:#F7768E">        successThreshold</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2</span></span>
+<span class="line"><span style="color:#F7768E">        failureThreshold</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 1</span></span>
+<span class="line"><span style="color:#F7768E">        initialDelaySeconds</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 5</span></span>
+<span class="line"><span style="color:#F7768E">        periodSeconds</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
 <ul>
 <li>timeoutSeconds
 <ul>
@@ -119,33 +154,30 @@ spec:
 </ul>
 </li>
 </ul>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-healthcheck.yaml
-pi@raspi001:~/tmp $ k describe pod sample-healthcheck | egrep "Liveness|Readiness"
-    Liveness:       http-get http://:80/index.html delay=5s timeout=1s period=3s #success=1 #failure=2
-    Readiness:      exec [ls /usr/share/nginx/html/50x.html] delay=5s timeout=1s period=3s #success=2 #failure=1
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-healthcheck.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> describe</span><span style="color:#9ECE6A"> pod</span><span style="color:#9ECE6A"> sample-healthcheck</span><span style="color:#89DDFF"> |</span><span style="color:#C0CAF5"> egrep</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Liveness|Readiness</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C0CAF5">    Liveness:</span><span style="color:#9ECE6A">       http-get</span><span style="color:#9ECE6A"> http://:80/index.html</span><span style="color:#9ECE6A"> delay=5s</span><span style="color:#9ECE6A"> timeout=1s</span><span style="color:#9ECE6A"> period=3s</span><span style="color:#51597D;font-style:italic"> #success=1 #failure=2</span></span>
+<span class="line"><span style="color:#C0CAF5">    Readiness:</span><span style="color:#9ECE6A">      exec</span><span style="color:#A9B1D6"> [ls </span><span style="color:#9ECE6A">/usr/share/nginx/html/50x.html]</span><span style="color:#9ECE6A"> delay=5s</span><span style="color:#9ECE6A"> timeout=1s</span><span style="color:#9ECE6A"> period=3s</span><span style="color:#51597D;font-style:italic"> #success=2 #failure=1</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>設定どおりに動作していますね。では、失敗させましょう。</p>
 <p>liveness を失敗させるには index.html を削除すれば良いですね。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k exec -it sample-healthcheck rm /usr/share/nginx/html/index.html
-pi@raspi001:~/tmp $ k get pods --watch
-NAME                                      READY   STATUS    RESTARTS   AGE
-sample-healthcheck                        1/1     Running   1          9m54s
-sample-healthcheck                        0/1     Running   2          10m
-sample-healthcheck                        1/1     Running   2          10m
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-healthcheck</span><span style="color:#9ECE6A"> rm</span><span style="color:#9ECE6A"> /usr/share/nginx/html/index.html</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#E0AF68"> --watch</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                                      READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-healthcheck</span><span style="color:#9ECE6A">                        1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   1</span><span style="color:#9ECE6A">          9m54s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-healthcheck</span><span style="color:#9ECE6A">                        0/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   2</span><span style="color:#9ECE6A">          10m</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-healthcheck</span><span style="color:#9ECE6A">                        1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   2</span><span style="color:#9ECE6A">          10m</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>一度削除されて、再起動しましたね。
 今度は、readiness を失敗させましょう。こちらは 50x.html を削除すれば良いですね。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k exec -it sample-healthcheck rm /usr/share/nginx/html/50x.html
-pi@raspi001:~/tmp $ k get pods --watch
-NAME                                      READY   STATUS    RESTARTS   AGE
-sample-healthcheck                        1/1     Running   2          16m
-sample-healthcheck                        0/1     Running   2          16m
-pi@raspi001:~/tmp $ k exec -it sample-healthcheck touch /usr/share/nginx/html/50x.html
-pi@raspi001:~/tmp $ k get pods --watch
-NAME                                      READY   STATUS    RESTARTS   AGE
-sample-healthcheck                        0/1     Running   2          17m
-sample-healthcheck                        1/1     Running   2          17m
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-healthcheck</span><span style="color:#9ECE6A"> rm</span><span style="color:#9ECE6A"> /usr/share/nginx/html/50x.html</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#E0AF68"> --watch</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                                      READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-healthcheck</span><span style="color:#9ECE6A">                        1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   2</span><span style="color:#9ECE6A">          16m</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-healthcheck</span><span style="color:#9ECE6A">                        0/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   2</span><span style="color:#9ECE6A">          16m</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-healthcheck</span><span style="color:#9ECE6A"> touch</span><span style="color:#9ECE6A"> /usr/share/nginx/html/50x.html</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#E0AF68"> --watch</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                                      READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-healthcheck</span><span style="color:#9ECE6A">                        0/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   2</span><span style="color:#9ECE6A">          17m</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-healthcheck</span><span style="color:#9ECE6A">                        1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   2</span><span style="color:#9ECE6A">          17m</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>期待通り、50x.html を削除すると、READY から外れて、追加すると READY に戻りました。</p>
 <h2 id="コンテナの再起動">コンテナの再起動</h2>
 <p>コンテナのプロセスが停止、またはヘルスチェックの失敗によってコンテナを再起動するかどうかは、spec.restartPolicy によって決まります。
@@ -168,66 +200,62 @@ sample-healthcheck                        1/1     Running   2          17m
 </li>
 </ul>
 <p>試してみましょう。</p>
-<pre><code class="language-yaml">## sample-restart-always.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: sample-restart-always
-spec:
-  restartPolicy: Always
-  containers:
-    - name: nginx-container
-      image: nginx:1.12
-      command: ["sh", "-c", "exit 0"] # 成功の場合
-##      command: ["sh", "-c", "exit 1"] # 失敗の場合
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-restart-always.yaml
-## 成功の場合
-pi@raspi001:~/tmp $ k get pods sample-restart-always --watch
-NAME                    READY   STATUS              RESTARTS   AGE
-sample-restart-always   0/1     ContainerCreating   0          13s
-sample-restart-always   0/1     Completed           0          19s
-sample-restart-always   0/1     Completed           1          27s
-sample-restart-always   0/1     CrashLoopBackOff    1          28s
-sample-restart-always   0/1     Completed           2          37s
-## 失敗の場合
-pi@raspi001:~/tmp $ k get pods sample-restart-always --watch
-NAME                    READY   STATUS              RESTARTS   AGE
-sample-restart-always   0/1     ContainerCreating   0          7s
-sample-restart-always   0/1     Error               0          12s
-sample-restart-always   0/1     Error               1          17s
-sample-restart-always   0/1     CrashLoopBackOff    1          18s
-sample-restart-always   0/1     Error               2          37s
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-restart-always.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Pod</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-restart-always</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  restartPolicy</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Always</span></span>
+<span class="line"><span style="color:#F7768E">  containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">      image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#F7768E">      command</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">sh</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">-c</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">exit 0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span><span style="color:#51597D;font-style:italic"> # 成功の場合</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">##      command: ["sh", "-c", "exit 1"] # 失敗の場合</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-restart-always.yaml</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">## 成功の場合</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#9ECE6A"> sample-restart-always</span><span style="color:#E0AF68"> --watch</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                    READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">              RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-always</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     ContainerCreating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          13s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-always</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Completed</span><span style="color:#FF9E64">           0</span><span style="color:#9ECE6A">          19s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-always</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Completed</span><span style="color:#FF9E64">           1</span><span style="color:#9ECE6A">          27s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-always</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     CrashLoopBackOff</span><span style="color:#FF9E64">    1</span><span style="color:#9ECE6A">          28s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-always</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Completed</span><span style="color:#FF9E64">           2</span><span style="color:#9ECE6A">          37s</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">## 失敗の場合</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#9ECE6A"> sample-restart-always</span><span style="color:#E0AF68"> --watch</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                    READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">              RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-always</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     ContainerCreating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          7s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-always</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Error</span><span style="color:#FF9E64">               0</span><span style="color:#9ECE6A">          12s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-always</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Error</span><span style="color:#FF9E64">               1</span><span style="color:#9ECE6A">          17s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-always</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     CrashLoopBackOff</span><span style="color:#FF9E64">    1</span><span style="color:#9ECE6A">          18s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-always</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Error</span><span style="color:#FF9E64">               2</span><span style="color:#9ECE6A">          37s</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>成功、失敗どちらも再起動していることがわかります。</p>
-<pre><code class="language-yaml">## sample-restart-onfailure.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: sample-restart-onfailure
-spec:
-  restartPolicy: OnFailure
-  containers:
-    - name: nginx-container
-      image: nginx:1.12
-      command: ["sh", "-c", "exit 0"] # 成功の場合
-##      command: ["sh", "-c", "exit 1"] # 失敗の場合
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-restart-onfailure.yaml
-## 成功の場合
-pi@raspi001:~/tmp $ k get pods sample-restart-onfailure --watch
-NAME                       READY   STATUS              RESTARTS   AGE
-sample-restart-onfailure   0/1     ContainerCreating   0          3s
-sample-restart-onfailure   0/1     Completed           0          15s
-## 失敗の場合
-pi@raspi001:~/tmp $ k get pods sample-restart-onfailure --watch
-NAME                       READY   STATUS              RESTARTS   AGE
-sample-restart-onfailure   0/1     ContainerCreating   0          4s
-sample-restart-onfailure   0/1     Error               0          22s
-sample-restart-onfailure   0/1     Error               1          28s
-sample-restart-onfailure   0/1     CrashLoopBackOff    1          29s
-sample-restart-onfailure   0/1     Error               2          50s
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-restart-onfailure.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Pod</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-restart-onfailure</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  restartPolicy</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> OnFailure</span></span>
+<span class="line"><span style="color:#F7768E">  containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">      image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#F7768E">      command</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">sh</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">-c</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">exit 0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span><span style="color:#51597D;font-style:italic"> # 成功の場合</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">##      command: ["sh", "-c", "exit 1"] # 失敗の場合</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-restart-onfailure.yaml</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">## 成功の場合</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#9ECE6A"> sample-restart-onfailure</span><span style="color:#E0AF68"> --watch</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                       READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">              RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-onfailure</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     ContainerCreating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          3s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-onfailure</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Completed</span><span style="color:#FF9E64">           0</span><span style="color:#9ECE6A">          15s</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">## 失敗の場合</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#9ECE6A"> sample-restart-onfailure</span><span style="color:#E0AF68"> --watch</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                       READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">              RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-onfailure</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     ContainerCreating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          4s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-onfailure</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Error</span><span style="color:#FF9E64">               0</span><span style="color:#9ECE6A">          22s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-onfailure</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Error</span><span style="color:#FF9E64">               1</span><span style="color:#9ECE6A">          28s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-onfailure</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     CrashLoopBackOff</span><span style="color:#FF9E64">    1</span><span style="color:#9ECE6A">          29s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-restart-onfailure</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Error</span><span style="color:#FF9E64">               2</span><span style="color:#9ECE6A">          50s</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>成功時は、Completed の終了していますね。CrashLoopBackOff していません。失敗時は、Error となり、CrashLoopBackOff しています。
 期待通りですね。</p>
 <h2 id="initcontainers">initContainers</h2>
@@ -235,82 +263,78 @@ sample-restart-onfailure   0/1     Error               2          50s
 spec.containers がもともとありますが、こちらは同時並列で起動するので、順序が必要な場合には向いていません。
 initContainers は、spec.initContainers で設定でき、複数指定できます。複数の場合は上から順に起動します。</p>
 <p>試してみましょう。</p>
-<pre><code class="language-yaml">## sample-initcontainer.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: sample-initcontainer
-spec:
-  initContainers:
-    - name: output-1
-      image: nginx:1.12
-      command:
-        ["sh", "-c", "sleep 20; echo 1st &gt; /usr/share/nginx/html/index.html"]
-      volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html/
-    - name: output-2
-      image: nginx:1.12
-      command:
-        ["sh", "-c", "sleep 10; echo 2nd &gt;&gt; /usr/share/nginx/html/index.html"]
-      volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html/
-  containers:
-    - name: nginx-container
-      image: nginx:1.12
-      volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html/
-  volumes:
-    - name: html-volume
-      emptyDir: {}
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k get pod sample-initcontainer --watch
-NAME                   READY   STATUS     RESTARTS   AGE
-sample-initcontainer   0/1     Init:0/2   0          3s
-sample-initcontainer   0/1     Init:0/2   0          9s
-sample-initcontainer   0/1     Init:1/2   0          30s
-sample-initcontainer   0/1     Init:1/2   0          38s
-sample-initcontainer   0/1     PodInitializing   0          51s
-sample-initcontainer   1/1     Running           0          59s
-pi@raspi001:~/tmp $ k exec -it sample-initcontainer cat /usr/share/nginx/html/index.html
-1st
-2nd
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-initcontainer.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Pod</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-initcontainer</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  initContainers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> output-1</span></span>
+<span class="line"><span style="color:#F7768E">      image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#F7768E">      command</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#89DDFF">        [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">sh</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">-c</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">sleep 20; echo 1st &gt; /usr/share/nginx/html/index.html</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#F7768E">      volumeMounts</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> html-volume</span></span>
+<span class="line"><span style="color:#F7768E">          mountPath</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> /usr/share/nginx/html/</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> output-2</span></span>
+<span class="line"><span style="color:#F7768E">      image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#F7768E">      command</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#89DDFF">        [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">sh</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">-c</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">sleep 10; echo 2nd &gt;&gt; /usr/share/nginx/html/index.html</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#F7768E">      volumeMounts</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> html-volume</span></span>
+<span class="line"><span style="color:#F7768E">          mountPath</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> /usr/share/nginx/html/</span></span>
+<span class="line"><span style="color:#F7768E">  containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">      image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#F7768E">      volumeMounts</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> html-volume</span></span>
+<span class="line"><span style="color:#F7768E">          mountPath</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> /usr/share/nginx/html/</span></span>
+<span class="line"><span style="color:#F7768E">  volumes</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> html-volume</span></span>
+<span class="line"><span style="color:#F7768E">      emptyDir</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {}</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pod</span><span style="color:#9ECE6A"> sample-initcontainer</span><span style="color:#E0AF68"> --watch</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                   READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">     RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-initcontainer</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Init:0/2</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          3s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-initcontainer</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Init:0/2</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          9s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-initcontainer</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Init:1/2</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          30s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-initcontainer</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     Init:1/2</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          38s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-initcontainer</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     PodInitializing</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          51s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-initcontainer</span><span style="color:#9ECE6A">   1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">           0</span><span style="color:#9ECE6A">          59s</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-initcontainer</span><span style="color:#9ECE6A"> cat</span><span style="color:#9ECE6A"> /usr/share/nginx/html/index.html</span></span>
+<span class="line"><span style="color:#C0CAF5">1st</span></span>
+<span class="line"><span style="color:#C0CAF5">2nd</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>確かに、initContainers が順序通り起動できています。ふむふむ。</p>
 <h2 id="起動時と終了時のコマンド実行poststartprestop">起動時と終了時のコマンド実行(postStart,preStop)</h2>
 <p>コンテナ起動後に実行するコマンドを postStart,
 コンテナ終了前に実行するコマンドを preStop という機能で実現できます。</p>
-<pre><code class="language-yaml">## sample-lifecycle.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: sample-lifecycle
-spec:
-  containers:
-    - name: nginx-container
-      image: nginx:1.12
-      command: ["/bin/sh", "-c", "touch /tmp/started; sleep 3600"]
-      lifecycle:
-        postStart:
-          exec:
-            command: ["/bin/sh", "-c", "sleep 20; touch /tmp/poststart"]
-        preStop:
-          exec:
-            command: ["/bin/sh", "-c", "touch /tmp/prestop; sleep 20"]
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~/tmp $  k apply -f sample-lifecycle.yaml
-pi@raspi001:~/tmp $  k exec -it sample-lifecycle ls /tmp
-started
-## 数秒後
-pi@raspi001:~/tmp $  $ k exec -it sample-lifecycle ls /tmp
-poststart  started
-pi@raspi001:~/tmp $ k delete -f sample-lifecycle.yaml
-## すぐ!
-pi@raspi001:~/tmp $ k exec -it sample-lifecycle ls /tmp
-poststart  prestop  started
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-lifecycle.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Pod</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-lifecycle</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">      image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#F7768E">      command</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">/bin/sh</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">-c</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">touch /tmp/started; sleep 3600</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#F7768E">      lifecycle</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">        postStart</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          exec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">            command</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">/bin/sh</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">-c</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">sleep 20; touch /tmp/poststart</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#F7768E">        preStop</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">          exec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">            command</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">/bin/sh</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">-c</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">touch /tmp/prestop; sleep 20</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">]</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $  </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-lifecycle.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $  </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-lifecycle</span><span style="color:#9ECE6A"> ls</span><span style="color:#9ECE6A"> /tmp</span></span>
+<span class="line"><span style="color:#C0CAF5">started</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">## 数秒後</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $  $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-lifecycle</span><span style="color:#9ECE6A"> ls</span><span style="color:#9ECE6A"> /tmp</span></span>
+<span class="line"><span style="color:#C0CAF5">poststart</span><span style="color:#9ECE6A">  started</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> delete</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-lifecycle.yaml</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">## すぐ!</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-lifecycle</span><span style="color:#9ECE6A"> ls</span><span style="color:#9ECE6A"> /tmp</span></span>
+<span class="line"><span style="color:#C0CAF5">poststart</span><span style="color:#9ECE6A">  prestop</span><span style="color:#9ECE6A">  started</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>たしかに、postStart, preStop が動いています。
 注意しないといけないのが、postStart は、spec.containers[].command の実行とほぼ同じだそうです。（非同期)</p>
 <h2 id="pod-の安全な停止とタイミング">Pod の安全な停止とタイミング</h2>
@@ -328,38 +352,36 @@ kubernetes からのスケジューリング対象外となり、たとえば Re
 スケジューリング対象外になります。現在動作しているものも対象にしたい場合は、drain コマンド
 を使います。
 実際に試してみます。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k get nodes
-NAME       STATUS   ROLES    AGE   VERSION
-raspi001   Ready    master   33d   v1.14.1
-raspi002   Ready    worker   33d   v1.14.1
-raspi003   Ready    worker   32d   v1.14.1
-pi@raspi001:~/tmp $ k cordon raspi002
-pi@raspi001:~/tmp $ k get nodes
-NAME       STATUS                     ROLES    AGE   VERSION
-raspi001   Ready                      master   33d   v1.14.1
-raspi002   Ready,SchedulingDisabled   worker   33d   v1.14.1
-raspi003   Ready                      worker   32d   v1.14.1
-pi@raspi001:~/tmp $ k uncordon raspi002
-pi@raspi001:~/tmp $ k get nodes
-NAME       STATUS   ROLES    AGE   VERSION
-raspi001   Ready    master   33d   v1.14.1
-raspi002   Ready    worker   33d   v1.14.1
-raspi003   Ready    worker   32d   v1.14.1
-pi@raspi001:~/tmp $ k drain raspi002
-node/raspi002 cordoned
-error: unable to drain node "raspi002", aborting command...
-
-There are pending nodes to be drained:
- raspi002
-error: cannot delete DaemonSet-managed Pods (use --ignore-daemonsets to ignore): kube-system/kube-flannel-ds-arm-7nnbj, kube-system/kube-proxy-wgjdq, metallb-system/speaker-tsxdk
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> nodes</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">       STATUS</span><span style="color:#9ECE6A">   ROLES</span><span style="color:#9ECE6A">    AGE</span><span style="color:#9ECE6A">   VERSION</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi001</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">    master</span><span style="color:#9ECE6A">   33d</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi002</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">    worker</span><span style="color:#9ECE6A">   33d</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi003</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">    worker</span><span style="color:#9ECE6A">   32d</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> cordon</span><span style="color:#9ECE6A"> raspi002</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> nodes</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">       STATUS</span><span style="color:#9ECE6A">                     ROLES</span><span style="color:#9ECE6A">    AGE</span><span style="color:#9ECE6A">   VERSION</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi001</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">                      master</span><span style="color:#9ECE6A">   33d</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi002</span><span style="color:#9ECE6A">   Ready,SchedulingDisabled</span><span style="color:#9ECE6A">   worker</span><span style="color:#9ECE6A">   33d</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi003</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">                      worker</span><span style="color:#9ECE6A">   32d</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> uncordon</span><span style="color:#9ECE6A"> raspi002</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> nodes</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">       STATUS</span><span style="color:#9ECE6A">   ROLES</span><span style="color:#9ECE6A">    AGE</span><span style="color:#9ECE6A">   VERSION</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi001</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">    master</span><span style="color:#9ECE6A">   33d</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi002</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">    worker</span><span style="color:#9ECE6A">   33d</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi003</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">    worker</span><span style="color:#9ECE6A">   32d</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> drain</span><span style="color:#9ECE6A"> raspi002</span></span>
+<span class="line"><span style="color:#C0CAF5">node/raspi002</span><span style="color:#9ECE6A"> cordoned</span></span>
+<span class="line"><span style="color:#C0CAF5">error:</span><span style="color:#9ECE6A"> unable</span><span style="color:#9ECE6A"> to</span><span style="color:#9ECE6A"> drain</span><span style="color:#9ECE6A"> node</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">raspi002</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">,</span><span style="color:#9ECE6A"> aborting</span><span style="color:#9ECE6A"> command...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">There</span><span style="color:#9ECE6A"> are</span><span style="color:#9ECE6A"> pending</span><span style="color:#9ECE6A"> nodes</span><span style="color:#9ECE6A"> to</span><span style="color:#9ECE6A"> be</span><span style="color:#9ECE6A"> drained:</span></span>
+<span class="line"><span style="color:#C0CAF5"> raspi002</span></span>
+<span class="line"><span style="color:#C0CAF5">error:</span><span style="color:#9ECE6A"> cannot</span><span style="color:#9ECE6A"> delete</span><span style="color:#9ECE6A"> DaemonSet-managed</span><span style="color:#9ECE6A"> Pods</span><span style="color:#A9B1D6"> (use </span><span style="color:#E0AF68">--ignore-daemonsets</span><span style="color:#9ECE6A"> to</span><span style="color:#9ECE6A"> ignore</span><span style="color:#A9B1D6">): kube-system/kube-flannel-ds-arm-7nnbj, kube-system/kube-proxy-wgjdq, metallb-system/speaker-tsxdk</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>drain すると、ReplicaSet のように管理した Pod であれば、別 Node に作成されるので良いのですが、
 単体 Pod など管理されていないものは、削除されてしまいます。上記の警告は、DaemonSet で管理されている Pod は、
 削除するしかないけど、良いですか？というものです。
 そのため、drain をすると、いくつか警告されます。警告内容に従って適宜操作する必要があります。</p>
 <h2 id="お片付け">お片付け</h2>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-healthcheck.yaml -f sample-restart-always.yaml -f sample-restart-onfailure.yaml -f sample-initcontainer.yaml -f sample-lifecycle.yaml
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> delete</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-healthcheck.yaml</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-restart-always.yaml</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-restart-onfailure.yaml</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-initcontainer.yaml</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-lifecycle.yaml</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <h2 id="最後に">最後に</h2>
 <p>今回は、ヘルスチェックの動作と、コンテナを停止するまでのステップを学習しました。
 わざわざヘルスチェックの処理をアプリケーションに用意せずとも、kubernetes に機能として

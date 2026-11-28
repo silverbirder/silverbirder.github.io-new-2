@@ -4,18 +4,54 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2021-09-04" data-pagefind-filter="month:2021-09" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">64</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2021-09-04"><span class="visually-hidden">2021年9月4日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2021</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">09</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">04</span></span></time></p></div><div class="notebook-heading"><h1>LLVM入門 - javascriptをLLVM(Rust:inkwell)でJITコンパイルするまで</h1></div></header><div class="notebook-body"><p>コンパイラ基盤であるLLVMについて、全く知識がない私が、
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2021-09-04" data-pagefind-filter="month:2021-09" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">64</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2021-09-04"><span class="visually-hidden">2021年9月4日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2021</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">09</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">04</span></span></time></p></div><div class="notebook-heading"><h1>LLVM入門 - javascriptをLLVM(Rust:inkwell)でJITコンパイルするまで</h1></div></header><div class="notebook-body"><p>コンパイラ基盤であるLLVMについて、全く知識がない私が、
 javascriptソースコードをパースしLLVMでコンパイルできるようになりました。</p>
 <p>LLVMの記事は数多くありますが、初心者向けの記事が少なく感じたため、
 本記事では、できる限り分かりやすくLLVMについて紹介できる記事を書こうと思います。</p>
 <p>ソースコードは、こちらに置いています。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/silverbirder/rustscript" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/rustscript: A Toy Javascript Compiler that parses javascript and compiles JIT with LLVM(Rust:inkwell).</strong><span class="link-card-description" data-astro-cid-p7ia6262>A Toy Javascript Compiler that parses javascript and compiles JIT with LLVM(Rust:inkwell). - silverbirder/rustscript</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/581fd378a3abad81527b5c10af8aca03fc9cc41ed09628f3737399689d199b4e.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://github.com/silverbirder/rustscript" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/rustscript: A Toy Javascript Compiler that parses javascript and compiles JIT with LLVM(Rust:inkwell).</strong><span class="link-card-description" data-astro-cid-p7ia6262>A Toy Javascript Compiler that parses javascript and compiles JIT with LLVM(Rust:inkwell). - silverbirder/rustscript</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/581fd378a3abad81527b5c10af8aca03fc9cc41ed09628f3737399689d199b4e.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <h2 id="自己紹介">自己紹介</h2>
 <p>ふだん、javascriptやpythonなどインタプリタ言語を使うエンジニアです。
 LLVMについて、全く知識がなかった人間です。</p>
 <h2 id="背景">背景</h2>
 <p>過去に、おもちゃのブラウザ自作をやってみました。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://silverbirder.github.io/blog/contents/learning_browser_engine" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>ブラウザの仕組みを学ぶ</strong><span class="link-card-description" data-astro-cid-p7ia6262>Webフロントエンジニアたるもの、ブラウザの仕組みに興味を持つのは自然の摂理です。本記事では、私がブラウザの仕組みを学んでいく過程を備忘録として残します。</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262>silverbirder.github.io</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/2c044f07c1a077a6dc843052f22f5f3b5dbedde987fbb0f1ba956497eee25a4d.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://silverbirder.github.io/blog/contents/learning_browser_engine" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>ブラウザの仕組みを学ぶ</strong><span class="link-card-description" data-astro-cid-p7ia6262>Webフロントエンジニアたるもの、ブラウザの仕組みに興味を持つのは自然の摂理です。本記事では、私がブラウザの仕組みを学んでいく過程を備忘録として残します。</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262>silverbirder.github.io</span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/2c044f07c1a077a6dc843052f22f5f3b5dbedde987fbb0f1ba956497eee25a4d.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <p>HTMLとCSSを解析し、レンダリングするところを書き、基本的な動作を知ることができました。
 HTMLとCSSとくれば、次はJSだと思い、JSを実行するエンジンを書いてみたくなりました。
 ただし、WebブラウザのAPIとJS実行エンジンをバインディングする箇所(EX.DOM操作)は難しいので、
@@ -25,7 +61,7 @@ HTMLとCSSとくれば、次はJSだと思い、JSを実行するエンジンを
 <blockquote>
 <p>compiler is a computer program that translates computer code written in one programming language (the source language) into another language (the target language). The name “compiler” is primarily used for programs that translate source code from a high-level programming language to a lower level language (e.g. assembly language, object code, or machine code) to create an executable program.</p>
 </blockquote>
-<p>※ <a href="https://en.wikipedia.org/wiki/Compiler"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/en.wikipedia.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://en.wikipedia.org/wiki/Compiler<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
+<p>※ <a href="https://en.wikipedia.org/wiki/Compiler"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/en.wikipedia.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://en.wikipedia.org/wiki/Compiler<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></p>
 <p>に書かれている通り、あるコードを別のコードに変換するプログラムのことをコンパイラと指します。
 主に、高級言語(ex. javascript)から低級言語(ex. アセンブリ言語)への変換という意味でコンパイラが使われます。</p>
 <hr>
@@ -41,10 +77,9 @@ Passes almost all tests from tc39/test262.</p>
 <p>※ <a href="https://rustdoc.swc.rs/swc_ecma_parser/"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/rustdoc.swc.rs.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">swc_ecma_parser<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
 <p>tc39/test262のテストケースをほとんどパスしているようです。
 <a href="https://github.com/tc39/test262"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">tc39/test262<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>は、次の仕様動作を保証するテストスイートです。</p>
-<pre><code class="language-text">ECMA-262, ECMAScript Language Specification
-ECMA-402, ECMAScript Internationalization API Specification
-ECMA-404, The JSON Data Interchange Format (pdf)
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>ECMA-262, ECMAScript Language Specification</span></span>
+<span class="line"><span>ECMA-402, ECMAScript Internationalization API Specification</span></span>
+<span class="line"><span>ECMA-404, The JSON Data Interchange Format (pdf)</span></span></code></pre><figcaption class="notebook-code-language">テキスト</figcaption></figure>
 <p>実際のテストコードは、<a href="https://github.com/tc39/test262/tree/main/test"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">tc39/test262/test<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>にあります。</p>
 <hr>
 <p>パーサ部分を自作しようか悩みました。
@@ -59,7 +94,7 @@ ECMA-404, The JSON Data Interchange Format (pdf)
 </ol>
 <p>①番の言語文法について知るために、ecmascriptのBNFってどれだろうなと調べていました。
 そうすると、私の調べた範囲では、次のページにたどり着きました。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://tc39.es/ecma262/#sec-grammar-summary" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>ECMAScript® 2027 Language Specification</strong><span class="link-card-description" data-astro-cid-p7ia6262>Introduction This Ecma Standard defines the ECMAScript 2027 Language. It is the eighteenth edition of the ECMAScript Language Specification. ECMAScript is based on several originating technologies, the most well-known being JavaScript (Netscape) and JScript (Microsoft). The language was invente</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/tc39.es.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">tc39.es<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/ceeeee50c258fd9e0b5413cc67bd44afc93f0b2c6e0bc1a324dcc158c3caaa32.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://tc39.es/ecma262/#sec-grammar-summary" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>ECMAScript® 2027 Language Specification</strong><span class="link-card-description" data-astro-cid-p7ia6262>Introduction This Ecma Standard defines the ECMAScript 2027 Language. It is the eighteenth edition of the ECMAScript Language Specification. ECMAScript is based on several originating technologies, the most well-known being JavaScript (Netscape) and JScript (Microsoft). The language was invente</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/tc39.es.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">tc39.es<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/ceeeee50c258fd9e0b5413cc67bd44afc93f0b2c6e0bc1a324dcc158c3caaa32.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <p>これは、先程の<a href="https://rustdoc.swc.rs/swc_ecma_parser/"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/rustdoc.swc.rs.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">swc_ecma_parser<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>のテストスイート対象<a href="https://github.com/tc39/test262/tree/main/test"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">tc39/test262/test<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>であったので、あえて再構築する気になれず、自作は諦めました。</p>
 <hr>
 <p>中間言語 ~ コード生成については、LLVMというコンパイル基盤を使おうと思います。</p>
@@ -74,7 +109,7 @@ LLVMは、次の特徴があります。</p>
 <blockquote>
 <p>LLVM is a set of compiler and toolchain technologies, which can be used to develop a front end for any programming language and a back end for any instruction set architecture. LLVM is designed around a language-independent intermediate representation (IR) that serves as a portable, high-level assembly language that can be optimized with a variety of transformations over multiple passes.</p>
 </blockquote>
-<p>※ <a href="https://en.wikipedia.org/wiki/LLVM"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/en.wikipedia.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://en.wikipedia.org/wiki/LLVM<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
+<p>※ <a href="https://en.wikipedia.org/wiki/LLVM"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/en.wikipedia.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://en.wikipedia.org/wiki/LLVM<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></p>
 <p>LLVMは、任意のフロントエンド言語(コンパイラという文脈でいう変換前の言語)から任意の命令セットアーキテクチャ(以下、ISA)バックエンドへ変換できます。</p>
 <hr>
 <p>ISAは、次の意味になります。</p>
@@ -111,44 +146,41 @@ LLVMライブラリとして、<a href="https://github.com/TheDan64/inkwell"><im
 これを知っていないと、LLVMのコードを見ても、理解しにくいと思います。(自身が持つ言葉で解釈して誤った理解になりかねません)</p>
 <p>小さなC言語コードとIRで例を示します。
 Rustじゃなく、Cを選んだのは、clangから手軽にIRを出力できるからです。</p>
-<pre><code class="language-c">// if.c
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-
-int main(void)
-{
-    int i = rand();
-    if (i == 1)
-    {
-        printf("i is one.");
-    }
-    return 0;
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#51597D;font-style:italic">// if.c</span></span>
+<span class="line"><span style="color:#89DDFF">#</span><span style="color:#BB9AF7">include</span><span style="color:#89DDFF"> &lt;</span><span style="color:#9ECE6A">stdio.h</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#89DDFF">#</span><span style="color:#BB9AF7">include</span><span style="color:#89DDFF"> &lt;</span><span style="color:#9ECE6A">stdlib.h</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">int</span><span style="color:#7AA2F7"> main</span><span style="color:#9ABDF5">(</span><span style="color:#BB9AF7">void</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#9ABDF5">{</span></span>
+<span class="line"><span style="color:#BB9AF7">    int</span><span style="color:#9ABDF5"> i </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> rand</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">    if</span><span style="color:#9ABDF5"> (i </span><span style="color:#BB9AF7">==</span><span style="color:#FF9E64"> 1</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#9ABDF5">    {</span></span>
+<span class="line"><span style="color:#7AA2F7">        printf</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">i is one.</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span></span>
+<span class="line"><span style="color:#BB9AF7">    return</span><span style="color:#FF9E64"> 0</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">C</figcaption></figure>
 <p>これをIRに変換</p>
-<pre><code class="language-shell">clang -S -emit-llvm -O3 if.c
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">clang</span><span style="color:#E0AF68"> -S</span><span style="color:#E0AF68"> -emit-llvm</span><span style="color:#E0AF68"> -O3</span><span style="color:#9ECE6A"> if.c</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>出力されたファイルは、<code>if.ll</code>というIRファイルです。
 そこから、<code>@main</code>コードを見ます。</p>
-<pre><code class="language-text">@.str = private unnamed_addr constant [10 x i8] c"i is one.\00", align 1
-
-define i32 @main() local_unnamed_addr #0 {
-  %1 = tail call i32 @rand() #3
-  %2 = icmp eq i32 %1, 1
-  br i1 %2, label %3, label %5
-
-3:                                                ; preds = %0
-  %4 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([10 x i8], [10 x i8]* @.str, i64 0, i64 0))
-  br label %5
-
-5:                                                ; preds = %3, %0
-  ret i32 0
-}
-
-declare i32 @rand() local_unnamed_addr #1
-
-declare noundef i32 @printf(i8* nocapture noundef readonly, ...) local_unnamed_addr #2
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>@.str = private unnamed_addr constant [10 x i8] c"i is one.\00", align 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>define i32 @main() local_unnamed_addr #0 {</span></span>
+<span class="line"><span>  %1 = tail call i32 @rand() #3</span></span>
+<span class="line"><span>  %2 = icmp eq i32 %1, 1</span></span>
+<span class="line"><span>  br i1 %2, label %3, label %5</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>3:                                                ; preds = %0</span></span>
+<span class="line"><span>  %4 = tail call i32 (i8*, ...) @printf(i8* nonnull dereferenceable(1) getelementptr inbounds ([10 x i8], [10 x i8]* @.str, i64 0, i64 0))</span></span>
+<span class="line"><span>  br label %5</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>5:                                                ; preds = %3, %0</span></span>
+<span class="line"><span>  ret i32 0</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>declare i32 @rand() local_unnamed_addr #1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>declare noundef i32 @printf(i8* nocapture noundef readonly, ...) local_unnamed_addr #2</span></span></code></pre><figcaption class="notebook-code-language">テキスト</figcaption></figure>
 <p>IRをModule,Function,Block,Instructionで区切って見ると、次の画像のとおりです。</p>
 <p><span class="notebook-photo-frame"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1633770792/silver-birder.github.io/blog/sample_llvm_code.png?ar=2068%3A1138" alt="sample_llvm_code" width="2068" height="1138" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_200/q_auto/f_auto/v1633770792/silver-birder.github.io/blog/sample_llvm_code.png?ar=2068%3A1138 200w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_300/q_auto/f_auto/v1633770792/silver-birder.github.io/blog/sample_llvm_code.png?ar=2068%3A1138 300w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1633770792/silver-birder.github.io/blog/sample_llvm_code.png?ar=2068%3A1138 400w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_450/q_auto/f_auto/v1633770792/silver-birder.github.io/blog/sample_llvm_code.png?ar=2068%3A1138 450w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_600/q_auto/f_auto/v1633770792/silver-birder.github.io/blog/sample_llvm_code.png?ar=2068%3A1138 600w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_800/q_auto/f_auto/v1633770792/silver-birder.github.io/blog/sample_llvm_code.png?ar=2068%3A1138 800w" sizes="auto, min(25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem) - 0.5rem - 2 * 0.5rem))"><span class="notebook-photo-caption" aria-hidden="true">sample_llvm_code</span></span></p>
 <p>それぞれ、どういうものか簡単に説明します。</p>
@@ -156,7 +188,7 @@ declare noundef i32 @printf(i8* nocapture noundef readonly, ...) local_unnamed_a
 <blockquote>
 <p>LLVM programs are composed of Module’s, each of which is a translation unit of the input programs.</p>
 </blockquote>
-<p>※ <a href="https://llvm.org/docs/LangRef.html#module-structure"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/llvm.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://llvm.org/docs/LangRef.html#module-structure<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
+<p>※ <a href="https://llvm.org/docs/LangRef.html#module-structure"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/llvm.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://llvm.org/docs/LangRef.html#module-structure<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></p>
 <p>モジュールは、入力プログラムの変換単位になります。
 モジュールには、関数、グローバル変数、シンボルテーブルエントリを持ちます。</p>
 <h3 id="function">Function</h3>
@@ -164,19 +196,19 @@ declare noundef i32 @printf(i8* nocapture noundef readonly, ...) local_unnamed_a
 <p>LLVM function definitions consist of the “define” keyword.
 A function definition contains a list of basic blocks.</p>
 </blockquote>
-<p>※ <a href="https://llvm.org/docs/LangRef.html#functions"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/llvm.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://llvm.org/docs/LangRef.html#functions<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
+<p>※ <a href="https://llvm.org/docs/LangRef.html#functions"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/llvm.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://llvm.org/docs/LangRef.html#functions<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></p>
 <p>関数は、複数のブロック(Block)を持ちます。</p>
 <h3 id="block">Block</h3>
 <blockquote>
 <p>Each basic block may optionally start with a label (giving the basic block a symbol table entry), contains a list of instructions, and ends with a terminator instruction (such as a branch or function return).</p>
 </blockquote>
-<p>※ <a href="https://llvm.org/docs/LangRef.html#functions"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/llvm.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://llvm.org/docs/LangRef.html#functions<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
+<p>※ <a href="https://llvm.org/docs/LangRef.html#functions"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/llvm.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://llvm.org/docs/LangRef.html#functions<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></p>
 <p>ブロックは、ラベルから始まり、複数の命令(Instruction)を持ちます。</p>
 <h3 id="instruction">Instruction</h3>
 <blockquote>
 <p>The LLVM instruction set consists of several different classifications of instructions: terminator instructions, binary instructions, bitwise binary instructions, memory instructions, and other instructions.</p>
 </blockquote>
-<p>※ <a href="https://llvm.org/docs/LangRef.html#instruction-reference"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/llvm.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://llvm.org/docs/LangRef.html#instruction-reference<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
+<p>※ <a href="https://llvm.org/docs/LangRef.html#instruction-reference"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/llvm.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://llvm.org/docs/LangRef.html#instruction-reference<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></p>
 <p>命令は、バイナリ命令やメモリ命令など、様々な命令があります。</p>
 <h3 id="参考資料">参考資料</h3>
 <p>参考になる資料たちは、次のとおりです。</p>
@@ -202,100 +234,93 @@ A function definition contains a list of basic blocks.</p>
 <p>前置きが長くなりましたが、実際にLLVMをやっていきたいと思います。</p>
 <h3 id="開発環境">開発環境</h3>
 <p>私の環境(Mac)はこちらです。</p>
-<pre><code class="language-shell">$ sw_vers 
-ProductName:    macOS
-ProductVersion: 11.6
-BuildVersion:   20G165
-$ cargo --version &amp;&amp; rustc --version
-cargo 1.56.0-nightly (18751dd3f 2021-09-01)
-rustc 1.56.0-nightly (50171c310 2021-09-01)
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">$</span><span style="color:#9ECE6A"> sw_vers</span><span style="color:#A9B1D6"> </span></span>
+<span class="line"><span style="color:#C0CAF5">ProductName:</span><span style="color:#9ECE6A">    macOS</span></span>
+<span class="line"><span style="color:#C0CAF5">ProductVersion:</span><span style="color:#FF9E64"> 11.6</span></span>
+<span class="line"><span style="color:#C0CAF5">BuildVersion:</span><span style="color:#9ECE6A">   20G165</span></span>
+<span class="line"><span style="color:#C0CAF5">$</span><span style="color:#9ECE6A"> cargo</span><span style="color:#E0AF68"> --version</span><span style="color:#89DDFF"> &amp;&amp;</span><span style="color:#C0CAF5"> rustc</span><span style="color:#E0AF68"> --version</span></span>
+<span class="line"><span style="color:#C0CAF5">cargo</span><span style="color:#9ECE6A"> 1.56.0-nightly</span><span style="color:#A9B1D6"> (18751dd3f </span><span style="color:#9ECE6A">2021-09-01</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">rustc</span><span style="color:#9ECE6A"> 1.56.0-nightly</span><span style="color:#A9B1D6"> (50171c310 </span><span style="color:#9ECE6A">2021-09-01</span><span style="color:#A9B1D6">)</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>llvmのインストールは、Macユーザなので、<a href="https://formulae.brew.sh/formula/llvm"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/formulae.brew.sh.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">brewからllvm<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>をインストールします。
 <a href="https://releases.llvm.org/download.html"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/releases.llvm.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">公式ページからダウンロード<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>もできるようです。</p>
 <p>インストールが完了すると、clangやllcといったツールが使えます。</p>
-<pre><code class="language-shell">$ clang --version
-Homebrew clang version 13.0.0
-Target: x86_64-apple-darwin20.6.0
-Thread model: posix
-InstalledDir: /usr/local/opt/llvm/bin
-$ llc -version
-Homebrew LLVM version 12.0.1
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">$</span><span style="color:#9ECE6A"> clang</span><span style="color:#E0AF68"> --version</span></span>
+<span class="line"><span style="color:#C0CAF5">Homebrew</span><span style="color:#9ECE6A"> clang</span><span style="color:#9ECE6A"> version</span><span style="color:#FF9E64"> 13.0.0</span></span>
+<span class="line"><span style="color:#C0CAF5">Target:</span><span style="color:#9ECE6A"> x86_64-apple-darwin20.6.0</span></span>
+<span class="line"><span style="color:#C0CAF5">Thread</span><span style="color:#9ECE6A"> model:</span><span style="color:#9ECE6A"> posix</span></span>
+<span class="line"><span style="color:#C0CAF5">InstalledDir:</span><span style="color:#9ECE6A"> /usr/local/opt/llvm/bin</span></span>
+<span class="line"><span style="color:#C0CAF5">$</span><span style="color:#9ECE6A"> llc</span><span style="color:#E0AF68"> -version</span></span>
+<span class="line"><span style="color:#C0CAF5">Homebrew</span><span style="color:#9ECE6A"> LLVM</span><span style="color:#9ECE6A"> version</span><span style="color:#FF9E64"> 12.0.1</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>MacにはXcodeにclangが含まれているようです。こちらを使っても問題ありません。
 (ただ、xcodeのclangには、<a href="https://github.com/WebAssembly/wasi-sdk/issues/172#issuecomment-772399153"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">wasmには対応していないです<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>)</p>
-<pre><code class="language-shell"># xcode付属のclangの場合
-$ clang --version
-Apple clang version 12.0.5 (clang-1205.0.22.9)
-Target: x86_64-apple-darwin20.6.0
-Thread model: posix
-InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#51597D;font-style:italic"># xcode付属のclangの場合</span></span>
+<span class="line"><span style="color:#C0CAF5">$</span><span style="color:#9ECE6A"> clang</span><span style="color:#E0AF68"> --version</span></span>
+<span class="line"><span style="color:#C0CAF5">Apple</span><span style="color:#9ECE6A"> clang</span><span style="color:#9ECE6A"> version</span><span style="color:#FF9E64"> 12.0.5</span><span style="color:#A9B1D6"> (clang-1205.0.22.9)</span></span>
+<span class="line"><span style="color:#C0CAF5">Target:</span><span style="color:#9ECE6A"> x86_64-apple-darwin20.6.0</span></span>
+<span class="line"><span style="color:#C0CAF5">Thread</span><span style="color:#9ECE6A"> model:</span><span style="color:#9ECE6A"> posix</span></span>
+<span class="line"><span style="color:#C0CAF5">InstalledDir:</span><span style="color:#9ECE6A"> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>Cargo.tomlの<code>dependencies</code>は、次のとおりです。</p>
-<pre><code class="language-toml">[dependencies]
-inkwell = { git = "https://github.com/TheDan64/inkwell", branch = "master", features = ["llvm12-0"] }
-swc_ecma_parser = "0.73.0"
-swc_common = { version = "0.13.0", features=["tty-emitter"] }
-swc_ecma_ast = "0.54.0"
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="toml"><code><span class="line"><span style="color:#89DDFF">[</span><span style="color:#C0CAF5">dependencies</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#C0CAF5">inkwell</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> {</span><span style="color:#C0CAF5"> git</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">https://github.com/TheDan64/inkwell</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> branch</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">master</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> features</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">llvm12-0</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF"> }</span></span>
+<span class="line"><span style="color:#C0CAF5">swc_ecma_parser</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">0.73.0</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C0CAF5">swc_common</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> {</span><span style="color:#C0CAF5"> version</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">0.13.0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> features</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">[</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">tty-emitter</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF"> }</span></span>
+<span class="line"><span style="color:#C0CAF5">swc_ecma_ast</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">0.54.0</span><span style="color:#89DDFF">"</span></span></code></pre><figcaption class="notebook-code-language">TOML</figcaption></figure>
 <h3 id="hello-world-を出力">“Hello World” を出力</h3>
 <p>まずは、Hello World を出力します。
 Rustのコードは、次のものになります。</p>
-<pre><code class="language-rust">extern crate inkwell;
-
-use inkwell::context::Context;
-use inkwell::OptimizationLevel;
-
-fn main() {
-    let context = Context::create();
-    let i32_type = context.i32_type();
-    let i8_type = context.i8_type();
-    let i8_ptr_type = i8_type.ptr_type(inkwell::AddressSpace::Generic);
-
-    // Module
-    let module = context.create_module("main");
-
-    // Function
-    let printf_fn_type = i32_type.fn_type(&amp;[i8_ptr_type.into()], true);
-    let printf_function = module.add_function("printf", printf_fn_type, None);
-    let main_fn_type = i32_type.fn_type(&amp;[], false);
-    let main_function = module.add_function("main", main_fn_type, None);
-
-    // Block
-    let entry_basic_block = context.append_basic_block(main_function, "entry");
-
-    // Instruction(Builder)
-    let builder = context.create_builder();
-    builder.position_at_end(entry_basic_block);
-    let hw_string_ptr = builder.build_global_string_ptr("Hello, world!\n", "hw");
-    builder.build_call(printf_function, &amp;[hw_string_ptr.as_pointer_value().into()], "call");
-    builder.build_return(Some(&amp;i32_type.const_int(0, false)));
-
-    let execution_engine = module.create_jit_execution_engine(OptimizationLevel::Aggressive).unwrap();
-    unsafe {
-        execution_engine.get_function::&lt;unsafe extern "C" fn()&gt;("main").unwrap().call();
-    }
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"><span style="color:#BB9AF7">extern</span><span style="color:#7DCFFF"> crate</span><span style="color:#A9B1D6"> inkwell</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> inkwell</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">context</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Context</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> inkwell</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">OptimizationLevel</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">fn</span><span style="color:#7AA2F7"> main</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> Context</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">create</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> i32_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">i32_type</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> i8_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">i8_type</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> i8_ptr_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> i8_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">ptr_type</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">inkwell</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">AddressSpace</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Generic</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Module</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create_module</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Function</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> printf_fn_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> i32_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fn_type</span><span style="color:#89DDFF">(&amp;[</span><span style="color:#C0CAF5">i8_ptr_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">into</span><span style="color:#89DDFF">()],</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> printf_function</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">add_function</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">printf</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> printf_fn_type</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> None</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> main_fn_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> i32_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fn_type</span><span style="color:#89DDFF">(&amp;[],</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> main_function</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">add_function</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> main_fn_type</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> None</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Block</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> entry_basic_block</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append_basic_block</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">main_function</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">entry</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Instruction(Builder)</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create_builder</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">position_at_end</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">entry_basic_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> hw_string_ptr</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_global_string_ptr</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Hello, world!</span><span style="color:#C0CAF5">\</span><span style="color:#89DDFF">n"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">hw</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_call</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">printf_function</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> &amp;[</span><span style="color:#C0CAF5">hw_string_ptr</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">as_pointer_value</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">into</span><span style="color:#89DDFF">()],</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">call</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_return</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">Some</span><span style="color:#89DDFF">(&amp;</span><span style="color:#C0CAF5">i32_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">const_int</span><span style="color:#89DDFF">(</span><span style="color:#FF9E64">0</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">)));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> execution_engine</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create_jit_execution_engine</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">OptimizationLevel</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Aggressive</span><span style="color:#89DDFF">).</span><span style="color:#7AA2F7">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#89DDFF">    unsafe</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">        execution_engine</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">get_function</span><span style="color:#89DDFF">::&lt;unsafe</span><span style="color:#BB9AF7"> extern</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">C</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> fn()&gt;(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">).</span><span style="color:#7AA2F7">unwrap</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">call</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre><figcaption class="notebook-code-language">RUST</figcaption></figure>
 <p>実行してみます。</p>
-<pre><code class="language-shell">$ cargo run
-Hello, world!
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">$</span><span style="color:#9ECE6A"> cargo</span><span style="color:#9ECE6A"> run</span></span>
+<span class="line"><span style="color:#C0CAF5">Hello,</span><span style="color:#9ECE6A"> world!</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>LLVMのJITコンパイラで実行できました。
 ちなみに、IRがどんなものか確認したい場合は、<code>module.print_to_file</code> を使いましょう。
 実際に出力してみると、次の結果になります。</p>
-<pre><code class="language-text">; ModuleID = 'main'
-source_filename = "main"
-
-@hw = private unnamed_addr constant [15 x i8] c"Hello, world!\0A\00", align 1
-
-declare i32 @printf(i8*, ...)
-
-define i32 @main() {
-entry:
-  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([15 x i8], [15 x i8]* @hw, i32 0, i32 0))
-  ret i32 0
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>; ModuleID = 'main'</span></span>
+<span class="line"><span>source_filename = "main"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@hw = private unnamed_addr constant [15 x i8] c"Hello, world!\0A\00", align 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>declare i32 @printf(i8*, ...)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>define i32 @main() {</span></span>
+<span class="line"><span>entry:</span></span>
+<span class="line"><span>  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([15 x i8], [15 x i8]* @hw, i32 0, i32 0))</span></span>
+<span class="line"><span>  ret i32 0</span></span>
+<span class="line"><span>}</span></span></code></pre><figcaption class="notebook-code-language">テキスト</figcaption></figure>
 <p>Rustの<code>execution_engine.get_function::&lt;unsafe extern "C" fn()&gt;("main").unwrap().call();</code>は、IRの<code>@main</code>関数を実行しています。
 <code>@main</code>関数では、<code>@printf</code>関数を実行していますが、それは、C言語の<code>printf</code>になります。</p>
 <p>IRのコードに関する調査は、<a href="https://llvm.org/docs/LangRef.html"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/llvm.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">LLVM Language Reference Manual<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a> が重宝します。
@@ -303,253 +328,247 @@ entry:
 <h3 id="sum">SUM</h3>
 <p>次は、3つの数値を引数とし、足し算した結果を返す関数SUMを作成してみます。
 Rustのコードは、次のものになります。</p>
-<pre><code class="language-rust">extern crate inkwell;
-
-use inkwell::OptimizationLevel;
-use inkwell::context::Context;
-use std::error::Error;
-
-fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
-    let context = Context::create();
-    let i64_type = context.i64_type();
-    let fn_type = i64_type.fn_type(&amp;[i64_type.into(), i64_type.into(), i64_type.into()], false);
-
-    // Module
-    let module = context.create_module("main");
-    let builder = context.create_builder();
-
-    // Function
-    let function = module.add_function("sum", fn_type, None);
-
-    // Block
-    let basic_block = context.append_basic_block(function, "entry");
-
-    // Instruction(Builder)
-    builder.position_at_end(basic_block);
-    let x = function.get_nth_param(0).unwrap().into_int_value();
-    let y = function.get_nth_param(1).unwrap().into_int_value();
-    let z = function.get_nth_param(2).unwrap().into_int_value();
-    let sum = builder.build_int_add(x, y, "sum");
-    let sum = builder.build_int_add(z, sum, "sum");
-    builder.build_return(Some(&amp;sum));
-
-    let execution_engine = module.create_jit_execution_engine(OptimizationLevel::None)?;
-
-    unsafe { 
-        let x = 1u64;
-        let y = 2u64;
-        let z = 3u64;
-        let r = execution_engine.get_function::&lt;unsafe extern "C" fn(u64, u64, u64)-&gt; u64&gt;("sum")?.call(x, y , z);
-        println!("{:?}", r);
-    };
-    Ok(())
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"><span style="color:#BB9AF7">extern</span><span style="color:#7DCFFF"> crate</span><span style="color:#A9B1D6"> inkwell</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> inkwell</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">OptimizationLevel</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> inkwell</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">context</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Context</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> std</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">error</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Error</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">fn</span><span style="color:#7AA2F7"> main</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#C0CAF5"> Result</span><span style="color:#89DDFF">&lt;(),</span><span style="color:#C0CAF5"> Box</span><span style="color:#89DDFF">&lt;dyn</span><span style="color:#C0CAF5"> Error</span><span style="color:#89DDFF">&gt;&gt;</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> Context</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">create</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">i64_type</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> fn_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fn_type</span><span style="color:#89DDFF">(&amp;[</span><span style="color:#C0CAF5">i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">into</span><span style="color:#89DDFF">(),</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">into</span><span style="color:#89DDFF">(),</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">into</span><span style="color:#89DDFF">()],</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Module</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create_module</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create_builder</span><span style="color:#89DDFF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Function</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> function</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">add_function</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">sum</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> fn_type</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> None</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Block</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> basic_block</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append_basic_block</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">function</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">entry</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Instruction(Builder)</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">position_at_end</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">basic_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> x</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> function</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">get_nth_param</span><span style="color:#89DDFF">(</span><span style="color:#FF9E64">0</span><span style="color:#89DDFF">).</span><span style="color:#7AA2F7">unwrap</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">into_int_value</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> y</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> function</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">get_nth_param</span><span style="color:#89DDFF">(</span><span style="color:#FF9E64">1</span><span style="color:#89DDFF">).</span><span style="color:#7AA2F7">unwrap</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">into_int_value</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> z</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> function</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">get_nth_param</span><span style="color:#89DDFF">(</span><span style="color:#FF9E64">2</span><span style="color:#89DDFF">).</span><span style="color:#7AA2F7">unwrap</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">into_int_value</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> sum</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_int_add</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">x</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> y</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">sum</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> sum</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_int_add</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">z</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> sum</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">sum</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_return</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">Some</span><span style="color:#89DDFF">(&amp;</span><span style="color:#C0CAF5">sum</span><span style="color:#89DDFF">));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> execution_engine</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create_jit_execution_engine</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">OptimizationLevel</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">None</span><span style="color:#89DDFF">)?;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">    unsafe</span><span style="color:#89DDFF"> {</span><span style="color:#A9B1D6"> </span></span>
+<span class="line"><span style="color:#BB9AF7">        let</span><span style="color:#C0CAF5"> x</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 1</span><span style="color:#C0CAF5">u64</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">        let</span><span style="color:#C0CAF5"> y</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 2</span><span style="color:#C0CAF5">u64</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">        let</span><span style="color:#C0CAF5"> z</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 3</span><span style="color:#C0CAF5">u64</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">        let</span><span style="color:#C0CAF5"> r</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> execution_engine</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">get_function</span><span style="color:#89DDFF">::&lt;unsafe</span><span style="color:#BB9AF7"> extern</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">C</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> fn(</span><span style="color:#C0CAF5">u64</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> u64</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> u64</span><span style="color:#89DDFF">)-&gt;</span><span style="color:#C0CAF5"> u64</span><span style="color:#89DDFF">&gt;(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">sum</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">)?.</span><span style="color:#7AA2F7">call</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">x</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> y</span><span style="color:#89DDFF"> ,</span><span style="color:#C0CAF5"> z</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#7AA2F7">        println!</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"{</span><span style="color:#9ECE6A">:?</span><span style="color:#89DDFF">}"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> r</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#89DDFF">    };</span></span>
+<span class="line"><span style="color:#C0CAF5">    Ok</span><span style="color:#89DDFF">(())</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre><figcaption class="notebook-code-language">RUST</figcaption></figure>
 <p>実行してみます。</p>
-<pre><code class="language-shell">$ cargo run
-6
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">$</span><span style="color:#9ECE6A"> cargo</span><span style="color:#9ECE6A"> run</span></span>
+<span class="line"><span style="color:#C0CAF5">6</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>見事、<code>1 + 2 + 3</code>の足し算ができました。
 ちなみに、IRも出力しておきます。</p>
-<pre><code class="language-text">; ModuleID = 'main'
-source_filename = "main"
-target datalayout = "e-m:o-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
-
-define i64 @sum(i64 %0, i64 %1, i64 %2) {
-entry:
-  %sum = add i64 %0, %1
-  %sum1 = add i64 %2, %sum
-  ret i64 %sum1
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>; ModuleID = 'main'</span></span>
+<span class="line"><span>source_filename = "main"</span></span>
+<span class="line"><span>target datalayout = "e-m:o-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>define i64 @sum(i64 %0, i64 %1, i64 %2) {</span></span>
+<span class="line"><span>entry:</span></span>
+<span class="line"><span>  %sum = add i64 %0, %1</span></span>
+<span class="line"><span>  %sum1 = add i64 %2, %sum</span></span>
+<span class="line"><span>  ret i64 %sum1</span></span>
+<span class="line"><span>}</span></span></code></pre><figcaption class="notebook-code-language">テキスト</figcaption></figure>
 <p>前回同様、Rustの<code>execution_engine.get_function::&lt;unsafe extern "C" fn(u64, u64, u64)-&gt; u64&gt;("sum")?.call(x, y , z);</code>は、IRの<code>@sum</code>関数に該当します。
 足し算の<code>Instruction</code>が使えました。</p>
 <h3 id="fizzbuzz">FizzBuzz</h3>
 <p>では、次はFizzBuzzをしてみます。割り算やifの命令が新しく使います。
 Rustのコードは、次のものになります。</p>
-<pre><code class="language-rust">extern crate inkwell;
-
-use inkwell::context::Context;
-use inkwell::IntPredicate::EQ;
-use inkwell::OptimizationLevel;
-use std::error::Error;
-
-fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
-    let context = Context::create();
-    let i64_type = context.i64_type();
-    let void_type = context.void_type();
-    let i8_type = context.i8_type();
-
-    let i8_ptr_type = i8_type.ptr_type(inkwell::AddressSpace::Generic);
-    let fn_type = i64_type.fn_type(&amp;[i64_type.into()], false);
-    let null = i8_ptr_type.const_null();
-
-    // Module
-    let module = context.create_module("fizz_buzz");
-
-    // Function
-    let printf_fn_type = void_type.fn_type(&amp;[i8_ptr_type.into()], true);
-    let printf_function = module.add_function("printf", printf_fn_type, None);
-    let fizz_buzz_function = module.add_function("fizz_buzz", fn_type, None);
-
-    // Block
-    let block = context.append_basic_block(fizz_buzz_function, "entry");
-
-    // Instruction
-    let builder = context.create_builder();
-    builder.position_at_end(block);
-
-    let fizz_buzz_string_ptr = builder.build_global_string_ptr("FizzBuzz\n", "fizz_buzz");
-    let fizz_string_ptr = builder.build_global_string_ptr("Fizz\n", "fizz");
-    let buzz_string_ptr = builder.build_global_string_ptr("Buzz\n", "buzz");
-
-    let param_0 = fizz_buzz_function
-        .get_nth_param(0)
-        .unwrap()
-        .into_int_value();
-
-    let rem_divied_by_3 =
-        builder.build_int_signed_rem(param_0, i64_type.const_int(3, false), "rem_3");
-    let rem_divied_by5 =
-        builder.build_int_signed_rem(param_0, i64_type.const_int(5, false), "rem_5");
-    let rem_divied_by15 =
-        builder.build_int_signed_rem(param_0, i64_type.const_int(15, false), "rem_15");
-
-    let comp_that_is_divisible_by_3 = builder.build_int_compare(
-        EQ,
-        rem_divied_by_3,
-        i64_type.const_int(0, false),
-        "if_can_divide_by_3",
-    );
-    let comp_that_is_divisible_by_5 = builder.build_int_compare(
-        EQ,
-        rem_divied_by5,
-        i64_type.const_int(0, false),
-        "if_can_divide_by_5",
-    );
-    let comp_that_is_divisible_by_15 = builder.build_int_compare(
-        EQ,
-        rem_divied_by15,
-        i64_type.const_int(0, false),
-        "if_can_divide_by_15",
-    );
-
-    // Block
-    let fizz_buzz_block = context.append_basic_block(fizz_buzz_function, "fizz_buzz");
-    let fizz_block = context.append_basic_block(fizz_buzz_function, "fizz");
-    let buzz_block = context.append_basic_block(fizz_buzz_function, "buzz");
-    let num_block = context.append_basic_block(fizz_buzz_function, "num");
-    let else_1_block = context.append_basic_block(fizz_buzz_function, "else_1");
-    let else_2_block = context.append_basic_block(fizz_buzz_function, "else_2");
-    let end_block = context.append_basic_block(fizz_buzz_function, "end_block");
-
-    // Instruction
-    builder.build_conditional_branch(comp_that_is_divisible_by_15, fizz_buzz_block, else_1_block);
-    builder.position_at_end(fizz_buzz_block);
-    builder.build_call(
-        printf_function,
-        &amp;[fizz_buzz_string_ptr.as_pointer_value().into()],
-        "print_fizz_buzz",
-    );
-    builder.build_unconditional_branch(end_block);
-
-    // Instruction
-    builder.position_at_end(else_1_block);
-    builder.build_conditional_branch(comp_that_is_divisible_by_3, fizz_block, else_2_block);
-    builder.position_at_end(fizz_block);
-    builder.build_call(
-        printf_function,
-        &amp;[fizz_string_ptr.as_pointer_value().into()],
-        "print_fizz",
-    );
-    builder.build_unconditional_branch(end_block);
-
-    // Instruction
-    builder.position_at_end(else_2_block);
-    builder.build_conditional_branch(comp_that_is_divisible_by_5, buzz_block, num_block);
-    builder.position_at_end(buzz_block);
-    builder.build_call(
-        printf_function,
-        &amp;[buzz_string_ptr.as_pointer_value().into()],
-        "print_buzz",
-    );
-    builder.build_unconditional_branch(end_block);
-
-    // Instruction
-    builder.position_at_end(num_block);
-    builder.build_call(
-        printf_function,
-        &amp;[buzz_string_ptr.as_pointer_value().into()], // TODO: Print input num.
-        "print_num",
-    );
-    builder.build_unconditional_branch(end_block);
-
-    // Instruction
-    builder.position_at_end(end_block);
-    builder.build_return(Some(&amp;null));
-
-    let e = module.create_jit_execution_engine(OptimizationLevel::None)?;
-    unsafe {
-        let x = 15u64;
-        e.get_function::&lt;unsafe extern "C" fn(u64) -&gt; ()&gt;("fizz_buzz")?
-            .call(x);
-    }
-    Ok(())
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"><span style="color:#BB9AF7">extern</span><span style="color:#7DCFFF"> crate</span><span style="color:#A9B1D6"> inkwell</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> inkwell</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">context</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Context</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> inkwell</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">IntPredicate</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">EQ</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> inkwell</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">OptimizationLevel</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> std</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">error</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Error</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">fn</span><span style="color:#7AA2F7"> main</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#C0CAF5"> Result</span><span style="color:#89DDFF">&lt;(),</span><span style="color:#C0CAF5"> Box</span><span style="color:#89DDFF">&lt;dyn</span><span style="color:#C0CAF5"> Error</span><span style="color:#89DDFF">&gt;&gt;</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> Context</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">create</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">i64_type</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> void_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">void_type</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> i8_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">i8_type</span><span style="color:#89DDFF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> i8_ptr_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> i8_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">ptr_type</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">inkwell</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">AddressSpace</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Generic</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> fn_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fn_type</span><span style="color:#89DDFF">(&amp;[</span><span style="color:#C0CAF5">i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">into</span><span style="color:#89DDFF">()],</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> null</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> i8_ptr_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">const_null</span><span style="color:#89DDFF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Module</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create_module</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">fizz_buzz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Function</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> printf_fn_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> void_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fn_type</span><span style="color:#89DDFF">(&amp;[</span><span style="color:#C0CAF5">i8_ptr_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">into</span><span style="color:#89DDFF">()],</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> printf_function</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">add_function</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">printf</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> printf_fn_type</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> None</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> fizz_buzz_function</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">add_function</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">fizz_buzz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> fn_type</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> None</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Block</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> block</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append_basic_block</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">fizz_buzz_function</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">entry</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Instruction</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create_builder</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">position_at_end</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> fizz_buzz_string_ptr</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_global_string_ptr</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">FizzBuzz</span><span style="color:#C0CAF5">\</span><span style="color:#89DDFF">n"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">fizz_buzz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> fizz_string_ptr</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_global_string_ptr</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Fizz</span><span style="color:#C0CAF5">\</span><span style="color:#89DDFF">n"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">fizz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> buzz_string_ptr</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_global_string_ptr</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Buzz</span><span style="color:#C0CAF5">\</span><span style="color:#89DDFF">n"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">buzz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> param_0</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> fizz_buzz_function</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">get_nth_param</span><span style="color:#89DDFF">(</span><span style="color:#FF9E64">0</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">unwrap</span><span style="color:#89DDFF">()</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">into_int_value</span><span style="color:#89DDFF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> rem_divied_by_3</span><span style="color:#89DDFF"> =</span></span>
+<span class="line"><span style="color:#C0CAF5">        builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_int_signed_rem</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">param_0</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">const_int</span><span style="color:#89DDFF">(</span><span style="color:#FF9E64">3</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">),</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">rem_3</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> rem_divied_by5</span><span style="color:#89DDFF"> =</span></span>
+<span class="line"><span style="color:#C0CAF5">        builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_int_signed_rem</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">param_0</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">const_int</span><span style="color:#89DDFF">(</span><span style="color:#FF9E64">5</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">),</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">rem_5</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> rem_divied_by15</span><span style="color:#89DDFF"> =</span></span>
+<span class="line"><span style="color:#C0CAF5">        builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_int_signed_rem</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">param_0</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">const_int</span><span style="color:#89DDFF">(</span><span style="color:#FF9E64">15</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">),</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">rem_15</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> comp_that_is_divisible_by_3</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_int_compare</span><span style="color:#89DDFF">(</span></span>
+<span class="line"><span style="color:#FF9E64">        EQ</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">        rem_divied_by_3</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">        i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">const_int</span><span style="color:#89DDFF">(</span><span style="color:#FF9E64">0</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">if_can_divide_by_3</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    );</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> comp_that_is_divisible_by_5</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_int_compare</span><span style="color:#89DDFF">(</span></span>
+<span class="line"><span style="color:#FF9E64">        EQ</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">        rem_divied_by5</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">        i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">const_int</span><span style="color:#89DDFF">(</span><span style="color:#FF9E64">0</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">if_can_divide_by_5</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    );</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> comp_that_is_divisible_by_15</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_int_compare</span><span style="color:#89DDFF">(</span></span>
+<span class="line"><span style="color:#FF9E64">        EQ</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">        rem_divied_by15</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">        i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">const_int</span><span style="color:#89DDFF">(</span><span style="color:#FF9E64">0</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">if_can_divide_by_15</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Block</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> fizz_buzz_block</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append_basic_block</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">fizz_buzz_function</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">fizz_buzz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> fizz_block</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append_basic_block</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">fizz_buzz_function</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">fizz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> buzz_block</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append_basic_block</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">fizz_buzz_function</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">buzz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> num_block</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append_basic_block</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">fizz_buzz_function</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">num</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> else_1_block</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append_basic_block</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">fizz_buzz_function</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">else_1</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> else_2_block</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append_basic_block</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">fizz_buzz_function</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">else_2</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> end_block</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append_basic_block</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">fizz_buzz_function</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">end_block</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Instruction</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_conditional_branch</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">comp_that_is_divisible_by_15</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> fizz_buzz_block</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> else_1_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">position_at_end</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">fizz_buzz_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_call</span><span style="color:#89DDFF">(</span></span>
+<span class="line"><span style="color:#C0CAF5">        printf_function</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        &amp;[</span><span style="color:#C0CAF5">fizz_buzz_string_ptr</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">as_pointer_value</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">into</span><span style="color:#89DDFF">()],</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">print_fizz_buzz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    );</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_unconditional_branch</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">end_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Instruction</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">position_at_end</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">else_1_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_conditional_branch</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">comp_that_is_divisible_by_3</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> fizz_block</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> else_2_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">position_at_end</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">fizz_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_call</span><span style="color:#89DDFF">(</span></span>
+<span class="line"><span style="color:#C0CAF5">        printf_function</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        &amp;[</span><span style="color:#C0CAF5">fizz_string_ptr</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">as_pointer_value</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">into</span><span style="color:#89DDFF">()],</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">print_fizz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    );</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_unconditional_branch</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">end_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Instruction</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">position_at_end</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">else_2_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_conditional_branch</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">comp_that_is_divisible_by_5</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> buzz_block</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> num_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">position_at_end</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">buzz_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_call</span><span style="color:#89DDFF">(</span></span>
+<span class="line"><span style="color:#C0CAF5">        printf_function</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        &amp;[</span><span style="color:#C0CAF5">buzz_string_ptr</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">as_pointer_value</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">into</span><span style="color:#89DDFF">()],</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">print_buzz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    );</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_unconditional_branch</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">end_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Instruction</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">position_at_end</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">num_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_call</span><span style="color:#89DDFF">(</span></span>
+<span class="line"><span style="color:#C0CAF5">        printf_function</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        &amp;[</span><span style="color:#C0CAF5">buzz_string_ptr</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">as_pointer_value</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">into</span><span style="color:#89DDFF">()],</span><span style="color:#51597D;font-style:italic"> // TODO: Print input num.</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">print_num</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    );</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_unconditional_branch</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">end_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Instruction</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">position_at_end</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">end_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">    builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_return</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">Some</span><span style="color:#89DDFF">(&amp;</span><span style="color:#C0CAF5">null</span><span style="color:#89DDFF">));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> e</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create_jit_execution_engine</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">OptimizationLevel</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">None</span><span style="color:#89DDFF">)?;</span></span>
+<span class="line"><span style="color:#89DDFF">    unsafe</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">        let</span><span style="color:#C0CAF5"> x</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 15</span><span style="color:#C0CAF5">u64</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">        e</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">get_function</span><span style="color:#89DDFF">::&lt;unsafe</span><span style="color:#BB9AF7"> extern</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">C</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> fn(</span><span style="color:#C0CAF5">u64</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#89DDFF"> ()&gt;(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">fizz_buzz</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">)?</span></span>
+<span class="line"><span style="color:#89DDFF">            .</span><span style="color:#7AA2F7">call</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">x</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#C0CAF5">    Ok</span><span style="color:#89DDFF">(())</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre><figcaption class="notebook-code-language">RUST</figcaption></figure>
 <p>if文では、<code>build_conditional_branch</code>と<code>build_unconditional_branch</code>がどうやら使うそうです。
 <a href="https://github.com/TheDan64/inkwell/blob/master/examples/kaleidoscope/main.rs"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">inkwell/examples/kaleidoscope/main.rs<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>で書いてありましたので、使ってみました。
 実行してみます。15を引数として呼んでいます。</p>
-<pre><code class="language-shell">$ cargo run
-FizzBuzz
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">$</span><span style="color:#9ECE6A"> cargo</span><span style="color:#9ECE6A"> run</span></span>
+<span class="line"><span style="color:#C0CAF5">FizzBuzz</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>成功です！
 ちなみに、IRも出力しておきます。</p>
-<pre><code class="language-text">; ModuleID = 'fizz_buzz'
-source_filename = "fizz_buzz"
-
-@fizz_buzz.1 = private unnamed_addr constant [10 x i8] c"FizzBuzz\0A\00", align 1
-@fizz = private unnamed_addr constant [6 x i8] c"Fizz\0A\00", align 1
-@buzz = private unnamed_addr constant [6 x i8] c"Buzz\0A\00", align 1
-
-declare void @printf(i8*, ...)
-
-define i64 @fizz_buzz(i64 %0) {
-entry:
-  %rem_3 = srem i64 %0, 3
-  %rem_5 = srem i64 %0, 5
-  %rem_15 = srem i64 %0, 15
-  %if_can_divide_by_3 = icmp eq i64 %rem_3, 0
-  %if_can_divide_by_5 = icmp eq i64 %rem_5, 0
-  %if_can_divide_by_15 = icmp eq i64 %rem_15, 0
-  br i1 %if_can_divide_by_15, label %fizz_buzz, label %else_1
-
-fizz_buzz:                                        ; preds = %entry
-  call void (i8*, ...) @printf(i8* getelementptr inbounds ([10 x i8], [10 x i8]* @fizz_buzz.1, i32 0, i32 0))
-  br label %end_block
-
-fizz:                                             ; preds = %else_1
-  call void (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @fizz, i32 0, i32 0))
-  br label %end_block
-
-buzz:                                             ; preds = %else_2
-  call void (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @buzz, i32 0, i32 0))
-  br label %end_block
-
-num:                                              ; preds = %else_2
-  call void (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @buzz, i32 0, i32 0))
-  br label %end_block
-
-else_1:                                           ; preds = %entry
-  br i1 %if_can_divide_by_3, label %fizz, label %else_2
-
-else_2:                                           ; preds = %else_1
-  br i1 %if_can_divide_by_5, label %buzz, label %num
-
-end_block:                                        ; preds = %num, %buzz, %fizz, %fizz_buzz
-  ret i8* null
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>; ModuleID = 'fizz_buzz'</span></span>
+<span class="line"><span>source_filename = "fizz_buzz"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@fizz_buzz.1 = private unnamed_addr constant [10 x i8] c"FizzBuzz\0A\00", align 1</span></span>
+<span class="line"><span>@fizz = private unnamed_addr constant [6 x i8] c"Fizz\0A\00", align 1</span></span>
+<span class="line"><span>@buzz = private unnamed_addr constant [6 x i8] c"Buzz\0A\00", align 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>declare void @printf(i8*, ...)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>define i64 @fizz_buzz(i64 %0) {</span></span>
+<span class="line"><span>entry:</span></span>
+<span class="line"><span>  %rem_3 = srem i64 %0, 3</span></span>
+<span class="line"><span>  %rem_5 = srem i64 %0, 5</span></span>
+<span class="line"><span>  %rem_15 = srem i64 %0, 15</span></span>
+<span class="line"><span>  %if_can_divide_by_3 = icmp eq i64 %rem_3, 0</span></span>
+<span class="line"><span>  %if_can_divide_by_5 = icmp eq i64 %rem_5, 0</span></span>
+<span class="line"><span>  %if_can_divide_by_15 = icmp eq i64 %rem_15, 0</span></span>
+<span class="line"><span>  br i1 %if_can_divide_by_15, label %fizz_buzz, label %else_1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>fizz_buzz:                                        ; preds = %entry</span></span>
+<span class="line"><span>  call void (i8*, ...) @printf(i8* getelementptr inbounds ([10 x i8], [10 x i8]* @fizz_buzz.1, i32 0, i32 0))</span></span>
+<span class="line"><span>  br label %end_block</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>fizz:                                             ; preds = %else_1</span></span>
+<span class="line"><span>  call void (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @fizz, i32 0, i32 0))</span></span>
+<span class="line"><span>  br label %end_block</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>buzz:                                             ; preds = %else_2</span></span>
+<span class="line"><span>  call void (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @buzz, i32 0, i32 0))</span></span>
+<span class="line"><span>  br label %end_block</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>num:                                              ; preds = %else_2</span></span>
+<span class="line"><span>  call void (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @buzz, i32 0, i32 0))</span></span>
+<span class="line"><span>  br label %end_block</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>else_1:                                           ; preds = %entry</span></span>
+<span class="line"><span>  br i1 %if_can_divide_by_3, label %fizz, label %else_2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>else_2:                                           ; preds = %else_1</span></span>
+<span class="line"><span>  br i1 %if_can_divide_by_5, label %buzz, label %num</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>end_block:                                        ; preds = %num, %buzz, %fizz, %fizz_buzz</span></span>
+<span class="line"><span>  ret i8* null</span></span>
+<span class="line"><span>}</span></span></code></pre><figcaption class="notebook-code-language">テキスト</figcaption></figure>
 <p>Blockがめちゃくちゃ増えました。それはFizzBuzzのif,elseが多いからですね。
 LLVMについて、少し自信がついてきました。
 これまで<code>中間言語 ~ コード生成</code>をLLVMでやってみました。
@@ -557,166 +576,160 @@ LLVMについて、少し自信がついてきました。
 <h3 id="四則演算するjavascriptをパース">四則演算するJavascriptをパース</h3>
 <p>javascriptをパースしてみます。<a href="https://rustdoc.swc.rs/swc_ecma_parser/"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/rustdoc.swc.rs.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">swc_ecma_parser<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>を使います。
 パースするjavascriptは、次のものになります。</p>
-<pre><code class="language-javascript">// ./src/test.js
-20 / 10
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#51597D;font-style:italic">// ./src/test.js</span></span>
+<span class="line"><span style="color:#FF9E64">20</span><span style="color:#89DDFF"> /</span><span style="color:#FF9E64"> 10</span></span></code></pre><figcaption class="notebook-code-language">JAVASCRIPT</figcaption></figure>
 <p>Rustのコードは、次のものになります。</p>
-<pre><code class="language-rust">#[macro_use]
-extern crate swc_common;
-extern crate swc_ecma_ast;
-extern crate swc_ecma_parser;
-
-use std::path::Path;
-
-use swc_common::sync::Lrc;
-use swc_common::{
-    errors::{ColorConfig, Handler},
-    SourceMap,
-};
-use swc_ecma_parser::{lexer::Lexer, Parser, StringInput, Syntax};
-
-fn main() {
-    let cm: Lrc&lt;SourceMap&gt; = Default::default();
-    let handler = Handler::with_tty_emitter(ColorConfig::Auto, true, false, Some(cm.clone()));
-
-    let fm = cm
-        .load_file(Path::new("./src/test.js"))
-        .expect("failed to load test.js");
-    let lexer = Lexer::new(
-        Syntax::Es(Default::default()),
-        // JscTarget defaults to es5
-        Default::default(),
-        StringInput::from(&amp;*fm),
-        None,
-    );
-
-    let mut parser = Parser::new_from(lexer);
-
-    for e in parser.take_errors() {
-        e.into_diagnostic(&amp;handler).emit();
-    }
-
-    let _module = parser
-        .parse_module()
-        .map_err(|mut e| e.into_diagnostic(&amp;handler).emit())
-        .expect("failed to parser module");
-
-    println!("{:?}", _module);
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"><span style="color:#89DDFF">#[</span><span style="color:#A9B1D6">macro_use</span><span style="color:#89DDFF">]</span></span>
+<span class="line"><span style="color:#BB9AF7">extern</span><span style="color:#7DCFFF"> crate</span><span style="color:#A9B1D6"> swc_common</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">extern</span><span style="color:#7DCFFF"> crate</span><span style="color:#A9B1D6"> swc_ecma_ast</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">extern</span><span style="color:#7DCFFF"> crate</span><span style="color:#A9B1D6"> swc_ecma_parser</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> std</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">path</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Path</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> swc_common</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">sync</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Lrc</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> swc_common</span><span style="color:#89DDFF">::{</span></span>
+<span class="line"><span style="color:#0DB9D7">    errors</span><span style="color:#89DDFF">::{</span><span style="color:#C0CAF5">ColorConfig</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> Handler</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#C0CAF5">    SourceMap</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">};</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> swc_ecma_parser</span><span style="color:#89DDFF">::{</span><span style="color:#0DB9D7">lexer</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Lexer</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> Parser</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> StringInput</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> Syntax</span><span style="color:#89DDFF">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">fn</span><span style="color:#7AA2F7"> main</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> cm</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Lrc</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">SourceMap</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> Default</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">default</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> handler</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> Handler</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">with_tty_emitter</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">ColorConfig</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Auto</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> Some</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">cm</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">clone</span><span style="color:#89DDFF">()));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> fm</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> cm</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">load_file</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">Path</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">new</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">./src/test.js</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">))</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">expect</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">failed to load test.js</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> lexer</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> Lexer</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">new</span><span style="color:#89DDFF">(</span></span>
+<span class="line"><span style="color:#0DB9D7">        Syntax</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">Es</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">Default</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">default</span><span style="color:#89DDFF">()),</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // JscTarget defaults to es5</span></span>
+<span class="line"><span style="color:#0DB9D7">        Default</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">default</span><span style="color:#89DDFF">(),</span></span>
+<span class="line"><span style="color:#0DB9D7">        StringInput</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">from</span><span style="color:#89DDFF">(&amp;*</span><span style="color:#C0CAF5">fm</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#C0CAF5">        None</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#9D7CD8;font-style:italic"> mut</span><span style="color:#C0CAF5"> parser</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> Parser</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">new_from</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">lexer</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    for</span><span style="color:#C0CAF5"> e</span><span style="color:#89DDFF"> in</span><span style="color:#C0CAF5"> parser</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">take_errors</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">        e</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">into_diagnostic</span><span style="color:#89DDFF">(&amp;</span><span style="color:#C0CAF5">handler</span><span style="color:#89DDFF">).</span><span style="color:#7AA2F7">emit</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> _module</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> parser</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">parse_module</span><span style="color:#89DDFF">()</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">map_err</span><span style="color:#89DDFF">(</span><span style="color:#BB9AF7">|</span><span style="color:#9D7CD8;font-style:italic">mut</span><span style="color:#C0CAF5"> e</span><span style="color:#BB9AF7">|</span><span style="color:#C0CAF5"> e</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">into_diagnostic</span><span style="color:#89DDFF">(&amp;</span><span style="color:#C0CAF5">handler</span><span style="color:#89DDFF">).</span><span style="color:#7AA2F7">emit</span><span style="color:#89DDFF">())</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">expect</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">failed to parser module</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">    println!</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"{</span><span style="color:#9ECE6A">:?</span><span style="color:#89DDFF">}"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> _module</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre><figcaption class="notebook-code-language">RUST</figcaption></figure>
 <p>実行してみます。</p>
-<pre><code class="language-shell">$ cargo run
-Module { span: Span { lo: BytePos(0), hi: BytePos(8), ctxt: #0 }, body: [Stmt(Expr(ExprStmt { span: Span { lo: BytePos(0), hi: BytePos(8), ctxt: #0 }, expr: Bin(BinExpr { span: Span { lo: BytePos(0), hi: BytePos(7), ctxt: #0 }, op: "/", left: Lit(Num(Number { span: Span { lo: BytePos(0), hi: BytePos(2), ctxt: #0 }, value: 20.0 })), right: Lit(Num(Number { span: Span { lo: BytePos(5), hi: BytePos(7), ctxt: #0 }, value: 10.0 })) }) }))], shebang: None }
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">$</span><span style="color:#9ECE6A"> cargo</span><span style="color:#9ECE6A"> run</span></span>
+<span class="line"><span style="color:#C0CAF5">Module</span><span style="color:#9ECE6A"> {</span><span style="color:#9ECE6A"> span:</span><span style="color:#9ECE6A"> Span</span><span style="color:#9ECE6A"> {</span><span style="color:#9ECE6A"> lo:</span><span style="color:#9ECE6A"> BytePos</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">0</span><span style="color:#9ABDF5">)</span><span style="color:#9ECE6A">,</span><span style="color:#9ECE6A"> hi:</span><span style="color:#9ECE6A"> BytePos</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">8</span><span style="color:#9ABDF5">)</span><span style="color:#9ECE6A">,</span><span style="color:#9ECE6A"> ctxt:</span><span style="color:#51597D;font-style:italic"> #0 }, body: [Stmt(Expr(ExprStmt { span: Span { lo: BytePos(0), hi: BytePos(8), ctxt: #0 }, expr: Bin(BinExpr { span: Span { lo: BytePos(0), hi: BytePos(7), ctxt: #0 }, op: "/", left: Lit(Num(Number { span: Span { lo: BytePos(0), hi: BytePos(2), ctxt: #0 }, value: 20.0 })), right: Lit(Num(Number { span: Span { lo: BytePos(5), hi: BytePos(7), ctxt: #0 }, value: 10.0 })) }) }))], shebang: None }</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>それっぽい結果(20.0や10.0、<code>op: "/"</code>)が出力されましたね！</p>
 <h3 id="四則演算するjavascriptをllvmで実行">四則演算するJavascriptをLLVMで実行</h3>
 <p>最後に、swc_ecma_parserとLLVMを組み合わせて、<code>字句解析 ~ 構文木</code>と<code>中間言語 ~ コード生成</code>を繋げ、四則演算するJSをパースし、LLVMで実行してみます。</p>
 <p>パースするjavascriptは、次のものになります。</p>
-<pre><code class="language-javascript">// ./src/test.js
-20 / 10;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#51597D;font-style:italic">// ./src/test.js</span></span>
+<span class="line"><span style="color:#FF9E64">20</span><span style="color:#89DDFF"> /</span><span style="color:#FF9E64"> 10</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">JAVASCRIPT</figcaption></figure>
 <p>Rustのコードは、次のものになります。</p>
-<pre><code class="language-rust">extern crate inkwell;
-extern crate swc_common;
-extern crate swc_ecma_ast;
-extern crate swc_ecma_parser;
-
-use inkwell::context::Context;
-use inkwell::OptimizationLevel;
-use std::error::Error;
-use std::path::Path;
-use swc_common::sync::Lrc;
-use swc_common::{
-    errors::{ColorConfig, Handler},
-    SourceMap,
-};
-use swc_ecma_ast::Lit::Num;
-use swc_ecma_parser::{lexer::Lexer, Parser, StringInput, Syntax};
-
-fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
-    let cm: Lrc&lt;SourceMap&gt; = Default::default();
-    let handler = Handler::with_tty_emitter(ColorConfig::Auto, true, false, Some(cm.clone()));
-
-    let fm = cm
-        .load_file(Path::new("./src/test.js"))
-        .expect("failed to load test.js");
-    let lexer = Lexer::new(
-        Syntax::Es(Default::default()),
-        Default::default(),
-        StringInput::from(&amp;*fm),
-        None,
-    );
-    let mut parser = Parser::new_from(lexer);
-    for e in parser.take_errors() {
-        e.into_diagnostic(&amp;handler).emit();
-    }
-    let _module = parser
-        .parse_module()
-        .map_err(|e| e.into_diagnostic(&amp;handler).emit())
-        .expect("failed to parser module");
-
-    let context = Context::create();
-    let module = context.create_module("main");
-    let builder = context.create_builder();
-    for b in _module.body {
-        if b.is_stmt() {
-            let stmt = b.stmt().unwrap();
-            if stmt.is_expr() {
-                let expr_stmt = stmt.expr().unwrap();
-                let expr = expr_stmt.expr;
-                if expr.is_bin() {
-                    let bin_expr = expr.bin().unwrap();
-                    let left_expr = bin_expr.left;
-                    let right_expr = bin_expr.right;
-                    let binary_op = bin_expr.op;
-                    if left_expr.is_lit() &amp;&amp; right_expr.is_lit() {
-                        let left_lit = left_expr.lit().unwrap();
-                        let right_lit = right_expr.lit().unwrap();
-                        let left_value = match left_lit {
-                            Num(n) =&gt; n.value,
-                            _ =&gt; 0f64,
-                        };
-                        let right_value = match right_lit {
-                            Num(n) =&gt; n.value,
-                            _ =&gt; 0f64,
-                        };
-                        let i64_type = context.i64_type();
-                        let void_type = context.void_type();
-                        let fn_type = void_type.fn_type(&amp;[], false);
-                        let function = module.add_function("main", fn_type, None);
-                        let basic_block = context.append_basic_block(function, "entry");
-                        builder.position_at_end(basic_block);
-                        let x = i64_type.const_int(left_value as u64, true);
-                        let y = i64_type.const_int(right_value as u64, true);
-                        let result = match binary_op {
-                            swc_ecma_ast::BinaryOp::Add =&gt; builder.build_int_add(x, y, "main"),
-                            swc_ecma_ast::BinaryOp::Sub =&gt; builder.build_int_sub(x, y, "main"),
-                            swc_ecma_ast::BinaryOp::Div =&gt; {
-                                builder.build_int_signed_div(x, y, "main")
-                            }
-                            swc_ecma_ast::BinaryOp::Mul =&gt; builder.build_int_mul(x, y, "main"),
-                            _ =&gt; i64_type.const_int(0u64, true),
-                        };
-                        builder.build_return(Some(&amp;result));
-                        let e = module.create_jit_execution_engine(OptimizationLevel::None)?;
-                        unsafe {
-                            let r = e
-                                .get_function::&lt;unsafe extern "C" fn() -&gt; u64&gt;("main")?
-                                .call();
-                            println!("{:?}", r);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    Ok(())
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"><span style="color:#BB9AF7">extern</span><span style="color:#7DCFFF"> crate</span><span style="color:#A9B1D6"> inkwell</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">extern</span><span style="color:#7DCFFF"> crate</span><span style="color:#A9B1D6"> swc_common</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">extern</span><span style="color:#7DCFFF"> crate</span><span style="color:#A9B1D6"> swc_ecma_ast</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">extern</span><span style="color:#7DCFFF"> crate</span><span style="color:#A9B1D6"> swc_ecma_parser</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> inkwell</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">context</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Context</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> inkwell</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">OptimizationLevel</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> std</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">error</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Error</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> std</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">path</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Path</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> swc_common</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">sync</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Lrc</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> swc_common</span><span style="color:#89DDFF">::{</span></span>
+<span class="line"><span style="color:#0DB9D7">    errors</span><span style="color:#89DDFF">::{</span><span style="color:#C0CAF5">ColorConfig</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> Handler</span><span style="color:#89DDFF">},</span></span>
+<span class="line"><span style="color:#C0CAF5">    SourceMap</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">};</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> swc_ecma_ast</span><span style="color:#89DDFF">::</span><span style="color:#0DB9D7">Lit</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Num</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">use</span><span style="color:#0DB9D7"> swc_ecma_parser</span><span style="color:#89DDFF">::{</span><span style="color:#0DB9D7">lexer</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Lexer</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> Parser</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> StringInput</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> Syntax</span><span style="color:#89DDFF">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">fn</span><span style="color:#7AA2F7"> main</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#C0CAF5"> Result</span><span style="color:#89DDFF">&lt;(),</span><span style="color:#C0CAF5"> Box</span><span style="color:#89DDFF">&lt;dyn</span><span style="color:#C0CAF5"> Error</span><span style="color:#89DDFF">&gt;&gt;</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> cm</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Lrc</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">SourceMap</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> Default</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">default</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> handler</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> Handler</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">with_tty_emitter</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">ColorConfig</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Auto</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> Some</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">cm</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">clone</span><span style="color:#89DDFF">()));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> fm</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> cm</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">load_file</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">Path</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">new</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">./src/test.js</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">))</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">expect</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">failed to load test.js</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> lexer</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> Lexer</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">new</span><span style="color:#89DDFF">(</span></span>
+<span class="line"><span style="color:#0DB9D7">        Syntax</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">Es</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">Default</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">default</span><span style="color:#89DDFF">()),</span></span>
+<span class="line"><span style="color:#0DB9D7">        Default</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">default</span><span style="color:#89DDFF">(),</span></span>
+<span class="line"><span style="color:#0DB9D7">        StringInput</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">from</span><span style="color:#89DDFF">(&amp;*</span><span style="color:#C0CAF5">fm</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#C0CAF5">        None</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    );</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#9D7CD8;font-style:italic"> mut</span><span style="color:#C0CAF5"> parser</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> Parser</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">new_from</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">lexer</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    for</span><span style="color:#C0CAF5"> e</span><span style="color:#89DDFF"> in</span><span style="color:#C0CAF5"> parser</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">take_errors</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">        e</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">into_diagnostic</span><span style="color:#89DDFF">(&amp;</span><span style="color:#C0CAF5">handler</span><span style="color:#89DDFF">).</span><span style="color:#7AA2F7">emit</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> _module</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> parser</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">parse_module</span><span style="color:#89DDFF">()</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">map_err</span><span style="color:#89DDFF">(</span><span style="color:#BB9AF7">|</span><span style="color:#C0CAF5">e</span><span style="color:#BB9AF7">|</span><span style="color:#C0CAF5"> e</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">into_diagnostic</span><span style="color:#89DDFF">(&amp;</span><span style="color:#C0CAF5">handler</span><span style="color:#89DDFF">).</span><span style="color:#7AA2F7">emit</span><span style="color:#89DDFF">())</span></span>
+<span class="line"><span style="color:#89DDFF">        .</span><span style="color:#7AA2F7">expect</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">failed to parser module</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> Context</span><span style="color:#89DDFF">::</span><span style="color:#7AA2F7">create</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create_module</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">    let</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create_builder</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">    for</span><span style="color:#C0CAF5"> b</span><span style="color:#89DDFF"> in</span><span style="color:#C0CAF5"> _module</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">body </span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#BB9AF7">        if</span><span style="color:#C0CAF5"> b</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">is_stmt</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">            let</span><span style="color:#C0CAF5"> stmt</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> b</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">stmt</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">            if</span><span style="color:#C0CAF5"> stmt</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">is_expr</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">                let</span><span style="color:#C0CAF5"> expr_stmt</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> stmt</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">expr</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">                let</span><span style="color:#C0CAF5"> expr</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> expr_stmt</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">expr</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">                if</span><span style="color:#C0CAF5"> expr</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">is_bin</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">                    let</span><span style="color:#C0CAF5"> bin_expr</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> expr</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">bin</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">                    let</span><span style="color:#C0CAF5"> left_expr</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> bin_expr</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">left</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">                    let</span><span style="color:#C0CAF5"> right_expr</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> bin_expr</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">right</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">                    let</span><span style="color:#C0CAF5"> binary_op</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> bin_expr</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">op</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">                    if</span><span style="color:#C0CAF5"> left_expr</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">is_lit</span><span style="color:#89DDFF">()</span><span style="color:#BB9AF7"> &amp;&amp;</span><span style="color:#C0CAF5"> right_expr</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">is_lit</span><span style="color:#89DDFF">()</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> left_lit</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> left_expr</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">lit</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> right_lit</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> right_expr</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">lit</span><span style="color:#89DDFF">().</span><span style="color:#7AA2F7">unwrap</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> left_value</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7"> match</span><span style="color:#C0CAF5"> left_lit</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">                            Num</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">n</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> =&gt;</span><span style="color:#C0CAF5"> n</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">value</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">                            _</span><span style="color:#89DDFF"> =&gt;</span><span style="color:#FF9E64"> 0</span><span style="color:#C0CAF5">f64</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">                        };</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> right_value</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7"> match</span><span style="color:#C0CAF5"> right_lit</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">                            Num</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">n</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> =&gt;</span><span style="color:#C0CAF5"> n</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">value</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">                            _</span><span style="color:#89DDFF"> =&gt;</span><span style="color:#FF9E64"> 0</span><span style="color:#C0CAF5">f64</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">                        };</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">i64_type</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> void_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">void_type</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> fn_type</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> void_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fn_type</span><span style="color:#89DDFF">(&amp;[],</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> function</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">add_function</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> fn_type</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> None</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> basic_block</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append_basic_block</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">function</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">entry</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#C0CAF5">                        builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">position_at_end</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">basic_block</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> x</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">const_int</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">left_value</span><span style="color:#89DDFF"> as</span><span style="color:#C0CAF5"> u64</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> y</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">const_int</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">right_value</span><span style="color:#89DDFF"> as</span><span style="color:#C0CAF5"> u64</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> result</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7"> match</span><span style="color:#C0CAF5"> binary_op</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#0DB9D7">                            swc_ecma_ast</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">BinaryOp</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Add</span><span style="color:#89DDFF"> =&gt;</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_int_add</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">x</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> y</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#0DB9D7">                            swc_ecma_ast</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">BinaryOp</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Sub</span><span style="color:#89DDFF"> =&gt;</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_int_sub</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">x</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> y</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#0DB9D7">                            swc_ecma_ast</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">BinaryOp</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Div</span><span style="color:#89DDFF"> =&gt;</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">                                builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_int_signed_div</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">x</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> y</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">                            }</span></span>
+<span class="line"><span style="color:#0DB9D7">                            swc_ecma_ast</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">BinaryOp</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">Mul</span><span style="color:#89DDFF"> =&gt;</span><span style="color:#C0CAF5"> builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_int_mul</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">x</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> y</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#C0CAF5">                            _</span><span style="color:#89DDFF"> =&gt;</span><span style="color:#C0CAF5"> i64_type</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">const_int</span><span style="color:#89DDFF">(</span><span style="color:#FF9E64">0</span><span style="color:#C0CAF5">u64</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> true</span><span style="color:#89DDFF">),</span></span>
+<span class="line"><span style="color:#89DDFF">                        };</span></span>
+<span class="line"><span style="color:#C0CAF5">                        builder</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">build_return</span><span style="color:#89DDFF">(</span><span style="color:#C0CAF5">Some</span><span style="color:#89DDFF">(&amp;</span><span style="color:#C0CAF5">result</span><span style="color:#89DDFF">));</span></span>
+<span class="line"><span style="color:#BB9AF7">                        let</span><span style="color:#C0CAF5"> e</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> module</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create_jit_execution_engine</span><span style="color:#89DDFF">(</span><span style="color:#0DB9D7">OptimizationLevel</span><span style="color:#89DDFF">::</span><span style="color:#C0CAF5">None</span><span style="color:#89DDFF">)?;</span></span>
+<span class="line"><span style="color:#89DDFF">                        unsafe</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">                            let</span><span style="color:#C0CAF5"> r</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> e</span></span>
+<span class="line"><span style="color:#89DDFF">                                .</span><span style="color:#7AA2F7">get_function</span><span style="color:#89DDFF">::&lt;unsafe</span><span style="color:#BB9AF7"> extern</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">C</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> fn()</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#C0CAF5"> u64</span><span style="color:#89DDFF">&gt;(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">)?</span></span>
+<span class="line"><span style="color:#89DDFF">                                .</span><span style="color:#7AA2F7">call</span><span style="color:#89DDFF">();</span></span>
+<span class="line"><span style="color:#7AA2F7">                            println!</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"{</span><span style="color:#9ECE6A">:?</span><span style="color:#89DDFF">}"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> r</span><span style="color:#89DDFF">);</span></span>
+<span class="line"><span style="color:#89DDFF">                        }</span></span>
+<span class="line"><span style="color:#89DDFF">                    }</span></span>
+<span class="line"><span style="color:#89DDFF">                }</span></span>
+<span class="line"><span style="color:#89DDFF">            }</span></span>
+<span class="line"><span style="color:#89DDFF">        }</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#C0CAF5">    Ok</span><span style="color:#89DDFF">(())</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre><figcaption class="notebook-code-language">RUST</figcaption></figure>
 <p>実行してみます。</p>
-<pre><code class="language-shell">$ cargo run
-2
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">$</span><span style="color:#9ECE6A"> cargo</span><span style="color:#9ECE6A"> run</span></span>
+<span class="line"><span style="color:#C0CAF5">2</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p><code>20 / 10</code>つまり、<code>2</code>が出力されました！やった！</p>
 <h2 id="終わりに">終わりに</h2>
 <p>これにて、簡単なjavascriptコードをパースし、LLVMで実行できるところまでたどり着きました。

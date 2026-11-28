@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2019-05-29" data-pagefind-filter="month:2019-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">19</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-29"><span class="visually-hidden">2019年5月29日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">29</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 12. リソース制限 -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2019-05-29" data-pagefind-filter="month:2019-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">19</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-29"><span class="visually-hidden">2019年5月29日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">29</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 12. リソース制限 -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
 <ol>
 <li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_01/">一足遅れて Kubernetes を学び始める - 01. 環境選択編 -</a></li>
 <li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_02/">一足遅れて Kubernetes を学び始める - 02. Docker For Mac -</a></li>
@@ -36,45 +72,42 @@ limits は、使用するリソースの上限値です。</p>
 <p>request は、空きノードに指定するリソースがなければスケジューリングされませんが、limits は、関係なくスケジューリングされます。</p>
 <p>とにもかくにも、試してみましょう。</p>
 <p>まず、現状確認です。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k get node
-NAME       STATUS   ROLES    AGE   VERSION
-raspi001   Ready    master   31d   v1.14.1
-raspi002   Ready    worker   31d   v1.14.1
-raspi003   Ready    worker   30d   v1.14.1
-pi@raspi001:~/tmp $ k get nodes -o jsonpath='{.items[?(@.metadata.name!="raspi001")].status.allocatable.memory}'
-847048Ki 847048Ki
-pi@raspi001:~/tmp $ k get nodes -o jsonpath='{.items[?(@.metadata.name!="raspi001")].status.allocatable.cpu}'
-4 4
-pi@raspi001:~/tmp $ k get nodes -o jsonpath='{.items[?(@.metadata.name!="raspi001")].status.capacity.memory}'
-949448Ki 949448Ki
-pi@raspi001:~/tmp $ k get nodes -o jsonpath='{.items[?(@.metadata.name!="raspi001")].status.capacity.cpu}'
-4 4
-
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> node</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">       STATUS</span><span style="color:#9ECE6A">   ROLES</span><span style="color:#9ECE6A">    AGE</span><span style="color:#9ECE6A">   VERSION</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi001</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">    master</span><span style="color:#9ECE6A">   31d</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi002</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">    worker</span><span style="color:#9ECE6A">   31d</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi003</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">    worker</span><span style="color:#9ECE6A">   30d</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> nodes</span><span style="color:#E0AF68"> -o</span><span style="color:#9ECE6A"> jsonpath=</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">{.items[?(@.metadata.name!="raspi001")].status.allocatable.memory}</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#C0CAF5">847048Ki</span><span style="color:#9ECE6A"> 847048Ki</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> nodes</span><span style="color:#E0AF68"> -o</span><span style="color:#9ECE6A"> jsonpath=</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">{.items[?(@.metadata.name!="raspi001")].status.allocatable.cpu}</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#C0CAF5">4</span><span style="color:#FF9E64"> 4</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> nodes</span><span style="color:#E0AF68"> -o</span><span style="color:#9ECE6A"> jsonpath=</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">{.items[?(@.metadata.name!="raspi001")].status.capacity.memory}</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#C0CAF5">949448Ki</span><span style="color:#9ECE6A"> 949448Ki</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> nodes</span><span style="color:#E0AF68"> -o</span><span style="color:#9ECE6A"> jsonpath=</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">{.items[?(@.metadata.name!="raspi001")].status.capacity.cpu}</span><span style="color:#89DDFF">'</span></span>
+<span class="line"><span style="color:#C0CAF5">4</span><span style="color:#FF9E64"> 4</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>jsonpath の使い方は、<a href="https://kubernetes.io/docs/reference/kubectl/jsonpath/"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/kubernetes.io.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">こちら<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>にあります。</p>
 <p>allocatable が Pod に配置できるリソース量で、capacity は Node 全体での配置できるリソース量です。
 これだけだと、現在使っているリソース量が不明なので個別に調べます。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k describe node raspi002
-...
-Allocated resources:
-  (Total limits may be over 100 percent, i.e., overcommitted.)
-  Resource           Requests     Limits
-  --------           --------     ------
-  cpu                200m (5%)    200m (5%)
-  memory             150Mi (18%)  150Mi (18%)
-  ephemeral-storage  0 (0%)       0 (0%)
-...
-pi@raspi001:~/tmp $ k describe node raspi003
-...
-Allocated resources:
-  (Total limits may be over 100 percent, i.e., overcommitted.)
-  Resource           Requests     Limits
-  --------           --------     ------
-  cpu                400m (10%)   300m (7%)
-  memory             320Mi (38%)  420Mi (50%)
-  ephemeral-storage  0 (0%)       0 (0%)
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> describe</span><span style="color:#9ECE6A"> node</span><span style="color:#9ECE6A"> raspi002</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">Allocated</span><span style="color:#9ECE6A"> resources:</span></span>
+<span class="line"><span style="color:#9ABDF5">  (</span><span style="color:#C0CAF5">Total</span><span style="color:#9ECE6A"> limits</span><span style="color:#9ECE6A"> may</span><span style="color:#9ECE6A"> be</span><span style="color:#9ECE6A"> over</span><span style="color:#FF9E64"> 100</span><span style="color:#9ECE6A"> percent,</span><span style="color:#9ECE6A"> i.e.,</span><span style="color:#9ECE6A"> overcommitted.</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  Resource</span><span style="color:#9ECE6A">           Requests</span><span style="color:#9ECE6A">     Limits</span></span>
+<span class="line"><span style="color:#C0CAF5">  --------</span><span style="color:#E0AF68">           --------</span><span style="color:#E0AF68">     ------</span></span>
+<span class="line"><span style="color:#C0CAF5">  cpu</span><span style="color:#9ECE6A">                200m</span><span style="color:#A9B1D6"> (5%)    200m (</span><span style="color:#C0CAF5">5%</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  memory</span><span style="color:#9ECE6A">             150Mi</span><span style="color:#A9B1D6"> (18%)  150Mi (</span><span style="color:#C0CAF5">18%</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  ephemeral-storage</span><span style="color:#FF9E64">  0</span><span style="color:#A9B1D6"> (0%)       0 (</span><span style="color:#C0CAF5">0%</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> describe</span><span style="color:#9ECE6A"> node</span><span style="color:#9ECE6A"> raspi003</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">Allocated</span><span style="color:#9ECE6A"> resources:</span></span>
+<span class="line"><span style="color:#9ABDF5">  (</span><span style="color:#C0CAF5">Total</span><span style="color:#9ECE6A"> limits</span><span style="color:#9ECE6A"> may</span><span style="color:#9ECE6A"> be</span><span style="color:#9ECE6A"> over</span><span style="color:#FF9E64"> 100</span><span style="color:#9ECE6A"> percent,</span><span style="color:#9ECE6A"> i.e.,</span><span style="color:#9ECE6A"> overcommitted.</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  Resource</span><span style="color:#9ECE6A">           Requests</span><span style="color:#9ECE6A">     Limits</span></span>
+<span class="line"><span style="color:#C0CAF5">  --------</span><span style="color:#E0AF68">           --------</span><span style="color:#E0AF68">     ------</span></span>
+<span class="line"><span style="color:#C0CAF5">  cpu</span><span style="color:#9ECE6A">                400m</span><span style="color:#A9B1D6"> (10%)   300m (</span><span style="color:#C0CAF5">7%</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  memory</span><span style="color:#9ECE6A">             320Mi</span><span style="color:#A9B1D6"> (38%)  420Mi (</span><span style="color:#C0CAF5">50%</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  ephemeral-storage</span><span style="color:#FF9E64">  0</span><span style="color:#A9B1D6"> (0%)       0 (</span><span style="color:#C0CAF5">0%</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>現状のリソース状況を表にすると下記のとおりです。</p>
 <table>
 <thead>
@@ -104,41 +137,39 @@ Allocated resources:
 </tbody>
 </table>
 <p>では、リソース制限を試してみましょう。</p>
-<pre><code class="language-yaml">## sample-resource.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: sample-resource
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: sample-app
-  template:
-    metadata:
-      labels:
-        app: sample-app
-    spec:
-      containers:
-        - name: nginx-container
-          image: nginx:1.12
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "300m"
-            limits:
-              memory: "256Mi"
-              cpu: "600m"
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-resource.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> apps/v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Deployment</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-resource</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  replicas</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3</span></span>
+<span class="line"><span style="color:#F7768E">  selector</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    matchLabels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">  template</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      labels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">        app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">    spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">          image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#F7768E">          resources</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">            requests</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">              memory</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">128Mi</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">              cpu</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">300m</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">            limits</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">              memory</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">256Mi</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">              cpu</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">600m</span><span style="color:#89DDFF">"</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
 <p>apply する pod で要求する memory の下限合計は 384Mi(128Mi×3),cpu は 900m(300m×3)です。
 これだと、pod が run するはずです。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-resource.yaml
-pi@raspi001:~/tmp $ k get pods
-NAME                                      READY   STATUS    RESTARTS   AGE
-sample-resource-785cd54844-7n89t          1/1     Running   0          108s
-sample-resource-785cd54844-9b5f9          1/1     Running   0          108s
-sample-resource-785cd54844-whj7x          1/1     Running   0          108s
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-resource.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                                      READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-7n89t</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          108s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-9b5f9</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          108s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-whj7x</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          108s</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>期待通りですね。
 今度はリソース制限になる状態を試してみます。</p>
 <p>全 WorkerNode の memory 下限合計は 1,224Mi(697,048Ki+527,048Ki)です。
@@ -146,43 +177,41 @@ sample-resource-785cd54844-whj7x          1/1     Running   0          108s
 replica 数を 3 にしましたが、10 にすれば良いですね（1,280Mi)</p>
 <p>期待動作として、9 個(128Mi*9=1,152Mi)は Running で、1 個(128Mi)は Pending になるはずです。</p>
 <p>sample-resource.yaml の replica を 10 に変更したあと ↓</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-resource.yaml
-pi@raspi001:~/tmp $ k get pods
-NAME                                      READY   STATUS    RESTARTS   AGE
-sample-resource-785cd54844-7n89t          1/1     Running   0          6m19s
-sample-resource-785cd54844-9b5f9          1/1     Running   0          6m19s
-sample-resource-785cd54844-dffsd          1/1     Running   0          61s
-sample-resource-785cd54844-jmkv6          1/1     Running   0          61s
-sample-resource-785cd54844-k9vcb          1/1     Running   0          61s
-sample-resource-785cd54844-l4smf          0/1     Pending   0          60s
-sample-resource-785cd54844-n4hl7          1/1     Running   0          60s
-sample-resource-785cd54844-th4bp          0/1     Pending   0          60s
-sample-resource-785cd54844-whj7x          1/1     Running   0          6m19s
-sample-resource-785cd54844-xclsk          1/1     Running   0          60s
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-resource.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                                      READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-7n89t</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          6m19s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-9b5f9</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          6m19s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-dffsd</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          61s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-jmkv6</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          61s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-k9vcb</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          61s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-l4smf</span><span style="color:#9ECE6A">          0/1</span><span style="color:#9ECE6A">     Pending</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          60s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-n4hl7</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          60s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-th4bp</span><span style="color:#9ECE6A">          0/1</span><span style="color:#9ECE6A">     Pending</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          60s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-whj7x</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          6m19s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-xclsk</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          60s</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>あれ、2 つ Pending になっていますね。もしかして、Node の空きリソースが中途半端にないからですかね。
 確認してみましょう。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k describe node raspi002
-...
-Allocated resources:
-  (Total limits may be over 100 percent, i.e., overcommitted.)
-  Resource           Requests     Limits
-  --------           --------     ------
-  cpu                1700m (42%)  3200m (80%)
-  memory             790Mi (95%)  1430Mi (172%)
-  ephemeral-storage  0 (0%)       0 (0%)
-...
-pi@raspi001:~/tmp $ k describe node raspi003
-...
-Allocated resources:
-  (Total limits may be over 100 percent, i.e., overcommitted.)
-  Resource           Requests     Limits
-  --------           --------     ------
-  cpu                1300m (32%)  2100m (52%)
-  memory             704Mi (85%)  1188Mi (143%)
-  ephemeral-storage  0 (0%)       0 (0%)
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> describe</span><span style="color:#9ECE6A"> node</span><span style="color:#9ECE6A"> raspi002</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">Allocated</span><span style="color:#9ECE6A"> resources:</span></span>
+<span class="line"><span style="color:#9ABDF5">  (</span><span style="color:#C0CAF5">Total</span><span style="color:#9ECE6A"> limits</span><span style="color:#9ECE6A"> may</span><span style="color:#9ECE6A"> be</span><span style="color:#9ECE6A"> over</span><span style="color:#FF9E64"> 100</span><span style="color:#9ECE6A"> percent,</span><span style="color:#9ECE6A"> i.e.,</span><span style="color:#9ECE6A"> overcommitted.</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  Resource</span><span style="color:#9ECE6A">           Requests</span><span style="color:#9ECE6A">     Limits</span></span>
+<span class="line"><span style="color:#C0CAF5">  --------</span><span style="color:#E0AF68">           --------</span><span style="color:#E0AF68">     ------</span></span>
+<span class="line"><span style="color:#C0CAF5">  cpu</span><span style="color:#9ECE6A">                1700m</span><span style="color:#A9B1D6"> (42%)  3200m (</span><span style="color:#C0CAF5">80%</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  memory</span><span style="color:#9ECE6A">             790Mi</span><span style="color:#A9B1D6"> (95%)  1430Mi (</span><span style="color:#C0CAF5">172%</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  ephemeral-storage</span><span style="color:#FF9E64">  0</span><span style="color:#A9B1D6"> (0%)       0 (</span><span style="color:#C0CAF5">0%</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> describe</span><span style="color:#9ECE6A"> node</span><span style="color:#9ECE6A"> raspi003</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">Allocated</span><span style="color:#9ECE6A"> resources:</span></span>
+<span class="line"><span style="color:#9ABDF5">  (</span><span style="color:#C0CAF5">Total</span><span style="color:#9ECE6A"> limits</span><span style="color:#9ECE6A"> may</span><span style="color:#9ECE6A"> be</span><span style="color:#9ECE6A"> over</span><span style="color:#FF9E64"> 100</span><span style="color:#9ECE6A"> percent,</span><span style="color:#9ECE6A"> i.e.,</span><span style="color:#9ECE6A"> overcommitted.</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  Resource</span><span style="color:#9ECE6A">           Requests</span><span style="color:#9ECE6A">     Limits</span></span>
+<span class="line"><span style="color:#C0CAF5">  --------</span><span style="color:#E0AF68">           --------</span><span style="color:#E0AF68">     ------</span></span>
+<span class="line"><span style="color:#C0CAF5">  cpu</span><span style="color:#9ECE6A">                1300m</span><span style="color:#A9B1D6"> (32%)  2100m (</span><span style="color:#C0CAF5">52%</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  memory</span><span style="color:#9ECE6A">             704Mi</span><span style="color:#A9B1D6"> (85%)  1188Mi (</span><span style="color:#C0CAF5">143%</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">  ephemeral-storage</span><span style="color:#FF9E64">  0</span><span style="color:#A9B1D6"> (0%)       0 (</span><span style="color:#C0CAF5">0%</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>raspi002 は、847Mi 中 790Mi 使っています。１つの Pod を追加するためのリソース（128Mi）はないですね。
 raspi003 は、847Mi 中 704Mi 使っています。こちらは空いている気がするのですが、なぜでしょうか。</p>
 <p>ここで、memory の<code>704Mi (85%)</code>というところに着目すると、100%だった場合は 828Mi ということになります。
@@ -236,28 +265,26 @@ requests は、パフォーマンステストをしつつ最適化していき�
 <h2 id="resourcequota">ResourceQuota</h2>
 <p>ResourceQuota を使うことで、Namespace ごとに「作成可能なリソース数の制限」と「リソース使用量の制限」ができます。
 「作成可能なリソース数の制限」を試そうと思います。</p>
-<pre><code class="language-yaml">## sample-resourcequota.yaml
-apiVersion: v1
-kind: ResourceQuota
-metadata:
-  name: sample-resourcequota
-  namespace: default
-spec:
-  hard:
-    # 作成可能なリソースの数
-    count/pods: 5
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-resource.yaml
-pi@raspi001:~/tmp $ k apply -f sample-resourcequota.yaml
-pi@raspi001:~/tmp $ k apply -f sample-resource.yaml
-pi@raspi001:~/tmp $ k get pods
-NAME                                      READY   STATUS    RESTARTS   AGE
-sample-resource-785cd54844-dll8t          1/1     Running   0          38s
-sample-resource-785cd54844-ljr7q          1/1     Running   0          39s
-sample-resource-785cd54844-r6txh          1/1     Running   0          38s
-sample-resource-785cd54844-sb6sq          1/1     Running   0          38s
-sample-resource-785cd54844-3ffeg          1/1     Running   0          38s
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-resourcequota.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> ResourceQuota</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-resourcequota</span></span>
+<span class="line"><span style="color:#F7768E">  namespace</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> default</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  hard</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    # 作成可能なリソースの数</span></span>
+<span class="line"><span style="color:#F7768E">    count/pods</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 5</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> delete</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-resource.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-resourcequota.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-resource.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                                      READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-dll8t</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          38s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-ljr7q</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          39s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-r6txh</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          38s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-sb6sq</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          38s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-resource-785cd54844-3ffeg</span><span style="color:#9ECE6A">          1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          38s</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>こうすると、pods が 5 個までしか作成できないので、sample-resource.yaml を適用しても 5 個までしか作成されません。
 replica のような場合は、特に警告がなく単純に作られませんでした。
 configmap を 5 個までに制限して、1 つずつ configmap を apply すると、警告がでるそうです。</p>
@@ -279,8 +306,7 @@ configmap を 5 個までに制限して、1 つずつ configmap を apply す�
 <p>VPA は、コンテナに割り当てる CPU やメモリのリソース割当をスケールさせるリソースです。
 これは、HPA のスケールアウトではなく、Pod のスケールアップを行うものです。</p>
 <h2 id="お片付け">お片付け</h2>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-resource.yaml -f sample-resourcequota.yaml
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> delete</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-resource.yaml</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-resourcequota.yaml</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <h2 id="最後に">最後に</h2>
 <p>今回は、Requests や Limits を操作してリソース制限をしてみました。
 どれがいくらリソースを消費しているのか確認する術を学び、

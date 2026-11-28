@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2021-05-24" data-pagefind-filter="month:2021-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">62</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2021-05-24"><span class="visually-hidden">2021年5月24日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2021</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">24</span></span></time></p></div><div class="notebook-heading"><h1>ブラウザの仕組みを学ぶ</h1></div></header><div class="notebook-body"><p>Web フロントエンジニアたるもの、 <strong>ブラウザの仕組みに興味を持つのは自然の摂理</strong> です。本記事では、私がブラウザの仕組みを学んでいく過程を備忘録として残します。</p>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2021-05-24" data-pagefind-filter="month:2021-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">62</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2021-05-24"><span class="visually-hidden">2021年5月24日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2021</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">24</span></span></time></p></div><div class="notebook-heading"><h1>ブラウザの仕組みを学ぶ</h1></div></header><div class="notebook-body"><p>Web フロントエンジニアたるもの、 <strong>ブラウザの仕組みに興味を持つのは自然の摂理</strong> です。本記事では、私がブラウザの仕組みを学んでいく過程を備忘録として残します。</p>
 <h2 id="みんな大好き-chrome">みんな大好き Chrome</h2>
 <p>Web フロントエンジニアに愛されているブラウザといえば、<del>IE</del>Chrome ですよね。
 ブラウザで HTML,CSS,JS の動作確認するのは、日常茶飯事です。
@@ -192,61 +228,59 @@ DOM とレンダーオブジェクトは、1 対 1 という訳ではなく、�
 <p><a href="https://limpet.net/mbrubeck/2014/11/05/toy-layout-engine-7-painting.html"><span class="notebook-photo-frame"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1622034177/silver-birder.github.io/blog/mbrubeck_toy-layout-engine-7-painting.png?ar=2844%3A738" alt="Toyブラウザエンジン(mbrubeck)のメインフロー" width="2844" height="738" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_200/q_auto/f_auto/v1622034177/silver-birder.github.io/blog/mbrubeck_toy-layout-engine-7-painting.png?ar=2844%3A738 200w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_300/q_auto/f_auto/v1622034177/silver-birder.github.io/blog/mbrubeck_toy-layout-engine-7-painting.png?ar=2844%3A738 300w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1622034177/silver-birder.github.io/blog/mbrubeck_toy-layout-engine-7-painting.png?ar=2844%3A738 400w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_450/q_auto/f_auto/v1622034177/silver-birder.github.io/blog/mbrubeck_toy-layout-engine-7-painting.png?ar=2844%3A738 450w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_600/q_auto/f_auto/v1622034177/silver-birder.github.io/blog/mbrubeck_toy-layout-engine-7-painting.png?ar=2844%3A738 600w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_800/q_auto/f_auto/v1622034177/silver-birder.github.io/blog/mbrubeck_toy-layout-engine-7-painting.png?ar=2844%3A738 800w" sizes="auto, min(25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem) - 0.5rem - 2 * 0.5rem))"><span class="notebook-photo-caption" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/limpet.net.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Toyブラウザエンジン(mbrubeck)のメインフロー<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></p>
 <p>Style tree は、これまでの話でいうと Render tree だと思います。
 Toy ブラウザエンジン(mbrubeck)に、次の HTML と CSS を読み込ませると、下記の画像のようなアウトプットになります。</p>
-<pre><code class="language-html">&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Test&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;div class="outer"&gt;
-    &lt;p class="inner"&gt;Hello, &lt;span id="name"&gt;world!&lt;/span&gt;&lt;/p&gt;
-    &lt;p class="inner" id="bye"&gt;Goodbye!&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/html&gt;
-</code></pre>
-<pre><code class="language-css">* {
-  display: block;
-}
-
-span {
-  display: inline;
-}
-
-html {
-  width: 600px;
-  padding: 10px;
-  border-width: 1px;
-  margin: auto;
-  background: #ffffff;
-}
-
-head {
-  display: none;
-}
-
-.outer {
-  background: #00ccff;
-  border-color: #666666;
-  border-width: 2px;
-  margin: 50px;
-  padding: 50px;
-}
-
-.inner {
-  border-color: #cc0000;
-  border-width: 4px;
-  height: 100px;
-  margin-bottom: 20px;
-  width: 500px;
-}
-
-.inner#bye {
-  background: #ffff00;
-}
-
-span#name {
-  background: red;
-  color: white;
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#BA3C97">&lt;</span><span style="color:#F7768E">html</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">  &lt;</span><span style="color:#F7768E">head</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;</span><span style="color:#F7768E">title</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">Test</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">title</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">  &lt;/</span><span style="color:#F7768E">head</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">  &lt;</span><span style="color:#F7768E">div</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">outer</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;</span><span style="color:#F7768E">p</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">inner</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">Hello, </span><span style="color:#BA3C97">&lt;</span><span style="color:#F7768E">span</span><span style="color:#BB9AF7"> id</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">name</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">world!</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">span</span><span style="color:#BA3C97">&gt;&lt;/</span><span style="color:#F7768E">p</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;</span><span style="color:#F7768E">p</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">inner</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> id</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">bye</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">Goodbye!</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">p</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">  &lt;/</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">html</span><span style="color:#BA3C97">&gt;</span></span></code></pre><figcaption class="notebook-code-language">HTML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="css"><code><span class="line"><span style="color:#F7768E">*</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  display</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> block</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0DB9D7">span</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  display</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> inline</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0DB9D7">html</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 600</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  padding</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 10</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  border-width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 1</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  margin</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> auto</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  background</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #ffffff</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0DB9D7">head</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  display</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> none</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E0AF68">.</span><span style="color:#9ECE6A">outer</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  background</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #00ccff</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  border-color</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #666666</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  border-width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  margin</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 50</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  padding</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 50</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E0AF68">.</span><span style="color:#9ECE6A">inner</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  border-color</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #cc0000</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  border-width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 4</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  height</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 100</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  margin-bottom</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 20</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 500</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E0AF68">.</span><span style="color:#9ECE6A">inner</span><span style="color:#89DDFF">#</span><span style="color:#FC7B7B">bye</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  background</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #ffff00</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0DB9D7">span</span><span style="color:#89DDFF">#</span><span style="color:#FC7B7B">name</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  background</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> red</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  color</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> white</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">CSS</figcaption></figure>
 <p><a href="https://github.com/mbrubeck/robinson"><span class="notebook-photo-frame"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1622034247/silver-birder.github.io/blog/mbrubeck_robinson_output.png?ar=800%3A600" alt="Toyブラウザエンジン(mbrubeck)のアウトプット" width="800" height="600" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_200/q_auto/f_auto/v1622034247/silver-birder.github.io/blog/mbrubeck_robinson_output.png?ar=800%3A600 200w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_300/q_auto/f_auto/v1622034247/silver-birder.github.io/blog/mbrubeck_robinson_output.png?ar=800%3A600 300w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1622034247/silver-birder.github.io/blog/mbrubeck_robinson_output.png?ar=800%3A600 400w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_450/q_auto/f_auto/v1622034247/silver-birder.github.io/blog/mbrubeck_robinson_output.png?ar=800%3A600 450w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_600/q_auto/f_auto/v1622034247/silver-birder.github.io/blog/mbrubeck_robinson_output.png?ar=800%3A600 600w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_800/q_auto/f_auto/v1622034247/silver-birder.github.io/blog/mbrubeck_robinson_output.png?ar=800%3A600 800w" sizes="auto, min(25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem) - 0.5rem - 2 * 0.5rem))"><span class="notebook-photo-caption" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Toyブラウザエンジン(mbrubeck)のアウトプット<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></p>
 <p>次のリンクにある自作ブラウザエンジンは、<a href="https://github.com/mbrubeck/robinson"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">mbrubeck/robinson<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>を参考にして作られたものだそうです。</p>
 <ul>
@@ -259,126 +293,124 @@ span#name {
 </ul>
 <p>Toy ブラウザエンジン(askerry)に、次の HTML と CSS を読み込ませると、下記の画像のようなアウトプットになります。
 見たら分かると思いますが、とても高機能です。</p>
-<pre><code class="language-html">&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
-  &lt;head&gt;
-    &lt;title&gt;Browser Test&lt;/title&gt;
-    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
-    &lt;link rel="stylesheet" href="demo.css" /&gt;
-  &lt;/head&gt;
-
-  &lt;body&gt;
-    &lt;div id="page"&gt;
-      &lt;header class="header"&gt;
-        &lt;h1&gt;Toy Browser Engine&lt;/h1&gt;
-      &lt;/header&gt;
-      &lt;div id="main"&gt;
-        &lt;div id="navbar"&gt;
-          &lt;a href="#" class="navitem"&gt; Home &lt;/a&gt;
-          &lt;a href="#" class="navitem"&gt; About &lt;/a&gt;
-          &lt;a href="#" class="navitem"&gt; Some random stuff &lt;/a&gt;
-          &lt;a href="#" class="navitem"&gt; Conclusion &lt;/a&gt;
-          &lt;img class="img" src="images/otters.jpg" /&gt;
-        &lt;/div&gt;
-        &lt;div id="content"&gt;
-          &lt;h2&gt;What is this?&lt;/h2&gt;
-          This is a &lt;b&gt;toy&lt;/b&gt; browser engine, implemented for
-          &lt;span&gt;fun &lt;/span&gt; &lt;img class="icon" src="images/fun.png" /&gt; and
-          &lt;span&gt;glory &lt;img class="icon" src="images/glory.png" /&gt;&lt;/span&gt;.
-          &lt;h2&gt;Why would anyone do this?&lt;/h2&gt;
-          This seems pretty pointless! But I had a few goals:
-          &lt;ul&gt;
-            &lt;li&gt;Something to build to learn C++&lt;/li&gt;
-            &lt;li&gt;Learn more about how browsers work&lt;/li&gt;
-            &lt;li&gt;Make something I've never made before&lt;/li&gt;
-          &lt;/ul&gt;
-          &lt;h2&gt;What can it do?&lt;/h2&gt;
-          &lt;p&gt;
-            Currently, the engine can parse a subset of HTML and build a DOM
-            tree. It can also parse a small subset of CSS (sometimes
-            incorrectly) and use simple selector matching to apply styles to
-            elements.
-          &lt;/p&gt;
-          &lt;p&gt;
-            It supports &lt;em&gt;very basic&lt;/em&gt; rendering of boxes, images, and text
-            with simple block and inline layouts.
-          &lt;/p&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<pre><code class="language-css">/* https://github.com/askerry/toy-browser/blob/master/examples/demo.css */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #bfc0c0;
-  color: #253237;
-  font-size: 16px;
-}
-#page {
-  padding: 20;
-  /* width: 800px; */
-  margin: auto;
-}
-
-header {
-  padding: 10px;
-  padding-left: 20px;
-  background-color: #434371;
-  color: #4acebd;
-}
-
-span {
-  color: #4acebd;
-}
-
-#main {
-  background-color: white;
-  display: flex;
-}
-
-#navbar {
-  width: 180px;
-  padding: 30px;
-  background-color: #4acebd;
-  height: 500px;
-}
-
-.navitem {
-  display: block;
-  text-align: center;
-  background-color: #434371;
-  color: #4acebd;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding: 10px;
-  border-radius: 4px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #253237;
-}
-
-#content {
-  padding: 20px;
-  width: 500;
-}
-
-.img {
-  width: 180px;
-}
-
-.icon {
-  width: 2em;
-}
-
-h2 {
-  color: #434371;
-}
-
-li {
-  margin-bottom: 5px;
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#BA3C97">&lt;</span><span style="color:#F7768E">html</span><span style="color:#BB9AF7"> xmlns</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">http://www.w3.org/1999/xhtml</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">  &lt;</span><span style="color:#F7768E">head</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;</span><span style="color:#F7768E">title</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">Browser Test</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">title</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;</span><span style="color:#F7768E">meta</span><span style="color:#BB9AF7"> http-equiv</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Content-Type</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> content</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">text/html; charset=utf-8</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97"> /&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;</span><span style="color:#F7768E">link</span><span style="color:#BB9AF7"> rel</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">stylesheet</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> href</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">demo.css</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97"> /&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">  &lt;/</span><span style="color:#F7768E">head</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BA3C97">  &lt;</span><span style="color:#F7768E">body</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;</span><span style="color:#F7768E">div</span><span style="color:#BB9AF7"> id</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">page</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;</span><span style="color:#F7768E">header</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">header</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">        &lt;</span><span style="color:#F7768E">h1</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">Toy Browser Engine</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">h1</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;/</span><span style="color:#F7768E">header</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;</span><span style="color:#F7768E">div</span><span style="color:#BB9AF7"> id</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">main</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">        &lt;</span><span style="color:#F7768E">div</span><span style="color:#BB9AF7"> id</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">navbar</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">a</span><span style="color:#BB9AF7"> href</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">#</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">navitem</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE"> Home </span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">a</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">a</span><span style="color:#BB9AF7"> href</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">#</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">navitem</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE"> About </span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">a</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">a</span><span style="color:#BB9AF7"> href</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">#</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">navitem</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE"> Some random stuff </span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">a</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">a</span><span style="color:#BB9AF7"> href</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">#</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">navitem</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE"> Conclusion </span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">a</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">img</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">img</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> src</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">images/otters.jpg</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97"> /&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">        &lt;/</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">        &lt;</span><span style="color:#F7768E">div</span><span style="color:#BB9AF7"> id</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">content</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">h2</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">What is this?</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">h2</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#9AA5CE">          This is a </span><span style="color:#BA3C97">&lt;</span><span style="color:#F7768E">b</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">toy</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">b</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE"> browser engine, implemented for</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">span</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">fun </span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">span</span><span style="color:#BA3C97">&gt;</span><span style="color:#BA3C97"> &lt;</span><span style="color:#F7768E">img</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">icon</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> src</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">images/fun.png</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97"> /&gt;</span><span style="color:#9AA5CE"> and</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">span</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">glory </span><span style="color:#BA3C97">&lt;</span><span style="color:#F7768E">img</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">icon</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> src</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">images/glory.png</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97"> /&gt;&lt;/</span><span style="color:#F7768E">span</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">.</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">h2</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">Why would anyone do this?</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">h2</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#9AA5CE">          This seems pretty pointless! But I had a few goals:</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">ul</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">            &lt;</span><span style="color:#F7768E">li</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">Something to build to learn C++</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">li</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">            &lt;</span><span style="color:#F7768E">li</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">Learn more about how browsers work</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">li</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">            &lt;</span><span style="color:#F7768E">li</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">Make something I've never made before</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">li</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;/</span><span style="color:#F7768E">ul</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">h2</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">What can it do?</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">h2</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">p</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#9AA5CE">            Currently, the engine can parse a subset of HTML and build a DOM</span></span>
+<span class="line"><span style="color:#9AA5CE">            tree. It can also parse a small subset of CSS (sometimes</span></span>
+<span class="line"><span style="color:#9AA5CE">            incorrectly) and use simple selector matching to apply styles to</span></span>
+<span class="line"><span style="color:#9AA5CE">            elements.</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;/</span><span style="color:#F7768E">p</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;</span><span style="color:#F7768E">p</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#9AA5CE">            It supports </span><span style="color:#BA3C97">&lt;</span><span style="color:#F7768E">em</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">very basic</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">em</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE"> rendering of boxes, images, and text</span></span>
+<span class="line"><span style="color:#9AA5CE">            with simple block and inline layouts.</span></span>
+<span class="line"><span style="color:#BA3C97">          &lt;/</span><span style="color:#F7768E">p</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">        &lt;/</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;/</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;/</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">  &lt;/</span><span style="color:#F7768E">body</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">html</span><span style="color:#BA3C97">&gt;</span></span></code></pre><figcaption class="notebook-code-language">HTML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="css"><code><span class="line"><span style="color:#51597D;font-style:italic">/* https://github.com/askerry/toy-browser/blob/master/examples/demo.css */</span></span>
+<span class="line"><span style="color:#0DB9D7">body</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  font-family</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Arial</span><span style="color:#89DDFF">,</span><span style="color:#9ECE6A"> sans-serif</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  background-color</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #bfc0c0</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  color</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #253237</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  font-size</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 16</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"><span style="color:#89DDFF">#</span><span style="color:#FC7B7B">page</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  padding</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 20</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  /* width: 800px; */</span></span>
+<span class="line"><span style="color:#7AA2F7">  margin</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> auto</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0DB9D7">header</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  padding</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 10</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  padding-left</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 20</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  background-color</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #434371</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  color</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #4acebd</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0DB9D7">span</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  color</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #4acebd</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">#</span><span style="color:#FC7B7B">main</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  background-color</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> white</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  display</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> flex</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">#</span><span style="color:#FC7B7B">navbar</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 180</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  padding</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 30</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  background-color</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #4acebd</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  height</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 500</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E0AF68">.</span><span style="color:#9ECE6A">navitem</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  display</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> block</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  text-align</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> center</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  background-color</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #434371</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  color</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #4acebd</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  margin-top</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 5</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  margin-bottom</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 5</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  padding</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 10</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  border-radius</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 4</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  border-style</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> solid</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  border-width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  border-color</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #253237</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">#</span><span style="color:#FC7B7B">content</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  padding</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 20</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 500</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E0AF68">.</span><span style="color:#9ECE6A">img</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 180</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E0AF68">.</span><span style="color:#9ECE6A">icon</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 2</span><span style="color:#F7768E">em</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0DB9D7">h2</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  color</span><span style="color:#89DDFF">:</span><span style="color:#9AA5CE"> #434371</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0DB9D7">li</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  margin-bottom</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 5</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">CSS</figcaption></figure>
 <p><a href="https://github.com/askerry/toy-browser"><span class="notebook-photo-frame"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1693364002/silver-birder.github.io/blog/demo.png?ar=981%3A652" alt="Toyブラウザエンジン(askerry)のアウトプット" width="981" height="652" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_200/q_auto/f_auto/v1693364002/silver-birder.github.io/blog/demo.png?ar=981%3A652 200w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_300/q_auto/f_auto/v1693364002/silver-birder.github.io/blog/demo.png?ar=981%3A652 300w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1693364002/silver-birder.github.io/blog/demo.png?ar=981%3A652 400w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_450/q_auto/f_auto/v1693364002/silver-birder.github.io/blog/demo.png?ar=981%3A652 450w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_600/q_auto/f_auto/v1693364002/silver-birder.github.io/blog/demo.png?ar=981%3A652 600w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_800/q_auto/f_auto/v1693364002/silver-birder.github.io/blog/demo.png?ar=981%3A652 800w" sizes="auto, min(25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem) - 0.5rem - 2 * 0.5rem))"><span class="notebook-photo-caption" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Toyブラウザエンジン(askerry)のアウトプット<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></p>
 <p>私としては、こちらの方が興味があるので、まずこちらを知り、それを Rust 版で作り直したいなと思います。</p>
 <h2 id="c-を学ぶ">C++ を学ぶ</h2>
@@ -390,122 +422,117 @@ li {
 </ul>
 <h2 id="自作ブラウザのソースコード">自作ブラウザのソースコード</h2>
 <p><a href="https://github.com/askerry/toy-browser"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">askerry/toy-browser<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>のメインコード(main.cc)を載せます。</p>
-<pre><code class="language-c">/* https://github.com/askerry/toy-browser/blob/master/src/main.cc */
-namespace {
-
-void renderWindow(int width, int height, const style::StyledNode &amp;sn,
-                  sf::RenderWindow *window) {
-  layout::Dimensions viewport;
-  viewport.content.width = width;
-  viewport.content.height = height;
-  // Create layout tree for the specified viewport dimensions.
-  std::unique_ptr&lt;layout::LayoutElement&gt; layout_root =
-      layout::layout_tree(sn, viewport);
-  // Paint to window.
-  paint(*layout_root, viewport.content, window);
-}
-
-int windowLoop(const style::StyledNode &amp;sn) {
-  // Create browser window.
-  std::unique_ptr&lt;sf::RenderWindow&gt; window(new sf::RenderWindow());
-  window-&gt;create(sf::VideoMode(FLAGS_window_width, FLAGS_window_height),
-                 "Toy Browser", sf::Style::Close | sf::Style::Resize);
-  window-&gt;setPosition(sf::Vector2i(0, 0));
-  window-&gt;clear(sf::Color::Black);
-  // Render initial window contents.
-  renderWindow(FLAGS_window_width, FLAGS_window_height, sn, window.get());
-  // Run the main event loop as long as the window is open.
-  while (window-&gt;isOpen()) {
-    sf::Event event;
-    while (window-&gt;pollEvent(event)) {
-      switch (event.type) {
-        case sf::Event::Closed:
-          window-&gt;close();
-          break;
-
-        case sf::Event::KeyPressed:
-          logger::debug("keypress: " + std::to_string(event.key.code));
-          break;
-
-        case sf::Event::Resized:
-          logger::debug("new width: " + std::to_string(event.size.width));
-          logger::debug("new height: " + std::to_string(event.size.height));
-          window-&gt;clear(sf::Color::Black);
-          renderWindow(event.size.width, event.size.height, sn, window.get());
-          break;
-
-        case sf::Event::TextEntered:
-          if (event.text.unicode &lt; 128) {
-            logger::debug(
-                "ASCII character typed: " +
-                std::to_string(static_cast&lt;char&gt;(event.text.unicode)));
-          }
-          break;
-
-        default:
-          break;
-      }
-    }
-  }
-  return 0;
-}
-}  // namespace
-int main(int argc, char **argv) {
-  gflags::ParseCommandLineFlags(&amp;argc, &amp;argv, true);
-
-  // Parse HTML and CSS files.
-  const std::string source = io::readFile(FLAGS_html_file);
-  std::unique_ptr&lt;dom::Node&gt; root = html_parser::parseHtml(source);
-  const std::string css = io::readFile(FLAGS_css_file);
-  const std::unique_ptr&lt;css::StyleSheet const&gt; stylesheet = css::parseCss(css);
-
-  // Initialize font registry singleton.
-  text_render::FontRegistry *registry =
-      text_render::FontRegistry::getInstance();
-
-  // Align styles with DOM nodes.
-  std::unique_ptr&lt;style::StyledNode&gt; styled_node =
-      style::styleTree(*root, stylesheet, style::PropertyMap());
-
-  // Run main browser window loop.
-  windowLoop(*styled_node);
-
-  // Delete styled node and clear font registry.
-  styled_node.reset();
-  registry-&gt;clear();
-  return 0;
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#51597D;font-style:italic">/* https://github.com/askerry/toy-browser/blob/master/src/main.cc */</span></span>
+<span class="line"><span style="color:#A9B1D6">namespace </span><span style="color:#9ABDF5">{</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">void</span><span style="color:#7AA2F7"> renderWindow</span><span style="color:#9ABDF5">(</span><span style="color:#BB9AF7">int</span><span style="color:#7AA2F7"> width</span><span style="color:#89DDFF">,</span><span style="color:#BB9AF7"> int</span><span style="color:#7AA2F7"> height</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#7AA2F7"> style::StyledNode </span><span style="color:#89DDFF">&amp;</span><span style="color:#7AA2F7">sn</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#7AA2F7">                  sf::RenderWindow </span><span style="color:#89DDFF">*</span><span style="color:#7AA2F7">window</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#9ABDF5">  layout::Dimensions viewport</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">  viewport</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">content</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">width</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> width</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">  viewport</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">content</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">height</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> height</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Create layout tree for the specified viewport dimensions.</span></span>
+<span class="line"><span style="color:#9ABDF5">  std::unique_ptr</span><span style="color:#BB9AF7">&lt;</span><span style="color:#9ABDF5">layout::LayoutElement</span><span style="color:#BB9AF7">&gt;</span><span style="color:#9ABDF5"> layout_root </span><span style="color:#89DDFF">=</span></span>
+<span class="line"><span style="color:#7AA2F7">      layout::layout_tree</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">sn</span><span style="color:#89DDFF">,</span><span style="color:#7AA2F7"> viewport</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Paint to window.</span></span>
+<span class="line"><span style="color:#7AA2F7">  paint</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">*</span><span style="color:#7AA2F7">layout_root</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> viewport</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">content</span><span style="color:#89DDFF">,</span><span style="color:#7AA2F7"> window</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">int</span><span style="color:#7AA2F7"> windowLoop</span><span style="color:#9ABDF5">(</span><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#7AA2F7"> style::StyledNode </span><span style="color:#89DDFF">&amp;</span><span style="color:#7AA2F7">sn</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Create browser window.</span></span>
+<span class="line"><span style="color:#9ABDF5">  std::unique_ptr</span><span style="color:#BB9AF7">&lt;</span><span style="color:#9ABDF5">sf::RenderWindow</span><span style="color:#BB9AF7">&gt;</span><span style="color:#7AA2F7"> window</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">new sf::RenderWindow</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">  window</span><span style="color:#89DDFF">-&gt;</span><span style="color:#7AA2F7">create</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">sf::VideoMode</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">FLAGS_window_width</span><span style="color:#89DDFF">,</span><span style="color:#7AA2F7"> FLAGS_window_height</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">                 "</span><span style="color:#9ECE6A">Toy Browser</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#7AA2F7"> sf::Style::Close </span><span style="color:#89DDFF">|</span><span style="color:#7AA2F7"> sf::Style::Resize</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">  window</span><span style="color:#89DDFF">-&gt;</span><span style="color:#7AA2F7">setPosition</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">sf::Vector2i</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">0</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> 0</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">  window</span><span style="color:#89DDFF">-&gt;</span><span style="color:#7AA2F7">clear</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">sf::Color::Black</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Render initial window contents.</span></span>
+<span class="line"><span style="color:#7AA2F7">  renderWindow</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">FLAGS_window_width</span><span style="color:#89DDFF">,</span><span style="color:#7AA2F7"> FLAGS_window_height</span><span style="color:#89DDFF">,</span><span style="color:#7AA2F7"> sn</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> window</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">get</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Run the main event loop as long as the window is open.</span></span>
+<span class="line"><span style="color:#BB9AF7">  while</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">window</span><span style="color:#89DDFF">-&gt;</span><span style="color:#7AA2F7">isOpen</span><span style="color:#9ABDF5">()) {</span></span>
+<span class="line"><span style="color:#9ABDF5">    sf::Event event</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">    while</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">window</span><span style="color:#89DDFF">-&gt;</span><span style="color:#7AA2F7">pollEvent</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">event</span><span style="color:#9ABDF5">)) {</span></span>
+<span class="line"><span style="color:#BB9AF7">      switch</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">event</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">type</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#BB9AF7">        case</span><span style="color:#9ABDF5"> sf</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5">:Event::Closed:</span></span>
+<span class="line"><span style="color:#C0CAF5">          window</span><span style="color:#89DDFF">-&gt;</span><span style="color:#7AA2F7">close</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">          break</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">        case</span><span style="color:#9ABDF5"> sf</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5">:Event::KeyPressed:</span></span>
+<span class="line"><span style="color:#7AA2F7">          logger::debug</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">keypress: </span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> +</span><span style="color:#7AA2F7"> std::to_string</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">event</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">key</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">code</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">          break</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">        case</span><span style="color:#9ABDF5"> sf</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5">:Event::Resized:</span></span>
+<span class="line"><span style="color:#7AA2F7">          logger::debug</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">new width: </span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> +</span><span style="color:#7AA2F7"> std::to_string</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">event</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">size</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">width</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">          logger::debug</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">new height: </span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> +</span><span style="color:#7AA2F7"> std::to_string</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">event</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">size</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">height</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">          window</span><span style="color:#89DDFF">-&gt;</span><span style="color:#7AA2F7">clear</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">sf::Color::Black</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">          renderWindow</span><span style="color:#9ABDF5">(event.size.width</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> event.size.height</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> sn</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> window.</span><span style="color:#7AA2F7">get</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">          break</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">        case</span><span style="color:#9ABDF5"> sf</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5">:Event::TextEntered:</span></span>
+<span class="line"><span style="color:#BB9AF7">          if</span><span style="color:#9ABDF5"> (event.text.unicode </span><span style="color:#BB9AF7">&lt;</span><span style="color:#FF9E64"> 128</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#7AA2F7">            logger::debug</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#89DDFF">                "</span><span style="color:#9ECE6A">ASCII character typed: </span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> +</span></span>
+<span class="line"><span style="color:#7AA2F7">                std::to_string</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">static_cast</span><span style="color:#BB9AF7">&lt;char&gt;</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">event</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">text</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">unicode</span><span style="color:#9ABDF5">)))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">          }</span></span>
+<span class="line"><span style="color:#BB9AF7">          break</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">        default</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#BB9AF7">          break</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">      }</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#BB9AF7">  return</span><span style="color:#FF9E64"> 0</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#51597D;font-style:italic">  // namespace</span></span>
+<span class="line"><span style="color:#BB9AF7">int</span><span style="color:#7AA2F7"> main</span><span style="color:#9ABDF5">(</span><span style="color:#BB9AF7">int</span><span style="color:#E0AF68"> argc</span><span style="color:#89DDFF">,</span><span style="color:#BB9AF7"> char</span><span style="color:#89DDFF"> **</span><span style="color:#E0AF68">argv</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  gflags::ParseCommandLineFlags</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">&amp;</span><span style="color:#7AA2F7">argc</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> &amp;</span><span style="color:#7AA2F7">argv</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> true</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Parse HTML and CSS files.</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#9ABDF5"> std::string source </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> io::readFile</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">FLAGS_html_file</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  std::unique_ptr</span><span style="color:#BB9AF7">&lt;</span><span style="color:#9ABDF5">dom::Node</span><span style="color:#BB9AF7">&gt;</span><span style="color:#9ABDF5"> root </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> html_parser::parseHtml</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">source</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#9ABDF5"> std::string css </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> io::readFile</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">FLAGS_css_file</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#9ABDF5"> std::unique_ptr</span><span style="color:#BB9AF7">&lt;</span><span style="color:#9ABDF5">css::StyleSheet </span><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7">&gt;</span><span style="color:#9ABDF5"> stylesheet </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> css::parseCss</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">css</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Initialize font registry singleton.</span></span>
+<span class="line"><span style="color:#9ABDF5">  text_render::FontRegistry </span><span style="color:#89DDFF">*</span><span style="color:#9ABDF5">registry </span><span style="color:#89DDFF">=</span></span>
+<span class="line"><span style="color:#7AA2F7">      text_render::FontRegistry::getInstance</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Align styles with DOM nodes.</span></span>
+<span class="line"><span style="color:#9ABDF5">  std::unique_ptr</span><span style="color:#BB9AF7">&lt;</span><span style="color:#9ABDF5">style::StyledNode</span><span style="color:#BB9AF7">&gt;</span><span style="color:#9ABDF5"> styled_node </span><span style="color:#89DDFF">=</span></span>
+<span class="line"><span style="color:#7AA2F7">      style::styleTree</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">*</span><span style="color:#7AA2F7">root</span><span style="color:#89DDFF">,</span><span style="color:#7AA2F7"> stylesheet</span><span style="color:#89DDFF">,</span><span style="color:#7AA2F7"> style::PropertyMap</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Run main browser window loop.</span></span>
+<span class="line"><span style="color:#7AA2F7">  windowLoop</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">*</span><span style="color:#7AA2F7">styled_node</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Delete styled node and clear font registry.</span></span>
+<span class="line"><span style="color:#C0CAF5">  styled_node</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">reset</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">  registry</span><span style="color:#89DDFF">-&gt;</span><span style="color:#7AA2F7">clear</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">  return</span><span style="color:#FF9E64"> 0</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">C</figcaption></figure>
 <p>次のとおり、これまで学んできたメインフローと、C++がとても似ていることが分かります。</p>
 <ol>
 <li>HTML と CSS をパース</li>
 </ol>
-<pre><code class="language-c">// Parse HTML and CSS files.
-const std::string source = io::readFile(FLAGS_html_file);
-std::unique_ptr&lt;dom::Node&gt; root = html_parser::parseHtml(source);
-const std::string css = io::readFile(FLAGS_css_file);
-const std::unique_ptr&lt;css::StyleSheet const&gt; stylesheet = css::parseCss(css);
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#51597D;font-style:italic">// Parse HTML and CSS files.</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#A9B1D6"> std::string source </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> io::</span><span style="color:#7AA2F7">readFile</span><span style="color:#9ABDF5">(</span><span style="color:#A9B1D6">FLAGS_html_file</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#A9B1D6">std::unique_ptr</span><span style="color:#BB9AF7">&lt;</span><span style="color:#A9B1D6">dom::Node</span><span style="color:#BB9AF7">&gt;</span><span style="color:#A9B1D6"> root </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> html_parser::</span><span style="color:#7AA2F7">parseHtml</span><span style="color:#9ABDF5">(</span><span style="color:#A9B1D6">source</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#A9B1D6"> std::string css </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> io::</span><span style="color:#7AA2F7">readFile</span><span style="color:#9ABDF5">(</span><span style="color:#A9B1D6">FLAGS_css_file</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#A9B1D6"> std::unique_ptr</span><span style="color:#BB9AF7">&lt;</span><span style="color:#A9B1D6">css::StyleSheet </span><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7">&gt;</span><span style="color:#A9B1D6"> stylesheet </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> css::</span><span style="color:#7AA2F7">parseCss</span><span style="color:#9ABDF5">(</span><span style="color:#A9B1D6">css</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">C</figcaption></figure>
 <ol>
 <li>1 の結果から Style tree(Render tree)を構築</li>
 </ol>
-<pre><code class="language-c">// Align styles with DOM nodes.
-std::unique_ptr&lt;style::StyledNode&gt; styled_node =
-    style::styleTree(*root, stylesheet, style::PropertyMap());
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#51597D;font-style:italic">// Align styles with DOM nodes.</span></span>
+<span class="line"><span style="color:#A9B1D6">std::unique_ptr</span><span style="color:#BB9AF7">&lt;</span><span style="color:#A9B1D6">style::StyledNode</span><span style="color:#BB9AF7">&gt;</span><span style="color:#A9B1D6"> styled_node </span><span style="color:#89DDFF">=</span></span>
+<span class="line"><span style="color:#A9B1D6">    style::</span><span style="color:#7AA2F7">styleTree</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">*</span><span style="color:#E0AF68">root</span><span style="color:#89DDFF">,</span><span style="color:#A9B1D6"> stylesheet</span><span style="color:#89DDFF">,</span><span style="color:#7AA2F7"> style::PropertyMap</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">C</figcaption></figure>
 <ol>
 <li>2 の結果から Layout tree を構築</li>
 </ol>
-<pre><code class="language-c">// Create layout tree for the specified viewport dimensions.
-std::unique_ptr&lt;layout::LayoutElement&gt; layout_root =
-    layout::layout_tree(sn, viewport);
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#51597D;font-style:italic">// Create layout tree for the specified viewport dimensions.</span></span>
+<span class="line"><span style="color:#A9B1D6">std::unique_ptr</span><span style="color:#BB9AF7">&lt;</span><span style="color:#A9B1D6">layout::LayoutElement</span><span style="color:#BB9AF7">&gt;</span><span style="color:#A9B1D6"> layout_root </span><span style="color:#89DDFF">=</span></span>
+<span class="line"><span style="color:#A9B1D6">    layout::</span><span style="color:#7AA2F7">layout_tree</span><span style="color:#9ABDF5">(</span><span style="color:#A9B1D6">sn</span><span style="color:#89DDFF">,</span><span style="color:#A9B1D6"> viewport</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">C</figcaption></figure>
 <ol>
 <li>3 を paint という描画</li>
 </ol>
-<pre><code class="language-c">// Paint to window.
-paint(*layout_root, viewport.content, window);
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#51597D;font-style:italic">// Paint to window.</span></span>
+<span class="line"><span style="color:#7AA2F7">paint</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">*</span><span style="color:#E0AF68">layout_root</span><span style="color:#89DDFF">,</span><span style="color:#A9B1D6"> viewport.content</span><span style="color:#89DDFF">,</span><span style="color:#A9B1D6"> window</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">C</figcaption></figure>
 <h2 id="re-ブラウザの仕組み資料を読む">Re: ブラウザの仕組み資料を読む</h2>
 <p>もう一度、<a href="https://www.html5rocks.com/ja/tutorials/internals/howbrowserswork/"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/www.html5rocks.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">ブラウザの仕組み: 最新ウェブブラウザの内部構造<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a> を読むと、初めて読んだときに比べて、深く理解できるんじゃないかなと思います。</p>
 <h2 id="最後に">最後に</h2>

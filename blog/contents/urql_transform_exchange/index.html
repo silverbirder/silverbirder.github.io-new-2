@@ -4,10 +4,46 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2022-08-10" data-pagefind-filter="month:2022-08" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">86</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-08-10"><span class="visually-hidden">2022年8月10日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">08</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span></span></time></p></div><div class="notebook-heading"><h1>urqlでデータ変換(transform)してみた</h1></div></header><div class="notebook-body"><p>GraphQL クライアントを使っていると、データ取得後にデータ変換がしたくなりませんか。私はしたくなります。
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2022-08-10" data-pagefind-filter="month:2022-08" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">86</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-08-10"><span class="visually-hidden">2022年8月10日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">08</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span></span></time></p></div><div class="notebook-heading"><h1>urqlでデータ変換(transform)してみた</h1></div></header><div class="notebook-body"><p>GraphQL クライアントを使っていると、データ取得後にデータ変換がしたくなりませんか。私はしたくなります。
 GraphQL クライアントの urql で、データ変換するのに、exchanges が使えそうだったので、それを共有します。</p>
 <p>サンプルコードは、次のリポジトリに置いています。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/silverbirder/urql-exchange-transform" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/urql-exchange-transform: urql-exchange-transform is an exchange for the urql GraphQL client that transform data</strong><span class="link-card-description" data-astro-cid-p7ia6262>urql-exchange-transform is an exchange for the urql GraphQL client that transform data - silverbirder/urql-exchange-transform</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://github.com/silverbirder/urql-exchange-transform" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/urql-exchange-transform: urql-exchange-transform is an exchange for the urql GraphQL client that transform data</strong><span class="link-card-description" data-astro-cid-p7ia6262>urql-exchange-transform is an exchange for the urql GraphQL client that transform data - silverbirder/urql-exchange-transform</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></div>
 <h2 id="exchanges">Exchanges</h2>
 <p>Exchanges とは、<a href="https://formidable.com/open-source/urql/docs/architecture/#the-client-and-exchanges"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/formidable.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">公式ページ<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>より引用します。</p>
 <blockquote>
@@ -25,77 +61,73 @@ URL とクエリは、次のものを使います。</p>
 </ul>
 </li>
 </ul>
-<pre><code class="language-graphql">query Pokemons {
-  pokemons {
-    id
-    name
-  }
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="graphql"><code><span class="line"><span style="color:#BB9AF7">query</span><span style="color:#7AA2F7"> Pokemons</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">  pokemons</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">    id</span></span>
+<span class="line"><span style="color:#C0CAF5">    name</span></span>
+<span class="line"><span style="color:#89DDFF">  }</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span></code></pre><figcaption class="notebook-code-language">GRAPHQL</figcaption></figure>
 <p>データ変換は、次のようなコードを書きます。
 map の部分が、実際のデータ変換になります。今回は、name を<code>toLowerCase</code>しています。</p>
-<pre><code class="language-javascript">export const transformExchange = ({ forward }) =&gt; {
-  return (ops$) =&gt;
-    pipe(
-      ops$,
-      forward,
-      // Sample transform code
-      map((result) =&gt; {
-        const { data } = result;
-        if (!data || !data.pokemons) {
-          return result;
-        }
-        const { pokemons } = data;
-        result.data.pokemons = pokemons.map((pokemon) =&gt; {
-          pokemon["name"] = pokemon.name.toLowerCase();
-          return pokemon;
-        });
-        return result;
-      })
-    );
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#7AA2F7"> transformExchange</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> forward</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">ops$</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span></span>
+<span class="line"><span style="color:#7AA2F7">    pipe</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#C0CAF5">      ops$</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">      forward</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">      // Sample transform code</span></span>
+<span class="line"><span style="color:#7AA2F7">      map</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">result</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">        const</span><span style="color:#89DDFF"> {</span><span style="color:#BB9AF7"> data</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> result</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">        if</span><span style="color:#9ABDF5"> (</span><span style="color:#BB9AF7">!</span><span style="color:#C0CAF5">data</span><span style="color:#BB9AF7"> ||</span><span style="color:#BB9AF7"> !</span><span style="color:#C0CAF5">data</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">pokemons</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">          return</span><span style="color:#C0CAF5"> result</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">        }</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">        const</span><span style="color:#89DDFF"> {</span><span style="color:#BB9AF7"> pokemons</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> data</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">        result</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">data</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">pokemons</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> pokemons</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">map</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">pokemon</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">          pokemon</span><span style="color:#9ABDF5">[</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">name</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">] </span><span style="color:#89DDFF">=</span><span style="color:#C0CAF5"> pokemon</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">name</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toLowerCase</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">          return</span><span style="color:#C0CAF5"> pokemon</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">        })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">        return</span><span style="color:#C0CAF5"> result</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">      })</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">JAVASCRIPT</figcaption></figure>
 <p>transformExchange 関数を urql のクライアントに渡します。</p>
-<pre><code class="language-javascript">import { createClient, fetchExchange } from "urql";
-import { transformExchange } from "./transformExchange";
-
-client = createClient({
-  url: "https://trygql.formidable.dev/graphql/basic-pokedex",
-  exchanges: [transformExchange, fetchExchange],
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">createClient</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> fetchExchange</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">urql</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">transformExchange</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./transformExchange</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">client</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> createClient</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#73DACA">  url</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">https://trygql.formidable.dev/graphql/basic-pokedex</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  exchanges</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span><span style="color:#7DCFFF">transformExchange</span><span style="color:#89DDFF">,</span><span style="color:#7DCFFF"> fetchExchange</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">JAVASCRIPT</figcaption></figure>
 <p>exchanges は、何も指定しない場合、<a href="https://formidable.com/open-source/urql/docs/api/core/#defaultexchanges"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/formidable.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">defaultExchanges<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>が使われます。今回、必要最低限の説明のために、<a href="https://formidable.com/open-source/urql/docs/api/core/#defaultexchanges"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/formidable.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">defaultExchanges<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>の内の fetchExchange だけ使いました。</p>
 <p>あとは、次のコードのように useQuery でデータ取得すれば良いです。データ取得後のデータは、データ変換された結果になっています。</p>
-<pre><code class="language-javascript">import { useQuery } from "urql";
-
-const PokemonsQuery = `
-  query Pokemons {
-    pokemons {
-      id
-      name
-    }
-  }
-`;
-
-export const Pokemons = () =&gt; {
-  const [result] = useQuery({
-    query: PokemonsQuery,
-  });
-
-  const { data, fetching, error } = result;
-
-  if (fetching) return &lt;p&gt;Loading...&lt;/p&gt;;
-  if (error) return &lt;p&gt;Oh no... {error.message}&lt;/p&gt;;
-
-  return (
-    &lt;ul&gt;
-      {data.pokemons.map((pokemon) =&gt; (
-        &lt;li key={pokemon.id}&gt;{pokemon.name}&lt;/li&gt;
-      ))}
-    &lt;/ul&gt;
-  );
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">useQuery</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">urql</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> PokemonsQuery</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> `</span></span>
+<span class="line"><span style="color:#9ECE6A">  query Pokemons {</span></span>
+<span class="line"><span style="color:#9ECE6A">    pokemons {</span></span>
+<span class="line"><span style="color:#9ECE6A">      id</span></span>
+<span class="line"><span style="color:#9ECE6A">      name</span></span>
+<span class="line"><span style="color:#9ECE6A">    }</span></span>
+<span class="line"><span style="color:#9ECE6A">  }</span></span>
+<span class="line"><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#7AA2F7"> Pokemons</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#89DDFF"> [</span><span style="color:#BB9AF7">result</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useQuery</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#73DACA">    query</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> PokemonsQuery</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#89DDFF"> {</span><span style="color:#BB9AF7"> data</span><span style="color:#89DDFF">,</span><span style="color:#BB9AF7"> fetching</span><span style="color:#89DDFF">,</span><span style="color:#BB9AF7"> error</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> result</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">  if</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">fetching</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7;font-style:italic">return</span><span style="color:#BA3C97"> &lt;</span><span style="color:#F7768E">p</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">Loading...</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">p</span><span style="color:#BA3C97">&gt;</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">  if</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">error</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7;font-style:italic">return</span><span style="color:#BA3C97"> &lt;</span><span style="color:#F7768E">p</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">Oh no... </span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">error</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">message}</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">p</span><span style="color:#BA3C97">&gt;</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;</span><span style="color:#F7768E">ul</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#7DCFFF">      {</span><span style="color:#C0CAF5">data</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">pokemons</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">map</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">pokemon</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#BA3C97">        &lt;</span><span style="color:#F7768E">li</span><span style="color:#BB9AF7"> key</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">pokemon</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">id}</span><span style="color:#BA3C97">&gt;</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">pokemon</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">name}</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">li</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">      ))</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;/</span><span style="color:#F7768E">ul</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">JAVASCRIPT</figcaption></figure>
 <p>pokemon.name が <code>toLowerCase</code> されています。</p>
 <h2 id="終わりに">終わりに</h2>
 <p>urql の exchanges って、<a href="https://github.com/kitten/wonka"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">wonka<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>という<a href="https://reasonml.github.io/"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/reasonml.github.io.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Reason<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>言語で書かれたライブラリに依存しているので、調査するのが少し苦労しました。</p>

@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2024-03-14" data-pagefind-filter="month:2024-03" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">115</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2024-03-14"><span class="visually-hidden">2024年3月14日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2024</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">14</span></span></time></p></div><div class="notebook-heading"><h1>Typescript で Document Testing したい</h1></div></header><div class="notebook-body"><p>TypeScriptを使用している開発者であれば、コードにドキュメントを書いた人もいるかと思います。
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2024-03-14" data-pagefind-filter="month:2024-03" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">115</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2024-03-14"><span class="visually-hidden">2024年3月14日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2024</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">14</span></span></time></p></div><div class="notebook-heading"><h1>Typescript で Document Testing したい</h1></div></header><div class="notebook-body"><p>TypeScriptを使用している開発者であれば、コードにドキュメントを書いた人もいるかと思います。
 ドキュメントに対して、ドキュメントテストというのが書けるらしいです。
 この記事では、TypeScriptでドキュメントテストを行うためのツールをいくつか紹介します。</p>
 <p>サンプルコードは、以下にあります。</p>
@@ -43,124 +79,116 @@ Deno では公式に <a href="https://docs.deno.com/runtime/manual/basics/testin
 <h3 id="doctest-ts">doctest-ts</h3>
 <p>doctest-tsは、特定のフォーマットでコメントにテストケースを記述することで、テストを簡単に追加できます。
 ドキュメントは、以下のように書きます。</p>
-<pre><code class="language-ts">// src/hasFoo.ts
-/** Does this string contain foo, ignoring case?
-
-    hasFoo('___foo__') // =&gt; true
-    hasFoo('   fOO  ') // =&gt; true
-    hasFoo('Foo.') // =&gt; true
-    hasFoo('bar') // =&gt; false
-    hasFoo('fo') // =&gt; false
-    hasFoo('oo') // =&gt; false
-
-*/
-function hasFoo(s: string): boolean {
-  return null != s.match(/foo/i);
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/hasFoo.ts</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">/** Does this string contain foo, ignoring case?</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    hasFoo('___foo__') // =&gt; true</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    hasFoo('   fOO  ') // =&gt; true</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    hasFoo('Foo.') // =&gt; true</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    hasFoo('bar') // =&gt; false</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    hasFoo('fo') // =&gt; false</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    hasFoo('oo') // =&gt; false</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">*/</span></span>
+<span class="line"><span style="color:#BB9AF7">function</span><span style="color:#7AA2F7"> hasFoo</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">s</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> boolean</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#FF9E64"> null</span><span style="color:#BB9AF7"> !=</span><span style="color:#C0CAF5"> s</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">match</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">/</span><span style="color:#B4F9F8">foo</span><span style="color:#89DDFF">/i</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>以下のコマンドを使用してテストファイルを生成し、Jestでテストを実行できます。</p>
-<pre><code class="language-bash">doctest-ts --jest src/hasFoo.ts
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">doctest-ts</span><span style="color:#E0AF68"> --jest</span><span style="color:#9ECE6A"> src/hasFoo.ts</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>生成されたテストコードは以下です。</p>
-<pre><code class="language-ts">/** Does this string contain foo, ignoring case?
-
-    hasFoo('___foo__') // =&gt; true
-    hasFoo('   fOO  ') // =&gt; true
-    hasFoo('Foo.') // =&gt; true
-    hasFoo('bar') // =&gt; false
-    hasFoo('fo') // =&gt; false
-    hasFoo('oo') // =&gt; false
-
-*/
-function hasFoo(s: string): boolean {
-  return null != s.match(/foo/i);
-}
-
-import "jest"
-const __expect: jest.Expect = expect
-
-    describe("hasFoo", () =&gt; {
-      it("hasFoo", () =&gt; {
-        __expect(hasFoo("___foo__")).toEqual(true)
-        __expect(hasFoo("   fOO  ")).toEqual(true)
-        __expect(hasFoo("Foo.")).toEqual(true)
-        __expect(hasFoo("bar")).toEqual(false)
-        __expect(hasFoo("fo")).toEqual(false)
-        __expect(hasFoo("oo")).toEqual(false)})
-    })
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">/** Does this string contain foo, ignoring case?</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    hasFoo('___foo__') // =&gt; true</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    hasFoo('   fOO  ') // =&gt; true</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    hasFoo('Foo.') // =&gt; true</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    hasFoo('bar') // =&gt; false</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    hasFoo('fo') // =&gt; false</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    hasFoo('oo') // =&gt; false</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">*/</span></span>
+<span class="line"><span style="color:#BB9AF7">function</span><span style="color:#7AA2F7"> hasFoo</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">s</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> boolean</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#FF9E64"> null</span><span style="color:#BB9AF7"> !=</span><span style="color:#C0CAF5"> s</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">match</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">/</span><span style="color:#B4F9F8">foo</span><span style="color:#89DDFF">/i</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">jest</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> __expect</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> jest</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">Expect</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> expect</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">    describe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">hasFoo</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">      it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">hasFoo</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">        __expect</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">hasFoo</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">___foo__</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toEqual</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">true</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#7AA2F7">        __expect</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">hasFoo</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">   fOO  </span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toEqual</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">true</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#7AA2F7">        __expect</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">hasFoo</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Foo.</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toEqual</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">true</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#7AA2F7">        __expect</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">hasFoo</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">bar</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toEqual</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">false</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#7AA2F7">        __expect</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">hasFoo</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">fo</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toEqual</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">false</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#7AA2F7">        __expect</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">hasFoo</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">oo</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toEqual</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">false</span><span style="color:#9ABDF5">)})</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <h3 id="tsdoc-testify">tsdoc-testify</h3>
 <p>tsdoc-testifyは、TSDocコメント内にテストケースを記述し、Nodeのassertモジュールを使用してテストを実行します。
 ドキュメントは、以下のように書きます。</p>
-<pre><code class="language-ts">// ./src/sub.ts
-/**
- * sub function
- *
- * @remarks
- * demo
- *
- * @example
- *
- * ```
- * import * as assert from "assert";
- * import { sub } from "./sub";
- *
- * assert.equal(sub(2, 1), 1);
- * ```
- *
- * @example
- *
- * ```
- * import * as assert from "assert";
- * import { sub } from "./sub";
- *
- * assert.equal(sub(4, 5), -1);
- * ```
- * @param a
- * @param b
- */
-export function sub(a: number, b: number) {
-  return a - b;
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// ./src/sub.ts</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">/**</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * sub function</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> *</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * </span><span style="color:#646E9C;font-style:italic">@remarks</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * demo</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> *</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * </span><span style="color:#646E9C;font-style:italic">@example</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> *</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * ```</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * import * as assert from "assert";</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * import { sub } from "./sub";</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> *</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * assert.equal(sub(2, 1), 1);</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * ```</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> *</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * </span><span style="color:#646E9C;font-style:italic">@example</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> *</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * ```</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * import * as assert from "assert";</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * import { sub } from "./sub";</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> *</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * assert.equal(sub(4, 5), -1);</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * ```</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * </span><span style="color:#646E9C;font-style:italic">@param</span><span style="color:#5A638C;font-style:italic"> a</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * </span><span style="color:#646E9C;font-style:italic">@param</span><span style="color:#5A638C;font-style:italic"> b</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> */</span></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#BB9AF7"> function</span><span style="color:#7AA2F7"> sub</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">a</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> b</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#C0CAF5"> a</span><span style="color:#89DDFF"> -</span><span style="color:#C0CAF5"> b</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>テストケースは以下のコマンドで生成されます。</p>
-<pre><code class="language-bash">tsdoc-testify --filepath ./src/sub.ts
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">tsdoc-testify</span><span style="color:#E0AF68"> --filepath</span><span style="color:#9ECE6A"> ./src/sub.ts</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>生成されたテストコードは以下です。</p>
-<pre><code class="language-ts">// Code generated by "tsdoc-testify"; DO NOT EDIT.
-
-import * as assert from "assert";
-import { sub } from "./sub";
-test("/&lt;path_to_app&gt;/src/sub.ts_0", () =&gt; {
-  assert.equal(sub(2, 1), 1);
-});
-test("/&lt;path_to_app&gt;/src/sub.ts_1", () =&gt; {
-  assert.equal(sub(4, 5), -1);
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// Code generated by "tsdoc-testify"; DO NOT EDIT.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#FF9E64"> *</span><span style="color:#89DDFF"> as</span><span style="color:#0DB9D7"> assert</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">assert</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">sub</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./sub</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">test</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">/&lt;path_to_app&gt;/src/sub.ts_0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">  assert</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">equal</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">sub</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">2</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> 1</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> 1</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">test</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">/&lt;path_to_app&gt;/src/sub.ts_1</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">  assert</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">equal</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">sub</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">4</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> 5</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> -</span><span style="color:#FF9E64">1</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <h3 id="the-real-doctest">the-real-doctest</h3>
 <p>the-real-doctestは、TSDocコメント内で直接テストを記述し、独自のコマンドを使用してテストを実行します。
 これはテストコードの生成を省略し、シンプルな比較演算子(<code>==, !=, === or !==</code>)を使用してテストを記述できます。
 ドキュメントは、以下のように書きます。</p>
-<pre><code class="language-ts">// ./src/nsum.ts
-/**
- * @param n
- * @returns the sum of the n first integers
- * @example
- * const n = 5
- * const expected = 1 + 2 + 3 + 4 + 5
- * const actual = nsum(n)
- * actual == expected
- * @example nsum(3) == 1 + 2 + 3
- * @example nsum(8) == 36 // This should fail
- */
-function nsum(n: number): number {
-  return (n * (n + 1)) / 2;
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#51597D;font-style:italic">// ./src/nsum.ts</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">/**</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * </span><span style="color:#646E9C;font-style:italic">@param</span><span style="color:#5A638C;font-style:italic"> n</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * </span><span style="color:#646E9C;font-style:italic">@returns</span><span style="color:#51597D;font-style:italic"> the sum of the n first integers</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * </span><span style="color:#646E9C;font-style:italic">@example</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * const n = 5</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * const expected = 1 + 2 + 3 + 4 + 5</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * const actual = nsum(n)</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * actual == expected</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * </span><span style="color:#646E9C;font-style:italic">@example</span><span style="color:#51597D;font-style:italic"> nsum(3) == 1 + 2 + 3</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> * </span><span style="color:#646E9C;font-style:italic">@example</span><span style="color:#51597D;font-style:italic"> nsum(8) == 36 // This should fail</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic"> */</span></span>
+<span class="line"><span style="color:#BB9AF7">function</span><span style="color:#7AA2F7"> nsum</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">n</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> number</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">n</span><span style="color:#89DDFF"> *</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">n</span><span style="color:#89DDFF"> +</span><span style="color:#FF9E64"> 1</span><span style="color:#9ABDF5">)) </span><span style="color:#89DDFF">/</span><span style="color:#FF9E64"> 2</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">TS</figcaption></figure>
 <p>以下のコマンドで、テストを実行できます。</p>
-<pre><code class="language-bash">the-real-doctest test ./src/nsum.ts
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">the-real-doctest</span><span style="color:#9ECE6A"> test</span><span style="color:#9ECE6A"> ./src/nsum.ts</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <h2 id="結論">結論</h2>
 <p>ドキュメントテストは、コードの使用方法を明確に理解し、ドキュメントを最新の状態に保つのに非常に役立ちます。
 開発エディタのコード補完を使えば、コード内部を読まなくても使い方の理解が深まります。

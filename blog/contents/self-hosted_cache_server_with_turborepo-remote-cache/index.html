@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2022-09-11" data-pagefind-filter="month:2022-09" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">92</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-09-11"><span class="visually-hidden">2022年9月11日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">09</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span></span></time></p></div><div class="notebook-heading"><h1>turborepo-remote-cache でキャッシュサーバをセルフホストした</h1></div></header><div class="notebook-body"><p>vercel 製の turborepo という ビルドシステムが爆速なモノレポツールがあります。
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2022-09-11" data-pagefind-filter="month:2022-09" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">92</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2022-09-11"><span class="visually-hidden">2022年9月11日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2022</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">09</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span></span></time></p></div><div class="notebook-heading"><h1>turborepo-remote-cache でキャッシュサーバをセルフホストした</h1></div></header><div class="notebook-body"><p>vercel 製の turborepo という ビルドシステムが爆速なモノレポツールがあります。
 爆速にする機能の 1 つに、リモートキャッシュというものがあります。
 この機能は vercel のキャッシュサーバを使うのですが、キャッシュサーバをセルフホストする方法もあります。
 今回は、それを紹介します。</p>
@@ -14,17 +50,17 @@
 <h2 id="ローカルでやってみた">ローカルで、やってみた</h2>
 <p>実際に試してみました。ソースコードは、次のリンクにあります。</p>
 <ul>
-<li><a href="https://github.com/silverbirder/turborepo-with-selfhost-remote-cache"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/silverbirder/turborepo-with-selfhost-remote-cache<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://github.com/silverbirder/turborepo-with-selfhost-remote-cache"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/silverbirder/turborepo-with-selfhost-remote-cache<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <p>手元に Git clone して、README に従って動作確認できると思います。必要なソフトウェアは、Docker と Yarn です。</p>
 <h3 id="キャッシュサーバの準備">キャッシュサーバの準備</h3>
 <p>セルフホストする場合、キャッシュサーバを建てる必要があります。
-キャッシュサーバは、<a href="https://github.com/fox1t/turborepo-remote-cache"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/fox1t/turborepo-remote-cache<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a> を使うと良いです。
+キャッシュサーバは、<a href="https://github.com/fox1t/turborepo-remote-cache"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/fox1t/turborepo-remote-cache<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a> を使うと良いです。
 Docker イメージが公開されているので、それを使っても良いですし、自前で <code>docker build</code> しても良いです。</p>
 <ul>
 <li>Docker イメージ
 <ul>
-<li><a href="https://hub.docker.com/r/fox1t/turborepo-remote-cache"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/hub.docker.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://hub.docker.com/r/fox1t/turborepo-remote-cache<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://hub.docker.com/r/fox1t/turborepo-remote-cache"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/hub.docker.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://hub.docker.com/r/fox1t/turborepo-remote-cache<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 </li>
 </ul>
@@ -43,31 +79,27 @@ Docker イメージが公開されているので、それを使っても良い�
 </li>
 </ul>
 <p>簡単にするため、次の.env ファイルを用意しました。</p>
-<pre><code class="language-text">## .env
-TURBO_TOKEN=mytoken
-STORAGE_PATH=/storage/
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>## .env</span></span>
+<span class="line"><span>TURBO_TOKEN=mytoken</span></span>
+<span class="line"><span>STORAGE_PATH=/storage/</span></span></code></pre><figcaption class="notebook-code-language">テキスト</figcaption></figure>
 <p>あとは、キャッシュサーバを起動するために、docker-compose を書きます。</p>
-<pre><code class="language-yml">## docker-compose.yml
-services:
-  remote-cache:
-    image: fox1t/turborepo-remote-cache:latest
-    env_file:
-      - .env
-    ports:
-      - "3000:3000"
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yml"><code><span class="line"><span style="color:#51597D;font-style:italic">## docker-compose.yml</span></span>
+<span class="line"><span style="color:#F7768E">services</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  remote-cache</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> fox1t/turborepo-remote-cache:latest</span></span>
+<span class="line"><span style="color:#F7768E">    env_file</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#9ECE6A"> .env</span></span>
+<span class="line"><span style="color:#F7768E">    ports</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">      -</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">3000:3000</span><span style="color:#89DDFF">"</span></span></code></pre><figcaption class="notebook-code-language">YML</figcaption></figure>
 <p>次のコマンドで、キャッシュサーバを起動しましょう。</p>
-<pre><code class="language-bash">docker-compose up -d
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">docker-compose</span><span style="color:#9ECE6A"> up</span><span style="color:#E0AF68"> -d</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>これで、キャッシュサーバは PORT:3000 番 で起動します。</p>
 <h3 id="turbo-build">turbo build</h3>
 <p>では、実際に turborepo からつながるか、試してみます。</p>
 <p>turborepo は、<code>npx create-turbo@latest</code> で作成できます。
 作成後、作成したフォルダで次のコマンドを実行します。</p>
-<pre><code class="language-bash">yarn
-yarn turbo run build --team="team_myteam" --token="mytoken" --api="http://localhost:3000"
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">yarn</span></span>
+<span class="line"><span style="color:#C0CAF5">yarn</span><span style="color:#9ECE6A"> turbo</span><span style="color:#9ECE6A"> run</span><span style="color:#9ECE6A"> build</span><span style="color:#E0AF68"> --team=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">team_myteam</span><span style="color:#89DDFF">"</span><span style="color:#E0AF68"> --token=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">mytoken</span><span style="color:#89DDFF">"</span><span style="color:#E0AF68"> --api=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">http://localhost:3000</span><span style="color:#89DDFF">"</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>turbo コマンドのオプションで、3 つ指定します。</p>
 <ul>
 <li>team
@@ -87,39 +119,35 @@ yarn turbo run build --team="team_myteam" --token="mytoken" --api="http://localh
 </li>
 </ul>
 <p>実行すると次のログが表示されるはずです。</p>
-<pre><code class="language-bash">yarn run v1.22.19
-turbo run build --team=team_myteam --token=mytoken --api=http://localhost:3000
-• Packages in scope: docs, eslint-config-custom, tsconfig, ui, web
-• Running build in 5 packages
-• Remote computation caching enabled
-web:build: cache miss, executing 082bae5de9b1745f
-docs:build: cache miss, executing 5a55c6367c8caf01
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">yarn</span><span style="color:#9ECE6A"> run</span><span style="color:#9ECE6A"> v1.22.19</span></span>
+<span class="line"><span style="color:#C0CAF5">turbo</span><span style="color:#9ECE6A"> run</span><span style="color:#9ECE6A"> build</span><span style="color:#E0AF68"> --team=team_myteam</span><span style="color:#E0AF68"> --token=mytoken</span><span style="color:#E0AF68"> --api=http://localhost:3000</span></span>
+<span class="line"><span style="color:#C0CAF5">•</span><span style="color:#9ECE6A"> Packages</span><span style="color:#9ECE6A"> in</span><span style="color:#9ECE6A"> scope:</span><span style="color:#9ECE6A"> docs,</span><span style="color:#9ECE6A"> eslint-config-custom,</span><span style="color:#9ECE6A"> tsconfig,</span><span style="color:#9ECE6A"> ui,</span><span style="color:#9ECE6A"> web</span></span>
+<span class="line"><span style="color:#C0CAF5">•</span><span style="color:#9ECE6A"> Running</span><span style="color:#9ECE6A"> build</span><span style="color:#9ECE6A"> in</span><span style="color:#FF9E64"> 5</span><span style="color:#9ECE6A"> packages</span></span>
+<span class="line"><span style="color:#C0CAF5">•</span><span style="color:#9ECE6A"> Remote</span><span style="color:#9ECE6A"> computation</span><span style="color:#9ECE6A"> caching</span><span style="color:#9ECE6A"> enabled</span></span>
+<span class="line"><span style="color:#C0CAF5">web:build:</span><span style="color:#9ECE6A"> cache</span><span style="color:#9ECE6A"> miss,</span><span style="color:#9ECE6A"> executing</span><span style="color:#9ECE6A"> 082bae5de9b1745f</span></span>
+<span class="line"><span style="color:#C0CAF5">docs:build:</span><span style="color:#9ECE6A"> cache</span><span style="color:#9ECE6A"> miss,</span><span style="color:#9ECE6A"> executing</span><span style="color:#9ECE6A"> 5a55c6367c8caf01</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p><code>Remote computation caching enabled</code> で、リモートキャッシュが有効となりました。
 初回の場合、cache miss となります。ハッシュ値は、<code>web: 082bae5de9b1745f</code> と <code>docs:5a55c6367c8caf01</code> になります。
 キャッシュがローカルに保存されるため、削除します。</p>
-<pre><code class="language-bash">rm -rf node_modules/.cache/turbo
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">rm</span><span style="color:#E0AF68"> -rf</span><span style="color:#9ECE6A"> node_modules/.cache/turbo</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>ではもう一度、turbo build してみましょう。</p>
-<pre><code class="language-bash">yarn turbo run build --team="team_myteam" --token="mytoken" --api="http://localhost:3000"
-yarn run v1.22.19
-/Users/silverbirder/docker/node/turborepo-with-selfhost-remote-cache/node_modules/.bin/turbo run build --team=team_myteam --token=mytoken --api=http://localhost:3000
-• Packages in scope: docs, eslint-config-custom, tsconfig, ui, web
-• Running build in 5 packages
-• Remote computation caching enabled
-docs:build: cache hit, replaying output 5a55c6367c8caf01
-web:build: cache hit, replaying output 082bae5de9b1745f
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">yarn</span><span style="color:#9ECE6A"> turbo</span><span style="color:#9ECE6A"> run</span><span style="color:#9ECE6A"> build</span><span style="color:#E0AF68"> --team=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">team_myteam</span><span style="color:#89DDFF">"</span><span style="color:#E0AF68"> --token=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">mytoken</span><span style="color:#89DDFF">"</span><span style="color:#E0AF68"> --api=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">http://localhost:3000</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C0CAF5">yarn</span><span style="color:#9ECE6A"> run</span><span style="color:#9ECE6A"> v1.22.19</span></span>
+<span class="line"><span style="color:#C0CAF5">/Users/silverbirder/docker/node/turborepo-with-selfhost-remote-cache/node_modules/.bin/turbo</span><span style="color:#9ECE6A"> run</span><span style="color:#9ECE6A"> build</span><span style="color:#E0AF68"> --team=team_myteam</span><span style="color:#E0AF68"> --token=mytoken</span><span style="color:#E0AF68"> --api=http://localhost:3000</span></span>
+<span class="line"><span style="color:#C0CAF5">•</span><span style="color:#9ECE6A"> Packages</span><span style="color:#9ECE6A"> in</span><span style="color:#9ECE6A"> scope:</span><span style="color:#9ECE6A"> docs,</span><span style="color:#9ECE6A"> eslint-config-custom,</span><span style="color:#9ECE6A"> tsconfig,</span><span style="color:#9ECE6A"> ui,</span><span style="color:#9ECE6A"> web</span></span>
+<span class="line"><span style="color:#C0CAF5">•</span><span style="color:#9ECE6A"> Running</span><span style="color:#9ECE6A"> build</span><span style="color:#9ECE6A"> in</span><span style="color:#FF9E64"> 5</span><span style="color:#9ECE6A"> packages</span></span>
+<span class="line"><span style="color:#C0CAF5">•</span><span style="color:#9ECE6A"> Remote</span><span style="color:#9ECE6A"> computation</span><span style="color:#9ECE6A"> caching</span><span style="color:#9ECE6A"> enabled</span></span>
+<span class="line"><span style="color:#C0CAF5">docs:build:</span><span style="color:#9ECE6A"> cache</span><span style="color:#9ECE6A"> hit,</span><span style="color:#9ECE6A"> replaying</span><span style="color:#9ECE6A"> output</span><span style="color:#9ECE6A"> 5a55c6367c8caf01</span></span>
+<span class="line"><span style="color:#C0CAF5">web:build:</span><span style="color:#9ECE6A"> cache</span><span style="color:#9ECE6A"> hit,</span><span style="color:#9ECE6A"> replaying</span><span style="color:#9ECE6A"> output</span><span style="color:#9ECE6A"> 082bae5de9b1745f</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>どうでしょうか、<code>cache hit</code> と表示されています。手元にキャッシュがないのにも関わらず、リモートのキャッシュサーバにキャッシュがあるため、<code>cache hit</code> となります！</p>
 <h3 id="キャッシュオブジェクト">キャッシュオブジェクト</h3>
 <p>キャッシュのオブジェクトは、ハッシュ値名で、アウトプット(file やログ)のバイナリになります。
 Docker コンテナ内で見ると、次のようなファイルが置かれています。</p>
-<pre><code class="language-bash">ls -hl storage/team_myteam/
-total 5392
--rw-r--r--  1 silverbirder  staff   1.3M Sep 11 16:20 082bae5de9b1745f
--rw-r--r--  1 silverbirder  staff   1.3M Sep 11 16:20 5a55c6367c8caf01
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">ls</span><span style="color:#E0AF68"> -hl</span><span style="color:#9ECE6A"> storage/team_myteam/</span></span>
+<span class="line"><span style="color:#C0CAF5">total</span><span style="color:#FF9E64"> 5392</span></span>
+<span class="line"><span style="color:#C0CAF5">-rw-r--r--</span><span style="color:#FF9E64">  1</span><span style="color:#9ECE6A"> silverbirder</span><span style="color:#9ECE6A">  staff</span><span style="color:#9ECE6A">   1.3M</span><span style="color:#9ECE6A"> Sep</span><span style="color:#FF9E64"> 11</span><span style="color:#9ECE6A"> 16:20</span><span style="color:#9ECE6A"> 082bae5de9b1745f</span></span>
+<span class="line"><span style="color:#C0CAF5">-rw-r--r--</span><span style="color:#FF9E64">  1</span><span style="color:#9ECE6A"> silverbirder</span><span style="color:#9ECE6A">  staff</span><span style="color:#9ECE6A">   1.3M</span><span style="color:#9ECE6A"> Sep</span><span style="color:#FF9E64"> 11</span><span style="color:#9ECE6A"> 16:20</span><span style="color:#9ECE6A"> 5a55c6367c8caf01</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>–team オプションで指定した名前で、フォルダが作成されています。
 そのため、team 毎にキャッシュが作成されます。</p>
 <h3 id="キャッシュとは">キャッシュとは</h3>

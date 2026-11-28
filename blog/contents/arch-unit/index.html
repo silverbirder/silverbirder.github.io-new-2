@@ -4,9 +4,45 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2020-11-28" data-pagefind-filter="month:2020-11" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">57</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2020-11-28"><span class="visually-hidden">2020年11月28日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2020</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">28</span></span></time></p></div><div class="notebook-heading"><h1>TypescriptでArchUnitしてみた</h1></div></header><div class="notebook-body"><p>ArchUnit をというものを最近知りました。依存関係のテストができるそうです。さっそく試してみたいと思いますので、その備忘録として残しておきます。</p>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2020-11-28" data-pagefind-filter="month:2020-11" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">57</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2020-11-28"><span class="visually-hidden">2020年11月28日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2020</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">28</span></span></time></p></div><div class="notebook-heading"><h1>TypescriptでArchUnitしてみた</h1></div></header><div class="notebook-body"><p>ArchUnit をというものを最近知りました。依存関係のテストができるそうです。さっそく試してみたいと思いますので、その備忘録として残しておきます。</p>
 <h2 id="archunit">ArchUnit</h2>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://www.archunit.org/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Unit test your Java architecture</strong><span class="link-card-description" data-astro-cid-p7ia6262>Start enforcing your architecture within 30 minutes using the test setup you already have.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/www.archunit.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">www.archunit.org<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://www.archunit.org/" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Unit test your Java architecture</strong><span class="link-card-description" data-astro-cid-p7ia6262>Start enforcing your architecture within 30 minutes using the test setup you already have.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/www.archunit.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">www.archunit.org<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></div>
 <blockquote>
 <p>ArchUnit is a free, simple and extensible library for checking the architecture of your Java code using any plain Java unit test framework. That is, ArchUnit can check dependencies between packages and classes, layers and slices, check for cyclic dependencies and more. It does so by analyzing given Java bytecode, importing all classes into a Java code structure.</p>
 </blockquote>
@@ -16,83 +52,75 @@
 <h2 id="typescript-でも-archunit-したい">Typescript でも ArchUnit したい</h2>
 <p>ArchUnit は Java 製です。私は Typescript の ArchUnit がしたいです。
 そこで、良さげなライブラリを発見しました。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/MaibornWolff/ts-arch" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - ts-arch/ts-arch: An architecture unit test framework for Typescript</strong><span class="link-card-description" data-astro-cid-p7ia6262>An architecture unit test framework for Typescript - ts-arch/ts-arch</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/7b10ae4512b7b3a68e0ccad0c686567ff2ddc173e37101e9da9c14cff715b7c9.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://github.com/MaibornWolff/ts-arch" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - ts-arch/ts-arch: An architecture unit test framework for Typescript</strong><span class="link-card-description" data-astro-cid-p7ia6262>An architecture unit test framework for Typescript - ts-arch/ts-arch</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/7b10ae4512b7b3a68e0ccad0c686567ff2ddc173e37101e9da9c14cff715b7c9.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <p>特に拘りなく、アーキテクチャのテストができれば何でも良いかなと思います。
 極端な話、ソースコードを AST パースし、依存関係を抽出できれば自作できるんじゃないかと思います。</p>
 <h2 id="試してみた">試してみた</h2>
 <p>試したソースコードは、下記に置いています。ご参考下さい。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/silverbirder/try-archunit" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/try-archunit</strong><span class="link-card-description" data-astro-cid-p7ia6262>Contribute to silverbirder/try-archunit development by creating an account on GitHub.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/696c9c98dd69b025d86c3987e3729a650da627f719f44553d63248531e24366b.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://github.com/silverbirder/try-archunit" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/try-archunit</strong><span class="link-card-description" data-astro-cid-p7ia6262>Contribute to silverbirder/try-archunit development by creating an account on GitHub.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/696c9c98dd69b025d86c3987e3729a650da627f719f44553d63248531e24366b.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <p>全体のソースコードツリーは次の構成です。</p>
-<pre><code class="language-text">src
-└ 1_enterprise_business_rules
-  └ entities
-    └ Entity.ts
-└ 2_application_business_rules
-  └ use_cases
-    └ UseCase.ts
-└ 3_interface_adapters
-  └ controllers
-    └ Controller.ts
-  └ gateways
-    └ Gateway.ts
-  └ presenters
-    └ Presenter.ts
-└ 4_frameworks_and_drivers
-  └ web
-    └ Web.ts
-└ clean_architecture.puml
-└ clean_architecture.test.ts
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>src</span></span>
+<span class="line"><span>└ 1_enterprise_business_rules</span></span>
+<span class="line"><span>  └ entities</span></span>
+<span class="line"><span>    └ Entity.ts</span></span>
+<span class="line"><span>└ 2_application_business_rules</span></span>
+<span class="line"><span>  └ use_cases</span></span>
+<span class="line"><span>    └ UseCase.ts</span></span>
+<span class="line"><span>└ 3_interface_adapters</span></span>
+<span class="line"><span>  └ controllers</span></span>
+<span class="line"><span>    └ Controller.ts</span></span>
+<span class="line"><span>  └ gateways</span></span>
+<span class="line"><span>    └ Gateway.ts</span></span>
+<span class="line"><span>  └ presenters</span></span>
+<span class="line"><span>    └ Presenter.ts</span></span>
+<span class="line"><span>└ 4_frameworks_and_drivers</span></span>
+<span class="line"><span>  └ web</span></span>
+<span class="line"><span>    └ Web.ts</span></span>
+<span class="line"><span>└ clean_architecture.puml</span></span>
+<span class="line"><span>└ clean_architecture.test.ts</span></span></code></pre><figcaption class="notebook-code-language">テキスト</figcaption></figure>
 <p>各プロダクトコードは、下の階層のファイルを import しているだけとします。</p>
-<pre><code class="language-typescript">// src/4_frameworks_and_drivers/web/Web.ts
-import "../../3_interface_adapters/gateways/Gateway";
-import "../../3_interface_adapters/controllers/Controller";
-import "../../3_interface_adapters/presenters/Presenter";
-</code></pre>
-<pre><code class="language-typescript">// src/3_interface_adapters/controllers/Controller.ts
-import "../../2_application_business_rules/use_cases/UseCase";
-</code></pre>
-<pre><code class="language-typescript">// src/2_application_business_rules/use_cases/UseCase.ts
-import "../../1_enterprise_business_rules/entities/Entity";
-</code></pre>
-<pre><code class="language-typescript">// src/1_enterprise_business_rules/entities/Entity.ts
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/4_frameworks_and_drivers/web/Web.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../3_interface_adapters/gateways/Gateway</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../3_interface_adapters/controllers/Controller</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../3_interface_adapters/presenters/Presenter</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/3_interface_adapters/controllers/Controller.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../2_application_business_rules/use_cases/UseCase</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/2_application_business_rules/use_cases/UseCase.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../1_enterprise_business_rules/entities/Entity</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/1_enterprise_business_rules/entities/Entity.ts</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>下記ファイルにある UML のコンポーネント図で依存関係を表します。</p>
-<pre><code class="language-text">## clean_architecture.puml
-@startuml
-  component [4_frameworks_and_drivers] #Blue
-  component [3_interface_adapters] #Green
-  component [2_application_business_rules] #Red
-  component [1_enterprise_business_rules] #Yellow
-
-  4_frameworks_and_drivers --&gt; 3_interface_adapters
-  3_interface_adapters --&gt; 2_application_business_rules
-  2_application_business_rules --&gt; 1_enterprise_business_rules
-@enduml
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>## clean_architecture.puml</span></span>
+<span class="line"><span>@startuml</span></span>
+<span class="line"><span>  component [4_frameworks_and_drivers] #Blue</span></span>
+<span class="line"><span>  component [3_interface_adapters] #Green</span></span>
+<span class="line"><span>  component [2_application_business_rules] #Red</span></span>
+<span class="line"><span>  component [1_enterprise_business_rules] #Yellow</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  4_frameworks_and_drivers --&gt; 3_interface_adapters</span></span>
+<span class="line"><span>  3_interface_adapters --&gt; 2_application_business_rules</span></span>
+<span class="line"><span>  2_application_business_rules --&gt; 1_enterprise_business_rules</span></span>
+<span class="line"><span>@enduml</span></span></code></pre><figcaption class="notebook-code-language">テキスト</figcaption></figure>
 <p>UML を可視化すると、下記の図のとおりです。</p>
 <p><span class="notebook-photo-frame"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1614430164/silver-birder.github.io/blog/clean_architecture.puml.png?ar=470%3A684" alt="clean_architecture.puml" width="470" height="684" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_200/q_auto/f_auto/v1614430164/silver-birder.github.io/blog/clean_architecture.puml.png?ar=470%3A684 200w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_300/q_auto/f_auto/v1614430164/silver-birder.github.io/blog/clean_architecture.puml.png?ar=470%3A684 300w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1614430164/silver-birder.github.io/blog/clean_architecture.puml.png?ar=470%3A684 400w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_450/q_auto/f_auto/v1614430164/silver-birder.github.io/blog/clean_architecture.puml.png?ar=470%3A684 450w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_470/q_auto/f_auto/v1614430164/silver-birder.github.io/blog/clean_architecture.puml.png?ar=470%3A684 470w" sizes="auto, min(25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem) - 0.5rem - 2 * 0.5rem))"><span class="notebook-photo-caption" aria-hidden="true">clean_architecture.puml</span></span></p>
 <p>テストコードは、下記のとおりです。</p>
-<pre><code class="language-typescript">// clean_architecture.test.ts
-describe("architecture", () =&gt; {
-  it("Check dependency", async () =&gt; {
-    const architectureUml = path.resolve(__dirname, "clean_architecture.puml");
-    const violations = await slicesOfProject()
-      .definedBy("src/(**)/")
-      .should()
-      .adhereToDiagramInFile(architectureUml)
-      .check();
-    await expect(violations).toEqual([]);
-  });
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// clean_architecture.test.ts</span></span>
+<span class="line"><span style="color:#7AA2F7">describe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">architecture</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Check dependency</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> architectureUml</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> path</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">resolve</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">__dirname</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">clean_architecture.puml</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> violations</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#7AA2F7"> slicesOfProject</span><span style="color:#9ABDF5">()</span></span>
+<span class="line"><span style="color:#89DDFF">      .</span><span style="color:#7AA2F7">definedBy</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">src/(**)/</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#89DDFF">      .</span><span style="color:#7AA2F7">should</span><span style="color:#9ABDF5">()</span></span>
+<span class="line"><span style="color:#89DDFF">      .</span><span style="color:#7AA2F7">adhereToDiagramInFile</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">architectureUml</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#89DDFF">      .</span><span style="color:#7AA2F7">check</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#7AA2F7"> expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">violations</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toEqual</span><span style="color:#9ABDF5">([])</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>このテストケースは PASS します。</p>
 <p><span class="notebook-photo-frame"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422" alt="src/clean_architecture.test.ts > architecture > Check dependency #Succeed" width="962" height="422" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_200/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422 200w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_300/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422 300w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422 400w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_450/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422 450w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_600/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422 600w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_800/q_auto/f_auto/v1614430233/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_succeed.png?ar=962%3A422 800w" sizes="auto, min(25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem) - 0.5rem - 2 * 0.5rem))"><span class="notebook-photo-caption" aria-hidden="true">src/clean_architecture.test.ts &gt; architecture &gt; Check dependency #Succeed</span></span></p>
 <p>では、違反コードを書いてみます。</p>
-<pre><code class="language-typescript">// src/3_interface_adapters/controllers/Controller.ts
-import "../../2_application_business_rules/use_cases/UseCase";
-import "../../4_frameworks_and_drivers/web/Web";
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/3_interface_adapters/controllers/Controller.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../2_application_business_rules/use_cases/UseCase</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../4_frameworks_and_drivers/web/Web</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>3 レイヤーが上位の 4 レイヤーを使用しています。この状態でテストを実行すると、</p>
 <p><span class="notebook-photo-frame"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564" alt="src/clean_architecture.test.ts > architecture > Check dependency #Failed" width="1200" height="564" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_200/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564 200w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_300/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564 300w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564 400w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_450/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564 450w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_600/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564 600w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_800/q_auto/f_auto/v1614430292/silver-birder.github.io/blog/src_clean_architecture_test_ts_architecture_check_dependency_failed.png?ar=1200%3A564 800w" sizes="auto, min(25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem) - 0.5rem - 2 * 0.5rem))"><span class="notebook-photo-caption" aria-hidden="true">src/clean_architecture.test.ts &gt; architecture &gt; Check dependency #Failed</span></span></p>
 <p>見事 Failed となりました。つまり、依存関係の誤りを自動的に検出することができます。</p>

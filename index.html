@@ -242,79 +242,9 @@
       }
 
       .home-intro h1 {
-        --title-size: clamp(2.5rem, 6vw, 3.5rem);
-        --title-line-height: 1.18;
-        --title-tracking: -0.04em;
+        --site-wordmark-size: clamp(2.5rem, 6vw, 3.5rem);
 
-        display: flex;
-        inline-size: max-content;
         margin: var(--primitive-space-none) auto;
-        font-family: var(--semantic-font-family-heading);
-        font-size: var(--title-size);
-        line-height: var(--title-line-height);
-        letter-spacing: var(--title-tracking);
-      }
-
-      .home-title-wave {
-        position: absolute;
-        inline-size: var(--primitive-space-none);
-        block-size: var(--primitive-space-none);
-      }
-
-      .home-title-letter {
-        --letter-seam: url('#home-title-seam-0');
-        --letter-blue: url('#home-title-blue-0');
-
-        position: relative;
-      }
-
-      @supports (clip-path: url('#home-title-seam-0')) {
-        @media screen and (forced-colors: none) {
-          .home-title-letter::before,
-          .home-title-letter::after {
-            content: attr(data-letter);
-            position: absolute;
-            inset: var(--primitive-space-none);
-            pointer-events: none;
-            user-select: none;
-          }
-
-          .home-title-letter::before {
-            color: var(--semantic-color-background-page);
-            clip-path: var(--letter-seam);
-          }
-
-          .home-title-letter::after {
-            color: var(--semantic-color-text-link);
-            clip-path: var(--letter-blue);
-          }
-        }
-      }
-
-      @media screen and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
-        .home-title-water {
-          --water-duration: 5.4s;
-          --water-phase: 0s;
-          --water-shift: 6%;
-          --water-tilt: 3deg;
-
-          transform-box: fill-box;
-          transform-origin: center;
-          animation: home-title-slosh var(--water-duration) ease-in-out var(--water-phase) infinite;
-        }
-      }
-
-      @keyframes home-title-slosh {
-        0%,
-        100% {
-          transform: translateX(calc(var(--water-shift) * var(--primitive-scale-negative)))
-            skewY(var(--water-tilt));
-        }
-
-        50% {
-          transform: translateX(var(--water-shift))
-            skewY(calc(var(--water-tilt) * var(--primitive-scale-negative)));
-        }
       }
 
       .home-intro nav {
@@ -341,7 +271,7 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"><style>.home-window[data-astro-cid-dau75j5u]{--window-width:min(60vw, 22rem);--window-curve-width:50%;--window-photo-curve-depth:40%;--window-frame-ratio:4 / 5;--window-photo-position:38%;inline-size:var(--window-width);margin:var(--primitive-space-none);position:relative;container-type:inline-size}.home-window-frame[data-astro-cid-dau75j5u]{box-sizing:border-box;aspect-ratio:var(--window-frame-ratio);padding:calc(var(--semantic-space-control-block) + var(--primitive-size-css-pixel));position:relative}.home-window-outline[data-astro-cid-dau75j5u]{--window-view-box-width:100px;--window-container-width:100cqw;--window-stroke-width-fallback:.19px;inset:var(--primitive-space-none);inline-size:var(--primitive-size-full);block-size:var(--primitive-size-full);fill:none;stroke:var(--semantic-color-text-link);stroke-width:var(--window-stroke-width-fallback);stroke-width:calc(var(--semantic-border-width-hairline) * (var(--window-view-box-width) / var(--window-container-width)));stroke-linecap:round;pointer-events:none;position:absolute;overflow:visible}.home-window-photo[data-astro-cid-dau75j5u]{inline-size:var(--primitive-size-full);block-size:var(--primitive-size-full);object-fit:cover;object-position:var(--window-photo-position) center;border-start-start-radius:var(--window-curve-width) var(--window-photo-curve-depth);border-start-end-radius:var(--window-curve-width) var(--window-photo-curve-depth);display:block}.home-window-avatar[data-astro-cid-dau75j5u]{--window-avatar-width:13%;--window-avatar-offset:-50% 9%;inline-size:var(--window-avatar-width);block-size:auto;translate:var(--window-avatar-offset);position:absolute;inset-block-end:var(--primitive-size-full);inset-inline-start:var(--primitive-radius-full)}@media (prefers-reduced-motion:no-preference){.home-window-line[data-astro-cid-dau75j5u]{--window-draw-duration:5.5s;animation:window-outline-draw var(--window-draw-duration) linear forwards}@keyframes window-outline-draw{to{stroke-dashoffset:var(--primitive-space-none)}}}@media (prefers-reduced-motion:reduce){.home-window-line[data-astro-cid-dau75j5u]{stroke-dasharray:none}}
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"><style>.home-window[data-astro-cid-dau75j5u]{--window-width:min(60vw, 22rem);--window-curve-width:50%;--window-photo-curve-depth:40%;--window-frame-ratio:4 / 5;--window-photo-position:38%;inline-size:var(--window-width);margin:var(--primitive-space-none);position:relative;container-type:inline-size}.home-window-frame[data-astro-cid-dau75j5u]{box-sizing:border-box;aspect-ratio:var(--window-frame-ratio);padding:calc(var(--semantic-space-control-block) + var(--primitive-size-css-pixel));position:relative}.home-window-outline[data-astro-cid-dau75j5u]{--window-view-box-width:100px;--window-container-width:100cqw;--window-stroke-width-fallback:.19px;inset:var(--primitive-space-none);inline-size:var(--primitive-size-full);block-size:var(--primitive-size-full);fill:none;stroke:var(--semantic-color-text-link);stroke-width:var(--window-stroke-width-fallback);stroke-width:calc(var(--semantic-border-width-hairline) * (var(--window-view-box-width) / var(--window-container-width)));stroke-linecap:round;pointer-events:none;position:absolute;overflow:visible}.home-window-photo[data-astro-cid-dau75j5u]{inline-size:var(--primitive-size-full);block-size:var(--primitive-size-full);object-fit:cover;object-position:var(--window-photo-position) center;border-start-start-radius:var(--window-curve-width) var(--window-photo-curve-depth);border-start-end-radius:var(--window-curve-width) var(--window-photo-curve-depth);display:block}.home-window-avatar[data-astro-cid-dau75j5u]{--window-avatar-width:13%;--window-avatar-offset:-50% 9%;inline-size:var(--window-avatar-width);block-size:auto;translate:var(--window-avatar-offset);position:absolute;inset-block-end:var(--primitive-size-full);inset-inline-start:var(--primitive-radius-full)}@media (prefers-reduced-motion:no-preference){.home-window-line[data-astro-cid-dau75j5u]{--window-draw-duration:5.5s;animation:window-outline-draw var(--window-draw-duration) linear forwards}@keyframes window-outline-draw{to{stroke-dashoffset:var(--primitive-space-none)}}}@media (prefers-reduced-motion:reduce){.home-window-line[data-astro-cid-dau75j5u]{stroke-dasharray:none}}
 </style></head><body><main><section class="home"><figure class="home-window" data-astro-cid-dau75j5u><div class="home-window-frame" data-astro-cid-dau75j5u><svg class="home-window-outline" viewBox="0 0 100 125" preserveAspectRatio="none" aria-hidden="true" data-astro-cid-dau75j5u><path class="home-window-line" d="
   M81.6 11.5 A50 51 0 0 0 66.02 2.69
   C67.23 2.97 68.34 2.51 68.42 1.10 C68.49 0.08 68.03 -0.57 67.22 -1.58
@@ -371,43 +301,43 @@
   C99.605 82.919 99.514 82.372 99.574 81.642 C99.666 80.912 99.939 80.152 100.000 79.696
 
   V51 A50 51 0 0 0 88.7 18.7 C86.1 15.5 85.8 10.8 88.8 7.6
-" pathLength="1" stroke-dasharray="1.02 1.02" stroke-dashoffset="1.02" data-astro-cid-dau75j5u></path></svg><img class="home-window-photo" src="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,c_limit,w_768/v1778412179/silver-birder.github.io/blog/x7je0vkto34mbvaof8k2.jpg" srcset="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,c_limit,w_480/v1778412179/silver-birder.github.io/blog/x7je0vkto34mbvaof8k2.jpg 480w, https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,c_limit,w_768/v1778412179/silver-birder.github.io/blog/x7je0vkto34mbvaof8k2.jpg 768w, https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,c_limit,w_1024/v1778412179/silver-birder.github.io/blog/x7je0vkto34mbvaof8k2.jpg 1024w" sizes="min(60vw, 22rem)" width="1200" height="901" alt="琵琶湖が綺麗だ" fetchpriority="high" data-astro-cid-dau75j5u><img class="home-window-avatar" src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="500" height="500" alt="" data-astro-cid-dau75j5u></div></figure><div class="home-intro"><svg class="home-title-wave" aria-hidden="true" focusable="false"><defs><path id="home-title-water-0" class="home-title-water" d="
+" pathLength="1" stroke-dasharray="1.02 1.02" stroke-dashoffset="1.02" data-astro-cid-dau75j5u></path></svg><img class="home-window-photo" src="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,c_limit,w_768/v1778412179/silver-birder.github.io/blog/x7je0vkto34mbvaof8k2.jpg" srcset="https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,c_limit,w_480/v1778412179/silver-birder.github.io/blog/x7je0vkto34mbvaof8k2.jpg 480w, https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,c_limit,w_768/v1778412179/silver-birder.github.io/blog/x7je0vkto34mbvaof8k2.jpg 768w, https://res.cloudinary.com/silverbirder/image/upload/f_auto,q_auto,c_limit,w_1024/v1778412179/silver-birder.github.io/blog/x7je0vkto34mbvaof8k2.jpg 1024w" sizes="min(60vw, 22rem)" width="1200" height="901" alt="琵琶湖が綺麗だ" fetchpriority="high" data-astro-cid-dau75j5u><img class="home-window-avatar" src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="500" height="500" alt="" data-astro-cid-dau75j5u></div></figure><div class="home-intro"><h1 aria-label="ジブンノート"><span class="site-wordmark wordmark-animated" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="home-title-water-0" class="wordmark-water" d="
   M -.24 .52
   C -.04 .52 .07 .485 .26 .485
   S .58 .55 .72 .55
   S 1 .51 1.24 .51
   V 1.25 H -.24 Z
-" style="--water-phase: 0.00s"></path><clipPath id="home-title-seam-0" clipPathUnits="objectBoundingBox"><use href="#home-title-water-0"></use></clipPath><clipPath id="home-title-blue-0" clipPathUnits="objectBoundingBox"><use href="#home-title-water-0" y=".015"></use></clipPath><path id="home-title-water-1" class="home-title-water" d="
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="home-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#home-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="home-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#home-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="home-title-water-1" class="wordmark-water" d="
   M -.24 .52
   C -.04 .52 .07 .485 .26 .485
   S .58 .55 .72 .55
   S 1 .51 1.24 .51
   V 1.25 H -.24 Z
-" style="--water-phase: -0.52s"></path><clipPath id="home-title-seam-1" clipPathUnits="objectBoundingBox"><use href="#home-title-water-1"></use></clipPath><clipPath id="home-title-blue-1" clipPathUnits="objectBoundingBox"><use href="#home-title-water-1" y=".015"></use></clipPath><path id="home-title-water-2" class="home-title-water" d="
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="home-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#home-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="home-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#home-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="home-title-water-2" class="wordmark-water" d="
   M -.24 .52
   C -.04 .52 .07 .485 .26 .485
   S .58 .55 .72 .55
   S 1 .51 1.24 .51
   V 1.25 H -.24 Z
-" style="--water-phase: -1.04s"></path><clipPath id="home-title-seam-2" clipPathUnits="objectBoundingBox"><use href="#home-title-water-2"></use></clipPath><clipPath id="home-title-blue-2" clipPathUnits="objectBoundingBox"><use href="#home-title-water-2" y=".015"></use></clipPath><path id="home-title-water-3" class="home-title-water" d="
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="home-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#home-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="home-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#home-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="home-title-water-3" class="wordmark-water" d="
   M -.24 .52
   C -.04 .52 .07 .485 .26 .485
   S .58 .55 .72 .55
   S 1 .51 1.24 .51
   V 1.25 H -.24 Z
-" style="--water-phase: -1.56s"></path><clipPath id="home-title-seam-3" clipPathUnits="objectBoundingBox"><use href="#home-title-water-3"></use></clipPath><clipPath id="home-title-blue-3" clipPathUnits="objectBoundingBox"><use href="#home-title-water-3" y=".015"></use></clipPath><path id="home-title-water-4" class="home-title-water" d="
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="home-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#home-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="home-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#home-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="home-title-water-4" class="wordmark-water" d="
   M -.24 .52
   C -.04 .52 .07 .485 .26 .485
   S .58 .55 .72 .55
   S 1 .51 1.24 .51
   V 1.25 H -.24 Z
-" style="--water-phase: -2.08s"></path><clipPath id="home-title-seam-4" clipPathUnits="objectBoundingBox"><use href="#home-title-water-4"></use></clipPath><clipPath id="home-title-blue-4" clipPathUnits="objectBoundingBox"><use href="#home-title-water-4" y=".015"></use></clipPath><path id="home-title-water-5" class="home-title-water" d="
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="home-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#home-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="home-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#home-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="home-title-water-5" class="wordmark-water" d="
   M -.24 .52
   C -.04 .52 .07 .485 .26 .485
   S .58 .55 .72 .55
   S 1 .51 1.24 .51
   V 1.25 H -.24 Z
-" style="--water-phase: -2.60s"></path><clipPath id="home-title-seam-5" clipPathUnits="objectBoundingBox"><use href="#home-title-water-5"></use></clipPath><clipPath id="home-title-blue-5" clipPathUnits="objectBoundingBox"><use href="#home-title-water-5" y=".015"></use></clipPath></defs></svg><h1 aria-label="ジブンノート"><span class="home-title-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#home-title-seam-0); --letter-blue: url(#home-title-blue-0)">ジ</span><span class="home-title-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#home-title-seam-1); --letter-blue: url(#home-title-blue-1)">ブ</span><span class="home-title-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#home-title-seam-2); --letter-blue: url(#home-title-blue-2)">ン</span><span class="home-title-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#home-title-seam-3); --letter-blue: url(#home-title-blue-3)">ノ</span><span class="home-title-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#home-title-seam-4); --letter-blue: url(#home-title-blue-4)">ー</span><span class="home-title-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#home-title-seam-5); --letter-blue: url(#home-title-blue-5)">ト</span></h1><nav aria-label="サイト内のページ"><a href="/silverbirder.github.io-new-2/me/">自己紹介</a><a href="/silverbirder.github.io-new-2/blog/">ブログ</a></nav></div><div class="home-room" aria-hidden="true"><div class="home-living-room" aria-hidden="true"><svg class="home-favorite-jacket" viewBox="0 0 116 136" aria-hidden="true"><path d="M52 10 Q52 7 55 7 H61 Q64 7 64 10 Q64 13 61 13 H55 Q52 13 52 10 Z M57 10 H60"></path><path d="M54 13 C54 6 65 7 65 14 C65 19 58 20 58 26 V28 M39 36 L54 29 Q58 27 62 29 L77 36"></path><path d="M46 54 Q58 55 70 54"></path><path class="home-jacket-collar" d="M33 40 Q35 33 41 35 Q41 48 48 65 L39 67 Q34 54 33 40 Z M75 35 Q82 33 83 40 Q80 56 77 67 L68 65 Q75 48 75 35 Z"></path><path class="home-jacket-cuffs" d="M14 116 Q21 120 28 117 L28 120 Q20 126 13 119 Z M89 117 Q96 120 103 115 L103 118 Q98 125 88 119 Z"></path><path d="
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="home-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#home-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="home-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#home-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#home-title-seam-0); --letter-blue: url(#home-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#home-title-seam-1); --letter-blue: url(#home-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#home-title-seam-2); --letter-blue: url(#home-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#home-title-seam-3); --letter-blue: url(#home-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#home-title-seam-4); --letter-blue: url(#home-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#home-title-seam-5); --letter-blue: url(#home-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></h1><nav aria-label="サイト内のページ"><a href="/silverbirder.github.io-new-2/me/">自己紹介</a><a href="/silverbirder.github.io-new-2/blog/">ブログ</a></nav></div><div class="home-room" aria-hidden="true"><div class="home-living-room" aria-hidden="true"><svg class="home-favorite-jacket" viewBox="0 0 116 136" aria-hidden="true"><path d="M52 10 Q52 7 55 7 H61 Q64 7 64 10 Q64 13 61 13 H55 Q52 13 52 10 Z M57 10 H60"></path><path d="M54 13 C54 6 65 7 65 14 C65 19 58 20 58 26 V28 M39 36 L54 29 Q58 27 62 29 L77 36"></path><path d="M46 54 Q58 55 70 54"></path><path class="home-jacket-collar" d="M33 40 Q35 33 41 35 Q41 48 48 65 L39 67 Q34 54 33 40 Z M75 35 Q82 33 83 40 Q80 56 77 67 L68 65 Q75 48 75 35 Z"></path><path class="home-jacket-cuffs" d="M14 116 Q21 120 28 117 L28 120 Q20 126 13 119 Z M89 117 Q96 120 103 115 L103 118 Q98 125 88 119 Z"></path><path d="
               M41 35 Q36 31 34 36 Q28 34 28 41 Q22 39 23 46 Q16 44 19 51 Q13 52 17 56 C14 71 14 99 13 119 Q16 124 24 123 L28 120 L32 74 C32 87 29 106 31 121 Q37 128 44 125 C42 105 45 84 48 65 Q41 56 41 35 Z
               M41 35 Q58 31 75 35
               M75 35 Q75 55 68 65 C69 82 69 108 68 125 Q78 128 85 121 C87 107 84 88 84 74 L88 119 Q92 124 101 122 L103 118 C103 93 102 70 99 57 Q97 54 96 51 Q100 47 93 46 Q95 40 88 41 Q87 35 82 37 Q80 30 75 35 Z

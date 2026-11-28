@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2025-11-27" data-pagefind-filter="month:2025-11" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">179</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-11-27"><span class="visually-hidden">2025年11月27日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">27</span></span></time></p></div><div class="notebook-heading"><h1>CSSで任意の色から、背景色・文字色を決める方法</h1></div></header><div class="notebook-body"><p>CSS の色に関する Tip を 2 つ紹介します。</p>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2025-11-27" data-pagefind-filter="month:2025-11" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">179</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-11-27"><span class="visually-hidden">2025年11月27日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">11</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">27</span></span></time></p></div><div class="notebook-heading"><h1>CSSで任意の色から、背景色・文字色を決める方法</h1></div></header><div class="notebook-body"><p>CSS の色に関する Tip を 2 つ紹介します。</p>
 <ul>
 <li>1つの文字色から、薄い背景色を決める</li>
 <li>1つの背景色から、文字色を決める</li>
@@ -14,17 +50,16 @@
 <p>CSS の <code>color-mix()</code> を使うと、1つの色をベースにして<br>
 自動で <strong>ちょっと薄い背景色</strong> を作ることができます。</p>
 <p>たとえば、青色の10%を混ぜた背景色にする例です。</p>
-<pre><code class="language-html">&lt;div&gt;薄い背景色&lt;/div&gt;
-&lt;style&gt;
-div {
-  display: inline-block;
-  padding: 8px 12px;
-
-  color: blue;
-  background-color: color-mix(in srgb, blue 10%, transparent);
-}
-&lt;/style&gt;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#BA3C97">&lt;</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">薄い背景色</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">&lt;</span><span style="color:#F7768E">style</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#0DB9D7">div</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  display</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> inline-block</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  padding</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 8</span><span style="color:#F7768E">px</span><span style="color:#FF9E64"> 12</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  color</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> blue</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  background-color</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> color-mix</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">in</span><span style="color:#FF9E64"> srgb</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> blue</span><span style="color:#FF9E64"> 10</span><span style="color:#F7768E">%</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> transparent</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">style</span><span style="color:#BA3C97">&gt;</span></span></code></pre><figcaption class="notebook-code-language">HTML</figcaption></figure>
 <p><code>color-mix()</code> が使える環境なら、淡い背景を作るときにとても便利です。</p>
 <div style={{display: 'inline-block', height: "3rem", padding: "8px 12px", color: "blue", backgroundColor: "color-mix(in srgb, blue 10%, transparent)"}}>薄い背景色</div>
 <h2 id="1つの背景色から文字色を決める">1つの背景色から、文字色を決める</h2>
@@ -33,21 +68,20 @@ div {
 <ul>
 <li><a href="https://blanktar.jp/blog/2020/11/css-automate-foreground-text-color"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/blanktar.jp.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">CSSのfilterを使って、背景色に合わせた文字色を自動的に設定する - Blanktar<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
 </ul>
-<pre><code class="language-html">&lt;div&gt;
-  &lt;span&gt;読みやすい文字色&lt;/span&gt;
-&lt;/div&gt;
-&lt;style&gt;
-div {
-  display: inline-block;
-  padding: 8px 12px;
-  background-color: blue;
-}
-span {
-  color: inherit;
-  filter: invert(100%) grayscale(100%) contrast(100%);
-}
-&lt;/style&gt;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#BA3C97">&lt;</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">  &lt;</span><span style="color:#F7768E">span</span><span style="color:#BA3C97">&gt;</span><span style="color:#9AA5CE">読みやすい文字色</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">span</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">&lt;</span><span style="color:#F7768E">style</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#0DB9D7">div</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  display</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> inline-block</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  padding</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 8</span><span style="color:#F7768E">px</span><span style="color:#FF9E64"> 12</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  background-color</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> blue</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"><span style="color:#0DB9D7">span</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  color</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> inherit</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  filter</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> invert</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">100</span><span style="color:#F7768E">%</span><span style="color:#9ABDF5">)</span><span style="color:#0DB9D7"> grayscale</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">100</span><span style="color:#F7768E">%</span><span style="color:#9ABDF5">)</span><span style="color:#0DB9D7"> contrast</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">100</span><span style="color:#F7768E">%</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">style</span><span style="color:#BA3C97">&gt;</span></span></code></pre><figcaption class="notebook-code-language">HTML</figcaption></figure>
 <p>背景色が濃くても薄くても、適度に読みやすい文字色になります。</p>
 <div style={{display: 'inline-block', height: "3rem", padding: "8px 12px", backgroundColor: "blue"}}>
   <span style={{color: "inherit", filter: "invert(100%) grayscale(100%) contrast(100%)"}}>読みやすい文字色</span>

@@ -4,14 +4,50 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2023-04-28" data-pagefind-filter="month:2023-04" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">100</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2023-04-28"><span class="visually-hidden">2023年4月28日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2023</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">04</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">28</span></span></time></p></div><div class="notebook-heading"><h1>Webフロントエンドにおける網羅的テストパターンガイド</h1></div></header><div class="notebook-body"><p>こんにちは、テストが好きな silverbirder と申します。Web フロントエンドのテストは実施していますか？ユニットテストやビジュアルリグレッションテストは広く知られていると思います。しかし、パフォーマンステストのためのテストコードはありますか？また、カオスエンジニアリングテストやアクセシビリティテストはありますか？</p>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2023-04-28" data-pagefind-filter="month:2023-04" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">100</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2023-04-28"><span class="visually-hidden">2023年4月28日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2023</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">04</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">28</span></span></time></p></div><div class="notebook-heading"><h1>Webフロントエンドにおける網羅的テストパターンガイド</h1></div></header><div class="notebook-body"><p>こんにちは、テストが好きな silverbirder と申します。Web フロントエンドのテストは実施していますか？ユニットテストやビジュアルリグレッションテストは広く知られていると思います。しかし、パフォーマンステストのためのテストコードはありますか？また、カオスエンジニアリングテストやアクセシビリティテストはありますか？</p>
 <p>今回、私は Web フロントエンドにおける網羅的なテストパターンを調査し、その結果をここで紹介したいと思います。これらを理解することで、読者の皆さんが適切なテスト戦略を策定する際の参考になれば幸いです。</p>
 <h2 id="前提">前提</h2>
 <p>今回、テスト対象として取り上げる題材は、<a href="https://todomvc.com/"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/todomvc.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">TodoMVC<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>という TODO アプリです。フレームワークとして React を使用しますが、紹介するテストパターンはフレームワークに依存しないものです。ただし、使用するライブラリは React に関連しているため、その点についてはご了承ください。また、テストライブラリとして、Jest を使用します。</p>
 <p>参考となるコードは次のリポジトリに用意していますので、ぜひご参照ください。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/silverbirder/react-todoMVC/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/react-todoMVC: try tests on TodoMVC</strong><span class="link-card-description" data-astro-cid-p7ia6262>try tests on TodoMVC. Contribute to silverbirder/react-todoMVC development by creating an account on GitHub.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/4debc04c6c08530d580773b7faf02ea09ba968eb0d7cf284650b61bdbe96bcaf.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://github.com/silverbirder/react-todoMVC/" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>GitHub - silverbirder/react-todoMVC: try tests on TodoMVC</strong><span class="link-card-description" data-astro-cid-p7ia6262>try tests on TodoMVC. Contribute to silverbirder/react-todoMVC development by creating an account on GitHub.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/4debc04c6c08530d580773b7faf02ea09ba968eb0d7cf284650b61bdbe96bcaf.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <p>また、動作するアプリケーションを Vercel で公開しています。こちらも参考にしてください。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://silverbirder-react-todo-mvc.vercel.app" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>React App</strong><span class="link-card-description" data-astro-cid-p7ia6262>Web site created using create-react-app</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/silverbirder-react-todo-mvc.vercel.app.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">silverbirder-react-todo-mvc.vercel.app<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://silverbirder-react-todo-mvc.vercel.app" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>React App</strong><span class="link-card-description" data-astro-cid-p7ia6262>Web site created using create-react-app</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/silverbirder-react-todo-mvc.vercel.app.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">silverbirder-react-todo-mvc.vercel.app<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></div>
 <p>コンポーネントの構造は以下の通りです。</p>
 <p><span class="notebook-photo-frame"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1693364069/silver-birder.github.io/blog/8fcf377eaa36-20230423.png?ar=1024%3A1215" alt="component_structure" width="1024" height="1215" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_200/q_auto/f_auto/v1693364069/silver-birder.github.io/blog/8fcf377eaa36-20230423.png?ar=1024%3A1215 200w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_300/q_auto/f_auto/v1693364069/silver-birder.github.io/blog/8fcf377eaa36-20230423.png?ar=1024%3A1215 300w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1693364069/silver-birder.github.io/blog/8fcf377eaa36-20230423.png?ar=1024%3A1215 400w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_450/q_auto/f_auto/v1693364069/silver-birder.github.io/blog/8fcf377eaa36-20230423.png?ar=1024%3A1215 450w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_600/q_auto/f_auto/v1693364069/silver-birder.github.io/blog/8fcf377eaa36-20230423.png?ar=1024%3A1215 600w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_800/q_auto/f_auto/v1693364069/silver-birder.github.io/blog/8fcf377eaa36-20230423.png?ar=1024%3A1215 800w" sizes="min(25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem) - 0.5rem - 2 * 0.5rem))"><span class="notebook-photo-caption" aria-hidden="true">component_structure</span></span></p>
 <ul>
@@ -63,116 +99,114 @@
 <h4 id="ユニットテスト">ユニットテスト</h4>
 <p>まず、よく知られているユニットテストから始めましょう。TodoItem コンポーネントのテストを行ってみましょう。</p>
 <p>TodoItem コンポーネントは以下の通りです。</p>
-<pre><code class="language-typescript">// src/components/TodoItem/TodoItem.tsx
-
-import React, { useContext } from "react";
-import type { Todo } from "../../types";
-import { TodoContext } from "../context";
-
-type Props = {
-  todo: Todo;
-};
-
-export const TodoItem: React.FC&lt;Props&gt; = ({ todo }) =&gt; {
-  const { toggle, deleteTodo } = useContext(TodoContext);
-  return (
-    &lt;li className={todo.completed ? "completed" : ""}&gt;
-      &lt;div className="view"&gt;
-        &lt;input
-          className="toggle"
-          type="checkbox"
-          checked={todo.completed}
-          onChange={() =&gt; toggle(todo.id)}
-        /&gt;
-        &lt;label data-testid="todo-title"&gt;{todo.title}&lt;/label&gt;
-        &lt;button className="destroy" onClick={() =&gt; deleteTodo(todo.id)} /&gt;
-      &lt;/div&gt;
-    &lt;/li&gt;
-  );
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/components/TodoItem/TodoItem.tsx</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> React</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">useContext</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#BB9AF7"> type</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">Todo</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../types</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">TodoContext</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../context</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> Props</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  todo</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Todo</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#7AA2F7"> TodoItem</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> React</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">FC</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">Props</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> todo</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#89DDFF"> {</span><span style="color:#BB9AF7"> toggle</span><span style="color:#89DDFF">,</span><span style="color:#BB9AF7"> deleteTodo</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useContext</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">TodoContext</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#BB9AF7">    &lt;</span><span style="color:#C0CAF5">li</span><span style="color:#C0CAF5"> className</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{todo.completed ? </span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">completed</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> :</span><span style="color:#89DDFF"> ""</span><span style="color:#9ABDF5">}</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#C0CAF5">div</span><span style="color:#C0CAF5"> className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">view</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">        &lt;</span><span style="color:#E0AF68">input</span></span>
+<span class="line"><span style="color:#C0CAF5">          className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">toggle</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C0CAF5">          type</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">checkbox</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C0CAF5">          checked</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{todo.</span><span style="color:#C0CAF5">completed</span><span style="color:#9ABDF5">}</span></span>
+<span class="line"><span style="color:#C0CAF5">          onChange</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{() =&gt; </span><span style="color:#7AA2F7">toggle</span><span style="color:#9ABDF5">(todo.id)}</span></span>
+<span class="line"><span style="color:#89DDFF">        /</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">        &lt;</span><span style="color:#C0CAF5">label</span><span style="color:#C0CAF5"> data</span><span style="color:#89DDFF">-</span><span style="color:#C0CAF5">testid</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">todo-title</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7">&gt;</span><span style="color:#9ABDF5">{todo.</span><span style="color:#C0CAF5">title</span><span style="color:#9ABDF5">}</span><span style="color:#BB9AF7">&lt;</span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5">label</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">        &lt;</span><span style="color:#C0CAF5">button</span><span style="color:#C0CAF5"> className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">destroy</span><span style="color:#89DDFF">"</span><span style="color:#C0CAF5"> onClick</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{() =&gt; </span><span style="color:#7AA2F7">deleteTodo</span><span style="color:#9ABDF5">(todo.id)} </span><span style="color:#89DDFF">/</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5">div</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">    &lt;</span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5">li</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>このコンポーネントに対するテストコードは、以下のようになります。</p>
-<pre><code class="language-typescript">// src/components/TodoItem/TodoItem.test.tsx
-
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import { TodoItem } from "./TodoItem";
-import { TodoContext } from "../context";
-import userEvent from "@testing-library/user-event";
-
-const mockToggle = jest.fn();
-const mockDeleteTodo = jest.fn();
-const mockAdd = jest.fn();
-
-describe("TodoItem", () =&gt; {
-  // Arrange
-  const mockTodo = {
-    id: "1",
-    title: "Test Todo",
-    completed: false,
-  };
-
-  it("renders todo title", () =&gt; {
-    // Act
-    render(
-      &lt;TodoContext.Provider
-        value={{
-          toggle: mockToggle,
-          deleteTodo: mockDeleteTodo,
-          addTodo: mockAdd,
-        }}
-      &gt;
-        &lt;TodoItem todo={mockTodo} /&gt;
-      &lt;/TodoContext.Provider&gt;
-    );
-
-    // Assert
-    expect(screen.getByText(mockTodo.title)).toBeInTheDocument();
-  });
-
-  it("toggles todo completion", () =&gt; {
-    // Arrange
-    render(
-      &lt;TodoContext.Provider
-        value={{
-          toggle: mockToggle,
-          deleteTodo: mockDeleteTodo,
-          addTodo: mockAdd,
-        }}
-      &gt;
-        &lt;TodoItem todo={mockTodo} /&gt;
-      &lt;/TodoContext.Provider&gt;
-    );
-
-    // Act
-    userEvent.click(screen.getByRole("checkbox"));
-
-    // Assert
-    expect(mockToggle).toHaveBeenCalledWith(mockTodo.id);
-  });
-
-  it("deletes a todo", () =&gt; {
-    // Arrange
-    render(
-      &lt;TodoContext.Provider
-        value={{
-          toggle: mockToggle,
-          deleteTodo: mockDeleteTodo,
-          addTodo: mockAdd,
-        }}
-      &gt;
-        &lt;TodoItem todo={mockTodo} /&gt;
-      &lt;/TodoContext.Provider&gt;
-    );
-
-    // Act
-    userEvent.click(screen.getByRole("button"));
-
-    // Assert
-    expect(mockDeleteTodo).toHaveBeenCalledWith(mockTodo.id);
-  });
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/components/TodoItem/TodoItem.test.tsx</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> React</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">render</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> screen</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@testing-library/react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">TodoItem</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./TodoItem</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">TodoContext</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../context</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> userEvent</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@testing-library/user-event</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> mockToggle</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> jest</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fn</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> mockDeleteTodo</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> jest</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fn</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> mockAdd</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> jest</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fn</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">describe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">TodoItem</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> mockTodo</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">    id</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">1</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">    title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Test Todo</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">    completed</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">renders todo title</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Act</span></span>
+<span class="line"><span style="color:#7AA2F7">    render</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#C0CAF5">TodoContext</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Provider</span></span>
+<span class="line"><span style="color:#C0CAF5">        value</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{{</span></span>
+<span class="line"><span style="color:#73DACA">          toggle</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> mockToggle</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">          deleteTodo</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> mockDeleteTodo</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">          addTodo</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> mockAdd</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">        }}</span></span>
+<span class="line"><span style="color:#BB9AF7">      &gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">        &lt;</span><span style="color:#C0CAF5">TodoItem</span><span style="color:#C0CAF5"> todo</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{</span><span style="color:#C0CAF5">mockTodo</span><span style="color:#9ABDF5">} </span><span style="color:#89DDFF">/</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5">TodoContext</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Provider</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">screen</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByText</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">mockTodo</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">title</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBeInTheDocument</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">toggles todo completion</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Arrange</span></span>
+<span class="line"><span style="color:#7AA2F7">    render</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#C0CAF5">TodoContext</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Provider</span></span>
+<span class="line"><span style="color:#C0CAF5">        value</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{{</span></span>
+<span class="line"><span style="color:#73DACA">          toggle</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> mockToggle</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">          deleteTodo</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> mockDeleteTodo</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">          addTodo</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> mockAdd</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">        }}</span></span>
+<span class="line"><span style="color:#BB9AF7">      &gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">        &lt;</span><span style="color:#C0CAF5">TodoItem</span><span style="color:#C0CAF5"> todo</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{</span><span style="color:#C0CAF5">mockTodo</span><span style="color:#9ABDF5">} </span><span style="color:#89DDFF">/</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5">TodoContext</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Provider</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Act</span></span>
+<span class="line"><span style="color:#C0CAF5">    userEvent</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">click</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">screen</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByRole</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">checkbox</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">mockToggle</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toHaveBeenCalledWith</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">mockTodo</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">id</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">deletes a todo</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Arrange</span></span>
+<span class="line"><span style="color:#7AA2F7">    render</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#C0CAF5">TodoContext</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Provider</span></span>
+<span class="line"><span style="color:#C0CAF5">        value</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{{</span></span>
+<span class="line"><span style="color:#73DACA">          toggle</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> mockToggle</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">          deleteTodo</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> mockDeleteTodo</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">          addTodo</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> mockAdd</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">        }}</span></span>
+<span class="line"><span style="color:#BB9AF7">      &gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">        &lt;</span><span style="color:#C0CAF5">TodoItem</span><span style="color:#C0CAF5"> todo</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{</span><span style="color:#C0CAF5">mockTodo</span><span style="color:#9ABDF5">} </span><span style="color:#89DDFF">/</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5">TodoContext</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">Provider</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Act</span></span>
+<span class="line"><span style="color:#C0CAF5">    userEvent</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">click</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">screen</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByRole</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">button</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Assert</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">mockDeleteTodo</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toHaveBeenCalledWith</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">mockTodo</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">id</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>特に目新しいテストコードはないでしょう。今回はコンポーネントに対するテストコードでしたが、コンポーネントから切り離されたロジックファイル（例えば、React の hooks）ももちろん対象です。</p>
 <p>ユニットテストを作成する際には、以下の 3 つのポイントに注意しています。</p>
 <ul>
@@ -224,163 +258,158 @@ describe("TodoItem", () =&gt; {
 <p>ユニットテストでは、個々のコンポーネントや関数が対象となります。一方、インテグレーションテストでは、1 画面に構成されるコンポーネントなど、ユーザーに価値を提供できる状態のものが対象です。今回の場合、TodoList.tsx や TodoInput.tsx を使用している App.tsx が該当します。</p>
 <p>インテグレーションテストにおいては、バックエンドとの通信は模擬されますが、それ以外の要素はすべて実際のものです。ユニットテストではコンポーネント単体のみのテストでしたが、インテグレーションテストでは画面に表示される必要なコンポーネントが全て揃っています。そのため、コンポーネント間の連携を確認する目的で、ユーザー操作、すなわちインタラクションテストを行うことが効果的です。</p>
 <p>インタラクションテストには、Storybook を利用すると便利です。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://storybook.js.org/docs/react/writing-tests/interaction-testing" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Storybook: Frontend workshop for UI development</strong><span class="link-card-description" data-astro-cid-p7ia6262>Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It&#39;s open source and free.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/storybook.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">storybook.js.org<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/d58dbac443221d5a90aa0c03d75d4f7a4e8fe723ecb4539acf7aadd05f4b7782.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://storybook.js.org/docs/react/writing-tests/interaction-testing" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Storybook: Frontend workshop for UI development</strong><span class="link-card-description" data-astro-cid-p7ia6262>Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It&#39;s open source and free.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/storybook.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">storybook.js.org<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/d58dbac443221d5a90aa0c03d75d4f7a4e8fe723ecb4539acf7aadd05f4b7782.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <p>従来はターミナルでインタラクション（クリックなど）のテストを行っていたと思いますが、Storybook を用いることで視覚的に確認しながらテストが作成できるため、非常に開発しやすくなります。</p>
 <p>それでは、1 つの機能として提供されている App.tsx を対象に、インタラクションテストを作成してみましょう。
 まず、Storybook を作成すると、次のようなものができます。</p>
 <p>:::message
 今回紹介する Storybook のバージョンは 6.5 です。
 :::</p>
-<pre><code class="language-typescript">// src/components/App/App.stories.tsx
-
-import { ComponentStoryObj, ComponentMeta } from "@storybook/react";
-import { App } from ".";
-import { userEvent, within } from "@storybook/testing-library";
-
-type Component = typeof App;
-type Meta = ComponentMeta&lt;Component&gt;;
-type Story = ComponentStoryObj&lt;Component&gt;;
-
-const meta: Meta = {
-  component: App,
-};
-export default meta;
-
-export const AddTwoTodosAndCheckOneScenario: Story = {
-  play: async ({ canvasElement }) =&gt; {
-    const canvas = within(canvasElement);
-    await userEvent.type(canvas.getByRole("textbox"), "Write a blog post", {
-      delay: 100,
-    });
-    await userEvent.keyboard("{enter}", { delay: 100 });
-    await userEvent.type(canvas.getByRole("textbox"), "Develop sample app", {
-      delay: 100,
-    });
-    await userEvent.keyboard("{enter}", { delay: 100 });
-    await userEvent.click(canvas.getAllByRole("checkbox")[1]);
-  },
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/components/App/App.stories.tsx</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">ComponentStoryObj</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> ComponentMeta</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@storybook/react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">App</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">.</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">userEvent</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> within</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@storybook/testing-library</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> Component</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> typeof</span><span style="color:#C0CAF5"> App</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> Meta</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> ComponentMeta</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">Component</span><span style="color:#89DDFF">&gt;;</span></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> Story</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> ComponentStoryObj</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">Component</span><span style="color:#89DDFF">&gt;;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> meta</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Meta</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  component</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> App</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#7DCFFF"> default</span><span style="color:#C0CAF5"> meta</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#BB9AF7"> AddTwoTodosAndCheckOneScenario</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Story</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  play</span><span style="color:#89DDFF">:</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> (</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> canvasElement</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> canvas</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> within</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">canvasElement</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> userEvent</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">type</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">canvas</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByRole</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">textbox</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Write a blog post</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">      delay</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 100</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> userEvent</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">keyboard</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">{enter}</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">delay</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 100</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> userEvent</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">type</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">canvas</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByRole</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">textbox</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Develop sample app</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">      delay</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 100</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> userEvent</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">keyboard</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">{enter}</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">delay</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 100</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> userEvent</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">click</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">canvas</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getAllByRole</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">checkbox</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)[</span><span style="color:#FF9E64">1</span><span style="color:#9ABDF5">])</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>このように、Storybook では、Story に play を記述することでインタラクションを表現できます。Storybook 上でインタラクションを確認することができます。</p>
 <p><a href="https://res.cloudinary.com/silverbirder/image/upload/v1693364075/silver-birder.github.io/blog/97cc9410915a-20230423.gif?ar=1432%3A1732"><span class="notebook-photo-frame"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1694336346/silver-birder.github.io/blog/97cc9410915a-20230423-png.png?ar=1432%3A1732" alt="storybook_interaction" width="1432" height="1732" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_200/q_auto/f_auto/v1694336346/silver-birder.github.io/blog/97cc9410915a-20230423-png.png?ar=1432%3A1732 200w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_300/q_auto/f_auto/v1694336346/silver-birder.github.io/blog/97cc9410915a-20230423-png.png?ar=1432%3A1732 300w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1694336346/silver-birder.github.io/blog/97cc9410915a-20230423-png.png?ar=1432%3A1732 400w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_450/q_auto/f_auto/v1694336346/silver-birder.github.io/blog/97cc9410915a-20230423-png.png?ar=1432%3A1732 450w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_600/q_auto/f_auto/v1694336346/silver-birder.github.io/blog/97cc9410915a-20230423-png.png?ar=1432%3A1732 600w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_800/q_auto/f_auto/v1694336346/silver-birder.github.io/blog/97cc9410915a-20230423-png.png?ar=1432%3A1732 800w" sizes="auto, min(25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem) - 0.5rem - 2 * 0.5rem))"><span class="notebook-photo-caption" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/res.cloudinary.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">storybook_interaction<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></p>
 <p>それでは、これをテストに活用しましょう。</p>
-<pre><code class="language-typescript">// src/components/App/App.test.tsx
-
-import { render, screen } from "@testing-library/react";
-import { composeStories } from "@storybook/testing-react";
-import * as stories from "./App.stories";
-
-const { AddTwoTodosAndCheckOneScenario } = composeStories(stories);
-
-describe("play AddTwoTodosAndCheckOneScenario", () =&gt; {
-  it("renders two todos", async () =&gt; {
-    // Arrange
-    const { container } = render(&lt;AddTwoTodosAndCheckOneScenario /&gt;);
-
-    // Act
-    await AddTwoTodosAndCheckOneScenario.play({ canvasElement: container });
-
-    // Assert
-    const todos = screen.getAllByTestId("todo-title");
-    expect(todos).toHaveLength(2);
-  });
-  it("checks one todo", async () =&gt; {
-    // Arrange
-    const { container } = render(&lt;AddTwoTodosAndCheckOneScenario /&gt;);
-
-    // Act
-    await AddTwoTodosAndCheckOneScenario.play({ canvasElement: container });
-
-    // Assert
-    const todoCheckboxes = screen.getAllByRole("checkbox", { checked: true });
-    expect(todoCheckboxes).toHaveLength(1);
-  });
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/components/App/App.test.tsx</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">render</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> screen</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@testing-library/react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">composeStories</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@storybook/testing-react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#FF9E64"> *</span><span style="color:#89DDFF"> as</span><span style="color:#0DB9D7"> stories</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./App.stories</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#89DDFF"> {</span><span style="color:#BB9AF7"> AddTwoTodosAndCheckOneScenario</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> composeStories</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">stories</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">describe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">play AddTwoTodosAndCheckOneScenario</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">renders two todos</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#89DDFF"> {</span><span style="color:#BB9AF7"> container</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> render</span><span style="color:#9ABDF5">(&lt;</span><span style="color:#C0CAF5">AddTwoTodosAndCheckOneScenario</span><span style="color:#9ABDF5"> /&gt;)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Act</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> AddTwoTodosAndCheckOneScenario</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">play</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">canvasElement</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> container</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Assert</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todos</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> screen</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getAllByTestId</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">todo-title</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todos</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toHaveLength</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">2</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">checks one todo</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#89DDFF"> {</span><span style="color:#BB9AF7"> container</span><span style="color:#89DDFF"> }</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> render</span><span style="color:#9ABDF5">(&lt;</span><span style="color:#C0CAF5">AddTwoTodosAndCheckOneScenario</span><span style="color:#9ABDF5"> /&gt;)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Act</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> AddTwoTodosAndCheckOneScenario</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">play</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">canvasElement</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> container</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Assert</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todoCheckboxes</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> screen</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getAllByRole</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">checkbox</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">checked</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> true</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todoCheckboxes</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toHaveLength</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">1</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>このように、Storybook の Story オブジェクトをテストコードに読み込み、play 関数を実行できます。したがって、Storybook で確認したインタラクションがそのままテストコードで動きます。後は、expect を書くだけです。</p>
 <p>インテグレーションテストは、ユニットテストよりも非常に価値があるテストを多く実施できます。その理由は、ユーザー目線のテストが可能となるからです。ユニットテストでは、関数やコンポーネントの詳細なテストは可能ですが、それは基本的にエンジニア目線のテストになります。</p>
 <p>ユニットテストよりもインテグレーションテストが多くなっても問題ありません。ユニットテストとインテグレーションテストのテストが重なるコードがあるかもしれませんが、完璧な必要最小限な網羅的なテストメンテンナンスは現実的ではないため、また、重なっていても困ることもそう多くない場合、許容して良いと思っています。</p>
 <h5 id="api-通信のモック">API 通信のモック</h5>
 <p>フロントエンドは、バックエンドとの通信を発生させることは多々あります。インテグレーションテストやユニットテストでは、API 通信をモックすることがよくあります。通信をインターセプトして、固定データを返却する mswjs/msw が有名です。また、固定データではなく、動的にデータを返却できる mswjs/data というものも便利なので紹介です。</p>
-<p><a href="https://github.com/mswjs/msw"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/mswjs/msw<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>
-<a href="https://github.com/mswjs/data"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/mswjs/data<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
+<p><a href="https://github.com/mswjs/msw"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/mswjs/msw<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a>
+<a href="https://github.com/mswjs/data"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/mswjs/data<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></p>
 <h4 id="e2e-テストシステム">E2E テスト(システム)</h4>
 <p>ここでは、フロントエンドから API までを含んだ一気通貫のテストを作成します。E2E テストでは、一般的にヘッドレスブラウザを使用したテストが行われます。私は、Playwright を好んで使います。</p>
 <p>E2E テストの作成方法としては、エンジニア目線で細かいテストを行うよりも、ビジネス目線で要件を満たすかどうかを確認する受け入れテストを書くことが望ましいでしょう。そこで、ATDD として有名な<a href="https://github.com/cucumber/cucumber-js"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">cucumber<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>を用いたサンプルを紹介します。</p>
 <p>cucumber では、受け入れのためのシナリオを BDD 形式の gherkin で記述します。また、<a href="https://github.com/cucumber/gherkin/blob/main/MARKDOWN_WITH_GHERKIN.md"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">gherkin は markdown で作成すること<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>ができます。</p>
 <p>それでは、簡単な受け入れテストのシナリオを作成してみましょう。以下のようなシナリオになります。</p>
-<pre><code class="language-markdown">## Feature: Todo App
-
-## Background: The Todo App is opened
-
-- Given the Todo App is opened
-
-## Rule: Adding new Todos
-
-### Scenario: Add a new Todo
-
-- When the user enters a "new Todo" and enter key
-- Then the "new Todo" is added to the list
-
-### Scenario: Attempt to add an empty Todo
-
-- When the user enters an empty Todo and clicks the Add button
-- Then the Todo is not added to the list and "Not entered" message is displayed
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:#61BDF2;font-weight:bold">##</span><span style="color:#61BDF2;font-weight:bold"> Feature: Todo App</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#61BDF2;font-weight:bold">##</span><span style="color:#61BDF2;font-weight:bold"> Background: The Todo App is opened</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">-</span><span style="color:#9AA5CE"> Given the Todo App is opened</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#61BDF2;font-weight:bold">##</span><span style="color:#61BDF2;font-weight:bold"> Rule: Adding new Todos</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7;font-weight:bold">###</span><span style="color:#7AA2F7;font-weight:bold"> Scenario: Add a new Todo</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">-</span><span style="color:#9AA5CE"> When the user enters a "new Todo" and enter key</span></span>
+<span class="line"><span style="color:#89DDFF">-</span><span style="color:#9AA5CE"> Then the "new Todo" is added to the list</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7;font-weight:bold">###</span><span style="color:#7AA2F7;font-weight:bold"> Scenario: Attempt to add an empty Todo</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">-</span><span style="color:#9AA5CE"> When the user enters an empty Todo and clicks the Add button</span></span>
+<span class="line"><span style="color:#89DDFF">-</span><span style="color:#9AA5CE"> Then the Todo is not added to the list and "Not entered" message is displayed</span></span></code></pre><figcaption class="notebook-code-language">MARKDOWN</figcaption></figure>
 <p>このシナリオを参考にして、テストコードを作成してみましょう。次のようなテストコードを記述します。<code>World</code> は、Playwright を使用してヘッドレスブラウザを起動しているだけです。</p>
-<pre><code class="language-typescript">// features/step_definitions/steps.ts
-
-import { Given, When, Then } from "@cucumber/cucumber";
-import World from "../support/World";
-import assert from "assert";
-
-Given("the Todo App is opened", async function (this: World) {
-  await this.page.goto("https://silverbirder-react-todo-mvc.vercel.app");
-});
-
-When(
-  "the user enters a {string} and enter key",
-  async function (this: World, todo: string) {
-    const todoInput = await this.page.getByPlaceholder("what you need to do?");
-    await todoInput.type(todo);
-    await this.page.keyboard.down("Enter");
-  }
-);
-
-Then(
-  "the {string} is added to the list",
-  async function (this: World, todo: string) {
-    const todos = await this.page.getByText(todo);
-    assert((await todos.count()) === 1);
-  }
-);
-
-When(
-  "the user enters an empty Todo and clicks the Add button",
-  async function (this: World) {
-    const todoInput = await this.page.getByPlaceholder("what you need to do?");
-    await todoInput.focus();
-    await this.page.keyboard.down("Enter");
-  }
-);
-
-Then(
-  "the Todo is not added to the list and {string} message is displayed",
-  async function (this: World, message: string) {
-    const todos = await this.page.getByTestId("todo-title");
-    assert((await todos.count()) === 0);
-    const messages = await this.page.getByText(message);
-    assert((await messages.count()) === 1);
-  }
-);
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// features/step_definitions/steps.ts</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">Given</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> When</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> Then</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@cucumber/cucumber</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> World</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../support/World</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> assert</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">assert</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">Given</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">the Todo App is opened</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#BB9AF7"> function</span><span style="color:#9ABDF5"> (</span><span style="color:#F7768E">this</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> World</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  await</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">goto</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">https://silverbirder-react-todo-mvc.vercel.app</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">When</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#89DDFF">  "</span><span style="color:#9ECE6A">the user enters a {string} and enter key</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  async</span><span style="color:#BB9AF7"> function</span><span style="color:#9ABDF5"> (</span><span style="color:#F7768E">this</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> World</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> todo</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todoInput</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByPlaceholder</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">what you need to do?</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> todoInput</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">type</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todo</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">page</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">keyboard</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">down</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Enter</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">Then</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#89DDFF">  "</span><span style="color:#9ECE6A">the {string} is added to the list</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  async</span><span style="color:#BB9AF7"> function</span><span style="color:#9ABDF5"> (</span><span style="color:#F7768E">this</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> World</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> todo</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todos</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByText</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">todo</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    assert</span><span style="color:#9ABDF5">((</span><span style="color:#BB9AF7;font-style:italic">await</span><span style="color:#C0CAF5"> todos</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">count</span><span style="color:#9ABDF5">()) </span><span style="color:#BB9AF7">===</span><span style="color:#FF9E64"> 1</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">When</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#89DDFF">  "</span><span style="color:#9ECE6A">the user enters an empty Todo and clicks the Add button</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  async</span><span style="color:#BB9AF7"> function</span><span style="color:#9ABDF5"> (</span><span style="color:#F7768E">this</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> World</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todoInput</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByPlaceholder</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">what you need to do?</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#C0CAF5"> todoInput</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">focus</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    await</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">page</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">keyboard</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">down</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Enter</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">Then</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#89DDFF">  "</span><span style="color:#9ECE6A">the Todo is not added to the list and {string} message is displayed</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  async</span><span style="color:#BB9AF7"> function</span><span style="color:#9ABDF5"> (</span><span style="color:#F7768E">this</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> World</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> message</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todos</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByTestId</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">todo-title</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    assert</span><span style="color:#9ABDF5">((</span><span style="color:#BB9AF7;font-style:italic">await</span><span style="color:#C0CAF5"> todos</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">count</span><span style="color:#9ABDF5">()) </span><span style="color:#BB9AF7">===</span><span style="color:#FF9E64"> 0</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> messages</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#F7768E"> this</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getByText</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">message</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    assert</span><span style="color:#9ABDF5">((</span><span style="color:#BB9AF7;font-style:italic">await</span><span style="color:#C0CAF5"> messages</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">count</span><span style="color:#9ABDF5">()) </span><span style="color:#BB9AF7">===</span><span style="color:#FF9E64"> 1</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p><code>cucumber-js</code> を実行すると、シナリオをもとにテストが実行されます。</p>
-<pre><code class="language-bash">npx cucumber-js
-..........
-2 scenarios (2 passed)
-6 steps (6 passed)
-0m02.504s (executing steps: 0m02.476s)
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">npx</span><span style="color:#9ECE6A"> cucumber-js</span></span>
+<span class="line"><span style="color:#0DB9D7">..........</span></span>
+<span class="line"><span style="color:#C0CAF5">2</span><span style="color:#9ECE6A"> scenarios</span><span style="color:#A9B1D6"> (2 </span><span style="color:#9ECE6A">passed</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">6</span><span style="color:#9ECE6A"> steps</span><span style="color:#A9B1D6"> (6 </span><span style="color:#9ECE6A">passed</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">0m02.504s</span><span style="color:#A9B1D6"> (executing </span><span style="color:#9ECE6A">steps:</span><span style="color:#9ECE6A"> 0m02.476s</span><span style="color:#A9B1D6">)</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>このテストをリリース前に実施することで、シナリオで記述された内容が保証されます。ぜひ、リリース前の受け入れテストの実施をご検討ください。</p>
 <p>※ Screenplay パターンと呼ばれる、Actor、Task、World についてもお話ししたいのですが、情報量が多くなるため、今回は割愛させていただきます。</p>
 <h3 id="非機能テストnon-functional">非機能テスト(Non-Functional)</h3>
@@ -397,151 +426,146 @@ Then(
 <p>しかし、問題解決だけで終わらせてしまうのは非常に勿体ないことです。同じような問題が再発しないように、パフォーマンスに関するテストコードが存在するとさらに良いでしょう。</p>
 <h5 id="profiler">Profiler</h5>
 <p>React では、Profiler というツールが提供されており、これを Jest と組み合わせることで効果的にテストが可能です。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://ja.reactjs.org/docs/profiler.html" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>プロファイラ API – React</strong><span class="link-card-description" data-astro-cid-p7ia6262>ユーザインターフェース構築のための JavaScript ライブラリ</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/ja.reactjs.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">ja.reactjs.org<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/967fbc3f4e9dbad7243e72b15e8f7764d27c9733389f384eee81b7bf20e63bc1.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://ja.reactjs.org/docs/profiler.html" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>プロファイラ API – React</strong><span class="link-card-description" data-astro-cid-p7ia6262>ユーザインターフェース構築のための JavaScript ライブラリ</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/ja.reactjs.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">ja.reactjs.org<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/967fbc3f4e9dbad7243e72b15e8f7764d27c9733389f384eee81b7bf20e63bc1.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <p>例えば、TodoList の Todo が 100 個レンダリングされる場合の描画時間を、200ms 未満であることを確認するテストが作成できます。</p>
-<pre><code class="language-typescript">// src/components/TodoList/TodoList.perf.test.tsx
-
-import { render } from "@testing-library/react";
-import { TodoList } from ".";
-import { Todo } from "../../types";
-import { Profiler } from "react";
-
-describe("TodoList", () =&gt; {
-  it("renders with acceptable performance", () =&gt; {
-    // Arrange
-    const onRender = jest.fn();
-    const todos: Todo[] = [...Array(100)].map((value, index) =&gt; {
-      return {
-        id: index.toString(),
-        title: "title",
-        completed: false,
-      };
-    });
-
-    // Act
-    render(
-      &lt;Profiler id="PerformanceTestComponent" onRender={onRender}&gt;
-        &lt;TodoList todos={todos} /&gt;
-      &lt;/Profiler&gt;
-    );
-
-    // Assert
-    const [, , actualDuration, , , , ,] = onRender.mock.calls[0];
-    expect(actualDuration).toBeLessThan(200);
-  });
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/components/TodoList/TodoList.perf.test.tsx</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">render</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@testing-library/react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">TodoList</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">.</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">Todo</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../types</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">Profiler</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">describe</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">TodoList</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> ()</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  it</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">renders with acceptable performance</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> () </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Arrange</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> onRender</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> jest</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">fn</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> todos</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Todo</span><span style="color:#9ABDF5">[] </span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5"> [</span><span style="color:#F7768E;font-weight:bold">...</span><span style="color:#7AA2F7">Array</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">100</span><span style="color:#9ABDF5">)]</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">map</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">value</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> index</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">      return</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">        id</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> index</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toString</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">        title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">title</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">        completed</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">      }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Act</span></span>
+<span class="line"><span style="color:#7AA2F7">    render</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#C0CAF5">Profiler</span><span style="color:#C0CAF5"> id</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">PerformanceTestComponent</span><span style="color:#89DDFF">"</span><span style="color:#C0CAF5"> onRender</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{</span><span style="color:#C0CAF5">onRender</span><span style="color:#9ABDF5">}</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">        &lt;</span><span style="color:#C0CAF5">TodoList</span><span style="color:#C0CAF5"> todos</span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5">{</span><span style="color:#C0CAF5">todos</span><span style="color:#9ABDF5">} </span><span style="color:#89DDFF">/</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">      &lt;</span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5">Profiler</span><span style="color:#BB9AF7">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // Assert</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#89DDFF"> [,</span><span style="color:#89DDFF"> ,</span><span style="color:#BB9AF7"> actualDuration</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> ,</span><span style="color:#89DDFF"> ,</span><span style="color:#89DDFF"> ,</span><span style="color:#89DDFF"> ,]</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> onRender</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">mock</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">calls</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">    expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">actualDuration</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBeLessThan</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">200</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>これは単純な例ですが、実際にはもっと複雑な操作が求められることがあります。パフォーマンスチューニング後に、描画時間などの要件が保証されるようにしましょう。</p>
 <h5 id="performanceobserver">PerformanceObserver</h5>
 <p>レイアウトの再計算（reflow）が強制的に実行される場合、ブラウザのメインスレッドでの JS 実行時間が長く続く可能性があります。これにより、描画速度が遅れ、フレームレート（fps）が低下することがあります。</p>
 <p>この問題に対処するために、Performance API の中にある、まだ実験段階の機能である PerformanceLongTaskTiming という指標を用いたテストコードを作成することができます。</p>
 <p>以下のリンクで Performance API および PerformanceLongTaskTiming に関する詳細情報を参照できます。</p>
 <ul>
-<li><a href="https://developer.mozilla.org/ja/docs/Web/API/Performance_API"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/developer.mozilla.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://developer.mozilla.org/ja/docs/Web/API/Performance_API<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
-<li><a href="https://developer.mozilla.org/ja/docs/Web/API/PerformanceLongTaskTiming"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/developer.mozilla.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://developer.mozilla.org/ja/docs/Web/API/PerformanceLongTaskTiming<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/API/Performance_API"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/developer.mozilla.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://developer.mozilla.org/ja/docs/Web/API/Performance_API<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/API/PerformanceLongTaskTiming"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/developer.mozilla.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://developer.mozilla.org/ja/docs/Web/API/PerformanceLongTaskTiming<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <p>具体的にテストコードを作成してみましょう。@playwright/test を利用してみます。</p>
-<pre><code class="language-typescript">import { test, expect } from "@playwright/test";
-
-test("no long tasks after button click", async ({ page }) =&gt; {
-  // Navigate to the specified URL
-  await page.goto(
-    "https://googlesamples.github.io/web-fundamentals/tools/chrome-devtools/rendering-tools/forcedsync.html"
-  );
-
-  // Define a function to observe long tasks
-  const observeLongTasks = async (): Promise&lt;number&gt; =&gt; {
-    return await page.evaluate(() =&gt; {
-      return new Promise&lt;number&gt;((resolve) =&gt; {
-        let longTaskCount = 0;
-
-        // Create a PerformanceObserver to observe long tasks
-        const observer = new PerformanceObserver((entryList) =&gt; {
-          for (const entry of entryList.getEntries()) {
-            if (entry.entryType === "longtask") {
-              longTaskCount++;
-            }
-          }
-        });
-
-        // Start observing long tasks
-        observer.observe({ entryTypes: ["longtask"] });
-
-        // Click the button
-        const button = document.querySelector("button");
-        button.click();
-
-        // Wait for a short time to allow long tasks to be recorded
-        setTimeout(() =&gt; {
-          // Stop observing and resolve the promise with the count of long tasks
-          observer.disconnect();
-          resolve(longTaskCount);
-        }, 3000);
-      });
-    });
-  };
-
-  // Observe long tasks after clicking the button
-  const longTaskCount = await observeLongTasks();
-
-  // Expect no long tasks to occur
-  expect(longTaskCount).toBe(0);
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">test</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> expect</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@playwright/test</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">test</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">no long tasks after button click</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> (</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> page</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Navigate to the specified URL</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  await</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">goto</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">https://googlesamples.github.io/web-fundamentals/tools/chrome-devtools/rendering-tools/forcedsync.html</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Define a function to observe long tasks</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#7AA2F7"> observeLongTasks</span><span style="color:#89DDFF"> =</span><span style="color:#9D7CD8;font-style:italic"> async</span><span style="color:#9ABDF5"> ()</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Promise</span><span style="color:#89DDFF">&lt;</span><span style="color:#0DB9D7">number</span><span style="color:#89DDFF">&gt;</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">    return</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">evaluate</span><span style="color:#9ABDF5">(() </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">      return</span><span style="color:#89DDFF"> new</span><span style="color:#0DB9D7"> Promise</span><span style="color:#89DDFF">&lt;</span><span style="color:#0DB9D7">number</span><span style="color:#89DDFF">&gt;</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">resolve</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">        let</span><span style="color:#BB9AF7"> longTaskCount</span><span style="color:#89DDFF"> =</span><span style="color:#FF9E64"> 0</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // Create a PerformanceObserver to observe long tasks</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">        const</span><span style="color:#BB9AF7"> observer</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> PerformanceObserver</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">entryList</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">          for</span><span style="color:#9ABDF5"> (</span><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> entry</span><span style="color:#89DDFF"> of</span><span style="color:#C0CAF5"> entryList</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">getEntries</span><span style="color:#9ABDF5">()) {</span></span>
+<span class="line"><span style="color:#BB9AF7">            if</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">entry</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">entryType</span><span style="color:#BB9AF7"> ===</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">longtask</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#C0CAF5">              longTaskCount</span><span style="color:#89DDFF">++;</span></span>
+<span class="line"><span style="color:#9ABDF5">            }</span></span>
+<span class="line"><span style="color:#9ABDF5">          }</span></span>
+<span class="line"><span style="color:#9ABDF5">        })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // Start observing long tasks</span></span>
+<span class="line"><span style="color:#C0CAF5">        observer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">observe</span><span style="color:#9ABDF5">({ </span><span style="color:#73DACA">entryTypes</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">longtask</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">] })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // Click the button</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">        const</span><span style="color:#BB9AF7"> button</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> document</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">querySelector</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">button</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">        button</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">click</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // Wait for a short time to allow long tasks to be recorded</span></span>
+<span class="line"><span style="color:#7AA2F7">        setTimeout</span><span style="color:#9ABDF5">(() </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">          // Stop observing and resolve the promise with the count of long tasks</span></span>
+<span class="line"><span style="color:#C0CAF5">          observer</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">disconnect</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">          resolve</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">longTaskCount</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">        }</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> 3000</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">      })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Observe long tasks after clicking the button</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> longTaskCount</span><span style="color:#89DDFF"> =</span><span style="color:#BB9AF7;font-style:italic"> await</span><span style="color:#7AA2F7"> observeLongTasks</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">  // Expect no long tasks to occur</span></span>
+<span class="line"><span style="color:#7AA2F7">  expect</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">longTaskCount</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">toBe</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>以下のコマンドを使用してテストを実行することができます。</p>
-<pre><code class="language-text">npx playwright test
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>npx playwright test</span></span></code></pre><figcaption class="notebook-code-language">テキスト</figcaption></figure>
 <p>このテストコードによって、longTasks が発生しないことが保証されます。</p>
 <p>longTasks は、50ms を超えるタスクが対象となります（<a href="https://w3c.github.io/longtasks/"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/w3c.github.io.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">参照<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>）。その他の指標には、<code>paint</code>や<code>layout-shift</code>などが含まれます。指標の一覧は、<a href="https://w3c.github.io/timing-entrytypes-registry/#registry"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/w3c.github.io.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">こちらのリンク<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>で確認できます。</p>
 <h5 id="メモリリーク">メモリリーク</h5>
 <p>SPA のようなフロントエンドの場合、メモリリークが懸念されることがあります。この問題に対処するために、Meta 社が開発した Memlab というツールが便利です。Memlab は、Puppeteer を起動し、画面操作を行い、<a href="https://github.com/facebook/memlab/blob/d93d724a95696ab013631bb86c42283303b7dcd1/packages/core/src/lib/NodeHeap.ts#L93"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">V8 におけるヒープメモリのスナップショットを取得しています<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>。</p>
 <p>ここでは、簡単な Memlab を利用したテストコードを紹介します。</p>
-<pre><code class="language-javascript">// .memlab/scenario.js
-
-// initial page load's url
-function url() {
-  return "https://silverbirder-react-todo-mvc.vercel.app";
-}
-
-// action where you suspect the memory leak might be happening
-async function action(page) {
-  await page.type(".new-todo", "Hello World");
-  await page.keyboard.press("Enter");
-}
-
-// how to go back to the state before action
-async function back(page) {
-  await page.hover(".view");
-  await page.click(".destroy");
-}
-
-module.exports = { action, back, url };
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#51597D;font-style:italic">// .memlab/scenario.js</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// initial page load's url</span></span>
+<span class="line"><span style="color:#BB9AF7">function</span><span style="color:#7AA2F7"> url</span><span style="color:#9ABDF5">()</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">https://silverbirder-react-todo-mvc.vercel.app</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// action where you suspect the memory leak might be happening</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">async</span><span style="color:#BB9AF7"> function</span><span style="color:#7AA2F7"> action</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">page</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  await</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">type</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">.new-todo</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Hello World</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  await</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">keyboard</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">press</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Enter</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// how to go back to the state before action</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">async</span><span style="color:#BB9AF7"> function</span><span style="color:#7AA2F7"> back</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">page</span><span style="color:#9ABDF5">)</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  await</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">hover</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">.view</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  await</span><span style="color:#C0CAF5"> page</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">click</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">.destroy</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0DB9D7">module</span><span style="color:#89DDFF">.</span><span style="color:#0DB9D7">exports</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span><span style="color:#C0CAF5"> action</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> back</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> url</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">JAVASCRIPT</figcaption></figure>
 <p><code>url</code> は、ベースとなる URL へのアクセスであり、メモリの使用量を監視します。<code>action</code> でメモリリークが発生しそうな操作を記述し、<code>back</code> で元の状態に戻す操作を行います。</p>
 <p>Memlab の実行は、以下のコマンドです。</p>
-<pre><code class="language-bash">memlab run --scenario .memlab/scenario.js
-page-load[1.4MB](baseline)[s1] &gt; action-on-page[1.6MB](target)[s2] &gt; revert[1.8MB](final)[s3]
-
-total time: 49.2s
-Memory usage across all steps:
-2.1 _________
-1.9 _________
-1.8 _________
-1.7 ______▄▄_
-1.5 ___▄▄_▄▄_
-1.4 ___▄▄_▄▄_
-1.3 ▄▄_▄▄_▄▄_
-1.1 ▄▄_▄▄_▄▄_
-1.0 ▄▄_▄▄_▄▄_
-    1  2  3
-
-No leaks found
-MemLab found 0 leak(s)
-✨  Done in 51.69s.
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">memlab</span><span style="color:#9ECE6A"> run</span><span style="color:#E0AF68"> --scenario</span><span style="color:#9ECE6A"> .memlab/scenario.js</span></span>
+<span class="line"><span style="color:#C0CAF5">page-load[1.4MB](baseline</span><span style="color:#A9B1D6">)</span><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">s1</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> &gt;</span><span style="color:#A9B1D6"> action-on-page</span><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">1.6MB</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6">(</span><span style="color:#C0CAF5">target</span><span style="color:#A9B1D6">)</span><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">s2</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> &gt;</span><span style="color:#A9B1D6"> revert</span><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">1.8MB</span><span style="color:#89DDFF">]</span><span style="color:#A9B1D6">(</span><span style="color:#C0CAF5">final</span><span style="color:#A9B1D6">)</span><span style="color:#89DDFF">[</span><span style="color:#A9B1D6">s3</span><span style="color:#89DDFF">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">total</span><span style="color:#9ECE6A"> time:</span><span style="color:#9ECE6A"> 49.2s</span></span>
+<span class="line"><span style="color:#C0CAF5">Memory</span><span style="color:#9ECE6A"> usage</span><span style="color:#9ECE6A"> across</span><span style="color:#9ECE6A"> all</span><span style="color:#9ECE6A"> steps:</span></span>
+<span class="line"><span style="color:#C0CAF5">2.1</span><span style="color:#9ECE6A"> _________</span></span>
+<span class="line"><span style="color:#C0CAF5">1.9</span><span style="color:#9ECE6A"> _________</span></span>
+<span class="line"><span style="color:#C0CAF5">1.8</span><span style="color:#9ECE6A"> _________</span></span>
+<span class="line"><span style="color:#C0CAF5">1.7</span><span style="color:#9ECE6A"> ______▄▄_</span></span>
+<span class="line"><span style="color:#C0CAF5">1.5</span><span style="color:#9ECE6A"> ___▄▄_▄▄_</span></span>
+<span class="line"><span style="color:#C0CAF5">1.4</span><span style="color:#9ECE6A"> ___▄▄_▄▄_</span></span>
+<span class="line"><span style="color:#C0CAF5">1.3</span><span style="color:#9ECE6A"> ▄▄_▄▄_▄▄_</span></span>
+<span class="line"><span style="color:#C0CAF5">1.1</span><span style="color:#9ECE6A"> ▄▄_▄▄_▄▄_</span></span>
+<span class="line"><span style="color:#C0CAF5">1.0</span><span style="color:#9ECE6A"> ▄▄_▄▄_▄▄_</span></span>
+<span class="line"><span style="color:#C0CAF5">    1</span><span style="color:#FF9E64">  2</span><span style="color:#FF9E64">  3</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">No</span><span style="color:#9ECE6A"> leaks</span><span style="color:#9ECE6A"> found</span></span>
+<span class="line"><span style="color:#C0CAF5">MemLab</span><span style="color:#9ECE6A"> found</span><span style="color:#FF9E64"> 0</span><span style="color:#9ECE6A"> leak</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">s</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#C0CAF5">✨</span><span style="color:#9ECE6A">  Done</span><span style="color:#9ECE6A"> in</span><span style="color:#9ECE6A"> 51.69s.</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <h4 id="レジリエンス">レジリエンス</h4>
 <p>フロントエンドでもカオスエンジニアリングテストが実施可能です。</p>
-<p><a href="https://www.npmjs.com/package/chaos-frontend-toolkit"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/www.npmjs.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://www.npmjs.com/package/chaos-frontend-toolkit<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
+<p><a href="https://www.npmjs.com/package/chaos-frontend-toolkit"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/www.npmjs.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://www.npmjs.com/package/chaos-frontend-toolkit<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></p>
 <p>ブラウザの操作はユーザーによって多様です。例えば、以下のようなブラウザ操作が存在します。</p>
 <ul>
 <li>自由なブラウザバックやマウス、キーボード操作</li>
@@ -554,50 +578,48 @@ MemLab found 0 leak(s)
 </ul>
 <p>このようなカオスを注入してもアプリケーションがクラッシュしないようにテストを書くことは有益であるかもしれません。</p>
 <p>例えば、Storybook 上でランダムなクリックを発生させるためのコードは、次のようになります。</p>
-<pre><code class="language-typescript">// src/components/App/App.stories.tsx
-import { ComponentStoryObj, ComponentMeta } from "@storybook/react";
-import { App } from ".";
-import chaosFrontendToolkit from "chaos-frontend-toolkit";
-
-type Component = typeof App;
-type Meta = ComponentMeta&lt;Component&gt;;
-type Story = ComponentStoryObj&lt;Component&gt;;
-
-const meta: Meta = {
-  component: App,
-};
-export default meta;
-
-export const Monkey: Story = {
-  decorators: [
-    (Story) =&gt; {
-      chaosFrontendToolkit.gremlins.start();
-      return &lt;Story /&gt;;
-    },
-  ],
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#51597D;font-style:italic">// src/components/App/App.stories.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">ComponentStoryObj</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> ComponentMeta</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@storybook/react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">App</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">.</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> chaosFrontendToolkit</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">chaos-frontend-toolkit</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> Component</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> typeof</span><span style="color:#C0CAF5"> App</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> Meta</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> ComponentMeta</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">Component</span><span style="color:#89DDFF">&gt;;</span></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> Story</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> ComponentStoryObj</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">Component</span><span style="color:#89DDFF">&gt;;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> meta</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Meta</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  component</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> App</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#7DCFFF"> default</span><span style="color:#C0CAF5"> meta</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#BB9AF7"> Monkey</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Story</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  decorators</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span></span>
+<span class="line"><span style="color:#9ABDF5">    (</span><span style="color:#E0AF68">Story</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">      chaosFrontendToolkit</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">gremlins</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">start</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">      return</span><span style="color:#9ABDF5"> &lt;</span><span style="color:#C0CAF5">Story</span><span style="color:#9ABDF5"> /&gt;</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  ]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TYPESCRIPT</figcaption></figure>
 <p>その後、console.error を監視し、発生しないことを確認するテストコードを書くと良いでしょう。ただし、もしエラーが検出されたとしても、再現できなければ問題解決が難しいため、何らかの方法で追跡しやすいログを残すか、セッションリプレイのように記録するなどの工夫が必要です（シード値があればさらに良いですが）。</p>
 <h4 id="ミューテーション">ミューテーション</h4>
 <p>突然変異テストという手法が存在します。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://stryker-mutator.io/" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Stryker Mutator</strong><span class="link-card-description" data-astro-cid-p7ia6262>Stryker Mutator: Test your tests with mutation testing.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/stryker-mutator.io.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">stryker-mutator.io<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/e30869809f841db1ee3333f3fa7c91cf56549d11f7cf6a1ba2b9a26525b03a31.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://stryker-mutator.io/" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Stryker Mutator</strong><span class="link-card-description" data-astro-cid-p7ia6262>Stryker Mutator: Test your tests with mutation testing.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/stryker-mutator.io.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">stryker-mutator.io<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/e30869809f841db1ee3333f3fa7c91cf56549d11f7cf6a1ba2b9a26525b03a31.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <p>これは、フロントエンドという文脈ではありませんが、面白かったので紹介します。(笑)</p>
 <p>Stryker は、プロダクションコードを書き換え（突然変異）する際に、テストコードも失敗することを期待するものです。つまり、テストコードのテストを行うイメージです。これにより、偽のテストカバレッジを見抜くことができます。Stryker の設定は、公式ページに従ってセットアップし、<code>stryker run</code> を実行するだけです。実際に動かしてみます。</p>
-<pre><code class="language-bash">stryker run
-INFO ProjectReader Found 4 of 63 file(s) to be mutated.
-INFO Instrumenter Instrumented 4 source file(s) with 47 mutant(s)
-INFO ConcurrencyTokenProvider Creating 2 checker process(es) and 2 test runner process(es).
-INFO DryRunExecutor Starting initial test run (jest test runner with "off" coverage analysis). This may take a while.
-INFO DryRunExecutor Initial test run succeeded. Ran 8 tests in 20 seconds (net 8004 ms, overhead 12326 ms).
-Mutation testing  [=========================================] 100% (elapsed: ~2m, remaining: n/a) 47/47 Mutants tested (21 survived, 0 timed out)
-
-All tests
-  ...
-  TodoItem/TodoItem.test.tsx
-    ✘ TodoItem renders todo title [line 18] (covered 0)
-    ✘ TodoItem toggles todo completion [line 30] (covered 0)
-    ✓ TodoItem deletes a todo [line 45] (killed 1)
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">stryker</span><span style="color:#9ECE6A"> run</span></span>
+<span class="line"><span style="color:#C0CAF5">INFO</span><span style="color:#9ECE6A"> ProjectReader</span><span style="color:#9ECE6A"> Found</span><span style="color:#FF9E64"> 4</span><span style="color:#9ECE6A"> of</span><span style="color:#FF9E64"> 63</span><span style="color:#9ECE6A"> file</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">s</span><span style="color:#9ABDF5">)</span><span style="color:#9ECE6A"> to</span><span style="color:#9ECE6A"> be</span><span style="color:#9ECE6A"> mutated.</span></span>
+<span class="line"><span style="color:#C0CAF5">INFO</span><span style="color:#9ECE6A"> Instrumenter</span><span style="color:#9ECE6A"> Instrumented</span><span style="color:#FF9E64"> 4</span><span style="color:#9ECE6A"> source</span><span style="color:#9ECE6A"> file</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">s</span><span style="color:#9ABDF5">)</span><span style="color:#9ECE6A"> with</span><span style="color:#FF9E64"> 47</span><span style="color:#9ECE6A"> mutant</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">s</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#C0CAF5">INFO</span><span style="color:#9ECE6A"> ConcurrencyTokenProvider</span><span style="color:#9ECE6A"> Creating</span><span style="color:#FF9E64"> 2</span><span style="color:#9ECE6A"> checker</span><span style="color:#9ECE6A"> process</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">es</span><span style="color:#9ABDF5">)</span><span style="color:#9ECE6A"> and</span><span style="color:#FF9E64"> 2</span><span style="color:#9ECE6A"> test</span><span style="color:#9ECE6A"> runner</span><span style="color:#9ECE6A"> process</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">es</span><span style="color:#9ABDF5">)</span><span style="color:#9ECE6A">.</span></span>
+<span class="line"><span style="color:#C0CAF5">INFO</span><span style="color:#9ECE6A"> DryRunExecutor</span><span style="color:#9ECE6A"> Starting</span><span style="color:#9ECE6A"> initial</span><span style="color:#9ECE6A"> test</span><span style="color:#9ECE6A"> run</span><span style="color:#A9B1D6"> (jest </span><span style="color:#9ECE6A">test</span><span style="color:#9ECE6A"> runner</span><span style="color:#9ECE6A"> with</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">off</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A"> coverage</span><span style="color:#9ECE6A"> analysis</span><span style="color:#A9B1D6">). This may take a while.</span></span>
+<span class="line"><span style="color:#C0CAF5">INFO</span><span style="color:#9ECE6A"> DryRunExecutor</span><span style="color:#9ECE6A"> Initial</span><span style="color:#9ECE6A"> test</span><span style="color:#9ECE6A"> run</span><span style="color:#9ECE6A"> succeeded.</span><span style="color:#9ECE6A"> Ran</span><span style="color:#FF9E64"> 8</span><span style="color:#9ECE6A"> tests</span><span style="color:#9ECE6A"> in</span><span style="color:#FF9E64"> 20</span><span style="color:#9ECE6A"> seconds</span><span style="color:#A9B1D6"> (net </span><span style="color:#FF9E64">8004</span><span style="color:#9ECE6A"> ms,</span><span style="color:#9ECE6A"> overhead</span><span style="color:#FF9E64"> 12326</span><span style="color:#9ECE6A"> ms</span><span style="color:#A9B1D6">).</span></span>
+<span class="line"><span style="color:#C0CAF5">Mutation</span><span style="color:#9ECE6A"> testing</span><span style="color:#A9B1D6">  [=========================================] 100% (</span><span style="color:#C0CAF5">elapsed:</span><span style="color:#9ECE6A"> ~2m,</span><span style="color:#9ECE6A"> remaining:</span><span style="color:#9ECE6A"> n/a</span><span style="color:#A9B1D6">) 47/47 Mutants tested (</span><span style="color:#C0CAF5">21</span><span style="color:#9ECE6A"> survived,</span><span style="color:#FF9E64"> 0</span><span style="color:#9ECE6A"> timed</span><span style="color:#9ECE6A"> out</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">All</span><span style="color:#9ECE6A"> tests</span></span>
+<span class="line"><span style="color:#0DB9D7">  ...</span></span>
+<span class="line"><span style="color:#C0CAF5">  TodoItem/TodoItem.test.tsx</span></span>
+<span class="line"><span style="color:#C0CAF5">    ✘</span><span style="color:#9ECE6A"> TodoItem</span><span style="color:#9ECE6A"> renders</span><span style="color:#9ECE6A"> todo</span><span style="color:#9ECE6A"> title</span><span style="color:#A9B1D6"> [line </span><span style="color:#9ECE6A">18]</span><span style="color:#A9B1D6"> (covered </span><span style="color:#FF9E64">0</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">    ✘</span><span style="color:#9ECE6A"> TodoItem</span><span style="color:#9ECE6A"> toggles</span><span style="color:#9ECE6A"> todo</span><span style="color:#9ECE6A"> completion</span><span style="color:#A9B1D6"> [line </span><span style="color:#9ECE6A">30]</span><span style="color:#A9B1D6"> (covered </span><span style="color:#FF9E64">0</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">    ✓</span><span style="color:#9ECE6A"> TodoItem</span><span style="color:#9ECE6A"> deletes</span><span style="color:#9ECE6A"> a</span><span style="color:#9ECE6A"> todo</span><span style="color:#A9B1D6"> [line </span><span style="color:#9ECE6A">45]</span><span style="color:#A9B1D6"> (killed </span><span style="color:#FF9E64">1</span><span style="color:#A9B1D6">)</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>TodoItem の中で、プロダクトコードを破壊したミュータント（👽）を検出し、対応するテストが失敗した（Killed）ものは、次の画像の通りです。</p>
 <p><span class="notebook-photo-frame"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1693364079/silver-birder.github.io/blog/ec63905e2231-20230423.png?ar=1296%3A1400" alt="mutant_todo_item_1" width="1296" height="1400" loading="lazy" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_200/q_auto/f_auto/v1693364079/silver-birder.github.io/blog/ec63905e2231-20230423.png?ar=1296%3A1400 200w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_300/q_auto/f_auto/v1693364079/silver-birder.github.io/blog/ec63905e2231-20230423.png?ar=1296%3A1400 300w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1693364079/silver-birder.github.io/blog/ec63905e2231-20230423.png?ar=1296%3A1400 400w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_450/q_auto/f_auto/v1693364079/silver-birder.github.io/blog/ec63905e2231-20230423.png?ar=1296%3A1400 450w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_600/q_auto/f_auto/v1693364079/silver-birder.github.io/blog/ec63905e2231-20230423.png?ar=1296%3A1400 600w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_800/q_auto/f_auto/v1693364079/silver-birder.github.io/blog/ec63905e2231-20230423.png?ar=1296%3A1400 800w" sizes="auto, min(25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem) - 0.5rem - 2 * 0.5rem))"><span class="notebook-photo-caption" aria-hidden="true">mutant_todo_item_1</span></span></p>
 <p>一方、ミュータントが生き残って（Survived）しまった例として、例えば、className の箇所が挙げられます。</p>
@@ -612,10 +634,10 @@ All tests
 <h4 id="ビジュアル">ビジュアル</h4>
 <p>見た目は、フロントエンド特有の非常に重要な要素です。レスポンシブデザイン、デスクトップ・モバイルのデバイス、Windows/Mac などの OS、ブラウザの外観に関する機能（ダークモード）など、見た目の変化をテストすることも重要です。
 ビジュアルリグレッションテストという手法を開発サイクルに取り入れましょう。Lost Pixel や Chromatic など、様々な手段があるので試してみてください。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://storybook.js.org/docs/react/writing-tests/visual-testing" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Storybook: Frontend workshop for UI development</strong><span class="link-card-description" data-astro-cid-p7ia6262>Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It&#39;s open source and free.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/storybook.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">storybook.js.org<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/d58dbac443221d5a90aa0c03d75d4f7a4e8fe723ecb4539acf7aadd05f4b7782.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://storybook.js.org/docs/react/writing-tests/visual-testing" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Storybook: Frontend workshop for UI development</strong><span class="link-card-description" data-astro-cid-p7ia6262>Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It&#39;s open source and free.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/storybook.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">storybook.js.org<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/d58dbac443221d5a90aa0c03d75d4f7a4e8fe723ecb4539acf7aadd05f4b7782.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <h4 id="アクセシビリティ">アクセシビリティ</h4>
 <p>アクセシビリティについては、人の判断が必要なケースもありますが、機械的にチェックできる要素も存在します。キーボード操作のみで機能が正常に動作するか確認するためには、インタラクションテストが必要です。VoiceOver の対応状況はいかがでしょうか？さらに、画像の alt 属性は適切に設定されていますか？文章の表現については人の目で判断が必要ですが、少なくとも入力されているかどうかはチェックできます。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://storybook.js.org/docs/react/writing-tests/accessibility-testing" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Storybook: Frontend workshop for UI development</strong><span class="link-card-description" data-astro-cid-p7ia6262>Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It&#39;s open source and free.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/storybook.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">storybook.js.org<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/d58dbac443221d5a90aa0c03d75d4f7a4e8fe723ecb4539acf7aadd05f4b7782.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://storybook.js.org/docs/react/writing-tests/accessibility-testing" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>Storybook: Frontend workshop for UI development</strong><span class="link-card-description" data-astro-cid-p7ia6262>Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It&#39;s open source and free.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/storybook.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">storybook.js.org<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span><img class="link-card-image" src="/silverbirder.github.io-new-2/link-card/d58dbac443221d5a90aa0c03d75d4f7a4e8fe723ecb4539acf7aadd05f4b7782.webp" alt="" width="160" height="90" loading="lazy" decoding="async" data-astro-cid-p7ia6262></a></div>
 <h2 id="その他">その他</h2>
 <p>テストの観点として、網羅的に知りたいと思いませんか？私は、自前で<a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSpbSeaOPVSKyi36bwbBXQ56DbXNzLEp-anI4PHfXps4pa7gWUMDGHjNmVy1gl945o4aNGCszPWxcKm/pubhtml"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/docs.google.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">point of view<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>というものを作成しました。これは、様々な観点の一覧表です。この一覧表から、何かインスパイアされるものを見つけるのが、楽しいですね。</p>
 <p>例えば、以下のようなことが考えられます。</p>

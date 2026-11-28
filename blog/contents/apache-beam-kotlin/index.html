@@ -4,12 +4,48 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2020-07-10" data-pagefind-filter="month:2020-07" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">49</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2020-07-10"><span class="visually-hidden">2020年7月10日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2020</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">07</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span></span></time></p></div><div class="notebook-heading"><h1>Apache Beam + Kotlin 開発 実践入門</h1></div></header><div class="notebook-body"><p>どうも、こんにちは。Re:ゼロ 2 期 始まりましたね 👏、 <a href="https://twitter.com/silverbirder"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/twitter.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">@silverbirder<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a> です。
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2020-07-10" data-pagefind-filter="month:2020-07" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">49</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2020-07-10"><span class="visually-hidden">2020年7月10日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2020</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">07</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">10</span></span></time></p></div><div class="notebook-heading"><h1>Apache Beam + Kotlin 開発 実践入門</h1></div></header><div class="notebook-body"><p>どうも、こんにちは。Re:ゼロ 2 期 始まりましたね 👏、 <a href="https://twitter.com/silverbirder"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/twitter.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">@silverbirder<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a> です。
 最近、仕事の関係上、Apache Beam + Kotlin を使うことになりました。それらの技術が一切知らなかったので、この記事に学んだことを書いていきます ✍️。</p>
 <p>サンプルリポジトリは、下記に載せています。</p>
-<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card" href="https://github.com/silverbirder/apache-beam-kotlin-example/tree/master/src/main/kotlin" data-astro-cid-p7ia6262><span class="link-card-tape" aria-hidden="true" data-astro-cid-p7ia6262></span><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>apache-beam-kotlin-example/src/main/kotlin at master · silverbirder/apache-beam-kotlin-example</strong><span class="link-card-description" data-astro-cid-p7ia6262>My first learning the Kotlin. Contribute to silverbirder/apache-beam-kotlin-example development by creating an account on GitHub.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></div>
+<div class="link-card-block" data-astro-cid-p7ia6262><a class="link-card notebook-sticker" href="https://github.com/silverbirder/apache-beam-kotlin-example/tree/master/src/main/kotlin" data-astro-cid-p7ia6262><span class="link-card-holes" aria-hidden="true" data-astro-cid-p7ia6262><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span><span data-astro-cid-p7ia6262></span></span><span class="link-card-copy" data-astro-cid-p7ia6262><strong class="link-card-title" data-astro-cid-p7ia6262>apache-beam-kotlin-example/src/main/kotlin at master · silverbirder/apache-beam-kotlin-example</strong><span class="link-card-description" data-astro-cid-p7ia6262>My first learning the Kotlin. Contribute to silverbirder/apache-beam-kotlin-example development by creating an account on GitHub.</span><span class="link-card-domain" data-link-label data-astro-cid-p7ia6262><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">github.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></span></a></div>
 <h2 id="apache-beam-とは">Apache Beam とは</h2>
-<p><a href="https://www.st-hakky-blog.com/entry/2020/04/29/172220"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/www.st-hakky-blog.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://www.st-hakky-blog.com/entry/2020/04/29/172220<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></p>
+<p><a href="https://www.st-hakky-blog.com/entry/2020/04/29/172220"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/www.st-hakky-blog.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://www.st-hakky-blog.com/entry/2020/04/29/172220<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></p>
 <p><strong>Batch や Streaming を 1 つのパイプライン処理</strong> として実現できるデータパイプライン、それが Apache Beam です。(Batch + Stream → Beam)</p>
 <p>言語は、Java, Python, Go(experimental)が選べます。 また、パイプライン上で実行する環境のことをランナーと呼び、Cloud Dataflow や Apache Flink、Apache Spark などがあります。</p>
 <p>※ Streaming 処理は、サーバーの能力がボトルネックになりがちです。そこで、Cloud Dataflow という GCP のマネージドサービスを使用すると、その問題が解消されます。</p>
@@ -17,176 +53,165 @@
 <p>今回は、Java を選びました。モダンな書き方ができる Kotlin でコーディングします。</p>
 <h2 id="セットアップ">セットアップ</h2>
 <p>ソフトウェアバージョンは、次のとおりです。</p>
-<pre><code class="language-shell">java -version
-openjdk version "1.8.0_252"
-OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_252-b09)
-OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.252-b09, mixed mode)
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">java</span><span style="color:#E0AF68"> -version</span></span>
+<span class="line"><span style="color:#C0CAF5">openjdk</span><span style="color:#9ECE6A"> version</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">1.8.0_252</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C0CAF5">OpenJDK</span><span style="color:#9ECE6A"> Runtime</span><span style="color:#9ECE6A"> Environment</span><span style="color:#A9B1D6"> (AdoptOpenJDK)(</span><span style="color:#C0CAF5">build</span><span style="color:#9ECE6A"> 1.8.0_252-b09</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">OpenJDK</span><span style="color:#9ECE6A"> 64-Bit</span><span style="color:#9ECE6A"> Server</span><span style="color:#9ECE6A"> VM</span><span style="color:#A9B1D6"> (AdoptOpenJDK)(</span><span style="color:#C0CAF5">build</span><span style="color:#9ECE6A"> 25.252-b09,</span><span style="color:#9ECE6A"> mixed</span><span style="color:#9ECE6A"> mode</span><span style="color:#A9B1D6">)</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>IDE として intelliJ を使用しており、Kotlin SDK(1.3.72)が内蔵しています。</p>
-<pre><code class="language-shell">git clone https://github.com/silverbirder/apache-beam-kotlin-example.git &amp;&amp; cd apache-beam-kotlin-example
-./gradlew build
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">git</span><span style="color:#9ECE6A"> clone</span><span style="color:#9ECE6A"> https://github.com/silverbirder/apache-beam-kotlin-example.git</span><span style="color:#89DDFF"> &amp;&amp;</span><span style="color:#0DB9D7"> cd</span><span style="color:#9ECE6A"> apache-beam-kotlin-example</span></span>
+<span class="line"><span style="color:#C0CAF5">./gradlew</span><span style="color:#9ECE6A"> build</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <h2 id="パイプライン処理の概要">パイプライン処理の概要</h2>
-<pre><code class="language-shell">1. データの入力する(input → PCollection)
-2. 入力されたデータを変形させる (PCollection → PTransform → PCollection)
-3. 加工したデータを出力する (PCollection → output)
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">1.</span><span style="color:#9ECE6A"> データの入力する</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">input</span><span style="color:#9ECE6A"> →</span><span style="color:#9ECE6A"> PCollection</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#C0CAF5">2.</span><span style="color:#9ECE6A"> 入力されたデータを変形させる</span><span style="color:#A9B1D6"> (PCollection </span><span style="color:#9ECE6A">→</span><span style="color:#9ECE6A"> PTransform</span><span style="color:#9ECE6A"> →</span><span style="color:#9ECE6A"> PCollection</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#C0CAF5">3.</span><span style="color:#9ECE6A"> 加工したデータを出力する</span><span style="color:#A9B1D6"> (PCollection </span><span style="color:#9ECE6A">→</span><span style="color:#9ECE6A"> output</span><span style="color:#A9B1D6">)</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>PCollection は、ひとかたまりのデータセットだと思って下さい。</p>
 <p>よくあるサンプルコード <a href="https://github.com/silverbirder/apache-beam-kotlin-example/blob/master/src/main/kotlin/WordCount.kt"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">WordCount<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a> を例に進めます。</p>
 <p>※ 元々は、<a href="https://github.com/apache/beam/blob/master/examples/kotlin/src/main/java/org/apache/beam/examples/kotlin/WordCount.kt"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">ApacheBeam 公式の WordCount<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>があったのですが、ローカルマシン単体で動かせないため、多少アレンジしました。WordCount は、ある文章から単語を抽出しカウントを取るだけです。</p>
 <p>メインのコードは、こちらです。動かすときは、IDE からデバッグ実行します。（この辺りは省略します。詳しくは Makefile を見て下さい 🙇‍♂️）</p>
-<pre><code class="language-kotlin">@JvmStatic
-fun main(args: Array&lt;String&gt;) {
-    val options = (PipelineOptionsFactory.fromArgs(*args).withValidation().`as`(WordCountOptions::class.java))
-    runWordCount(options)
-}
-
-@JvmStatic
-fun runWordCount(options: WordCountOptions) {
-    // パイプラインを作る（空っぽ）
-    val p = Pipeline.create(options)
-
-         // Textファイルからデータを入力する → PCollection
-        p.apply("ReadLines", TextIO.read().from(options.inputFile))
-
-        // PCollectionをPTransformで変形させる
-        .apply(CountWords())
-        .apply(MapElements.via(FormatAsTextFn()))
-
-        // Textファイルにデータ(PCollection)を出力する
-        .apply&lt;PDone&gt;("WriteCounts", TextIO.write().to(options.output))
-
-    // パイプラインを実行する
-    p.run().waitUntilFinish()
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#C0CAF5">@JvmStatic</span></span>
+<span class="line"><span style="color:#BB9AF7">fun</span><span style="color:#7AA2F7"> main</span><span style="color:#A9B1D6">(args: </span><span style="color:#C0CAF5">Array</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">&gt;) {</span></span>
+<span class="line"><span style="color:#BB9AF7">    val</span><span style="color:#A9B1D6"> options </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> (PipelineOptionsFactory.</span><span style="color:#7AA2F7">fromArgs</span><span style="color:#A9B1D6">(</span><span style="color:#89DDFF">*</span><span style="color:#A9B1D6">args).</span><span style="color:#7AA2F7">withValidation</span><span style="color:#A9B1D6">().</span><span style="color:#7AA2F7">`as`</span><span style="color:#A9B1D6">(WordCountOptions::</span><span style="color:#7AA2F7">class</span><span style="color:#A9B1D6">.java))</span></span>
+<span class="line"><span style="color:#7AA2F7">    runWordCount</span><span style="color:#A9B1D6">(options)</span></span>
+<span class="line"><span style="color:#A9B1D6">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">@JvmStatic</span></span>
+<span class="line"><span style="color:#BB9AF7">fun</span><span style="color:#7AA2F7"> runWordCount</span><span style="color:#A9B1D6">(options: </span><span style="color:#C0CAF5">WordCountOptions</span><span style="color:#A9B1D6">) {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // パイプラインを作る（空っぽ）</span></span>
+<span class="line"><span style="color:#BB9AF7">    val</span><span style="color:#A9B1D6"> p </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> Pipeline.</span><span style="color:#7AA2F7">create</span><span style="color:#A9B1D6">(options)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">         // Textファイルからデータを入力する → PCollection</span></span>
+<span class="line"><span style="color:#A9B1D6">        p.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(</span><span style="color:#9ECE6A">"ReadLines"</span><span style="color:#A9B1D6">, TextIO.</span><span style="color:#7AA2F7">read</span><span style="color:#A9B1D6">().</span><span style="color:#7AA2F7">from</span><span style="color:#A9B1D6">(options.inputFile))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // PCollectionをPTransformで変形させる</span></span>
+<span class="line"><span style="color:#A9B1D6">        .</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(</span><span style="color:#7AA2F7">CountWords</span><span style="color:#A9B1D6">())</span></span>
+<span class="line"><span style="color:#A9B1D6">        .</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(MapElements.</span><span style="color:#7AA2F7">via</span><span style="color:#A9B1D6">(</span><span style="color:#7AA2F7">FormatAsTextFn</span><span style="color:#A9B1D6">()))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // Textファイルにデータ(PCollection)を出力する</span></span>
+<span class="line"><span style="color:#A9B1D6">        .</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">PDone</span><span style="color:#A9B1D6">&gt;(</span><span style="color:#9ECE6A">"WriteCounts"</span><span style="color:#A9B1D6">, TextIO.</span><span style="color:#7AA2F7">write</span><span style="color:#A9B1D6">().</span><span style="color:#7AA2F7">to</span><span style="color:#A9B1D6">(options.output))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">    // パイプラインを実行する</span></span>
+<span class="line"><span style="color:#A9B1D6">    p.</span><span style="color:#7AA2F7">run</span><span style="color:#A9B1D6">().</span><span style="color:#7AA2F7">waitUntilFinish</span><span style="color:#A9B1D6">()</span></span>
+<span class="line"><span style="color:#A9B1D6">}</span></span></code></pre><figcaption class="notebook-code-language">KOTLIN</figcaption></figure>
 <h2 id="ptransform">PTransform</h2>
 <p>Apache Beam のコアとなる PTransform についてサンプルコードを載せます。</p>
 <h2 id="pardo">ParDo</h2>
 <p>ParDo は、PCollection を好きなように加工することができます。
 最も、柔軟に処理を書くことができます。</p>
-<pre><code class="language-kotlin">    // PTransformによる変形処理
-    public class CountWords : PTransform&lt;PCollection&lt;String&gt;, PCollection&lt;KV&lt;String, Long&gt;&gt;&gt;() {
-        override fun expand(lines: PCollection&lt;String&gt;): PCollection&lt;KV&lt;String, Long&gt;&gt; {
-
-            // 文章を単語に分割する
-            val words = lines.apply(ParDo.of(ExtractWordsFn()))
-
-            // 分割された単語をカウントする
-            val wordCounts = words.apply(Count.perElement())
-            return wordCounts
-        }
-    }
-
-    public class ExtractWordsFn : DoFn&lt;String, String&gt;() {
-        @ProcessElement
-        fun processElement(@Element element: String, receiver: DoFn.OutputReceiver&lt;String&gt;) {
-        ...
-    }
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#51597D;font-style:italic">    // PTransformによる変形処理</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    public</span><span style="color:#BB9AF7"> class</span><span style="color:#C0CAF5"> CountWords</span><span style="color:#A9B1D6"> : </span><span style="color:#C0CAF5">PTransform</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">PCollection</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">&gt;, </span><span style="color:#C0CAF5">PCollection</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">KV</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">, </span><span style="color:#C0CAF5">Long</span><span style="color:#A9B1D6">&gt;&gt;&gt;() {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">        override</span><span style="color:#BB9AF7"> fun</span><span style="color:#7AA2F7"> expand</span><span style="color:#A9B1D6">(lines: </span><span style="color:#C0CAF5">PCollection</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">&gt;): </span><span style="color:#C0CAF5">PCollection</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">KV</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">, </span><span style="color:#C0CAF5">Long</span><span style="color:#A9B1D6">&gt;&gt; {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">            // 文章を単語に分割する</span></span>
+<span class="line"><span style="color:#BB9AF7">            val</span><span style="color:#A9B1D6"> words </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> lines.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(ParDo.</span><span style="color:#7AA2F7">of</span><span style="color:#A9B1D6">(</span><span style="color:#7AA2F7">ExtractWordsFn</span><span style="color:#A9B1D6">()))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">            // 分割された単語をカウントする</span></span>
+<span class="line"><span style="color:#BB9AF7">            val</span><span style="color:#A9B1D6"> wordCounts </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> words.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(Count.</span><span style="color:#7AA2F7">perElement</span><span style="color:#A9B1D6">())</span></span>
+<span class="line"><span style="color:#BB9AF7">            return</span><span style="color:#A9B1D6"> wordCounts</span></span>
+<span class="line"><span style="color:#A9B1D6">        }</span></span>
+<span class="line"><span style="color:#A9B1D6">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    public</span><span style="color:#BB9AF7"> class</span><span style="color:#C0CAF5"> ExtractWordsFn</span><span style="color:#A9B1D6"> : </span><span style="color:#C0CAF5">DoFn</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">, </span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">&gt;() {</span></span>
+<span class="line"><span style="color:#C0CAF5">        @ProcessElement</span></span>
+<span class="line"><span style="color:#BB9AF7">        fun</span><span style="color:#7AA2F7"> processElement</span><span style="color:#A9B1D6">(</span><span style="color:#C0CAF5">@Element</span><span style="color:#A9B1D6"> element: </span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">, receiver: </span><span style="color:#C0CAF5">DoFn</span><span style="color:#A9B1D6">.OutputReceiver</span><span style="color:#BB9AF7">&lt;</span><span style="color:#A9B1D6">String</span><span style="color:#BB9AF7">&gt;</span><span style="color:#A9B1D6">) {</span></span>
+<span class="line"><span style="color:#89DDFF">        ..</span><span style="color:#A9B1D6">.</span></span>
+<span class="line"><span style="color:#A9B1D6">    }</span></span></code></pre><figcaption class="notebook-code-language">KOTLIN</figcaption></figure>
 <h2 id="groupbykey">GroupByKey</h2>
 <p>Key-Value(KV)の PCollection を Key でグルーピングします。</p>
-<pre><code class="language-kotlin">import java.lang.Iterable as JavaIterable
-
-// PCollection&lt;KV&lt;String, Long&gt;&gt;
-val wordCounts = words.apply(Count.perElement())
-
-// PCollection&lt;KV&lt;String, JavaIterable&lt;Long&gt;&gt;&gt;
-val groupByWord = wordCounts.apply(GroupByKey.create&lt;String, Long&gt;()) as PCollection&lt;KV&lt;String, JavaIterable&lt;Long&gt;&gt;&gt;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#BB9AF7">import</span><span style="color:#C0CAF5"> java.lang.Iterable </span><span style="color:#BB9AF7">as</span><span style="color:#C0CAF5"> JavaIterable</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// PCollection&lt;KV&lt;String, Long&gt;&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">val</span><span style="color:#A9B1D6"> wordCounts </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> words.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(Count.</span><span style="color:#7AA2F7">perElement</span><span style="color:#A9B1D6">())</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// PCollection&lt;KV&lt;String, JavaIterable&lt;Long&gt;&gt;&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">val</span><span style="color:#A9B1D6"> groupByWord </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> wordCounts.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(GroupByKey.</span><span style="color:#7AA2F7">create</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">, </span><span style="color:#C0CAF5">Long</span><span style="color:#A9B1D6">&gt;()) </span><span style="color:#BB9AF7">as</span><span style="color:#A9B1D6"> PCollection</span><span style="color:#BB9AF7">&lt;</span><span style="color:#A9B1D6">KV</span><span style="color:#BB9AF7">&lt;</span><span style="color:#A9B1D6">String, JavaIterable</span><span style="color:#BB9AF7">&lt;</span><span style="color:#A9B1D6">Long</span><span style="color:#BB9AF7">&gt;&gt;&gt;</span></span></code></pre><figcaption class="notebook-code-language">KOTLIN</figcaption></figure>
 <p>Kotlin では、Iterable が動作できないため、Java の Iterable を使う必要があります。</p>
 <h2 id="flatten">Flatten</h2>
 <p>複数の PCollection を 1 つの PCollection に結合します。</p>
-<pre><code class="language-kotlin">// PCollection&lt;KV&lt;String, Long&gt;&gt;
-val wordCounts = words.apply(Count.perElement())
-
-// PCollectionList&lt;KV&lt;String, Long&gt;&gt;
-val wordCountsDouble = PCollectionList.of(wordCounts).and(wordCounts)
-
-// PCollection&lt;KV&lt;String, Long&gt;&gt;
-val flattenWordCount = wordCountsDouble.apply(Flatten.pCollections())
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#51597D;font-style:italic">// PCollection&lt;KV&lt;String, Long&gt;&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">val</span><span style="color:#A9B1D6"> wordCounts </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> words.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(Count.</span><span style="color:#7AA2F7">perElement</span><span style="color:#A9B1D6">())</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// PCollectionList&lt;KV&lt;String, Long&gt;&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">val</span><span style="color:#A9B1D6"> wordCountsDouble </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> PCollectionList.</span><span style="color:#7AA2F7">of</span><span style="color:#A9B1D6">(wordCounts).</span><span style="color:#7AA2F7">and</span><span style="color:#A9B1D6">(wordCounts)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// PCollection&lt;KV&lt;String, Long&gt;&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">val</span><span style="color:#A9B1D6"> flattenWordCount </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> wordCountsDouble.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(Flatten.</span><span style="color:#7AA2F7">pCollections</span><span style="color:#A9B1D6">())</span></span></code></pre><figcaption class="notebook-code-language">KOTLIN</figcaption></figure>
 <h2 id="combine">Combine</h2>
 <p>PCollection の要素を結合します。
 GroupByKey の Key 毎に要素を結合する方法と、PCollection 毎に要素を結合する方法があります。
 今回は、GroupByKey のサンプルコードです。</p>
-<pre><code class="language-kotlin">// PCollection&lt;KV&lt;String, Long&gt;&gt;
-val wordCounts = words.apply(Count.perElement())
-
-// PCollection&lt;KV&lt;String, Long&gt;&gt;
-val sumWordsByKey = wordCounts.apply(Sum.longsPerKey())
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#51597D;font-style:italic">// PCollection&lt;KV&lt;String, Long&gt;&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">val</span><span style="color:#A9B1D6"> wordCounts </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> words.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(Count.</span><span style="color:#7AA2F7">perElement</span><span style="color:#A9B1D6">())</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// PCollection&lt;KV&lt;String, Long&gt;&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">val</span><span style="color:#A9B1D6"> sumWordsByKey </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> wordCounts.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(Sum.</span><span style="color:#7AA2F7">longsPerKey</span><span style="color:#A9B1D6">())</span></span></code></pre><figcaption class="notebook-code-language">KOTLIN</figcaption></figure>
 <h2 id="partition">Partition</h2>
 <p>PCollection を任意の数でパーティション分割します。</p>
-<pre><code class="language-kotlin">// PCollection&lt;KV&lt;String, Long&gt;&gt;
-val wordCounts = words.apply(Count.perElement())
-
-// PCollection&lt;KV&lt;String, Long&gt;&gt;
-var 10wordCounts = wordCounts.apply(Partition.of(10, PartitionFunc()))
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#51597D;font-style:italic">// PCollection&lt;KV&lt;String, Long&gt;&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">val</span><span style="color:#A9B1D6"> wordCounts </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> words.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(Count.</span><span style="color:#7AA2F7">perElement</span><span style="color:#A9B1D6">())</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">// PCollection&lt;KV&lt;String, Long&gt;&gt;</span></span>
+<span class="line"><span style="color:#BB9AF7">var</span><span style="color:#A9B1D6"> 10wordCounts </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> wordCounts.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(Partition.</span><span style="color:#7AA2F7">of</span><span style="color:#A9B1D6">(</span><span style="color:#FF9E64">10</span><span style="color:#A9B1D6">, </span><span style="color:#7AA2F7">PartitionFunc</span><span style="color:#A9B1D6">()))</span></span></code></pre><figcaption class="notebook-code-language">KOTLIN</figcaption></figure>
 <h2 id="streaming-と-windowing">Streaming と Windowing</h2>
 <p>パイプラインを、そのまま使えば Batch 実行となります。
 Batch は、有限のデータに対し、Streaming は無限のデータに対して使います。
 無限のデータを処理するのは、Windowing というものを使い、無限を有限のデータにカットして、処理します。</p>
 <p>Streaming 処理するためには、下記のようにコードにします。</p>
-<pre><code class="language-kotlin">    @JvmStatic
-    fun main(args: Array&lt;String&gt;) {
-        val options = (PipelineOptionsFactory.fromArgs(*args).withValidation().`as`(WordCountOptions::class.java))
-        runWordCount(options)
-    }
-
-    @JvmStatic
-    fun runWordCount(options: WordCountOptions) {
-        val p = Pipeline.create(options)
-        p.apply("ReadLines",
-                        TextIO
-                        .read()
-                        .from("./src/main/kotlin/*.json")
-                        // fromで指定したファイルがないか監視する。(入力値は無限)
-                        //  10秒ごとに監視、5分間変更がなければ終了。
-                        .watchForNewFiles(standardSeconds(10), afterTimeSinceNewOutput(standardMinutes(5)))
-             )
-
-            // 30秒間毎にWindowingする。（無限のデータを、有限のデータにカットする）
-            .apply(Window.into&lt;String&gt;(FixedWindows.of(standardSeconds(30))))
-            .apply(CountWords())
-            .apply(MapElements.via(FormatAsTextFn()))
-            .apply&lt;PDone&gt;("WriteCounts", TextIO.write().to(options.output).withWindowedWrites().withNumShards(1))
-        p.run().waitUntilFinish()
-    }
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#C0CAF5">    @JvmStatic</span></span>
+<span class="line"><span style="color:#BB9AF7">    fun</span><span style="color:#7AA2F7"> main</span><span style="color:#A9B1D6">(args: </span><span style="color:#C0CAF5">Array</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">&gt;) {</span></span>
+<span class="line"><span style="color:#BB9AF7">        val</span><span style="color:#A9B1D6"> options </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> (PipelineOptionsFactory.</span><span style="color:#7AA2F7">fromArgs</span><span style="color:#A9B1D6">(</span><span style="color:#89DDFF">*</span><span style="color:#A9B1D6">args).</span><span style="color:#7AA2F7">withValidation</span><span style="color:#A9B1D6">().</span><span style="color:#7AA2F7">`as`</span><span style="color:#A9B1D6">(WordCountOptions::</span><span style="color:#7AA2F7">class</span><span style="color:#A9B1D6">.java))</span></span>
+<span class="line"><span style="color:#7AA2F7">        runWordCount</span><span style="color:#A9B1D6">(options)</span></span>
+<span class="line"><span style="color:#A9B1D6">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">    @JvmStatic</span></span>
+<span class="line"><span style="color:#BB9AF7">    fun</span><span style="color:#7AA2F7"> runWordCount</span><span style="color:#A9B1D6">(options: </span><span style="color:#C0CAF5">WordCountOptions</span><span style="color:#A9B1D6">) {</span></span>
+<span class="line"><span style="color:#BB9AF7">        val</span><span style="color:#A9B1D6"> p </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> Pipeline.</span><span style="color:#7AA2F7">create</span><span style="color:#A9B1D6">(options)</span></span>
+<span class="line"><span style="color:#A9B1D6">        p.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(</span><span style="color:#9ECE6A">"ReadLines"</span><span style="color:#A9B1D6">,</span></span>
+<span class="line"><span style="color:#A9B1D6">                        TextIO</span></span>
+<span class="line"><span style="color:#A9B1D6">                        .</span><span style="color:#7AA2F7">read</span><span style="color:#A9B1D6">()</span></span>
+<span class="line"><span style="color:#A9B1D6">                        .</span><span style="color:#7AA2F7">from</span><span style="color:#A9B1D6">(</span><span style="color:#9ECE6A">"./src/main/kotlin/*.json"</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">                        // fromで指定したファイルがないか監視する。(入力値は無限)</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">                        //  10秒ごとに監視、5分間変更がなければ終了。</span></span>
+<span class="line"><span style="color:#A9B1D6">                        .</span><span style="color:#7AA2F7">watchForNewFiles</span><span style="color:#A9B1D6">(</span><span style="color:#7AA2F7">standardSeconds</span><span style="color:#A9B1D6">(</span><span style="color:#FF9E64">10</span><span style="color:#A9B1D6">), </span><span style="color:#7AA2F7">afterTimeSinceNewOutput</span><span style="color:#A9B1D6">(</span><span style="color:#7AA2F7">standardMinutes</span><span style="color:#A9B1D6">(</span><span style="color:#FF9E64">5</span><span style="color:#A9B1D6">)))</span></span>
+<span class="line"><span style="color:#A9B1D6">             )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">            // 30秒間毎にWindowingする。（無限のデータを、有限のデータにカットする）</span></span>
+<span class="line"><span style="color:#A9B1D6">            .</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(Window.</span><span style="color:#7AA2F7">into</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">&gt;(FixedWindows.</span><span style="color:#7AA2F7">of</span><span style="color:#A9B1D6">(</span><span style="color:#7AA2F7">standardSeconds</span><span style="color:#A9B1D6">(</span><span style="color:#FF9E64">30</span><span style="color:#A9B1D6">))))</span></span>
+<span class="line"><span style="color:#A9B1D6">            .</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(</span><span style="color:#7AA2F7">CountWords</span><span style="color:#A9B1D6">())</span></span>
+<span class="line"><span style="color:#A9B1D6">            .</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(MapElements.</span><span style="color:#7AA2F7">via</span><span style="color:#A9B1D6">(</span><span style="color:#7AA2F7">FormatAsTextFn</span><span style="color:#A9B1D6">()))</span></span>
+<span class="line"><span style="color:#A9B1D6">            .</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">PDone</span><span style="color:#A9B1D6">&gt;(</span><span style="color:#9ECE6A">"WriteCounts"</span><span style="color:#A9B1D6">, TextIO.</span><span style="color:#7AA2F7">write</span><span style="color:#A9B1D6">().</span><span style="color:#7AA2F7">to</span><span style="color:#A9B1D6">(options.output).</span><span style="color:#7AA2F7">withWindowedWrites</span><span style="color:#A9B1D6">().</span><span style="color:#7AA2F7">withNumShards</span><span style="color:#A9B1D6">(</span><span style="color:#FF9E64">1</span><span style="color:#A9B1D6">))</span></span>
+<span class="line"><span style="color:#A9B1D6">        p.</span><span style="color:#7AA2F7">run</span><span style="color:#A9B1D6">().</span><span style="color:#7AA2F7">waitUntilFinish</span><span style="color:#A9B1D6">()</span></span>
+<span class="line"><span style="color:#A9B1D6">    }</span></span></code></pre><figcaption class="notebook-code-language">KOTLIN</figcaption></figure>
 <h2 id="テストコード">テストコード</h2>
 <p>Apache Beam もテストコードが書けます。
 サンプルコードは、<a href="https://github.com/silverbirder/apache-beam-kotlin-example/blob/master/src/test/kotlin/WordCountTest.kt"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">こちら<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>です。</p>
 <p>実行するパイプラインを TestPipeline にすることで、テストができます。</p>
-<pre><code class="language-kotlin">import org.apache.beam.sdk.testing.TestPipeline
-
-fun countWordsTest() {
-        // Arrange
-        val p: Pipeline = TestPipeline.create().enableAbandonedNodeEnforcement(false)
-        val input: PCollection&lt;String&gt; = p.apply(Create.of(WORDS)).setCoder(StringUtf8Coder.of())
-        val output: PCollection&lt;KV&lt;String, Long&gt;&gt;? = input.apply(CountWords())
-
-        // Act
-        p.run()
-
-        // Assert
-        PAssert.that&lt;KV&lt;String, Long&gt;&gt;(output).containsInAnyOrder(COUNTS_ARRAY)
-    }
-
-    companion object {
-        val WORDS: List&lt;String&gt; = listOf(
-            "hi there", "hi", "hi sue bob",
-            "hi sue", "", "bob hi"
-        )
-        val COUNTS_ARRAY = listOf(
-            KV.of("hi", 5L),
-            KV.of("there", 2L),
-            KV.of("sue", 2L),
-            KV.of("bob", 2L)
-        )
-    }
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#BB9AF7">import</span><span style="color:#C0CAF5"> org.apache.beam.sdk.testing.TestPipeline</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">fun</span><span style="color:#7AA2F7"> countWordsTest</span><span style="color:#A9B1D6">() {</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // Arrange</span></span>
+<span class="line"><span style="color:#BB9AF7">        val</span><span style="color:#A9B1D6"> p: </span><span style="color:#C0CAF5">Pipeline</span><span style="color:#89DDFF"> =</span><span style="color:#A9B1D6"> TestPipeline.</span><span style="color:#7AA2F7">create</span><span style="color:#A9B1D6">().</span><span style="color:#7AA2F7">enableAbandonedNodeEnforcement</span><span style="color:#A9B1D6">(</span><span style="color:#FF9E64">false</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#BB9AF7">        val</span><span style="color:#A9B1D6"> input: </span><span style="color:#C0CAF5">PCollection</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">&gt; </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> p.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(Create.</span><span style="color:#7AA2F7">of</span><span style="color:#A9B1D6">(WORDS)).</span><span style="color:#7AA2F7">setCoder</span><span style="color:#A9B1D6">(StringUtf8Coder.</span><span style="color:#7AA2F7">of</span><span style="color:#A9B1D6">())</span></span>
+<span class="line"><span style="color:#BB9AF7">        val</span><span style="color:#A9B1D6"> output: </span><span style="color:#C0CAF5">PCollection</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">KV</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">, </span><span style="color:#C0CAF5">Long</span><span style="color:#A9B1D6">&gt;&gt;? </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> input.</span><span style="color:#7AA2F7">apply</span><span style="color:#A9B1D6">(</span><span style="color:#7AA2F7">CountWords</span><span style="color:#A9B1D6">())</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // Act</span></span>
+<span class="line"><span style="color:#A9B1D6">        p.</span><span style="color:#7AA2F7">run</span><span style="color:#A9B1D6">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // Assert</span></span>
+<span class="line"><span style="color:#A9B1D6">        PAssert.</span><span style="color:#7AA2F7">that</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">KV</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">, </span><span style="color:#C0CAF5">Long</span><span style="color:#A9B1D6">&gt;&gt;(output).</span><span style="color:#7AA2F7">containsInAnyOrder</span><span style="color:#A9B1D6">(COUNTS_ARRAY)</span></span>
+<span class="line"><span style="color:#A9B1D6">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    companion</span><span style="color:#BB9AF7"> object</span><span style="color:#A9B1D6"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">        val</span><span style="color:#A9B1D6"> WORDS: </span><span style="color:#C0CAF5">List</span><span style="color:#A9B1D6">&lt;</span><span style="color:#C0CAF5">String</span><span style="color:#A9B1D6">&gt; </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> listOf</span><span style="color:#A9B1D6">(</span></span>
+<span class="line"><span style="color:#9ECE6A">            "hi there"</span><span style="color:#A9B1D6">, </span><span style="color:#9ECE6A">"hi"</span><span style="color:#A9B1D6">, </span><span style="color:#9ECE6A">"hi sue bob"</span><span style="color:#A9B1D6">,</span></span>
+<span class="line"><span style="color:#9ECE6A">            "hi sue"</span><span style="color:#A9B1D6">, </span><span style="color:#9ECE6A">""</span><span style="color:#A9B1D6">, </span><span style="color:#9ECE6A">"bob hi"</span></span>
+<span class="line"><span style="color:#A9B1D6">        )</span></span>
+<span class="line"><span style="color:#BB9AF7">        val</span><span style="color:#A9B1D6"> COUNTS_ARRAY </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> listOf</span><span style="color:#A9B1D6">(</span></span>
+<span class="line"><span style="color:#A9B1D6">            KV.</span><span style="color:#7AA2F7">of</span><span style="color:#A9B1D6">(</span><span style="color:#9ECE6A">"hi"</span><span style="color:#A9B1D6">, </span><span style="color:#FF9E64">5L</span><span style="color:#A9B1D6">),</span></span>
+<span class="line"><span style="color:#A9B1D6">            KV.</span><span style="color:#7AA2F7">of</span><span style="color:#A9B1D6">(</span><span style="color:#9ECE6A">"there"</span><span style="color:#A9B1D6">, </span><span style="color:#FF9E64">2L</span><span style="color:#A9B1D6">),</span></span>
+<span class="line"><span style="color:#A9B1D6">            KV.</span><span style="color:#7AA2F7">of</span><span style="color:#A9B1D6">(</span><span style="color:#9ECE6A">"sue"</span><span style="color:#A9B1D6">, </span><span style="color:#FF9E64">2L</span><span style="color:#A9B1D6">),</span></span>
+<span class="line"><span style="color:#A9B1D6">            KV.</span><span style="color:#7AA2F7">of</span><span style="color:#A9B1D6">(</span><span style="color:#9ECE6A">"bob"</span><span style="color:#A9B1D6">, </span><span style="color:#FF9E64">2L</span><span style="color:#A9B1D6">)</span></span>
+<span class="line"><span style="color:#A9B1D6">        )</span></span>
+<span class="line"><span style="color:#A9B1D6">    }</span></span></code></pre><figcaption class="notebook-code-language">KOTLIN</figcaption></figure>
 <h2 id="終わりに">終わりに</h2>
 <p>Apache Beam は、他にも Side input や Additional outputs などがあります。
 使いこなせるためにも、これからも頑張っていきます！</p>

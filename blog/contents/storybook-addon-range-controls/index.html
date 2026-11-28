@@ -4,36 +4,72 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2025-08-20" data-pagefind-filter="month:2025-08" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">142</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-08-20"><span class="visually-hidden">2025年8月20日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">08</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">20</span></span></time></p></div><div class="notebook-heading"><h1>はじめてのStorybookアドオン開発体験記</h1></div></header><div class="notebook-body"><p>こんにちは。
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2025-08-20" data-pagefind-filter="month:2025-08" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">142</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2025-08-20"><span class="visually-hidden">2025年8月20日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2025</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">08</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">20</span></span></time></p></div><div class="notebook-heading"><h1>はじめてのStorybookアドオン開発体験記</h1></div></header><div class="notebook-body"><p>こんにちは。
 先日、ちょっとしたきっかけでStorybookのアドオンをはじめて開発しました。
 本記事では、そのStorybookのアドオン開発の体験を共有したいと思います。</p>
 <h2 id="開発したアドオン">開発したアドオン</h2>
 <p>storybook-addon-range-controls というアドオンを開発しました。
 npmで公開しています。</p>
 <ul>
-<li><a href="https://www.npmjs.com/package/storybook-addon-range-controls"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/www.npmjs.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://www.npmjs.com/package/storybook-addon-range-controls<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://www.npmjs.com/package/storybook-addon-range-controls"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/www.npmjs.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://www.npmjs.com/package/storybook-addon-range-controls<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <p>このアドオンは、端的にいうと Storybook上で、 <strong>コンポーネントの文字列・数値・配列の引数を、スライダーでデータ増減できるアドオン</strong> です。
 作ろうと思ったきっかけは、StorybookのArgTypesでrangeの値を使って、 <strong>データ増減に伴うデザイン崩れをチェック</strong> していたのですが、
 配列のスライダーをするのに少しだけコードを書く手間があり、もっと簡単にできないかというのがきっかけです。</p>
 <p>デモは、以下のリンクで公開していますので、気になる方はぜひ触ってみてください。</p>
 <ul>
-<li><a href="https://develop--689dd119bb72c220c0ddb738.chromatic.com"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/develop--689dd119bb72c220c0ddb738.chromatic.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://develop--689dd119bb72c220c0ddb738.chromatic.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://develop--689dd119bb72c220c0ddb738.chromatic.com"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/develop--689dd119bb72c220c0ddb738.chromatic.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://develop--689dd119bb72c220c0ddb738.chromatic.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <p>このアドオンを作るために、何をしたのかを振り返ります。</p>
 <p>実装したコードベースは、以下で公開していますので、よければご参考ください。</p>
 <ul>
-<li><a href="https://github.com/silverbirder/storybook-addon-range-controls"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/silverbirder/storybook-addon-range-controls<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://github.com/silverbirder/storybook-addon-range-controls"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/silverbirder/storybook-addon-range-controls<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <h2 id="アドオンキット">アドオンキット</h2>
 <p>まず、Storybookのアドオンってどうやって作るのか、作った経験がない私にはわからなかったので、
 以下のStorybookのドキュメントを読みました。</p>
 <ul>
-<li><a href="https://storybook.js.org/docs/addons/writing-addons"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/storybook.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://storybook.js.org/docs/addons/writing-addons<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://storybook.js.org/docs/addons/writing-addons"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/storybook.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://storybook.js.org/docs/addons/writing-addons<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <p>読んでいると、以下のアドオンキットがあることに辿り着きました。</p>
 <ul>
-<li><a href="https://github.com/storybookjs/addon-kit"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/storybookjs/addon-kit<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://github.com/storybookjs/addon-kit"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/storybookjs/addon-kit<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <p>これは、Storybookのアドオン開発に必要なものが最低限揃っていて、最初のとっかかりにはちょうどよかったです。</p>
 <h2 id="アドオンの種類">アドオンの種類</h2>
@@ -45,47 +81,46 @@ npmで公開しています。</p>
 </ul>
 <p>3つの種類についての説明は、以下の公式ページがわかりやすいです。</p>
 <ul>
-<li><a href="https://storybook.js.org/docs/addons/addon-types"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/storybook.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://storybook.js.org/docs/addons/addon-types<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://storybook.js.org/docs/addons/addon-types"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/storybook.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://storybook.js.org/docs/addons/addon-types<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <p>今回、私がなんとなく想像していたのはパネルだったので、今回はパネルを使ってみることにしました。</p>
 <h2 id="パネル開発">パネル開発</h2>
 <p>アドオンキットでは、開発するアドオンを組み込んだStorybookを起動できる（npm run start）ようになっていて、起動させたStorybook上でアドオンの実装を進めていきます。</p>
 <p>アドオン開発には、さまざまなAPIが用意されており、公式のドキュメントが参考になります。</p>
 <ul>
-<li><a href="https://storybook.js.org/docs/addons/addons-api"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/storybook.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://storybook.js.org/docs/addons/addons-api<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://storybook.js.org/docs/addons/addons-api"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/storybook.js.org.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://storybook.js.org/docs/addons/addons-api<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <p>例えば、表示しているStoryのparamtersやargsを取得するhooksなどがあります。
 以下は、私が利用したhooksのコード例です。</p>
-<pre><code class="language-tsx">import React, { memo } from "react";
-import type { RangeControlsParameters } from "src/types";
-import { useParameter, useArgs } from "storybook/manager-api";
-import { useTheme } from "storybook/theming";
-
-import { KEY } from "../../constants";
-
-type Props = {
-  active: boolean;
-};
-
-export const Panel = memo((props: Props) =&gt; {
-  const config = useParameter&lt;RangeControlsParameters&gt;(KEY, {});
-  const theme = useTheme();
-  const [args, updateArgs] = useArgs();
-
-  return (&lt;&gt;...&lt;/&gt;);
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> React</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">memo</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#BB9AF7"> type</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">RangeControlsParameters</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">src/types</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">useParameter</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> useArgs</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">storybook/manager-api</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">useTheme</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">storybook/theming</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">KEY</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../constants</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> Props</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">  active</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> boolean</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#BB9AF7"> Panel</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> memo</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">props</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Props</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> config</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useParameter</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">RangeControlsParameters</span><span style="color:#89DDFF">&gt;</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">KEY</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> {})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> theme</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useTheme</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#89DDFF"> [</span><span style="color:#BB9AF7">args</span><span style="color:#89DDFF">,</span><span style="color:#BB9AF7"> updateArgs</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useArgs</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> (</span><span style="color:#BA3C97">&lt;&gt;</span><span style="color:#9AA5CE">...</span><span style="color:#BA3C97">&lt;/&gt;</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
 <p>また、パネルのUI開発には、以下にあるように、コンポーネントやスタイルなどが用意されています。</p>
 <ul>
 <li>コンポーネント一覧
 <ul>
-<li><a href="https://github.com/storybookjs/storybook/blob/da8cf2095bfde31267c11652a5f18deb4c48e192/code/core/src/components/README.md"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/storybookjs/storybook/blob/da8cf2095bfde31267c11652a5f18deb4c48e192/code/core/src/components/README.md<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://github.com/storybookjs/storybook/blob/da8cf2095bfde31267c11652a5f18deb4c48e192/code/core/src/components/README.md"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/storybookjs/storybook/blob/da8cf2095bfde31267c11652a5f18deb4c48e192/code/core/src/components/README.md<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 <li>emotionを使ってスタイルを書きます</li>
 </ul>
 </li>
 <li>スタイル一覧
 <ul>
-<li><a href="https://github.com/storybookjs/storybook/blob/da8cf2095bfde31267c11652a5f18deb4c48e192/code/core/src/theming/README.md"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/storybookjs/storybook/blob/da8cf2095bfde31267c11652a5f18deb4c48e192/code/core/src/theming/README.md<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://github.com/storybookjs/storybook/blob/da8cf2095bfde31267c11652a5f18deb4c48e192/code/core/src/theming/README.md"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/storybookjs/storybook/blob/da8cf2095bfde31267c11652a5f18deb4c48e192/code/core/src/theming/README.md<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 <li>ダークモードの対応も可能です</li>
 </ul>
 </li>
@@ -94,39 +129,38 @@ export const Panel = memo((props: Props) =&gt; {
 ゼロから作り上げるということはありません。また、ダークテーマの対応もできます。</p>
 <p>以下は、私が実装したパネルのコード例です。
 emotionを使ったことがある人なら、理解しやすいコードかと思います。</p>
-<pre><code class="language-tsx">// PropControl.styles.ts
-import { Badge } from "storybook/internal/components";
-import { styled, typography } from "storybook/theming";
-
-export const StyledDetails = styled.details`
-  border: 1px solid
-    ${({ theme }) =&gt;
-      theme.base === "dark" ? theme.color.dark : theme.color.border};
-  margin-bottom: ${({ theme }) =&gt; theme.layoutMargin}px;
-  background: ${({ theme }) =&gt; theme.color.lightest};
-`;
-
-export const StyledSummary = styled.summary`
-  padding: ${({ theme }) =&gt; theme.layoutMargin}px;
-  cursor: pointer;
-  font-weight: ${typography.weight.bold};
-  font-size: ${typography.size.s2}px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: ${({ theme }) =&gt; theme.color.defaultText};
-  background: ${({ theme }) =&gt; theme.background.content};
-
-  &amp;:hover {
-    background: ${({ theme }) =&gt;
-      theme.base === "dark" ? theme.color.darker : theme.color.lighter};
-  }
-`;
-
-export const SummaryBadge = styled(Badge)`
-  margin-left: auto;
-`;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// PropControl.styles.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">Badge</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">storybook/internal/components</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">styled</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> typography</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">storybook/theming</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#BB9AF7"> StyledDetails</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> styled</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">details</span><span style="color:#89DDFF">`</span></span>
+<span class="line"><span style="color:#9ECE6A">  border: 1px solid</span></span>
+<span class="line"><span style="color:#7DCFFF">    ${</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> theme</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">      theme</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">base</span><span style="color:#BB9AF7"> ===</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">dark</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> ?</span><span style="color:#C0CAF5"> theme</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">color</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">dark</span><span style="color:#BB9AF7"> :</span><span style="color:#C0CAF5"> theme</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">color</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">border</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">;</span></span>
+<span class="line"><span style="color:#9ECE6A">  margin-bottom: </span><span style="color:#7DCFFF">${</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> theme</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#C0CAF5"> theme</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">layoutMargin</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">px;</span></span>
+<span class="line"><span style="color:#9ECE6A">  background: </span><span style="color:#7DCFFF">${</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> theme</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#C0CAF5"> theme</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">color</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">lightest</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">;</span></span>
+<span class="line"><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#BB9AF7"> StyledSummary</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> styled</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">summary</span><span style="color:#89DDFF">`</span></span>
+<span class="line"><span style="color:#9ECE6A">  padding: </span><span style="color:#7DCFFF">${</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> theme</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#C0CAF5"> theme</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">layoutMargin</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">px;</span></span>
+<span class="line"><span style="color:#9ECE6A">  cursor: pointer;</span></span>
+<span class="line"><span style="color:#9ECE6A">  font-weight: </span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">typography</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">weight</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">bold</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">;</span></span>
+<span class="line"><span style="color:#9ECE6A">  font-size: </span><span style="color:#7DCFFF">${</span><span style="color:#C0CAF5">typography</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">size</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">s2</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">px;</span></span>
+<span class="line"><span style="color:#9ECE6A">  display: flex;</span></span>
+<span class="line"><span style="color:#9ECE6A">  align-items: center;</span></span>
+<span class="line"><span style="color:#9ECE6A">  justify-content: flex-start;</span></span>
+<span class="line"><span style="color:#9ECE6A">  color: </span><span style="color:#7DCFFF">${</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> theme</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#C0CAF5"> theme</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">color</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">defaultText</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">;</span></span>
+<span class="line"><span style="color:#9ECE6A">  background: </span><span style="color:#7DCFFF">${</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> theme</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#C0CAF5"> theme</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">background</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">content</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECE6A">  &amp;:hover {</span></span>
+<span class="line"><span style="color:#9ECE6A">    background: </span><span style="color:#7DCFFF">${</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68"> theme</span><span style="color:#89DDFF"> }</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">      theme</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">base</span><span style="color:#BB9AF7"> ===</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">dark</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> ?</span><span style="color:#C0CAF5"> theme</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">color</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">darker</span><span style="color:#BB9AF7"> :</span><span style="color:#C0CAF5"> theme</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">color</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">lighter</span><span style="color:#7DCFFF">}</span><span style="color:#9ECE6A">;</span></span>
+<span class="line"><span style="color:#9ECE6A">  }</span></span>
+<span class="line"><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#BB9AF7"> SummaryBadge</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> styled</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">Badge</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">`</span></span>
+<span class="line"><span style="color:#9ECE6A">  margin-left: auto;</span></span>
+<span class="line"><span style="color:#89DDFF">`</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
 <h2 id="リリース">リリース</h2>
 <p>npmへの公開は、アドオンキットにあるGitHub Actionsの release.yml をほとんどそのまま使いました。
 必要なAPIトークンは、<a href="https://github.com/storybookjs/addon-kit"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">README<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>に書いてあるので、その通りにやれば大丈夫です。</p>
@@ -134,13 +168,13 @@ export const SummaryBadge = styled(Badge)`
 <p>アドオンの使い方を示すためにデモが欲しかったので、Chromaticのサービスを使用しました。</p>
 <p>以下のURLにデモを公開しています。</p>
 <ul>
-<li><a href="https://develop--689dd119bb72c220c0ddb738.chromatic.com"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/develop--689dd119bb72c220c0ddb738.chromatic.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://develop--689dd119bb72c220c0ddb738.chromatic.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://develop--689dd119bb72c220c0ddb738.chromatic.com"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/develop--689dd119bb72c220c0ddb738.chromatic.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://develop--689dd119bb72c220c0ddb738.chromatic.com<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <h2 id="困ったこと">困ったこと</h2>
 <h3 id="ホットリロードが効かない">ホットリロードが効かない</h3>
 <p>以下のaddon-kitのissueにもあるように、ホットリロードがうまく動かないことがありました。</p>
 <ul>
-<li><a href="https://github.com/storybookjs/addon-kit/issues/49"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">https://github.com/storybookjs/addon-kit/issues/49<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a></li>
+<li><a href="https://github.com/storybookjs/addon-kit/issues/49"><span class="external-link-url"><span class="external-link-head" aria-hidden="true"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>https://github.com/storybookjs/addon-kit/issues/49<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></span></a></li>
 </ul>
 <p>そのため、開発中はコード修正してリロードを繰り返していました。ちょっと面倒でしたね。</p>
 <h3 id="パラメータに関数を渡せない">パラメータに関数を渡せない</h3>
@@ -148,76 +182,73 @@ export const SummaryBadge = styled(Badge)`
 JSONシリアライズの関係かと思います。</p>
 <p>少し強引なやり方かもしれませんが、プレビューのデコレータからだと、パラメータに関数がまだ残っているため、そのデータをパネルへ渡すようにしました。</p>
 <p>以下のように、プレビューのデコレータで、関数入りパラメータを独自シリアライズをし、パネルではそのデータを取得するようにしました。</p>
-<pre><code class="language-tsx">// withGlobals.ts
-import type {
-  Renderer,
-  StoryContext,
-  PartialStoryFn as StoryFunction,
-} from "storybook/internal/types";
-import { useEffect, useChannel } from "storybook/preview-api";
-import { EVENTS, KEY } from "./constants";
-import { serializeFunctions } from "./utils/serialize";
-
-export const withGlobals = (
-  StoryFn: StoryFunction&lt;Renderer&gt;,
-  context: StoryContext&lt;Renderer&gt;,
-) =&gt; {
-  const emit = useChannel({});
-
-  useEffect(() =&gt; {
-    const params = context.parameters?.[KEY];
-    if (params) {
-      const serialized = JSON.stringify(serializeFunctions(params));
-      emit(EVENTS.PARAMETERS_SYNC, serialized);
-    }
-  }, [context.id, context.parameters]);
-
-  return StoryFn();
-};
-</code></pre>
-<pre><code class="language-tsx">// preview.ts
-import type { ProjectAnnotations, Renderer } from "storybook/internal/types";
-
-import { KEY } from "./constants";
-import { withGlobals } from "./withGlobals";
-
-const preview: ProjectAnnotations&lt;Renderer&gt; = {
-  decorators: [withGlobals],
-  initialGlobals: {
-    [KEY]: false,
-  },
-};
-
-export default preview;
-</code></pre>
-<pre><code class="language-tsx">// Panel.tsx
-import React, { memo } from "react";
-import type { RangeControlsParameters } from "src/types";
-import { useChannel } from "storybook/manager-api";
-
-import { EVENTS } from "../../constants";
-import { reviveFunctions } from "../../utils/serialize";
-
-type Props = {
-  active: boolean;
-};
-
-export const Panel = memo((props: Props) =&gt; {
-  useChannel({
-    [EVENTS.PARAMETERS_SYNC]: (serialized: string) =&gt; {
-      try {
-        const parsed = JSON.parse(serialized);
-        const revived = reviveFunctions&lt;RangeControlsParameters&gt;(parsed);
-        // Do something with the revived parameters
-      } catch (e) {
-        console.error("Failed to deserialize parameters", e);
-      }
-    },
-  });
-
-  return (&lt;&gt;...&lt;/&gt;);
-});
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// withGlobals.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#BB9AF7"> type</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#0DB9D7">  Renderer</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#0DB9D7">  StoryContext</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#C0CAF5">  PartialStoryFn</span><span style="color:#89DDFF"> as</span><span style="color:#0DB9D7"> StoryFunction</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">storybook/internal/types</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">useEffect</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> useChannel</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">storybook/preview-api</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">EVENTS</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> KEY</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./constants</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">serializeFunctions</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./utils/serialize</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#7AA2F7"> withGlobals</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#E0AF68">  StoryFn</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> StoryFunction</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">Renderer</span><span style="color:#89DDFF">&gt;,</span></span>
+<span class="line"><span style="color:#E0AF68">  context</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> StoryContext</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">Renderer</span><span style="color:#89DDFF">&gt;,</span></span>
+<span class="line"><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> emit</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useChannel</span><span style="color:#9ABDF5">({})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  useEffect</span><span style="color:#9ABDF5">(() </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">    const</span><span style="color:#BB9AF7"> params</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">parameters</span><span style="color:#89DDFF">?.</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">KEY</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">    if</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">params</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">      const</span><span style="color:#BB9AF7"> serialized</span><span style="color:#89DDFF"> =</span><span style="color:#0DB9D7"> JSON</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">stringify</span><span style="color:#9ABDF5">(</span><span style="color:#7AA2F7">serializeFunctions</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">params</span><span style="color:#9ABDF5">))</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">      emit</span><span style="color:#9ABDF5">(</span><span style="color:#0DB9D7">EVENTS</span><span style="color:#89DDFF">.</span><span style="color:#FF9E64">PARAMETERS_SYNC</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> serialized</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> [</span><span style="color:#C0CAF5">context</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">id</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> context</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">parameters</span><span style="color:#9ABDF5">])</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#7AA2F7"> StoryFn</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// preview.ts</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#BB9AF7"> type</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">ProjectAnnotations</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> Renderer</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">storybook/internal/types</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">KEY</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./constants</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">withGlobals</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./withGlobals</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> preview</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> ProjectAnnotations</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">Renderer</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  decorators</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span><span style="color:#7DCFFF">withGlobals</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  initialGlobals</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9ABDF5">    [</span><span style="color:#FF9E64">KEY</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> false</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#7DCFFF"> default</span><span style="color:#C0CAF5"> preview</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// Panel.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> React</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">memo</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#BB9AF7"> type</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">RangeControlsParameters</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">src/types</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">useChannel</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">storybook/manager-api</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">EVENTS</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../constants</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">reviveFunctions</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../../utils/serialize</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> Props</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">  active</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> boolean</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#BB9AF7"> Panel</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> memo</span><span style="color:#9ABDF5">((</span><span style="color:#E0AF68">props</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Props</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  useChannel</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#9ABDF5">    [</span><span style="color:#0DB9D7">EVENTS</span><span style="color:#89DDFF">.</span><span style="color:#FF9E64">PARAMETERS_SYNC</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">serialized</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> string</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">      try</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">        const</span><span style="color:#BB9AF7"> parsed</span><span style="color:#89DDFF"> =</span><span style="color:#0DB9D7"> JSON</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">parse</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">serialized</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">        const</span><span style="color:#BB9AF7"> revived</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> reviveFunctions</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">RangeControlsParameters</span><span style="color:#89DDFF">&gt;</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">parsed</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">        // Do something with the revived parameters</span></span>
+<span class="line"><span style="color:#9ABDF5">      } </span><span style="color:#BB9AF7">catch</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">e</span><span style="color:#9ABDF5">) {</span></span>
+<span class="line"><span style="color:#C0CAF5">        console</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">error</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Failed to deserialize parameters</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> e</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">      }</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> (</span><span style="color:#BA3C97">&lt;&gt;</span><span style="color:#9AA5CE">...</span><span style="color:#BA3C97">&lt;/&gt;</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
 <h2 id="最後に">最後に</h2>
 <p>Storybookのアドオン開発って、どれぐらい難しいのかなと思ったのですが、
 アドオンキットのおかげで、思ったよりも簡単に開発できました。

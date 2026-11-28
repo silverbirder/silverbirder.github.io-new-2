@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2024-03-07" data-pagefind-filter="month:2024-03" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">112</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2024-03-07"><span class="visually-hidden">2024年3月7日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2024</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">07</span></span></time></p></div><div class="notebook-heading"><h1>Storybook上で tRPC通信をMSWでモックする方法</h1></div></header><div class="notebook-body"><h2 id="はじめに">はじめに</h2>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2024-03-07" data-pagefind-filter="month:2024-03" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">112</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2024-03-07"><span class="visually-hidden">2024年3月7日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2024</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">07</span></span></time></p></div><div class="notebook-heading"><h1>Storybook上で tRPC通信をMSWでモックする方法</h1></div></header><div class="notebook-body"><h2 id="はじめに">はじめに</h2>
 <p>tRPCは、型安全なAPIを簡単に構築できるフレームワークです。
 開発中、バックエンドの実装を待たずに、Storybook上でフロントエンドの開発を進めたい場合、
 Mock Service Worker (MSW) を使用してAPIのモックを行うことができます。
@@ -13,133 +49,128 @@ Mock Service Worker (MSW) を使用してAPIのモックを行うことができ
 <h2 id="技術スタック">技術スタック</h2>
 <p>まずは、使用するライブラリを紹介します。
 <code>package.json</code> には以下のような依存関係が記載されています。(一部抜粋しています)</p>
-<pre><code class="language-json">{
-  "dependencies": {
-    "@tanstack/react-query": "^4.36.1",
-    "@trpc/client": "^10.45.1",
-    "@trpc/next": "^10.45.1",
-    "@trpc/react-query": "^10.45.1",
-    "@trpc/server": "^10.45.1",
-    "next": "^14.1.0",
-    "react": "18.2.0"
-  },
-  "devDependencies": {
-    "@storybook/nextjs": "^7.6.17",
-    "@storybook/react": "^7.6.17",
-    "msw": "^2.2.2",
-    "msw-storybook-addon": "^2.0.0--canary.122.b3ed3b1.0",
-    "msw-trpc": "^2.0.0-beta.0",
-    "storybook": "^7.6.17"
-  }
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#9ABDF5">{</span></span>
+<span class="line"><span style="color:#89DDFF">  "</span><span style="color:#7AA2F7">dependencies</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">@tanstack/react-query</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^4.36.1</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">@trpc/client</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^10.45.1</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">@trpc/next</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^10.45.1</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">@trpc/react-query</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^10.45.1</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">@trpc/server</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^10.45.1</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">next</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^14.1.0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">18.2.0</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">  "</span><span style="color:#7AA2F7">devDependencies</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">@storybook/nextjs</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^7.6.17</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">@storybook/react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^7.6.17</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">msw</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^2.2.2</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">msw-storybook-addon</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^2.0.0--canary.122.b3ed3b1.0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">msw-trpc</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^2.0.0-beta.0</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#0DB9D7">storybook</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^7.6.17</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">JSON</figcaption></figure>
 <h2 id="準備">準備</h2>
 <p>プロジェクトの雛形を作成するため、以下のコマンドを実行します。</p>
-<pre><code class="language-bash">npm create t3-app@latest
-npx storybook@latest init
-npm i msw
-npx msw init ./public --save
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">npm</span><span style="color:#9ECE6A"> create</span><span style="color:#9ECE6A"> t3-app@latest</span></span>
+<span class="line"><span style="color:#C0CAF5">npx</span><span style="color:#9ECE6A"> storybook@latest</span><span style="color:#9ECE6A"> init</span></span>
+<span class="line"><span style="color:#C0CAF5">npm</span><span style="color:#9ECE6A"> i</span><span style="color:#9ECE6A"> msw</span></span>
+<span class="line"><span style="color:#C0CAF5">npx</span><span style="color:#9ECE6A"> msw</span><span style="color:#9ECE6A"> init</span><span style="color:#9ECE6A"> ./public</span><span style="color:#E0AF68"> --save</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>これにより、tRPCとMSWを統合する基本的なセットアップが整います。</p>
 <h2 id="サンプルコンポーネント">サンプルコンポーネント</h2>
 <p>次に、サンプルとして使用するコンポーネントは以下です。
 t3-appで生成されたコンポーネントで、一部アレンジしています。</p>
-<pre><code class="language-tsx">// ~/app/_components/create-post.tsx
-"use client";
-
-import { useState } from "react";
-
-import { api } from "~/trpc/react";
-
-export function CreatePost() {
-  const [name, setName] = useState("");
-  const [postName, setPostName] = useState("");
-
-  const createPost = api.post.create.useMutation({
-    onSuccess: ({name}) =&gt; {
-      setName("");
-      setPostName(name);
-    },
-  });
-
-  return (
-    &lt;form
-      onSubmit={(e) =&gt; {
-        e.preventDefault();
-        createPost.mutate({ name });
-      }}
-      className="flex flex-col gap-2"
-    &gt;
-      &lt;input
-        type="text"
-        placeholder="Title"
-        value={name}
-        onChange={(e) =&gt; setName(e.target.value)}
-        className="w-full rounded-full px-4 py-2 text-black"
-      /&gt;
-      &lt;button
-        type="submit"
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
-        disabled={createPost.isLoading}
-      &gt;
-        {createPost.isLoading ? "Submitting..." : "Submit"}
-      &lt;/button&gt;
-      &lt;div&gt;{postName}&lt;/div&gt;
-    &lt;/form&gt;
-  );
-}
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// ~/app/_components/create-post.tsx</span></span>
+<span class="line"><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">use client</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">useState</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">api</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">~/trpc/react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#BB9AF7"> function</span><span style="color:#7AA2F7"> CreatePost</span><span style="color:#9ABDF5">()</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#89DDFF"> [</span><span style="color:#BB9AF7">name</span><span style="color:#89DDFF">,</span><span style="color:#BB9AF7"> setName</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useState</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">""</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#89DDFF"> [</span><span style="color:#BB9AF7">postName</span><span style="color:#89DDFF">,</span><span style="color:#BB9AF7"> setPostName</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useState</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">""</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#BB9AF7"> createPost</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> api</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">post</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">create</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">useMutation</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#7AA2F7">    onSuccess</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> (</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68">name</span><span style="color:#89DDFF">}</span><span style="color:#9ABDF5">) </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">      setName</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">""</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">      setPostName</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">name</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;</span><span style="color:#F7768E">form</span></span>
+<span class="line"><span style="color:#BB9AF7">      onSubmit</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">e</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#C0CAF5">        e</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">preventDefault</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#C0CAF5">        createPost</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">mutate</span><span style="color:#9ABDF5">({ </span><span style="color:#C0CAF5">name</span><span style="color:#9ABDF5"> })</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">      }</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BB9AF7">      className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">flex flex-col gap-2</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#BA3C97">    &gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;</span><span style="color:#F7768E">input</span></span>
+<span class="line"><span style="color:#BB9AF7">        type</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">text</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#BB9AF7">        placeholder</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">Title</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#BB9AF7">        value</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">name</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BB9AF7">        onChange</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">e</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#7AA2F7"> setName</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">e</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">target</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">value</span><span style="color:#9ABDF5">)</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BB9AF7">        className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">w-full rounded-full px-4 py-2 text-black</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#BA3C97">      /&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;</span><span style="color:#F7768E">button</span></span>
+<span class="line"><span style="color:#BB9AF7">        type</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">submit</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#BB9AF7">        className</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#BB9AF7">        disabled</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">createPost</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">isLoading}</span></span>
+<span class="line"><span style="color:#BA3C97">      &gt;</span></span>
+<span class="line"><span style="color:#7DCFFF">        {</span><span style="color:#C0CAF5">createPost</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">isLoading</span><span style="color:#BB9AF7"> ?</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Submitting...</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> :</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Submit</span><span style="color:#89DDFF">"</span><span style="color:#7DCFFF">}</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;/</span><span style="color:#F7768E">button</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">&gt;</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">postName</span><span style="color:#7DCFFF">}</span><span style="color:#BA3C97">&lt;/</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;/</span><span style="color:#F7768E">form</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
 <p><code>api.post.create.useMutation</code> を用いてtRPCでデータの送信を行なっています。</p>
 <h2 id="mswとtrpcの統合">MSWとtRPCの統合</h2>
 <p>MSWとtRPCを統合するには、まず<a href="https://github.com/maloguertin/msw-trpc"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">maloguertin/msw-trpc<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>パッケージをインストールします。</p>
-<pre><code class="language-bash">npm i msw-trpc --save-dev
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">npm</span><span style="color:#9ECE6A"> i</span><span style="color:#9ECE6A"> msw-trpc</span><span style="color:#E0AF68"> --save-dev</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>そして、MSWとtRPCの統合コードは <code>~/trpc/msw.tsx</code> に配置し、以下のように記述します。</p>
-<pre><code class="language-tsx">// ~/trpc/msw.tsx
-"use client";
-
-import { useState } from "react";
-import { createTRPCMsw } from "msw-trpc";
-import { httpLink } from "@trpc/client";
-import { createTRPCReact } from "@trpc/react-query";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { getUrl, transformer } from "./shared";
-import type { AppRouter } from "~/server/api/root";
-
-export const trpcMsw = createTRPCMsw&lt;AppRouter&gt;({
-  baseUrl: getUrl(),
-  transformer: { input: transformer, output: transformer },
-});
-
-export const api = createTRPCReact&lt;AppRouter&gt;();
-
-export const TRPCReactProvider = (props: { children: React.ReactNode }) =&gt; {
-  const [queryClient] = useState(() =&gt; new QueryClient());
-  const [trpcClient] = useState(() =&gt;
-    api.createClient({
-      transformer,
-      links: [
-        httpLink({
-          url: getUrl(),
-          headers() {
-            return {
-              "content-type": "application/json",
-            };
-          },
-        }),
-      ],
-    }),
-  );
-
-  return (
-    &lt;QueryClientProvider client={queryClient}&gt;
-      &lt;api.Provider client={trpcClient} queryClient={queryClient}&gt;
-        {props.children}
-      &lt;/api.Provider&gt;
-    &lt;/QueryClientProvider&gt;
-  );
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// ~/trpc/msw.tsx</span></span>
+<span class="line"><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">use client</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">useState</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">createTRPCMsw</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">msw-trpc</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">httpLink</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@trpc/client</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">createTRPCReact</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@trpc/react-query</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">QueryClient</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> QueryClientProvider</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@tanstack/react-query</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">getUrl</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> transformer</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">./shared</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#BB9AF7"> type</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">AppRouter</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">~/server/api/root</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#BB9AF7"> trpcMsw</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> createTRPCMsw</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">AppRouter</span><span style="color:#89DDFF">&gt;</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#73DACA">  baseUrl</span><span style="color:#89DDFF">:</span><span style="color:#7AA2F7"> getUrl</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  transformer</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span><span style="color:#73DACA"> input</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> transformer</span><span style="color:#89DDFF">,</span><span style="color:#73DACA"> output</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> transformer</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#BB9AF7"> api</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> createTRPCReact</span><span style="color:#89DDFF">&lt;</span><span style="color:#C0CAF5">AppRouter</span><span style="color:#89DDFF">&gt;</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#7AA2F7"> TRPCReactProvider</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">props</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span><span style="color:#C0CAF5"> children</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> React</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">ReactNode</span><span style="color:#9ABDF5"> })</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#89DDFF"> [</span><span style="color:#BB9AF7">queryClient</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useState</span><span style="color:#9ABDF5">(() </span><span style="color:#BB9AF7">=&gt;</span><span style="color:#89DDFF"> new</span><span style="color:#7AA2F7"> QueryClient</span><span style="color:#9ABDF5">())</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">  const</span><span style="color:#89DDFF"> [</span><span style="color:#BB9AF7">trpcClient</span><span style="color:#89DDFF">]</span><span style="color:#89DDFF"> =</span><span style="color:#7AA2F7"> useState</span><span style="color:#9ABDF5">(() </span><span style="color:#BB9AF7">=&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">    api</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">createClient</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#C0CAF5">      transformer</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">      links</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span></span>
+<span class="line"><span style="color:#7AA2F7">        httpLink</span><span style="color:#9ABDF5">({</span></span>
+<span class="line"><span style="color:#73DACA">          url</span><span style="color:#89DDFF">:</span><span style="color:#7AA2F7"> getUrl</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#7AA2F7">          headers</span><span style="color:#9ABDF5">() {</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">            return</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#89DDFF">              "</span><span style="color:#9ECE6A">content-type</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">application/json</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">            }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">          }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">        })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">      ]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">    })</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">  return</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;</span><span style="color:#DE5971">QueryClientProvider </span><span style="color:#BB9AF7">client</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">queryClient</span><span style="color:#7DCFFF">}</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;</span><span style="color:#DE5971">api.Provider </span><span style="color:#BB9AF7">client</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">trpcClient</span><span style="color:#7DCFFF">}</span><span style="color:#BB9AF7"> queryClient</span><span style="color:#89DDFF">=</span><span style="color:#7DCFFF">{</span><span style="color:#C0CAF5">queryClient</span><span style="color:#7DCFFF">}</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#7DCFFF">        {</span><span style="color:#C0CAF5">props</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">children}</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;/</span><span style="color:#DE5971">api.Provider</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">    &lt;/</span><span style="color:#DE5971">QueryClientProvider</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">  )</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
 <p><code>trpcMsw</code> は MSWのハンドラで使用します。
 詳しくは、<a href="https://github.com/maloguertin/msw-trpc"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">maloguertin/msw-trpc<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a> の <code>createTRPCMsw</code> をご確認ください。
 createTRPCMsw の引数が最初分からなかったので、困りました。
@@ -147,77 +178,74 @@ createTRPCMsw の引数が最初分からなかったので、困りました。
 <h2 id="mswとstorybookの統合">MSWとStorybookの統合</h2>
 <p>MSWをStorybookで動かすためには、<a href="https://github.com/mswjs/msw-storybook-addon"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/github.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">mswjs/msw-storybook-addon<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a> を使います。
 インストールは、以下のコマンドを実行します。</p>
-<pre><code class="language-bash">npm i msw-storybook-addon --save-dev
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#C0CAF5">npm</span><span style="color:#9ECE6A"> i</span><span style="color:#9ECE6A"> msw-storybook-addon</span><span style="color:#E0AF68"> --save-dev</span></span></code></pre><figcaption class="notebook-code-language">BASH</figcaption></figure>
 <p>※ 諸事情により、<code>msw-storybook-addon@2.0.0--canary.122.b3ed3b1.0</code> を指定しています。</p>
 <p>Storybookでの表示を設定するには、<code>.storybook/preview.tsx</code> を以下のように設定します。</p>
-<pre><code class="language-tsx">// /.storybook/preview.tsx
-import React from "react";
-import type { Preview } from "@storybook/react";
-import { initialize, mswLoader } from "msw-storybook-addon";
-import { TRPCReactProvider } from "../src/trpc/msw";
-initialize();
-
-const preview: Preview = {
-  parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
-  },
-  loaders: [mswLoader],
-  decorators: [
-    (Story) =&gt; (
-      &lt;TRPCReactProvider&gt;
-        &lt;Story /&gt;
-      &lt;/TRPCReactProvider&gt;
-    ),
-  ],
-};
-
-export default preview;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// /.storybook/preview.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#0DB9D7"> React</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#BB9AF7"> type</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">Preview</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">@storybook/react</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">initialize</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> mswLoader</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">msw-storybook-addon</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">TRPCReactProvider</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">../src/trpc/msw</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">initialize</span><span style="color:#9ABDF5">()</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> preview</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Preview</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  parameters</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">    actions</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span><span style="color:#41A6B5"> argTypesRegex</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">^on[A-Z].*</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">    controls</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#41A6B5">      matchers</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#41A6B5">        color</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> /</span><span style="color:#F7768E">(</span><span style="color:#B4F9F8">background</span><span style="color:#BB9AF7">|</span><span style="color:#B4F9F8">color</span><span style="color:#F7768E">)</span><span style="color:#BB9AF7">$</span><span style="color:#89DDFF">/i</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#41A6B5">        date</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> /</span><span style="color:#B4F9F8">Date</span><span style="color:#BB9AF7">$</span><span style="color:#89DDFF">/i</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">      }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  loaders</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span><span style="color:#7DCFFF">mswLoader</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  decorators</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span></span>
+<span class="line"><span style="color:#9ABDF5">    (</span><span style="color:#E0AF68">Story</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> (</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;</span><span style="color:#DE5971">TRPCReactProvider</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">        &lt;</span><span style="color:#DE5971">Story </span><span style="color:#BA3C97">/&gt;</span></span>
+<span class="line"><span style="color:#BA3C97">      &lt;/</span><span style="color:#DE5971">TRPCReactProvider</span><span style="color:#BA3C97">&gt;</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  ]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#7DCFFF"> default</span><span style="color:#C0CAF5"> preview</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
 <p>decorators に <code>TRPCReactProvider</code> で包みます。
 これにより、Storybook内でtRPCの通信をMSWでモックできるようになります。</p>
 <h2 id="storybookのstoriesファイル">Storybookのstoriesファイル</h2>
 <p>最後に、Storybookのstoriesファイルは、以下のように定義します。</p>
-<pre><code class="language-tsx">// ~/app/_components/create-post.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react';
-
-import { CreatePost } from './create-post';
-import { trpcMsw } from '~/trpc/msw';
-
-const meta = {
-  title: 'create-post',
-  component: CreatePost,
-  parameters: {
-    layout: 'centered',
-  },
-  tags: ['autodocs'],
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
-} satisfies Meta&lt;typeof CreatePost&gt;;
-
-export default meta;
-type Story = StoryObj&lt;typeof meta&gt;;
-
-export const Main: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        trpcMsw.post.create.mutation(({name}) =&gt; {
-          const post = { id: 1, name: name };
-          return post;
-        })
-      ],
-    },
-  }
-};
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#51597D;font-style:italic">// ~/app/_components/create-post.stories.tsx</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#BB9AF7"> type</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">Meta</span><span style="color:#89DDFF">,</span><span style="color:#0DB9D7"> StoryObj</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">@storybook/react</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">CreatePost</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">./create-post</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7DCFFF">import</span><span style="color:#9ABDF5"> { </span><span style="color:#0DB9D7">trpcMsw</span><span style="color:#9ABDF5"> }</span><span style="color:#7DCFFF"> from</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">~/trpc/msw</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">const</span><span style="color:#BB9AF7"> meta</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  title</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">create-post</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  component</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> CreatePost</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  parameters</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">    layout</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">centered</span><span style="color:#89DDFF">'</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  tags</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">autodocs</span><span style="color:#89DDFF">'</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">  argTypes</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">    backgroundColor</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span><span style="color:#41A6B5"> control</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">color</span><span style="color:#89DDFF">'</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#BB9AF7"> satisfies</span><span style="color:#C0CAF5"> Meta</span><span style="color:#89DDFF">&lt;typeof</span><span style="color:#C0CAF5"> CreatePost</span><span style="color:#89DDFF">&gt;;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#7DCFFF"> default</span><span style="color:#C0CAF5"> meta</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7">type</span><span style="color:#C0CAF5"> Story</span><span style="color:#89DDFF"> =</span><span style="color:#C0CAF5"> StoryObj</span><span style="color:#89DDFF">&lt;typeof</span><span style="color:#C0CAF5"> meta</span><span style="color:#89DDFF">&gt;;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7DCFFF">export</span><span style="color:#9D7CD8;font-style:italic"> const</span><span style="color:#BB9AF7"> Main</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> Story</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">  parameters</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">    msw</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#41A6B5">      handlers</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span></span>
+<span class="line"><span style="color:#C0CAF5">        trpcMsw</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">post</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">create</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">mutation</span><span style="color:#9ABDF5">((</span><span style="color:#89DDFF">{</span><span style="color:#E0AF68">name</span><span style="color:#89DDFF">}</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =&gt;</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#9D7CD8;font-style:italic">          const</span><span style="color:#BB9AF7"> post</span><span style="color:#89DDFF"> =</span><span style="color:#9ABDF5"> { </span><span style="color:#41A6B5">id</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 1</span><span style="color:#89DDFF">,</span><span style="color:#41A6B5"> name</span><span style="color:#89DDFF">:</span><span style="color:#7DCFFF"> name</span><span style="color:#9ABDF5"> }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#BB9AF7;font-style:italic">          return</span><span style="color:#7DCFFF"> post</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">        })</span></span>
+<span class="line"><span style="color:#9ABDF5">      ]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span><span style="color:#89DDFF">;</span></span></code></pre><figcaption class="notebook-code-language">TSX</figcaption></figure>
 <p><code>parameters.switch.handlers</code> に、tRPCのmutationをMSWでモックしています。
 これで、<code>npm run storybook</code> を実行すると、tRPCのモックが反映されたUIを確認できます。</p>
 <h2 id="終わりに">終わりに</h2>

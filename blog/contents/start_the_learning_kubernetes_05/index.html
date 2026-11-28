@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2019-05-03" data-pagefind-filter="month:2019-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">8</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-03"><span class="visually-hidden">2019年5月3日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 05. workloads その1 -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2019-05-03" data-pagefind-filter="month:2019-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">8</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-03"><span class="visually-hidden">2019年5月3日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">03</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 05. workloads その1 -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
 <ol>
 <li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_01/">一足遅れて Kubernetes を学び始める - 01. 環境選択編 -</a></li>
 <li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_02/">一足遅れて Kubernetes を学び始める - 02. Docker For Mac -</a></li>
@@ -78,135 +114,124 @@ Pod 毎に IP アドレスが振られる。ボリュームは共有。
 基本的に、Pod にコンテナを詰め込めるのではなく、「分離できるなら、分離する」方針がマイクロサービスとして良いそうです。
 さっそく、動かしてみます。</p>
 <p>※ <code>alias k=kubectl</code></p>
-<pre><code class="language-yaml">## sample-2pod.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: sample-2pod
-spec:
-  containers:
-    - name: nginx-container
-      image: nginx:1.12
-    - name: redis-container
-      image: redis:3.2
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f . --prune --all
-pod/sample-2pod created
-pi@raspi001:~/tmp $ k get pod sample-2pod
-NAME          READY   STATUS    RESTARTS   AGE
-sample-2pod   2/2     Running   0          101s
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-2pod.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Pod</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-2pod</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">      image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> redis-container</span></span>
+<span class="line"><span style="color:#F7768E">      image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> redis:3.2</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> .</span><span style="color:#E0AF68"> --prune</span><span style="color:#E0AF68"> --all</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-2pod</span><span style="color:#9ECE6A"> created</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pod</span><span style="color:#9ECE6A"> sample-2pod</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">          READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-2pod</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          101s</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>期待通り複数のコンテナが動いていますね。(READY 2/2)
 exec で中に入る場合、どうなるのでしょうか。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k exec -it sample-2pod /bin/sh
-Defaulting container name to nginx-container.
-Use 'kubectl describe pod/sample-2pod -n default' to see all of the containers in this pod.
-#
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-2pod</span><span style="color:#9ECE6A"> /bin/sh</span></span>
+<span class="line"><span style="color:#C0CAF5">Defaulting</span><span style="color:#9ECE6A"> container</span><span style="color:#9ECE6A"> name</span><span style="color:#9ECE6A"> to</span><span style="color:#9ECE6A"> nginx-container.</span></span>
+<span class="line"><span style="color:#C0CAF5">Use</span><span style="color:#89DDFF"> '</span><span style="color:#9ECE6A">kubectl describe pod/sample-2pod -n default</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A"> to</span><span style="color:#9ECE6A"> see</span><span style="color:#9ECE6A"> all</span><span style="color:#9ECE6A"> of</span><span style="color:#9ECE6A"> the</span><span style="color:#9ECE6A"> containers</span><span style="color:#9ECE6A"> in</span><span style="color:#9ECE6A"> this</span><span style="color:#9ECE6A"> pod.</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">#</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>なるほど、デフォルトのコンテナ（spec.containers の先頭)に入るみたいです。
 redis-container に入る場合は、</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k exec -it sample-2pod -c redis-container /bin/sh
-## redis-cli
-127.0.0.1:6379&gt; exit
-#
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-2pod</span><span style="color:#E0AF68"> -c</span><span style="color:#9ECE6A"> redis-container</span><span style="color:#9ECE6A"> /bin/sh</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">## redis-cli</span></span>
+<span class="line"><span style="color:#C0CAF5">127.0.0.1:6379</span><span style="color:#A9B1D6">&gt; </span><span style="color:#9ECE6A">exit</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">#</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p><code>-c</code>でコンテナを指定するだけみたいです。
 他にも説明したいことがありますが、長くなりそうなので切り上げます。</p>
 <h2 id="replicaset-replicationcontroller">ReplicaSet, ReplicationController</h2>
 <p>レプリカという名前だけあって、Pod を複製するリソース。
 過去の経緯から ReplicationController から ReplicaSet へ名前変更があったため、ReplicaSet を使うことが推奨</p>
 <p>さっそく、動かしてみます。</p>
-<pre><code class="language-yaml">## sample-rs.yaml
-apiVersion: apps/v1
-kind: ReplicaSet
-metadata:
-  name: sample-rs
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: sample-app
-  template:
-    metadata:
-      labels:
-        app: sample-app
-    spec:
-      containers:
-        - name: nginx-container
-          image: nginx:1.12
-        - name: redis-container
-          image: redis:3.2
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f . --prune --all
-replicaset.apps/sample-rs created
-pod/sample-2pod unchanged
-pi@raspi001:~/tmp $ k get pods
-NAME              READY   STATUS              RESTARTS   AGE
-sample-2pod       2/2     Running             0          20m
-sample-rs-ghkcc   2/2     Running             0          103s
-sample-rs-nsc5b   0/2     ContainerCreating   0          103s
-sample-rs-wk7vl   0/2     ContainerCreating   0          103s
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-rs.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> apps/v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> ReplicaSet</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-rs</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  replicas</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3</span></span>
+<span class="line"><span style="color:#F7768E">  selector</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    matchLabels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">  template</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      labels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">        app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">    spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">          image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> redis-container</span></span>
+<span class="line"><span style="color:#F7768E">          image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> redis:3.2</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> .</span><span style="color:#E0AF68"> --prune</span><span style="color:#E0AF68"> --all</span></span>
+<span class="line"><span style="color:#C0CAF5">replicaset.apps/sample-rs</span><span style="color:#9ECE6A"> created</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-2pod</span><span style="color:#9ECE6A"> unchanged</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">              READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">              RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-2pod</span><span style="color:#9ECE6A">       2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">             0</span><span style="color:#9ECE6A">          20m</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-ghkcc</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">             0</span><span style="color:#9ECE6A">          103s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-nsc5b</span><span style="color:#9ECE6A">   0/2</span><span style="color:#9ECE6A">     ContainerCreating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          103s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-wk7vl</span><span style="color:#9ECE6A">   0/2</span><span style="color:#9ECE6A">     ContainerCreating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          103s</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>確かに、replica3 つ(sample-rs)で、それぞれコンテナが２つ(READY 2/2)作れていますね。
 書いて気になるのは、 pod の apiVersion は、<code>v1</code>に対して、replicaSet の apiVersion は、 <code>apps/v1</code>というのが気になりましたので、調べてみたところ、<a href="https://qiita.com/soymsk/items/69aeaa7945fe1f875822"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/qiita.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Kubernetes の apiVersion に何を書けばいいか<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>という記事を見つけました。
 Core となる機能は、<code>v1</code>で良いみたいです。</p>
 <p>Kubernetes の目玉機能であるオーケストレーションの機能であるセルフヒーリングを試してみます。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k get pods
-NAME              READY   STATUS    RESTARTS   AGE
-sample-2pod       2/2     Running   0          29m
-sample-rs-ghkcc   2/2     Running   0          11m
-sample-rs-nsc5b   2/2     Running   0          11m
-sample-rs-wk7vl   2/2     Running   0          11m
-pi@raspi001:~/tmp $ k delete pod sample-rs-wk7vl
-pod "sample-rs-wk7vl" deleted
-pi@raspi001:~/tmp $ k get pods
-NAME              READY   STATUS              RESTARTS   AGE
-sample-2pod       2/2     Running             0          30m
-sample-rs-ghkcc   2/2     Running             0          11m
-sample-rs-gq2hs   0/2     ContainerCreating   0          13s
-sample-rs-nsc5b   2/2     Running             0          11m
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">              READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-2pod</span><span style="color:#9ECE6A">       2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          29m</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-ghkcc</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          11m</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-nsc5b</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          11m</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-wk7vl</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          11m</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> delete</span><span style="color:#9ECE6A"> pod</span><span style="color:#9ECE6A"> sample-rs-wk7vl</span></span>
+<span class="line"><span style="color:#C0CAF5">pod</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">sample-rs-wk7vl</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A"> deleted</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">              READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">              RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-2pod</span><span style="color:#9ECE6A">       2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">             0</span><span style="color:#9ECE6A">          30m</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-ghkcc</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">             0</span><span style="color:#9ECE6A">          11m</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-gq2hs</span><span style="color:#9ECE6A">   0/2</span><span style="color:#9ECE6A">     ContainerCreating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          13s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-nsc5b</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">             0</span><span style="color:#9ECE6A">          11m</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>おー、ContainerCreating されています。良いですね〜。
 ちなみに、気になったのは node 自体が故障してダウンした場合は、どうなるのでしょうか。試してみます。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k get pods -o=wide
-NAME              READY   STATUS    RESTARTS   AGE    IP            NODE       NOMINATED NODE   READINESS GATES
-sample-2pod       2/2     Running   0          32m    10.244.1.25   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-ghkcc   2/2     Running   0          13m    10.244.1.26   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-gq2hs   2/2     Running   0          114s   10.244.1.27   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-nsc5b   2/2     Running   0          13m    10.244.2.15   raspi003   &lt;none&gt;           &lt;none&gt;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#E0AF68"> -o=wide</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">              READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span><span style="color:#9ECE6A">    IP</span><span style="color:#9ECE6A">            NODE</span><span style="color:#9ECE6A">       NOMINATED</span><span style="color:#9ECE6A"> NODE</span><span style="color:#9ECE6A">   READINESS</span><span style="color:#9ECE6A"> GATES</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-2pod</span><span style="color:#9ECE6A">       2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          32m</span><span style="color:#FF9E64">    10.244.1.25</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-ghkcc</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          13m</span><span style="color:#FF9E64">    10.244.1.26</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-gq2hs</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          114s</span><span style="color:#FF9E64">   10.244.1.27</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-nsc5b</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          13m</span><span style="color:#FF9E64">    10.244.2.15</span><span style="color:#9ECE6A">   raspi003</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>raspi003 の電源を落としてみます。</p>
 <p>worker(raspi003)に移動</p>
-<pre><code class="language-shell">~ $ slogin pi@raspi003.local
-pi@raspi003.local's password:
-pi@raspi003:~ $ sudo shutdown now
-sudo: unable to resolve host raspi003
-Connection to raspi003.local closed by remote host.
-Connection to raspi003.local closed.
-~ $
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#89DDFF">~</span><span style="color:#A9B1D6"> $ slogin pi@raspi003.local</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi003.local</span><span style="color:#C0CAF5">'s password:</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi003:~ $ sudo shutdown now</span></span>
+<span class="line"><span style="color:#C0CAF5">sudo: unable to resolve host raspi003</span></span>
+<span class="line"><span style="color:#C0CAF5">Connection to raspi003.local closed by remote host.</span></span>
+<span class="line"><span style="color:#C0CAF5">Connection to raspi003.local closed.</span></span>
+<span class="line"><span style="color:#C0CAF5">~ $</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>master(raspi001)に移動</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k get nodes
-NAME       STATUS     ROLES    AGE     VERSION
-raspi001   Ready      master   5d16h   v1.14.1
-raspi002   Ready      worker   5d16h   v1.14.1
-raspi003   NotReady   worker   4d21h   v1.14.1
-pi@raspi001:~/tmp $ k get pods -o=wide
-NAME              READY   STATUS    RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES
-sample-2pod       2/2     Running   0          35m     10.244.1.25   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-ghkcc   2/2     Running   0          17m     10.244.1.26   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-gq2hs   2/2     Running   0          5m38s   10.244.1.27   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-nsc5b   2/2     Running   0          17m     10.244.2.15   raspi003   &lt;none&gt;           &lt;none&gt;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> nodes</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">       STATUS</span><span style="color:#9ECE6A">     ROLES</span><span style="color:#9ECE6A">    AGE</span><span style="color:#9ECE6A">     VERSION</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi001</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">      master</span><span style="color:#9ECE6A">   5d16h</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi002</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">      worker</span><span style="color:#9ECE6A">   5d16h</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi003</span><span style="color:#9ECE6A">   NotReady</span><span style="color:#9ECE6A">   worker</span><span style="color:#9ECE6A">   4d21h</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#E0AF68"> -o=wide</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">              READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span><span style="color:#9ECE6A">     IP</span><span style="color:#9ECE6A">            NODE</span><span style="color:#9ECE6A">       NOMINATED</span><span style="color:#9ECE6A"> NODE</span><span style="color:#9ECE6A">   READINESS</span><span style="color:#9ECE6A"> GATES</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-2pod</span><span style="color:#9ECE6A">       2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          35m</span><span style="color:#FF9E64">     10.244.1.25</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-ghkcc</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          17m</span><span style="color:#FF9E64">     10.244.1.26</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-gq2hs</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          5m38s</span><span style="color:#FF9E64">   10.244.1.27</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-nsc5b</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          17m</span><span style="color:#FF9E64">     10.244.2.15</span><span style="color:#9ECE6A">   raspi003</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>ん？ raspi003 で動いている？ 数十秒後…</p>
-<pre><code class="language-shell">pi@raspi001:~/kubernetes-perfect-guide/samples/chapter05/tmp $ k get pods -o=wide
-NAME              READY   STATUS        RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
-sample-2pod       2/2     Running       0          40m   10.244.1.25   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-ghkcc   2/2     Running       0          22m   10.244.1.26   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-gq2hs   2/2     Running       0          10m   10.244.1.27   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-nsc5b   2/2     Terminating   0          22m   10.244.2.15   raspi003   &lt;none&gt;           &lt;none&gt;
-sample-rs-p2jsc   2/2     Running       0          53s   10.244.1.28   raspi002   &lt;none&gt;           &lt;none&gt;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/kubernetes-perfect-guide/samples/chapter05/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#E0AF68"> -o=wide</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">              READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">        RESTARTS</span><span style="color:#9ECE6A">   AGE</span><span style="color:#9ECE6A">   IP</span><span style="color:#9ECE6A">            NODE</span><span style="color:#9ECE6A">       NOMINATED</span><span style="color:#9ECE6A"> NODE</span><span style="color:#9ECE6A">   READINESS</span><span style="color:#9ECE6A"> GATES</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-2pod</span><span style="color:#9ECE6A">       2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">       0</span><span style="color:#9ECE6A">          40m</span><span style="color:#FF9E64">   10.244.1.25</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-ghkcc</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">       0</span><span style="color:#9ECE6A">          22m</span><span style="color:#FF9E64">   10.244.1.26</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-gq2hs</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">       0</span><span style="color:#9ECE6A">          10m</span><span style="color:#FF9E64">   10.244.1.27</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-nsc5b</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Terminating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          22m</span><span style="color:#FF9E64">   10.244.2.15</span><span style="color:#9ECE6A">   raspi003</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-p2jsc</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">       0</span><span style="color:#9ECE6A">          53s</span><span style="color:#FF9E64">   10.244.1.28</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>おー、期待通り raspi003 にある pod が消えて、raspi002 に作り直されました。sample-rs-nsc5b は node が落ちちゃっているので、消すこともできず残り続けます。</p>
 <h2 id="少し待ち時間が長いような">少し待ち時間が長いような</h2>
 <p><a href="http://dr-asa.hatenablog.com/entry/2018/04/02/174006"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/dr-asa.hatenablog.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Kubernetes はクラスタで障害があったとき、どういう動きをするのか<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>という記事によれば、kube-controller-manager が検知して、kube-scheduler が正しい数に揃えているみたいです。 <strong>数十秒待たされた</strong> のは、検知の間隔のせいでしょうか。</p>
@@ -217,22 +242,21 @@ sample-rs-p2jsc   2/2     Running       0          53s   10.244.1.28   raspi002 
 ただし、<a href="https://stackoverflow.com/questions/48640806/editing-nodeselector-doesnt-rearrange-pods-in-replicaset"><img class="external-link-favicon" src="https://icons.duckduckgo.com/ip3/stackoverflow.com.ico" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">Editing nodeSelector doesn’t rearrange pods in ReplicaSet<span class="external-link-tail" aria-hidden="true"><svg class="external-link-mark" viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M5.5 2.5h-4v8h8v-4M7.5 1.5h3v3m0-3L5 7"/></svg></span></a>によると、それは replicaSet ではなく、deployment で行うべきとのことです。replicaSet で動くかどうか、念の為試してみます。</p>
 <p>まず、先程落とした raspi003 を電源を入れ直して起動させます。
 その後、master(raspi001)に移動。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k label nodes raspi002 type=AWS
-node/raspi002 labeled
-pi@raspi001:~/tmp $ k label nodes raspi003 type=GCP
-node/raspi003 labeled
-pi@raspi001:~/tmp $ k get nodes -L type
-NAME       STATUS   ROLES    AGE     VERSION   TYPE
-raspi001   Ready    master   5d17h   v1.14.1
-raspi002   Ready    worker   5d17h   v1.14.1   AWS
-raspi003   Ready    worker   4d21h   v1.14.1   GCP
-pi@raspi001:~/tmp $ k get pods -o=wide
-NAME              READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
-sample-2pod       2/2     Running   0          75m   10.244.1.25   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-ghkcc   2/2     Running   0          56m   10.244.1.26   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-gq2hs   2/2     Running   0          44m   10.244.1.27   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-p2jsc   2/2     Running   0          35m   10.244.1.28   raspi002   &lt;none&gt;           &lt;none&gt;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> label</span><span style="color:#9ECE6A"> nodes</span><span style="color:#9ECE6A"> raspi002</span><span style="color:#9ECE6A"> type=AWS</span></span>
+<span class="line"><span style="color:#C0CAF5">node/raspi002</span><span style="color:#9ECE6A"> labeled</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> label</span><span style="color:#9ECE6A"> nodes</span><span style="color:#9ECE6A"> raspi003</span><span style="color:#9ECE6A"> type=GCP</span></span>
+<span class="line"><span style="color:#C0CAF5">node/raspi003</span><span style="color:#9ECE6A"> labeled</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> nodes</span><span style="color:#E0AF68"> -L</span><span style="color:#9ECE6A"> type</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">       STATUS</span><span style="color:#9ECE6A">   ROLES</span><span style="color:#9ECE6A">    AGE</span><span style="color:#9ECE6A">     VERSION</span><span style="color:#9ECE6A">   TYPE</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi001</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">    master</span><span style="color:#9ECE6A">   5d17h</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi002</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">    worker</span><span style="color:#9ECE6A">   5d17h</span><span style="color:#9ECE6A">   v1.14.1</span><span style="color:#9ECE6A">   AWS</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi003</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">    worker</span><span style="color:#9ECE6A">   4d21h</span><span style="color:#9ECE6A">   v1.14.1</span><span style="color:#9ECE6A">   GCP</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#E0AF68"> -o=wide</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">              READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span><span style="color:#9ECE6A">   IP</span><span style="color:#9ECE6A">            NODE</span><span style="color:#9ECE6A">       NOMINATED</span><span style="color:#9ECE6A"> NODE</span><span style="color:#9ECE6A">   READINESS</span><span style="color:#9ECE6A"> GATES</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-2pod</span><span style="color:#9ECE6A">       2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          75m</span><span style="color:#FF9E64">   10.244.1.25</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-ghkcc</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          56m</span><span style="color:#FF9E64">   10.244.1.26</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-gq2hs</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          44m</span><span style="color:#FF9E64">   10.244.1.27</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-p2jsc</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          35m</span><span style="color:#FF9E64">   10.244.1.28</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>node にラベルを貼って、nodeSelector しやすいようにしました。
 sample-rs は、全て raspi002 で動いているので、下記を試してみます。</p>
 <ol>
@@ -240,62 +264,58 @@ sample-rs は、全て raspi002 で動いているので、下記を試してみ
 <li>raspi002 をシャットダウン</li>
 </ol>
 <p>その結果、「sample-rs は raspi002 が動いていないので、セルフヒーリングしない」ことを期待します。</p>
-<pre><code class="language-yaml">## sample-rs.yaml
-apiVersion: apps/v1
-kind: ReplicaSet
-metadata:
-  name: sample-rs
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: sample-app
-  template:
-    metadata:
-      labels:
-        app: sample-app
-    spec:
-      containers:
-        - name: nginx-container
-          image: nginx:1.12
-        - name: redis-container
-          image: redis:3.2
-      nodeSelector:
-        type: AWS
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f . --prune --all
-replicaset.apps/sample-rs configured
-pod/sample-2pod unchanged
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-rs.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> apps/v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> ReplicaSet</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-rs</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  replicas</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3</span></span>
+<span class="line"><span style="color:#F7768E">  selector</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    matchLabels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">  template</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      labels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">        app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">    spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">          image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> redis-container</span></span>
+<span class="line"><span style="color:#F7768E">          image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> redis:3.2</span></span>
+<span class="line"><span style="color:#F7768E">      nodeSelector</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">        type</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> AWS</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> .</span><span style="color:#E0AF68"> --prune</span><span style="color:#E0AF68"> --all</span></span>
+<span class="line"><span style="color:#C0CAF5">replicaset.apps/sample-rs</span><span style="color:#9ECE6A"> configured</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-2pod</span><span style="color:#9ECE6A"> unchanged</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>nodeSelector を追加しました。
 今回は単純な指定なのでこれで良いですが、より柔軟に指定したい場合は nodeAffinity を使うそうです。</p>
 <p>worker(raspi002)に移動</p>
-<pre><code class="language-shell">~ $ slogin pi@raspi002.local
-pi@raspi002.local's password:
-pi@raspi002:~ $ sudo shutdown now
-sudo: unable to resolve host raspi002
-Connection to raspi002.local closed by remote host.
-Connection to raspi002.local closed.
-~ $
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#89DDFF">~</span><span style="color:#A9B1D6"> $ slogin pi@raspi002.local</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi002.local</span><span style="color:#C0CAF5">'s password:</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi002:~ $ sudo shutdown now</span></span>
+<span class="line"><span style="color:#C0CAF5">sudo: unable to resolve host raspi002</span></span>
+<span class="line"><span style="color:#C0CAF5">Connection to raspi002.local closed by remote host.</span></span>
+<span class="line"><span style="color:#C0CAF5">Connection to raspi002.local closed.</span></span>
+<span class="line"><span style="color:#C0CAF5">~ $</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>数十秒待つ…
 結果は…!</p>
 <p>master(raspi001)に移動</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k get nodes -L type
-NAME       STATUS     ROLES    AGE     VERSION   TYPE
-raspi001   Ready      master   5d17h   v1.14.1
-raspi002   NotReady   worker   5d17h   v1.14.1   AWS
-raspi003   Ready      worker   4d22h   v1.14.1   GCP
-pi@raspi001:~/tmp $ k get pods -o=wide
-NAME              READY   STATUS        RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
-sample-2pod       2/2     Terminating   0          89m   10.244.1.25   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-4srpp   0/2     Pending       0          36s   &lt;none&gt;        &lt;none&gt;     &lt;none&gt;           &lt;none&gt;
-sample-rs-6mgcr   0/2     Pending       0          37s   &lt;none&gt;        &lt;none&gt;     &lt;none&gt;           &lt;none&gt;
-sample-rs-ghkcc   2/2     Terminating   0          71m   10.244.1.26   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-gq2hs   2/2     Terminating   0          59m   10.244.1.27   raspi002   &lt;none&gt;           &lt;none&gt;
-sample-rs-lc225   0/2     Pending       0          36s   &lt;none&gt;        &lt;none&gt;     &lt;none&gt;           &lt;none&gt;
-sample-rs-p2jsc   2/2     Terminating   0          49m   10.244.1.28   raspi002   &lt;none&gt;           &lt;none&gt;
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> nodes</span><span style="color:#E0AF68"> -L</span><span style="color:#9ECE6A"> type</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">       STATUS</span><span style="color:#9ECE6A">     ROLES</span><span style="color:#9ECE6A">    AGE</span><span style="color:#9ECE6A">     VERSION</span><span style="color:#9ECE6A">   TYPE</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi001</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">      master</span><span style="color:#9ECE6A">   5d17h</span><span style="color:#9ECE6A">   v1.14.1</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi002</span><span style="color:#9ECE6A">   NotReady</span><span style="color:#9ECE6A">   worker</span><span style="color:#9ECE6A">   5d17h</span><span style="color:#9ECE6A">   v1.14.1</span><span style="color:#9ECE6A">   AWS</span></span>
+<span class="line"><span style="color:#C0CAF5">raspi003</span><span style="color:#9ECE6A">   Ready</span><span style="color:#9ECE6A">      worker</span><span style="color:#9ECE6A">   4d22h</span><span style="color:#9ECE6A">   v1.14.1</span><span style="color:#9ECE6A">   GCP</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#E0AF68"> -o=wide</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">              READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">        RESTARTS</span><span style="color:#9ECE6A">   AGE</span><span style="color:#9ECE6A">   IP</span><span style="color:#9ECE6A">            NODE</span><span style="color:#9ECE6A">       NOMINATED</span><span style="color:#9ECE6A"> NODE</span><span style="color:#9ECE6A">   READINESS</span><span style="color:#9ECE6A"> GATES</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-2pod</span><span style="color:#9ECE6A">       2/2</span><span style="color:#9ECE6A">     Terminating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          89m</span><span style="color:#FF9E64">   10.244.1.25</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-4srpp</span><span style="color:#9ECE6A">   0/2</span><span style="color:#9ECE6A">     Pending</span><span style="color:#FF9E64">       0</span><span style="color:#9ECE6A">          36s</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">        &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">     &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-6mgcr</span><span style="color:#9ECE6A">   0/2</span><span style="color:#9ECE6A">     Pending</span><span style="color:#FF9E64">       0</span><span style="color:#9ECE6A">          37s</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">        &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">     &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-ghkcc</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Terminating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          71m</span><span style="color:#FF9E64">   10.244.1.26</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-gq2hs</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Terminating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          59m</span><span style="color:#FF9E64">   10.244.1.27</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-lc225</span><span style="color:#9ECE6A">   0/2</span><span style="color:#9ECE6A">     Pending</span><span style="color:#FF9E64">       0</span><span style="color:#9ECE6A">          36s</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">        &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">     &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-p2jsc</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Terminating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          49m</span><span style="color:#FF9E64">   10.244.1.28</span><span style="color:#9ECE6A">   raspi002</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#89DDFF">           &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>期待通りでした。つまり、sample-rs は raspi002 以外で作り直せないので、Pending,Terminating 状態です。
 また、単純な pod である sample-2pod は replicaSet ではないので、セルフヒーリングされずに Terminating になっています。
 面白いですね。これ。</p>
@@ -305,124 +325,117 @@ ReplicaSet にない「ローリングアップデート、ロールバック」
 Pod や ReplicaSet ではなく、Deployment が最も推奨されるリソース種類。</p>
 <p>ReplicaSet では、指定したコンテナイメージを更新した場合(アップデート)、どうなるのでしょうか。すべて更新されるのか、一部だけなのでしょうか。試してみます。</p>
 <p>sample-2pod-replica.yaml の nginx イメージを 1.12 から 1.13 に更新しました。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k get all
-NAME                  READY   STATUS    RESTARTS   AGE
-pod/sample-rs-4srpp   2/2     Running   0          7h14m
-pod/sample-rs-6mgcr   2/2     Running   0          7h14m
-pod/sample-rs-lc225   2/2     Running   0          7h14m
-
-NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
-service/kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   6d
-
-NAME                        DESIRED   CURRENT   READY   AGE
-replicaset.apps/sample-rs   3         3         3       8h
-pi@raspi001:~/tmp $ k apply -f . --prune --all
-replicaset.apps/sample-rs configured
-pod/sample-2pod created
-pi@raspi001:~/tmp $ k describe replicaset sample-rs
-Name:         sample-rs
-...
-  Containers:
-   nginx-container:
-    Image:        nginx:1.13
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> all</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                  READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-rs-4srpp</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          7h14m</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-rs-6mgcr</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          7h14m</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-rs-lc225</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          7h14m</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                 TYPE</span><span style="color:#9ECE6A">        CLUSTER-IP</span><span style="color:#9ECE6A">   EXTERNAL-IP</span><span style="color:#9ECE6A">   PORT</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">S</span><span style="color:#9ABDF5">)</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">service/kubernetes</span><span style="color:#9ECE6A">   ClusterIP</span><span style="color:#FF9E64">   10.96.0.1</span><span style="color:#89DDFF">    &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#9ECE6A">        443/TCP</span><span style="color:#9ECE6A">   6d</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                        DESIRED</span><span style="color:#9ECE6A">   CURRENT</span><span style="color:#9ECE6A">   READY</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">replicaset.apps/sample-rs</span><span style="color:#FF9E64">   3</span><span style="color:#FF9E64">         3</span><span style="color:#FF9E64">         3</span><span style="color:#9ECE6A">       8h</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> .</span><span style="color:#E0AF68"> --prune</span><span style="color:#E0AF68"> --all</span></span>
+<span class="line"><span style="color:#C0CAF5">replicaset.apps/sample-rs</span><span style="color:#9ECE6A"> configured</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-2pod</span><span style="color:#9ECE6A"> created</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> describe</span><span style="color:#9ECE6A"> replicaset</span><span style="color:#9ECE6A"> sample-rs</span></span>
+<span class="line"><span style="color:#C0CAF5">Name:</span><span style="color:#9ECE6A">         sample-rs</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">  Containers:</span></span>
+<span class="line"><span style="color:#C0CAF5">   nginx-container:</span></span>
+<span class="line"><span style="color:#C0CAF5">    Image:</span><span style="color:#9ECE6A">        nginx:1.13</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>replicaset のマニュフェストは更新されました。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k describe pod sample-rs-4srpp
-Name:               sample-rs-4srpp
-...
-  nginx-container:
-    Container ID:   docker://9160f550ee9d9bbcd1a5c990ca95389b2b39aff6688bcd933c99fe93b1968b99
-    Image:          nginx:1.12
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> describe</span><span style="color:#9ECE6A"> pod</span><span style="color:#9ECE6A"> sample-rs-4srpp</span></span>
+<span class="line"><span style="color:#C0CAF5">Name:</span><span style="color:#9ECE6A">               sample-rs-4srpp</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">  nginx-container:</span></span>
+<span class="line"><span style="color:#C0CAF5">    Container</span><span style="color:#9ECE6A"> ID:</span><span style="color:#9ECE6A">   docker://9160f550ee9d9bbcd1a5c990ca95389b2b39aff6688bcd933c99fe93b1968b99</span></span>
+<span class="line"><span style="color:#C0CAF5">    Image:</span><span style="color:#9ECE6A">          nginx:1.12</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>pod は変化なしのようです。
 では、Deployment を使ってみます。</p>
-<pre><code class="language-yaml">## sample-deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: sample-deployment
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: sample-app
-  template:
-    metadata:
-      labels:
-        app: sample-app
-    spec:
-      containers:
-        - name: nginx-container
-          image: nginx:1.12
-          ports:
-            - containerPort: 80
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f . --prune --all --record
-replicaset.apps/sample-rs configured
-pod/sample-2pod configured
-deployment.apps/sample-deployment created
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-deployment.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> apps/v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Deployment</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-deployment</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  replicas</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3</span></span>
+<span class="line"><span style="color:#F7768E">  selector</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    matchLabels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">  template</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      labels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">        app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">    spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">          image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#F7768E">          ports</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">            -</span><span style="color:#F7768E"> containerPort</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 80</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> .</span><span style="color:#E0AF68"> --prune</span><span style="color:#E0AF68"> --all</span><span style="color:#E0AF68"> --record</span></span>
+<span class="line"><span style="color:#C0CAF5">replicaset.apps/sample-rs</span><span style="color:#9ECE6A"> configured</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-2pod</span><span style="color:#9ECE6A"> configured</span></span>
+<span class="line"><span style="color:#C0CAF5">deployment.apps/sample-deployment</span><span style="color:#9ECE6A"> created</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p><code>--record</code>をつけることで、履歴を保持することができます。ロールバックに使います。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k get all
-NAME                                    READY   STATUS    RESTARTS   AGE
-pod/sample-2pod                         2/2     Running   0          12m
-pod/sample-deployment-6cd85bd5f-4whgn   1/1     Running   0          119s
-pod/sample-deployment-6cd85bd5f-js2sw   1/1     Running   0          119s
-pod/sample-deployment-6cd85bd5f-mjt77   1/1     Running   0          119s
-pod/sample-rs-4srpp                     2/2     Running   0          7h28m
-pod/sample-rs-6mgcr                     2/2     Running   0          7h28m
-pod/sample-rs-lc225                     2/2     Running   0          7h28m
-
-NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
-service/kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   6d1h
-
-NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/sample-deployment   3/3     3            3           2m
-
-NAME                                          DESIRED   CURRENT   READY   AGE
-replicaset.apps/sample-deployment-6cd85bd5f   3         3         3       2m
-replicaset.apps/sample-rs                     3         3         3       8h
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> all</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                                    READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-2pod</span><span style="color:#9ECE6A">                         2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          12m</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-deployment-6cd85bd5f-4whgn</span><span style="color:#9ECE6A">   1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          119s</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-deployment-6cd85bd5f-js2sw</span><span style="color:#9ECE6A">   1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          119s</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-deployment-6cd85bd5f-mjt77</span><span style="color:#9ECE6A">   1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          119s</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-rs-4srpp</span><span style="color:#9ECE6A">                     2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          7h28m</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-rs-6mgcr</span><span style="color:#9ECE6A">                     2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          7h28m</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-rs-lc225</span><span style="color:#9ECE6A">                     2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          7h28m</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                 TYPE</span><span style="color:#9ECE6A">        CLUSTER-IP</span><span style="color:#9ECE6A">   EXTERNAL-IP</span><span style="color:#9ECE6A">   PORT</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">S</span><span style="color:#9ABDF5">)</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">service/kubernetes</span><span style="color:#9ECE6A">   ClusterIP</span><span style="color:#FF9E64">   10.96.0.1</span><span style="color:#89DDFF">    &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#9ECE6A">        443/TCP</span><span style="color:#9ECE6A">   6d1h</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                                READY</span><span style="color:#9ECE6A">   UP-TO-DATE</span><span style="color:#9ECE6A">   AVAILABLE</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">deployment.apps/sample-deployment</span><span style="color:#9ECE6A">   3/3</span><span style="color:#FF9E64">     3</span><span style="color:#FF9E64">            3</span><span style="color:#9ECE6A">           2m</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                                          DESIRED</span><span style="color:#9ECE6A">   CURRENT</span><span style="color:#9ECE6A">   READY</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">replicaset.apps/sample-deployment-6cd85bd5f</span><span style="color:#FF9E64">   3</span><span style="color:#FF9E64">         3</span><span style="color:#FF9E64">         3</span><span style="color:#9ECE6A">       2m</span></span>
+<span class="line"><span style="color:#C0CAF5">replicaset.apps/sample-rs</span><span style="color:#FF9E64">                     3</span><span style="color:#FF9E64">         3</span><span style="color:#FF9E64">         3</span><span style="color:#9ECE6A">       8h</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>sample-deployment が、deployment,replicaset,pod を作成しました。</p>
 <p>では、sample-deployment の nginx コンテナを 1.12 から 1.13 に更新してみます。</p>
-<pre><code class="language-yaml">## sample-deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: sample-deployment
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: sample-app
-  template:
-    metadata:
-      labels:
-        app: sample-app
-    spec:
-      containers:
-        - name: nginx-container
-          image: nginx:1.13
-          ports:
-            - containerPort: 80
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f . --prune --all --record
-replicaset.apps/sample-rs unchanged
-pod/sample-2pod unchanged
-deployment.apps/sample-deployment configured
-pi@raspi001:~/tmp $ k get pod
-NAME                                 READY   STATUS              RESTARTS   AGE
-sample-2pod                          2/2     Running             0          15m
-sample-deployment-6cd85bd5f-js2sw    1/1     Running             0          4m53s
-sample-deployment-6cd85bd5f-mjt77    1/1     Running             0          4m53s
-sample-deployment-7dfb996c6b-gh2cg   0/1     ContainerCreating   0          21s
-sample-deployment-7dfb996c6b-m4wrd   1/1     Running             0          38s
-sample-rs-4srpp                      2/2     Running             0          7h31m
-sample-rs-6mgcr                      2/2     Running             0          7h31m
-sample-rs-lc225                      2/2     Running             0          7h31m
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-deployment.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> apps/v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Deployment</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-deployment</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  replicas</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3</span></span>
+<span class="line"><span style="color:#F7768E">  selector</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    matchLabels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">  template</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      labels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">        app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">    spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">          image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.13</span></span>
+<span class="line"><span style="color:#F7768E">          ports</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">            -</span><span style="color:#F7768E"> containerPort</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 80</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> .</span><span style="color:#E0AF68"> --prune</span><span style="color:#E0AF68"> --all</span><span style="color:#E0AF68"> --record</span></span>
+<span class="line"><span style="color:#C0CAF5">replicaset.apps/sample-rs</span><span style="color:#9ECE6A"> unchanged</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-2pod</span><span style="color:#9ECE6A"> unchanged</span></span>
+<span class="line"><span style="color:#C0CAF5">deployment.apps/sample-deployment</span><span style="color:#9ECE6A"> configured</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pod</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                                 READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">              RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-2pod</span><span style="color:#9ECE6A">                          2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">             0</span><span style="color:#9ECE6A">          15m</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-deployment-6cd85bd5f-js2sw</span><span style="color:#9ECE6A">    1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">             0</span><span style="color:#9ECE6A">          4m53s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-deployment-6cd85bd5f-mjt77</span><span style="color:#9ECE6A">    1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">             0</span><span style="color:#9ECE6A">          4m53s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-deployment-7dfb996c6b-gh2cg</span><span style="color:#9ECE6A">   0/1</span><span style="color:#9ECE6A">     ContainerCreating</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          21s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-deployment-7dfb996c6b-m4wrd</span><span style="color:#9ECE6A">   1/1</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">             0</span><span style="color:#9ECE6A">          38s</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-4srpp</span><span style="color:#9ECE6A">                      2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">             0</span><span style="color:#9ECE6A">          7h31m</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-6mgcr</span><span style="color:#9ECE6A">                      2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">             0</span><span style="color:#9ECE6A">          7h31m</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-rs-lc225</span><span style="color:#9ECE6A">                      2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">             0</span><span style="color:#9ECE6A">          7h31m</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>おー、deployment の pod が作り変わっていっています。これが <strong>ローリングアップデート</strong> です。
 ローリングアップデートは、spec.template 以下が更新されると変化したとみなすそうです。
 また、ロールバックは、rollout コマンドで実施できますし、revision 指定で戻すこともできます。
@@ -434,30 +447,27 @@ sample-rs-lc225                      2/2     Running             0          7h31
 <p>ちなみに、マニュフェストを書かずに deployment ができます。<code>k run sample-deployment-cli --image nginx:1.12 --replicas 3 --port 80</code>です。お試しなら、便利ですね。</p>
 <h2 id="お片付け">お片付け</h2>
 <p>試しに、prune で削除しています。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ ls
-sample-2pod-replica.yaml  sample-2pod.yaml  sample-deployment.yaml
-pi@raspi001:~/tmp $ mv sample-2pod-replica.yaml sample-2pod-replica.yaml.org
-pi@raspi001:~/tmp $ mv sample-deployment.yaml sample-deployment.yaml.org
-pi@raspi001:~/tmp $ k apply -f . --all --prune
-pod/sample-2pod configured
-deployment.apps/sample-deployment pruned
-replicaset.apps/sample-rs pruned
-pi@raspi001:~/tmp $ k get all
-NAME              READY   STATUS    RESTARTS   AGE
-pod/sample-2pod   2/2     Running   0          30m
-
-NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
-service/kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   6d1h
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">ls</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-2pod-replica.yaml</span><span style="color:#9ECE6A">  sample-2pod.yaml</span><span style="color:#9ECE6A">  sample-deployment.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">mv</span><span style="color:#9ECE6A"> sample-2pod-replica.yaml</span><span style="color:#9ECE6A"> sample-2pod-replica.yaml.org</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">mv</span><span style="color:#9ECE6A"> sample-deployment.yaml</span><span style="color:#9ECE6A"> sample-deployment.yaml.org</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> .</span><span style="color:#E0AF68"> --all</span><span style="color:#E0AF68"> --prune</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-2pod</span><span style="color:#9ECE6A"> configured</span></span>
+<span class="line"><span style="color:#C0CAF5">deployment.apps/sample-deployment</span><span style="color:#9ECE6A"> pruned</span></span>
+<span class="line"><span style="color:#C0CAF5">replicaset.apps/sample-rs</span><span style="color:#9ECE6A"> pruned</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> all</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">              READY</span><span style="color:#9ECE6A">   STATUS</span><span style="color:#9ECE6A">    RESTARTS</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">pod/sample-2pod</span><span style="color:#9ECE6A">   2/2</span><span style="color:#9ECE6A">     Running</span><span style="color:#FF9E64">   0</span><span style="color:#9ECE6A">          30m</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                 TYPE</span><span style="color:#9ECE6A">        CLUSTER-IP</span><span style="color:#9ECE6A">   EXTERNAL-IP</span><span style="color:#9ECE6A">   PORT</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">S</span><span style="color:#9ABDF5">)</span><span style="color:#9ECE6A">   AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">service/kubernetes</span><span style="color:#9ECE6A">   ClusterIP</span><span style="color:#FF9E64">   10.96.0.1</span><span style="color:#89DDFF">    &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#9ECE6A">        443/TCP</span><span style="color:#9ECE6A">   6d1h</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>んー、こうすると消せるのですが、どうしても１ファイル残してしまいます…。
 すべて org にすると、<code>k apply -f .</code>が失敗しますし…。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete pod sample-2pod
-pod "sample-2pod" deleted
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> delete</span><span style="color:#9ECE6A"> pod</span><span style="color:#9ECE6A"> sample-2pod</span></span>
+<span class="line"><span style="color:#C0CAF5">pod</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">sample-2pod</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A"> deleted</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>結局、こうしました…。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k label node raspi002 type-
-pi@raspi001:~/tmp $ k label node raspi003 type-
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> label</span><span style="color:#9ECE6A"> node</span><span style="color:#9ECE6A"> raspi002</span><span style="color:#9ECE6A"> type-</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> label</span><span style="color:#9ECE6A"> node</span><span style="color:#9ECE6A"> raspi003</span><span style="color:#9ECE6A"> type-</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <h2 id="おわりに">おわりに</h2>
 <p>思った以上に、ReplicaSet にハマってしまいました。
 次は、残りの workloads を試します。

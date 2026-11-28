@@ -4,7 +4,43 @@
           navigation: auto;
         }
       }
-    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BvG42A_H.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.BwnJ62vA.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout.DrdjulHs.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/jibun-note-logo.png" width="1129" height="181" alt="ジブンノート トップ" data-astro-cid-nqkczdkf></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2019-05-07" data-pagefind-filter="month:2019-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">11</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-07"><span class="visually-hidden">2019年5月7日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">07</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 08. discovery&amp;LB その1 -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
+    </style><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/BlogTagList.BzArTKTq.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/ArticleLayout.aFz2Rw8k.css"><link rel="stylesheet" href="/silverbirder.github.io-new-2/_astro/Layout._b5UJD7N.css"></head><body><header class="site-header" data-astro-cid-nqkczdkf><div class="site-header-inner" data-astro-cid-nqkczdkf><a class="site-logo" href="/silverbirder.github.io-new-2/" aria-label="ジブンノート トップ" data-astro-cid-nqkczdkf><img src="/silverbirder.github.io-new-2/silverbirder-avatar.png" width="24" height="24" alt="" data-astro-cid-nqkczdkf><span class="site-wordmark" aria-hidden="true" data-astro-cid-sdkvgl5v><svg class="wordmark-wave" aria-hidden="true" focusable="false" data-astro-cid-sdkvgl5v><defs data-astro-cid-sdkvgl5v><path id="header-title-water-0" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: 0.00s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-0" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-0" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-1" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -0.52s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-1" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-1" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-2" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.04s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-2" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-2" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-3" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -1.56s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-3" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-3" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-4" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.08s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-4" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-4" y=".015" data-astro-cid-sdkvgl5v></use></clipPath><path id="header-title-water-5" class="wordmark-water" d="
+  M -.24 .52
+  C -.04 .52 .07 .485 .26 .485
+  S .58 .55 .72 .55
+  S 1 .51 1.24 .51
+  V 1.25 H -.24 Z
+" style="--water-phase: -2.60s" data-astro-cid-sdkvgl5v></path><clipPath id="header-title-seam-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" data-astro-cid-sdkvgl5v></use></clipPath><clipPath id="header-title-blue-5" clipPathUnits="objectBoundingBox" data-astro-cid-sdkvgl5v><use href="#header-title-water-5" y=".015" data-astro-cid-sdkvgl5v></use></clipPath></defs></svg><span class="wordmark-letter" aria-hidden="true" data-letter="ジ" style="--letter-seam: url(#header-title-seam-0); --letter-blue: url(#header-title-blue-0)" data-astro-cid-sdkvgl5v>ジ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ブ" style="--letter-seam: url(#header-title-seam-1); --letter-blue: url(#header-title-blue-1)" data-astro-cid-sdkvgl5v>ブ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ン" style="--letter-seam: url(#header-title-seam-2); --letter-blue: url(#header-title-blue-2)" data-astro-cid-sdkvgl5v>ン</span><span class="wordmark-letter" aria-hidden="true" data-letter="ノ" style="--letter-seam: url(#header-title-seam-3); --letter-blue: url(#header-title-blue-3)" data-astro-cid-sdkvgl5v>ノ</span><span class="wordmark-letter" aria-hidden="true" data-letter="ー" style="--letter-seam: url(#header-title-seam-4); --letter-blue: url(#header-title-blue-4)" data-astro-cid-sdkvgl5v>ー</span><span class="wordmark-letter" aria-hidden="true" data-letter="ト" style="--letter-seam: url(#header-title-seam-5); --letter-blue: url(#header-title-blue-5)" data-astro-cid-sdkvgl5v>ト</span></span></a><nav aria-label="メインナビゲーション" data-astro-cid-nqkczdkf><a href="/silverbirder.github.io-new-2/me/" data-astro-cid-nqkczdkf>自己紹介</a><a href="/silverbirder.github.io-new-2/blog/" data-astro-cid-nqkczdkf>ブログ</a></nav></div></header><main><article class="notebook" data-pagefind-body data-pagefind-sort="date:2019-05-07" data-pagefind-filter="month:2019-05" style="--notebook-rule-image: url(&quot;/silverbirder.github.io-new-2/notebook-rule.svg&quot;); --notebook-tick-image: url(&quot;/silverbirder.github.io-new-2/notebook-ticks.svg&quot;)"><header class="notebook-header"><div class="notebook-meta" data-pagefind-ignore><p class="notebook-entry notebook-number"><span class="notebook-entry-label notebook-meta-parts" lang="en"><span class="notebook-entry-text">NO</span><span class="notebook-meta-dot" aria-hidden="true"></span></span><span class="notebook-entry-text">11</span></p><p class="notebook-entry"><span class="notebook-entry-label notebook-entry-text" lang="en">DATE</span><time datetime="2019-05-07"><span class="visually-hidden">2019年5月7日</span><span class="notebook-meta-parts" aria-hidden="true"><span class="notebook-entry-text">2019</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">05</span><span class="notebook-meta-dot" aria-hidden="true"></span><span class="notebook-entry-text">07</span></span></time></p></div><div class="notebook-heading"><h1>一足遅れて Kubernetes を学び始める - 08. discovery&amp;LB その1 -</h1></div></header><div class="notebook-body"><h2 id="ストーリー">ストーリー</h2>
 <ol>
 <li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_01/">一足遅れて Kubernetes を学び始める - 01. 環境選択編 -</a></li>
 <li><a href="https://silverbirder.github.io/blog/contents/start_the_learning_kubernetes_02/">一足遅れて Kubernetes を学び始める - 02. Docker For Mac -</a></li>
@@ -79,80 +115,73 @@
 <p>Kubernetes では、Pod 毎に IP アドレスが割り振られています。
 そのため、異なる Pod 間で通信する際は、Pod の IP アドレスが必要になります。逆に同一の Pod 内なら localhost で通信できます。</p>
 <p>説明するために、準備します。</p>
-<pre><code class="language-yaml">## sample-deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: sample-deployment
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: sample-app
-  template:
-    metadata:
-      labels:
-        app: sample-app
-    spec:
-      containers:
-        - name: nginx-container
-          image: nginx:1.12
-          ports:
-            - containerPort: 80
-        - name: redis-container
-          image: redis:3.2
-</code></pre>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-deployment.yaml
-pi@raspi001:~/tmp $ k get pods -l app=sample-app -o custom-columns="NAME:{metadata.name}, IP:{status.podIP},NODE:{spec.nodeName}"
-NAME                                 IP           NODE
-sample-deployment-9dc487867-h7lww   10.244.1.72   raspi002
-sample-deployment-9dc487867-n8x5w   10.244.2.66   raspi003
-sample-deployment-9dc487867-nxbxc   10.244.2.67   raspi003
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-deployment.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> apps/v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Deployment</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-deployment</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  replicas</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 3</span></span>
+<span class="line"><span style="color:#F7768E">  selector</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    matchLabels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">  template</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      labels</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">        app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span>
+<span class="line"><span style="color:#F7768E">    spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">      containers</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx-container</span></span>
+<span class="line"><span style="color:#F7768E">          image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> nginx:1.12</span></span>
+<span class="line"><span style="color:#F7768E">          ports</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">            -</span><span style="color:#F7768E"> containerPort</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 80</span></span>
+<span class="line"><span style="color:#9ABDF5">        -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> redis-container</span></span>
+<span class="line"><span style="color:#F7768E">          image</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> redis:3.2</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-deployment.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> pods</span><span style="color:#E0AF68"> -l</span><span style="color:#9ECE6A"> app=sample-app</span><span style="color:#E0AF68"> -o</span><span style="color:#9ECE6A"> custom-columns=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">NAME:{metadata.name}, IP:{status.podIP},NODE:{spec.nodeName}</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">                                 IP</span><span style="color:#9ECE6A">           NODE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-deployment-9dc487867-h7lww</span><span style="color:#FF9E64">   10.244.1.72</span><span style="color:#9ECE6A">   raspi002</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-deployment-9dc487867-n8x5w</span><span style="color:#FF9E64">   10.244.2.66</span><span style="color:#9ECE6A">   raspi003</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-deployment-9dc487867-nxbxc</span><span style="color:#FF9E64">   10.244.2.67</span><span style="color:#9ECE6A">   raspi003</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p><span class="notebook-photo-frame"><img src="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1639816788/silver-birder.github.io/blog/pod_ip_adress_kubernetes.png?ar=790%3A311" alt="pod ip adress" width="790" height="311" loading="eager" fetchpriority="high" srcset="https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_200/q_auto/f_auto/v1639816788/silver-birder.github.io/blog/pod_ip_adress_kubernetes.png?ar=790%3A311 200w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_300/q_auto/f_auto/v1639816788/silver-birder.github.io/blog/pod_ip_adress_kubernetes.png?ar=790%3A311 300w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_400/q_auto/f_auto/v1639816788/silver-birder.github.io/blog/pod_ip_adress_kubernetes.png?ar=790%3A311 400w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_450/q_auto/f_auto/v1639816788/silver-birder.github.io/blog/pod_ip_adress_kubernetes.png?ar=790%3A311 450w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_600/q_auto/f_auto/v1639816788/silver-birder.github.io/blog/pod_ip_adress_kubernetes.png?ar=790%3A311 600w, https://res.cloudinary.com/silverbirder/image/upload/c_limit,w_790/q_auto/f_auto/v1639816788/silver-birder.github.io/blog/pod_ip_adress_kubernetes.png?ar=790%3A311 790w" sizes="min(25rem, calc(100vw - clamp(1rem, 3vw, 2rem) - clamp(1rem, 3vw, 2rem) - 0.5rem - 2 * 0.5rem))"><span class="notebook-photo-caption" aria-hidden="true">pod ip adress</span></span></p>
 <p>このような状況下で、<code>sample-deployment-9dc487867-n8x5w:redis</code>を中心に見ていきます。</p>
 <p>※ nginx は 80 ポートで開放されています。</p>
 <h2 id="前準備">前準備</h2>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k exec -it sample-deployment-9dc487867-n8x5w -c redis-container /bin/bash
-root@sample-deployment-9dc487867-n8x5w:/data# apt-get update &amp;&amp; apt-get install curl -y
-root@sample-deployment-9dc487867-n8x5w:/data# exit
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-deployment-9dc487867-n8x5w</span><span style="color:#E0AF68"> -c</span><span style="color:#9ECE6A"> redis-container</span><span style="color:#9ECE6A"> /bin/bash</span></span>
+<span class="line"><span style="color:#C0CAF5">root@sample-deployment-9dc487867-n8x5w:/data#</span><span style="color:#9ECE6A"> apt-get</span><span style="color:#9ECE6A"> update</span><span style="color:#89DDFF"> &amp;&amp;</span><span style="color:#C0CAF5"> apt-get</span><span style="color:#9ECE6A"> install</span><span style="color:#9ECE6A"> curl</span><span style="color:#E0AF68"> -y</span></span>
+<span class="line"><span style="color:#C0CAF5">root@sample-deployment-9dc487867-n8x5w:/data#</span><span style="color:#9ECE6A"> exit</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>curl がないのでインストールします。</p>
 <h2 id="同一-node同一-pod-内のコンテナへ通信">同一 Node,同一 Pod 内のコンテナへ通信</h2>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k exec -it sample-deployment-9dc487867-n8x5w -c redis-container /bin/bash
-root@sample-deployment-9dc487867-n8x5w:/data# curl localhost:80
-&lt;!DOCTYPE html&gt;
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-deployment-9dc487867-n8x5w</span><span style="color:#E0AF68"> -c</span><span style="color:#9ECE6A"> redis-container</span><span style="color:#9ECE6A"> /bin/bash</span></span>
+<span class="line"><span style="color:#C0CAF5">root@sample-deployment-9dc487867-n8x5w:/data#</span><span style="color:#9ECE6A"> curl</span><span style="color:#9ECE6A"> localhost:80</span></span>
+<span class="line"><span style="color:#89DDFF">&lt;!</span><span style="color:#C0CAF5">DOCTYPE</span><span style="color:#9ECE6A"> htm</span><span style="color:#A9B1D6">l</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>OK</p>
 <h2 id="同一-node異なる-pod-のコンテナへ通信">同一 Node,異なる Pod のコンテナへ通信</h2>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k exec -it sample-deployment-9dc487867-n8x5w -c redis-container /bin/bash
-root@sample-deployment-9dc487867-n8x5w:/data# curl 10.244.2.66:80
-&lt;!DOCTYPE html&gt;
-...
-root@sample-deployment-9dc487867-n8x5w:/data# curl 10.244.2.67:80
-&lt;!DOCTYPE html&gt;
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-deployment-9dc487867-n8x5w</span><span style="color:#E0AF68"> -c</span><span style="color:#9ECE6A"> redis-container</span><span style="color:#9ECE6A"> /bin/bash</span></span>
+<span class="line"><span style="color:#C0CAF5">root@sample-deployment-9dc487867-n8x5w:/data#</span><span style="color:#9ECE6A"> curl</span><span style="color:#9ECE6A"> 10.244.2.66:80</span></span>
+<span class="line"><span style="color:#89DDFF">&lt;!</span><span style="color:#C0CAF5">DOCTYPE</span><span style="color:#9ECE6A"> htm</span><span style="color:#A9B1D6">l</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">root@sample-deployment-9dc487867-n8x5w:/data#</span><span style="color:#9ECE6A"> curl</span><span style="color:#9ECE6A"> 10.244.2.67:80</span></span>
+<span class="line"><span style="color:#89DDFF">&lt;!</span><span style="color:#C0CAF5">DOCTYPE</span><span style="color:#9ECE6A"> htm</span><span style="color:#A9B1D6">l</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>OK</p>
 <h2 id="異なる-node異なる-pod-のコンテナへ通信">異なる Node,異なる Pod のコンテナへ通信</h2>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k exec -it sample-deployment-9dc487867-n8x5w -c redis-container /bin/bash
-root@sample-deployment-9dc487867-n8x5w:/data# curl 10.244.1.72:80
-&lt;!DOCTYPE html&gt;
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> exec</span><span style="color:#E0AF68"> -it</span><span style="color:#9ECE6A"> sample-deployment-9dc487867-n8x5w</span><span style="color:#E0AF68"> -c</span><span style="color:#9ECE6A"> redis-container</span><span style="color:#9ECE6A"> /bin/bash</span></span>
+<span class="line"><span style="color:#C0CAF5">root@sample-deployment-9dc487867-n8x5w:/data#</span><span style="color:#9ECE6A"> curl</span><span style="color:#9ECE6A"> 10.244.1.72:80</span></span>
+<span class="line"><span style="color:#89DDFF">&lt;!</span><span style="color:#C0CAF5">DOCTYPE</span><span style="color:#9ECE6A"> htm</span><span style="color:#A9B1D6">l</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>OK</p>
 <h2 id="masternode-から各-pod-へ通信">MasterNode から各 Pod へ通信</h2>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ curl 10.244.1.72:80
-&lt;!DOCTYPE html&gt;
-...
-pi@raspi001:~/tmp $ curl 10.244.2.66:80
-&lt;!DOCTYPE html&gt;
-...
-pi@raspi001:~/tmp $ curl 10.244.2.67:80
-&lt;!DOCTYPE html&gt;
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">curl</span><span style="color:#9ECE6A"> 10.244.1.72:80</span></span>
+<span class="line"><span style="color:#89DDFF">&lt;!</span><span style="color:#C0CAF5">DOCTYPE</span><span style="color:#9ECE6A"> htm</span><span style="color:#A9B1D6">l</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">curl</span><span style="color:#9ECE6A"> 10.244.2.66:80</span></span>
+<span class="line"><span style="color:#89DDFF">&lt;!</span><span style="color:#C0CAF5">DOCTYPE</span><span style="color:#9ECE6A"> htm</span><span style="color:#A9B1D6">l</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">curl</span><span style="color:#9ECE6A"> 10.244.2.67:80</span></span>
+<span class="line"><span style="color:#89DDFF">&lt;!</span><span style="color:#C0CAF5">DOCTYPE</span><span style="color:#9ECE6A"> htm</span><span style="color:#A9B1D6">l</span><span style="color:#89DDFF">&gt;</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>OK</p>
 <p>ここから分かるように、Pod 内部の通信、Pod 間の通信、さらに Node 間の通信までも、Kubernetes によってネットワークが構築されています。</p>
 <h2 id="service">Service</h2>
@@ -166,58 +195,54 @@ pi@raspi001:~/tmp $ curl 10.244.2.67:80
 自作すると、少し大変です。そこで、Service の出番です。
 サービスは、複数存在する Pod に対して <strong>自動的にロードバランスしてくれる</strong> のと、合わせて <strong>外向けの IP アドレス</strong> (ExternalIP)や、 <strong>内向けの IP アドレス</strong> (ClusterIP)も提供してくれます。</p>
 <p>さっそく、試してみます。</p>
-<pre><code class="language-yaml">## sample-clusterip.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: sample-clusterip
-spec:
-  type: ClusterIP
-  ports:
-    - name: "http-port"
-      protocol: "TCP"
-      port: 8080
-      targetPort: 80
-  selector:
-    app: sample-app
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#51597D;font-style:italic">## sample-clusterip.yaml</span></span>
+<span class="line"><span style="color:#F7768E">apiVersion</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> v1</span></span>
+<span class="line"><span style="color:#F7768E">kind</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> Service</span></span>
+<span class="line"><span style="color:#F7768E">metadata</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  name</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-clusterip</span></span>
+<span class="line"><span style="color:#F7768E">spec</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">  type</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> ClusterIP</span></span>
+<span class="line"><span style="color:#F7768E">  ports</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#9ABDF5">    -</span><span style="color:#F7768E"> name</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">http-port</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">      protocol</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">TCP</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#F7768E">      port</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 8080</span></span>
+<span class="line"><span style="color:#F7768E">      targetPort</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 80</span></span>
+<span class="line"><span style="color:#F7768E">  selector</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#F7768E">    app</span><span style="color:#89DDFF">:</span><span style="color:#9ECE6A"> sample-app</span></span></code></pre><figcaption class="notebook-code-language">YAML</figcaption></figure>
 <p>これは、<code>app=sample-app</code>にマッチする Pod に対してロードバランスしてくれます。外から 8080 ポートで待ち受けて、80 ポートでコンテナへ通信します。
 spec.type が ClusterIP なので、内向けの IP アドレスが提供されています。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k apply -f sample-clusterip.yaml
-pi@raspi001:~/tmp $ k get service sample-clusterip
-NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-sample-clusterip   ClusterIP   10.111.197.69   &lt;none&gt;        8080/TCP   30s
-pi@raspi001:~/tmp $ k describe service sample-clusterip
-Name:              sample-clusterip
-...
-Selector:          app=sample-app
-Type:              ClusterIP
-IP:                10.111.197.69
-Port:              http-port  8080/TCP
-TargetPort:        80/TCP
-Endpoints:         10.244.1.72:80,10.244.2.66:80,10.244.2.67:80
-...
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> apply</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-clusterip.yaml</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> get</span><span style="color:#9ECE6A"> service</span><span style="color:#9ECE6A"> sample-clusterip</span></span>
+<span class="line"><span style="color:#C0CAF5">NAME</span><span style="color:#9ECE6A">               TYPE</span><span style="color:#9ECE6A">        CLUSTER-IP</span><span style="color:#9ECE6A">      EXTERNAL-IP</span><span style="color:#9ECE6A">   PORT</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">S</span><span style="color:#9ABDF5">)</span><span style="color:#9ECE6A">    AGE</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-clusterip</span><span style="color:#9ECE6A">   ClusterIP</span><span style="color:#FF9E64">   10.111.197.69</span><span style="color:#89DDFF">   &lt;</span><span style="color:#9ECE6A">non</span><span style="color:#A9B1D6">e</span><span style="color:#89DDFF">&gt;</span><span style="color:#9ECE6A">        8080/TCP</span><span style="color:#9ECE6A">   30s</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> describe</span><span style="color:#9ECE6A"> service</span><span style="color:#9ECE6A"> sample-clusterip</span></span>
+<span class="line"><span style="color:#C0CAF5">Name:</span><span style="color:#9ECE6A">              sample-clusterip</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span>
+<span class="line"><span style="color:#C0CAF5">Selector:</span><span style="color:#9ECE6A">          app=sample-app</span></span>
+<span class="line"><span style="color:#C0CAF5">Type:</span><span style="color:#9ECE6A">              ClusterIP</span></span>
+<span class="line"><span style="color:#C0CAF5">IP:</span><span style="color:#FF9E64">                10.111.197.69</span></span>
+<span class="line"><span style="color:#C0CAF5">Port:</span><span style="color:#9ECE6A">              http-port</span><span style="color:#9ECE6A">  8080/TCP</span></span>
+<span class="line"><span style="color:#C0CAF5">TargetPort:</span><span style="color:#9ECE6A">        80/TCP</span></span>
+<span class="line"><span style="color:#C0CAF5">Endpoints:</span><span style="color:#9ECE6A">         10.244.1.72:80,10.244.2.66:80,10.244.2.67:80</span></span>
+<span class="line"><span style="color:#0DB9D7">...</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>内向けに 10.111.197.69 の IP アドレスが振られました。また、ロードバランスする対象 Pod は、先にあげた Pod の IP アドレスです。
 Endpints に<code>:80</code>とあるように、port 毎にサービス(clusterIP)を作ることもできます。(service の spec.ports は配列指定）</p>
 <p>アクセスできるのか、試します。
 せっかくなので、pod 毎に index.html の内容を変化させましょう。</p>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ for PODNAME in `k get pods -l app=sample-app -o jsonpath='{.items[*].metadata.name}'`; do
-&gt; k exec -it ${PODNAME} -- cp /etc/hostname /usr/share/nginx/html/index.html;
-&gt; done
-pi@raspi001:~/tmp $ curl 10.111.197.69:8080
-sample-deployment-9dc487867-nxbxc
-pi@raspi001:~/tmp $ curl 10.111.197.69:8080
-sample-deployment-9dc487867-n8x5w
-pi@raspi001:~/tmp $ curl 10.111.197.69:8080
-sample-deployment-9dc487867-h7lww
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">for</span><span style="color:#9ECE6A"> PODNAME</span><span style="color:#9ECE6A"> in</span><span style="color:#89DDFF"> `</span><span style="color:#C0CAF5">k</span><span style="color:#9ECE6A"> get pods </span><span style="color:#E0AF68">-l</span><span style="color:#9ECE6A"> app=sample-app </span><span style="color:#E0AF68">-o</span><span style="color:#9ECE6A"> jsonpath=</span><span style="color:#89DDFF">'</span><span style="color:#9ECE6A">{.items[*].metadata.name}</span><span style="color:#89DDFF">'`</span><span style="color:#89DDFF">;</span><span style="color:#BB9AF7"> do</span></span>
+<span class="line"><span style="color:#89DDFF">&gt;</span><span style="color:#A9B1D6"> k exec -it </span><span style="color:#89DDFF">${</span><span style="color:#C0CAF5">PODNAME</span><span style="color:#89DDFF">}</span><span style="color:#A9B1D6"> -- cp /etc/hostname /usr/share/nginx/html/index.html</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#89DDFF">&gt;</span><span style="color:#BB9AF7"> done</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">curl</span><span style="color:#9ECE6A"> 10.111.197.69:8080</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-deployment-9dc487867-nxbxc</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">curl</span><span style="color:#9ECE6A"> 10.111.197.69:8080</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-deployment-9dc487867-n8x5w</span></span>
+<span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">curl</span><span style="color:#9ECE6A"> 10.111.197.69:8080</span></span>
+<span class="line"><span style="color:#C0CAF5">sample-deployment-9dc487867-h7lww</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <p>確かに、ロードバランシングによって pod に適度なランダム具合でアクセスできています。
 もちろん、外からはアクセスできません。</p>
 <p>iMac へ移動</p>
-<pre><code class="language-shell">~ $ curl 10.111.197.69:8080
-## 返答なし
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#89DDFF">~</span><span style="color:#A9B1D6"> $ curl 10.111.197.69:8080</span></span>
+<span class="line"><span style="color:#51597D;font-style:italic">## 返答なし</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <h2 id="サービスディスカバリとクラスタ内-dns">サービスディスカバリとクラスタ内 DNS</h2>
 <p>サービスディスカバリとは、「問題においての解決策」を指しています。
 Kubernetes における問題とは、動的にサービスが生成され続けていることによるサービスを特定することが難しくなる問題です。
@@ -243,8 +268,7 @@ Kubernetes における問題とは、動的にサービスが生成され続け
 <p>dnsPolicy による明示的な設定がない限り、Pod 生成時にクラスタ内 DNS へレコード追加されます。
 クラスタ内 DNS で名前解決できなかった場合は、クラスタ外 DNS に問い合わせします。</p>
 <h2 id="お片付け">お片付け</h2>
-<pre><code class="language-shell">pi@raspi001:~/tmp $ k delete -f sample-deployment.yaml -f sample-clusterip.yaml
-</code></pre>
+<figure class="notebook-code-frame"><pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#C0CAF5">pi@raspi001:~/tmp</span><span style="color:#A9B1D6"> $ </span><span style="color:#9ECE6A">k</span><span style="color:#9ECE6A"> delete</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-deployment.yaml</span><span style="color:#E0AF68"> -f</span><span style="color:#9ECE6A"> sample-clusterip.yaml</span></span></code></pre><figcaption class="notebook-code-language">SHELL</figcaption></figure>
 <h2 id="最後に">最後に</h2>
 <p>今回は、Service についての概要を学びました。Kubernetes の世界では、自動的にネットワーク構築されているため、特段意識することはありませんでした。
 もう少し理解が進めれば、ネットワークがどのように構築されているのか、クラスタ内 DNS がどのように動いているのか知りたいと思います。
