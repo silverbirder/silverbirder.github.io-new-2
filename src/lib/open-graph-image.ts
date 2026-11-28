@@ -94,7 +94,7 @@ async function drawFallbackRun(text: string, size: number): Promise<DrawnRun> {
 async function textImage(text: string, size: number) {
   const runs = await Promise.all(
     fontRuns(text).map(({ font, text: value }) =>
-      font ? drawFontRun(font, value, size) : drawFallbackRun(value, size),
+      font ? Promise.resolve(drawFontRun(font, value, size)) : drawFallbackRun(value, size),
     ),
   );
   let advance = 0;
@@ -161,11 +161,13 @@ export async function renderOpenGraphImage(text: Overlay[], avatar: Avatar) {
     <rect x="${frameWidth}" y="${frameWidth}"
       width="${width - 2 * frameWidth}" height="${height - 2 * frameWidth}" fill="${paper}"/>
     <svg x="${width - frameWidth - topArtWidth}" y="${frameWidth}" width="${topArtWidth}" height="${topArtHeight}"
-      viewBox="0 0 ${topArtWidth} ${topArtMaxHeight}" preserveAspectRatio="none"
+      viewBox="0 0 ${topArtWidth} ${topArtMaxHeight}" preserveAspectRatio="none" overflow="visible"
       fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M151 -9 C182 38 239 76 300 80 C357 84 390 61 437 73"
+      <path d="M136 -34 C141 -25 146 -17 151 -9 C182 38 239 76 300 80 C357 84 390 61 437 73
+        C449 76 460 83 471 84"
         stroke="${cyan}" stroke-width="6.4"/>
-      <path d="M269 -9 C254 24 276 47 313 62 C351 78 366 108 437 112"
+      <path d="M284 -34 C278 -26 273 -18 269 -9 C254 24 276 47 313 62 C351 78 366 108 437 112
+        C448 113 461 114 471 112"
         stroke="${green}" stroke-width="4.5" opacity=".9"/>
     </svg>
     <svg x="${frameWidth}" y="${height - frameWidth - bottomArtHeight}" width="${bottomArtWidth}" height="${bottomArtHeight}"
