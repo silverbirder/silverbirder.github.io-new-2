@@ -137,6 +137,25 @@ time .notebook-meta-parts {
   position: relative;
   isolation: isolate;
   display: flow-root;
+
+  --paper-outline-weight: 22%;
+  --paper-edge-weight: 16%;
+  --paper-edge-offset: 3px;
+  --paper-outline: color-mix(
+    in srgb,
+    var(--semantic-color-text-primary) var(--paper-outline-weight),
+    var(--semantic-color-background-page)
+  );
+  --paper-edge: color-mix(
+    in srgb,
+    var(--semantic-color-text-primary) var(--paper-edge-weight),
+    var(--semantic-color-background-page)
+  );
+
+  --notebook-paper-shadow:
+    inset var(--primitive-space-none) var(--primitive-space-none) var(--primitive-space-none)
+      var(--semantic-border-width-hairline) var(--paper-outline),
+    var(--paper-edge-offset) var(--paper-edge-offset) var(--primitive-space-none) var(--paper-edge);
 }
 
 /* The SVG supplies the shape; its visible color is managed here. */
@@ -314,28 +333,11 @@ time .notebook-meta-parts {
   object-position: left top;
 }
 
-.notebook-body :is(.notebook-photo-frame, .link-card, blockquote) {
-  --paper-outline-weight: 22%;
-  --paper-edge-weight: 16%;
-  --paper-edge-offset: 3px;
-  --paper-outline: color-mix(
-    in srgb,
-    var(--semantic-color-text-primary) var(--paper-outline-weight),
-    var(--semantic-color-background-page)
-  );
-  --paper-edge: color-mix(
-    in srgb,
-    var(--semantic-color-text-primary) var(--paper-edge-weight),
-    var(--semantic-color-background-page)
-  );
-
-  box-shadow:
-    inset var(--primitive-space-none) var(--primitive-space-none) var(--primitive-space-none)
-      var(--semantic-border-width-hairline) var(--paper-outline),
-    var(--paper-edge-offset) var(--paper-edge-offset) var(--primitive-space-none) var(--paper-edge);
+.notebook-body :is(.notebook-photo-frame, blockquote) {
+  box-shadow: var(--notebook-paper-shadow);
 }
 
-.notebook-body :is(.notebook-photo-frame, .link-card)::before {
+.notebook-body .notebook-sticker::before {
   --sticker-size: 2.125rem;
   --sticker-offset: -0.9375rem;
   --sticker-layer: 1;

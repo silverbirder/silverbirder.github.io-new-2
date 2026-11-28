@@ -7,7 +7,7 @@ const thumbnail = card.image && import.meta.env.BASE_URL + 'link-card/' + card.i
 ---
 
 <div class="link-card-block">
-  <a class="link-card" href={card.url}>
+  <a class="link-card notebook-sticker" href={card.url}>
     <span class="link-card-holes" aria-hidden="true">
       <span></span>
       <span></span>
@@ -78,6 +78,7 @@ const thumbnail = card.image && import.meta.env.BASE_URL + 'link-card/' + card.i
         var(--paper-clear) calc(var(--margin-line-inset) + var(--semantic-border-width-hairline))
       ),
       var(--paper-tint);
+    box-shadow: var(--notebook-paper-shadow);
     line-height: var(--card-line-height);
     color: var(--semantic-color-text-primary);
     text-decoration: none;
