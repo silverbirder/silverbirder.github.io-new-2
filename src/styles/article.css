@@ -3,6 +3,9 @@
   src: url('../assets/fonts/jetbrains-mono-regular.woff2') format('woff2');
   font-weight: normal;
   font-display: swap;
+  ascent-override: 131.25%;
+  descent-override: 31.25%;
+  line-gap-override: 0%;
 }
 
 @font-face {

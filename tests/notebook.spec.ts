@@ -42,8 +42,8 @@ async function auditText(page: Page) {
 
     function inspect(node: Text) {
       const parent = node.parentElement!;
-      // 写真のキャプションは白い台紙の中に揃える。
-      if (parent.closest('.notebook-photo-caption')) return;
+      // 写真とコードの文字は、それぞれの枠内で行間を決める。
+      if (parent.closest('.notebook-photo-caption, .notebook-code-frame')) return;
       const style = getComputedStyle(parent);
       ctx.font = `${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
       for (const { segment, index } of segmenter.segment(node.data)) {
@@ -81,6 +81,10 @@ async function auditText(page: Page) {
         document.querySelector('.notebook-header')!.getBoundingClientRect().bottom + scrollY,
       firstElementTop: body.firstElementChild!.getBoundingClientRect().top + scrollY,
       checked,
+      codeFrames: [...body.querySelectorAll('.notebook-code-frame')].map((frame) => {
+        const bounds = frame.getBoundingClientRect();
+        return [bounds.top + scrollY, bounds.bottom + scrollY];
+      }),
       totalViolations: violations.length,
       violations: violations.slice(0, 30),
     };
@@ -129,6 +133,7 @@ async function auditNativeSelection(
     const rect = range.getBoundingClientRect();
     const body = document.querySelector('.notebook-body')!.getBoundingClientRect();
     const unit = Number.parseFloat(getComputedStyle(element).lineHeight);
+    const codeFrame = element.closest('.notebook-code-frame')?.getBoundingClientRect();
     const ctx = document.createElement('canvas').getContext('2d')!;
     const backgrounds: string[] = [];
     for (let parent: Element | null = element; parent; parent = parent.parentElement) {
@@ -146,6 +151,7 @@ async function auditNativeSelection(
       width: rect.width,
       height: rect.height,
       documentTop: rect.top + scrollY,
+      codeBounds: codeFrame && { top: codeFrame.top + scrollY, bottom: codeFrame.bottom + scrollY },
       documentClipTop: Math.max(0, Math.floor(rect.y - unit)) + scrollY,
       dpr: devicePixelRatio,
       clip: {
@@ -167,14 +173,20 @@ async function auditNativeSelection(
   await info.attach(`selection-${selector}`, { body: screenshot, contentType: 'image/png' });
   const bounds = greenBounds(before, screenshot, area.color);
   expect(bounds.last, 'native selection color must be visible').toBeGreaterThanOrEqual(0);
-  const rowTop = grid.origin + Math.round((area.documentTop - grid.origin) / grid.step) * grid.step;
   // Paint edges may be rounded to a device pixel; layout assertions above are stricter.
   const pixel = 1 / area.dpr;
-  expect(area.documentClipTop + bounds.first / area.dpr).toBeGreaterThanOrEqual(rowTop - pixel);
-  expect(area.documentClipTop + (bounds.last + 1) / area.dpr).toBeLessThanOrEqual(
-    rowTop + grid.step + pixel,
-  );
-  expect((bounds.last - bounds.first + 1) / area.dpr).toBeGreaterThanOrEqual(grid.step - pixel * 2);
+  const selectionTop = area.documentClipTop + bounds.first / area.dpr;
+  const selectionBottom = area.documentClipTop + (bounds.last + 1) / area.dpr;
+  if (area.codeBounds) {
+    expect(selectionTop).toBeGreaterThanOrEqual(area.codeBounds.top - pixel);
+    expect(selectionBottom).toBeLessThanOrEqual(area.codeBounds.bottom + pixel);
+  } else {
+    const rowTop =
+      grid.origin + Math.round((area.documentTop - grid.origin) / grid.step) * grid.step;
+    expect(selectionTop).toBeGreaterThanOrEqual(rowTop - pixel);
+    expect(selectionBottom).toBeLessThanOrEqual(rowTop + grid.step + pixel);
+    expect(selectionBottom - selectionTop).toBeGreaterThanOrEqual(grid.step - pixel * 2);
+  }
   await page.keyboard.press('ArrowRight');
 }
 
@@ -483,6 +495,13 @@ for (const size of sizes) {
           '本文はヘッダー直後の一行目から始まる',
         ).toBeLessThan(0.05);
         expect(report.violations).toEqual([]);
+        for (const edges of report.codeFrames) {
+          for (const edge of edges) {
+            const snapped =
+              report.origin + Math.round((edge - report.origin) / report.step) * report.step;
+            expect(Math.abs(edge - snapped), 'コード枠の上下が罫線に揃う').toBeLessThan(0.05);
+          }
+        }
         await auditNativeSelection(page, '.notebook-body > p', info, report);
         await auditNativeSelection(page, '.notebook-body h2', info, report);
         await auditNativeSelection(page, 'pre code', info, report);
