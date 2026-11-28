@@ -511,6 +511,41 @@ for (const size of sizes) {
   });
 }
 
+test('スマートフォン幅で遅れて読み込まれた本文フォントが罫線をずらさない', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.route('https://**/*', (route) => route.abort());
+
+  const requested = Promise.withResolvers<void>();
+  const release = Promise.withResolvers<void>();
+  await page.route('**/fonts/rounded-x-mplus-1c-regular-core.woff2', async (route) => {
+    requested.resolve();
+    await release.promise;
+    await route.continue();
+  });
+  await page.goto('/samples/notebook/', { waitUntil: 'domcontentloaded' });
+  const paragraph = page.locator('.notebook-body > p').filter({ hasText: /^次の段落です。/ });
+
+  try {
+    await requested.promise;
+    await expect(paragraph).toBeVisible();
+    expect(await paragraph.evaluate(() => document.fonts.status)).toBe('loading');
+    const wraps = await paragraph.evaluate(
+      (element) => element.scrollHeight > Number.parseFloat(getComputedStyle(element).lineHeight),
+    );
+    expect(wraps).toBe(true);
+  } finally {
+    release.resolve();
+  }
+
+  await page.evaluate(() => document.fonts.ready);
+  const report = await auditText(page);
+  expect(report.checked).toBeGreaterThan(0);
+  expect(report.violations).toEqual([]);
+
+  // フォント切り替え時の再レイアウトで段落の行間が伸びる原因を再導入しない。
+  await expect(paragraph).toHaveCSS('text-box-trim', 'none');
+});
+
 test('見出しが大きすぎると文字と選択範囲のはみ出しを検出する', async ({ page }) => {
   await openArticle(page, '/samples/notebook/', 16);
   await page.addStyleTag({ content: '.notebook .notebook-body h2 { font-size: 3rem; }' });
