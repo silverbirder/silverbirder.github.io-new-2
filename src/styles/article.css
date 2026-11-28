@@ -173,7 +173,7 @@ time .notebook-meta-parts {
 
 /* cap is the actual font metric: the first baseline is anchored, not guessed. */
 @supports (text-box: trim-both cap alphabetic) {
-  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, pre, th, td) {
+  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, th, td) {
     text-box: trim-both cap alphabetic;
     padding-block: calc(
         var(--component-notebook-rule-spacing) - var(--primitive-font-metric-cap) -
@@ -189,6 +189,11 @@ time .notebook-meta-parts {
     );
   }
 
+  .notebook-body p:has(br) {
+    text-box: normal;
+    padding-block: var(--primitive-space-none);
+  }
+
   .notebook-body :is(ul, ol) :is(ul, ol, li, p) {
     text-box: normal;
     padding-block: var(--primitive-space-none);
@@ -201,7 +206,7 @@ time .notebook-meta-parts {
     height: calc-size(auto, round(up, size, var(--component-notebook-rule-spacing)));
   }
 
-  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, pre, th, td) {
+  .notebook-body :is(p, h1, h2, h3, h4, h5, h6, th, td) {
     height: calc-size(auto, round(nearest, size, var(--component-notebook-rule-spacing)));
   }
 
@@ -220,6 +225,42 @@ time .notebook-meta-parts {
   font-size: var(--semantic-font-size-heading);
   font-weight: var(--semantic-font-weight-heading);
   line-height: var(--component-notebook-rule-spacing);
+}
+
+.notebook-body strong:not(:where([data-embed] *, .link-card *)) {
+  --marker-height: 0.28em;
+  --marker-bottom: 0.1em;
+  --marker-paper-tint: 58%;
+  --marker-cap-stop: 96%;
+  --marker-radius: calc(var(--marker-height) * var(--primitive-ratio-half));
+  --marker-fill: color-mix(
+    in srgb,
+    var(--semantic-color-border-paper) var(--marker-paper-tint),
+    var(--semantic-color-background-page)
+  );
+
+  background:
+    radial-gradient(
+        circle farthest-side at right,
+        var(--marker-fill),
+        var(--marker-fill) var(--marker-cap-stop),
+        transparent
+      )
+      left bottom var(--marker-bottom) / var(--marker-radius) var(--marker-height) no-repeat,
+    radial-gradient(
+        circle farthest-side at left,
+        var(--marker-fill),
+        var(--marker-fill) var(--marker-cap-stop),
+        transparent
+      )
+      right bottom var(--marker-bottom) / var(--marker-radius) var(--marker-height) no-repeat,
+    linear-gradient(var(--marker-fill), var(--marker-fill)) center bottom var(--marker-bottom) /
+      calc(
+        var(--primitive-size-full) - var(--marker-height) + var(--primitive-size-css-pixel) *
+          var(--primitive-ratio-double)
+      )
+      var(--marker-height) no-repeat;
+  box-decoration-break: clone;
 }
 
 .notebook-body em {
@@ -273,6 +314,52 @@ time .notebook-meta-parts {
   object-position: left top;
 }
 
+.notebook-body :is(.notebook-photo-frame, .link-card, blockquote) {
+  --paper-outline-weight: 22%;
+  --paper-edge-weight: 16%;
+  --paper-edge-offset: 3px;
+  --paper-outline: color-mix(
+    in srgb,
+    var(--semantic-color-text-primary) var(--paper-outline-weight),
+    var(--semantic-color-background-page)
+  );
+  --paper-edge: color-mix(
+    in srgb,
+    var(--semantic-color-text-primary) var(--paper-edge-weight),
+    var(--semantic-color-background-page)
+  );
+
+  box-shadow:
+    inset var(--primitive-space-none) var(--primitive-space-none) var(--primitive-space-none)
+      var(--semantic-border-width-hairline) var(--paper-outline),
+    var(--paper-edge-offset) var(--paper-edge-offset) var(--primitive-space-none) var(--paper-edge);
+}
+
+.notebook-body :is(.notebook-photo-frame, .link-card)::before {
+  --sticker-size: 2.125rem;
+  --sticker-offset: -0.9375rem;
+  --sticker-layer: 1;
+
+  content: '';
+  position: absolute;
+  z-index: var(--sticker-layer);
+  inset-block-start: var(--sticker-offset);
+  inset-inline-start: calc(
+    (var(--primitive-size-full) - var(--sticker-size)) * var(--primitive-ratio-half)
+  );
+  inline-size: var(--sticker-size);
+  block-size: var(--sticker-size);
+  background: url('./slime-sticker.svg') center / contain no-repeat;
+  pointer-events: none;
+}
+
+.notebook-body .notebook-photo-frame::before {
+  --photo-sticker-shift: 0.1rem;
+  --sticker-offset: calc(
+    var(--photo-frame-inset) + var(--photo-sticker-shift) - var(--sticker-size)
+  );
+}
+
 .notebook-photo-frame {
   --photo-frame-inset: var(--primitive-space-2);
   --photo-frame-bottom: calc(
@@ -280,16 +367,10 @@ time .notebook-meta-parts {
       var(--photo-frame-bottom-ratio)
   );
   --photo-frame-bottom-ratio: 3.2;
-  --photo-shadow-opacity: 18%;
-  --photo-shadow-offset: 2px;
-  --photo-shadow-blur: 6px;
   --photo-caption-line-height: 1.45;
   --photo-caption-family: 'Yomogi', var(--semantic-font-family-body);
-  --photo-shadow: hsl(
-    var(--primitive-palette-slate-900-hue) var(--primitive-palette-slate-900-saturation)
-      var(--primitive-palette-slate-900-lightness) / var(--photo-shadow-opacity)
-  );
 
+  position: relative;
   display: block;
   box-sizing: border-box;
   inline-size: fit-content;
@@ -301,9 +382,13 @@ time .notebook-meta-parts {
     calc(var(--primitive-size-full) - var(--primitive-space-2))
   );
   padding: var(--photo-frame-inset) var(--photo-frame-inset) var(--photo-frame-bottom);
-  background: var(--primitive-palette-neutral-0);
-  box-shadow: var(--primitive-space-none) var(--photo-shadow-offset) var(--photo-shadow-blur)
-    var(--photo-shadow);
+  background: var(--semantic-color-background-page);
+}
+
+.notebook-photo-frame > img,
+.notebook-photo-frame > picture > img {
+  box-shadow: var(--primitive-space-none) var(--primitive-space-none) var(--primitive-space-none)
+    var(--semantic-border-width-hairline) var(--semantic-color-border-subtle);
 }
 
 .notebook-photo-frame:has(> .notebook-photo-caption) {
@@ -394,11 +479,43 @@ time .notebook-meta-parts {
 }
 
 .notebook-body blockquote {
+  --quote-mark-size: 3rem;
+  --quote-mark-offset: -0.875rem;
+  --quote-mark-height: 1.5rem;
+  --quote-mark-inset: var(--primitive-space-2);
+  --quote-block-padding: calc(var(--component-notebook-rule-spacing) * var(--primitive-ratio-half));
+  --quote-radius: 0.8rem;
+
+  position: relative;
   display: flow-root;
-  padding-inline-start: var(--semantic-space-quote-indent);
-  background-color: var(--semantic-color-background-muted);
-  border-inline-start: var(--semantic-border-width-hairline) solid
-    var(--semantic-color-border-paper);
+  padding: var(--quote-block-padding) var(--semantic-space-quote-indent);
+  border-radius: var(--quote-radius);
+  background: var(--semantic-color-background-page);
+}
+
+.notebook-body blockquote::before,
+.notebook-body blockquote::after {
+  position: absolute;
+  block-size: var(--quote-mark-height);
+  padding-inline: var(--primitive-space-1);
+  color: var(--semantic-color-text-link);
+  font-family: Georgia, serif;
+  font-size: var(--quote-mark-size);
+  font-weight: bold;
+  line-height: normal;
+  pointer-events: none;
+}
+
+.notebook-body blockquote::before {
+  content: '“' / '';
+  inset-block-start: var(--quote-mark-offset);
+  inset-inline-start: var(--quote-mark-inset);
+}
+
+.notebook-body blockquote::after {
+  content: '”' / '';
+  inset-block-end: var(--quote-mark-offset);
+  inset-inline-end: var(--quote-mark-inset);
 }
 
 .notebook-body :is(pre, code) {
@@ -442,6 +559,7 @@ time .notebook-meta-parts {
   display: block;
   max-width: var(--primitive-size-full);
   overflow-x: auto;
+  background-color: var(--semantic-color-background-page);
   border-collapse: collapse;
   border-spacing: var(--primitive-space-none);
 }
