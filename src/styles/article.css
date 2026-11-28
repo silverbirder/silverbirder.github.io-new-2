@@ -1,4 +1,14 @@
 @font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../assets/fonts/jetbrains-mono-regular.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+  ascent-override: 131.25%;
+  descent-override: 31.25%;
+  line-gap-override: 0%;
+}
+
+@font-face {
   font-family: 'Yomogi';
   src: url('../assets/fonts/yomogi-regular.woff2') format('woff2');
   font-display: swap;
@@ -134,6 +144,24 @@ time .notebook-meta-parts {
 }
 
 .notebook-body {
+  --code-background-hue: 235;
+  --code-background-saturation: 18.75%;
+  --code-background-lightness: 12.55%;
+  --code-text-hue: 229;
+  --code-text-saturation: 35%;
+  --code-text-lightness: 75%;
+  --code-label-hue: 222;
+  --code-label-saturation: 28%;
+  --code-label-lightness: 25%;
+  --code-background: hsl(
+    var(--code-background-hue) var(--code-background-saturation) var(--code-background-lightness)
+  );
+  --code-label-background: hsl(
+    var(--code-label-hue) var(--code-label-saturation) var(--code-label-lightness)
+  );
+  --code-text: hsl(var(--code-text-hue) var(--code-text-saturation) var(--code-text-lightness));
+  --inline-code-radius: 0.2rem;
+
   position: relative;
   isolation: isolate;
   display: flow-root;
@@ -163,7 +191,7 @@ time .notebook-meta-parts {
 
 /* Normalize nested browser defaults before snapping the outer block height. */
 .notebook-body :where(ul, ol, blockquote),
-.notebook-body :is(li, figure) {
+.notebook-body :is(li, figure:where(:not(.notebook-code-frame))) {
   margin-block: var(--primitive-space-none);
 }
 
@@ -402,21 +430,69 @@ time .notebook-meta-parts {
 }
 
 .notebook-body :is(pre, code) {
-  font-family: var(--semantic-font-family-code);
+  font-family: 'JetBrains Mono', var(--semantic-font-family-code), monospace;
 }
 
+/* Keep inline code within the surrounding ruled line. */
 .notebook-body code:not(pre > code) {
+  --inline-code-background-hue: 198;
+  --inline-code-background-saturation: 55.56%;
+  --inline-code-background-lightness: 92.94%;
+  --inline-code-text-hue: 205.3;
+  --inline-code-text-saturation: 64.34%;
+  --inline-code-text-lightness: 25.29%;
+
+  line-height: var(--primitive-space-none);
   padding-inline: var(--primitive-space-1);
-  background-color: var(--semantic-color-background-muted);
+  border-radius: var(--inline-code-radius);
+  background-color: hsl(
+    var(--inline-code-background-hue) var(--inline-code-background-saturation)
+      var(--inline-code-background-lightness)
+  );
+  color: hsl(
+    var(--inline-code-text-hue) var(--inline-code-text-saturation) var(--inline-code-text-lightness)
+  );
   box-decoration-break: clone;
 }
 
-.notebook-body pre {
-  overflow-x: auto;
+.notebook-code-frame {
+  --code-label-text-hue: 222;
+  --code-label-text-saturation: 90%;
+  --code-label-text-lightness: 78%;
+  --code-frame-radius: 0.4rem;
+  --code-block-padding: calc(var(--component-notebook-rule-spacing) * var(--primitive-ratio-half));
+  display: flex;
+  flex-direction: column;
+  min-inline-size: var(--primitive-space-none);
+  background: var(--code-background);
+  border-radius: var(--code-frame-radius);
+  overflow: hidden;
+}
+
+.notebook-code-language {
+  order: var(--primitive-scale-negative);
   padding-inline: var(--semantic-space-control-inline);
+  background: var(--code-label-background);
+  color: hsl(
+    var(--code-label-text-hue) var(--code-label-text-saturation) var(--code-label-text-lightness)
+  );
+  font-size: var(--primitive-font-size-xs);
+  font-weight: var(--semantic-font-weight-heading);
   line-height: var(--component-notebook-rule-spacing);
-  background-color: var(--semantic-color-background-muted);
-  color: var(--semantic-color-text-primary);
+}
+
+.notebook-body pre {
+  margin: var(--primitive-space-none);
+  overflow-x: auto;
+  padding: var(--code-block-padding) var(--semantic-space-control-inline);
+  font-size: var(--primitive-font-size-sm);
+  line-height: var(--component-notebook-rule-spacing);
+  color: var(--code-text);
+}
+
+.notebook-body pre ::selection,
+.notebook-body code::selection {
+  background: var(--code-label-background);
 }
 
 .notebook-body :is(th, td) {

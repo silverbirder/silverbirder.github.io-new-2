@@ -133,12 +133,20 @@ export function insertArticleBlocks(html: string, cards: BlogLinkCard[] = []) {
   const blocks: (string | BlogLinkCard | ArticleEmbed)[] = [];
   let offset = 0;
   for (const node of fragment.childNodes) {
-    if (!isElement(node, 'p') || node.attrs.length > 0 || !node.sourceCodeLocation) continue;
-    const block = paragraphBlock(node, links);
-    if (!block) continue;
+    if (!node.sourceCodeLocation) continue;
     const { startOffset, endOffset } = node.sourceCodeLocation;
-    blocks.push(html.slice(offset, startOffset), block);
-    offset = endOffset;
+    if (isElement(node, 'pre')) {
+      blocks.push(
+        html.slice(offset, startOffset),
+        `<div class="notebook-code-frame">${html.slice(startOffset, endOffset)}</div>`,
+      );
+      offset = endOffset;
+    } else if (isElement(node, 'p') && node.attrs.length === 0) {
+      const block = paragraphBlock(node, links);
+      if (!block) continue;
+      blocks.push(html.slice(offset, startOffset), block);
+      offset = endOffset;
+    }
   }
   blocks.push(html.slice(offset));
   return blocks;
