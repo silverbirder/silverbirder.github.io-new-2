@@ -36,6 +36,21 @@ function labelLocation(link: Html.Element) {
   return (label ?? link).sourceCodeLocation;
 }
 
+function iconMarkup(link: Html.Element, favicon: string) {
+  const [label] = link.childNodes;
+  const bareUrl =
+    link.childNodes.length === 1 &&
+    label?.nodeName === '#text' &&
+    'value' in label &&
+    label.value === attribute(link, 'href');
+  return bareUrl
+    ? {
+        start: `<span class="external-link-url"><span class="external-link-head" aria-hidden="true">${favicon}</span>`,
+        end: `${externalMark}</span>`,
+      }
+    : { start: favicon, end: externalMark };
+}
+
 export function addExternalLinkIcons(markup: string, page: URL) {
   const inserts: { offset: number; content: string }[] = [];
   const fragment = parseFragment(markup, { sourceCodeLocationInfo: true });
@@ -49,8 +64,11 @@ export function addExternalLinkIcons(markup: string, page: URL) {
 
     const src = `https://icons.duckduckgo.com/ip3/${encodeURIComponent(hostname)}.ico`;
     const favicon = `<img class="external-link-favicon" src="${src}" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">`;
-    inserts.push({ offset: location.startTag.endOffset, content: favicon });
-    inserts.push({ offset: location.endTag.startOffset, content: externalMark });
+    const icons = iconMarkup(link, favicon);
+    inserts.push(
+      { offset: location.startTag.endOffset, content: icons.start },
+      { offset: location.endTag.startOffset, content: icons.end },
+    );
   }
 
   // Keep rendered markup intact, including scripts and whitespace around inline links.

@@ -28,3 +28,11 @@ a .external-link-tail::before {
   /* WORD JOINER keeps the arrow with the end of the link label. */
   content: '\2060';
 }
+
+.external-link-url {
+  word-break: break-all;
+}
+
+.external-link-url .external-link-head::after {
+  content: '\2060';
+}
