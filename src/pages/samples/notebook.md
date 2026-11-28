@@ -85,8 +85,6 @@ https://example.com/very/long/article/path/for/checking/how/a/link/wraps/inside/
 >
 > - 引用の中の箇条書きです。
 > - もう一つの項目です。
->
-> > 引用の中に、さらに引用を入れています。
 
 引用が終わった後の段落です。
 
