@@ -484,12 +484,12 @@ time .notebook-meta-parts {
   --quote-mark-offset: -0.875rem;
   --quote-mark-height: 1.5rem;
   --quote-mark-inset: var(--primitive-space-2);
-  --quote-block-padding: calc(var(--component-notebook-rule-spacing) * var(--primitive-ratio-half));
   --quote-radius: 0.8rem;
 
   position: relative;
   display: flow-root;
-  padding: var(--quote-block-padding) var(--semantic-space-quote-indent);
+  padding: var(--component-notebook-rule-spacing) var(--semantic-space-quote-indent)
+    var(--primitive-space-none);
   border-radius: var(--quote-radius);
   background: var(--semantic-color-background-page);
 }
