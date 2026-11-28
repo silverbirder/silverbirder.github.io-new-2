@@ -65,8 +65,10 @@ export function addExternalLinkIcons(markup: string, page: URL) {
     const src = `https://icons.duckduckgo.com/ip3/${encodeURIComponent(hostname)}.ico`;
     const favicon = `<img class="external-link-favicon" src="${src}" alt="" width="16" height="16" loading="lazy" decoding="async" referrerpolicy="no-referrer">`;
     const icons = iconMarkup(link, favicon);
-    inserts.push({ offset: location.startTag.endOffset, content: icons.start });
-    inserts.push({ offset: location.endTag.startOffset, content: icons.end });
+    inserts.push(
+      { offset: location.startTag.endOffset, content: icons.start },
+      { offset: location.endTag.startOffset, content: icons.end },
+    );
   }
 
   // Keep rendered markup intact, including scripts and whitespace around inline links.
